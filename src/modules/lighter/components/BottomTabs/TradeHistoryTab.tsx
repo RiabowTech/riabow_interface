@@ -9,6 +9,10 @@ import { type LighterTradeHistoryRow, useTradeHistoryAdapter } from "../../adapt
 type Row = {
   market: string;
   side: string;
+  /** Locale-independent direction key for color/class lookup ("Long" | "Short" | "--"). */
+  direction: string;
+  /** Numeric PnL for color classification (positive = gain, negative = loss). */
+  closedPnlValue: number | null;
   date: string;
   tradeValue: string;
   size: string;
@@ -66,6 +70,10 @@ const TRADE_HISTORY_LABELS = {
   liquidation: { en: "Liquidation", zh: "強平" },
   deleverage: { en: "Deleverage", zh: "自動減倉" },
   marketSettlement: { en: "Market Settlement", zh: "市場結算" },
+  openLong: { en: "Open Long", zh: "開多" },
+  openShort: { en: "Open Short", zh: "開空" },
+  closeLong: { en: "Close Long", zh: "平多" },
+  closeShort: { en: "Close Short", zh: "平空" },
 } as const;
 
 function pickTradeLabel(key: keyof typeof TRADE_HISTORY_LABELS, locale: Locale): string {
@@ -93,10 +101,18 @@ function toTypeLabel(type: string, locale: Locale): string {
   return type || "--";
 }
 
+function toSideLabel(side: string, isClose: boolean, locale: Locale): string {
+  if (side === "Long") return pickTradeLabel(isClose ? "closeLong" : "openLong", locale);
+  if (side === "Short") return pickTradeLabel(isClose ? "closeShort" : "openShort", locale);
+  return side || "--";
+}
+
 function toRow(trade: LighterTradeHistoryRow, locale: Locale): Row {
   return {
     market: trade.market,
-    side: trade.side,
+    side: toSideLabel(trade.side, trade.isClose, locale),
+    direction: trade.side,
+    closedPnlValue: trade.closedPnl,
     date: formatDate(trade.date),
     tradeValue: formatUsd(trade.tradeValue),
     size: formatNumber(trade.size, 4),
@@ -189,7 +205,7 @@ export function TradeHistoryTab({
                 <td>
                   <span
                     className={
-                      row.side.includes("Short")
+                      row.direction === "Short"
                         ? `${styles.marketCell} ${styles.marketCellShort}`
                         : `${styles.marketCell} ${styles.marketCellLong}`
                     }
@@ -200,14 +216,24 @@ export function TradeHistoryTab({
                     </span>
                   </span>
                 </td>
-                <td className={row.side.includes("Long") ? styles.sideLong : styles.sideShort}>{row.side}</td>
+                <td className={row.direction === "Long" ? styles.sideLong : styles.sideShort}>{row.side}</td>
                 <td className={`${styles.mono} ${row.date === "--" ? styles.placeholder : ""}`}>{row.date}</td>
                 <td className={`${styles.mono} ${row.tradeValue === "--" ? styles.placeholder : ""}`}>
                   {row.tradeValue}
                 </td>
                 <td className={`${styles.mono} ${row.size === "--" ? styles.placeholder : ""}`}>{row.size}</td>
                 <td className={`${styles.mono} ${row.price === "--" ? styles.placeholder : ""}`}>{row.price}</td>
-                <td className={`${styles.mono} ${row.closedPnl === "--" ? styles.placeholder : ""}`}>
+                <td
+                  className={`${styles.mono} ${
+                    row.closedPnl === "--"
+                      ? styles.placeholder
+                      : row.closedPnlValue != null && row.closedPnlValue > 0
+                        ? styles.pnlGain
+                        : row.closedPnlValue != null && row.closedPnlValue < 0
+                          ? styles.pnlLoss
+                          : ""
+                  }`}
+                >
                   {row.closedPnl}
                 </td>
                 <td className={`${styles.mono} ${row.fee === "--" ? styles.placeholder : ""}`}>{row.fee}</td>

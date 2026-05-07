@@ -237,6 +237,13 @@ export function useOrderbookUpdates(
       const updateSymbol = update.symbol ? normalizeMarketSymbolToApiFormat(update.symbol) : undefined;
 
       if (updateSymbol === targetSymbol) {
+        // Skip frames where both sides are empty. The backend's
+        // `handler.rs` initial-subscribe path (and the matching-engine
+        // broadcast forwarder) can emit `{bids:[], asks:[]}` when the
+        // engine briefly returns Err for `get_orderbook` — we must NOT
+        // overwrite the last good state with that, or the depth bars
+        // flash to "--" for a few seconds until the next real frame.
+        if (update.bids.length === 0 && update.asks.length === 0) return;
         setOrderbook(update);
         onUpdate?.(update);
       }

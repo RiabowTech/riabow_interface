@@ -4,7 +4,9 @@ import { arbitrumSdk, arbitrumSdkConfig } from "sdk/utils/testUtil";
 
 import { TradingSdk } from "../../index";
 
-describe("Markets", () => {
+// Integration test against live Arbitrum mainnet (RPC + Subsquid). Skipped in CI;
+// run manually when verifying upstream GMX SDK compatibility.
+describe.skip("Markets", () => {
   describe("getMarkets", () => {
     it("should be able to get markets data", async () => {
       const marketsData = await arbitrumSdk.markets.getMarkets();

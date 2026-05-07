@@ -33,9 +33,13 @@ function fmtCompactUsd(n: number | null): string {
 function fmtCountdown(ts: number | null): string {
   if (ts == null) return "-";
   const diff = Math.max(0, ts - Date.now());
-  const m = Math.floor(diff / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  const totalSec = Math.floor(diff / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  const pad = (n: number) => String(n).padStart(2, "0");
+  // 8 小时 funding 周期 → 倒计时上限 ~07:59:59;<1h 时省略小时段。
+  return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
 }
 function Stat({
   label,

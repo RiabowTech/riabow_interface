@@ -154,12 +154,111 @@ const getChartTypeOptions = (): ChartTypeOpt[] => [
   { label: t`Area`, value: CHART_SERIES_TYPE.Area, icon: AreaIcon },
 ];
 
+type SplitLayout = "1" | "2H" | "2V" | "3H" | "3V" | "4G";
+const SPLIT_PANE_COUNT: Record<SplitLayout, number> = {
+  "1": 1,
+  "2H": 2,
+  "2V": 2,
+  "3H": 3,
+  "3V": 3,
+  "4G": 4,
+};
+
+// 16x16 SVG icons for each layout option in the split menu.
+function SplitLayoutIcon({ layout }: { layout: SplitLayout }) {
+  const stroke = "currentColor";
+  const props = { width: 16, height: 16, viewBox: "0 0 16 16", fill: "none", stroke, strokeWidth: 1.2 };
+  switch (layout) {
+    case "1":
+      return (
+        <svg {...props}>
+          <rect x="2.5" y="3" width="11" height="10" rx="1" />
+        </svg>
+      );
+    case "2H":
+      return (
+        <svg {...props}>
+          <rect x="2.5" y="3" width="11" height="10" rx="1" />
+          <line x1="8" y1="3" x2="8" y2="13" />
+        </svg>
+      );
+    case "2V":
+      return (
+        <svg {...props}>
+          <rect x="2.5" y="3" width="11" height="10" rx="1" />
+          <line x1="2.5" y1="8" x2="13.5" y2="8" />
+        </svg>
+      );
+    case "3H":
+      return (
+        <svg {...props}>
+          <rect x="2.5" y="3" width="11" height="10" rx="1" />
+          <line x1="6.166" y1="3" x2="6.166" y2="13" />
+          <line x1="9.833" y1="3" x2="9.833" y2="13" />
+        </svg>
+      );
+    case "3V":
+      return (
+        <svg {...props}>
+          <rect x="2.5" y="3" width="11" height="10" rx="1" />
+          <line x1="2.5" y1="6.333" x2="13.5" y2="6.333" />
+          <line x1="2.5" y1="9.666" x2="13.5" y2="9.666" />
+        </svg>
+      );
+    case "4G":
+      return (
+        <svg {...props}>
+          <rect x="2.5" y="3" width="11" height="10" rx="1" />
+          <line x1="8" y1="3" x2="8" y2="13" />
+          <line x1="2.5" y1="8" x2="13.5" y2="8" />
+        </svg>
+      );
+  }
+}
+
+function SplitMenuRow({
+  label,
+  current,
+  onPick,
+  options,
+}: {
+  label: string;
+  current: SplitLayout;
+  onPick: (l: SplitLayout) => void;
+  options: { key: SplitLayout }[];
+}) {
+  return (
+    <div className={styles.splitMenuRow}>
+      <span className={styles.splitMenuRowLabel}>{label}</span>
+      {options.map((opt) => (
+        <button
+          key={opt.key}
+          type="button"
+          role="menuitemradio"
+          aria-checked={current === opt.key}
+          className={cx(styles.splitMenuOpt, { [styles.splitMenuOptActive]: current === opt.key })}
+          onClick={() => onPick(opt.key)}
+        >
+          <SplitLayoutIcon layout={opt.key} />
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export function ChartPanel() {
   const [topTab, setTopTab] = useState<TopTab>("Price");
   const [mode, setMode] = useState<ChartMode>("TradingView");
   const [tf, setTf] = useState("15m");
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  // 多窗格布局:Lighter 风格 1 / 2H / 2V / 3H / 3V / 4G
+  const [splitLayout, setSplitLayout] = useState<SplitLayout>("1");
+  const [splitMenuOpen, setSplitMenuOpen] = useState(false);
+  const splitMenuRef = useRef<HTMLDivElement>(null);
+  // 浏览器原生全屏:requestFullscreen / exitFullscreen
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const tabs: TopTab[] = ["Price", "Funding", "Details"];
   // "Original" 图表模式暂时下线(改动回归后再打开): 保留枚举值用于向后兼容,但从 UI 渲染列表中移除
   const modes: ChartMode[] = ["TradingView", "Depth"];
@@ -279,6 +378,45 @@ export function ChartPanel() {
     }
   }, [tvWidget]);
 
+  const pickSplitLayout = useCallback((layout: SplitLayout) => {
+    setSplitLayout(layout);
+    setSplitMenuOpen(false);
+  }, []);
+
+  const toggleFullscreen = useCallback(() => {
+    const el = rootRef.current;
+    if (!el) return;
+    const doc = document as Document & { webkitFullscreenElement?: Element | null };
+    const isCurrentlyFullscreen = Boolean(doc.fullscreenElement || doc.webkitFullscreenElement);
+    if (isCurrentlyFullscreen) {
+      void document.exitFullscreen?.();
+    } else {
+      void el.requestFullscreen?.();
+    }
+  }, []);
+
+  // Close split menu on outside click.
+  useEffect(() => {
+    if (!splitMenuOpen) return;
+    const onDocDown = (e: MouseEvent) => {
+      if (splitMenuRef.current && !splitMenuRef.current.contains(e.target as Node)) {
+        setSplitMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDocDown);
+    return () => document.removeEventListener("mousedown", onDocDown);
+  }, [splitMenuOpen]);
+
+  // Sync state on browser fullscreen change (handles ESC / browser UI).
+  useEffect(() => {
+    const sync = () => {
+      const doc = document as Document & { webkitFullscreenElement?: Element | null };
+      setIsFullscreen(Boolean(doc.fullscreenElement || doc.webkitFullscreenElement));
+    };
+    document.addEventListener("fullscreenchange", sync);
+    return () => document.removeEventListener("fullscreenchange", sync);
+  }, []);
+
   // Raw Prices (TV 内建 last price line):开启时用 Lighter 红 #E64558,对齐参考截图里那条红点线。
   // widget 重建 / toggle / 首次 ready 都要重新 apply,避免被初始 LIGHTER_TV_OVERRIDES 的灰色覆盖。
   useEffect(() => {
@@ -346,7 +484,7 @@ export function ChartPanel() {
   }, [tvWidget, markPriceLine, markPriceValue]);
 
   return (
-    <div className={styles.root}>
+    <div ref={rootRef} className={styles.root}>
       <div className={styles.topTabs}>
         <div className={styles.tabsLeft}>
           {tabs.map((t) => (
@@ -369,20 +507,47 @@ export function ChartPanel() {
               </button>
             ))}
             <span className={styles.modesSep} />
-            <button className={styles.iconBtnSm} aria-label="windowed">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <div className={styles.splitMenuWrap} ref={splitMenuRef}>
+              <button
+                type="button"
+                className={cx(styles.iconBtnSm, {
+                  [styles.iconBtnActive]: splitMenuOpen || splitLayout !== "1",
+                })}
+                aria-label={t`Chart layout`}
+                aria-haspopup="menu"
+                aria-expanded={splitMenuOpen}
+                title={t`Chart layout`}
+                onClick={() => setSplitMenuOpen((v) => !v)}
               >
-                <rect x="3" y="3" width="10" height="10" rx="0.5" />
-              </svg>
-            </button>
-            <button className={styles.iconBtnSm} aria-label="fullscreen">
+                <SplitLayoutIcon layout={splitLayout} />
+              </button>
+              {splitMenuOpen && (
+                <div className={styles.splitMenu} role="menu">
+                  <SplitMenuRow label="1" current={splitLayout} onPick={pickSplitLayout} options={[{ key: "1" }]} />
+                  <SplitMenuRow
+                    label="2"
+                    current={splitLayout}
+                    onPick={pickSplitLayout}
+                    options={[{ key: "2H" }, { key: "2V" }]}
+                  />
+                  <SplitMenuRow
+                    label="3"
+                    current={splitLayout}
+                    onPick={pickSplitLayout}
+                    options={[{ key: "3H" }, { key: "3V" }]}
+                  />
+                  <SplitMenuRow label="4" current={splitLayout} onPick={pickSplitLayout} options={[{ key: "4G" }]} />
+                </div>
+              )}
+            </div>
+            <button
+              type="button"
+              className={cx(styles.iconBtnSm, { [styles.iconBtnActive]: isFullscreen })}
+              aria-label={isFullscreen ? t`Exit fullscreen` : t`Enter fullscreen`}
+              aria-pressed={isFullscreen}
+              title={isFullscreen ? t`Exit fullscreen` : t`Fullscreen`}
+              onClick={toggleFullscreen}
+            >
               <svg
                 width="16"
                 height="16"
@@ -674,17 +839,29 @@ export function ChartPanel() {
               })}
             >
               {mode === "TradingView" ? (
-                <TVChart
-                  extraDisabledFeatures={LIGHTER_TV_DISABLED}
-                  removeEnabledFeatures={TV_ENABLED_FEATURES_TO_REMOVE}
-                  extraOverrides={LIGHTER_TV_OVERRIDES}
-                  brandName="Primit"
-                  customCssUrl="/lighter-tv.css"
-                  initialBarsCount={170}
-                  forcedPeriod={tf}
-                  onPeriodChange={setTf}
-                  onWidgetReady={setTvWidget}
-                />
+                <div className={cx(styles.splitGrid, styles[`splitGrid_${splitLayout}`])}>
+                  {Array.from({ length: SPLIT_PANE_COUNT[splitLayout] }).map((_, paneIdx) => {
+                    // Only the leading pane keeps the drawing toolbar; other panes
+                    // hide it so the left side isn't cluttered with duplicate tools.
+                    const disabledFeatures =
+                      paneIdx === 0 ? LIGHTER_TV_DISABLED : [...LIGHTER_TV_DISABLED, "left_toolbar"];
+                    return (
+                      <div key={`${splitLayout}-${paneIdx}`} className={styles.splitPane}>
+                        <TVChart
+                          extraDisabledFeatures={disabledFeatures}
+                          removeEnabledFeatures={TV_ENABLED_FEATURES_TO_REMOVE}
+                          extraOverrides={LIGHTER_TV_OVERRIDES}
+                          brandName="Primit"
+                          customCssUrl="/lighter-tv.css"
+                          initialBarsCount={170}
+                          forcedPeriod={tf}
+                          onPeriodChange={paneIdx === 0 ? setTf : undefined}
+                          onWidgetReady={paneIdx === 0 ? setTvWidget : undefined}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               ) : null}
             </div>
             <div

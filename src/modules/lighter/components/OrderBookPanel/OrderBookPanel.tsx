@@ -18,7 +18,7 @@ type Unit = "BTC" | "USD";
 type GroupKey = string;
 export type OrderBookLayout = "Tab" | "Stacked" | "Large";
 
-const UNIT_OPTIONS: Unit[] = ["BTC", "USD"];
+const UNIT_OPTIONS: Unit[] = ["USD", "BTC"];
 const LAYOUT_OPTIONS: OrderBookLayout[] = ["Tab", "Stacked", "Large"];
 
 function DropdownMenu<T extends string>({
@@ -169,7 +169,7 @@ export function OrderBookPanel({
   const [tab, setTab] = useState<Tab>("OrderBook");
   const [orderBookMode, setOrderBookMode] = useState<Mode>("all");
   const [tradesMode, setTradesMode] = useState<Mode>("all");
-  const [unit, setUnit] = useState<Unit>("BTC");
+  const [unit, setUnit] = useState<Unit>("USD");
   const [group, setGroup] = useState<GroupKey>("1");
   const [tradeSizeFilter, setTradeSizeFilter] = useState<TradeSizeFilter>("All");
   const [openMenu, setOpenMenu] = useState<"unit" | "group" | "layout" | "tradeSize" | null>(null);

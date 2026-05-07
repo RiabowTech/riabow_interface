@@ -84,7 +84,6 @@ export function useTradingMarkets(chainId: number | undefined, config?: SWRConfi
     if (!marketsData) return [];
     return marketsData.markets.map((market) => ({
       ...market,
-      leverage: 50, // Force leverage to 50 as requested
       lastPrice: market.last_price?.toString(),
       volume24h: market.volume_24h?.toString(),
       priceChangePercent:
@@ -223,7 +222,6 @@ export function useTradingMarketsWithTickers(
       const ticker = tickersData?.[market.symbol];
       return {
         ...market,
-        leverage: 50, // Force leverage to 50 as requested
         ticker,
         lastPrice: ticker?.last_price || market.last_price?.toString(),
         volume24h: ticker?.volume_24h || market.volume_24h?.toString(),

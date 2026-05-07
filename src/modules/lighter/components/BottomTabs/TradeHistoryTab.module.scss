@@ -120,6 +120,14 @@
   font-weight: 500;
 }
 
+.table tbody td.pnlGain {
+  color: var(--ltr-up);
+}
+
+.table tbody td.pnlLoss {
+  color: var(--ltr-down);
+}
+
 .sortHeader {
   display: inline-flex;
   align-items: center;
@@ -133,7 +141,7 @@
 }
 
 .colMarket { width: 72px; }
-.colSide { width: 92px; }
+.colSide { width: 110px; }
 .colDate { width: 116px; }
 .colTradeValue { width: 90px; }
 .colSize { width: 64px; }

@@ -47,6 +47,7 @@ describe("getMultichainTransferableGasPaymentTokenSymbols", () => {
       Base; Arbitrum; USDC, ETH
       BNB; Avalanche; USDC, USDT
       Base; Avalanche; USDC
+      Arbitrum Sepolia; Arbitrum Sepolia; USDC.SG, ETH
       Sepolia; Arbitrum Sepolia; USDC.SG, ETH
       Optimism Sepolia; Arbitrum Sepolia; USDC.SG, ETH"
     `);

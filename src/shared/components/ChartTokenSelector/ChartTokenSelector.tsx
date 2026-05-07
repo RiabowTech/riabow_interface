@@ -29,6 +29,8 @@ export default function ChartTokenSelector({ oneRowLabels }: Props) {
     return market?.base_asset || selectedSymbol?.replace(/[-/]?USD[T]?$/i, "") || "BTC";
   }, [market, selectedSymbol]);
 
+  const poolName = `${baseSymbol}-USDT`;
+
   return (
     <SelectorBase
       popoverPlacement="bottom-start"
@@ -56,6 +58,13 @@ export default function ChartTokenSelector({ oneRowLabels }: Props) {
                   })}
                 >
                   <span className="text-start text-[13px] font-medium text-typography-primary">{baseSymbol}/USD</span>
+                  <span
+                    className={cx("text-12 font-normal text-typography-secondary", {
+                      "ml-4": oneRowLabels,
+                    })}
+                  >
+                    <span>[{poolName}]</span>
+                  </span>
                 </span>
 
                 <ChevronDownIcon className="primit-chevron-rotate inline-block size-16" />

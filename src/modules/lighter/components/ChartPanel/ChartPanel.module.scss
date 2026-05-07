@@ -46,6 +46,114 @@
   background: transparent; border: 0; cursor: pointer; padding: 0;
   &:hover { color: var(--ltr-text-primary); }
 }
+.iconBtnActive {
+  color: var(--ltr-text-primary);
+}
+
+// Split-layout popover anchored under the layout-selector icon button.
+.splitMenuWrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.splitMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 30;
+  background: #1A1A20;
+  border: 1px solid #2A2A33;
+  border-radius: 6px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.splitMenuRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.splitMenuRowLabel {
+  width: 18px;
+  flex: 0 0 18px;
+  color: var(--ltr-text-muted, #828285);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.splitMenuOpt {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: var(--ltr-text-muted, #828285);
+  cursor: pointer;
+  padding: 0;
+  &:hover {
+    color: var(--ltr-text-primary, #CFCFD3);
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+.splitMenuOptActive {
+  color: var(--ltr-text-primary, #CFCFD3);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+// Multi-pane chart grid. Gaps render the panel border between panes.
+.splitGrid {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 1px;
+  background: var(--ltr-border, #1F1F24);
+}
+.splitGrid_1 {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+.splitGrid_2H {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+.splitGrid_2V {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.splitGrid_3H {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+.splitGrid_3V {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+.splitGrid_4G {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.splitPane {
+  background: var(--ltr-bg-panel, #121218);
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  // TVChart wraps its container in `<div class="relative grow">`; that needs a
+  // flex parent for grow:1 to take effect, otherwise the inner absolutely
+  // positioned chart collapses to zero height.
+  display: flex;
+  flex-direction: column;
+}
 
 .toolbar {
   display: flex; align-items: center; justify-content: space-between;

@@ -5,7 +5,10 @@ import { useUserAccountTrades } from "modules/lighter/api";
 export type LighterTradeHistoryRow = {
   id: string;
   market: string;
+  /** Position direction the trade ended up on (Long / Short / "--"). */
   side: string;
+  /** Whether the trade opened a position (false) or closed one (true). */
+  isClose: boolean;
   date: number;
   tradeValue: number | null;
   size: number | null;
@@ -50,11 +53,17 @@ function pickTimestamp(trade: Record<string, unknown>) {
 function deriveSide(trade: Record<string, unknown>) {
   const side = toLower(trade.side);
   const positionSide = toLower(trade.position_side);
+  const isClose = trade.reduce_only === true;
 
+  // Trade direction (buy/sell) on the wire reflects "what was sent to the order
+  // book", not "which position this affects". When a long position is closed,
+  // the wire side is "sell" — but the underlying position is still long.
+  // Prefer position_side (server-side classification) when present; otherwise
+  // invert the wire side for close trades.
   if (positionSide === "long") return "Long";
   if (positionSide === "short") return "Short";
-  if (side === "buy") return "Long";
-  if (side === "sell") return "Short";
+  if (side === "buy") return isClose ? "Short" : "Long";
+  if (side === "sell") return isClose ? "Long" : "Short";
   return "--";
 }
 
@@ -82,7 +91,7 @@ export function useTradeHistoryAdapterState(): UseTradeHistoryAdapterResult {
   const rows = useMemo(() => {
     return (trades ?? [])
       .map((trade) => {
-        const rawTrade = trade as Record<string, unknown>;
+        const rawTrade = trade as unknown as Record<string, unknown>;
         const price = toNumber(trade.price);
         const size = toNumber((rawTrade.size as string | number | null | undefined) ?? trade.amount);
         const tradeValue = price != null && size != null ? price * size : null;
@@ -92,6 +101,7 @@ export function useTradeHistoryAdapterState(): UseTradeHistoryAdapterResult {
           id: trade.id,
           market: marketSymbol.replace(/USDT$/i, "") || "--",
           side: deriveSide(rawTrade),
+          isClose: rawTrade.reduce_only === true,
           date: pickTimestamp(rawTrade),
           tradeValue,
           size,

@@ -106,11 +106,11 @@ export function TokensFavoritesContextProvider({ children }: PropsWithChildren) 
       setSettings((prev) => {
         let favoriteTokens: string[];
         if (type === "gm") {
-          favoriteTokens = prev.gmFavoriteTokens ?? EMPTY_ARRAY;
+          favoriteTokens = prev.gmFavoriteTokens;
         } else if (type === "trade") {
-          favoriteTokens = prev.tradeFavoriteTokens ?? EMPTY_ARRAY;
+          favoriteTokens = prev.tradeFavoriteTokens;
         } else {
-          favoriteTokens = prev.indexFavoriteTokens ?? EMPTY_ARRAY;
+          favoriteTokens = prev.indexFavoriteTokens;
         }
 
         const updatedFavoriteTokens = favoriteTokens.includes(address)
@@ -138,11 +138,10 @@ export function TokensFavoritesContextProvider({ children }: PropsWithChildren) 
   const stableObj = useMemo<TokensFavoritesContextType>(() => {
     const s = settings ?? DEFAULT_TOKENS_FAVORITES_STORE;
     return {
-      tabs: s.tabs ?? EMPTY_OBJECT,
-      // 旧版 localStorage 可能缺字段，回退到空数组避免下游 `.includes` 崩溃
-      gmFavoriteTokens: s.gmFavoriteTokens ?? EMPTY_ARRAY,
-      indexFavoriteTokens: s.indexFavoriteTokens ?? EMPTY_ARRAY,
-      tradeFavoriteTokens: s.tradeFavoriteTokens ?? EMPTY_ARRAY,
+      tabs: s.tabs,
+      gmFavoriteTokens: s.gmFavoriteTokens,
+      indexFavoriteTokens: s.indexFavoriteTokens,
+      tradeFavoriteTokens: s.tradeFavoriteTokens,
       setTab,
       toggleFavoriteToken,
     };

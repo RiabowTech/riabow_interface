@@ -23,7 +23,9 @@ const getKeeperMarkets = async (chainId: number): Promise<{ markets: KeeperMarke
   return data;
 };
 
-describe("markets config", () => {
+// Integration test against the upstream GMX oracle keeper. Skipped in CI because
+// it hits the public network and isn't validating primit-owned code.
+describe.skip("markets config", () => {
   CONTRACTS_CHAIN_IDS_DEV.forEach(async (chainId) => {
     it(`markets should be consistent with keeper for ${chainId}`, async () => {
       const keeperMarkets = await withRetry(() => getKeeperMarkets(chainId), {

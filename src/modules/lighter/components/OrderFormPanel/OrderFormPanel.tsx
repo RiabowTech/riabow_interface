@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import useWallet from "@/shared/lib/wallets/useWallet";
 import { useChainId } from "lib/chains";
-import { useApiMarkets, usePrimitUserPositions } from "modules/lighter/api/hooks";
+import { useApiMarketDetails, usePrimitUserPositions } from "modules/lighter/api/hooks";
 import { useTradeState } from "modules/lighter/store/TradeStateContext";
 
 import { AdvancedOrderForm } from "./AdvancedOrderForm";
@@ -44,7 +44,8 @@ export function OrderFormPanel() {
   const { active, account } = useWallet();
   const { chainId } = useChainId();
   const { selectedSymbol } = useTradeState();
-  const { markets } = useApiMarkets(chainId, {
+  const normalizedSymbol = normalizeMarketSymbol(selectedSymbol);
+  const { details: marketDetails } = useApiMarketDetails(chainId, normalizedSymbol ?? undefined, {
     refreshInterval: 0,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
@@ -66,9 +67,7 @@ export function OrderFormPanel() {
   const [marginModalOpen, setMarginModalOpen] = useState(false);
   const advancedRef = useRef<HTMLDivElement>(null);
   const isConnected = Boolean(active && account);
-  const normalizedSymbol = normalizeMarketSymbol(selectedSymbol);
-  const currentMarket = markets?.markets.markets.find((market) => market.symbol === normalizedSymbol) ?? null;
-  const maxLeverage = Math.max(1, currentMarket?.leverage ?? 10);
+  const maxLeverage = Math.max(1, marketDetails?.max_leverage ?? 10);
   const currentPositionLeverage =
     positionsData?.positions?.find((position) => normalizeMarketSymbol(position.symbol) === normalizedSymbol)
       ?.leverage ?? 0;

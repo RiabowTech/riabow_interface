@@ -34,9 +34,11 @@ describe("TradeHistoryRow helpers", () => {
 
     expect(formatPositionMessage(requestIncreasePosition, minCollateralUsd)).toMatchInlineSnapshot(`
       {
-        "acceptablePrice": ">  $\u200a35.0578",
+        "acceptablePrice": ">  $ 35.0578",
         "action": "Request Market Increase",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "AVAX/USD [WAVAX-USDC]",
         "indexName": "AVAX/USD",
         "indexTokenSymbol": "AVAX",
@@ -44,12 +46,12 @@ describe("TradeHistoryRow helpers", () => {
         "market": "Short AVAX/USD",
         "marketPrice": undefined,
         "poolName": "WAVAX-USDC",
-        "price": ">  $\u200a35.0578",
+        "price": ">  $ 35.0578",
         "priceComment": [
           "Acceptable price for the order.",
         ],
         "priceImpact": undefined,
-        "size": "+$\u200a1,054.88",
+        "size": "+$ 1,054.88",
         "timestamp": "08 Feb 2024, 10:50",
         "timestampISO": "2024-02-08T10:50:50+04:00",
       }
@@ -57,9 +59,11 @@ describe("TradeHistoryRow helpers", () => {
 
     expect(formatPositionMessage(withdraw1Usd, minCollateralUsd)).toMatchInlineSnapshot(`
       {
-        "acceptablePrice": "<  $\u200a43.2376",
+        "acceptablePrice": "<  $ 43.2376",
         "action": "Request Withdraw",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "AVAX/USD [WAVAX-USDC]",
         "indexName": "AVAX/USD",
         "indexTokenSymbol": "AVAX",
@@ -67,7 +71,7 @@ describe("TradeHistoryRow helpers", () => {
         "market": "Short AVAX/USD",
         "marketPrice": undefined,
         "poolName": "WAVAX-USDC",
-        "price": "<  $\u200a43.2376",
+        "price": "<  $ 43.2376",
         "priceComment": [
           "Acceptable price for the order.",
         ],
@@ -80,9 +84,11 @@ describe("TradeHistoryRow helpers", () => {
 
     expect(formatPositionMessage(deposit1Usd, minCollateralUsd)).toMatchInlineSnapshot(`
       {
-        "acceptablePrice": "<  $\u200a0.085152",
+        "acceptablePrice": "<  $ 0.085152",
         "action": "Request Deposit",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "DOGE/USD [ETH-DAI]",
         "indexName": "DOGE/USD",
         "indexTokenSymbol": "DOGE",
@@ -90,7 +96,7 @@ describe("TradeHistoryRow helpers", () => {
         "market": "Long DOGE/USD",
         "marketPrice": undefined,
         "poolName": "ETH-DAI",
-        "price": "<  $\u200a0.085152",
+        "price": "<  $ 0.085152",
         "priceComment": [
           "Acceptable price for the order.",
         ],
@@ -106,6 +112,8 @@ describe("TradeHistoryRow helpers", () => {
         "acceptablePrice": ">  $ 29,700.00",
         "action": "Create Take Profit",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "BTC/USD [BTC-USDC]",
         "indexName": "BTC/USD",
         "indexTokenSymbol": "BTC",
@@ -130,6 +138,8 @@ describe("TradeHistoryRow helpers", () => {
         "acceptablePrice": "<  $ 1,645.69",
         "action": "Cancel Limit",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "ETH/USD [WETH-USDC]",
         "indexName": "ETH/USD",
         "indexTokenSymbol": "ETH",
@@ -154,6 +164,8 @@ describe("TradeHistoryRow helpers", () => {
         "acceptablePrice": "<  $ 1.01",
         "action": "Create Limit",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "BTC/USD [BTC-USDC]",
         "indexName": "BTC/USD",
         "indexTokenSymbol": "BTC",
@@ -178,6 +190,8 @@ describe("TradeHistoryRow helpers", () => {
         "acceptablePrice": ">  $ 0.82764",
         "action": "Execute Limit",
         "executionPrice": "$ 0.83711",
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "ARB/USD [ARB-USDC]",
         "indexName": "ARB/USD",
         "indexTokenSymbol": "ARB",
@@ -214,6 +228,8 @@ describe("TradeHistoryRow helpers", () => {
         "action": "Failed Limit",
         "actionComment": undefined,
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "BTC/USD [BTC-USDC]",
         "indexName": "BTC/USD",
         "indexTokenSymbol": "BTC",
@@ -247,6 +263,8 @@ describe("TradeHistoryRow helpers", () => {
       {
         "action": "Create Trigger",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "XRP/USD [WETH-USDC]",
         "indexName": "XRP/USD",
         "indexTokenSymbol": "XRP",
@@ -256,7 +274,7 @@ describe("TradeHistoryRow helpers", () => {
         "poolName": "WETH-USDC",
         "price": "",
         "priceImpact": undefined,
-        "size": "-$\u200a4,954.24",
+        "size": "-$ 4,954.24",
         "timestamp": "18 Sep 2023, 11:52",
         "timestampISO": "2023-09-18T11:52:39+04:00",
       }
@@ -266,6 +284,8 @@ describe("TradeHistoryRow helpers", () => {
       {
         "action": "Liquidated",
         "executionPrice": "$ 6.1063",
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "LINK/USD [LINK-USDC]",
         "indexName": "LINK/USD",
         "indexTokenSymbol": "LINK",
@@ -280,7 +300,7 @@ describe("TradeHistoryRow helpers", () => {
         "priceComment": [
           "Mark price for the liquidation.",
           "",
-          "This position was liquidated as the max. leverage of 0.0x was exceeded when taking into account fees.",
+          "This position was liquidated as the max. leverage of 0x was exceeded when taking into account fees.",
           "",
           {
             "key": "Initial Collateral",
@@ -356,6 +376,8 @@ describe("TradeHistoryRow helpers", () => {
         "acceptablePrice": "<  $ 1,589.47",
         "action": "Market Increase",
         "executionPrice": "$ 1,584.74",
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "ETH/USD [WETH-USDC]",
         "indexName": "ETH/USD",
         "indexTokenSymbol": "ETH",
@@ -363,7 +385,7 @@ describe("TradeHistoryRow helpers", () => {
         "market": "Long ETH/USD",
         "marketPrice": "$ 4.47",
         "poolName": "WETH-USDC",
-        "price": "$ 4.47",
+        "price": undefined,
         "priceComment": [
           "Mark price for the order.",
           "",
@@ -387,6 +409,8 @@ describe("TradeHistoryRow helpers", () => {
         "acceptablePrice": undefined,
         "action": "Create Stop Market",
         "executionPrice": undefined,
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "BTC/USD [BTC-USDC]",
         "indexName": "BTC/USD",
         "indexTokenSymbol": "BTC",
@@ -394,15 +418,15 @@ describe("TradeHistoryRow helpers", () => {
         "market": "Long BTC/USD",
         "marketPrice": undefined,
         "poolName": "BTC-USDC",
-        "price": ">  $\u200a95,600.00",
+        "price": ">  $ 95,600.00",
         "priceComment": [
           "Trigger price for the order.",
         ],
         "priceImpact": undefined,
-        "size": "+$\u200a3.62",
+        "size": "+$ 3.62",
         "timestamp": "18 Sep 2023, 16:43",
         "timestampISO": "2023-09-18T16:43:18+04:00",
-        "triggerPrice": ">  $\u200a95,600.00",
+        "triggerPrice": ">  $ 95,600.00",
       }
     `);
 
@@ -411,6 +435,8 @@ describe("TradeHistoryRow helpers", () => {
         "acceptablePrice": undefined,
         "action": "Execute Stop Market",
         "executionPrice": "$ 95,754.58",
+        "feeAmount": undefined,
+        "feePercent": undefined,
         "fullMarket": "BTC/USD [BTC-USDC]",
         "indexName": "BTC/USD",
         "indexTokenSymbol": "BTC",
