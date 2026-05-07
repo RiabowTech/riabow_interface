@@ -1,0 +1,92 @@
+/**
+ * Primit · Checkbox
+ * 与 Button / Select **secondary** 同源 token：0.5px 环、glow、炭底叠层；选中为 Primary 横向渐变。
+ * 依赖 `html[data-ui-theme="primit"]`（DesignSystem）、`PrimitColors.css`、`--ui-btn-*`。
+ */
+
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 0;
+  /* 压过 `Checkbox.css` 里 `--sb-accent` 霓虹描边（夹度常与 bundle 顺序有关） */
+  border: none !important;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-secondary-border, var(--primit-primary-2)),
+    var(--ui-btn-secondary-glow, 0 0 4px rgba(3, 119, 136, 0.2)) !important;
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    ) !important;
+  transition:
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    opacity 0.18s ease;
+}
+
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box svg {
+  width: 12px;
+  height: 12px;
+}
+
+html[data-ui-theme="primit"] .checkbox-wrapper:not(.disabled):hover .checkbox-box:not(.checked):not(.partial-checked) {
+  border: none !important;
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  ) !important;
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-secondary-hover-from, var(--primit-primary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  ) !important;
+}
+
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box.checked,
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box.partial-checked {
+  border: none !important;
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  ) !important;
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  ) !important;
+}
+
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box.checked svg,
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box.partial-checked svg {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box.disabled,
+html[data-ui-theme="primit"] .checkbox-wrapper.disabled .checkbox-box {
+  border: none !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+  opacity: 1;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    ) !important;
+}
+
+html[data-ui-theme="primit"] .checkbox-wrapper .checkbox-box.disabled svg,
+html[data-ui-theme="primit"] .checkbox-wrapper.disabled .checkbox-box svg {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+html[data-ui-theme="primit"] .checkbox-wrapper:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 65%, transparent);
+  outline-offset: 2px;
+}

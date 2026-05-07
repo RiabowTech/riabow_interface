@@ -1,0 +1,88 @@
+/**
+ * Legacy 交易站 · 荧光绿 / 渐变描边 Tabs（原 `Tabs.css` 内旧版视觉）
+ * 仅在 `html[data-ui-theme="legacy"]` 下生效；Primit 壳由 `themes/primit/tabs.primit.css` 负责。
+ */
+
+/* ========== 统一样式 Long/Short 等：绿（红）渐变外框与发光 ========== */
+html[data-ui-theme="legacy"] [data-unified-style="true"] {
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--sb-surface-0, #000), var(--sb-surface-0, #000)) padding-box, linear-gradient(90deg, rgba(var(--sb-accent-rgb, 0, 255, 178), 0.8) 0%, rgba(var(--sb-accent-rgb, 0, 255, 178), 0) 10%, rgb(0, 0, 0) 50%, rgba(var(--sb-accent-rgb, 0, 255, 178), 0) 90%, rgba(var(--sb-accent-rgb, 0, 255, 178), 0.8) 100%) border-box;
+  transition: all 0.3s ease;
+}
+
+html[data-ui-theme="legacy"] [data-qa="trade-direction"][data-unified-style="true"]:has(button:last-child.trade-direction-tab--active) {
+  background: linear-gradient(var(--sb-surface-0, #000), var(--sb-surface-0, #000)) padding-box, linear-gradient(90deg, rgba(var(--sb-danger-rgb, 255, 82, 82), 0.8) 0%, rgba(var(--sb-danger-rgb, 255, 82, 82), 0) 10%, rgb(0, 0, 0) 50%, rgba(var(--sb-danger-rgb, 255, 82, 82), 0) 90%, rgba(var(--sb-danger-rgb, 255, 82, 82), 0.8) 100%) border-box;
+}
+
+html[data-ui-theme="legacy"] [data-unified-style="true"] button {
+  background: var(--sb-surface-1, #141414);
+  color: color-mix(in srgb, var(--sb-text-primary, #fff) 60%, transparent);
+}
+
+html[data-ui-theme="legacy"] [data-unified-style="true"] button:not(.trade-direction-tab--active):hover {
+  background: var(--sb-surface-2, #1a1a1a);
+  color: color-mix(in srgb, var(--sb-text-primary, #fff) 90%, transparent);
+}
+
+html[data-ui-theme="legacy"] [data-unified-style="true"] button.trade-direction-tab--active {
+  color: var(--sb-accent, #00ffb2);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.2) 100%), var(--sb-surface-0, #090909);
+}
+
+html[data-ui-theme="legacy"] [data-unified-style="true"] button:first-child.trade-direction-tab--active {
+  color: var(--sb-accent, #00ffb2) !important;
+  box-shadow: -1px 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7);
+}
+
+html[data-ui-theme="legacy"] [data-qa="trade-direction"][data-unified-style="true"] button:last-child.trade-direction-tab--active {
+  color: var(--sb-danger, #ff5252) !important;
+  box-shadow: 1px 0 4px rgba(var(--sb-danger-rgb, 255, 82, 82), 0.7);
+}
+
+html[data-ui-theme="legacy"] [data-unified-style="true"]:not([data-qa="trade-direction"]) button:last-child.trade-direction-tab--active {
+  color: var(--sb-accent, #00ffb2) !important;
+  box-shadow: 1px 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7);
+}
+
+html[data-ui-theme="legacy"] [data-unified-style="true"] button:not(:first-child):not(:last-child).trade-direction-tab--active {
+  box-shadow: 0 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7), 0 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7);
+}
+
+/* ========== Block tabs：荧光字色与下划线 ========== */
+html[data-ui-theme="legacy"] .tab-active-green {
+  color: var(--sb-accent, #00ffb2) !important;
+  border-bottom-color: transparent !important;
+}
+
+html[data-ui-theme="legacy"] .tab-underline-indicator {
+  background: var(--sb-accent, #00ffb2);
+}
+
+/* ========== NestedTab（More）荧光 ========== */
+html[data-ui-theme="legacy"] .nested-tab-button--active .nested-tab-label--active {
+  color: #00ffb2 !important;
+}
+
+html[data-ui-theme="legacy"] .nested-tab-button--active .nested-tab-icon {
+  color: #00ffb2 !important;
+}
+
+html[data-ui-theme="legacy"] .nested-tab-icon--up {
+  color: #00ffb2 !important;
+}
+
+html[data-ui-theme="legacy"] .nested-tab-dropdown {
+  border: 1px solid transparent;
+  background: linear-gradient(#090909, #090909) padding-box,
+    linear-gradient(
+      90deg,
+      rgba(0, 255, 178, 0.8) 0%,
+      rgba(0, 255, 178, 0) 10%,
+      rgb(0, 0, 0) 50%,
+      rgba(0, 255, 178, 0) 90%,
+      rgba(0, 255, 178, 0.8) 100%
+    )
+      border-box;
+  box-shadow: 0 0 12px rgba(0, 255, 178, 0.3), 0 10px 24px rgba(0, 0, 0, 0.6);
+}

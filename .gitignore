@@ -1,0 +1,79 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+.vscode
+
+# Embedded git repositories (manage separately)
+# Reference repos
+/refs/
+
+# Large build artifacts
+**/artifacts/build-info/
+**/cache/
+
+# Logs
+console.log
+
+# typechain-types
+#/src/typechain-types
+
+# lingui
+#/src/locales/**/*.js
+#/src/locales/en/messages.po
+#/src/locales/_build/
+
+# testing
+/coverage
+
+# production
+/build
+/.next
+
+/stats.html
+
+# misc
+.DS_Store
+
+# Env files (NEVER commit — contain API keys, DSNs, project IDs)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+# Keep example templates in repo
+!.env.example
+!.env.*.example
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+package-lock.json
+
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+/.idea/
+
+.cursor/
+CLAUDE.md
+.serena
+.claude
+claude.md
+.history
+.github
+
+# Playwright MCP debug artifacts
+.playwright-mcp/
+local-*.png
+lighter-*.png

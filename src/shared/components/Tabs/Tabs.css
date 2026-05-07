@@ -1,0 +1,266 @@
+/* ================================
+ * 基础 Tab 样式（冷色块 Tab，与荧光 Legacy / Primit 稿面独立）
+ * ==============================*/
+.Tab.Tab__block {
+  display: grid;
+  grid-auto-flow: column;
+  font-size: var(--font-size-body-medium);
+  border-radius: 3px;
+  overflow: hidden;
+  color: var(--color-slate-100);
+  background: var(--color-cold-blue-900);
+  box-shadow: inset 0px 0px 30px 5px rgba(255, 255, 255, 0.01);
+}
+
+.Tab-option-icon {
+  margin-right: 0.465rem;
+  opacity: 0.7;
+}
+
+.Tab.Tab__block .Tab-option {
+  text-align: center;
+  padding: 0.8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.Tab.Tab__block.Tab__l .Tab-option {
+  padding: 10.5px;
+}
+
+.Tab.Tab__block .Tab-option:not(.disabled):not(.active):hover {
+  color: var(--color-typography-primary);
+  background: var(--color-cold-blue-700);
+}
+
+.Tab.Tab__block .Tab-option.active {
+  opacity: 1;
+  pointer-events: none;
+  background: var(--color-cold-blue-500);
+  color: var(--color-typography-primary);
+}
+
+.Tab.Tab__block .Tab-option.active .Tab-option-icon {
+  opacity: 1;
+}
+
+.Tab.Tab__inline {
+  overflow-x: scroll;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.Tab.Tab__inline::-webkit-scrollbar {
+  display: none;
+}
+
+.Tab.Tab__inline .Tab-option {
+  display: inline-block;
+  margin-right: 1.5rem;
+  font-size: var(--font-size-body-medium);
+  color: var(--color-slate-100);
+}
+
+.Tab.Tab__inline .Tab-option:not(.disabled):not(.active):hover {
+  color: var(--color-typography-primary);
+}
+
+.Tab.Tab__inline .Tab-option.active {
+  color: var(--color-typography-primary);
+  pointer-events: none;
+}
+
+.Tab-option {
+  cursor: pointer;
+}
+
+.Tab-option.disabled {
+  cursor: not-allowed;
+}
+
+/* ================================
+ * 统一样式 Tabs — 结构层（配色见 themes/legacy/tabs.legacy.css 或 primit/tabs.primit.css）
+ * ==============================*/
+[data-unified-style="true"] {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* 内部容器：flex 布局，自动均分 */
+[data-unified-style="true"] > div {
+  display: flex;
+  width: 100%;
+  gap: 2px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* trade-direction 特殊：使用 grid 两列布局 */
+[data-qa="trade-direction"][data-unified-style="true"] > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* 公共按钮基础样式（布局与字重；背景/字色由主题层覆写） */
+[data-unified-style="true"] button {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin: 0;
+  border-radius: 0;
+  font-family: "Messina Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.1s ease, color 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* trade-direction 特殊：按钮宽度 100% */
+[data-qa="trade-direction"][data-unified-style="true"] button {
+  width: 100%;
+}
+
+/* 公共圆角处理：第一个按钮 */
+[data-unified-style="true"] button:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+/* 公共圆角处理：最后一个按钮 */
+[data-unified-style="true"] button:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+/* 避免内层背景圆角遮住外层主题描边圆角 */
+[data-unified-style="true"] button:first-child {
+  border-top-left-radius: 10px !important;
+}
+
+[data-unified-style="true"] button:last-child {
+  border-top-right-radius: 10px !important;
+}
+
+/* 中间按钮圆角（三个或更多按钮时） */
+[data-unified-style="true"] button:not(:first-child):not(:last-child) {
+  border-radius: 2px;
+}
+
+/* ================================
+ * 特定页面的宽度和布局调整
+ * ==============================*/
+/* leaderboard-tabs 设置固定宽度，不撑满整行 */
+[data-qa="leaderboard-tabs"][data-unified-style="true"] {
+  width: auto !important;
+  max-width: 400px;
+}
+
+/* referrals-tabs 设置固定宽度，不撑满整行，居中显示 */
+[data-qa="referrals-tabs"][data-unified-style="true"] {
+  width: auto !important;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+/* ================================
+ * Block 下划线动画（条形色值：Legacy / Primit 主题层）
+ * ==============================*/
+.tab-active-green {
+  border-bottom-color: transparent !important;
+}
+
+.tab-underline-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  border-radius: 999px;
+  transition: left 0.3s ease, width 0.3s ease;
+  pointer-events: none;
+}
+
+/* 隐藏下划线：统一样式的 tabs 不需要下划线 */
+[data-unified-style="true"] .tab-underline-indicator {
+  display: none !important;
+}
+
+/* block：完全隐藏下划线 */
+[data-hide-block-underline="true"] .tab-underline-indicator {
+  display: none !important;
+}
+
+/* Primit 壳：见 `styles/themes/primit/tabs.primit.css` */
+
+/* ================================
+ * NestedTab (More 下拉框) — 结构；荧光见 legacy/tabs.legacy.css
+ * ==============================*/
+.nested-tab-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nested-tab-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+  font-family: "Messina Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.nested-tab-icon {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  transition: color 0.2s ease;
+  color: currentColor;
+}
+
+.nested-tab-dropdown {
+  z-index: 1000;
+  margin-top: 8px;
+  overflow: hidden;
+  border-radius: 20px;
+  outline: none;
+  padding: 8px 0;
+}
+
+.nested-tab-item {
+  font-family: "Messina Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nested-tab-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nested-tab-item--active {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.03);
+}

@@ -1,0 +1,87 @@
+/**
+ * 分区标题标签 · 与 `LandingPageV4` 的 `.primit-section-pill` 同源资源与字效，
+ * 外框 **直角**（`border-radius: 0`），衬底与落地 CTA 壳同系。
+ */
+.primit-section-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 18px;
+  border-radius: 0;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #191919 0%, #2d3a47 50%, #191919 100%);
+  border: 0.5px solid rgba(226, 231, 237, 0.14);
+  box-shadow: 0 0 0 0.5px color-mix(in srgb, var(--primit-primary-1, #87d7ea) 18%, transparent);
+}
+
+.primit-section-label__cap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.primit-section-label__cap img {
+  height: 28px;
+  width: auto;
+  max-height: 28px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+}
+
+.primit-section-label__cap--left img {
+  transform: rotate(-90deg) scaleY(-1);
+}
+
+.primit-section-label__cap--right img {
+  transform: rotate(-90deg);
+}
+
+.primit-section-label__star {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+.primit-section-label__text {
+  font-family: var(--primit-font-title, "Messina Sans", sans-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  background: linear-gradient(180deg, #ffffff 0%, #a8b0ba 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@media (max-width: 768px) {
+  .primit-section-label {
+    min-height: 30px;
+    padding: 0 12px;
+    gap: 4px;
+  }
+
+  .primit-section-label__cap {
+    width: 24px;
+    height: 24px;
+  }
+
+  .primit-section-label__cap img {
+    height: 24px;
+  }
+
+  .primit-section-label__text {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+}

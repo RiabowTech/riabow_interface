@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Restore native webkit behavior */
+    @apply leading-base;
+  }
+
+  input,
+  textarea {
+    /* Restore native webkit behavior */
+    @apply placeholder-gray;
+  }
+}
+
+@layer utilities {
+  /* Zanbara Gold Gradient Text */
+  .gold-gradient-text {
+    background: linear-gradient(135deg, #EBB800 0%, #D4A600 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Logo Icon Glow Effect */
+  .logo-glow {
+    filter: drop-shadow(0 0 5px rgba(235, 184, 0, 0.5));
+  }
+
+  /* Zanbara gold border */
+  .zanbara-border {
+    border-color: rgba(235, 184, 0, 0.2);
+  }
+
+  /* Zanbara gold accent */
+  .zanbara-accent {
+    color: #EBB800;
+  }
+}

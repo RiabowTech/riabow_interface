@@ -1,0 +1,310 @@
+.root {
+  display: flex; flex-direction: column; height: 100%;
+  background: #000; overflow: hidden;
+}
+
+/** Tab 布局:顶栏 + subbar 之后,订单簿/成交主体占满剩余高度,避免底部大块留白与左侧 K 线底不齐 */
+.tabMain {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/** 订单簿行数算不满剩余高度时,用与盘口同底色的占位条垫齐底边(不改动 ask/bid 行数比例) */
+.tabMainSpacer {
+  flex: 1 1 0;
+  min-height: 0;
+  background: var(--ltr-bg-panel);
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: visible;
+  background: #14151b;
+  border: 1px solid #20222a;
+  border-radius: 4px;
+}
+.stackedLayout {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4px;
+  flex: 1;
+  min-height: 0;
+}
+.stackedSection {
+  min-height: 0;
+}
+.largeLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4px;
+  flex: 1;
+  min-height: 0;
+}
+.tabs {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between;
+  background: #14151b;
+  border-radius: 4px;
+  overflow: visible;
+  /** 与 LighterTradePage `.chartCol` 首行 SymbolBar(40px) + row-gap 对齐 */
+  min-height: 40px;
+  margin-bottom: 4px;
+  z-index: 3;
+}
+.tab, .tabActive {
+  position: relative;
+  height: 40px; min-height: 40px; flex: 1;
+  min-width: 80px;
+  padding: 0 8px;
+  font-size: 11px; font-weight: 400;
+  color: #a9aaad;
+  background: transparent; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  white-space: nowrap;
+  transition: color 150ms ease;
+  &:hover { color: var(--ltr-text-primary); }
+}
+.tabActive {
+  color: var(--ltr-text-primary);
+  background: #22232b; // gray-9
+}
+.tab::after, .tabActive::after {
+  content: ""; position: absolute;
+  left: 0; right: 0; bottom: 1px; margin: 0 auto;
+  width: 52%; max-width: 52px;
+  height: 2px; border-radius: 999px;
+  background: var(--primit-primary-1, #87d7ea);
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  transform: scaleX(0);
+  opacity: 0;
+}
+.tabActive::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+.menuWrap { position: relative; display: inline-flex; margin: 0 8px 0 10px; flex-shrink: 0; z-index: 4; }
+.sectionHeader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 8px 0 10px;
+  background: #14151b;
+  /** 主题色 1px · 50% alpha */
+  border-bottom: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 50%, transparent);
+  overflow: visible;
+  z-index: 3;
+}
+.sectionTitlePlain {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ltr-text-primary);
+}
+.sectionHeaderActions {
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: 0;
+}
+.sectionHeaderSpacer {
+  width: 16px;
+  height: 16px;
+}
+.menuBtn {
+  width: 16px; height: 16px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ltr-text-secondary);
+  background: transparent; border: 0; cursor: pointer; padding: 0;
+  &:hover { color: var(--ltr-text-primary); }
+}
+
+.subbar {
+  display: flex; align-items: center; justify-content: space-between;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  /** 与 `.chartCol` 收藏条行高 25px + 与 K 线区间 row-gap 对齐 */
+  height: 25px;
+  padding: 0 10px;
+  margin-bottom: 4px;
+  background: var(--ltr-bg-panel);
+}
+.subRight { display: inline-flex; gap: 6px; align-items: center; }
+.modeBtns { display: inline-flex; gap: 4px; align-items: center; }
+.modeBtn {
+  width: 18px; height: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 2px; border: 0; border-radius: 2px;
+  background: transparent; cursor: pointer;
+  opacity: 0.5;
+  &:hover { opacity: 1; background: var(--ltr-bg-hover); }
+}
+.modeActive {
+  opacity: 1;
+  background: var(--ltr-bg-hover);
+}
+.modeIcon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 12px; height: 12px;
+  svg { width: 100%; height: 100%; display: block; }
+}
+
+.subSel {
+  height: 22px;
+  font-size: 11px; color: var(--ltr-text-secondary);
+  background: transparent; padding: 0 6px; border-radius: 2px;
+  border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px;
+  &:hover { color: var(--ltr-text-primary); background: var(--ltr-bg-hover); }
+}
+.caret { font-size: 9px; opacity: 0.7; }
+.caretSvg {
+  width: 10px; height: 10px; opacity: 0.85;
+  transition: transform 150ms ease;
+}
+.caretOpen { transform: rotate(180deg); }
+
+.selWrap { position: relative; display: inline-flex; }
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 100px;
+  background: #121218;
+  border: 1px solid var(--ltr-border);
+  border-radius: 4px;
+  padding: 4px 0;
+  z-index: 50;
+  display: flex; flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.tradeMenu {
+  min-width: 164px;
+}
+.menuItem {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--ltr-text-primary);
+  background: transparent; border: 0; cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  &:hover { background: var(--ltr-bg-hover); }
+}
+
+.header {
+  flex-shrink: 0;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  font-size: 12px; color: var(--ltr-text-secondary);
+  padding: 4px 10px;
+  text-align: right;
+  align-items: center;
+  background: var(--ltr-bg-panel);
+  > div:first-child { text-align: left; }
+}
+.unitBadge {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 1px 4px; margin-left: 4px;
+  font-size: 11px; color: var(--ltr-text-primary);
+  background: var(--ltr-border); border-radius: 2px;
+}
+.asks, .bids {
+  flex: 0 0 auto;
+  overflow: hidden;
+  min-height: 0;
+  background: var(--ltr-bg-panel);
+}
+.row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  height: 20px;
+  position: relative; align-items: center;
+}
+.rowEmpty {
+  .price, .size, .total {
+    color: transparent;
+  }
+}
+.rowClickable {
+  cursor: pointer;
+  &:hover {
+    background: var(--ltr-overlay-faint, rgba(255, 255, 255, 0.04));
+  }
+}
+.price, .size, .total {
+  padding: 0 10px;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: right; position: relative; z-index: 1;
+}
+.size, .total { color: var(--ltr-text-primary); }
+.price { text-align: left; }
+.depthTotalAsk, .depthTotalBid, .depthSizeAsk, .depthSizeBid {
+  position: absolute; top: 0; left: 0; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+.depthTotalAsk { background: var(--ltr-down-bg); }
+.depthTotalBid { background: var(--ltr-up-bg); }
+.depthSizeAsk {
+  background: color-mix(in srgb, var(--ltr-down) 32%, transparent);
+}
+.depthSizeBid {
+  background: color-mix(in srgb, var(--ltr-up) 32%, transparent);
+}
+
+.spreadRow {
+  flex-shrink: 0;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  padding: 4px 10px;
+  font-size: 12px;
+  background: var(--ltr-overlay-faint);
+}
+.spreadLabel { color: var(--ltr-text-secondary); text-align: center; }
+.spreadRow > span:last-child { text-align: right; color: var(--ltr-text-primary); }
+.spreadRow > span:first-child { text-align: left; font-variant-numeric: tabular-nums; color: var(--ltr-text-primary); }
+.empty { padding: 40px 8px; color: var(--ltr-text-muted); text-align: center; }
+
+// Trades tab
+.tradesHeader {
+  flex-shrink: 0;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  font-size: 12px; color: var(--ltr-text-secondary);
+  padding: 4px 10px;
+  align-items: center;
+  background: var(--ltr-bg-panel);
+  > div:nth-child(1) { text-align: left; }
+  > div:nth-child(2) { text-align: center; }
+  > div:nth-child(3) { text-align: right; }
+}
+.tradesList {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+  background: var(--ltr-bg-panel);
+  /** 隐藏滚动条，仍可用滚轮 / 触控滑动 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+.tradeRow {
+  display: flex; align-items: center;
+  height: 20px; padding: 0 10px;
+  font-size: 12px; font-weight: 300;
+  color: var(--ltr-text-secondary);
+  > div { flex: 1; }
+}
+.tradeBuy { background: rgb(7, 16, 18); }
+.tradeSell { background: rgb(18, 9, 15); }
+.tradeTime { text-align: left; }
+.tradeSize { text-align: center; font-variant-numeric: tabular-nums; }
+.tradePrice { text-align: right; color: var(--ltr-text-primary); font-variant-numeric: tabular-nums; }

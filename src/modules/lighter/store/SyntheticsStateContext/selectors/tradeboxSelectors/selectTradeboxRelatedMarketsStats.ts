@@ -1,0 +1,87 @@
+import fromPairs from "lodash/fromPairs";
+import keyBy from "lodash/keyBy";
+import values from "lodash/values";
+
+import { selectTokensData } from "@/modules/lighter/store/SyntheticsStateContext/selectors/globalSelectors";
+import {
+  getMarketIncreasePositionAmounts,
+  selectTradeboxIncreasePositionAmounts,
+  selectTradeboxToTokenAddress,
+  selectTradeboxTradeFlags,
+} from "@/modules/lighter/store/SyntheticsStateContext/selectors/tradeboxSelectors";
+import { createSelector } from "@/modules/lighter/store/SyntheticsStateContext/utils";
+import { getAvailableUsdLiquidityForPosition } from "domain/synthetics/markets";
+import {
+  MarketStat,
+  marketsInfoData2IndexTokenStatsMap,
+} from "domain/synthetics/stats/marketsInfoDataToIndexTokensStats";
+import { EMPTY_ARRAY, getByKey } from "lib/objects";
+
+import { selectTradeboxAvailableMarkets } from "./selectTradeboxAvailableMarkets";
+
+export type MarketLiquidityAndFeeStat = {
+  isEnoughLiquidity: boolean;
+  liquidity: bigint;
+};
+
+export type RelatedMarketsStats = {
+  relatedMarketsPositionStats: {
+    [marketTokenAddress: string]: MarketLiquidityAndFeeStat;
+  };
+  relatedMarketStats: MarketStat[];
+};
+
+export const selectTradeboxRelatedMarketsStats = createSelector((q) => {
+  const flags = q(selectTradeboxTradeFlags);
+  const indexTokenAddress = q(selectTradeboxToTokenAddress);
+  const tokensData = q(selectTokensData);
+  const increaseAmounts = q(selectTradeboxIncreasePositionAmounts);
+  const increaseSizeUsd = increaseAmounts?.sizeDeltaUsd;
+
+  const indexToken = getByKey(tokensData, indexTokenAddress);
+
+  const { isPosition, isLong } = flags;
+
+  if (!isPosition || !indexToken || isLong === undefined) {
+    return {
+      relatedMarketsPositionStats: {},
+      relatedMarketStats: [],
+    } as RelatedMarketsStats;
+  }
+
+  const availableMarkets = q(selectTradeboxAvailableMarkets);
+
+  const relatedMarketStats =
+    values(marketsInfoData2IndexTokenStatsMap(keyBy(availableMarkets, "marketTokenAddress")).indexMap)[0]
+      ?.marketsStats || EMPTY_ARRAY;
+
+  const defaultMarketsEnoughLiquidity = fromPairs(
+    availableMarkets.map((market) => {
+      const liquidity = getAvailableUsdLiquidityForPosition(market, isLong);
+      return [market.marketTokenAddress, { isEnoughLiquidity: liquidity > 0, liquidity, openFees: undefined }];
+    })
+  );
+
+  const result: RelatedMarketsStats = {
+    relatedMarketsPositionStats: defaultMarketsEnoughLiquidity,
+    relatedMarketStats: relatedMarketStats,
+  };
+
+  if (increaseSizeUsd !== undefined && increaseSizeUsd > 0) {
+    for (const relatedMarket of availableMarkets) {
+      const marketIncreasePositionAmounts = getMarketIncreasePositionAmounts(q, relatedMarket.marketTokenAddress);
+      if (!marketIncreasePositionAmounts) {
+        continue;
+      }
+
+      const availableUsdLiquidityForPosition =
+        defaultMarketsEnoughLiquidity[relatedMarket.marketTokenAddress].liquidity;
+      result.relatedMarketsPositionStats[relatedMarket.marketTokenAddress] = {
+        liquidity: availableUsdLiquidityForPosition,
+        isEnoughLiquidity: availableUsdLiquidityForPosition > increaseSizeUsd,
+      };
+    }
+  }
+
+  return result;
+});

@@ -1,0 +1,327 @@
+// src/modules/lighter/styles/global.scss
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "./tokens.scss";
+
+.lighter-root {
+  background: var(--ltr-bg-root);
+  color: var(--ltr-text-primary);
+  font-family: var(--ltr-font-family);
+  font-size: var(--ltr-font-body);
+  font-weight: var(--ltr-font-weight);
+  line-height: var(--ltr-line-height);
+  // 注意:不要设 -webkit-font-smoothing: antialiased,会让文字比 Lighter 显细
+  // Lighter 使用系统默认 (auto / subpixel)
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  min-height: 100vh;
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  // 注意:不要 reset background/border/padding/color/font,否则 CSS module 的样式会被覆盖
+  button { cursor: pointer; font-family: inherit; }
+  button:not([class]) { background: none; border: 0; padding: 0; color: inherit; font-size: inherit; font-weight: inherit; }
+  input { background: transparent; border: 0; color: inherit; font: inherit; outline: none; }
+  table { border-collapse: collapse; width: 100%; }
+
+  .ltr-mono { font-family: var(--ltr-font-family); font-variant-numeric: tabular-nums; }
+  .ltr-up { color: var(--ltr-up); }
+  .ltr-down { color: var(--ltr-down); }
+
+  // Lighter form primitives
+  .ltr-form {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 12px;
+  }
+  .ltr-form__section {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .ltr-form__row {
+    display: flex; justify-content: space-between; align-items: center;
+    min-height: 22px;
+    gap: 12px;
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .ltr-form__row-label {
+    color: var(--ltr-text-secondary);
+    white-space: nowrap;
+    margin: 0;
+  }
+  .ltr-form__row-value {
+    color: var(--ltr-text-primary);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    font-weight: 500;
+  }
+  .ltr-form__row-link {
+    color: var(--ltr-accent-cyan);
+    cursor: pointer;
+    &:hover {
+      color: color-mix(in srgb, var(--ltr-accent-cyan) 72%, #ffffff);
+    }
+  }
+  .ltr-form__field {
+    display: flex; align-items: center; gap: 4px;
+    height: 32px; min-height: 32px; padding: 0 8px;
+    /** 主题色 input 边框 · 20% alpha（与 3013 trade 输入框一致） */
+    border: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 20%, transparent);
+    background: #1f1f24;
+    border-radius: 4px;
+    color: var(--ltr-text-primary);
+    font-size: 12px;
+    line-height: 16px;
+    transition: background 150ms, border-color 150ms;
+    &:hover {
+      border-color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 40%, transparent);
+      background: #26262c;
+    }
+  }
+  .ltr-form__label {
+    white-space: nowrap;
+    color: var(--ltr-text-primary);
+    cursor: text;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+  .ltr-form__input {
+    flex: 1; min-width: 0; width: 100%;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent; border: 0; outline: 0;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--ltr-text-primary);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-weight: 400;
+    &::placeholder { color: #828285; text-align: right; font-weight: 400; }
+  }
+  .ltr-form__trailing {
+    display: inline-flex; align-items: center; gap: 4px;
+    height: 16px; padding: 0;
+    background: transparent; border: 0; cursor: pointer;
+    font-size: 12px; font-weight: 500;
+    color: var(--ltr-text-secondary);
+    &:hover { color: var(--ltr-text-primary); }
+    svg { opacity: 0.85; }
+  }
+  .ltr-form__trailing--link {
+    color: var(--ltr-accent-cyan);
+    &:hover {
+      color: color-mix(in srgb, var(--ltr-accent-cyan) 72%, #ffffff);
+    }
+  }
+  .ltr-form__trailing--plain {
+    color: var(--ltr-text-secondary);
+    cursor: default;
+  }
+  .ltr-form__note {
+    padding: 6px 8px;
+    margin: 4px 0 0;
+    border-radius: 4px;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .ltr-form__note--warn {
+    background: rgba(235, 180, 45, 0.10);
+    color: #eab645;
+  }
+  .ltr-form__note--error {
+    background: rgba(255, 92, 103, 0.12);
+    color: #ff6975;
+  }
+  .ltr-form__coin-wrap {
+    position: relative;
+    display: inline-flex;
+  }
+  .ltr-form__coin-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 120px;
+    background: #1f1f24;
+    border: 1px solid var(--ltr-border);
+    border-radius: 4px;
+    padding: 0;
+    z-index: 50;
+    display: flex; flex-direction: column;
+    box-shadow: none;
+    overflow: hidden;
+  }
+  .ltr-form__coin-item {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    min-height: 32px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: var(--ltr-text-primary);
+    background: transparent; border: 0; cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+    &:hover { background: #2a2b31; }
+    & + & { border-top: 1px solid var(--ltr-border); }
+  }
+  .ltr-form__disclosure {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 0;
+    background: transparent; border: 0; cursor: pointer;
+    font-size: 12px; font-weight: 500;
+    color: #f5f5f5;
+    align-self: flex-start;
+  }
+  .ltr-form__disclosure-caret {
+    display: inline-flex; align-items: center;
+    transition: transform 150ms;
+  }
+  .ltr-form__disclosure-caret--open { transform: rotate(180deg); }
+
+  .ltr-form__advanced {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .ltr-form__advanced-row {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .ltr-form__advanced-grid {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 135px 32px 135px;
+    gap: 4px;
+    justify-content: start;
+  }
+  .ltr-form__select {
+    display: inline-flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    height: 32px; padding: 0 8px;
+    background: #2b2b30; // gray-10
+    border: 1px solid #26262c; // gray-9
+    border-radius: 4px;
+    color: #f5f5f5;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 150ms, border-color 150ms;
+    &:hover { background: #1c1c24; border-color: #3a3a42; }
+    > span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    svg { opacity: 0.85; flex-shrink: 0; }
+  }
+  .ltr-form__select-wrap {
+    position: relative;
+    min-width: 0;
+    width: 100%;
+  }
+  .ltr-form__select-wrap--tif { width: 135px; }
+  .ltr-form__select-wrap--tif-unit { width: 135px; }
+  .ltr-form__select-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 100%;
+    background: #1c1c24;
+    border: 1px solid #2b2b30;
+    border-radius: 4px;
+    padding: 0;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+  }
+  .ltr-form__select-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 32px;
+    padding: 0 12px;
+    font-size: 12px;
+    color: #f3f3f3;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    white-space: nowrap;
+    &:hover { background: #2b2b30; }
+    & + & { border-top: 1px solid #2b2b30; }
+  }
+  .ltr-form__field--num {
+    width: 32px;
+    height: 32px;
+    padding: 1px;
+    justify-content: center;
+    border-radius: 4px;
+  }
+  .ltr-form__input--left {
+    text-align: left;
+    &::placeholder { text-align: left; }
+  }
+  .ltr-form__field--num .ltr-form__input {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 12px;
+    line-height: 30px;
+    letter-spacing: 0;
+  }
+  .ltr-form__field--num .ltr-form__input::placeholder {
+    text-align: center;
+  }
+  .ltr-form__field--num .ltr-form__input--left {
+    text-align: center;
+  }
+  .ltr-form__grid2 {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px;
+  }
+  .ltr-form__field { min-width: 0; }
+  .ltr-form__submit {
+    width: 100%;
+    height: 32px;
+    min-height: 32px;
+    margin-top: 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: filter 150ms;
+    &:hover { filter: brightness(1.1); }
+    &:disabled { opacity: 0.5; cursor: default; }
+  }
+  /** 与 OrderForm 侧栏指示条、PercentSlider 同源 token；Primit 下随 tokens.scss 映射到涨跌色 */
+  .ltr-form__submit--buy {
+    background: linear-gradient(180deg, var(--ltr-trade-buy-bright) 0%, var(--ltr-trade-buy-mid) 100%);
+  }
+  .ltr-form__submit--sell {
+    background: linear-gradient(180deg, var(--ltr-trade-sell-bright) 0%, var(--ltr-trade-sell-gradient-end) 100%);
+  }
+}
+
+body.lighter-active {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+
+  .App {
+    height: auto !important;
+    min-height: 100vh;
+    overflow: visible !important;
+    display: block !important;
+  }
+  // 隐藏旧 App 左侧栏(lighter 布局占满整个视口)
+  // 旧 DOM:sidebar + content(两个子元素);新 DOM 可能只剩 content
+  // 用 sidebar 自身类(z-30 + lg:block)定位,避免误伤唯一内容区
+  .App > [class*="lg:block"][class*="z-30"] { display: none !important; }
+  // 内容区撑满,由 lighter 自己的弹性栅格决定宽度
+  .App > div {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}

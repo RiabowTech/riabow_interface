@@ -1,0 +1,19 @@
+/**
+ * 强调色（霓虹绿 ↔ Primit 主色）：Earn / AI Strategy、`PageTitle` 大标题等共用。
+ * Primit 壳内与 --primit-primary-1 同步（随 html.dark 切换）。
+ * 字体栈见 `PrimitTypography.css`：`--primit-font-title` / `--primit-font-body`（理财页已改用变量）。
+ */
+:root {
+  --earn-accent: #00ffb2;
+}
+
+html[data-ui-theme="primit"] {
+  --earn-accent: var(--primit-primary-1);
+}
+
+/**
+ * 理财页标题、APR 等：替代 `text-gold-500`，与 `--earn-accent` 同步。
+ */
+.earn-accent-text {
+  color: var(--earn-accent);
+}

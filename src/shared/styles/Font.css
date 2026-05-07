@@ -1,0 +1,258 @@
+@font-face {
+  font-family: "Relative";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/relative/relative-book-pro.eot"); /* IE9 Compat Modes */
+  src:
+    local(""),
+    url("../fonts/relative/relative-book-pro.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/relative/relative-book-pro.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/relative/relative-book-pro.woff") format("woff"),
+    /* Modern Browsers */ url("../fonts/relative/relative-book-pro.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: "Relative";
+  font-display: swap;
+  src: url("../fonts/roboto/roboto-v30-latin-regular.eot"); /* IE9 Compat Modes */
+  src:
+    local(""),
+    url("../fonts/roboto/roboto-v30-latin-regular.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/roboto/roboto-v30-latin-regular.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/roboto/roboto-v30-latin-regular.woff") format("woff"),
+    /* Modern Browsers */ url("../fonts/roboto/roboto-v30-latin-regular.ttf") format("truetype"); /* Safari, Android, iOS */
+
+  /* apply this font only for numbers */
+  unicode-range: U+30-39;
+}
+
+@font-face {
+  font-family: "Relative";
+  font-display: swap;
+  src: url("../fonts/inter/inter-v12-latin-regular.eot"); /* IE9 Compat Modes */
+  src:
+    local(""),
+    url("../fonts/inter/inter-v12-latin-regular.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/inter/inter-v12-latin-regular.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/inter/inter-v12-latin-regular.woff") format("woff"),
+    /* Modern Browsers */ url("../fonts/inter/inter-v12-latin-regular.ttf") format("truetype"); /* Safari, Android, iOS */
+
+  /* apply this font for commas and full-stops */
+  unicode-range: U+002C, U+002E;
+}
+
+/* for certain components like inputs, don't overwrite the number font */
+@font-face {
+  font-family: "RelativeNumber";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/relative/relative-book-pro.eot"); /* IE9 Compat Modes */
+  src:
+    local(""),
+    url("../fonts/relative/relative-book-pro.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/relative/relative-book-pro.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/relative/relative-book-pro.woff") format("woff"),
+    /* Modern Browsers */ url("../fonts/relative/relative-book-pro.ttf") format("truetype"); /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: "TTHoves";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/tthoves/tthoves-pro-regular.ttf");
+  src:
+    local(""),
+    url("../fonts/tthoves/tthoves-pro-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "TTHoves";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/tthoves/tthoves-pro-medium.ttf");
+  src:
+    local(""),
+    url("../fonts/tthoves/tthoves-pro-medium.ttf") format("truetype");
+}
+
+/* Primit 历史字重：Alternox / Messina / Chakra / Outfit 文件仍在此注册；全局栈见 PrimitTypography.css（Messina Sans） */
+@font-face {
+  font-family: "Alternox";
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("../fonts/Alternox/alternox-extralight.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Alternox";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/Alternox/alternox-light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Alternox";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Alternox/alternox-regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Alternox";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/Alternox/alternox-semibold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Alternox";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Alternox/alternox-bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Alternox";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../fonts/Alternox/alternox-extrabold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Messina Sans";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/messina%20sans/messinasans-light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Messina Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/messina%20sans/MS-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Messina Sans";
+  font-style: normal;
+  font-weight: 450;
+  font-display: swap;
+  src: url("../fonts/messina%20sans/messinasans-book_0.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Messina Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/messina%20sans/MessinaSans-SemiBold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Messina Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/messina%20sans/messinasans-bold_0.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Messina Sans";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../fonts/messina%20sans/messinasans-black.otf") format("opentype");
+}
+
+/* Primit landing page fonts */
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Outfit Regular"),
+    url("../fonts/outfit/Outfit-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    local("Outfit Medium"),
+    url("../fonts/outfit/Outfit-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src:
+    local("Outfit SemiBold"),
+    url("../fonts/outfit/Outfit-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Outfit Bold"),
+    url("../fonts/outfit/Outfit-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Chakra Petch Regular"),
+    url("../fonts/chakra/ChakraPetch-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    local("Chakra Petch Medium"),
+    url("../fonts/chakra/ChakraPetch-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src:
+    local("Chakra Petch SemiBold"),
+    url("../fonts/chakra/ChakraPetch-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Chakra Petch";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Chakra Petch Bold"),
+    url("../fonts/chakra/ChakraPetch-Bold.ttf") format("truetype");
+}

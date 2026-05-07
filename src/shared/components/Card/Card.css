@@ -1,0 +1,25 @@
+.card {
+  border-radius: 8px;
+  background: var(--color-slate-900);
+}
+
+.card-header {
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body-large);
+  font-weight: normal;
+  letter-spacing: 0px;
+  color: var(--color-typography-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+}
+
+.card-divider {
+  height: 0.5px;
+  background: var(--color-slate-600);
+}
+
+.card-body {
+  padding: 16px;
+}

@@ -1,0 +1,44 @@
+.Page-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 12px;
+
+  .Page-title-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    
+    .Page-title__text {
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 1.2;
+      margin: 0;
+      color: #00ffb2 !important; /* 绿色文字 */
+      font-family: "Chakra Petch", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0.05em;
+      position: relative;
+      
+      /* 添加绿色发光效果 */
+      text-shadow: 0 0 8px rgba(0, 255, 178, 0.3);
+    }
+  }
+  
+  /* 副标题样式优化 */
+  > div:last-child {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .Page-title-wrapper {
+    .Page-title-group {
+      .Page-title__text {
+        font-size: 28px;
+      }
+    }
+  }
+}

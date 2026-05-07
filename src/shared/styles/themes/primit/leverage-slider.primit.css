@@ -1,0 +1,158 @@
+/**
+ * Primit 覆盖层 · LeverageSlider（rc-slider）
+ * 钩子：`.LeverageSlider`（`components/LeverageSlider/LeverageSlider.scss`）
+ * 替换 legacy 轨道/节点的 `blue-300` 与 `#00ffb2`，与做多绿/做空红 token 对齐。
+ */
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-rail {
+  height: 4px;
+  border-radius: 0;
+  background: var(--primit-accent-a15, rgba(226, 231, 237, 0.15));
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-track {
+  height: 4px;
+  border-radius: 0;
+  background-color: var(--primit-primary-1, #87d7ea);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-dot {
+  box-sizing: content-box;
+  width: 4px;
+  height: 4px;
+  border: 1.5px solid var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+  border-radius: 50%;
+  background: var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn));
+  top: -1px;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-dot-active {
+  border-color: var(--primit-primary-1, #87d7ea);
+  background: var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn));
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-handle {
+  width: 8px;
+  height: 8px;
+  box-sizing: content-box;
+  border: 2px solid var(--primit-primary-1, #87d7ea);
+  border-radius: 50%;
+  background-color: var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn));
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  cursor: grab;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-handle:active {
+  cursor: grabbing;
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 6px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 35%, transparent)
+  );
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-handle:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 65%, transparent);
+  outline-offset: 2px;
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-mark-text,
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-mark-text-active {
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--primit-accent-a50, rgba(226, 231, 237, 0.5));
+  opacity: 1;
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-mark-text-active {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-mark-text:hover,
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-mark-text-active:hover {
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+/* 做多 / 做空：与 Long·Short Big Tab 同色 */
+html[data-ui-theme="primit"] .LeverageSlider.positive .rc-slider-track {
+  background-color: var(--primit-others-green);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.positive .rc-slider-dot-active {
+  border-color: var(--primit-others-green);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.positive .rc-slider-handle {
+  border-color: var(--primit-others-green);
+  box-shadow: 0 0 4px color-mix(in srgb, var(--primit-others-green) 35%, transparent);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.positive .rc-slider-handle:focus-visible {
+  outline-color: color-mix(in srgb, var(--primit-others-green) 65%, transparent);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.negative .rc-slider-track {
+  background-color: var(--primit-others-red);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.negative .rc-slider-dot-active {
+  border-color: var(--primit-others-red);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.negative .rc-slider-handle {
+  border-color: var(--primit-others-red);
+  box-shadow: 0 0 4px color-mix(in srgb, var(--primit-others-red) 35%, transparent);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.negative .rc-slider-handle:focus-visible {
+  outline-color: color-mix(in srgb, var(--primit-others-red) 65%, transparent);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-tooltip-inner {
+  padding: 6px 10px;
+  border-radius: 0;
+  border: 0.5px solid var(--primit-primary-1, #87d7ea);
+  background: var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn));
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: 12px;
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-tooltip {
+  background: transparent;
+  box-shadow: none;
+}
+
+html[data-ui-theme="primit"] .LeverageSlider .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {
+  border-top-color: var(--primit-primary-1, #87d7ea);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.positive .rc-slider-tooltip-inner {
+  border-color: var(--primit-others-green);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.positive .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {
+  border-top-color: var(--primit-others-green);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.negative .rc-slider-tooltip-inner {
+  border-color: var(--primit-others-red);
+}
+
+html[data-ui-theme="primit"] .LeverageSlider.negative .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {
+  border-top-color: var(--primit-others-red);
+}

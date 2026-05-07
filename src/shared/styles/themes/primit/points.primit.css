@@ -1,0 +1,46 @@
+/**
+ * AxPoints（/points）：与 Primit 令牌同步，随 html.dark / :root 亮暗与 --primit-* 变化。
+ * 积分页主容器为 `.pd-page`；遗留 `--points-*` 仍挂在 `.points-page-content` 以备旧稿引用。
+ */
+html[data-ui-theme="primit"] .pd-page {
+  --pd-text: var(--primit-secondary-1);
+  --pd-muted: var(--primit-secondary-2);
+  /* 仅边框锁 #56bbc9；文字/进度/标签等跟设计令牌 */
+  --pd-border: #56bbc9;
+  --pd-primary: var(--primit-primary-1);
+  --pd-primary-2: var(--primit-primary-2);
+  --pd-yellow: #e7a71e;
+  --pd-green: #28e59b;
+  --pd-connect-wallet-bg: #2a6b77;
+  --pd-connect-wallet-bg-hover: color-mix(in srgb, #2a6b77 86%, var(--primit-secondary-1) 14%);
+  --pd-connect-wallet-edge: color-mix(in srgb, var(--primit-secondary-3) 62%, #2a6b77 38%);
+  /* 与 AppPageLayout PRIMIT_MAIN_SURFACE / fee-vip 主区同源，勿再叠 secondary-4 */
+  --pd-surface: var(--primit-trade-module-bg, var(--text-bg-color-secondary-3, #191919));
+  --pd-surface-deep: var(--primit-secondary-3);
+  /* 与稿面 Points_Card 一致：0deg 叠色 + MainBtn 炭底 + primary 20% 外发光 */
+  --neutral-color-gray-100: rgba(0, 0, 0, 0.2);
+  --pd-card-fill: var(--primit-surface-mainbtn, #20272f);
+  --pd-card-overlay: var(--neutral-color-gray-100);
+  --pd-card-bg: linear-gradient(0deg, var(--pd-card-overlay) 0%, var(--pd-card-overlay) 100%), var(--pd-card-fill);
+  --pd-card-glow: 0 0 4px 0 color-mix(in srgb, var(--primit-primary-1) 20%, transparent);
+  --pd-card-glow-yellow: 0 0 4px 0 rgba(231, 167, 30, 0.2);
+  --pd-card-glow-green: 0 0 4px 0 rgba(40, 229, 155, 0.2);
+}
+
+html[data-ui-theme="primit"] .points-page-content {
+  --points-accent: var(--primit-primary-1);
+  --points-fg: var(--primit-secondary-1);
+  --points-fg-muted: var(--primit-secondary-2);
+  --points-fg-soft: color-mix(in srgb, var(--primit-secondary-1) 72%, transparent);
+  --points-fg-dimmer: color-mix(in srgb, var(--primit-secondary-2) 88%, transparent);
+  --points-fg-table: var(--primit-secondary-1);
+  --points-surface-deep: var(--primit-secondary-4);
+  --points-surface-raised: var(--primit-soft-10);
+  --points-border-subtle: var(--primit-soft-15);
+  --points-border-medium: var(--primit-soft-20);
+  --points-border-faint: var(--primit-soft-5);
+  --points-divider: var(--primit-soft-15);
+  --points-row-hover: var(--primit-soft-5);
+  --points-scrollbar-track: var(--primit-soft-10);
+  --points-current-highlight: color-mix(in srgb, var(--primit-primary-1) 14%, transparent);
+}

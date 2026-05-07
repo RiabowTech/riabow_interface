@@ -1,0 +1,79 @@
+/**
+ * Primit · Big_Tab Item（Figma 第 9 章 `152-691`）
+ * 订单簿 / Trades 等：Messina Sans 14 / 600 / lh 1.4 / tracking 0.5px（`--primit-fs-300`）
+ */
+
+html[data-ui-theme="primit"] .BigTab {
+  box-sizing: border-box;
+  height: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0 8px;
+  border: none;
+  /* 与选中态同为 2px，避免仅选中项有底边时切换抖动 */
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  background: var(--primit-soft-15, rgba(226, 231, 237, 0.15));
+  font-family: var(--primit-font-tab, var(--primit-font-title));
+  font-size: var(--primit-fs-300, 14px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--primit-nav-fg-inactive, rgba(226, 231, 237, 0.7));
+  appearance: none;
+  -webkit-appearance: none;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+html[data-ui-theme="primit"] .BigTab:hover:not(:disabled):not(.BigTab--selected) {
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .BigTab--selected {
+  color: var(--primit-primary-1, #87d7ea);
+  border-bottom-color: var(--primit-primary-1, #87d7ea);
+}
+
+/* 交易方向 · 选中：做多绿 / 做空红 */
+html[data-ui-theme="primit"] .BigTab--tone-long.BigTab--selected {
+  color: var(--primit-others-green);
+  border-bottom-color: var(--primit-others-green);
+}
+
+html[data-ui-theme="primit"] .BigTab--tone-short.BigTab--selected {
+  color: var(--primit-others-red);
+  border-bottom-color: var(--primit-others-red);
+}
+
+html[data-ui-theme="primit"] .BigTab--tone-long:focus-visible {
+  outline-color: color-mix(in srgb, var(--primit-others-green) 70%, transparent);
+}
+
+html[data-ui-theme="primit"] .BigTab--tone-short:focus-visible {
+  outline-color: color-mix(in srgb, var(--primit-others-red) 70%, transparent);
+}
+
+html[data-ui-theme="primit"] .BigTab:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+html[data-ui-theme="primit"] .BigTab:focus-visible {
+  outline: 2px solid var(--primit-primary-1, #87d7ea);
+  outline-offset: 2px;
+}
+
+html[data-ui-theme="primit"] .BigTab-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  white-space: nowrap;
+  text-align: center;
+}

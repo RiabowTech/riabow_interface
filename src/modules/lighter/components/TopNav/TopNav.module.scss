@@ -1,0 +1,286 @@
+.root {
+  height: var(--ltr-topnav-h);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 8px;
+  background: var(--ltr-bg-root);
+}
+
+.logo {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 8px;
+  color: var(--primit-header-wordmark, #ffffff);
+  outline: none;
+}
+
+.logoImage {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  margin: 0 0 0 20px;
+  padding: 0;
+  flex: 1;
+  align-items: center;
+}
+
+.link {
+  color: var(--ltr-text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 0;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.navCaret {
+  width: 12px;
+  height: 12px;
+  opacity: 0.7;
+}
+
+.active {
+  color: #ffffff;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* === lighter.xyz 风格：所有右侧按钮统一为 4px 圆角 + 实心 slate-800 填充 === */
+
+/* 统一所有 primit-ui-button 子类的外观（main-40 / icon-40 / 其它） */
+.rightDense :global(.primit-ui-button) {
+  border-radius: 4px !important;
+  background-color: #1e293b !important; /* slate-800 */
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.rightDense :global(.primit-ui-button:hover:not(:disabled)) {
+  background-color: #334155 !important; /* slate-700 */
+  background-image: none !important;
+}
+
+/* 移除 Primit MainBtn 左侧竖线装饰 */
+.rightDense :global(.primit-ui-button::before),
+.rightDense :global(.primit-ui-button::after) {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  border: 0 !important;
+}
+
+/* 内层容器清掉 Primit 主题里的内框 / hover 收缩 / 渐变 */
+.rightDense :global(.primit-ui-button .primit-ui-button__inner) {
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.rightDense :global(.primit-ui-button:hover:not(:disabled) .primit-ui-button__inner) {
+  padding: 0 !important;
+  border-color: transparent !important;
+}
+
+/* 文本按钮 (Globe / SIGN) 尺寸 */
+.rightDense :global(.primit-ui-button--main-40) {
+  min-height: 32px;
+  height: 32px;
+  padding: 0 12px !important;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+/* 图标按钮 (Wallet / OneClick / 其它 size=icon) 尺寸 */
+.rightDense :global(.primit-ui-button--icon-40) {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0 !important;
+}
+
+.rightDense :global(.primit-ui-button--icon-40 .primit-ui-button__icon--solo svg),
+.rightDense :global(.primit-ui-button--icon-40 .primit-ui-button__icon svg) {
+  width: 16px;
+  height: 16px;
+}
+
+/* 隐藏 lighter 风格不要的 L 形角饰 */
+.rightDense :global(.primit-corner-bracket-frame) {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.rightDense :global(.primit-corner-bracket-frame__corners),
+.rightDense :global(.primit-corner-bracket-frame__corner) {
+  display: none !important;
+}
+
+.rightDense :global([data-qa="connect-wallet-button"] svg) {
+  width: 14px;
+  height: 14px;
+}
+
+.rightDense :global([data-qa="connect-wallet-button"]::before) {
+  margin-inline-start: 8px;
+}
+
+.authButton {
+  min-width: 96px;
+  height: 32px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+}
+
+.authStatusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  flex: 0 0 auto;
+  background: #ff5c68;
+}
+
+.walletButton {
+  flex: 0 0 auto;
+}
+
+.walletIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.langTrigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.rightDense .langTrigger::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 0 !important;
+}
+.langBtn {
+  width: 54px;
+  min-width: 54px;
+}
+
+.langWrap {
+  position: relative;
+}
+
+.caret {
+  width: 12px;
+  height: 12px;
+  opacity: 0.85;
+  transition: transform 160ms ease;
+}
+
+.caretOpen {
+  transform: rotate(180deg);
+}
+
+.langMenu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  width: 186px;
+  transform: translateX(-50%);
+  background: var(--ltr-bg-panel);
+  border: 1px solid var(--ltr-border);
+  border-radius: var(--ltr-radius);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  z-index: 40;
+}
+
+.langMenuHeader {
+  height: 32px;
+  padding: 0 12px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--ltr-text-primary);
+  border-bottom: 1px solid var(--ltr-border);
+  background: var(--ltr-bg-hover);
+}
+
+.langMenuHeaderIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.72;
+  color: var(--ltr-text-secondary);
+}
+
+.langItem {
+  width: 100%;
+  height: 32px;
+  padding: 0 10px 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: 0;
+  color: var(--ltr-text-primary);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--ltr-overlay-soft);
+    color: var(--primit-primary-1, var(--ltr-text-primary));
+  }
+
+  &:disabled {
+    opacity: 0.72;
+    cursor: default;
+  }
+}
+
+.langItemActive {
+  color: var(--primit-primary-1, var(--ltr-text-primary));
+}

@@ -1,0 +1,583 @@
+/* ============================================
+   Earn Page - Base Styles
+   ============================================ */
+
+/* Page wrapper - for scanning effect positioning */
+.earn-page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #090909;
+  /* 勿用 overflow:hidden，会裁切长内容导致 Primit 壳内无法向下滚到底 */
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+/* 产品列表拉取中：与 ScanningEffect 蒙层同区域，先出遮罩再叠 Loader（见 Earn.tsx 双 rAF） */
+.earn-initial-loading-mask {
+  position: fixed;
+  top: var(--detected-header-height, 80px);
+  left: var(--detected-sidebar-width, 0px);
+  right: 0;
+  bottom: 0;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+.earn-initial-loading-loader {
+  position: fixed;
+  top: var(--detected-header-height, 80px);
+  left: var(--detected-sidebar-width, 0px);
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: earn-initial-loader-in 0.28s ease-out both;
+}
+
+@keyframes earn-initial-loader-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .earn-initial-loading-mask,
+  .earn-initial-loading-loader {
+    left: 0;
+  }
+}
+
+/* Page background */
+.earn-page {
+  background: #090909;
+  min-height: 100vh;
+}
+
+/* ============================================
+   Common Layout Utilities
+   ============================================ */
+
+/* Info field - vertical layout with gap */
+.info-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Info row - horizontal layout with space between */
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ============================================
+   Strategy Card
+   ============================================ */
+
+.strategy-card {
+  overflow: hidden;
+  position: relative;
+}
+
+/* LIVE / active 整卡背景高亮（不影响内部小卡片） */
+.strategy-card-active-bg {
+  background:
+    radial-gradient(circle at 50% -100%, #7f8f9b99 0%, #0001 75%),
+    conic-gradient(
+      #ffffff14 0.25turn,
+      #ffffff20 0.25turn 0.5turn,
+      #ffffff14 0.5turn 0.75turn,
+      #ffffff20 0.75turn
+    ) top left / 4px 4px repeat,
+    #010405 !important; 
+}
+
+/* Active strategy card gradient border - bright on left/right, fades in middle */
+.strategy-card-active-border {
+  position: relative;
+  border: none;
+  
+}
+
+.strategy-card-active-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--earn-accent) 0%,
+    color-mix(in srgb, var(--earn-accent) 10%, transparent) 30%,
+    color-mix(in srgb, var(--earn-accent) 10%, transparent) 70%,
+    var(--earn-accent) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ============================================
+   Badge Components
+   ============================================ */
+
+/* Status Corner Badge - 45 degree ribbon style */
+.status-badge-corner {
+  position: absolute;
+  top: 10px;
+  right: -22px;
+  width: 80px;
+  padding: 3px 0;
+  font-family: var(--primit-font-title);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Silver metallic for OPEN */
+.status-badge-open {
+  background: linear-gradient(
+    135deg,
+    #d4af37 0%,
+    #ffd700 25%,
+    #ffed4e 50%,
+    #ffd700 75%,
+    #d4af37 100%
+  );
+  color: #1a1a1a;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+}
+
+/* Gold metallic for LIVE */
+.status-badge-live {
+  background: linear-gradient(
+    135deg,
+    #e8e8e8 0%,
+    #ffffff 25%,
+    #d0d0d0 50%,
+    #f5f5f5 75%,
+    #c0c0c0 100%
+  );
+  color: #000000;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+}
+
+@media (max-width: 768px) {
+  .status-badge-corner {
+    top: 10px;
+    right: -26px;
+    width: 70px;
+    padding: 2px 0;
+    font-size: 7px;
+    letter-spacing: 0.6px;
+  }
+}
+
+/* Base badge styles */
+.subscription-period-badge,
+.status-badge-progress {
+  padding: 6px 12px;
+  font-family: var(--primit-font-body);
+  font-size: 12px;
+  line-height: normal;
+  letter-spacing: 1px;
+}
+
+/* COMPLETED Badge */
+.completed-badge {
+  display: inline-block;
+  padding: 24px 60px;
+  background-image: url("img/home/titleBg.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  text-align: center;
+  font-family: var(--primit-font-title);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Subscription period badge */
+.subscription-period-badge {
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 300;
+  min-width: 180px;
+  height: 30px;
+  justify-content: center;
+}
+
+/* Status badge - in progress */
+.status-badge-progress {
+  display: inline-flex;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--earn-accent) 15%, transparent);
+  color: var(--earn-accent);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  width: fit-content;
+}
+
+/* ============================================
+   Layout Components
+   ============================================ */
+
+/* Strategy card & inner sections */
+.strategy-card,
+.inner-section {
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   Typography Styles
+   ============================================ */
+
+/* 正文档：--primit-font-body（Messina Sans 栈，随 locale） */
+.info-label,
+.value-number,
+.faq-title,
+.faq-question,
+.faq-answer {
+  font-family: var(--primit-font-body);
+  line-height: normal;
+}
+
+/* Info label - small secondary text */
+.info-label {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+/* Value number - primary numeric display */
+.value-number {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* FAQ text styles - 14px weight 300 */
+.faq-title,
+.faq-question,
+.faq-answer {
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.faq-title {
+  color: var(--earn-accent);
+}
+
+.faq-question {
+  color: #fff;
+}
+
+.faq-answer {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.faq-icon {
+  color: rgba(255, 255, 255, 0.75);
+  transition: color 0.3s ease;
+}
+
+.faq-icon:hover {
+  color: var(--earn-accent);
+}
+
+/* ============================================
+   APR Card Styles
+   ============================================ */
+
+/* APR 数字区：--primit-font-title */
+.apr-card-label,
+.apr-card-value {
+  font-family: var(--primit-font-title);
+  font-weight: 400;
+  line-height: normal;
+}
+
+.apr-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.20) 0%,
+    rgba(255, 255, 255, 0.11) 48.56%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+}
+
+.apr-card-center {
+  align-items: center;
+}
+
+.apr-card-label {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.apr-card-value {
+  color: var(--earn-accent);
+  font-size: 36px;
+  letter-spacing: 1px;
+}
+
+.apr-card-unit {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--primit-font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+}
+
+@media (max-width: 768px) {
+  .earn-page {
+    padding: 0;
+  }
+
+  .strategy-card {
+    border-radius: 0;
+  }
+
+  .apr-card {
+    padding: 16px;
+  }
+
+  .apr-card-label {
+    font-size: 12px;
+  }
+
+  .apr-card-value {
+    font-size: 28px;
+  }
+
+  .apr-card-unit {
+    font-size: 14px;
+  }
+
+  .info-label {
+    font-size: 11px;
+  }
+
+  .value-number {
+    font-size: 14px;
+  }
+
+  .info-field {
+    gap: 6px;
+  }
+}
+
+/* ============================================
+   My Subscriptions Styles
+   ============================================ */
+
+/* 订阅表 14px 正文 */
+.subscription-product-name,
+.subscription-field-value,
+.subscription-interest {
+  font-family: var(--primit-font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.5px;
+}
+
+.subscription-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subscription-row {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.03);
+  border: 0.5px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0;
+  padding: 20px 24px;
+  gap: 24px;
+}
+
+.subscription-status-wrapper,
+.subscription-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: flex-start;
+}
+
+.subscription-status-wrapper {
+  gap: 8px;
+  min-width: 200px;
+}
+
+.subscription-field-wrapper {
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.subscription-product-name,
+.subscription-field-value {
+  color: #fff;
+  text-align: left;
+}
+
+.subscription-field-value {
+  white-space: nowrap;
+}
+
+.subscription-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.subscription-field-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--primit-font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+.subscription-interest {
+  color: var(--earn-accent);
+  font-weight: 500;
+}
+
+/* ============================================
+   Responsive Styles
+   ============================================ */
+
+@media (max-width: 768px) {
+  .subscription-table-container {
+    gap: 10px;
+  }
+
+  .subscription-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 0;
+  }
+  
+  .subscription-status-wrapper,
+  .subscription-field-wrapper {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .status-badge-progress {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .subscription-product-name,
+  .subscription-field-value {
+    font-size: 13px;
+  }
+
+  .subscription-field-label {
+    font-size: 11px;
+  }
+
+  .subscription-interest {
+    font-size: 13px;
+  }
+
+  /* Past Performance Chart */
+  .inner-section {
+    border-radius: 0;
+    padding: 16px;
+  }
+
+  /* FAQ */
+  .faq-title {
+    font-size: 13px;
+  }
+
+  .faq-question,
+  .faq-answer {
+    font-size: 13px;
+  }
+
+  /* Completed badge */
+  .completed-badge {
+    padding: 20px 50px;
+    font-size: 14px;
+  }
+
+  .subscription-period-badge {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .claim-button {
+    width: 100%;
+  }
+}
+
+/* Claim Button Styles */
+.claim-button {
+  min-height: 40px;
+  padding: 8px 24px;
+  font-family: var(--primit-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  white-space: nowrap;
+}

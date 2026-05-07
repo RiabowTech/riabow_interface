@@ -1,0 +1,47 @@
+.TradingMarketsList {
+  &-symbol {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  &-leverage-badge {
+    background: rgba(0, 255, 136, 0.15);
+    color: #00ff88;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  &-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+
+    &--active {
+      background: rgba(0, 255, 136, 0.15);
+      color: #00ff88;
+    }
+
+    &--inactive {
+      background: rgba(255, 68, 68, 0.15);
+      color: #ff4444;
+    }
+
+    &--maintenance {
+      background: rgba(255, 170, 0, 0.15);
+      color: #ffaa00;
+    }
+  }
+}
+
+// Price change colors
+.positive {
+  color: #00ff88 !important;
+}
+
+.negative {
+  color: #ff4444 !important;
+}

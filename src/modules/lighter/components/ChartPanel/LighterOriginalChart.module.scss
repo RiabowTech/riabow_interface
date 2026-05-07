@@ -1,0 +1,197 @@
+.root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats {
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  pointer-events: none;
+  font-size: 12px;
+  line-height: 16px;
+  color: #f3f3f3;
+}
+
+.chart {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+}
+
+.chart > :global(*) {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.mainPaneGrid,
+.volumePaneGrid {
+  position: absolute;
+  left: 0;
+  right: 96px;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.mainPaneGrid {
+  top: 0;
+  z-index: 1;
+  background-image: linear-gradient(to bottom, rgba(43, 43, 48, 0.95) 1px, transparent 1px);
+  background-size: 100% 20%;
+  background-position: 0 20%;
+}
+
+.volumePaneOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.volumePaneGrid {
+  top: 1px;
+  bottom: 0;
+  z-index: 0;
+}
+
+.paneVerticalLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(43, 43, 48, 0.95);
+}
+
+.volumePaneHorizontalLine {
+  position: absolute;
+  left: 0;
+  right: 96px;
+  z-index: 1;
+  border-top: 1px solid rgba(43, 43, 48, 0.95);
+}
+
+.volumePaneHorizontalLine25 {
+  top: 25%;
+}
+
+.volumePaneHorizontalLine50 {
+  top: 50%;
+}
+
+.volumePaneHorizontalLine75 {
+  top: 75%;
+}
+
+.volumePaneDivider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  width: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.78);
+}
+
+.volumePaneAxisMask {
+  position: absolute;
+  top: -18px;
+  right: 0;
+  bottom: 0;
+  width: 96px;
+  z-index: 3;
+  background: #121218;
+}
+
+.volumePaneAxisLabel {
+  position: absolute;
+  right: 44px;
+  z-index: 5;
+  color: #b4b4b6;
+  font-size: 9px;
+  line-height: 11px;
+  font-weight: 400;
+  transform: translateY(-50%);
+}
+
+.volumePaneAxisLabel25 {
+  top: 25%;
+}
+
+.volumePaneAxisLabel50 {
+  top: 50%;
+}
+
+.volumePaneAxisLabel75 {
+  top: 75%;
+}
+
+.volumePaneLegend {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 10px 0 0 22px;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+.volumePaneLabel {
+  color: #8f98aa;
+  font-weight: 500;
+}
+
+.volumePaneMa5 {
+  color: #e1aa45;
+  font-weight: 500;
+}
+
+.volumePaneMa10 {
+  color: #9066d9;
+  font-weight: 500;
+}
+
+.volumePaneMa20 {
+  color: #4f7cff;
+  font-weight: 500;
+}
+
+.volumePaneVolume {
+  color: #4b9877;
+  font-weight: 500;
+}
+
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.label {
+  color: #f3f3f3;
+}
+
+.valueUp {
+  color: #68ce8f;
+  font-weight: 600;
+}
+
+.valueDown {
+  color: #e74e54;
+  font-weight: 600;
+}

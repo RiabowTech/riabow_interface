@@ -1,0 +1,39 @@
+.input-form {
+  max-width: 38.75rem;
+}
+
+.input-row {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: var(--font-size-body-medium);
+}
+
+.text-input {
+  color: var(--color-slate-100);
+  border-radius: 8px;
+  font-size: var(--font-size-body-medium);
+  background-color: var(--color-slate-800);
+  width: 100%;
+  box-sizing: border-box;
+  border: 0.5px solid var(--color-slate-600);
+
+  &:hover {
+    background-color: var(--color-fill-surfaceElevatedHover);
+  }
+
+  &::placeholder {
+    color: var(--color-slate-100);
+  }
+
+  &:focus {
+    border-color: var(--color-blue-300);
+  }
+
+  &:focus-within {
+    border-color: var(--color-blue-300);
+  }
+}

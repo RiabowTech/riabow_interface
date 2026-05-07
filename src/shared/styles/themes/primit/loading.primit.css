@@ -1,0 +1,22 @@
+/**
+ * Primit · Loading：骨架与旋转图标主色（--primit-primary-1）；ic_spinner.svg 为 currentColor 描边圆环。
+ */
+html[data-ui-theme="primit"] {
+  --skeleton-base: color-mix(in srgb, var(--primit-primary-1) 12%, transparent);
+  --skeleton-highlight: color-mix(in srgb, var(--primit-primary-1) 20%, transparent);
+  --skeleton-shimmer-mid: color-mix(in srgb, var(--primit-primary-1) 28%, transparent);
+  /* components/Loader/Loader.css 雷达扫掠：与主色同步 */
+  --loader-radar-glow: color-mix(in srgb, var(--primit-primary-1) 90%, transparent);
+  --loader-radar-glow-shadow: color-mix(in srgb, var(--primit-primary-1) 90%, transparent);
+  --loader-radar-sweep-border: color-mix(in srgb, var(--primit-primary-1) 45%, #ffffff);
+}
+
+/* 旋转 loading：与品牌主色一致（需保留 .text-white 等显式前景的场景） */
+html[data-ui-theme="primit"] svg.spin:not(.text-white),
+html[data-ui-theme="primit"] svg.animate-spin:not(.text-white) {
+  color: var(--primit-primary-1);
+}
+
+html[data-ui-theme="primit"] .bouncing-loader > div {
+  background: color-mix(in srgb, var(--primit-primary-1) 55%, var(--primit-secondary-2));
+}

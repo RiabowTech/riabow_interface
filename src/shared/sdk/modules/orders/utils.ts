@@ -1,0 +1,257 @@
+import { Address, isAddressEqual } from "viem";
+
+import type { ContractsChainId } from "sdk/configs/chains";
+import { getContract } from "sdk/configs/contracts";
+import { accountOrderListKey } from "sdk/configs/dataStore";
+import { getWrappedToken } from "sdk/configs/tokens";
+import type { MarketFilterLongShortDirection, MarketFilterLongShortItemData } from "sdk/modules/trades/trades";
+import type { GasLimitsConfig } from "sdk/types/fees";
+import type { MarketsInfoData } from "sdk/types/markets";
+import { DecreasePositionSwapType, Order, OrderType } from "sdk/types/orders";
+import { SidecarLimitOrderEntry, SidecarSlTpOrderEntry } from "sdk/types/sidecarOrders";
+import type { TokensData } from "sdk/types/tokens";
+import { estimateOrderOraclePriceCount } from "sdk/utils/fees/estimateOraclePriceCount";
+import { estimateExecuteDecreaseOrderGasLimit, getExecutionFee } from "sdk/utils/fees/executionFee";
+import type { MulticallRequestConfig, MulticallResult } from "sdk/utils/multicall";
+import { isIncreaseOrderType, isLimitOrderType, isSwapOrderType, isTriggerDecreaseOrderType } from "sdk/utils/orders";
+import { getSwapPathOutputAddresses } from "sdk/utils/swap/swapStats";
+
+import type { TradingSdk } from "../../index";
+
+export const getOrderExecutionFee = (
+  sdk: TradingSdk,
+  swapsCount: number,
+  decreasePositionSwapType: DecreasePositionSwapType | undefined,
+  gasLimits: GasLimitsConfig | undefined,
+  tokensData: TokensData | undefined,
+  gasPrice: bigint | undefined
+) => {
+  if (!gasLimits || !tokensData || gasPrice === undefined) return;
+
+  const estimatedGas = estimateExecuteDecreaseOrderGasLimit(gasLimits, {
+    decreaseSwapType: decreasePositionSwapType,
+    swapsCount: swapsCount ?? 0,
+  });
+
+  const oraclePriceCount = estimateOrderOraclePriceCount(swapsCount);
+
+  return getExecutionFee(sdk.chainId, gasLimits, tokensData, estimatedGas, gasPrice, oraclePriceCount);
+};
+
+export const getExecutionFeeAmountForEntry = (
+  sdk: TradingSdk,
+  entry: SidecarSlTpOrderEntry | SidecarLimitOrderEntry,
+  gasLimits: GasLimitsConfig,
+  tokensData: TokensData,
+  gasPrice: bigint | undefined
+) => {
+  if (!entry.txnType || entry.txnType === "cancel") return undefined;
+  const securedExecutionFee = entry.order?.executionFee ?? 0n;
+
+  let swapsCount = 0;
+
+  const executionFee = getOrderExecutionFee(
+    sdk,
+    swapsCount,
+    entry.decreaseAmounts?.decreaseSwapType,
+    gasLimits,
+    tokensData,
+    gasPrice
+  );
+
+  if (!executionFee || securedExecutionFee >= executionFee.feeTokenAmount) return undefined;
+
+  return executionFee.feeTokenAmount - securedExecutionFee;
+};
+
+export function matchByMarket({
+  order,
+  nonSwapRelevantDefinedFiltersLowercased,
+  hasNonSwapRelevantDefinedMarkets,
+  pureDirectionFilters,
+  hasPureDirectionFilters,
+  swapRelevantDefinedMarketsLowercased,
+  hasSwapRelevantDefinedMarkets,
+  marketsInfoData,
+  chainId,
+}: {
+  order: ReturnType<typeof parseGetOrdersResponse>["orders"][number];
+  nonSwapRelevantDefinedFiltersLowercased: MarketFilterLongShortItemData[];
+  hasNonSwapRelevantDefinedMarkets: boolean;
+  pureDirectionFilters: MarketFilterLongShortDirection[];
+  hasPureDirectionFilters: boolean;
+  swapRelevantDefinedMarketsLowercased: Address[];
+  hasSwapRelevantDefinedMarkets: boolean;
+  marketsInfoData?: MarketsInfoData;
+  chainId: number;
+}) {
+  if (!hasNonSwapRelevantDefinedMarkets && !hasSwapRelevantDefinedMarkets && !hasPureDirectionFilters) {
+    return true;
+  }
+
+  const isSwapOrder = isSwapOrderType(order.orderType);
+
+  const matchesPureDirectionFilter =
+    hasPureDirectionFilters &&
+    (isSwapOrder
+      ? pureDirectionFilters.includes("swap")
+      : pureDirectionFilters.includes(order.isLong ? "long" : "short"));
+
+  if (hasPureDirectionFilters && !matchesPureDirectionFilter) {
+    return false;
+  }
+
+  if (!hasNonSwapRelevantDefinedMarkets && !hasSwapRelevantDefinedMarkets) {
+    return true;
+  }
+
+  if (isSwapOrder) {
+    const sourceMarketInSwapPath = swapRelevantDefinedMarketsLowercased.includes(
+      order.swapPath.at(0)!.toLowerCase() as Address
+    );
+
+    const destinationMarketInSwapPath = swapRelevantDefinedMarketsLowercased.includes(
+      order.swapPath.at(-1)!.toLowerCase() as Address
+    );
+
+    return sourceMarketInSwapPath || destinationMarketInSwapPath;
+  } else if (!isSwapOrder) {
+    return nonSwapRelevantDefinedFiltersLowercased.some((filter) => {
+      const marketMatch = filter.marketAddress === "any" || filter.marketAddress === order.marketAddress.toLowerCase();
+      const directionMath = filter.direction === "any" || filter.direction === (order.isLong ? "long" : "short");
+      const initialCollateralAddress = order.initialCollateralTokenAddress.toLowerCase();
+
+      let collateralMatch = true;
+      if (!filter.collateralAddress) {
+        collateralMatch = true;
+      } else if (isLimitOrderType(order.orderType)) {
+        const wrappedToken = getWrappedToken(chainId);
+
+        if (!marketsInfoData) {
+          collateralMatch = true;
+        } else {
+          const { outTokenAddress } = getSwapPathOutputAddresses({
+            marketsInfoData,
+            initialCollateralAddress,
+            isIncrease: isIncreaseOrderType(order.orderType),
+            shouldUnwrapNativeToken: order.shouldUnwrapNativeToken,
+            swapPath: order.swapPath,
+            wrappedNativeTokenAddress: wrappedToken.address,
+          });
+
+          collateralMatch =
+            outTokenAddress !== undefined && isAddressEqual(outTokenAddress as Address, filter.collateralAddress);
+        }
+      } else if (isTriggerDecreaseOrderType(order.orderType)) {
+        collateralMatch = isAddressEqual(order.initialCollateralTokenAddress as Address, filter.collateralAddress);
+      }
+
+      return marketMatch && directionMath && collateralMatch;
+    });
+  }
+
+  return false;
+}
+
+export const DEFAULT_COUNT = 1000;
+
+export function buildGetOrdersMulticall(chainId: ContractsChainId, account: string) {
+  return {
+    dataStore: {
+      contractAddress: getContract(chainId, "DataStore"),
+      abiId: "DataStore",
+      calls: {
+        count: {
+          methodName: "getBytes32Count",
+          params: [accountOrderListKey(account!)],
+        },
+        keys: {
+          methodName: "getBytes32ValuesAt",
+          params: [accountOrderListKey(account!), 0, DEFAULT_COUNT],
+        },
+      },
+    },
+    reader: {
+      contractAddress: getContract(chainId, "SyntheticsReader"),
+      abiId: "SyntheticsReader",
+      calls: {
+        orders: {
+          methodName: "getAccountOrders",
+          params: [getContract(chainId, "DataStore"), account, 0, DEFAULT_COUNT],
+        },
+      },
+    },
+  } satisfies MulticallRequestConfig<any>;
+}
+
+export function parseGetOrdersResponse(res: MulticallResult<ReturnType<typeof buildGetOrdersMulticall>>) {
+  const count = Number(res.data.dataStore.count.returnValues[0]);
+  const orderKeys = res.data.dataStore.keys.returnValues;
+  const orders = res.data.reader.orders.returnValues as {
+    orderKey: string;
+    order: {
+      addresses: {
+        account: string;
+        receiver: string;
+        cancellationReceiver: string;
+        callbackContract: string;
+        uiFeeReceiver: string;
+        market: string;
+        initialCollateralToken: string;
+        swapPath: string[];
+      };
+      numbers: {
+        orderType: bigint;
+        decreasePositionSwapType: bigint;
+        sizeDeltaUsd: bigint;
+        initialCollateralDeltaAmount: bigint;
+        triggerPrice: bigint;
+        acceptablePrice: bigint;
+        executionFee: bigint;
+        callbackGasLimit: bigint;
+        minOutputAmount: bigint;
+        updatedAtTime: bigint;
+        validFromTime: bigint;
+        srcChainId: bigint;
+      };
+      flags: { isLong: boolean; shouldUnwrapNativeToken: boolean; isFrozen: boolean; autoCancel: boolean };
+      _dataList: string[];
+    };
+  }[];
+
+  return {
+    count,
+    orders: orders.map(({ order }, i) => {
+      const key = orderKeys[i];
+
+      const orderData: Order = {
+        key,
+        account: order.addresses.account as Address,
+        receiver: order.addresses.receiver as Address,
+        callbackContract: order.addresses.callbackContract as Address,
+        marketAddress: order.addresses.market as Address,
+        initialCollateralTokenAddress: order.addresses.initialCollateralToken as Address,
+        swapPath: order.addresses.swapPath as Address[],
+        sizeDeltaUsd: BigInt(order.numbers.sizeDeltaUsd),
+        initialCollateralDeltaAmount: BigInt(order.numbers.initialCollateralDeltaAmount),
+        contractTriggerPrice: BigInt(order.numbers.triggerPrice),
+        contractAcceptablePrice: BigInt(order.numbers.acceptablePrice),
+        executionFee: BigInt(order.numbers.executionFee),
+        callbackGasLimit: BigInt(order.numbers.callbackGasLimit),
+        minOutputAmount: BigInt(order.numbers.minOutputAmount),
+        updatedAtTime: BigInt(order.numbers.updatedAtTime),
+        isLong: order.flags.isLong as boolean,
+        shouldUnwrapNativeToken: order.flags.shouldUnwrapNativeToken as boolean,
+        isFrozen: order.flags.isFrozen as boolean,
+        orderType: Number(order.numbers.orderType) as OrderType,
+        decreasePositionSwapType: Number(order.numbers.decreasePositionSwapType) as DecreasePositionSwapType,
+        autoCancel: order.flags.autoCancel as boolean,
+        uiFeeReceiver: order.addresses.uiFeeReceiver as Address,
+        validFromTime: BigInt(order.numbers.validFromTime),
+        data: order._dataList,
+      };
+
+      return orderData;
+    }),
+  };
+}

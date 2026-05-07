@@ -1,0 +1,5315 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-08-06 13:30+0530\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ja\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+msgid "Unrealized Base PnL"
+msgstr "未実現ベースPnL"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Wallet not connected"
+msgstr "ウォレットが接続されていません"
+
+#: src/shared/lib/contracts/callContract.tsx
+msgid "Transaction completed."
+msgstr "取引が完了しました。"
+
+#: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
+msgid "No rewards selected"
+msgstr ""
+
+#: src/shared/components/RatingToast/RatingToast.tsx
+msgid "Not likely"
+msgstr "あまりない"
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "Market Order"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Buy order executed."
+msgstr "買い注文が実行されました。"
+
+#: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Disconnect"
+msgstr "接続停止"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Interest Income is automatically distributed with the principal upon redemption."
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "PRICE"
+msgstr "価格"
+
+#: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
+msgid "What would have made your rating a 9 or 10?"
+msgstr "評価を9または10にするためには何が必要でしたか？"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute Stop Loss"
+msgstr "ストップロスの執行"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "No dashboard data available"
+msgstr ""
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Approval signed"
+msgstr "承認署名完了"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Daily Loss"
+msgstr "1日あたりの損失"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Create TWAP Swap"
+msgstr "TWAPスワップを作成"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Commission"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "stop loss"
+msgstr "ストップロス"
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Type"
+msgstr "タイプ"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid ""
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Signature has expired"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/markets/createWithdrawalTxn.ts
+msgid "Withdrawal error."
+msgstr "出金エラー。"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Limit"
+msgstr "指値失敗"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "{0} Days"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "V2 Arbitrum"
+msgstr "V2 Arbitrum"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "CONFIRM"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Processing subscription..."
+msgstr ""
+
+#: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
+msgid "Show error"
+msgstr "エラーを表示"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute Market Swap"
+msgstr "マーケットスワップの執行"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Volume"
+msgstr "出来高"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Cancel Limit Swap"
+msgstr "指値スワップのキャンセル"
+
+#: src/modules/lighter/api/useCancelOrderHandler.ts
+msgid "Order ID not found for cancellation"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "To"
+msgstr "宛先"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+msgid "Order updated"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Withdrawal from Account"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Fees"
+msgstr "手数料"
+
+#: src/shared/lib/contracts/callContract.tsx
+msgid "View status."
+msgstr "状況を見る"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Missing required parameters"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Enter partial size"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Connecting wallet..."
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "My Invite Link"
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "The mark price has changed, consider increasing your allowed slippage by clicking on the \"...\" icon next to your address."
+msgstr "マーク価格が変わりました。アドレス横の「...」アイコンをクリックして、許容スリッページを増やしてください。"
+
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "@username"
+msgstr "@ユーザー名"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Failed to load PnL data"
+msgstr ""
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Stop Market - Short Inc."
+msgstr "ストップ市場 - ショート増加"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Take Profit"
+msgstr "テイクプロフィット失敗"
+
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Next Funding Countdown"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Select token"
+msgstr "トークンを選択"
+
+#: src/modules/lighter/domain/synthetics/markets/createDepositTxn.ts
+msgid "Deposit error."
+msgstr "入金エラー。"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Stop market price above mark price"
+msgstr "ストップ市場価格がマーク価格を上回っています"
+
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Interval"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Could not load today’s gainers."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Next Level"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+msgid "History"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Funding"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Max {0} short exceeded"
+msgstr "{0}の最大ショート値を超過しています"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Cumulative earnings (lifetime)"
+msgstr ""
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "Insufficient margin for this order."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Limit price below mark price"
+msgstr "指値価格がマーク価格を下回っています"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Switch to {0}"
+msgstr "{0} に切り替え"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/HistoricalLists.tsx
+msgid "Positions"
+msgstr "ポジション"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "{0} can not be sent to smart contract addresses. Select another token."
+msgstr "{0}はスマートコントラクトアドレスに送信できません。別のトークンを選択してください。"
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "Season 1"
+msgstr ""
+
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Expand"
+msgstr "展開"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "There are currently no active earn strategies available. Please check back later for new opportunities."
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Transaction failed due to RPC error.<0/><1/>Please enable <2>Express trading</2> under settings, which should offer a better experience."
+msgstr "RPCエラーにより取引が失敗しました。<0/><1/><2>エクスプレストレーディング</2>を設定で有効にしてください。これによりより良い体験が得られるはずです。"
+
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Position Margin"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Referral code added!"
+msgstr "リファラルコードが追加されました！"
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Available to Trade"
+msgstr "取引可能"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Want to trade faster with One-Click?"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+msgid "No"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Taker Fee"
+msgstr ""
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Classic"
+msgstr "クラシック"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/HistoricalLists.tsx
+msgid "Orders"
+msgstr "注文"
+
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+msgid "Increased {positionText}, +{0}"
+msgstr "{positionText}を増加、+{0}"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Funding Fee"
+msgstr "ファンディング手数料"
+
+#: src/shared/components/SettingsModal/ThemeSelector.tsx
+msgid "Light"
+msgstr "ライト"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Enter TP limit price"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Your TP rate (per $1k)"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+msgid "Maximum Order Value"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Realized PnL"
+msgstr "実現PnL"
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Adding"
+msgstr "追加中"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Updated hourly"
+msgstr ""
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "Ended"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Market Swap"
+msgstr "市場スワップ"
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Trade History"
+msgstr "取引履歴"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/shared/components/Tabs/NestedTab.tsx
+msgid "More"
+msgstr "もっと"
+
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Sell / Short"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
+msgid "Global"
+msgstr "グローバル"
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "{actionsCount, plural, one {Order} other {# Orders}}"
+msgstr "{actionsCount, plural, one {注文} other {# 注文}}"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "≥ $2,000,000,000"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Primit Frozen Balance"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Epoch Total Points"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Wallet:"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Rebates on V2"
+msgstr "V2のリベート"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Maturity Date (UTC)"
+msgstr ""
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "Epoch"
+msgstr ""
+
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "Telegram contact (optional)"
+msgstr "Telegram連絡先（任意）"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Distribution history for claimed rebates and airdrops."
+msgstr "請求されたリベートおよびエアドロップの分配履歴。"
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "providing liquidity"
+msgstr "流動性を提供"
+
+#: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
+msgid "Tap [Create Wallet] to start using your Web3 Wallet."
+msgstr "ウェブ3ウォレットを使用するには[ウォレットを作成]をタップしてください。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Highest VIP level reached for volume requirement."
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Invite friends, earn commissions, accumulate forever"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Real-Time Funding Rate"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "SL Price"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Limit price above mark price"
+msgstr "指値価格がマーク価格を上回っています"
+
+#: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
+msgid "Create or Import a Wallet"
+msgstr "ウォレットの作成またはインポート"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Updated {0}h ago"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Invitee Benefits"
+msgstr ""
+
+#: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
+msgid "Networks and Settings"
+msgstr "ネットワークと設定"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Max network fee buffer precision is 0.01%"
+msgstr "最大ネットワーク手数料バッファ精度は0.01%"
+
+#: src/modules/lighter/features/accounts/pages/Actions/ActionsRouter.tsx
+msgid "Legacy Actions"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Min. Required Collateral"
+msgstr "最低必要担保"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Rank"
+msgstr "ランク"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "to {0}"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Sent referral code transaction"
+msgstr "リファラルコード取引を送信しました"
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Maintenance Margin Fraction:"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Deposit completed"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
+msgid "What did you like the most about our service?"
+msgstr "当サービスで最も気に入った点は何ですか？"
+
+#: src/modules/lighter/api/custom/useReferralCode.ts
+msgid "You cannot use your own referral code."
+msgstr ""
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "TP - Long Dec."
+msgstr "TP - ロング減少"
+
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+msgid "Average"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Claimable Rebates"
+msgstr "請求可能リベート"
+
+#: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
+msgid "How can we address your concerns and improve your experience?"
+msgstr "懸念を解決し、体験を改善するためにはどうしたらよいでしょうか？"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "TP/SL updated"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "Acceptable price for the order."
+msgstr "注文のための許容価格"
+
+#: src/shared/components/TVChartContainer/DynamicLine.tsx
+msgid "The order could not be updated"
+msgstr "注文を更新できませんでした"
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Deposit to Account"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Actual APR is determined by the final settlement rate."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Unknown position"
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "No markets matched"
+msgstr "一致する市場がありません"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Invalid slippage value"
+msgstr "無効なスリッページ値"
+
+#: src/modules/lighter/api/custom/useAccountPnl.ts
+msgid "Failed to fetch daily PnL"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Smart contract address for this strategy"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Taker"
+msgstr ""
+
+#: src/shared/components/SettingsModal/DebugSettings.tsx
+msgid "Disable Share Modal PnL Check"
+msgstr ""
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Code already taken"
+msgstr "そのコードは既に使用されています"
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "SL - Short Dec."
+msgstr "SL - ショート減少"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Slippage should be less than -5%"
+msgstr "スリッページは-5%未満であるべきです"
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Unrealized PnL"
+msgstr "未実現PnL"
+
+#: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
+msgid "Rewards"
+msgstr "報酬"
+
+#: src/shared/components/TradingAccountModal/InsufficientWntBanner.tsx
+msgid "You’ll need some {wrappedNativeTokenSymbol} in your account to withdraw funds."
+msgstr "資金を引き出すには、アカウントにいくらかの {wrappedNativeTokenSymbol} が必要です。"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Failed to update settings."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Tier T1"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Current VIP Level"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Earnings available to claim."
+msgstr ""
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+msgid "Signing..."
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "3. How do I claim my Interest Income?"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Top traders ranked by realized PnL over the selected period."
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Contract Address:"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "All Time"
+msgstr "全期間"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Tier multiplier"
+msgstr ""
+
+#: src/shared/components/Referrals/referralsHelper.ts
+msgid "The referral code can't be more than {MAX_REFERRAL_CODE_LENGTH} characters."
+msgstr "紹介コードは{MAX_REFERRAL_CODE_LENGTH}文字を超えることはできません。"
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "LEVERAGE"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Referral Code"
+msgstr "紹介コード"
+
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+msgid "Referral Code Bound"
+msgstr ""
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Deactivating..."
+msgstr "無効化中..."
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Subscription Failed"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+msgid "Payment"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Collateral"
+msgstr "担保"
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "Epoch {0}"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Cancel Stop Market"
+msgstr "ストップ市場をキャンセル"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute Limit"
+msgstr "指値執行"
+
+#: src/modules/lighter/api/useCancelOrderHandler.ts
+msgid "Order cancelled successfully"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Request Withdraw"
+msgstr "出金リクエスト"
+
+#: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
+msgid "Copied"
+msgstr "コピー済"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Invalid TWAP number of parts value"
+msgstr "無効なTWAP分割数値"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Invalid network fee buffer value"
+msgstr "無効なネットワーク手数料バッファ値"
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Markets"
+msgstr "市場"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Claim Failed"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Retry"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Available Balance in Wallet:"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "The total realized and unrealized profit and loss for the period, considering price impact and fees but excluding swap fees."
+msgstr "期間の合計実現および未実現損益で、価格影響と手数料を考慮し、スワップ手数料を除く。"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Volume on V2"
+msgstr "V2の出来高"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "≥ $25,000,000"
+msgstr ""
+
+#: src/shared/components/SettingsModal/DisplaySettings.tsx
+msgid "Technically, net price impact breaks down into stored price impact (for increase orders) and close price impact (for decrease orders). This setting shows both in the net value tooltip and close modal execution details, plus the stored price impact for increase orders."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Account Balance"
+msgstr ""
+
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Total"
+msgstr "総計"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Realized Price Impact"
+msgstr "実現価格影響"
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "Index Price"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Limit Swap"
+msgstr "指値スワップ失敗"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Failed"
+msgstr ""
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Market - Long Inc."
+msgstr "市場 - ロング増加"
+
+#: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
+msgid "Error Details"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Margin Mode"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Total Rebates"
+msgstr "リベート総額"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "To Network"
+msgstr "宛先ネットワーク"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Min order: {0}"
+msgstr "最低注文: {0}"
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Confirm"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "({0} Shares, 1 Share = {sharePrice} USDT)"
+msgstr ""
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "TWAP Swap"
+msgstr "TWAPスワップ"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "CONNECT WALLET"
+msgstr ""
+
+#: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
+msgid "Hide error"
+msgstr "エラーを隠す"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds will appear in your Primit Account soon."
+msgstr ""
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "Order amount is below the minimum size for this market."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
+msgid "What issues did you encounter that led to your rating?"
+msgstr "評価につながった問題は何ですか？"
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "trading"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "{orderText} cancelled."
+msgstr "{orderText} がキャンセルされました。"
+
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+msgid "{orderTypeLabel} {positionText}, -{0}"
+msgstr "{orderTypeLabel} {positionText}, -{0}"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
+msgid "EIP-4844"
+msgstr "EIP-4844"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Sending buy request."
+msgstr "買いリクエストを送信中。"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "The amount you are trying to withdraw exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
+msgstr "引き出そうとしている金額が上限を超えています。<0>{upperLimitFormatted}</0>より小さい金額をお試しください。"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Gain"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Buy / Long"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Mark Price Line"
+msgstr ""
+
+#: src/shared/components/TVChartContainer/DynamicLine.tsx
+msgid "Unknown Order"
+msgstr "不明な注文"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Your Trading Fee"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+msgid "Mid"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Insufficient receive token liquidity"
+msgstr "受け取りトークン流動性不足"
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Open Orders ({0})"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Updated {ageSec}s ago"
+msgstr ""
+
+#: src/modules/lighter/api/custom/useReferralRebateClaim.ts
+#: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
+msgid "Claim failed"
+msgstr ""
+
+#: src/shared/components/SettingsModal/DisplaySettings.tsx
+msgid "Include PnL in Leverage Display"
+msgstr "レバレッジ表示にPnLを含める"
+
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+msgid "{positionName} Settling fees."
+msgstr "{positionName} 決済手数料。"
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Set the maximum leverage you are willing to use. Higher leverage increases the risk of liquidation."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "There is currently a high swap price impact for this swap."
+msgstr "このスワップに現在高いスワップ価格影響があります。"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Update Limit Swap"
+msgstr "指値スワップを更新する"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Wallet connected, but your session is missing or expired. Please sign in again to see your VIP level."
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "V2 Avalanche Fuji"
+msgstr "V2 Avalanche Fuji"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Order executed"
+msgstr "注文執行済"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "V2 Avalanche"
+msgstr "V2 Avalanche"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Market Decrease"
+msgstr "マーケット減少失敗"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "VIP0: 0.040% → 0.032%"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Mark price for the order."
+msgstr "注文のためのマーク価格"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Insufficient wallet balance on-chain"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Max Slippage (%)"
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "Search Market"
+msgstr "市場検索"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Claim successful!"
+msgstr ""
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Number of parts must be between {MIN_TWAP_NUMBER_OF_PARTS} and {MAX_TWAP_NUMBER_OF_PARTS}"
+msgstr "分割数は{MIN_TWAP_NUMBER_OF_PARTS}から{MAX_TWAP_NUMBER_OF_PARTS}の間でなければなりません"
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+#: src/shared/components/SearchInput/SearchInput.tsx
+msgid "Search"
+msgstr "検索"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Remaining Quota"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Tier {0}: {currentRebatePercentage}% rebate"
+msgstr "ティア {0}: {currentRebatePercentage}% リベート"
+
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Max Slippage override (%)"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "No swap path found"
+msgstr "スワップパスが見つかりません"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+msgid "4-18 Places"
+msgstr "4-18位"
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Your deposit is in progress"
+msgstr ""
+
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+msgid "Withdrew {0} from {positionText}"
+msgstr "{positionText}から{0}を出金"
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Select Asset to Deposit"
+msgstr "入金する資産を選択"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "{orderTypeText} {0} for {1}"
+msgstr "{orderTypeText} {0} を {1}に"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Estimated PnL"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "TP limit requires TP price"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Estimated Interest"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Enter a  price"
+msgstr "価格を入力"
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Account"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "The execution price didn't meet the acceptable price."
+msgstr "実行価格が許容価格を満たしませんでした。"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Close Fee"
+msgstr "クローズ手数料"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "V1 Airdrop"
+msgstr "V1エアドロップ"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Referral code created: {0}"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "FDV:"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Min size per part: {0}"
+msgstr "部分あたり最小サイズ: {0}"
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Trigger price above liq. price"
+msgstr "トリガー価格が清算価格を上回っています"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "No results found"
+msgstr "結果が見つかりません"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Commission: {0}"
+msgstr ""
+
+#: src/modules/lighter/api/useCancelOrderHandler.ts
+msgid "TP/SL cancelled successfully"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "14D Volume"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+msgid "Total Balance"
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "Layer 2"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Rebates Distribution History"
+msgstr "リベート分配履歴"
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Price Steps:"
+msgstr ""
+
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+msgid "Settling position fees"
+msgstr "ポジション手数料を決済中"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Invalid product ID"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Updated {0}m ago"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Referral Link"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Slippage tolerance above {SLIPPAGE_WARN_THRESHOLD_PCT}% is aggressive — the executed price may deviate significantly from the estimate."
+msgstr ""
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Settlement Chain"
+msgstr "決済チェーン"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "USD Value may not be accurate since the data does not contain prices for {0}"
+msgstr "データに{0}の価格が含まれていないため、USD価値が正確でない可能性があります"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "OPEN"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Cumulative PnL"
+msgstr "累積PnL"
+
+#: src/shared/components/SettingsModal/DisplaySettings.tsx
+msgid "Display PnL After Fees"
+msgstr "手数料後PnLを表示"
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Referral code added."
+msgstr "リファラルコードが追加されました。"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Borrow Fee"
+msgstr "借入手数料"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "{txnTypeText} {0} order for"
+msgstr "{txnTypeText} {0} 注文"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Max"
+msgstr "最大"
+
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Slippage"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Subscription successful!"
+msgstr ""
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Points"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
+msgid "Affiliates"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Friends who register with your code receive these benefits immediately"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Buy request sent."
+msgstr "買いリクエストが送信されました。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trading tier"
+msgstr ""
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "Selected leverage exceeds the market cap. Lower leverage and retry."
+msgstr ""
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Failed to deactivate"
+msgstr "無効化失敗"
+
+#: src/shared/lib/legacy.ts
+msgid "No open position, order cannot be executed unless a position is opened"
+msgstr "オープンのポジションはありません。オープンのポジションがない場合、注文は執行できません"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "CLAIM"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Cross"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "USDT approved"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Size"
+msgstr "サイズ"
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Market - Short Inc."
+msgstr "市場 - ショート増加"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Deposit in progress"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Connect Wallet"
+msgstr "ウォレット接続"
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Gas Token"
+msgstr ""
+
+#: src/shared/components/SettingsModal/ThemeSelector.tsx
+msgid "System"
+msgstr "システム"
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Open positions"
+msgstr "オープンポジション"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Total Commission"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Close All"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Fee & VIP | Primit"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Sell order cancelled."
+msgstr "売り注文がキャンセルされました。"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Claim commission"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+msgid "Leaderboard for traders on Primit."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Sign in to load the VIP fee schedule from the server."
+msgstr ""
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "{days} days · {statusWord}"
+msgstr ""
+
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+msgid "Deposited {0} into {positionText}"
+msgstr "{positionText}に{0}を入金"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Subscription Period (UTC):"
+msgstr ""
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "{0} Approved!"
+msgstr "{0}が承認されました!"
+
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Close {0} position"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Sending sell request."
+msgstr "売りリクエストを送信中。"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Address"
+msgstr "アドレス"
+
+#: src/modules/lighter/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
+msgid "Claiming successful."
+msgstr "請求に成功しました。"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Fulfilling sell request."
+msgstr "売りリクエストを履行中。"
+
+#: src/shared/components/SettingsModal/DisplaySettings.tsx
+msgid "Show Positions on Chart"
+msgstr "チャートにポジションを表示"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Creating"
+msgstr "作成中"
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "On-chain signing for every transaction."
+msgstr "すべての取引にオンチェーン署名。"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Days Left"
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "<0>Error submitting order.</0><1/><2>Signer address does not match receiver address.</2><3/><4>Please reload the page and try again.</4>"
+msgstr "<0>注文提出エラー。</0><1/><2>署名者アドレスが受信者アドレスと一致しません。</2><3/><4>ページをリロードして再試行してください。</4>"
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Trading Mode"
+msgstr "トレーディングモード"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "TP / SL"
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Transaction failed due to RPC error.<0/><1/>Please try changing the RPC url in your wallet settings with the help of <2>chainlist.org</2>.<3/><4/><5>Read more</5>."
+msgstr "RPCエラーにより取引が失敗しました。<0/><1/><2>chainlist.org</2>の助けを借りてウォレット設定でRPC URLを変更してください。<3/><4/><5>詳細を読む</5>。"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "No eligible tokens available for deposit"
+msgstr "入金可能な対象トークンなし"
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Swaps"
+msgstr "スワップ"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Allow {0} to be spent"
+msgstr "{0}の支出を許可"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "SL Limit Price"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Tier T2"
+msgstr ""
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "Unknown"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "The execution price didn't meet acceptable price. The order will fill when the condition is met."
+msgstr "実行価格が許容価格を満たしませんでした。条件が満たされたときに注文が満たされます。"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Trading Volume"
+msgstr "トレーディング出来高"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Claim rebate"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Update"
+msgstr "更新"
+
+#: src/modules/lighter/features/earn/components/PastPerformanceChart/PastPerformanceChart.tsx
+msgid "3rd Term"
+msgstr ""
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "Price is outside the acceptable band for this market."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "The amount you are trying to deposit exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
+msgstr "入金しようとしている金額が上限を超えています。<0>{upperLimitFormatted}</0>より小さい金額をお試しください。"
+
+#: src/modules/lighter/features/earn/components/PastPerformanceChart/PastPerformanceChart.tsx
+msgid "Past Performance"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Native token cannot be approved"
+msgstr "ネイティブトークンは承認できません"
+
+#. Button to clear the filter selection
+#: src/shared/components/TableOptionsFilter/TableOptionsFilter.tsx
+msgid "Clear selection"
+msgstr "選択をクリア"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "The order will not be executed as its trigger price is beyond the position's liquidation price."
+msgstr "注文のトリガー価格がポジションの清算価格を超えているため、注文は実行されません。"
+
+#: src/shared/components/SettingsModal/ThemeSelector.tsx
+#: src/shared/components/SettingsModal/ThemeSelector.tsx
+msgid "Theme"
+msgstr "テーマ"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Epoch {selectedEpochId} Total Points"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "APPROVE USDT"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/Actions/ActionsRouter.tsx
+msgid "V1 is not supported on {chainName}. Please switch to Arbitrum to use V1."
+msgstr "V1は{chainName}でサポートされていません。V1を使用するにはArbitrumに切り替えてください。"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Insufficient available liquidity."
+msgstr "利用可能な流動性が不足しています。"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Referred volume (USD)"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "Trigger price above lowest limit price"
+msgstr "トリガー価格が最低リミット価格を上回っています"
+
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "API Keys"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Max number of parts: {MAX_TWAP_NUMBER_OF_PARTS}"
+msgstr "最大パート数: {MAX_TWAP_NUMBER_OF_PARTS}"
+
+#: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+msgid "USDC Value"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Buy order cancelled."
+msgstr "買い注文がキャンセルされました。"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Unknown sell order"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/PastPerformanceChart/PastPerformanceChart.tsx
+msgid "2nd Term"
+msgstr ""
+
+#: src/modules/lighter/domain/multichain/SettlementChainWarningContainer.tsx
+msgid "Change to {0}"
+msgstr "{0} に変更"
+
+#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+msgid "Signing transaction will also authenticate your account"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+msgid "Role"
+msgstr ""
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Relayer request failed"
+msgstr "リレヤーリクエストに失敗しました"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Primit Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Est. Price"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute TWAP Part"
+msgstr "TWAPパートを実行"
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Export"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Discount applied"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "{fromText} to {toMinText}"
+msgstr "{fromText}から{toMinText}へ"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Otherwise, try changing the RPC url in your wallet settings with the help of <0>chainlist.org</0>."
+msgstr "それ以外の場合、<0>chainlist.org</0>の助けを借りてウォレット設定のRPC URLを変更してみてください。"
+
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "Testnet LayerZero Scan"
+msgstr "テストネット LayerZero Scan"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "14-day volume progress toward next VIP level"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "There may not be sufficient liquidity to execute the pay token to collateral token swap when the price conditions are met."
+msgstr "価格条件が満たされたときに支払いトークンから担保トークンへのスワップを実行するための十分な流動性がない可能性があります。"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "Trigger"
+msgstr "トリガー"
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Positions ({0})"
+msgstr ""
+
+#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Order cancelled"
+msgstr "注文はキャンセルされました"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Referral tier"
+msgstr ""
+
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Collapse"
+msgstr "折りたたむ"
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Market Name:"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "10% discount"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Traders Referred on Arbitrum"
+msgstr "Arbitrumで紹介したトレーダー"
+
+#: src/shared/lib/contracts/callContract.tsx
+#: src/shared/lib/contracts/callContract.tsx
+#: src/shared/lib/contracts/callContract.tsx
+msgid "Transaction sent."
+msgstr "取引は送信済です。"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Creating..."
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+msgid "Enter {triggerLabel}"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "TP/SL for Position"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Default level for new users"
+msgstr ""
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "and"
+msgstr "と"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Trading"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Pending Earnings"
+msgstr ""
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Signing approval..."
+msgstr "承認を署名中..."
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Original"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Next tier referrals"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Commission Rate"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Returned Collateral"
+msgstr "返却された担保"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "TradingView"
+msgstr ""
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Stop Market - Long Inc."
+msgstr "ストップマーケット - ロング増加"
+
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "Enter your feedback here."
+msgstr "ここにフィードバックを入力してください。"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "You're withdrawing {0}, your gas token. Gas is required for this withdrawal, so please keep at least <0>{1}</0> in {2} or switch your gas token in <1>settings</1>."
+msgstr "{0}、ガス・トークンを引き出しています。この引き出しにはガスが必要なので、{2}に少なくとも<0>{1}</0>を保持するか<1>設定</1>でガス・トークンを切り替えてください。"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Only positions with over {0} in \"Capital Used\" are ranked."
+msgstr "\"資本使用額\"が{0}を超えるポジションのみがランキングされます。"
+
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Position Value"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Active Referrals"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Unknown shift order"
+msgstr ""
+
+#: src/modules/lighter/hooks/useCancelApiOrder.ts
+msgid "Order canceled"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "One-time trigger on first trade"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "The order may not execute at the desired {priceText} as its acceptable price impact is set to {formattedOrderAcceptablePriceImpact}, which is lower than the current market price impact of {formattedCurrentAcceptablePriceImpact}. It can be edited using the \"Edit\" button."
+msgstr "許容価格インパクトが{formattedOrderAcceptablePriceImpact}に設定されており、現在の市場価格インパクト{formattedCurrentAcceptablePriceImpact}より低いため、希望の{priceText}で注文が実行されない可能性があります。\"編集\"ボタンで編集できます。"
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+msgid "Cross Leverage"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Liquidation Fee"
+msgstr "清算手数料"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "There may not be sufficient liquidity to execute the swap when the min. receive conditions are met."
+msgstr "最低受け取り条件が満たされたときにスワップを実行するための十分な流動性がない可能性があります。"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "{fromText} to"
+msgstr "{fromText}から"
+
+#: src/shared/components/SettingsModal/DisplaySettings.tsx
+msgid "Breakdown Net Price Impact"
+msgstr "ネット価格影響の内訳"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Cumulative PnL <0>{0}</0>"
+msgstr "累積PnL <0>{0}</0>"
+
+#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/useClosePositionHandler.ts
+msgid "Position close order submitted"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "The amount you are trying to withdraw is below the limit. Please try an amount larger than <0>{lowerLimitFormatted}</0>."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "Trigger price above highest limit price"
+msgstr "トリガー価格が最高リミット価格を上回っています"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Fulfilling buy request."
+msgstr "買いリクエストを履行中。"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "days"
+msgstr ""
+
+#: src/shared/components/SettingsModal/DebugSettings.tsx
+msgid "Show Debug Values"
+msgstr "デバッグ値を表示"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+msgid "Primit information for account"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Total Referrals"
+msgstr ""
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Trade"
+msgstr "トレード"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Points triggered by referral trades"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Adding referral code failed."
+msgstr "紹介コードが追加できませんでした"
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Updating"
+msgstr "更新中"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "V1 Arbitrum"
+msgstr "V1 Arbitrum"
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "SL"
+msgstr "SL"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Create Take Profit"
+msgstr "テイクプロフィットを作成"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Cancel TWAP"
+msgstr "TWAPをキャンセル"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Mark price for the liquidation."
+msgstr "清算のためのマーク価格"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "T{nextTier} requires {0} (14-day rolling)"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "<0>Selling {0}{1}<1>{poolName}</1></0>"
+msgstr "<0>{0}{1}の売却<1>{poolName}</1></0>"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/SelectAssetToDepositView.tsx
+msgid "No eligible tokens available on {0} for deposit"
+msgstr "{0} で入金可能な対象トークンなし"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Max close amount exceeded"
+msgstr "最大クローズ額を超えています"
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Max leverage: {0}x"
+msgstr "最大レバレッジ: {0}x"
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "T"
+msgstr "T"
+
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Est: {0} | Max: {1}"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Total earnings from referrals."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "{orderText} update failed."
+msgstr "{orderText}の更新に失敗しました。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+msgid "Product"
+msgstr ""
+
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "Leave your Telegram if you’re okay with being contacted for a quick follow-up."
+msgstr "簡単なフォローアップ連絡に問題なければTelegramを残してください。"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Primit Account Balance"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "≥ $100,000,000"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "PnL (%)"
+msgstr "損益 (%)"
+
+#: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
+msgid "How can we continue to meet your expectations?"
+msgstr "ご期待に沿うためにどうすればよいでしょうか？"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Generating session..."
+msgstr "セッション生成中..."
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Next Tier"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Epoch Progress"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Claim Successful!"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Network Fee"
+msgstr "ネットワーク手数料"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "20s"
+msgstr "20秒"
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Isolated"
+msgstr ""
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "Points Dashboard"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Expires"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Withdrawing..."
+msgstr "引き出し中..."
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Insufficient available liquidity. The order will fill when there is liquidity available."
+msgstr "利用可能な流動性が不足しています。流動性があるときに注文が満たされます。"
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/shared/components/ChartTokenSelector/ChartTokenSelector.tsx
+#: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "Market"
+msgstr "マーケット"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Enter referral code"
+msgstr "リファラルコードを入力"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "You can rebind now."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP 0 Bronze"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Lev."
+msgstr "レバレッジ"
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Available to Trade Assets"
+msgstr "取引可能な資産"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP Level"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "My Subscriptions"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/keys.ts
+msgid "Withdrawal"
+msgstr "引き出し"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "Submitting..."
+msgstr "送信中..."
+
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+msgid "<0>{0}</0> <1><2>{indexName}</2><3>[{poolName}]</3></1>"
+msgstr "<0>{0}</0> <1><2>{indexName}</2><3>[{poolName}]</3></1>"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+msgid "Interest"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Trigger price below liq. price"
+msgstr "トリガー価格が清算価格を下回っています"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Failed to complete withdrawal"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Time"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/simulateExecuteTxn.tsx
+msgid "Unknown Error"
+msgstr "不明なエラー"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Cumulative realized profit and loss from closed positions during the selected period. Unrealized PnL on open positions is not included."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP 1 Silver"
+msgstr ""
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Trading Pair"
+msgstr ""
+
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Liquidated"
+msgstr "清算済"
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "Please switch to the <0><1/><2>Arbitrum</2></0> or <3><4/><5>Avalanche</5></3> deployment for those features."
+msgstr "これらの機能を使用するには<0><1/><2>Arbitrum</2></0>または<3><4/><5>Avalanche</5></3>のデプロイに切り替えてください。"
+
+#: src/shared/components/SideNav/LanguageNavItem.tsx
+msgid "Select Language"
+msgstr "言語選択"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP {nextTier} requires {0} (14-day rolling)"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+msgid "Already Bound"
+msgstr ""
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Direction"
+msgstr "方向"
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "Slippage exceeds the allowed maximum. Raise your slippage tolerance or try a smaller size."
+msgstr ""
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "SIGN"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Close Out Margin Fraction:"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Today’s Top Gainers"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "Order Acceptable Price"
+msgstr "注文受付価格"
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "VOL."
+msgstr "ボリューム"
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "Trigger price below limit price"
+msgstr "トリガー価格がリミット価格を下回っています"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "<0>Buying {0}{1}<1>{poolName}</1></0> <2>with {tokensText}</2>"
+msgstr "<0>{0}{1}の購入<1>{poolName}</1></0> <2>{tokensText}で</2>"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Initial Collateral"
+msgstr "最初の担保"
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Taker: {0} | Maker: {1}"
+msgstr ""
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Portfolio"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "stop market"
+msgstr "ストップマーケット"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Start Unrealized PnL"
+msgstr "未実現損益の開始"
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Limit - Short Inc."
+msgstr "リミット - ショート増加"
+
+#: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
+msgid "Connect Your Wallet"
+msgstr ""
+
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+msgid "Sending settle request"
+msgstr "決済リクエスト送信中"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Referral Center"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Minimum claim is {REFERRAL_OFFCHAIN_MIN_CLAIM_USDT} USDT."
+msgstr ""
+
+#: src/shared/lib/legacy.ts
+msgid "Order cannot be executed as the remaining position would be smaller than $5.00"
+msgstr "ポジション金額が$5未満になるため注文を執行できません"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Failed to create referral code"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Claiming..."
+msgstr "請求中..."
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "All"
+msgstr "すべて"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Request Market Increase"
+msgstr "マーケット増加リクエスト"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Your current fees include rebates or staking discounts."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Current Trading Tier"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "TWAP"
+msgstr "TWAP"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "20% discount"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Enter withdrawal amount"
+msgstr "引き出し金額を入力"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Cancel Limit"
+msgstr "リミットをキャンセル"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "V2 Claim"
+msgstr "V2請求"
+
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+msgid "{positionName} Failed to settle."
+msgstr "{positionName} 決済に失敗しました。"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Select a market"
+msgstr "マーケットを選択"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Total trade notional (maker + taker) during the selected period."
+msgstr ""
+
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Please input a referral code to benefit from fee discounts."
+msgstr "紹介コードを入力すると手数料割引を受けられます。"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Deposit"
+msgstr "入金失敗"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Subscription Period (UTC0)"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Request Market Swap"
+msgstr "マーケットスワップリクエスト"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Total earnings that have been claimed."
+msgstr ""
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "This market is currently closed."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Loss"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "App disabled, pending {0} upgrade"
+msgstr "{0}アップグレード待ちのためアプリ無効"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds are now in your Primit Account."
+msgstr ""
+
+#: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
+msgid "More Options"
+msgstr "別の選択肢"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Processing claim..."
+msgstr ""
+
+#: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
+msgid "Network"
+msgstr "ネットワーク"
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "<0>every</0> {hours} hours{0}"
+msgstr "<0>毎</0> {hours}時間{0}"
+
+#: src/shared/components/DebugSwapsSettings/DebugSwapsSettings.tsx
+msgid "Fail External Swaps"
+msgstr "外部スワップの失敗"
+
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "Repeat Transaction"
+msgstr "取引を繰り返す"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Swap {fromTokenText} for {toTokenText}"
+msgstr "{fromTokenText}を{toTokenText}にスワップ"
+
+#: src/shared/components/SettingsModal/DebugSettings.tsx
+msgid "Disable Validation for Testing"
+msgstr "テストのため検証を無効化"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "You already have a referral code"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "PnL"
+msgstr "損益"
+
+#: src/shared/components/TradingAccountModal/InsufficientWntBanner.tsx
+msgid "You’ll need <0>{formattedAmount}</0> (<1>{formattedUsd}</1>) {wrappedNativeTokenSymbol} in your account to withdraw funds."
+msgstr "資金を引き出すには、アカウントに<0>{formattedAmount}</0> (<1>{formattedUsd}</1>) {wrappedNativeTokenSymbol} が必要です。"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Market Increase"
+msgstr "マーケット増加"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "No funding activity"
+msgstr "資金活動なし"
+
+#: src/shared/components/TVChartContainer/DynamicLine.tsx
+msgid "Cancel Order"
+msgstr "注文をキャンセル"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Missing signature or expiry data"
+msgstr ""
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Debug"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Withdraw"
+msgstr "出金"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Update Stop Market"
+msgstr "ストップマーケットを更新"
+
+#: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "View in Explorer"
+msgstr "Explorerで見る"
+
+#: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
+msgid "After you scan, a connection prompt will appear for you to connect your wallet."
+msgstr "スキャン後、ウォレットを接続するためのプロンプトが表示されます。"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Claim failed. Please try again."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "Fee"
+msgstr "手数料"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Traders Referred on Avalanche"
+msgstr "Avalancheで紹介したトレーダー"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Approval failed"
+msgstr "承認に失敗しました"
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "Open Interest"
+msgstr "建玉"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Updating settings..."
+msgstr "設定更新中..."
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Active Referral Code"
+msgstr "有効な紹介コード"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "The amount you are trying to deposit is below the limit. Please try an amount larger than <0>{lowerLimitFormatted}</0>."
+msgstr "入金しようとしている金額が下限を下回っています。<0>{lowerLimitFormatted}</0>より大きい金額をお試しください。"
+
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Funding Rate History"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Create TWAP"
+msgstr "TWAPを作成"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Claimable rebates from your referred traders."
+msgstr "紹介トレーダーからの請求可能リベート。"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Shift order executed."
+msgstr "シフト注文が実行されました。"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "You have yet to reach the minimum \"Capital Used\" of {0} to qualify for the rankings."
+msgstr "ランキング資格を得るための最小\"資本使用額\"{0}にまだ達していません。"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Signed"
+msgstr ""
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Shorts"
+msgstr "ショート"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Refreshes every 5 min · Last: {0} (UTC)"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Loading…"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Refreshes every 5 min"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Funding Activity"
+msgstr "資金活動"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Matured"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
+msgid "Refresh Page"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed TWAP Part"
+msgstr "TWAPパートに失敗"
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "TP - Short Dec."
+msgstr "TP - ショート減少"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Enter SL limit price"
+msgstr ""
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/earn/components/EarnTitle/EarnTitle.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Earn"
+msgstr ""
+
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "Your opinions and experiences matter to us. Your feedback helps us understand what we are doing well and where we can make enhancements."
+msgstr "ご意見とご経験は私たちにとって重要です。フィードバックは私たちが何をうまくやっているか、どこを改善できるかを理解するのに役立ちます。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Upgrade to T{nextTier} to save {0}% on taker TP rate (per $1k)"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Estimated Time"
+msgstr "推定時間"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Estimated APR"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Show last-trade price line"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Direct invitees"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Higher of two formulas"
+msgstr ""
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Rebates earned by this account as a trader."
+msgstr "トレーダーとしてこのアカウントが獲得したリベート"
+
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Monthly Funding Rate"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "This Year"
+msgstr "今年"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "Performance data is not available for this network"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Create new code"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP 2 Gold"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Updated just now"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "NA"
+msgstr "NA"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Trigger price for the order."
+msgstr "注文のトリガー価格"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/shared/components/MarketWithDirectionLabel/MarketWithDirectionLabel.tsx
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Short"
+msgstr "ショート"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "PnL ($)"
+msgstr "損益 ($)"
+
+#: src/modules/lighter/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
+msgid "Claiming failed."
+msgstr "請求に失敗しました。"
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+msgid "Stop Market price is above mark price"
+msgstr "ストップマーケット価格がマーク価格を上回っています"
+
+#: src/modules/lighter/context/PendingTxnsContext/PendingTxnsContext.tsx
+msgid "Txn failed. <0>View</0>."
+msgstr "取引失敗。<0>表示</0>。"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Enter a price"
+msgstr "価格を入力"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Market Increase"
+msgstr "マーケット増額失敗"
+
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Liq. Price"
+msgstr "清算価格"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "SL limit requires SL price"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Please sign in first to withdraw funds"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "≥ $5,000,000"
+msgstr ""
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "No live price available for this market right now. Please retry in a moment."
+msgstr ""
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "<0>Botanix</0> currently only supports"
+msgstr "<0>Botanix</0>は現在のみサポート"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Reduce Only"
+msgstr ""
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+msgid "Cross Margin Ratio"
+msgstr ""
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Fulfilling order request"
+msgstr "注文リクエストを履行中"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Network:"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Insufficient {0} balance to pay for gas"
+msgstr "ガス支払いのための{0}残高が不足しています"
+
+#: src/modules/lighter/domain/synthetics/orders/prepareOrderTxn.ts
+msgid "Error preparing transaction. Provider is not defined"
+msgstr "取引準備エラー。プロバイダーが定義されていません"
+
+#: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "PnL Analysis"
+msgstr "損益分析"
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Longs"
+msgstr "ロング"
+
+#: src/modules/lighter/api/custom/useReferralCode.ts
+msgid "Referral code created successfully!"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliateCodeDisplay.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Share your referral code and earn rebates from traders you refer."
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "Capital Used"
+msgstr "使用資本"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Price Impact"
+msgstr "価格インパクト"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Select a token"
+msgstr "トークンを選択"
+
+#: src/modules/lighter/api/useClosePositionHandler.ts
+msgid "Please connect your wallet and sign in first"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/simulateExecuteTxn.tsx
+#: src/modules/lighter/domain/synthetics/orders/simulateExecuteTxn.tsx
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Execute order simulation failed."
+msgstr "注文シミュレーション実行に失敗しました。"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Current bound code: {0}"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ScanningEffect/ScanningEffect.tsx
+msgid "SCANNING STRATEGIES"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Initial Margin Fraction:"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "TP"
+msgstr "TP"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "$5,000,000 – $99,999,999"
+msgstr ""
+
+#: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
+msgid "Log in to your Binance app and tap [Wallets]. Go to [Web3]."
+msgstr "Binanceアプリにログインし、[ウォレット]をタップして[Web3]に移動します。"
+
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Docs"
+msgstr "ドキュメント"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Cumulative trading volume points"
+msgstr ""
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "You already have a referral code: {existingCode}"
+msgstr ""
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+msgid "Cross Margin Usage"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Stop Market"
+msgstr "ストップマーケット失敗"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "You have already claimed this product"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Address copied to your clipboard"
+msgstr "アドレスがクリップボードにコピーされました"
+
+#: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+#: src/shared/components/SideNav/SettingsNavItem.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Settings"
+msgstr "設定"
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "The owner of this referral code has set a custom discount of {currentTierDiscount}% instead of the standard {0}% for Tier {1}."
+msgstr "このリファラルコードの所有者はティア{1}の標準{0}%の代わりにカスタム割引{currentTierDiscount}%を設定しています。"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Amount of traders you referred."
+msgstr "あなたが紹介したトレーダー数"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "Take Profit"
+msgstr "テイクプロフィット"
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "Hour(s)"
+msgstr "時間"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Connect wallet to view your 14-day volume."
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Adjust Max Leverage"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Create Limit"
+msgstr "リミットを作成"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Sign in to view your 14-day volume."
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Net Price Impact"
+msgstr "ネット価格影響"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Enter a code"
+msgstr "コードを入力"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Details"
+msgstr "詳細"
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Market - Short Dec."
+msgstr "市場 - ショート減少"
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Pending"
+msgstr ""
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Search Trading Pair"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "≥ $500,000,000"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Traders Referred on Avalanche Fuji"
+msgstr "Avalanche Fujiで紹介したトレーダー"
+
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Take Profit / Stop Loss"
+msgstr "テイクプロフィット / ストップロス"
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "Limit Order"
+msgstr ""
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "There is not enough {0} in your account on {networkName} to send this transaction.<0/><1/><2>Buy or Transfer {1} to {networkName}</2>"
+msgstr "{networkName}のアカウントにこの取引を送信するための{0}が十分にありません。<0/><1/><2>{1}を購入または{networkName}に転送</2>"
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "SL - Long Dec."
+msgstr "SL - ロング減少"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Create Stop Loss"
+msgstr "ストップロスを作成"
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/shared/components/AppHeader/AppHeaderUser.tsx
+msgid "Connect wallet"
+msgstr "ウォレットを接続"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Failed to generate session"
+msgstr "セッション生成に失敗"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "No repeated wallet confirmations"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/EarnTitle/EarnTitle.tsx
+msgid "AI STRATEGY"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Withdraw transaction submitted"
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "Loading markets..."
+msgstr ""
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Edit Referral Code"
+msgstr "紹介コード編集"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "The subscription window is closed. Please check back for the next opening."
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Network Fee:"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute Take Profit"
+msgstr "テイクプロフィットを実行"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "External swap is temporarily disabled. Please try again."
+msgstr "外部スワップは一時的に無効です。再試行してください。"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "{orderTypeText} {visualMultiplierPrefix}{0} {longShortText}: {sign}{1}"
+msgstr "{orderTypeText} {visualMultiplierPrefix}{0} {longShortText}: {sign}{1}"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Decreasing"
+msgstr "減少中"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Create Referral Code"
+msgstr "紹介コード作成"
+
+#: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
+msgid "Networks"
+msgstr "ネットワーク"
+
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+msgid "Decreased"
+msgstr "減額しました"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Contract Address"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "Updating {orderText}."
+msgstr "{orderText} を更新中。"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Decrease"
+msgstr "減少"
+
+#: src/shared/lib/legacy.ts
+msgid "Order cannot be executed as it would reduce the position's leverage below 1"
+msgstr "レバレッジ倍率が1倍以下になるため注文を執行できません"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Max slippage precision is -0.01%"
+msgstr "最大スリッページ精度は-0.01%"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Subscription"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "In Progress"
+msgstr ""
+
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+msgid "Settle request for {0, plural, one {# position} other {# positions}} sent"
+msgstr "{0, plural, one {# ポジション} other {# ポジション}} の決済リクエストを送信しました"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Sending shift request."
+msgstr "シフトリクエストを送信中。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Total Trades"
+msgstr "総取引数"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "2. How do I redeem my funds?"
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "<0>Permit signature is invalid. Please try again.</0>"
+msgstr "<0>許可署名が無効です。もう一度お試しください。</0>"
+
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "Favorites"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Reason: {0}"
+msgstr "理由: {0}"
+
+#: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
+#: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
+#: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
+msgid "All time"
+msgstr "すべての時間"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Shift request sent."
+msgstr "シフトリクエストが送信されました。"
+
+#: src/modules/lighter/domain/synthetics/orders/cancelOrdersTxn.ts
+msgid "Failed to cancel {ordersText}."
+msgstr "{ordersText}のキャンセルに失敗しました。"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Instant credit to your balance — no on-chain transaction."
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Total Earnings"
+msgstr ""
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Cancel newly created orders"
+msgstr "新規作成注文をキャンセル"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Minimum 1 share required"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Market Cap:"
+msgstr ""
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Display"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Create Stop Market"
+msgstr "ストップマーケットを作成"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Recent Activity"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "V1 Avalanche"
+msgstr "V1 Avalanche"
+
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+msgid "Binding..."
+msgstr ""
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
+#: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
+#: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Referrals"
+msgstr "紹介"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+msgid "Order Type"
+msgstr "注文タイプ"
+
+#: src/modules/lighter/domain/synthetics/orders/simulateExecuteTxn.tsx
+msgid "Order error. Prices are currently volatile for this market, try again by <0>increasing the allowed slippage</0> under the advanced display section."
+msgstr "注文エラー。この市場の価格が現在変動しています。<0>最大スリッページを増加</0>させて先進表示セクションで再試行してください。"
+
+#: src/shared/components/DebugSwapsSettings/DebugSwapsSettings.tsx
+msgid "Swap Price Impact for External Swap Threshold"
+msgstr "外部スワップ閾値のスワップ価格インパクト"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Participating Addresses:"
+msgstr ""
+
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+msgid "Spread"
+msgstr "スプレッド"
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Current Position Leverage: {currentPositionLeverage}x"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "This position was liquidated as the max. leverage of {formattedMaxLeverage} was exceeded when taking into account fees."
+msgstr "このポジションは手数料を考慮した上での最大レバレッジ倍率({formattedMaxLeverage})を超過したため清算されました。"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Wins and losses across closed positions during the selected period."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/cancelOrdersTxn.ts
+msgid "Cancelling {ordersText}."
+msgstr "{ordersText}をキャンセル中。"
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Loading..."
+msgstr "ロード中..."
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Trade now"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Please wait for settlement to complete."
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Execute"
+msgstr "執行"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Enter TP or SL price"
+msgstr ""
+
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Trades"
+msgstr "取引"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Submitted"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Edit take profit / stop loss for {0}"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Maker TP ($1k)"
+msgstr ""
+
+#: src/shared/components/SettingsModal/DisplaySettings.tsx
+msgid "Show Leverage Slider"
+msgstr "レバレッジスライダーを表示"
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Order Size"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "Cancelling {orderText}."
+msgstr "{orderText} をキャンセル中。"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "Execution price for the order."
+msgstr "注文の執行価格"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Could not load fee and VIP data."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Your frozen balance, locked in open orders and unavailable for trading until the orders are closed or cancelled."
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Bind someone else's invitation code to obtain the benefits of the invitee"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Partial Position"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "All Primit users are eligible."
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "You have not traded during the selected period."
+msgstr "選択された期間中に取引していません。"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "The trigger price for this order is based on the swap fees and price impact to guarantee that you will receive at least {toMinText} on order execution."
+msgstr "この注文のトリガー価格は、スワップ手数料と価格インパクトに基づき、注文執行時に少なくとも{toMinText}を受け取ることを保証します。"
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Referral code updated failed."
+msgstr "紹介コードが更新できませんでした。"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+msgid "Price"
+msgstr "価格"
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "Permit signing was cancelled"
+msgstr "許可署名がキャンセルされました"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "FAQs"
+msgstr ""
+
+#: src/modules/lighter/api/useCancelOrderHandler.ts
+msgid "Orders cancelled successfully"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Subscription Amount"
+msgstr ""
+
+#: src/modules/lighter/api/custom/useReferralRebateClaim.ts
+#: src/modules/lighter/api/custom/useReferralRebateClaim.ts
+#: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
+#: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
+msgid "No pending earnings to claim"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "1m 40s"
+msgstr "1分40秒"
+
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "Your deposit of from {sourceChainName} was not executed due to an error"
+msgstr "{sourceChainName}からの入金がエラーにより実行されませんでした"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Unknown buy order"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Event Type"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+msgid "Top PnL (%)"
+msgstr "トップPnL (%)"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "There may not be sufficient liquidity to execute your order when the price conditions are met."
+msgstr "価格条件が満たされた場合でも、注文を執行するための十分な流動性がない可能性があります。"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Daily cap {0}"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Cancel TWAP Swap"
+msgstr "TWAPスワップをキャンセル"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Transaction"
+msgstr "取引"
+
+#: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
+msgid "Last year"
+msgstr "昨年"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Rebates earned as an affiliate."
+msgstr "アフィリエイトとして稼いだリベート。"
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Fee & VIP"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Invalid liq. price"
+msgstr "無効な清算価格"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "<0>Smart wallets are not supported on {0}.</0><1/><2>Please switch to a different network or use a EOA wallet.</2>"
+msgstr ""
+
+#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+msgid "Sign Out"
+msgstr ""
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "Approval submitted! <0>View status.</0>"
+msgstr "承認が提出されました! <0>状況を確認する</0>"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Total Interest Distributed"
+msgstr ""
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+msgid "Accounts"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "SUBSCRIBE NOW"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Fulfilling shift request."
+msgstr "シフトリクエストを履行中。"
+
+#: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Asset"
+msgstr "資産"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Checking code"
+msgstr "コードを確認中"
+
+#: src/shared/components/EmptyTableContent/EmptyTableContent.tsx
+msgid "No items yet"
+msgstr "項目なし"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Stop Loss Decrease"
+msgstr "ストップロス減少"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "TP Limit Price"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Reliable Primit-powered transactions"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Connect wallet to see your VIP level."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+msgid "Available Balance"
+msgstr ""
+
+#: src/modules/lighter/api/custom/useReferralCode.ts
+msgid "Referral code bound successfully!"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Referral code updated."
+msgstr "リファラルコードが更新されました。"
+
+#: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
+msgid "30d"
+msgstr "30日"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Select different tokens"
+msgstr "別のトークンを選択"
+
+#: src/modules/lighter/domain/synthetics/fees/utils/index.ts
+msgid "The network fees are very high currently, which may be due to a temporary increase in transactions on the {chainName} network."
+msgstr "現在ネットワーク手数料が非常に高いです。これは{chainName}ネットワーク上の一時的なトランザクション増加によるものかもしれません。"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "There is no liquidation price, as the position's collateral value will increase to cover any negative PnL."
+msgstr "ポジションの担保価値が負のPnLをカバーするために増加するため、清算価格はありません。"
+
+#: src/shared/components/TVChartContainer/DynamicLine.tsx
+msgid "Edit Order"
+msgstr "注文を編集"
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "Approval was cancelled."
+msgstr "承認がキャンセルされました。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Connect wallet and sign in to see your trading tier."
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "24H%"
+msgstr "24時間%"
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Max Leverage:"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Withdrawing requires <0/> while you have <1/>. Please <2>swap</2> or <3>deposit</3> more {0} to your trading account."
+msgstr ""
+
+#: src/shared/components/RatingToast/RatingToast.tsx
+msgid "How likely are you to recommend our service to a friend or colleague?"
+msgstr "友人や同僚に当サービスをおすすめする可能性はどれくらいですか？"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Insufficient liquidity to swap collateral"
+msgstr "担保スワップのための流動性不足"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Market Decrease"
+msgstr "市場減少"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "N/A Term"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliateCodeDisplay.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Copy Referral Link"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Referred Volume"
+msgstr ""
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "The settlement chain is the network used for your account and opening positions. Account balances and positions are specific to the selected network."
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "{orderText} updated."
+msgstr "{orderText} が更新されました。"
+
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+#: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
+msgid "Live"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Insufficient liquidity"
+msgstr "流動性不足"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute TWAP Swap Part"
+msgstr "TWAPスワップ部分を執行"
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "<0>every</0> {seconds} seconds"
+msgstr "<0>毎</0> {seconds} 秒"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP 4 Diamond"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "The total realized and unrealized profit and loss for the period, including fees and price impact."
+msgstr "期間中の総実現および未実現損益で、手数料と価格インパクトを含む。"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Hold time x notional value"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+msgid "Loading funding history..."
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Closed PnL settlement points"
+msgstr ""
+
+#: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
+msgid "90d"
+msgstr "90日"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Liquidation"
+msgstr "清算"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Min collateral: {0}"
+msgstr "最小担保: {0}"
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+msgid "Enter new amount or price"
+msgstr "新しい額または価格を入力"
+
+#: src/modules/lighter/features/earn/components/PastPerformanceChart/PastPerformanceChart.tsx
+msgid "1st Term"
+msgstr ""
+
+#: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
+msgid "Open Binance app"
+msgstr "Binanceアプリを開く"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+msgid "Trigger Conditions"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "Limit size is required"
+msgstr "指値サイズが必要です"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "From Network"
+msgstr "送信元ネットワーク"
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "Next Funding"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Collateral at Liquidation"
+msgstr "清算時の担保"
+
+#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+msgid "Please connect your wallet first"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/shared/lib/dates.ts
+msgid "Today"
+msgstr "今日"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "From"
+msgstr "から"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Order Trigger Price"
+msgstr "注文トリガー価格"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Limit Increase"
+msgstr "指値増加"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Volume traded by your referred traders."
+msgstr "あなたが紹介したトレーダーによる取引高"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Tier: {0}"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Parts of this order will be executed once there is sufficient liquidity."
+msgstr "十分な流動性がある場合にこの注文の一部が執行されます。"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "This order using {collateralSymbol} as collateral will not be valid for the existing {longText} position using {symbol} as collateral."
+msgstr "{collateralSymbol}を担保とするこの注文は、{symbol}を担保とする既存の{longText}ポジションで有効になりません。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP {0}"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Pick an asset to deposit"
+msgstr "入金する資産を選択"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Order request sent"
+msgstr "注文リクエスト送信済"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "< $5,000,000"
+msgstr ""
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "Permit signing failed"
+msgstr "許可署名に失敗"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Stop market price below mark price"
+msgstr "ストップマーケット価格がマーク価格を下回る"
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "A size percentage is required"
+msgstr "サイズパーセンテージが必要です"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Unrealized Fees"
+msgstr "未実現手数料"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Traders Referred"
+msgstr "紹介したトレーダー"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Referral code copied"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Couldn't find a swap path with enough liquidity"
+msgstr "十分な流動性を持つスワップパスが見つかりませんでした"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+msgid "3rd Place"
+msgstr "3位"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Failed to update TP/SL"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Enter deposit amount"
+msgstr "入金額を入力"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Update Stop Loss"
+msgstr "ストップロスを更新"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Max {0} long exceeded"
+msgstr "{0}の最大ロング値を超過しています"
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Perps rebates are automatically applied as fee discounts on each trade and are not displayed on this table."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "N/A"
+msgstr "該当なし"
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+msgid "Stop Market price is below mark price"
+msgstr "ストップマーケット価格がマーク価格を下回る"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "LIVE"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+msgid "Rate"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Balance"
+msgstr "残高"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Win/Loss"
+msgstr "勝/敗"
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "This TWAP order will execute {numberOfParts} {0} {type} orders of {1} each over the next {2} for the {3} market."
+msgstr "このTWAP注文は{3}市場で次の{2}にわたって各{1}の{numberOfParts} {0} {type}注文を執行します。"
+
+#: src/modules/lighter/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
+msgid "Affiliate rewards claimed."
+msgstr "アフィリエイト報酬が請求されました。"
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Same as current active code"
+msgstr "現在アクティブなコードと同じです"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "Win / Loss"
+msgstr "勝 / 敗"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Min position size: {0}"
+msgstr "最小ポジションサイズ: {0}"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Updated hourly · Update: {0} (UTC)"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Trigger price below mark price"
+msgstr "トリガー価格がマーク価格を下回る"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Sell request sent."
+msgstr "売りリクエストが送信されました。"
+
+#: src/shared/components/TradingAccountModal/InsufficientWntBanner.tsx
+msgid "Please <0>swap</0> to get {wrappedNativeTokenSymbol}."
+msgstr "{wrappedNativeTokenSymbol} を入手するには<0>スワップ</0>してください。"
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "All cross positions share the same cross margin as collateral. In the event of liquidation, your cross margin balance and any remaining open positions under assets in this mode may be forfeited."
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Interest:"
+msgstr ""
+
+#: src/modules/lighter/domain/multichain/SettlementChainWarningContainer.tsx
+msgid "You switched your settlement network to {0}, but you still have {1} remaining in your {2} Trading Account."
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Order error. Prices are currently volatile for this market, try again by <0>increasing the allowed slippage</0> under the execution details section."
+msgstr "注文エラー。この市場の価格が現在変動的です。実行詳細セクションで<0>許容スリッページを増やして</0>もう一度お試しください。"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/swap.ts
+msgid "{fromText} to {toExecutionText}"
+msgstr "{fromText}から{toExecutionText}へ"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Settings updated."
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute Limit Swap"
+msgstr "指値スワップの執行"
+
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+msgid "Open positions with orders"
+msgstr "注文付きオープンポジション"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "Submit"
+msgstr "提出"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Claimed"
+msgstr ""
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "Permit signed!"
+msgstr "許可署名完了!"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "RP Points Bonus"
+msgstr ""
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "less than a minute"
+msgstr "1分未満"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "1. Who's eligible to join Primit Strategy?"
+msgstr ""
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Create"
+msgstr "作成"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+msgid "Last 7d"
+msgstr "過去7日"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Copy"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "Amount"
+msgstr "額"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "First Qualifying Trade"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "No rebates distribution history yet."
+msgstr "紹介報酬支払い履歴はありません。"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "trigger price"
+msgstr "トリガー価格"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Claim"
+msgstr "請求"
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Shifting from <0><1>{fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>{toIndexName}</4><5>{toPoolName}</5></3>"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/keys.ts
+msgid "Deposit failed"
+msgstr "入金に失敗しました"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Referral code created."
+msgstr "リファラルコードが作成されました。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+msgid "Total Participations"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+msgid "TP Trigger Price"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Insufficient quota available"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Claim submitted! Waiting for confirmation..."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Enter an amount"
+msgstr "額を入力"
+
+#: src/shared/components/TradingAccountModal/SelectAssetToDepositView.tsx
+msgid "No assets are available for deposit"
+msgstr "入金可能な資産なし"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "V1 Avalanche Fuji"
+msgstr "V1 Avalanche Fuji"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+msgid "Realized Swap Impact"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+msgid "1st Place"
+msgstr "1位"
+
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "RWA"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+msgid "Concluded Competitions"
+msgstr "終了したコンペティション"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Failed to sign approval"
+msgstr "承認署名に失敗"
+
+#: src/modules/lighter/domain/synthetics/fees/utils/index.ts
+msgid "The network fees are high currently, which may be due to a temporary increase in transactions on the {chainName} network."
+msgstr "現在ネットワーク手数料が高いです。これは{chainName}ネットワーク上の一時的なトランザクション増加によるものかもしれません。"
+
+#: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
+msgid "Scan the QR code"
+msgstr "QRコードをスキャン"
+
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Trigger price above mark price"
+msgstr "トリガー価格がマーク価格を上回る"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
+msgid "Concluded"
+msgstr "終了"
+
+#: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
+msgid "Reduce-only requires an open position on this market."
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Order Value"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "{addressLabel} on {networkLabel}"
+msgstr "{networkLabel}上の{addressLabel}"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Approving"
+msgstr "承認中"
+
+#: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
+msgid "Smart wallets are not supported on this network."
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Update Take Profit"
+msgstr "テイクプロフィットを更新"
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "Minute(s)"
+msgstr "分"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Start Unrealized Fees"
+msgstr "未実現手数料開始"
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "1hr Funding"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "{orderText} cancel failed."
+msgstr "{orderText} キャンセルに失敗。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP 3 Platinum"
+msgstr ""
+
+#: src/modules/lighter/api/custom/useReferralRebateClaim.ts
+#: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
+msgid "Connect wallet to claim"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Fees exceed amount"
+msgstr "手数料が額を超過"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+msgid "Win Rate"
+msgstr "勝率"
+
+#: src/modules/lighter/context/PendingTxnsContext/PendingTxnsContext.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+#: src/shared/lib/contracts/notifications.tsx
+#: src/shared/lib/contracts/notifications.tsx
+msgid "View"
+msgstr "見る"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Execute Stop Market"
+msgstr "ストップマーケットを執行"
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Volume traded by this account with an active referral code."
+msgstr "有効な紹介コードを使ってこのアカウントでトレードされた取引高"
+
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "AI"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Subscription Successful"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Need {0} more"
+msgstr ""
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Referral Codes"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Term"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Min USD Amount:"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Sell order executed."
+msgstr "売り注文が実行されました。"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Looks like you don't have a referral code to share. <0/> Create one now and start earning rebates!"
+msgstr "シェアできる紹介コードがないようです。<0/> コードをいま作成して紹介報酬を稼ぎましょう!"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Update 1CT (One-Click Trading) settings"
+msgstr "1CT (ワンクリック取引) 設定を更新"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Chart type"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+msgid "Limit Price"
+msgstr "指値"
+
+#: src/shared/components/AddressView/AddressView.tsx
+msgid "You"
+msgstr "あなた"
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Deactivate 1CT (One-Click Trading)"
+msgstr "1CT (ワンクリック取引) を無効化"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Failed to request withdraw"
+msgstr ""
+
+#: src/shared/components/AddressDropdown/AddressDropdownWithMultichain.tsx
+#: src/shared/components/TradeHistory/keys.ts
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/keys.ts
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Deposit"
+msgstr "入金"
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "Trigger price below highest limit price"
+msgstr "トリガー価格が最高指値価格を下回る"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "No Active Strategies"
+msgstr ""
+
+#: src/modules/lighter/api/custom/useReferralRebateClaim.ts
+#: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
+msgid "Failed to claim rebate"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "There may not be sufficient liquidity to execute the swap to the receive token when the price conditions are met."
+msgstr "価格条件が満たされた場合でも、受取トークンへのスワップを執行するための十分な流動性がない可能性があります。"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Enable One-Click Trading"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+msgid "Yes"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Rebinding available in {rebindDaysLeft} days."
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Failed to load dashboard"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Realized Fees"
+msgstr "実現手数料"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+msgid "Top Positions"
+msgstr "トップポジション"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+msgid "Cancel All"
+msgstr ""
+
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "We Value Your Feedback"
+msgstr "あなたのフィードバックを大切にします"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "Stop Loss"
+msgstr "ストップロス"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+msgid "Side"
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "Meme"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Margin"
+msgstr ""
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "Duration"
+msgstr "期間"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Exceeds your personal limit"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "TP Price"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "First Month Only"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "PnL Points"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+msgid "Search Address"
+msgstr "アドレスを検索"
+
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+msgid "Est. Liq. Price"
+msgstr ""
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Session generated"
+msgstr "セッション生成済"
+
+#: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
+msgid "Copy error"
+msgstr "コピーエラー"
+
+#: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
+msgid "What areas can we improve to make your experience better?"
+msgstr "あなたの体験を向上させるためにどの領域を改善できますか？"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Select a collateral"
+msgstr "担保を選択"
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "Size per part"
+msgstr "部分ごとのサイズ"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Insufficient {0} balance"
+msgstr "{0} 残高の不足"
+
+#: src/shared/components/TradingAccountModal/InsufficientWntBanner.tsx
+msgid "Please <0>deposit</0> or <1>swap</1> to get {wrappedNativeTokenSymbol}."
+msgstr "{wrappedNativeTokenSymbol} を入手するには<0>入金</0>または<1>スワップ</1>してください。"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "limit price"
+msgstr "指値価格"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Sending order request"
+msgstr "注文リクエストを送信中"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Transaction failed."
+msgstr "取引に失敗しました。"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Rebates"
+msgstr "リベート"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Shares:"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Insufficient {nativeTokenSymbol} balance"
+msgstr "{nativeTokenSymbol} 残高不足"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Update Limit"
+msgstr "指値を更新"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Error simulating withdrawal"
+msgstr "引き出しシミュレーションエラー"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+#: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "Date"
+msgstr "日付"
+
+#: src/modules/lighter/domain/tokens/approveTokens.tsx
+msgid "Approval failed."
+msgstr "承認に失敗しました。"
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Perps fee discounts are automatically applied on each trade and are not displayed on this table."
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+msgid "Trigger Price"
+msgstr "トリガー価格"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Swap {0} for {1}"
+msgstr "{0} を {1} にスワップ"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Maker"
+msgstr ""
+
+#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+msgid "Sign In"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Depth"
+msgstr "深度"
+
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "Layer 1"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Depositing"
+msgstr "入金中"
+
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "Withdraw from Account"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Maker Fee"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
+msgid "Realized Base PnL"
+msgstr "実現ベースPnL"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Tier"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Page outdated, please refresh"
+msgstr "ページが古くなっています。更新してください。"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Withdraw"
+msgstr "出金失敗"
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+msgid "Perpetuals Overview"
+msgstr ""
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
+msgid "Freeze"
+msgstr "凍結"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Number of active traders you referred."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "Stop Market"
+msgstr "ストップマーケット"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Holding Points"
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Transaction failed due to invalid signature.<0/><1/>Please try a different wallet provider, or switch to Classic or One-Click Trading mode within the <2>Settings.</2>"
+msgstr "無効署名のため取引に失敗しました。<0/><1/>異なるウォレットプロバイダをお試しください、または<2>設定</2>内でクラシックまたはワンクリック取引モードに切り替えてください。"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Min number of parts: {MIN_TWAP_NUMBER_OF_PARTS}"
+msgstr "最小パート数: {MIN_TWAP_NUMBER_OF_PARTS}"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Settled hourly in batches"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Manage your risk on individual positions by restricting the amount of margin allocated to each. If the margin ratio of an isolated position reaches 100%, the position will be liquidated."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trading fee tiers and VIP levels on Primit."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Tier T3"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "Trigger price above limit price"
+msgstr "トリガー価格がリミット価格を上回っています"
+
+#: src/modules/lighter/domain/synthetics/orders/cancelOrdersTxn.ts
+msgid "{ordersText} cancelled."
+msgstr "{ordersText} がキャンセルされました。"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Select a Pay token"
+msgstr "支払いトークンを選択"
+
+#: src/modules/lighter/api/useCancelOrderHandler.ts
+msgid "Please sign in to cancel orders"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Taker TP ($1k)"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Raw Prices"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Recent Tier"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Area"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Redemption Time (UTC)"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralCodeWarnings.tsx
+msgid "This code has been taken by someone else on {takenNetworkNames}, you will not receive rebates from traders using this code on {takenNetworkNames}."
+msgstr "このコードは{takenNetworkNames}で他の誰かに取られています。{takenNetworkNames}でこのコードを使用しているトレーダーからリベートを受け取ることはできません。"
+
+#: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
+msgid "Confirm Claim"
+msgstr "請求を確認"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "≥ $1,000 trade, both parties receive"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
+msgid "Connect your wallet to view your portfolio, track your positions, and manage your trades."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+#: src/modules/lighter/context/SyntheticsEvents/SyntheticsEventsProvider.tsx
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+#: src/shared/components/MarketWithDirectionLabel/MarketWithDirectionLabel.tsx
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+#: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Long"
+msgstr "ロング"
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+#: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
+#: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Position"
+msgstr "ポジション"
+
+#: src/modules/lighter/api/useCancelOrderHandler.ts
+msgid "All orders cancelled successfully"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "$0 – $4,999,999"
+msgstr ""
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Increasing"
+msgstr "増加中"
+
+#: src/shared/components/Referrals/AffiliateCodeDisplay.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Referral link copied to your clipboard"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "No tier information yet."
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Total Quota"
+msgstr ""
+
+#: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
+msgid "DeFi"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Funding History"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Cancel Take Profit"
+msgstr "テイクプロフィットをキャンセル"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+msgid "Top PnL ($)"
+msgstr "トップPnL ($)"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Total number of traders you referred."
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+msgid "Invalid address. Please make sure you have entered a valid Ethereum address"
+msgstr "無効なアドレスです。有効なEthereumアドレスを入力してください"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "{increaseOrDecreaseText} {tokenText} by {sizeText}"
+msgstr "{increaseOrDecreaseText} {tokenText} を {sizeText} で"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Wallet connected, but your session is missing or expired. Please sign in again to see your trading tier."
+msgstr ""
+
+#: src/shared/components/SettingsModal/ThemeSelector.tsx
+msgid "Dark"
+msgstr "ダーク"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Increase"
+msgstr "増加"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "No subscription found for this product"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Withdraw completed successfully"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
+msgid "Traders"
+msgstr ""
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Signature request was rejected"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Claimed Earnings"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "take profit"
+msgstr "テイクプロフィット"
+
+#: src/shared/components/DebugSwapsSettings/DebugSwapsSettings.tsx
+msgid "Force External Swaps"
+msgstr "外部スワップを強制"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Create Limit Swap"
+msgstr "リミットスワップを作成"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "<0>Your wallet is not connected to {0}.</0><1/><2>Switch to {1}</2>"
+msgstr "<0>ウォレットが{0}に接続されていません。</0><1/><2>{1}に切り替え</2>"
+
+#: src/shared/components/Errors/errorToasts.tsx
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Transaction was cancelled."
+msgstr "取引がキャンセルされました。"
+
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Yearly Funding Rate"
+msgstr ""
+
+#: src/shared/components/StatusNotification/GmStatusNotification.tsx
+msgid "Shift order cancelled."
+msgstr "シフト注文がキャンセルされました。"
+
+#: src/shared/lib/legacy.ts
+msgid "Order size is bigger than position, will only be executable if position increases"
+msgstr "注文サイズがポジションより大きいため、ポジションが増加した場合のみ執行可能です"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Transaction rejected by user"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Select network"
+msgstr "ネットワークを選択"
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Transaction failed due to execution fee validation.<0/><1/>{suggestText}<2/><3/><4>View transaction details.</4>"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Completed"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Trading Points"
+msgstr ""
+
+#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+msgid "Error: {error}"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Need"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Fees exceed Pay amount"
+msgstr "手数料が支払い額を超えています"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Market Swap"
+msgstr "マーケットスワップ失敗"
+
+#: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
+msgid "Error occurred. Please try again"
+msgstr "エラーが発生しました。再度お試しください"
+
+#: src/shared/components/Referrals/referralsHelper.ts
+msgid "Only letters, numbers and underscores are allowed."
+msgstr "文字、数字、アンダースコアのみ許可されます。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+msgid "APY"
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "There is not enough {0} in your account on {1} to send this transaction.<0/><1/><2>Buy or Transfer {2} to {3}</2>"
+msgstr "{1}のアカウントにこの取引を送信するための{0}が不足しています。<0/><1/><2>{2}を購入または{3}へ転送</2>"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Total Volume"
+msgstr "総取引量"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Referral link copied"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Line"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed TWAP Swap Part"
+msgstr "TWAPスワップパート失敗"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+msgid "Failed to update order"
+msgstr ""
+
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "The mark price has changed, consider increasing your allowed slippage."
+msgstr "マーク価格が変わりました。許容スリッページを増やしてください。"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Rebates on V1"
+msgstr "V1のリベート"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+msgid "Modify Order"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Candles"
+msgstr ""
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "using GLV and pool tokens. Buying or staking Primit, or using referrals, is not supported at this time."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Withdraw Fee"
+msgstr "引き出手数料"
+
+#: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
+msgid "Alerts"
+msgstr "アラート"
+
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+msgid "Closed PnL"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
+msgid "Min {0} Amount:"
+msgstr ""
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Activate 1CT (One-Click Trading)"
+msgstr "1CT (ワンクリック取引)を有効化"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Wallet"
+msgstr "ウォレット"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Enter a trigger price"
+msgstr "トリガー価格を入力"
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "<0>every</0> {minutes} minutes{0}"
+msgstr "<0>毎</0> {minutes} 分{0}"
+
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Entry Price"
+msgstr "エントリー価格"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Price change to Liq."
+msgstr "清算までの価格変動"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Cumulative trading volume from all referees (USD)."
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Cancel Stop Loss"
+msgstr "ストップロスをキャンセル"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "Limit Decrease"
+msgstr "リミット減少"
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Advanced"
+msgstr ""
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "24h Change"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Highest trading tier reached for volume requirement."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "All assets"
+msgstr "すべての資産"
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Market - Long Dec."
+msgstr "市場 - ロング減少"
+
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+#: src/shared/components/SideNav/SideNav.tsx
+msgid "Leaderboard"
+msgstr "リーダーボード"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "There may not be enough liquidity to execute parts of this order when the time conditions are met."
+msgstr "時間条件が満たされたときにこの注文の一部を執行するのに十分な流動性がない可能性があります。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "The PnL ($) compared to the capital used.<0/><1/>The capital used is calculated as the highest value of [<2>sum of collateral of open positions - realized PnL + period start pending PnL</2>]."
+msgstr "使用資本に対するPnL ($)。<0/><1/>使用資本は[<2>オープンポジション担保合計 - 実現PnL + 期間開始保留PnL</2>]の最高値として計算されます。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "No data available"
+msgstr "データなし"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Next tier volume (USD)"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "VIP0: 0.040% → 0.036%"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Your Primit Account balance, usable for trading from any supported chain."
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Failed Stop Loss"
+msgstr "ストップロス失敗"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Upgrade to VIP {nextTier} to save {0}% on Taker fee"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Invite friend"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Daily Profit"
+msgstr "日次利益"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Subscription Amount:"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+msgid "Trade Value"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+#: src/shared/components/Errors/errorToasts.tsx
+msgid "Transaction failed"
+msgstr "取引失敗"
+
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+msgid "Status"
+msgstr ""
+
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+msgid "Current Maximum Leverage: {maxLeverage}x"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "30s"
+msgstr "30秒"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/CompetitionPrizes.tsx
+msgid "2nd Place"
+msgstr "2位"
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "LAST PRICE"
+msgstr "最終価格"
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "You sign each transaction on-chain using your own RPC, typically provided by your wallet. Gas payments in {nativeTokenSymbol}."
+msgstr "ウォレットが通常提供する独自RPCを使用して各取引をオンチェーンで署名します。ガス支払いは {nativeTokenSymbol}。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+msgid "Subscription Date (UTC)"
+msgstr ""
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "Tier {0}: {currentTierDiscount}% discount"
+msgstr "ティア {0}: {currentTierDiscount}% 割引"
+
+#: src/modules/lighter/api/custom/useReferralRebateClaim.ts
+#: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
+msgid "Minimum claim amount is 10 USDT"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Now Open"
+msgstr ""
+
+#: src/shared/components/TVChartContainer/constants.ts
+msgid "Limit - Long Inc."
+msgstr "リミット - ロング増加"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Your Rank"
+msgstr ""
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Please connect your wallet"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Product has not been settled yet"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
+msgid "Oops! Something went wrong"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Faster execution with Primit premium RPCs"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "COMPLETED"
+msgstr ""
+
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+msgid "Order Book"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
+msgid "Weekly Funding Rate"
+msgstr ""
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Generate Referral Code"
+msgstr "紹介コード生成"
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Swap"
+msgstr "スワップ"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "long"
+msgstr "ロング"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "+10 RP"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "My Referral Code"
+msgstr ""
+
+#: src/shared/components/Referrals/ReferralCodeWarnings.tsx
+msgid "This code is not yet registered on {nonTakenNetworkNames}, you will not receive rebates there.<0/><1/>Switch your network to create this code on {nonTakenNetworkNames}."
+msgstr "このコードは{nonTakenNetworkNames}にまだ登録されていません。そこでリベートを受け取れません。<0/><1/>ネットワークを切り替えて{nonTakenNetworkNames}でこのコードを作成してください。"
+
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+msgid "Entire Position"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Reward"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "Referral code does not exist"
+msgstr "リファラルコードが存在しません"
+
+#: src/shared/components/SideNav/LanguageNavItem.tsx
+msgid "Language"
+msgstr "言語"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+msgid "Primit Account"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
+msgid "Trigger price below lowest limit price"
+msgstr "トリガー価格が最低リミット価格を下回っています"
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Download as CSV"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Deposit Fee"
+msgstr "入金手数料"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
+msgid "Enter a new size or price"
+msgstr "新しいサイズまたは価格を入力"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Missing required parameters for withdrawal"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Unknown order"
+msgstr "不明な注文"
+
+#: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
+msgid "Max Action Count Reached. <0>Click here</0> to update."
+msgstr "最大アクション数に達しました。<0>ここをクリック</0>して更新。"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Transaction cancelled by user"
+msgstr ""
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Epoch {selectedEpochId} Leaderboard"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "limit order"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "You do not have any eligible trade during the competition window."
+msgstr "コンペティション期間中に適格な取引がありません。"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "Referral Points"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Maximum {0} shares allowed"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+msgid "It will take a couple of minutes to be reflected. Please check back later."
+msgstr "反映に数分かかります。後ほど確認してください。"
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+msgid "Perpetuals Equity"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+msgid "Last 30d"
+msgstr "過去30日"
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "market order"
+msgstr ""
+
+#: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
+msgid "Address copied to your clipboard."
+msgstr "アドレスがクリップボードにコピーされました。"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Leftover collateral below {0} USD"
+msgstr "残余担保が{0} USD未満"
+
+#: src/modules/lighter/domain/synthetics/positions/utils.ts
+msgid "trigger"
+msgstr "トリガー"
+
+#: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
+msgid "7d"
+msgstr "7日"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Invitees Required"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Enter Referral Code"
+msgstr ""
+
+#: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
+msgid "{positionName} Fees settled."
+msgstr "{positionName} 手数料が決済されました。"
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
+msgid "Mark Price"
+msgstr "マーク価格"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Total Claim Amount:"
+msgstr ""
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "24h Volume"
+msgstr "24時間取引量"
+
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Referral Address"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "14-day volume progress toward next trading tier"
+msgstr ""
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "Frequency"
+msgstr "頻度"
+
+#: src/modules/lighter/api/custom/useReferralCode.ts
+msgid "Failed to bind referral code"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/HistoricalLists.tsx
+msgid "Order History"
+msgstr ""
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Withdrawing {0} from {positionText}"
+msgstr "{positionText}から{0}を出金中"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Limit Swap"
+msgstr "リミットスワップ"
+
+#: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
+msgid "24H VOL."
+msgstr "24時間取引量"
+
+#: src/shared/components/Referrals/TradersStats.tsx
+msgid "You will receive a {currentTierDiscount}% discount on opening and closing fees."
+msgstr "オープンおよびクローズ手数料で{currentTierDiscount}%割引を受け取ります。"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+msgid "Top Addresses"
+msgstr "トップアドレス"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Daily and Cumulative PnL"
+msgstr "日次および累積PnL"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP {nextTier}"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Contract USDT insufficient or not approved. Please contact admin."
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Your rewards have been claimed successfully."
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "short"
+msgstr "ショート"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Volume Required"
+msgstr ""
+
+#: src/shared/components/RatingToast/RatingToast.tsx
+msgid "Very likely"
+msgstr "非常に可能性が高い"
+
+#: src/shared/components/Referrals/AffiliateCodeDisplay.tsx
+#: src/shared/components/Referrals/ReferralDashboard.tsx
+msgid "Your Referral Code"
+msgstr ""
+
+#: src/modules/lighter/domain/synthetics/orders/cancelOrdersTxn.ts
+msgid "{count, plural, one {Order} other {# Orders}}"
+msgstr "{count, plural, one {注文} other {# 注文}}"
+
+#: src/shared/components/Referrals/AffiliatesStats.tsx
+msgid "Volume on V1"
+msgstr "V1の取引量"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Request Market Decrease"
+msgstr "マーケット減少リクエスト"
+
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+msgid "Max. Leverage exceeded"
+msgstr "最大レバレッジを超えました"
+
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+#: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
+msgid "Order Execution Price"
+msgstr "注文執行価格"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Amount:"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Nothing to export"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/shared/lib/dates.ts
+msgid "Yesterday"
+msgstr "昨日"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Remind me later"
+msgstr ""
+
+#: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
+msgid "Maintenance Margin"
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Request Deposit"
+msgstr "入金リクエスト"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "USDT address not configured"
+msgstr ""
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "{n}th Term"
+msgstr ""
+
+#: src/shared/components/TwapRows/TwapRows.tsx
+msgid "Number of Parts"
+msgstr "パート数"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "VIP 5 Legend"
+msgstr ""
+
+#: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
+msgid "Deactivated"
+msgstr "非活性化"
+
+#: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
+msgid "No ranked gains for this UTC day yet, or the cache is still warming up."
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/Countdown/Countdown.tsx
+msgid "Time Remaining"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Bars"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "No pending commission"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Indicators"
+msgstr ""
+
+#: src/shared/components/Referrals/JoinReferralCode.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Loading"
+msgstr "読み込み中"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Approving USDT..."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Limit"
+msgstr "リミット"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Available:"
+msgstr "利用可能："
+
+#: src/modules/lighter/api/custom/useReferralRebateClaim.ts
+#: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
+msgid "{0} USDT credited to your balance"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
+msgid "LayerZero Scan"
+msgstr "LayerZero Scan"
+
+#: src/modules/lighter/domain/synthetics/orders/utils.tsx
+msgid "The order may not execute as the max. allowed leverage is exceeded. Consider decreasing the order's leverage by editing and decreasing its size. <0>Read more</0>."
+msgstr "最大許容レバレッジを超えるため注文が執行されない可能性があります。サイズを減少させて注文のレバレッジを減少させてください。<0>詳細を読む</0>。"
+
+#: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+msgid "Close"
+msgstr "クローズ"
+
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Trading Account Balance"
+msgstr ""
+
+#: src/shared/components/StatusNotification/OrderStatusNotification.tsx
+msgid "Depositing {0} to {positionText}"
+msgstr "{positionText}へ{0}を入金中"
+
+#: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+msgid "Maturity Date:"
+msgstr ""
+
+#: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
+msgid "We encountered an error while loading the Earn page. Please try refreshing the page or contact support if the problem persists."
+msgstr ""
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Update TWAP Swap Part"
+msgstr "TWAPスワップパートを更新"
+
+#: src/shared/components/TradeHistory/keys.ts
+msgid "Update TWAP Part"
+msgstr "TWAPパートを更新"
+
+#: src/shared/components/Referrals/AddAffiliateCode.tsx
+msgid "Please switch to {0} to create your referral code. It will work across all other networks."
+msgstr "リファラルコードを作成するには{0}に切り替えてください。他のすべてのネットワークで動作します。"
+
+#: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
+msgid "No funding history."
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Refreshing…"
+msgstr ""
+
+#: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
+msgid "Copy Address"
+msgstr "アドレスをコピー"
+
+#: src/modules/lighter/api/custom/useReferralCode.ts
+#: src/shared/components/Referrals/BindReferralCodeForm.tsx
+msgid "You have already bound a referral code."
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+msgid "Filled"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+msgid "General Performance Details"
+msgstr "一般パフォーマンス詳細"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Chart Elements"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+msgid "Assets ({0})"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/WithdrawalView.tsx
+msgid "Insufficient balance"
+msgstr "残高不足"
+
+#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+msgid "Reward Leaderboard"
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
+msgid "Total Interest Income"
+msgstr ""

@@ -1,0 +1,254 @@
+/**
+ * Primit 多语言字体与行高
+ * 来源: Figma「1. Typography-desktop」整页 node 1-17；子区块 16-173（字体行高）、16-752（字号）
+ * https://www.figma.com/design/Xy4iA3ZnzAZPmOduAyqmtG/Primit-UI-Components-Guidelines?node-id=1-17&m=dev
+ * 设计文档：docs/design/PRIMIT-01-TYPOGRAPHY-DESKTOP.md
+ *
+ * 标题/正文/按钮统一 Messina Sans；行高为相对字号的比例（与稿中 140%、160% 等一致）。
+ * Messina / Outfit 等 @font-face 见 styles/Font.css（与历史 Alternox / Chakra 文件并存）。
+ * 中文等字魂等若未授权网页嵌入，仍依赖系统/回退字体。
+ */
+
+:root {
+  /* English（默认） */
+  --primit-font-title: "Messina Sans", ui-sans-serif, system-ui, sans-serif;
+  --primit-font-body: "Messina Sans", ui-sans-serif, system-ui, sans-serif;
+  --primit-font-button: "Messina Sans", ui-sans-serif, system-ui, sans-serif;
+  /** Tab 标签（block / inline / Long·Short 等）：与稿面 Tab 一致，随 locale 跟 title 栈 */
+  --primit-font-tab: var(--primit-font-title);
+
+  --primit-lh-title: 1.4;
+  --primit-lh-body: 1.6;
+  --primit-lh-body-long: 1.6;
+  --primit-lh-button: 1.2;
+  /** 顶边距修正 / 按钮&标签紧凑行高 */
+  --primit-lh-tight: 1.1;
+
+  /* 字号阶梯（英语 / 西语基准），单位 px — Figma 16-752 */
+  --primit-fs-100: 10px;
+  --primit-fs-150: 11px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 24px;
+  --primit-fs-750: 26px;
+  --primit-fs-800: 28px;
+  --primit-fs-900: 32px;
+  --primit-fs-1000: 36px;
+}
+
+html[data-primit-locale="zh-cn"] {
+  --primit-font-title: "Messina Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --primit-font-body: "Messina Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --primit-font-button: "Messina Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --primit-lh-title: 1;
+  --primit-lh-body: 1.6;
+  --primit-lh-body-long: 1.65;
+  --primit-lh-button: 1.2;
+  --primit-lh-tight: 1.1;
+
+  --primit-fs-100: 10px;
+  --primit-fs-150: 11px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 22px;
+  --primit-fs-750: 24px;
+  --primit-fs-800: 26px;
+  --primit-fs-900: 28px;
+  --primit-fs-1000: 32px;
+}
+
+html[data-primit-locale="zh-tw"] {
+  --primit-font-title: "Messina Sans", "PingFang TC", "PingFang SC", sans-serif;
+  --primit-font-body: "Messina Sans", "PingFang TC", "PingFang SC", sans-serif;
+  --primit-font-button: "Messina Sans", "PingFang TC", "PingFang SC", sans-serif;
+
+  --primit-lh-title: 1;
+  --primit-lh-body: 1.6;
+  --primit-lh-body-long: 1.65;
+  --primit-lh-button: 1.2;
+  --primit-lh-tight: 1.1;
+
+  --primit-fs-100: 10px;
+  --primit-fs-150: 11px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 22px;
+  --primit-fs-750: 24px;
+  --primit-fs-800: 26px;
+  --primit-fs-900: 28px;
+  --primit-fs-1000: 32px;
+}
+
+html[data-primit-locale="ko"] {
+  --primit-font-title: "Messina Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --primit-font-body: "Messina Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --primit-font-button: "Messina Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  --primit-lh-title: 1;
+  --primit-lh-body: 1.6;
+  --primit-lh-body-long: 1.65;
+  --primit-lh-button: 1.2;
+  --primit-lh-tight: 1.1;
+
+  --primit-fs-100: 10px;
+  --primit-fs-150: 11px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 22px;
+  --primit-fs-750: 24px;
+  --primit-fs-800: 26px;
+  --primit-fs-900: 28px;
+  --primit-fs-1000: 32px;
+}
+
+html[data-primit-locale="ja"] {
+  --primit-font-title: "Messina Sans", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
+  --primit-font-body: "Messina Sans", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
+  --primit-font-button: "Messina Sans", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+
+  --primit-lh-title: 1;
+  --primit-lh-body: 1.65;
+  --primit-lh-body-long: 1.65;
+  --primit-lh-button: 1.25;
+  --primit-lh-tight: 1.1;
+
+  --primit-fs-100: 10px;
+  --primit-fs-150: 11px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 22px;
+  --primit-fs-750: 24px;
+  --primit-fs-800: 26px;
+  --primit-fs-900: 28px;
+  --primit-fs-1000: 32px;
+}
+
+html[data-primit-locale="vi"] {
+  --primit-font-title: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --primit-font-body: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --primit-font-button: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+
+  --primit-lh-title: 1;
+  --primit-lh-body: 1.6;
+  --primit-lh-body-long: 1.8;
+  --primit-lh-button: 1.2;
+  --primit-lh-tight: 1.1;
+
+  /* 与英语阶梯一致（越南语 700 档起与西文对齐） */
+  --primit-fs-100: 10px;
+  --primit-fs-150: 11px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 24px;
+  --primit-fs-750: 26px;
+  --primit-fs-800: 28px;
+  --primit-fs-900: 32px;
+  --primit-fs-1000: 36px;
+}
+
+html[data-primit-locale="th"] {
+  --primit-font-title: "Messina Sans", "SF Pro TH", "Thonburi", "Leelawadee UI", system-ui, sans-serif;
+  --primit-font-body: "Messina Sans", "SF Pro TH", "Thonburi", "Leelawadee UI", system-ui, sans-serif;
+  --primit-font-button: "Messina Sans", "SF Pro TH", "Thonburi", "Leelawadee UI", system-ui, sans-serif;
+
+  --primit-lh-title: 1;
+  --primit-lh-body: 1.6;
+  --primit-lh-body-long: 1.8;
+  --primit-lh-button: 1.2;
+  --primit-lh-tight: 1.1;
+
+  /* 泰语：提高最小档；200/250 同为 12px — Figma 16-752 */
+  --primit-fs-100: 11px;
+  --primit-fs-150: 12px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 24px;
+  --primit-fs-750: 26px;
+  --primit-fs-800: 28px;
+  --primit-fs-900: 32px;
+  --primit-fs-1000: 36px;
+}
+
+html[data-primit-locale="ru"] {
+  --primit-font-title: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --primit-font-body: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --primit-font-button: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+
+  --primit-lh-title: 1;
+  --primit-lh-body: 1.6;
+  --primit-lh-body-long: 1.6;
+  --primit-lh-button: 1.2;
+  --primit-lh-tight: 1.1;
+
+  --primit-fs-100: 10px;
+  --primit-fs-150: 11px;
+  --primit-fs-200: 12px;
+  --primit-fs-250: 13px;
+  --primit-fs-300: 14px;
+  --primit-fs-400: 16px;
+  --primit-fs-500: 18px;
+  --primit-fs-600: 20px;
+  --primit-fs-700: 24px;
+  --primit-fs-750: 26px;
+  --primit-fs-800: 28px;
+  --primit-fs-900: 32px;
+  --primit-fs-1000: 36px;
+}
+
+body {
+  font-family: var(--primit-font-body);
+  line-height: var(--primit-lh-body);
+}
+
+.primit-text-title {
+  font-family: var(--primit-font-title);
+  line-height: var(--primit-lh-title);
+}
+
+.primit-text-body {
+  font-family: var(--primit-font-body);
+  line-height: var(--primit-lh-body);
+}
+
+.primit-text-body-long {
+  font-family: var(--primit-font-body);
+  line-height: var(--primit-lh-body-long);
+}
+
+.primit-text-button {
+  font-family: var(--primit-font-button);
+  line-height: var(--primit-lh-button);
+}
+
+.primit-text-tight {
+  line-height: var(--primit-lh-tight);
+}

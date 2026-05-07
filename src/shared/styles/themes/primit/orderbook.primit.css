@@ -1,0 +1,182 @@
+/**
+ * Primit · 订单簿
+ * Figma: https://www.figma.com/design/Xy4iA3ZnzAZPmOduAyqmtG/Primit-UI-Components-Guidelines?node-id=153-556&m=dev
+ * 使用 Grid 分配 asks/spread/bids，避免 legacy 盘口布局里 1fr/auto/1fr 与 flex 混用导致行被压扁、文字叠在一起。
+ */
+
+html[data-ui-theme="primit"] .OrderBookx10000 {
+  min-height: 0;
+  max-height: none;
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-book {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  /**
+   * 子元素顺序：表头 | asks | Spread | bids — 须 4 行对应 4 子项。
+   * 误用 5 行时 Spread 会落到 1fr 行、与 bids 叠在一起。
+   */
+  grid-template-rows: auto minmax(0, 1fr) auto minmax(0, 1fr);
+  /** 表头 / asks / Spread / bids 之间竖向间距（较原 4px 更紧） */
+  gap: 2px;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/** Trades：与主盘口区保持同列宽节奏；表头与列表区之间 2px，与 asks 区一致 */
+html[data-ui-theme="primit"] .OrderBookx10000-tradesPanel {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 2px;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-asks,
+html[data-ui-theme="primit"] .OrderBookx10000-bids {
+  flex: unset !important;
+  min-height: 0;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-asks {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-bids {
+  display: flex;
+  flex-direction: column;
+}
+
+/** 盘口行：禁止被 flex 压缩到高度 0（重叠根源） */
+html[data-ui-theme="primit"] .OrderBookx10000-primitRow {
+  flex-shrink: 0;
+  min-height: 20px;
+  align-self: stretch;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+/** 顶区：仅 Tab 行；与下方工具栏+盘口区的竖向间距由主体容器上的 `mt-10` 承担 */
+html[data-ui-theme="primit"] .OrderBookx10000-primitTop {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  padding-top: 0;
+}
+
+/** Tab 以下整块：工具栏、表头、档位/成交行共用左右 7px（与 TSX `px-7` 一致） */
+html[data-ui-theme="primit"] .OrderBookx10000-primitBody {
+  min-width: 0;
+  min-height: 0;
+}
+
+/** Big_Tab 行：与单 Tab h-10（40px）一致，避免 min-height 大于子项导致「看起来没撑满」 */
+html[data-ui-theme="primit"] .OrderBookx10000-tabs {
+  min-height: 40px;
+  align-items: stretch;
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-primitToolbar {
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-primitSelect {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  height: 24px;
+  min-height: 24px;
+  border: none;
+  border-radius: 0;
+  padding: 3px 8px;
+  cursor: pointer;
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+  background: transparent;
+  outline: none;
+}
+
+/**
+ * 工具栏下拉触发器：default 无底色；hover / 展开 时出现浅灰底。主色字与 ring 见 TSX（open）。
+ */
+html[data-ui-theme="primit"] .OrderBookx10000-primitSelect.OrderBookx10000-primitToolbarTrigger {
+  background: transparent;
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-primitSelect.OrderBookx10000-primitToolbarTrigger:hover,
+html[data-ui-theme="primit"] .OrderBookx10000-primitSelect.OrderBookx10000-primitToolbarTrigger[aria-expanded="true"] {
+  background: var(--primit-soft-15, rgba(226, 231, 237, 0.15));
+}
+
+/** 工具栏自定义下拉（Menu + FloatingPortal）：与模块炭底、主色描边一致；列表项紧凑行高 */
+html[data-ui-theme="primit"] .OrderBookx10000-primitMenuPanel {
+  z-index: 300;
+  box-sizing: border-box;
+  max-height: min(240px, 45vh);
+  min-width: 7.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /** 小选择框：紧凑内边距 */
+  padding: 8px;
+  border: 0.5px solid
+    color-mix(in srgb, var(--primit-primary-1, #87d7ea) 42%, transparent);
+  background: var(--primit-secondary-3, #191919);
+  box-shadow:
+    0 0 0 0.5px color-mix(in srgb, var(--primit-primary-1, #87d7ea) 22%, transparent),
+    0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-primitColHead {
+  box-sizing: border-box;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-primitTag {
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  padding: 3px 14px;
+  background: var(--primit-soft-10, rgba(226, 231, 237, 0.1));
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+/** 表头 USD 小标签：Figma ac-70 */
+html[data-ui-theme="primit"] .OrderBookx10000-primitTag--header {
+  color: var(--primit-soft-70, rgba(226, 231, 237, 0.7));
+}
+
+html[data-ui-theme="primit"] .OrderBookx10000-primitSpread {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  min-height: 20px;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+  background: var(--primit-soft-15, rgba(226, 231, 237, 0.15));
+}

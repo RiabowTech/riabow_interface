@@ -1,0 +1,11 @@
+<svg width="40" height="40" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- ZanbaraX Gold Logo - Arabic calligraphy style -->
+<defs>
+<linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#F4D03F"/>
+<stop offset="50%" stop-color="#D4AF37"/>
+<stop offset="100%" stop-color="#B8941F"/>
+</linearGradient>
+</defs>
+<path fill="url(#goldGradient)" d="M300,250 Q450,200,600,250 Q700,280,750,350 Q780,420,750,490 Q720,560,650,600 L580,650 Q500,700,450,780 L400,850 L800,850 L820,820 L480,820 L540,740 L600,690 Q680,640,730,570 Q770,500,760,430 Q750,360,680,300 Q600,240,480,250 Q360,260,300,250 Z"/>
+</svg>

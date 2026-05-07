@@ -1,0 +1,176 @@
+/**
+ * Primit 主题 · Tabs（block / inline / unified Long·Short / NestedTab）
+ * 依赖：`PrimitTypography.css`（`--primit-font-tab`）、`PrimitColors.css`、`data-ui-theme` + `html.dark`。
+ * 基础结构、legacy 荧光与下划线动画见 `shared/components/Tabs/Tabs.css`。
+ */
+
+/* 全局：Primit 壳下 Tabs 统一使用 `--primit-font-tab`（与 `--primit-font-title` / Messina Sans 栈一致） */
+html[data-ui-theme="primit"] [data-tabs-type="inline"] button,
+html[data-ui-theme="primit"] [data-tabs-type="inline-primary"] button {
+  font-family: var(--primit-font-tab, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-weight: 600;
+}
+
+html[data-ui-theme="primit"] .nested-tab-button,
+html[data-ui-theme="primit"] .nested-tab-item {
+  font-family: var(--primit-font-tab, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-weight: 600;
+}
+
+/* Primit + 深色：隐藏下划线时选中字色（legacy 路由保持 tab-active-green 默认） */
+html[data-ui-theme="primit"].dark [data-hide-block-underline="true"] button.tab-active-green {
+  color: var(--primit-secondary-1) !important;
+  border-bottom-color: transparent !important;
+}
+
+/* Primit + 浅色 */
+html[data-ui-theme="primit"]:not(.dark) [data-hide-block-underline="true"] button.tab-active-green {
+  color: var(--primit-primary-1) !important;
+  border-bottom-color: transparent !important;
+}
+
+/**
+ * Primit 壳（`data-ui-theme="primit"`）下 block Tabs：
+ * - 深色：`html.dark`（ThemeProvider）+ Primit 深色 token（Figma Tab 146-627）
+ * - 浅色：无 `html.dark` + Primit 浅色 token
+ */
+html[data-ui-theme="primit"].dark [data-tabs-type="block"] {
+  padding-left: 20px;
+  padding-right: 16px;
+}
+
+html[data-ui-theme="primit"].dark [data-tabs-type="block"] .tabs-row--block {
+  gap: 32px;
+}
+
+html[data-ui-theme="primit"].dark [data-tabs-type="block"] .tab-underline-indicator {
+  height: 2px;
+  bottom: 0;
+  border-radius: 0;
+  background: var(--primit-primary-1);
+  box-shadow: none;
+}
+
+html[data-ui-theme="primit"].dark [data-tabs-type="block"] button.tab-active-green {
+  color: var(--primit-secondary-1) !important;
+  border-bottom-color: transparent !important;
+}
+
+html[data-ui-theme="primit"].dark [data-tabs-type="block"] button:not(.tab-active-green) {
+  color: rgba(226, 231, 237, 0.6);
+}
+
+html[data-ui-theme="primit"].dark [data-tabs-type="block"] button:not(.tab-active-green):hover {
+  color: var(--primit-secondary-1);
+}
+
+html[data-ui-theme="primit"].dark [data-tabs-type="block"] button {
+  border-radius: 0 !important;
+  border-bottom-width: 0 !important;
+  margin-bottom: 0 !important;
+  font-family: var(--primit-font-tab, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+  /* 与 `.tab-underline-indicator`（bottom:0）拉近：过大 padding-bottom 会拉开字与下划线 */
+  padding-top: 8px !important;
+  padding-bottom: 4px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Primit · 浅色 · block Tabs（与深色同一结构，字色/未选用 secondary 系） */
+html[data-ui-theme="primit"]:not(.dark) [data-tabs-type="block"] {
+  padding-left: 20px;
+  padding-right: 16px;
+}
+
+html[data-ui-theme="primit"]:not(.dark) [data-tabs-type="block"] .tabs-row--block {
+  gap: 32px;
+}
+
+html[data-ui-theme="primit"]:not(.dark) [data-tabs-type="block"] .tab-underline-indicator {
+  height: 2px;
+  bottom: 0;
+  border-radius: 0;
+  background: var(--primit-primary-1);
+  box-shadow: none;
+}
+
+html[data-ui-theme="primit"]:not(.dark) [data-tabs-type="block"] button.tab-active-green {
+  color: var(--primit-secondary-1) !important;
+  border-bottom-color: transparent !important;
+}
+
+html[data-ui-theme="primit"]:not(.dark) [data-tabs-type="block"] button:not(.tab-active-green) {
+  color: var(--primit-secondary-2);
+}
+
+html[data-ui-theme="primit"]:not(.dark) [data-tabs-type="block"] button:not(.tab-active-green):hover {
+  color: var(--primit-secondary-1);
+}
+
+html[data-ui-theme="primit"]:not(.dark) [data-tabs-type="block"] button {
+  border-radius: 0 !important;
+  border-bottom-width: 0 !important;
+  margin-bottom: 0 !important;
+  font-family: var(--primit-font-tab, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+  padding-top: 8px !important;
+  padding-bottom: 4px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Primit：统一样式 Long/Short — 去掉外层荧光绿/红渐变描边与按钮 glow */
+[data-unified-style="true"][data-unified-variant="primit"] {
+  margin-top: 0;
+  border-radius: 0;
+  border: none;
+  background: var(--primit-trade-module-bg);
+}
+
+[data-qa="trade-direction"][data-unified-style="true"][data-unified-variant="primit"]:has(button:last-child.trade-direction-tab--active) {
+  border: none;
+  background: var(--primit-trade-module-bg);
+}
+
+[data-unified-style="true"][data-unified-variant="primit"] button {
+  font-family: var(--primit-font-tab, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-weight: 600;
+  background: var(--primit-soft-5);
+  color: var(--primit-nav-fg-inactive);
+}
+
+[data-unified-style="true"][data-unified-variant="primit"] button:not(.trade-direction-tab--active):hover {
+  background: var(--primit-soft-10);
+  color: var(--primit-nav-fg-hover);
+}
+
+[data-unified-style="true"][data-unified-variant="primit"] button.trade-direction-tab--active {
+  color: var(--primit-primary-1);
+  background: var(--primit-soft-10);
+  box-shadow: none !important;
+}
+
+[data-unified-style="true"][data-unified-variant="primit"] button:first-child.trade-direction-tab--active {
+  color: var(--primit-primary-1) !important;
+  box-shadow: none !important;
+}
+
+[data-qa="trade-direction"][data-unified-style="true"][data-unified-variant="primit"] button:last-child.trade-direction-tab--active {
+  color: var(--primit-others-red) !important;
+  box-shadow: none !important;
+}
+
+[data-unified-style="true"][data-unified-variant="primit"]:not([data-qa="trade-direction"]) button:last-child.trade-direction-tab--active {
+  box-shadow: none !important;
+}
+
+[data-unified-style="true"][data-unified-variant="primit"] button:not(:first-child):not(:last-child).trade-direction-tab--active {
+  box-shadow: none !important;
+}

@@ -1,0 +1,38 @@
+.StatusNotification-wrapper {
+  .StatusNotification-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.8rem 0.8rem 0.8rem;
+
+    .StatusNotification-cancel-all {
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--color-gray-300);
+      text-decoration: underline;
+
+      &:hover {
+        color: var(--color-typography-primary);
+      }
+    }
+  }
+}
+
+.StatusNotification-title {
+  font-weight: 500;
+  font-style: medium;
+  letter-spacing: -0.012em;
+}
+
+.Toastify__toast--error {
+  .StatusNotification-title {
+    color: var(--color-red-500);
+  }
+}
+
+.Toastify__toast--success {
+  .StatusNotification-title {
+    color: var(--color-green-500);
+  }
+}

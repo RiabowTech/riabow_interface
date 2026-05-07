@@ -1,0 +1,26 @@
+.page {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000;
+  padding: 4px 4px 8px;
+  display: grid;
+  grid-template-rows: var(--ltr-topnav-h) auto 1fr;
+  height: 100vh;
+}
+/** 主题色 1px · 50% alpha —— 顶栏 / banner 与下方内容的分割线 */
+.topnav { border-bottom: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 50%, transparent); }
+.banner {
+  background: #5a1820;
+  color: #f3f3f3;
+  font-size: 12px;
+  text-align: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 50%, transparent);
+  a { color: #f3f3f3; text-decoration: underline; }
+}
+.content {
+  min-height: 0;
+  overflow: auto;
+  padding: 0 4px;
+}

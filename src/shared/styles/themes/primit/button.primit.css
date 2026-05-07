@@ -1,0 +1,896 @@
+/**
+ * Primit 主题 · Button（MainBtn_40 / IconBtn_40 / Tab 24）
+ * 路径：`styles/themes/primit/button.primit.css`（由 `app/theme/component-themes.ts` 聚合加载）。
+ * Storybook DEX / Prediction / RWA 经典外形仍由 `Button.storybook-classic-skins.css` 覆盖。
+ * 颜色：优先 var(--ui-*)，回退 var(--primit-*)。
+ */
+
+.primit-ui-button {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border-style: solid;
+  border-width: 0.5px;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease,
+    opacity 0.18s ease;
+}
+
+/* 站内 `Link` 与 `<button>` 共用类名时，避免默认下划线 / 链色覆盖 Primit 字色 */
+a.primit-ui-button {
+  text-decoration: none;
+  color: inherit;
+}
+
+.primit-ui-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 65%, transparent);
+  outline-offset: 2px;
+}
+
+.primit-ui-button__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.primit-ui-button__main-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Figma：双 Icon 时 Navbar_16 与文案间距 6px */
+.primit-ui-button__main-row--tight {
+  gap: 6px;
+}
+
+.primit-ui-button__label {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.primit-ui-button__icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  line-height: 0;
+}
+
+.primit-ui-button__icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-button__icon img {
+  display: block;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* ========== MainBtn 40（Figma MainBtn_40） ========== */
+.primit-ui-button--main-40 {
+  min-height: 40px;
+  height: 40px;
+  padding: 10px 14px;
+  gap: 10px;
+  border-radius: 0;
+  border-width: 0;
+  font-family: var(--primit-font-button, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: var(--primit-fs-300, 14px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* 图标+文字按钮：固定内容行垂直居中，避免视觉偏上 */
+.primit-ui-button--main-40 .primit-ui-button__inner {
+  height: 100%;
+  align-items: center;
+}
+
+.primit-ui-button--main-40 .primit-ui-button__main-row {
+  height: 100%;
+  align-items: center;
+}
+
+.primit-ui-button--main-40 .primit-ui-button__label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+}
+
+.primit-ui-button--main-40.primit-ui-button--main-40-pad-compact {
+  padding-left: 14px;
+  padding-right: 10px;
+}
+
+.primit-ui-button--main-40.primit-ui-button--main-tall {
+  min-height: 48px;
+  height: 48px;
+  font-size: var(--primit-fs-400, 16px);
+}
+
+/* 左侧竖线（稿面 Navbar 左侧装饰线） */
+.primit-ui-button--main-40::before {
+  content: "";
+  flex-shrink: 0;
+  width: 1px;
+  height: 20px;
+  align-self: center;
+  background: currentColor;
+  opacity: 0.9;
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-connected::before,
+.primit-ui-button--main-40.primit-ui-button--intent-main::before {
+  opacity: 1;
+}
+
+.primit-ui-button--main-40.primit-ui-button--outline-compat::before,
+.primit-ui-button--main-40.primit-ui-button--ghost-compat::before {
+  opacity: 0.85;
+}
+
+/* —— intent: main（Figma Style=Main） —— */
+.primit-ui-button--main-40.primit-ui-button--intent-main {
+  color: var(--ui-btn-on-charcoal-fg, var(--primit-fg-on-mainbtn));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main::before {
+  background: var(--ui-btn-main-bg, var(--primit-primary-1));
+  opacity: 1;
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main:hover:not(:disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main:hover:not(:disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  opacity: 1;
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main:active:not(:disabled) {
+  filter: brightness(0.94);
+}
+
+/**
+ * MainBtn_40 · intent main + 金 / 青绿外环（Points 卡片 CTA，Figma 168:4189）
+ * 令牌：`PrimitColors.css` `--primit-btn-accent-*`
+ */
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-yellow:not(
+    .primit-ui-button--disabled
+  ) {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--primit-btn-accent-yellow-ring, #b8893a),
+    0 0 4px color-mix(in srgb, var(--primit-btn-accent-yellow-ring, #b8893a) 38%, transparent);
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-yellow:not(
+    .primit-ui-button--disabled
+  )::before {
+  background: var(--primit-btn-accent-yellow-ring, #b8893a);
+  opacity: 1;
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-yellow:hover:not(:disabled):not(
+    .primit-ui-button--disabled
+  ),
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-yellow:focus-visible:not(
+    :disabled
+  ):not(.primit-ui-button--disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--primit-btn-accent-yellow-ring, #b8893a),
+    0 0 4px color-mix(in srgb, var(--primit-btn-accent-yellow-hover-start, #e7a71e) 25%, transparent);
+  background-image: linear-gradient(
+    90deg,
+    var(--primit-btn-accent-yellow-hover-start, #e7a71e) 0%,
+    var(--primit-btn-accent-yellow-hover-end, #9e7a2f) 100%
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-yellow:hover:not(:disabled):not(
+    .primit-ui-button--disabled
+  )::before,
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-yellow:focus-visible:not(
+    :disabled
+  ):not(.primit-ui-button--disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #ffffff));
+  opacity: 1;
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-green:not(
+    .primit-ui-button--disabled
+  ) {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--primit-btn-accent-green-ring, #33987f),
+    0 0 4px color-mix(in srgb, var(--primit-btn-accent-green-ring, #33987f) 38%, transparent);
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-green:not(
+    .primit-ui-button--disabled
+  )::before {
+  background: var(--primit-btn-accent-green-ring, #33987f);
+  opacity: 1;
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-green:hover:not(:disabled):not(
+    .primit-ui-button--disabled
+  ),
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-green:focus-visible:not(
+    :disabled
+  ):not(.primit-ui-button--disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--primit-btn-accent-green-ring, #33987f),
+    0 0 4px color-mix(in srgb, var(--primit-btn-accent-green-hover-start, #28e59b) 22%, transparent);
+  background-image: linear-gradient(
+    90deg,
+    var(--primit-btn-accent-green-hover-start, #28e59b) 0%,
+    var(--primit-btn-accent-green-hover-end, #1d8d61) 100%
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-green:hover:not(:disabled):not(
+    .primit-ui-button--disabled
+  )::before,
+.primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--accent-green:focus-visible:not(
+    :disabled
+  ):not(.primit-ui-button--disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #ffffff));
+  opacity: 1;
+}
+
+/* —— intent: secondary（Figma Style=Secondary） —— */
+.primit-ui-button--main-40.primit-ui-button--intent-secondary {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-secondary-border, var(--primit-primary-2)),
+    var(--ui-btn-secondary-glow, 0 0 4px rgba(3, 119, 136, 0.2));
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-secondary::before {
+  background: var(--ui-btn-secondary-border, var(--primit-primary-2));
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-secondary:hover:not(:disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-secondary-border, var(--primit-primary-2)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-secondary-hover-from, var(--primit-primary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-secondary:hover:not(:disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-secondary:active:not(:disabled) {
+  filter: brightness(0.94);
+}
+
+/* —— intent: third（Figma Style=Third） —— */
+.primit-ui-button--main-40.primit-ui-button--intent-third {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-outline-border, var(--primit-primary-1)),
+    var(--ui-btn-third-glow, 0 0 4px rgba(3, 119, 136, 0.2));
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-third::before {
+  background: var(--ui-outline-border, var(--primit-primary-1));
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-third:hover:not(:disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow:
+    0 0 0 0.5px var(--ui-outline-border, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-third:hover:not(:disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-third:active:not(:disabled) {
+  filter: brightness(0.94);
+}
+
+/* —— intent: connected（与 Main 同色壳；正文栈 Messina Sans、保留地址大小写） —— */
+.primit-ui-button--main-40.primit-ui-button--intent-connected {
+  color: var(--ui-btn-on-charcoal-fg, var(--primit-fg-on-mainbtn));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-connected-border, var(--primit-primary-1)),
+    var(
+      --ui-btn-connected-shadow,
+      var(--ui-btn-default-glow, 0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent))
+    );
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-connected::before {
+  background: var(--ui-btn-connected-border, var(--primit-primary-1));
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-connected:hover:not(:disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-connected-border, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-secondary-hover-from, var(--primit-primary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-connected:hover:not(:disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-connected:active:not(:disabled) {
+  filter: brightness(0.94);
+}
+
+/* Connect Wallet 主引导 CTA：默认使用第二档（更克制），hover 回到第一档高亮 */
+.primit-ui-button--main-40.connect-wallet-cta {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 14%, transparent);
+  background-image: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 72%, #000000) 0%,
+    color-mix(in srgb, var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 70%, #000000) 100%
+  );
+}
+
+.primit-ui-button--main-40.connect-wallet-cta::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  opacity: 1;
+  transform-origin: center;
+  transition: transform 0.18s ease;
+}
+
+.primit-ui-button--main-40.connect-wallet-cta:hover:not(:disabled) {
+  filter: none;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  );
+}
+
+.primit-ui-button--main-40.connect-wallet-cta:hover:not(:disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #ffffff));
+  transform: rotate(90deg) scaleX(0.9);
+}
+
+.primit-ui-button--main-40.primit-ui-button--intent-connected .primit-ui-button__label {
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  text-transform: none;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+/* legacy outline / ghost */
+.primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary {
+  background-image: none;
+  background-color: transparent;
+  color: var(--ui-outline-fg, var(--primit-primary-1));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-outline-border, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+}
+
+.primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary::before {
+  background: var(--ui-outline-border, var(--primit-primary-1));
+}
+
+.primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary:hover:not(:disabled) {
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary:hover:not(:disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third {
+  background-image: none;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--ui-ghost-fg, var(--primit-secondary-2));
+  box-shadow: none;
+}
+
+.primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third::before {
+  background: var(--ui-ghost-fg, var(--primit-secondary-2));
+  opacity: 0.6;
+}
+
+.primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third:hover:not(:disabled) {
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+}
+
+.primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third:hover:not(:disabled)::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  opacity: 1;
+}
+
+/* disabled（Figma State=Disable） */
+.primit-ui-button--main-40:disabled,
+.primit-ui-button--main-40.primit-ui-button--disabled {
+  filter: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  background-image:
+    linear-gradient(
+      0deg,
+      var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%,
+      var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%
+    ),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    ) !important;
+}
+
+.primit-ui-button--main-40:disabled::before,
+.primit-ui-button--main-40.primit-ui-button--disabled::before {
+  background: var(--primit-accent-a40, rgba(226, 231, 237, 0.4)) !important;
+  opacity: 1 !important;
+}
+
+/**
+ * 顶栏 / Select_Icon_40 同列：稿面 **无** Navbar 左侧竖线时使用（与 IconBtn_40 一致为「净」壳体）。
+ * 用法：根节点 `className` 追加 `primit-ui-button--no-navbar-line`。
+ */
+.primit-ui-button--main-40.primit-ui-button--no-navbar-line::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 0 !important;
+}
+
+/* ========== IconBtn 40（Figma IconBtn_40 · 119-1450） ========== */
+.primit-ui-button--icon-40 {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 12px;
+  gap: 0;
+  border-radius: 0;
+  border-width: 0;
+  box-sizing: border-box;
+}
+
+/* 稿面无 MainBtn 左侧竖线 */
+.primit-ui-button--icon-40::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: 0 0 0 !important;
+}
+
+.primit-ui-button--icon-40 .primit-ui-button__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  gap: 0;
+  min-width: 0;
+  min-height: 0;
+  border: 0.5px solid transparent;
+  padding: 0;
+}
+
+/* Hover：外层 3px 间隙 + 内框 0.5px（Button-Text-White）+ 内边距 10px */
+.primit-ui-button--icon-40:hover:not(:disabled) {
+  padding: 3px;
+}
+
+.primit-ui-button--icon-40:hover:not(:disabled) .primit-ui-button__inner {
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 10px;
+  border-color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+/* Disable（排除 loading：保持 Default 壳 + 转圈） */
+.primit-ui-button--icon-40:disabled:not(.primit-ui-button--loading),
+.primit-ui-button--icon-40.primit-ui-button--disabled:not(.primit-ui-button--loading) {
+  padding: 3px;
+}
+
+.primit-ui-button--icon-40:disabled:not(.primit-ui-button--loading) .primit-ui-button__inner,
+.primit-ui-button--icon-40.primit-ui-button--disabled:not(.primit-ui-button--loading) .primit-ui-button__inner {
+  flex: 1 1 auto;
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 10px;
+  border-color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-button--icon-40 .primit-ui-button__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-button--icon-40 .primit-ui-button__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-button--icon-40 .primit-ui-button__icon--solo {
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-button--icon-40.primit-ui-button--intent-main {
+  color: var(--ui-btn-on-charcoal-fg, var(--primit-fg-on-mainbtn));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-button--icon-40.primit-ui-button--intent-main:hover:not(:disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  );
+}
+
+.primit-ui-button--icon-40.primit-ui-button--intent-secondary {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-secondary-border, var(--primit-primary-2)),
+    var(--ui-btn-secondary-glow, 0 0 4px rgba(3, 119, 136, 0.2));
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+}
+
+.primit-ui-button--icon-40.primit-ui-button--intent-secondary:hover:not(:disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-secondary-hover-from, var(--primit-primary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+}
+
+.primit-ui-button--icon-40.primit-ui-button--intent-third {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-outline-border, var(--primit-primary-1)),
+    var(--ui-btn-third-glow, 0 0 4px rgba(3, 119, 136, 0.2));
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+}
+
+.primit-ui-button--icon-40.primit-ui-button--intent-third:hover:not(:disabled) {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  /* Figma 119-1450：Third · Hover 为实心 Primary-2，非 MainBtn 横向渐变 */
+  background-image: none;
+  background-color: var(--ui-btn-icon-third-hover-bg, var(--primit-primary-2));
+}
+
+.primit-ui-button--icon-40.primit-ui-button--outline-compat {
+  background-image: none;
+  background-color: transparent;
+  color: var(--ui-outline-fg, var(--primit-primary-1));
+  border-color: transparent;
+  box-shadow: 0 0 0 0.5px var(--ui-outline-border, var(--primit-primary-1));
+}
+
+.primit-ui-button--icon-40.primit-ui-button--outline-compat:hover:not(:disabled) {
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+}
+
+.primit-ui-button--icon-40:disabled,
+.primit-ui-button--icon-40.primit-ui-button--disabled {
+  opacity: 1;
+  filter: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  background-image:
+    linear-gradient(
+      0deg,
+      var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%,
+      var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%
+    ),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    ) !important;
+}
+
+/* ========== Small TabBtn 24（Figma SmallTabBtn · 147-337 · Size=24） ========== */
+.primit-ui-button--tab-24 {
+  min-height: 24px;
+  height: 24px;
+  padding: 4px 8px;
+  border-radius: 2px;
+  font-size: var(--primit-fs-200, 12px);
+  letter-spacing: 0.5px;
+  text-transform: none;
+  font-weight: 600;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  line-height: 1.2;
+  border-width: 0;
+  border-color: transparent;
+}
+
+.primit-ui-button--tab-24::before {
+  content: none;
+}
+
+.primit-ui-button--tab-24 .primit-ui-button__inner {
+  gap: 4px;
+}
+
+.primit-ui-button--tab-24 .primit-ui-button__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-button--tab-24 .primit-ui-button__icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Main：Default 字 ac-50；Hover 无背景（稿面）；Selected ac-15 + 主色字 */
+.primit-ui-button--tab-24.primit-ui-button--intent-main {
+  background: transparent;
+  color: var(--ui-tab-fg, var(--primit-accent-a50, rgba(226, 231, 237, 0.5)));
+}
+
+.primit-ui-button--tab-24.primit-ui-button--intent-main:hover:not(:disabled) {
+  color: var(--ui-tab-fg-hover, var(--primit-secondary-1));
+  background: var(--ui-tab-hover-bg, transparent);
+}
+
+.primit-ui-button--tab-24.primit-ui-button--intent-main.primit-ui-button--tab-selected {
+  color: var(--ui-tab-selected-fg, var(--primit-primary-1));
+  background: var(--ui-tab-selected-bg, var(--primit-accent-a15, rgba(226, 231, 237, 0.15)));
+  box-shadow: var(--ui-tab-main-selected-shadow, none);
+}
+
+/* Secondary：Default / Hover 底 ac-15；Selected 主色实底 + 白字 */
+.primit-ui-button--tab-24.primit-ui-button--intent-secondary {
+  background: var(--ui-tab-secondary-default-bg, var(--primit-accent-a15, rgba(226, 231, 237, 0.15)));
+  color: var(--ui-tab-secondary-default-fg, var(--primit-accent-a50, rgba(226, 231, 237, 0.5)));
+}
+
+.primit-ui-button--tab-24.primit-ui-button--intent-secondary:hover:not(:disabled) {
+  color: var(--ui-tab-fg-hover, var(--primit-secondary-1));
+  background: var(--ui-tab-secondary-hover-bg, var(--primit-accent-a15, rgba(226, 231, 237, 0.15)));
+}
+
+.primit-ui-button--tab-24.primit-ui-button--intent-secondary.primit-ui-button--tab-selected {
+  color: var(--ui-tab-secondary-selected-fg, var(--Button-Text-White, #e2e7ed));
+  background: var(--ui-tab-secondary-selected-bg, var(--primit-primary-1));
+  box-shadow: var(--ui-tab-secondary-selected-shadow, none);
+}
+
+/* ========== disabled / loading（非 main-40 的 disabled 仍用透明度时由下面统一处理） ========== */
+.primit-ui-button--tab-24:disabled,
+.primit-ui-button--tab-24.primit-ui-button--disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.primit-ui-button--loading {
+  pointer-events: none;
+}
+
+.primit-ui-button__spinner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: primit-ui-button-spin 0.65s linear infinite;
+}
+
+@keyframes primit-ui-button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.primit-ui-button--loading .primit-ui-button__inner {
+  opacity: 0.35;
+}
+
+.primit-ui-button--loading.primit-ui-button--main-40 .primit-ui-button__inner,
+.primit-ui-button--loading.primit-ui-button--icon-40 .primit-ui-button__inner {
+  opacity: 0.35;
+}

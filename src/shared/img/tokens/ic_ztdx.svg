@@ -1,0 +1,11 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="20" cy="20" r="20" fill="url(#token_gradient)"/>
+  <path d="M28 12H14L12 16H23.5L11 28H13L26 16V14.5L28 12Z" fill="white"/>
+  <path d="M12 28H26L28 24H16.5L29 12H27L14 24V25.5L12 28Z" fill="white"/>
+  <defs>
+    <linearGradient id="token_gradient" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+</svg>

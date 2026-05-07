@@ -1,0 +1,307 @@
+import { JsonRpcProvider, WebSocketProvider } from "ethers";
+import uniq from "lodash/uniq";
+import { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useAccount } from "wagmi";
+
+import { SourceChainId } from "config/chains";
+import { isDevelopment } from "config/env";
+import { isSourceChain } from "config/multichain";
+import { useChainId } from "lib/chains";
+import {
+  metrics,
+  WsProviderConnected,
+  WsProviderDisconnected,
+  WsProviderHealthCheckFailed,
+  WsSourceChainProviderConnectedCounter,
+  WsSourceChainProviderDisconnectedCounter,
+} from "lib/metrics";
+import { EMPTY_OBJECT } from "lib/objects";
+import { closeWsConnection, getWsProvider, isProviderInClosedState, isWebsocketProvider } from "lib/rpc";
+import { useHasLostFocus } from "lib/useHasPageLostFocus";
+
+import { getTotalSubscribersEventsCount } from "./subscribeToEvents";
+
+const WS_HEALTH_CHECK_INTERVAL = 1000 * 30;
+const WS_RECONNECT_INTERVAL = 1000 * 5;
+const WS_ADDITIONAL_SOURCE_CHAIN_DISCONNECT_DELAY = 1 * 60 * 1000;
+
+const DEBUG_WEBSOCKETS_LOGGING = false;
+
+const debugLog = (...args: any[]) => {
+  if (DEBUG_WEBSOCKETS_LOGGING) {
+  }
+};
+
+export type WebsocketContextType = {
+  wsProvider: WebSocketProvider | JsonRpcProvider | undefined;
+  wsSourceChainProviders: Partial<Record<SourceChainId, WebSocketProvider | JsonRpcProvider>>;
+  setAdditionalSourceChain: (chainId: SourceChainId, name: string) => void;
+  removeAdditionalSourceChain: (chainId: SourceChainId, name: string) => void;
+};
+
+export const WsContext = createContext({} as WebsocketContextType);
+
+export function useWebsocketProvider() {
+  return useContext(WsContext) as WebsocketContextType;
+}
+
+export function WebsocketContextProvider({ children }: { children: ReactNode }) {
+  const { isConnected } = useAccount();
+  const { chainId, srcChainId } = useChainId();
+  const [wsProvider, setWsProvider] = useState<WebSocketProvider | JsonRpcProvider>();
+  const [additionalSourceChains, setAdditionalSourceChains] =
+    useState<Partial<Record<SourceChainId, string[]>>>(EMPTY_OBJECT);
+  const additionalSourceChainsCleanupTimersRef = useRef<Partial<Record<SourceChainId, number>>>({});
+  const [wsSourceChainProviders, setWsSourceChainProviders] =
+    useState<Partial<Record<SourceChainId, WebSocketProvider | JsonRpcProvider>>>(EMPTY_OBJECT);
+
+  const { hasPageLostFocus, hasV2LostFocus } = useHasLostFocus();
+  const initializedTime = useRef<number>();
+  const healthCheckTimerId = useRef<any>();
+  const lostFocusRef = useRef({ hasV2LostFocus });
+
+  lostFocusRef.current.hasV2LostFocus = hasV2LostFocus;
+
+  useEffect(
+    function updateProviderEffect() {
+      if (!isConnected || hasPageLostFocus) {
+        return;
+      }
+
+      const newProvider = getWsProvider(chainId);
+      setWsProvider(newProvider);
+
+      if (newProvider) {
+        initializedTime.current = Date.now();
+        metrics.pushEvent<WsProviderConnected>({
+          event: "wsProvider.connected",
+          isError: false,
+          data: {},
+        });
+      }
+
+      return function cleanup() {
+        initializedTime.current = undefined;
+        clearTimeout(healthCheckTimerId.current);
+
+        if (isWebsocketProvider(newProvider)) {
+          closeWsConnection(newProvider);
+        }
+
+        metrics.pushEvent<WsProviderDisconnected>({
+          event: "wsProvider.disconnected",
+          isError: false,
+          data: {},
+        });
+      };
+    },
+    [isConnected, chainId, hasPageLostFocus, srcChainId]
+  );
+
+  useEffect(
+    function updateSourceChainProviderEffect() {
+      if (!isConnected || hasPageLostFocus || srcChainId === undefined) {
+        return;
+      }
+
+      if (additionalSourceChainsCleanupTimersRef.current[srcChainId]) {
+        window.clearTimeout(additionalSourceChainsCleanupTimersRef.current[srcChainId]);
+        delete additionalSourceChainsCleanupTimersRef.current[srcChainId];
+        debugLog("cancelling cleanup timer for source chain", srcChainId);
+      }
+
+      const newSourceChainProvider = getWsProvider(srcChainId);
+
+      if (newSourceChainProvider) {
+        debugLog("source chain provider connected", srcChainId);
+
+        metrics.pushCounter<WsSourceChainProviderConnectedCounter>("wsSourceChainProvider.connected", {
+          srcChainId,
+        });
+        setWsSourceChainProviders((prev) => {
+          const newProviders = { ...prev };
+          newProviders[srcChainId] = newSourceChainProvider;
+          return newProviders;
+        });
+      }
+
+      return function cleanup() {
+        const timer = window.setTimeout(() => {
+          if (isWebsocketProvider(newSourceChainProvider)) {
+            debugLog("source chain provider disconnected", srcChainId);
+            closeWsConnection(newSourceChainProvider);
+          }
+          debugLog("source chain provider cleanup", srcChainId);
+          setWsSourceChainProviders((prev) => {
+            const newProviders = { ...prev };
+            delete newProviders[srcChainId];
+            return newProviders;
+          });
+
+          metrics.pushCounter<WsSourceChainProviderDisconnectedCounter>("wsSourceChainProvider.disconnected", {
+            srcChainId,
+          });
+        }, WS_ADDITIONAL_SOURCE_CHAIN_DISCONNECT_DELAY);
+
+        additionalSourceChainsCleanupTimersRef.current[srcChainId] = timer;
+        debugLog("scheduling cleanup timer for source chain", srcChainId);
+      };
+    },
+    [hasPageLostFocus, isConnected, srcChainId]
+  );
+
+  useEffect(
+    function updateAdditionalSourceChainEffect() {
+      if (!isConnected || hasPageLostFocus) {
+        return;
+      }
+
+      const distinctChains = Object.keys(additionalSourceChains)
+        .map((id) => parseInt(id) as SourceChainId)
+        .filter((id) => id !== srcChainId && isSourceChain(id));
+
+      if (distinctChains.length === 0) {
+        return;
+      }
+
+      const wsProviders: Partial<Record<SourceChainId, WebSocketProvider | JsonRpcProvider>> = {};
+
+      for (const additionalSourceChain of distinctChains) {
+        if (additionalSourceChainsCleanupTimersRef.current[additionalSourceChain]) {
+          window.clearTimeout(additionalSourceChainsCleanupTimersRef.current[additionalSourceChain]);
+          delete additionalSourceChainsCleanupTimersRef.current[additionalSourceChain];
+          debugLog("cancelling cleanup timer for additional source chain", additionalSourceChain);
+        }
+
+        const newSourceChainProvider = getWsProvider(additionalSourceChain);
+
+        if (newSourceChainProvider) {
+          wsProviders[additionalSourceChain] = newSourceChainProvider;
+        }
+      }
+
+      if (Object.keys(wsProviders).length !== 0) {
+        setWsSourceChainProviders((prev) => ({ ...prev, ...wsProviders }));
+      }
+
+      return function cleanup() {
+        for (const additionalSourceChain in wsProviders) {
+          debugLog("scheduling cleanup timer for additional source chain", additionalSourceChain);
+
+          const timer = window.setTimeout(() => {
+            debugLog("disconnecting from additional source chain", additionalSourceChain);
+            if (isWebsocketProvider(wsProviders[additionalSourceChain as unknown as SourceChainId])) {
+              closeWsConnection(wsProviders[additionalSourceChain as unknown as SourceChainId]);
+            }
+            setWsSourceChainProviders((prev) => {
+              const newProviders = { ...prev };
+              delete newProviders[additionalSourceChain as unknown as SourceChainId];
+              return newProviders;
+            });
+            delete additionalSourceChainsCleanupTimersRef.current[additionalSourceChain as unknown as SourceChainId];
+          }, WS_ADDITIONAL_SOURCE_CHAIN_DISCONNECT_DELAY);
+
+          additionalSourceChainsCleanupTimersRef.current[additionalSourceChain as unknown as SourceChainId] = timer;
+        }
+      };
+    },
+    [additionalSourceChains, hasPageLostFocus, isConnected, srcChainId]
+  );
+
+  useEffect(
+    function healthCheckEffect() {
+      if (!isConnected || hasPageLostFocus || !isWebsocketProvider(wsProvider)) {
+        return;
+      }
+
+      async function nextHealthCheck() {
+        if (!isWebsocketProvider(wsProvider)) {
+          return;
+        }
+
+        const isReconnectingIntervalPassed =
+          initializedTime.current && Date.now() - initializedTime.current > WS_RECONNECT_INTERVAL;
+        const listenerCount = await wsProvider.listenerCount();
+        const requiredListenerCount = getTotalSubscribersEventsCount(chainId, wsProvider, {
+          v2: !lostFocusRef.current.hasV2LostFocus,
+        });
+
+        if (isDevelopment() && isReconnectingIntervalPassed) {
+        }
+
+        if (
+          (isProviderInClosedState(wsProvider) && isReconnectingIntervalPassed) ||
+          (listenerCount < requiredListenerCount && isReconnectingIntervalPassed)
+        ) {
+          closeWsConnection(wsProvider);
+          const nextProvider = getWsProvider(chainId);
+          setWsProvider(nextProvider);
+          initializedTime.current = Date.now();
+          metrics.pushEvent<WsProviderHealthCheckFailed>({
+            event: "wsProvider.healthCheckFailed",
+            isError: false,
+            data: { requiredListenerCount, listenerCount },
+          });
+        }
+
+        healthCheckTimerId.current = window.setTimeout(nextHealthCheck, WS_HEALTH_CHECK_INTERVAL);
+      }
+
+      healthCheckTimerId.current = window.setTimeout(nextHealthCheck, WS_HEALTH_CHECK_INTERVAL);
+
+      return () => {
+        clearTimeout(healthCheckTimerId.current);
+      };
+    },
+    [isConnected, hasPageLostFocus, wsProvider, chainId]
+  );
+
+  const setAdditionalSourceChain = useCallback((newChainId: SourceChainId, name: string) => {
+    setAdditionalSourceChains((prev) => {
+      const value = uniq([...(prev[newChainId] ?? []), name]);
+      return { ...prev, [newChainId]: value };
+    });
+  }, []);
+
+  const removeAdditionalSourceChain = useCallback((removedChainId: SourceChainId, name: string) => {
+    setAdditionalSourceChains((prev) => {
+      const nextNames = (prev[removedChainId] ?? []).filter((n) => n !== name);
+      if (nextNames.length === 0) {
+        const next = { ...prev };
+        delete next[removedChainId];
+        return next;
+      }
+      return { ...prev, [removedChainId]: nextNames };
+    });
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      wsProvider,
+      wsSourceChainProviders,
+      setAdditionalSourceChain,
+      removeAdditionalSourceChain,
+    }),
+    [removeAdditionalSourceChain, setAdditionalSourceChain, wsProvider, wsSourceChainProviders]
+  );
+
+  return <WsContext.Provider value={value}>{children}</WsContext.Provider>;
+}
+
+export function useWsAdditionalSourceChains(chainId: SourceChainId | undefined, name: string) {
+  const { setAdditionalSourceChain, removeAdditionalSourceChain } = useWebsocketProvider();
+
+  useEffect(() => {
+    if (!chainId) {
+      return;
+    }
+
+    debugLog("setting up additional source chain", chainId);
+    setAdditionalSourceChain(chainId, name);
+
+    return () => {
+      debugLog("tearing down additional source chain", chainId);
+      removeAdditionalSourceChain(chainId, name);
+    };
+  }, [chainId, name, removeAdditionalSourceChain, setAdditionalSourceChain]);
+}

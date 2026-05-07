@@ -1,0 +1,49 @@
+/**
+ * Leaderboard：Primit 壳内与交易模块表面、主色（排序列 / 固定行左侧条）对齐。
+ */
+html[data-ui-theme="primit"] .LeaderboardRankCell-Pinned::after {
+  background-color: var(--primit-primary-1);
+}
+
+html[data-ui-theme="primit"] .LeaderboardToolbar {
+  background-color: var(--primit-trade-module-bg, var(--primit-secondary-3));
+  border-color: var(
+    --Accent-color-AC-20,
+    color-mix(in srgb, var(--primit-secondary-1) 20%, transparent)
+  );
+}
+
+html[data-ui-theme="primit"] .LeaderboardTable-panel {
+  background-color: var(--primit-trade-module-bg, var(--primit-secondary-3));
+}
+
+/* 表头默认次要色；当前排序列由 Sorter 的 text-blue-300 覆盖为主色 */
+html[data-ui-theme="primit"] .LeaderboardTable-panel thead th {
+  color: color-mix(in srgb, var(--primit-secondary-1) 65%, transparent);
+}
+
+html[data-ui-theme="primit"] .LeaderboardTable-panel thead th button.text-blue-300,
+html[data-ui-theme="primit"] .LeaderboardTable-panel thead th .text-blue-300 {
+  color: var(--primit-primary-1);
+}
+
+/* 排序列内 Tooltip 标题、handle、info 图标均走 currentColor，与 Primit 主色一致 */
+html[data-ui-theme="primit"] .LeaderboardTable-panel thead th button.text-blue-300 .Tooltip-handle,
+html[data-ui-theme="primit"] .LeaderboardTable-panel thead th button.text-blue-300 .Tooltip-handle span,
+html[data-ui-theme="primit"] .LeaderboardTable-panel thead th button.text-blue-300 svg {
+  color: var(--primit-primary-1);
+}
+
+/* 与 Primit 模块底协调的轻微斑马纹（覆盖 TableTr odd:bg-*） */
+html[data-ui-theme="primit"] .LeaderboardTable-panel tbody tr:nth-child(odd) {
+  background-color: color-mix(in srgb, var(--primit-secondary-1) 4%, var(--primit-secondary-3)) !important;
+}
+
+html[data-ui-theme="primit"] .LeaderboardTable-panel tbody tr:nth-child(even) {
+  background-color: var(--primit-secondary-3) !important;
+}
+
+html[data-ui-theme="primit"] .LeaderboardTable-panel .TableTr_hoverable:nth-child(odd):hover,
+html[data-ui-theme="primit"] .LeaderboardTable-panel .TableTr_hoverable:nth-child(even):hover {
+  background: color-mix(in srgb, var(--primit-secondary-1) 8%, var(--primit-secondary-3)) !important;
+}

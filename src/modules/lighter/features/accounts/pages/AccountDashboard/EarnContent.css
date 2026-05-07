@@ -1,0 +1,307 @@
+.earn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Summary Cards */
+.earn-summary {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.earn-summary-card {
+  flex: 1;
+  min-width: 240px;
+  padding: 24px;
+  border-radius: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.20) 0%,
+    rgba(255, 255, 255, 0.11) 48.56%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.earn-summary-label {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  line-height: normal;
+}
+
+.earn-summary-value {
+  color: var(--earn-accent, #00ffb2);
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: normal;
+  word-break: break-word; /* Allow long numbers to wrap */
+}
+
+/* Section */
+.earn-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.earn-section-title {
+  color: var(--earn-accent, #00ffb2);
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  margin: 0;
+  line-height: normal;
+}
+
+/* Subscription Table (In Progress) */
+.subscription-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subscription-row {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.03);
+  border: 0.5px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0;
+  padding: 20px 24px;
+  gap: 24px;
+}
+
+.subscription-status-wrapper,
+.subscription-field-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: flex-start;
+}
+
+.subscription-status-wrapper {
+  gap: 8px;
+  min-width: 200px;
+}
+
+.subscription-field-wrapper {
+  gap: 6px;
+  min-width: 0;
+  flex: 1;
+}
+
+.subscription-field-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: Outfit, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+.subscription-product-name,
+.subscription-field-value {
+  color: #fff;
+  font-family: Outfit, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.subscription-field-value {
+  white-space: nowrap;
+}
+
+.subscription-interest {
+  color: var(--earn-accent, #00ffb2);
+  font-family: Outfit, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.5px;
+}
+
+.subscription-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.info-label {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: Outfit, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+/* History Table */
+.earn-history-table-container {
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.earn-history-table {
+  background: transparent !important;
+  border-radius: 0 !important;
+  width: max(100%, 900px) !important; /* Ensures table is at least 900px to trigger scroll */
+}
+
+.earn-history-table .TableTh {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: Outfit, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  padding: 20px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.earn-history-table .TableTr {
+  transition: background 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.earn-history-table .TableTr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.earn-history-table .TableTr:last-child {
+  border-bottom: none;
+}
+
+.earn-history-table .TableTd {
+  color: #FFF;
+  font-family: Outfit, sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  padding: 20px 32px;
+  white-space: nowrap;
+}
+
+.earn-history-table .earn-apr-value {
+  color: var(--earn-accent, #00ffb2);
+  font-weight: 500;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .earn-content {
+    gap: 24px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .earn-summary {
+    width: 100%;
+  }
+
+  .earn-summary-card {
+    padding: 16px;
+    flex: 1 1 100%;
+    min-width: 0 !important; /* Override desktop min-width */
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .earn-summary-label {
+    font-size: 12px;
+  }
+
+  .earn-summary-value {
+    font-size: 28px;
+  }
+
+  .earn-section {
+    gap: 16px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .earn-section-title {
+    font-size: 18px;
+  }
+
+  .subscription-table-container {
+    gap: 10px;
+  }
+
+  .subscription-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 0;
+  }
+
+  .subscription-status-wrapper,
+  .subscription-field-wrapper {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .subscription-product-name,
+  .subscription-field-value {
+    font-size: 13px;
+  }
+
+  .subscription-field-label {
+    font-size: 11px;
+  }
+
+  .subscription-interest {
+    font-size: 13px;
+  }
+
+  .subscription-divider {
+    display: none; /* Hide dividers on mobile */
+  }
+
+  .earn-history-table .TableTh,
+  .earn-history-table .TableTd {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+
+  .earn-history-table .TableTh {
+    font-size: 12px;
+  }
+}
+

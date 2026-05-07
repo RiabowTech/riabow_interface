@@ -1,0 +1,126 @@
+.wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0 4px 4px;
+  width: 100%;
+}
+
+.slider {
+  position: relative;
+  display: flex; align-items: center;
+  height: 32px; width: 100%;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+.track {
+  position: relative;
+  height: 8px; flex: 1;
+  border-radius: 999px;
+  background: #2b2b30; // gray-10
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 -4px;
+    border-radius: 999px;
+    background: #2b2b30;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+.ticks {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  pointer-events: none;
+}
+.tallTick {
+  height: 10px; width: 2px;
+  border-radius: 2px;
+  border: 1px solid #3a3a42; // gray-8
+  background: transparent;
+}
+.dotTick {
+  height: 6px; width: 1px;
+  border-radius: 2px;
+  background: #26262c; // gray-9
+}
+
+.range {
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.fill {
+  position: absolute;
+  inset: 2px 0; left: 0; right: 0;
+  border-radius: 2px 0 0 2px;
+  opacity: 0.5;
+}
+.fill.buy {
+  background: linear-gradient(to right, var(--ltr-trade-buy-gradient-start), var(--ltr-trade-buy-gradient-end));
+}
+.fill.sell {
+  background: linear-gradient(to right, var(--ltr-trade-sell-gradient-start), var(--ltr-trade-sell-gradient-end));
+}
+
+.steps {
+  position: absolute; inset: 0;
+  pointer-events: none;
+}
+.stepBtn {
+  position: absolute; top: 50%;
+  width: 20px; height: 20px;
+  transform: translate(-50%, -50%);
+  background: transparent; border: 0; padding: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.thumbWrap {
+  position: absolute; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.thumb {
+  display: flex;
+  height: 20px; width: 6px;
+  border-radius: 8px;
+  border: 0.4px solid;
+  backdrop-filter: blur(16px);
+  &.buy {
+    background: var(--ltr-trade-buy-mid);
+    border-color: var(--ltr-trade-buy-mid-soft);
+  }
+  &.sell {
+    background: var(--ltr-trade-sell-gradient-end);
+    border-color: var(--ltr-trade-sell-bright);
+  }
+}
+
+.inputBox {
+  display: inline-flex; align-items: center;
+  gap: 4px;
+  height: 24px; max-width: 48px;
+  padding: 0 4px;
+  font-size: 12px;
+  color: var(--ltr-text-primary);
+  background: var(--ltr-bg-panel);
+  border: 1px solid #2b2b30;
+  border-radius: 2px;
+  transition: background 150ms, border-color 150ms;
+  flex-shrink: 0;
+  &:hover { background: #2b2b30; border-color: #26262c; }
+}
+.input {
+  width: 100%;
+  background: transparent;
+  border: 0; outline: 0;
+  font-size: 12px;
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  padding: 0;
+  &::placeholder { color: var(--ltr-text-muted); }
+}

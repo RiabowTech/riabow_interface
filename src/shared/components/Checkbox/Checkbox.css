@@ -1,0 +1,62 @@
+/* Checkbox 组件样式 - 基于设计稿 */
+
+/* Checkbox 容器 */
+.checkbox-wrapper {
+  position: relative;
+}
+
+/* Checkbox 方框 - 未选中状态 */
+.checkbox-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  min-height: 14px;
+  border-radius: 4px;
+  background: #1a1a1a; /* 中等灰色填充 */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 浅灰色边框 */
+  transition: all 0.3s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Checkbox 方框 - 选中状态 */
+.checkbox-box.checked {
+  /* 青色中心填充 + 外部绿色发光边框 */
+  border: 2px solid transparent;
+
+  background: 
+    linear-gradient(#00ffb2, #00ffb2) padding-box,
+    linear-gradient(90deg, rgba(0, 255, 178, 1) 0%, rgba(0, 255, 178, 0) 20%, rgb(0, 0, 0) 50%, rgba(0, 255, 178, 0) 80%, rgba(0, 255, 178, 1) 100%) border-box;
+  box-shadow: 0 0 4px rgba(0, 255, 178, 0.6); /* 发光效果 */
+}
+
+/* Checkbox 方框 - 部分选中状态 */
+.checkbox-box.partial-checked {
+  border: 2px solid transparent;
+  background: 
+    linear-gradient(#00ffb2, #00ffb2) padding-box,
+    linear-gradient (90deg, rgba(0, 255, 178, 1) 0%, rgba(0, 255, 178, 0) 10%, rgb(0, 0, 0) 50%, rgba(0, 255, 178, 0) 90%, rgba(0, 255, 178, 1) 100%) border-box;
+  box-shadow: 0 0 4px rgba(0, 255, 178, 0.6);
+}
+
+/* Checkbox 方框 - 禁用状态 */
+.checkbox-box.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Checkbox 图标颜色 */
+.checkbox-box.checked svg,
+.checkbox-box.partial-checked svg {
+  color: #000; /* 深色图标，在青色背景上可见 */
+}
+
+/* Hover 状态 */
+.checkbox-wrapper:not(.disabled):hover .checkbox-box:not(.checked):not(.partial-checked) {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: #222;
+}
+

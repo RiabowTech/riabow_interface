@@ -1,0 +1,32 @@
+/**
+ * Primit Account（/accounts）：与 Primit 壳衬底一体，图表/子 Tab 用 soft 与主色。
+ * 「理财」Tab 样式见 `earn.primit.css`（`.earn-content`）。
+ */
+html[data-ui-theme="primit"] .account-pnl-chart-card {
+  --account-dashboard-chart-accent: var(--primit-primary-1);
+  background: var(--primit-soft-10);
+  border: 1px solid var(--primit-soft-15);
+  box-shadow: 0 0 3px color-mix(in srgb, var(--primit-primary-1) 8%, transparent);
+  /* DailyAndCumulativePnL：与主色 / 功能色对齐 */
+  --pnl-chart-tick: color-mix(in srgb, var(--primit-secondary-1) 72%, transparent);
+  --pnl-chart-axis-line: var(--primit-soft-15);
+  --pnl-chart-grid: var(--primit-soft-15);
+  --pnl-chart-cursor: var(--primit-soft-30);
+  --pnl-chart-cumulative: var(--primit-primary-1);
+  --pnl-chart-active-dot-stroke: var(--primit-primary-1);
+  --pnl-chart-active-dot-fill: var(--primit-secondary-3);
+  --pnl-chart-profit: var(--primit-others-green);
+  --pnl-chart-loss: var(--primit-others-red);
+  --pnl-chart-neutral: color-mix(in srgb, var(--primit-secondary-1) 22%, transparent);
+}
+
+html[data-ui-theme="primit"] .account-pnl-chart-card__title {
+  color: var(--primit-secondary-1);
+}
+
+/* HistoricalLists 已与 Trade 页共用 primit-trade-module-bg + Tab 分隔线，不再单独覆写 Tab 条背景 */
+
+/** 未连接钱包时的引导页：与壳衬底一体，避免单独一块深色板 */
+html[data-ui-theme="primit"] .connect-wallet-prompt {
+  background: transparent;
+}

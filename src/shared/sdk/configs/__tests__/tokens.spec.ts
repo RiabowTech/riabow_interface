@@ -1,0 +1,58 @@
+import { withRetry, zeroAddress } from "viem";
+import { describe, expect, it } from "vitest";
+
+import { ARBITRUM, AVALANCHE, BOTANIX, getChainName, CONTRACTS_CHAIN_IDS } from "sdk/configs/chains";
+import { getOracleKeeperUrl } from "sdk/configs/oracleKeeper";
+import { TOKENS } from "sdk/configs/tokens";
+
+type KeeperToken = {
+  symbol: string;
+  address: string;
+  decimals: number;
+  synthetic?: boolean;
+};
+
+const getKeeperTokens = async (chainId: number): Promise<{ tokens: KeeperToken[] }> => {
+  const res = await fetch(`${getOracleKeeperUrl(chainId)}/tokens`);
+  const data = (await res.json()) as {
+    tokens: KeeperToken[];
+  };
+
+  if (!data || !data.tokens || data.tokens.length === 0) throw Error("No tokens in response");
+
+  return data;
+};
+
+const IGNORED_TOKENS = ["GM", "GLV"];
+
+const getIgnoredTokensByChain = (chainId: number) => {
+  return IGNORED_TOKENS.concat(
+    {
+      [ARBITRUM]: ["FRAX", "MIM"],
+      [AVALANCHE]: ["MIM", "WBTC"],
+      [BOTANIX]: [],
+    }[chainId] ?? []
+  );
+};
+
+describe("tokens config", () => {
+  CONTRACTS_CHAIN_IDS.forEach(async (chainId) => {
+    it(`tokens should be consistent with keeper for ${getChainName(chainId)}`, async () => {
+      const keeperTokens = await withRetry(() => getKeeperTokens(chainId), {
+        retryCount: 2,
+      });
+
+      TOKENS[chainId]
+        .filter((token) => token.address !== zeroAddress)
+        .filter((token) => !getIgnoredTokensByChain(chainId).includes(token.symbol))
+        .forEach((token) => {
+          const keeperToken = keeperTokens.tokens.find((t) => t.address === token.address);
+
+          expect(keeperToken).toBeDefined();
+          expect(keeperToken?.address).toBe(token.address);
+          expect(keeperToken?.decimals).toBe(token.decimals);
+          expect(Boolean(keeperToken?.synthetic)).toBe(Boolean(token.isSynthetic));
+        });
+    });
+  });
+});

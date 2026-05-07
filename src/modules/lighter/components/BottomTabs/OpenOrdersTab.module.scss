@@ -1,0 +1,469 @@
+.root {
+  height: 100%;
+  overflow: auto;
+  background: var(--ltr-bg-panel);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  height: 32px;
+  padding: 0 12px;
+  color: #b4b4b6;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.table tbody td {
+  height: 36px;
+  padding: 0 12px;
+  color: #f3f3f3;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 36px;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mono {
+  font-variant-numeric: tabular-nums;
+}
+
+.placeholder {
+  color: rgba(243, 243, 243, 0.4);
+}
+
+.market {
+  color: #f3f3f3;
+  font-weight: 500;
+}
+
+.marketCell {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  width: 100%;
+  max-width: 144px;
+  height: 28px;
+  overflow: hidden;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.marketCellLong {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--ltr-up) 22%, transparent) 0%,
+    color-mix(in srgb, var(--ltr-up) 8%, transparent) 56%,
+    transparent 100%
+  );
+}
+
+.marketCellShort {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--ltr-down) 22%, transparent) 0%,
+    color-mix(in srgb, var(--ltr-down) 8%, transparent) 56%,
+    transparent 100%
+  );
+}
+
+.marketStripe {
+  width: 2px;
+  flex: 0 0 2px;
+  height: 100%;
+}
+
+.marketCellLong .marketStripe {
+  background: var(--ltr-up);
+}
+
+.marketCellShort .marketStripe {
+  background: var(--ltr-down);
+}
+
+.marketContent {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0 8px 0 10px;
+}
+
+.table tbody td.sideLong {
+  color: var(--ltr-up);
+  font-weight: 500;
+}
+
+.table tbody td.sideShort {
+  color: var(--ltr-down);
+  font-weight: 500;
+}
+
+.cancelAll {
+  text-align: right;
+}
+
+.table thead th.cancelAllHeader {
+  color: var(--ltr-down);
+  text-align: center;
+}
+
+.sortHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sortCaret {
+  color: #717173;
+  font-size: 9px;
+  transform: translateY(-1px);
+}
+
+.cancelActions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.editAction,
+.cancelAction {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: #2b2b30;
+  border: 1px solid #38383d;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.editAction:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.editAction {
+  color: #d7d9df;
+}
+
+.cancelAction {
+  color: var(--ltr-down);
+  border-color: color-mix(in srgb, var(--ltr-down) 35%, transparent);
+  background: color-mix(in srgb, var(--ltr-down) 6%, transparent);
+}
+
+.cancelAction:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.actionIcon {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.loadingSpinner {
+  animation: lighterSpin 0.8s linear infinite;
+}
+
+@keyframes lighterSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.modifyOrderModal {
+  :global(.Modal-backdrop) {
+    background: rgba(0, 0, 0, 0.56);
+  }
+}
+
+.modifyOrderModalContent {
+  // 之前固定 height: 255px 配合 body 的 212px,多语言或交互态让内容稍长就会被裁剪。
+  // 改成按内容高度自适应,最多不超过视口,保留最小视觉高度避免过矮。
+  width: 440px;
+  min-height: 240px;
+  max-height: calc(100vh - 48px);
+  border: 1px solid #35353d;
+  border-radius: 8px;
+  background: #15151b;
+  overflow: visible;
+  box-sizing: border-box;
+  color: #f3f3f3;
+  font-size: 12px;
+
+  :global(.Modal-header-wrapper) {
+    gap: 0;
+    padding: 0;
+  }
+
+  :global(.overflow-auto) {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  :global(.Modal-body) {
+    padding: 0;
+    overflow: visible;
+  }
+
+  :global(.Modal-title-bar) {
+    width: 100%;
+    height: 41px;
+    padding: 12px;
+    border-bottom: 1px solid #303039;
+    box-sizing: border-box;
+  }
+
+  :global(.Modal-title) {
+    color: #b8b8bc;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+  }
+
+  :global(.Modal-close-button) {
+    width: 16px;
+    height: 16px;
+    right: 12px;
+    top: 12px;
+    color: #e8e8ea;
+  }
+
+  :global(.Modal-close-icon) {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.modifyOrderBody {
+  // 让内容驱动高度,info 行 + 两个 32px 输入框 + 32px submit + 8px 间距(×4) + padding(16×2)≈ 228px。
+  // 不再强制 438px 宽度 / 212px 高度,避免固定尺寸把 <Trans> 后变长的文案和 submit 按钮挤出可视区。
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-sizing: border-box;
+  overflow: visible;
+  background: #15151b;
+}
+
+.modifyOrderInfoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modifyOrderInfoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+
+.modifyOrderLabel,
+.modifyOrderValue {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.modifyOrderLabel {
+  color: #b8b8bc;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.modifyOrderValue {
+  color: #f3f3f3;
+  font-weight: 400;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  min-width: 0;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modifyOrderField {
+  position: relative;
+  height: 32px;
+  border: 1px solid #363640;
+  border-radius: 4px;
+  background: #24242a;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.modifyOrderFieldLabel {
+  color: #f3f3f3;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.modifyOrderFieldValue {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  flex: 1;
+}
+
+.modifyOrderInput {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #f3f3f3;
+  text-align: right;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+
+  &::placeholder {
+    color: #777a85;
+    text-align: right;
+  }
+}
+
+.modifyOrderHint {
+  border: 0;
+  background: transparent;
+  color: #90a6ff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1;
+}
+
+.modifyOrderUnitButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #d7d7db;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.modifyOrderUnitCaret,
+.modifyOrderUnitCheck {
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.modifyOrderUnitMenu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 1px);
+  width: 108px;
+  border: 1px solid #35353d;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #24242a;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
+
+.modifyOrderUnitOption {
+  width: 100%;
+  height: 32px;
+  padding: 0 12px;
+  border: 0;
+  border-bottom: 1px solid #303039;
+  background: #24242a;
+  color: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modifyOrderUnitOption:last-child {
+  border-bottom: 0;
+}
+
+.modifyOrderSubmit {
+  height: 32px;
+  border: 1px solid #363640;
+  border-radius: 4px;
+  background: #24242a;
+  color: #f3f3f3;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 150ms, border-color 150ms, opacity 150ms, box-shadow 150ms;
+
+  &:not(:disabled) {
+    border-color: #2fc48d;
+    background: linear-gradient(180deg, #2fc48d 0%, #24ab79 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  &:not(:disabled):hover {
+    border-color: #36d298;
+    background: linear-gradient(180deg, #36d298 0%, #28b883 100%);
+  }
+
+  &:not(:disabled):active {
+    background: linear-gradient(180deg, #29b27f 0%, #219d6f 100%);
+  }
+}
+
+.modifyOrderSubmit:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

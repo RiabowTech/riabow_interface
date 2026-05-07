@@ -1,0 +1,175 @@
+<!doctype html>
+<html
+  lang="en"
+  class="notranslate"
+  translate="no"
+  data-ui-theme="legacy"
+>
+  <head>
+    <meta name="google" content="notranslate" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- SEO Meta Tags -->
+    <title>Zanbara | Decentralized Derivatives Trading Platform</title>
+    <meta
+      name="description"
+      content="Trade spot or perpetual BTC, ETH and other top cryptocurrencies with up to 100x leverage directly from your wallet on Arbitrum."
+    />
+    <meta
+      name="keywords"
+      content="Zanbara, ZTDX, DeFi, crypto exchange, perpetuals, BTC, ETH, leverage, Arbitrum"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ztdx.io/" />
+    <meta property="og:site_name" content="Zanbara" />
+    <meta property="og:title" content="Zanbara | Decentralized Derivatives Trading Platform" />
+    <meta
+      property="og:description"
+      content="Trade spot or perpetual BTC, ETH and other top cryptocurrencies with up to 100x leverage directly from your wallet on Arbitrum."
+    />
+    <meta property="og:image" content="https://ztdx.io/og.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Zanbara" />
+    <meta name="twitter:title" content="Zanbara | Decentralized Derivatives Trading Platform" />
+    <meta
+      name="twitter:description"
+      content="Trade spot or perpetual BTC, ETH and other top cryptocurrencies with up to 100x leverage directly from your wallet on Arbitrum."
+    />
+    <meta name="twitter:image" content="https://ztdx.io/og.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="/favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" />
+
+    <!-- Google Fonts - Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      html, body, #root {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: #000;
+      }
+
+      #boot-shell {
+        display: none;
+      }
+
+      body.trade-boot #boot-shell {
+        position: fixed;
+        inset: 0;
+        display: block;
+        background: #000;
+        z-index: 0;
+      }
+
+      body.trade-boot #root {
+        position: relative;
+        z-index: 1;
+      }
+
+      .boot-shell-page {
+        min-height: 100vh;
+        padding: 4px;
+        background: #000;
+        box-sizing: border-box;
+      }
+
+      .boot-shell-topnav {
+        height: 52px;
+        background: #07080d;
+        border-bottom: 1px solid #1b1d24;
+      }
+
+      .boot-shell-main {
+        margin-top: 4px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 321px 321px;
+        gap: 4px;
+        height: 608px;
+      }
+
+      .boot-shell-chart,
+      .boot-shell-book,
+      .boot-shell-form,
+      .boot-shell-bottom-left,
+      .boot-shell-bottom-right {
+        background: #121218;
+      }
+
+      .boot-shell-chart {
+        display: grid;
+        grid-template-rows: 32px 25px minmax(0, 1fr);
+        gap: 4px;
+        background: #000;
+      }
+
+      .boot-shell-bar,
+      .boot-shell-favorites {
+        background: #17181f;
+      }
+
+      .boot-shell-bottom {
+        margin-top: 4px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 321px;
+        gap: 4px;
+        height: 392px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      if (window.location.pathname.startsWith("/trade")) {
+        document.body.classList.add("trade-boot");
+      }
+    </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="boot-shell" aria-hidden="true">
+      <div class="boot-shell-page">
+        <div class="boot-shell-topnav"></div>
+        <div class="boot-shell-main">
+          <div class="boot-shell-chart">
+            <div class="boot-shell-bar"></div>
+            <div class="boot-shell-favorites"></div>
+            <div class="boot-shell-bottom-left"></div>
+          </div>
+          <div class="boot-shell-book"></div>
+          <div class="boot-shell-form"></div>
+        </div>
+        <div class="boot-shell-bottom">
+          <div class="boot-shell-bottom-left"></div>
+          <div class="boot-shell-bottom-right"></div>
+        </div>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+    <script async src="/charting_library/charting_library.standalone.js"></script>
+  </body>
+</html>

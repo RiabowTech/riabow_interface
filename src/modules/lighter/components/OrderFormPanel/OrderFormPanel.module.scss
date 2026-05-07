@@ -1,0 +1,528 @@
+.root {
+  display: flex; flex-direction: column; height: 100%;
+  background: var(--ltr-bg-panel);
+}
+
+.topTabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  /** 与 LighterTradePage `.chartCol` SymbolBar 行 40px + 下行间距一致 */
+  height: 40px;
+  margin: 0 0 4px;
+  background: transparent;
+  border-radius: 0;
+}
+
+.topTabsSpacer {
+  flex-shrink: 0;
+  height: 40px;
+  margin: 0 0 4px;
+}
+
+.topTab,
+.topTabActive {
+  height: 40px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 400;
+  color: #f5f5f5;
+  background: #22232b;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 150ms ease, background 150ms ease;
+
+  &:hover {
+    color: #f5f5f5;
+    background: #282932;
+  }
+}
+
+.topTabActive {
+  color: #f5f5f5;
+  background: #22232b;
+}
+
+.modes {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /** 与 `.chartCol` 收藏条 25px + 与主体区间 row-gap 对齐 */
+  height: 25px;
+  padding: 0;
+  background: #2a2b31;
+  border-radius: 4px;
+  margin: 0 0 4px;
+  /** 原 gap: 1px 通过深灰底色透出竖分割线；去掉 gap 和底色让 Market/Limit/Advanced 之间干净衔接 */
+  gap: 0;
+  overflow: visible;
+}
+.mode, .modeActive {
+  position: relative;
+  height: 25px;
+  min-height: 25px;
+  padding: 0 4px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  font-size: 11px; font-weight: 400;
+  color: #959597; // gray-3
+  background: #14151b; border: 0; cursor: pointer;
+  white-space: nowrap;
+  transition: color 150ms;
+  &:hover { color: #f5f5f5; }
+}
+.modeActive {
+  color: #f5f5f5; // gray-0
+  background: #22232b; // gray-9
+  border-radius: 0;
+}
+.mode::after, .modeActive::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 1px; margin: 0 auto;
+  width: 52%; max-width: 52px;
+  height: 2px; border-radius: 999px;
+  background: var(--ltr-accent-cyan);
+  transform: scaleX(0); opacity: 0;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+.modeActive::after { transform: scaleX(1); opacity: 1; }
+
+.caret {
+  display: inline-flex; align-items: center;
+  transition: transform 150ms;
+}
+.caretOpen { transform: rotate(180deg); }
+
+.advancedWrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+}
+.advancedWrap > button { width: 100%; }
+.advancedMenu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  width: max-content;
+  min-width: 0;
+  overflow: hidden;
+  background: #1f1f24;
+  border: 1px solid #2b2b30;
+  border-radius: 4px;
+  padding: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  box-shadow: none;
+}
+.advancedItem {
+  height: 32px;
+  padding: 8px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 16px;
+  color: #b4b4b6;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  &:hover { background: #2a2b31; color: #f5f5f5; }
+}
+
+.sides {
+  position: relative;
+  display: flex;
+  margin: 0 0 4px;
+  height: 32px;
+  padding: 2px;
+  background: #121218;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 16px;
+}
+.sideBtn {
+  position: relative;
+  z-index: 10;
+  flex: 1 1 0;
+  height: 28px;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #f3f3f3;
+  background: transparent; border: 0; cursor: pointer;
+  border-radius: 2px;
+  transition: opacity 150ms;
+  &:active { opacity: 0.5; }
+  &:disabled { cursor: default; opacity: 0.5; }
+}
+.sideIndicator {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  width: calc(50% - 2px);
+  height: 28px;
+  border-radius: 2px;
+  border: 1px solid;
+  transition: left 200ms ease, background 200ms, border-color 200ms;
+}
+.indicatorBuy {
+  left: 2px;
+  background: var(--ltr-trade-buy-solid);
+  border-color: var(--ltr-trade-buy-bright);
+}
+.indicatorSell {
+  left: 50%;
+  background: var(--ltr-trade-sell-solid);
+  border-color: var(--ltr-trade-sell-bright);
+}
+
+.body { flex: 1; overflow: auto; }
+
+.leverageOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.leverageModal {
+  width: 440px;
+  height: 330px;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #17181f;
+  border: 1px solid #31323a;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.leverageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 41px;
+  padding: 12px;
+  border-bottom: 1px solid #31323a;
+  font-size: 12px;
+  font-weight: 400;
+  color: #b4b4b6;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.leverageClose {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f5f5f5;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.leverageBody {
+  height: 232px;
+  flex: 0 0 232px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.leverageSliderSection {
+  height: 57px;
+  padding: 12px;
+  border-bottom: 1px solid #31323a;
+  box-sizing: border-box;
+}
+
+.leverageSliderRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  gap: 8px;
+  align-items: center;
+}
+
+.leverageSlider {
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  appearance: none;
+}
+
+.leverageSlider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      transparent 0,
+      transparent calc(25% - 1px),
+      #3d3e46 calc(25% - 1px),
+      #3d3e46 25%
+    ),
+    linear-gradient(to right, rgba(120, 123, 132, 0.45) 0, rgba(120, 123, 132, 0.45) var(--leverage-fill, 0%), #2a2b33 var(--leverage-fill, 0%), #2a2b33 100%);
+}
+
+.leverageSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 6px;
+  height: 20px;
+  margin-top: -6px;
+  border-radius: 999px;
+  border: 0.4px solid #b4b4b6;
+  background: #d3d3d5;
+}
+
+.leverageSlider::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #2a2b33;
+}
+
+.leverageSlider::-moz-range-thumb {
+  width: 6px;
+  height: 20px;
+  border-radius: 999px;
+  border: 0.4px solid #b4b4b6;
+  background: #d3d3d5;
+}
+
+.leverageValueBadge {
+  width: 48px;
+  height: 32px;
+  padding: 0 4px;
+  display: inline-grid;
+  align-items: center;
+  grid-template-columns: 24px 8px;
+  justify-content: end;
+  gap: 1px;
+  border-radius: 2px;
+  border: 1px solid #31323a;
+  background: #2d2e36;
+  color: #f3f3f3;
+  font-size: 12px;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+.leverageValueInput {
+  display: block;
+  width: 24px;
+  min-width: 24px;
+  max-width: 24px;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 12px;
+  line-height: 32px;
+  text-align: right;
+  outline: none;
+  appearance: none;
+  font-variant-numeric: tabular-nums;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
+
+.leverageValueInput::placeholder {
+  color: #6b6c76;
+}
+
+.leverageCopySection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+
+.leverageText {
+  color: #f5f5f5;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.leverageMeta {
+  color: #b4b4b6;
+  font-size: 12px;
+}
+
+.leverageFooter {
+  height: 57px;
+  flex: 0 0 57px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px;
+  border-top: 1px solid #31323a;
+  box-sizing: border-box;
+}
+
+.leverageValueBadge span {
+  flex: 0 0 auto;
+  width: 8px;
+  text-align: left;
+}
+
+.leverageConfirm {
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: 1px solid #31323a;
+  background: #2d2e36;
+  color: #f3f3f3;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.marginOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.marginOption {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 12px;
+  border: 1px solid #31323a;
+  border-radius: 2px;
+  background: #17181f;
+  color: #d3d3d5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.marginOptionSelected {
+  background: #1f2027;
+}
+
+.marginCheck {
+  width: 16px;
+  height: 16px;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #4a4b54;
+  border-radius: 2px;
+  color: #f5f5f5;
+  background: #17181f;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.marginOptionSelected .marginCheck {
+  background: #22232b;
+}
+
+.marginCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.marginTitle {
+  color: #f5f5f5;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.marginText {
+  color: #b4b4b6;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.35;
+}
+
+.marginModal {
+  width: 440px;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #31323a;
+  border-radius: 8px;
+  background: #17181f;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.marginHeader {
+  min-height: 41px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #31323a;
+  color: #b4b4b6;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.marginClose {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f5f5f5;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.marginBody {
+  min-height: 232px;
+  padding: 12px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.marginFooter {
+  min-height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px;
+  border-top: 1px solid #31323a;
+  box-sizing: border-box;
+}
+
+.marginConfirm {
+  width: 100%;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #31323a;
+  border-radius: 2px;
+  background: #22232b;
+  color: #f5f5f5;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}

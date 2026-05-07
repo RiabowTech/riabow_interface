@@ -1,0 +1,102 @@
+/**
+ * L 形角饰（lighter.xyz 式 bracket：SVG 描边），hover 时角向中心微移。
+ * `tl-br`：左上 + 右下；`--all`：四角。
+ * 子元素需为角饰后的第一个内容节点（与 __corners 相邻）。
+ */
+.primit-corner-bracket-frame {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+.primit-corner-bracket-frame--all {
+  display: block;
+  width: 100%;
+}
+
+.primit-corner-bracket-frame__corners {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.primit-corner-bracket-frame__corner {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  color: color-mix(in srgb, var(--Button-Text-White, #ffffff) 58%, transparent);
+  transform: translate(0, 0);
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.18s ease;
+}
+
+.primit-corner-bracket-frame__corner path {
+  stroke: currentColor;
+  stroke-width: 0.55;
+}
+
+.primit-corner-bracket-frame__corner--tl {
+  top: 0;
+  left: 0;
+}
+
+.primit-corner-bracket-frame__corner--br {
+  right: 0;
+  bottom: 0;
+}
+
+.primit-corner-bracket-frame--all .primit-corner-bracket-frame__corner--tr {
+  top: 0;
+  right: 0;
+}
+
+.primit-corner-bracket-frame--all .primit-corner-bracket-frame__corner--bl {
+  bottom: 0;
+  left: 0;
+}
+
+/**
+ * 必须用「直接子级 __corners」限定，否则外层（如顶栏 layout=all）:hover
+ * 会匹配到内层嵌套的角饰节点，导致误触子组件（如 Connect Wallet）的角。
+ */
+.primit-corner-bracket-frame:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--tl {
+  transform: translate(5px, 5px);
+}
+
+.primit-corner-bracket-frame:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--br {
+  transform: translate(-5px, -5px);
+}
+
+.primit-corner-bracket-frame--all:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--tr {
+  transform: translate(-5px, 5px);
+}
+
+.primit-corner-bracket-frame--all:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--bl {
+  transform: translate(5px, -5px);
+}
+
+.primit-corner-bracket-frame:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner {
+  color: color-mix(in srgb, var(--Button-Text-White, #ffffff) 78%, transparent);
+}
+
+/* 子节点（按钮）沉在角饰之下，避免底色盖住 SVG */
+.primit-corner-bracket-frame__corners + * {
+  position: relative;
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primit-corner-bracket-frame__corner {
+    transition: color 0.18s ease;
+  }
+
+  .primit-corner-bracket-frame:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--tl,
+  .primit-corner-bracket-frame:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--br,
+  .primit-corner-bracket-frame--all:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--tr,
+  .primit-corner-bracket-frame--all:hover > .primit-corner-bracket-frame__corners .primit-corner-bracket-frame__corner--bl {
+    transform: none;
+  }
+}

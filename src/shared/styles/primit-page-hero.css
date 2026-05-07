@@ -1,0 +1,124 @@
+/**
+ * Primit 正文区页头标题：与 Referrals `.ref-hero__title` / `.ref-hero__sub` 对齐。
+ * 用于 `/earn`（EarnTitle）、`/earn/*`（PageTitle）、Leaderboard 正文标题等。
+ *
+ * 路由级对齐：`--primit-route-gutter-x` / `--primit-route-content-pt` 供 Points / Referrals / Fee VIP
+ * 等壳与页头共用，保证顶栏菜单切换后首屏标题左右与上边距一致。
+ *
+ * 高度：`--primit-page-hero-min-h` 保证单行副标题缺失时条带高度仍与 Earn / Portfolio 一致。
+ */
+
+html[data-ui-theme="primit"] {
+  --primit-route-gutter-x: 20px;
+  --primit-route-content-pt: 24px;
+  /* 与 pd-main / ref-main 块级 gap 对齐 */
+  --primit-route-block-gap: 20px;
+
+  --primit-page-hero-pb: 12px;
+  --primit-page-hero-title-mb: 8px;
+  --primit-page-hero-min-h: 108px;
+  --primit-page-hero-pt: var(--primit-route-content-pt);
+  --primit-page-hero-px: var(--primit-route-gutter-x);
+}
+
+.primit-page-hero {
+  box-sizing: border-box;
+}
+
+.primit-page-hero--inset {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--primit-page-hero-pt, 20px) var(--primit-page-hero-px, 16px) var(--primit-page-hero-pb, 12px);
+  min-height: var(--primit-page-hero-min-h, 108px);
+}
+
+@media (max-width: 768px) {
+  html[data-ui-theme="primit"] {
+    --primit-route-gutter-x: 12px;
+    --primit-route-content-pt: 16px;
+    --primit-route-block-gap: 16px;
+    --primit-page-hero-pb: 10px;
+    --primit-page-hero-min-h: 100px;
+  }
+}
+
+.primit-page-hero__title {
+  margin: 0 0 var(--primit-page-hero-title-mb, 8px);
+  font-family: var(--primit-font-title);
+  font-size: var(--primit-fs-600);
+  font-weight: 600;
+  line-height: var(--primit-lh-title);
+  letter-spacing: 1px;
+  color: var(--primit-secondary-1, #e2e7ed);
+}
+
+.primit-page-hero__subtitle {
+  margin: 0;
+  min-height: calc(12px * 1.4);
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.04em;
+  color: var(--primit-soft-60, rgba(226, 231, 237, 0.6));
+  line-height: 1.4;
+  max-width: 52rem;
+}
+
+.primit-page-hero__subtitle--tag {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+/* EarnPageLayout PageTitle：与 `.primit-page-hero--inset` 同高、同内边距 */
+html[data-ui-theme="primit"] .Page-title-wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: var(--primit-page-hero-pt) var(--primit-page-hero-px) var(--primit-page-hero-pb);
+  min-height: var(--primit-page-hero-min-h);
+  gap: 0;
+}
+
+html[data-ui-theme="primit"] .Page-title-wrapper .Page-title__text {
+  margin: 0 0 var(--primit-page-hero-title-mb);
+  font-family: var(--primit-font-title);
+  font-size: var(--primit-fs-600);
+  font-weight: 600;
+  line-height: var(--primit-lh-title);
+  letter-spacing: 1px;
+  color: var(--primit-secondary-1, #e2e7ed) !important;
+  text-shadow: none;
+}
+
+html[data-ui-theme="primit"] .Page-title-wrapper .Page-title__subtitle {
+  margin: 0;
+  min-height: calc(12px * 1.4);
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.04em;
+  color: var(--primit-soft-60, rgba(226, 231, 237, 0.6));
+  line-height: 1.4;
+  max-width: 52rem;
+}
+
+html[data-ui-theme="primit"] .Page-title-wrapper .Page-title-group {
+  gap: 8px;
+}
+
+/* 无副标题时保留一行副标题占位，与 Leaderboard / 双行页头同高 */
+html[data-ui-theme="primit"] .Page-title-wrapper:not(:has(.Page-title__subtitle))::after {
+  content: "";
+  display: block;
+  min-height: calc(12px * 1.4);
+  flex-shrink: 0;
+}
+
+/* Earn 子页：Primit 下覆盖 mt-12，使 Tab 与标题间距与主内容块 gap 一致 */
+html[data-ui-theme="primit"] .primit-earn-tabs-stack {
+  margin-top: var(--primit-route-block-gap) !important;
+}

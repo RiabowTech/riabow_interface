@@ -1,0 +1,90 @@
+// src/modules/lighter/styles/tokens.scss
+// Tokens extracted from app.lighter.xyz computed styles (2026-04-13).
+// Primit override block at the bottom re-aliases every color/font `--ltr-*`
+// to the corresponding `--primit-*` token when `html[data-ui-theme="primit"]`
+// is on. Structural sizes (row height, nav height, font-size) stay the same so
+// the trading grid keeps its Lighter-style compact density.
+:root {
+  --ltr-bg-root: #06060C;
+  --ltr-bg-panel: #121218;
+  --ltr-bg-panel-2: #0E0E14;
+  --ltr-bg-hover: #15151B;
+  --ltr-border: #2B2B30;
+  --ltr-border-strong: #515155;
+  --ltr-overlay-faint: rgba(255, 255, 255, 0.02);
+  --ltr-overlay-soft: rgba(255, 255, 255, 0.06);
+  --ltr-text-primary: #F3F3F3;
+  --ltr-text-secondary: #B4B4B6;
+  --ltr-text-muted: #6E6E72;
+  --ltr-up: #1BD289;
+  --ltr-down: #FF384F;
+  --ltr-up-bg: rgba(27, 210, 137, 0.10);
+  --ltr-down-bg: rgba(255, 56, 79, 0.10);
+  --ltr-warn-bg: #3A1212;
+
+  --ltr-font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --ltr-row-h: 18px;
+  --ltr-row-h-header: 20px;
+  --ltr-font-body: 12px;
+  --ltr-font-header: 12px;
+  --ltr-font-title: 12px;
+  --ltr-font-weight: 400;
+  --ltr-line-height: 16px;
+
+  --ltr-topnav-h: 56px;
+  --ltr-symbolbar-h: 38px;
+  --ltr-bottom-h: 220px;
+  --ltr-radius: 2px;
+  --ltr-cell-pad-x: 8px;
+
+  /** Lighter 交易页强调色（默认稿）；Primit 下由下方块覆写 */
+  --ltr-accent-cyan: #4ea7ff;
+  --ltr-trade-buy-solid: #159564;
+  --ltr-trade-buy-bright: #19be7d;
+  --ltr-trade-buy-mid: #1bd289;
+  --ltr-trade-buy-mid-soft: #5ae3a7;
+  --ltr-trade-buy-gradient-start: #0a4d2f;
+  --ltr-trade-buy-gradient-end: #1bd289;
+  --ltr-trade-sell-solid: #e63348;
+  --ltr-trade-sell-bright: #ff4c61;
+  --ltr-trade-sell-gradient-start: #5c1420;
+  --ltr-trade-sell-gradient-end: #ff384f;
+}
+
+/**
+ * Primit 主题：交易页强调色 / 涨跌 / 字体对齐 Primit token。
+ * 背景 `--ltr-bg-*`、分割 `--ltr-border*` 保持 :root Lighter 值（不覆写）。
+ */
+html[data-ui-theme="primit"] {
+  --ltr-text-primary: var(--color-typography-primary);
+  --ltr-text-secondary: var(--color-typography-secondary);
+  --ltr-text-muted: var(--primit-soft-50);
+  --ltr-up: var(--primit-others-green);
+  --ltr-down: var(--primit-others-red);
+  --ltr-up-bg: color-mix(in srgb, var(--primit-others-green) 12%, transparent);
+  --ltr-down-bg: color-mix(in srgb, var(--primit-others-red) 12%, transparent);
+  --ltr-warn-bg: color-mix(in srgb, var(--primit-others-red) 22%, transparent);
+  --ltr-font-family: var(--primit-font-body);
+  --ltr-radius: var(--layout-radius-small-container, 8px);
+
+  --ltr-accent-cyan: var(--primit-primary-1);
+  --ltr-trade-buy-solid: color-mix(in srgb, var(--primit-others-green) 78%, #000000);
+  --ltr-trade-buy-bright: color-mix(in srgb, var(--primit-others-green) 88%, #ffffff);
+  --ltr-trade-buy-mid: var(--primit-others-green);
+  --ltr-trade-buy-mid-soft: color-mix(in srgb, var(--primit-others-green) 72%, #ffffff);
+  --ltr-trade-buy-gradient-start: color-mix(in srgb, var(--primit-others-green) 30%, #000000);
+  --ltr-trade-buy-gradient-end: var(--primit-others-green);
+  --ltr-trade-sell-solid: color-mix(in srgb, var(--primit-others-red) 78%, #000000);
+  --ltr-trade-sell-bright: color-mix(in srgb, var(--primit-others-red) 88%, #ffffff);
+  --ltr-trade-sell-gradient-start: color-mix(in srgb, var(--primit-others-red) 34%, #000000);
+  --ltr-trade-sell-gradient-end: var(--primit-others-red);
+}
+
+[data-ltr-scope] {
+  font-family: var(--ltr-font-family);
+  font-size: var(--ltr-font-body);
+  font-weight: var(--ltr-font-weight);
+  line-height: var(--ltr-line-height);
+  color: var(--ltr-text-primary);
+  background: var(--ltr-bg-root);
+}

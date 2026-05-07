@@ -1,0 +1,2 @@
+export { PastPerformanceChart } from "./PastPerformanceChart";
+

@@ -1,0 +1,132 @@
+.chart-token-selector {
+  padding-left: 0.4rem;
+  margin-right: 0.5rem;
+
+  .Dropdown-current {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--color-typography-primary);
+  }
+
+  .Dropdown-current-arrow {
+    font-size: var(--font-size-body-small);
+    color: var(--color-slate-100);
+    margin-left: 1rem;
+    margin-top: -2px;
+  }
+
+  .Dropdown-options {
+    width: 15.8rem;
+    top: 4.6rem;
+    left: -0.6rem;
+  }
+
+  .Dropdown-option {
+    font-size: var(--font-size-body-small);
+    height: 3.4rem;
+    font-weight: 700;
+  }
+}
+
+.TVChart-top-card {
+  height: 58px;
+  display: flex;
+  align-items: center;
+}
+
+.Chart-header {
+  display: grid;
+  grid-template-columns: minmax(auto, max-content) auto;
+  background-color: var(--color-slate-900);
+}
+
+.Chart-top-scrollable {
+  display: grid;
+  grid-template-columns: auto auto auto auto max-content;
+  grid-column-gap: 2.4rem;
+  align-items: center;
+  overflow: hidden;
+  overflow-x: auto;
+  position: relative;
+  margin-right: 15px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.Chart-top-scrollable-fade-right,
+.Chart-top-scrollable-fade-left {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  max-width: 50px;
+  height: 100%;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+  pointer-events: all;
+}
+
+.Chart-top-scrollable-fade-left {
+  justify-content: flex-start;
+  background: linear-gradient(to left, transparent, var(--color-slate-950) 50%, var(--color-slate-950));
+}
+
+.Chart-top-scrollable-fade-right {
+  justify-content: flex-end;
+  background: linear-gradient(to right, transparent, var(--color-slate-950) 50%, var(--color-slate-950));
+}
+
+.Chart-header-value {
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+}
+
+@media (max-width: 1024px) {
+  .Chart-24h-low {
+    display: block;
+  }
+
+  .Chart-header {
+    grid-template-columns: minmax(auto, max-content) auto;
+  }
+}
+
+.Synthetics-chart {
+  height: min(536px, 60vh);
+
+  @media (max-width: $screen-md) and (max-height: 600px) {
+    height: calc(100svh - 200px);
+    min-height: 320px;
+  }
+
+  @media (min-width: $screen-lg) and (max-width: 2559px) {
+    min-height: 536px;
+  }
+
+  @media (min-width: 2560px) and (max-width: 3839px) {
+    min-height: 780px;
+  }
+
+  @media (min-width: 3840px) {
+    min-height: 1140px;
+  }
+}
+
+// XBlade Gold Theme for TradingView Drawing Toolbar
+.toggleButton-OhcB9eH7 {
+  .background-OhcB9eH7 {
+    fill: #FFD700 !important; // Bright gold
+  }
+
+  .arrow-OhcB9eH7 {
+    stroke: #1e2033 !important; // Dark background color for contrast
+  }
+
+  &:hover .background-OhcB9eH7 {
+    fill: #DAA520 !important; // Deep gold on hover
+  }
+}

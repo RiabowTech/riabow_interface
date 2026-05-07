@@ -1,0 +1,45 @@
+/**
+ * Primit 覆盖层 · 表头筛选（路径 A）
+ * 钩子：`.TableFilterBase-filter`、`.TableFilterBase-filter-popover`（`TableFilterBase.scss`）
+ * 与 `DateRangeSelect-popover` / trade 模块表面、主色混边一致；`TableOptionsFilter-options` 内部分割线。
+ */
+
+html[data-ui-theme="primit"] .TableFilterBase-filter-popover {
+  border-radius: 0 !important;
+  background-color: var(--primit-trade-module-bg, var(--text-bg-color-secondary-3, #191919)) !important;
+  border: 0.5px solid
+    color-mix(
+      in srgb,
+      var(--primit-primary-1, #87d7ea) 22%,
+      var(--primit-trade-divider, rgba(226, 231, 237, 0.12))
+    ) !important;
+}
+
+html[data-ui-theme="primit"] .TableOptionsFilter-options {
+  border-top: 1px solid
+    color-mix(
+      in srgb,
+      var(--primit-primary-1, #87d7ea) 14%,
+      var(--primit-trade-divider, rgba(226, 231, 237, 0.12))
+    );
+}
+
+html[data-ui-theme="primit"] .TableOptionsFilter-clear {
+  color: var(--primit-secondary-2, #9ca3af);
+}
+
+html[data-ui-theme="primit"] .TableOptionsFilter-clear:hover {
+  color: var(--primit-secondary-1, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .TableFilterBase-filter:not(.active):hover {
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .TableFilterBase-filter.active {
+  color: var(--primit-primary-1, #87d7ea);
+}
+
+html[data-ui-theme="primit"] .TableFilterBase-filter.active:hover {
+  color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 88%, #ffffff 12%);
+}

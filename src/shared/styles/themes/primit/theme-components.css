@@ -1,0 +1,27 @@
+/**
+ * Primit 组件主题聚合层（与 legacy 基础组件样式分离）。
+ * 切换整站组件皮肤时，在 `src/app/theme/component-themes.ts` 中改 import 目标即可。
+ */
+@import "./button.primit.css";
+@import "./checkbox.primit.css";
+@import "./tabs.primit.css";
+@import "./modal.primit.css";
+@import "./primit-input-select.primit.css";
+@import "./orderbook.primit.css";
+@import "./primit-big-tab.primit.css";
+@import "./trade-inputs.primit.css";
+@import "./search-input.primit.css";
+@import "./table-filter-base.primit.css";
+@import "./leverage-slider.primit.css";
+@import "./dropdown-panels.primit.css";
+@import "./scrollbar.primit.css";
+@import "./network-dropdown.primit.css";
+@import "./loading.primit.css";
+@import "./date-range-select.primit.css";
+@import "./tooltip.primit.css";
+@import "./points.primit.css";
+@import "./feeVip.primit.css";
+@import "./account-dashboard.primit.css";
+@import "./leaderboard.primit.css";
+@import "./earn.primit.css";
+@import "./referrals.primit.css";

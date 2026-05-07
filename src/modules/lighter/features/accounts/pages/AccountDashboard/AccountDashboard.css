@@ -1,0 +1,48 @@
+/* Account Dashboard Card */
+.account-dashboard-card {
+  padding: 0 0 40px;
+  background: transparent;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* 账户页 Tab 与 Hero 标题一致的左右内边距（与 /earn 的 primit-page-hero--inset 对齐） */
+.account-dashboard-card > .account-tabs {
+  margin-left: var(--primit-route-gutter-x, 20px);
+}
+
+/* Portfolio tabs container */
+.account-tabs {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 380px; /* 增加最大宽度，让 tabs 更长 */
+}
+
+/* Historical Lists tabs background */
+.historical-lists-tabs {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .account-dashboard-card {
+    padding: 0 0 24px;
+    gap: 24px;
+  }
+
+  .account-tabs {
+    width: 100%;
+  }
+
+  [data-qa="portfolio-tabs"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+

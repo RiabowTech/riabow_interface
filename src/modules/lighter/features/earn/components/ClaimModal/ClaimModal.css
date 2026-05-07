@@ -1,0 +1,310 @@
+/* Claim Modal Styles - 参考 SubscriptionModal */
+.claim-modal {
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.claim-modal .Modal-content {
+  position: relative;
+  background: rgba(0, 0, 0, 0.95);
+  border: none;
+  border-radius: 16px;
+  width: fit-content;
+  min-width: 400px;
+  max-width: 90vw;
+  overflow: visible;
+}
+
+/* 渐变边框效果 - 参考首页卡片样式 */
+.claim-modal .Modal-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--earn-accent) 80%, transparent) 0%,
+    color-mix(in srgb, var(--earn-accent) 50%, transparent) 25%,
+    color-mix(in srgb, var(--earn-accent) 10%, transparent) 50%,
+    color-mix(in srgb, var(--earn-accent) 50%, transparent) 75%,
+    color-mix(in srgb, var(--earn-accent) 80%, transparent) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.claim-modal .Modal-title {
+  color: var(--earn-accent) !important;
+}
+
+.claim-modal-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.claim-modal-content {
+  position: relative;
+  z-index: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Field Row */
+.claim-field-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.claim-field-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--primit-font-body);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.claim-field-value {
+  color: #fff;
+  font-family: var(--primit-font-body);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-align: right;
+}
+
+/* Total Amount Row - Highlighted */
+.claim-total-row {
+  padding: 16px 0;
+}
+
+.claim-total-amount {
+  color: var(--earn-accent);
+  font-family: var(--primit-font-body);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.5px;
+}
+
+/* Address */
+.claim-address {
+  font-size: 12px;
+  word-break: break-all;
+}
+
+/* Footer */
+.claim-modal-footer {
+  position: relative;
+  z-index: 1;
+  padding: 16px 24px 24px;
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.claim-btn {
+  flex: 1;
+  padding: 12px 24px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 1px !important;
+}
+
+.claim-btn-full {
+  width: 100%;
+  padding: 12px 24px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 1px !important;
+}
+
+/* Status Content Styles */
+.claim-status-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  gap: 20px;
+}
+
+/* Loading */
+.claim-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.claim-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid color-mix(in srgb, var(--earn-accent) 10%, transparent);
+  border-top-color: var(--earn-accent);
+  border-radius: 50%;
+  animation: claim-spin 1s linear infinite;
+}
+
+@keyframes claim-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Status Icon */
+.claim-status-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 300;
+}
+
+.claim-success-icon {
+  background: color-mix(in srgb, var(--earn-accent) 10%, transparent);
+  border: 2px solid var(--earn-accent);
+  color: var(--earn-accent);
+  box-shadow: 0 0 30px color-mix(in srgb, var(--earn-accent) 40%, transparent);
+  animation: claim-success-pulse 2s ease-in-out infinite;
+}
+
+@keyframes claim-success-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--earn-accent) 30%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 40px color-mix(in srgb, var(--earn-accent) 60%, transparent);
+  }
+}
+
+.claim-failed-icon {
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid #ef4444;
+  color: #ef4444;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+}
+
+/* Status Text */
+.claim-status-title {
+  font-family: var(--primit-font-body);
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.claim-success-title {
+  color: var(--earn-accent);
+}
+
+.claim-failed-title {
+  color: #ef4444;
+}
+
+.claim-status-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--primit-font-body);
+  font-size: 16px;
+  margin: 0;
+}
+
+.claim-error-detail {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--primit-font-body);
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .claim-modal .Modal-content {
+    min-width: unset;
+    width: 95vw;
+    max-width: 95vw;
+  }
+
+  .claim-modal-content {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+
+  .claim-field-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .claim-field-label {
+    font-size: 12px;
+  }
+
+  .claim-field-value {
+    font-size: 13px;
+    text-align: left;
+  }
+
+  .claim-address {
+    font-size: 11px;
+  }
+
+  .claim-modal-footer {
+    padding: 12px 16px 20px;
+    gap: 8px;
+  }
+
+  .claim-btn,
+  .claim-btn-full {
+    padding: 12px 16px !important;
+    font-size: 13px !important;
+  }
+
+  .claim-status-content {
+    min-height: 180px;
+    gap: 16px;
+  }
+
+  .claim-spinner {
+    width: 40px;
+    height: 40px;
+  }
+
+  .claim-status-text {
+    font-size: 13px;
+  }
+
+  .claim-status-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .claim-status-title {
+    font-size: 16px;
+  }
+
+  .claim-error-detail {
+    font-size: 12px;
+  }
+}

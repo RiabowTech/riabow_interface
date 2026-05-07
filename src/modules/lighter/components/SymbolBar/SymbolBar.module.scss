@@ -1,0 +1,209 @@
+.wrapper {
+  position: relative;
+  z-index: 20;
+
+  /** ------------------------------------------------------------------
+   *  ChartTokenSelector button 紧凑版（SymbolBar 作用域限定）
+   *  ------------------------------------------------------------------
+   *  目标密度与右侧 stats（12–13px）对齐：
+   *    - 按钮高度 40 → 32
+   *    - TokenIcon 20 → 14
+   *    - 主标 13 → 11；次标 12 → 10
+   *    - Chevron 16 → 14
+   *    - gap / padding 全部收紧
+   */
+  :global(.primit-ui-button--intent-secondary) {
+    min-height: 32px;
+    height: 32px;
+    /** min-width: max-content 防止父 flex 压缩 button，导致 chevron 被 border 裁 */
+    min-width: max-content;
+    gap: 6px;
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+  }
+  /* TokenIcon（.Token-icon 带 inline rounded-full） → 14×14 */
+  :global(.primit-ui-button--intent-secondary .Token-icon) {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  /* 主标 BTC/USD → 11px */
+  :global(.primit-ui-button--intent-secondary .text-typography-primary) {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  /* 次标 [BTC-USDT] → 10px */
+  :global(.primit-ui-button--intent-secondary .text-typography-secondary) {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+  /* ChevronDownIcon 16 → 14 */
+  :global(.primit-ui-button--intent-secondary svg) {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.root {
+  display: flex; align-items: center;
+  gap: 16px;
+  padding: 4px 8px;  /* 给 32px 按钮 + 2px focus outline + 2px offset 上下各 4px 呼吸 */
+  min-height: 40px;  /* 32 + 4×2 = 40px，刚好装下 button + focus ring */
+  background: var(--ltr-bg-root);
+}
+/**
+ * Primit 市场选择器：左侧 cyan accent 竖条 + "BASE/QUOTE" 主标 + "[BASE-USDT]" 次标。
+ * 颜色全部走 --ltr-* token（已在 tokens.scss primit override 块里指向 --primit-*）。
+ */
+.symbol {
+  position: relative;
+  height: 40px;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 12px 0 18px;
+  font-size: 14px; font-weight: 500;
+  color: var(--ltr-text-primary);
+  /** 与 interface_copy 一致：父 module 用 `--primit-trade-module-bg`，按钮本身透明；
+   *  这里直接把 module bg 贴到按钮上，避免再引入额外 token 分叉 */
+  background: var(--primit-trade-module-bg);
+  border: 0;
+  border-radius: var(--layout-radius-8, 8px);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+/** 左侧 cyan accent 竖条 —— 与 image 1 一致 */
+.symbol::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--primit-primary-1, #87d7ea);
+  border-radius: 2px;
+}
+.symbol:hover {
+  /** 保持透视：在 module bg 上叠一层 primit-soft overlay（与 3013 hover 行为一致） */
+  background: color-mix(in srgb, var(--primit-soft-5) 100%, var(--primit-trade-module-bg));
+}
+.symbol:hover,
+.symbol:focus,
+.symbol:focus-visible {
+  color: var(--ltr-text-primary) !important;
+}
+.symbol:hover .pairName,
+.symbol:focus .pairName,
+.symbol:focus-visible .pairName {
+  color: var(--ltr-text-primary);
+}
+.coinIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+.pairName {
+  font-family: var(--primit-font-title, var(--ltr-font-family));
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: var(--ltr-text-primary);
+  white-space: nowrap;
+}
+.instId {
+  font-family: var(--primit-font-body, var(--ltr-font-family));
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--ltr-text-secondary);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+/** 向后兼容：其他地方若仍用 .symName / .btcIcon / .lev */
+.btcIcon { width: 20px; height: 20px; flex-shrink: 0; }
+.symName { font-weight: 500; color: var(--ltr-text-primary); }
+.lev {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 20px; padding: 0 6px;
+  background: var(--ltr-overlay-soft);
+  border-radius: 4px;
+  color: var(--ltr-text-secondary);
+  font-size: 12px; font-weight: 400;
+  line-height: 16px;
+}
+.caret {
+  width: 12px;
+  height: 12px;
+  margin-left: 2px;
+  color: var(--ltr-text-secondary);
+  opacity: 0.9;
+  transition: transform 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+  transform-origin: center;
+}
+.symbol:hover .caret,
+.symbol:focus .caret,
+.symbol:focus-visible .caret {
+  color: var(--ltr-text-primary) !important;
+  opacity: 1;
+}
+.symbol:global(.SelectorBase-button-open) .caret,
+.symbol :global(.SelectorBase-chevron-open).caret {
+  transform: rotate(180deg);
+}
+
+.stats {
+  display: flex; align-items: center;
+  gap: 12px;  /* 16 → 12 压缩 stats 之间的间距 */
+  min-width: 0;  /* 允许 flex child 在需要时收缩 */
+}
+.stat {
+  display: flex; flex-direction: column; gap: 0;
+  min-width: 0;  /* 50 → 0 让 stat 按自身内容宽度，不强制下限 */
+  white-space: nowrap;
+}
+.label {
+  color: #b4b4b6;
+  font-size: 11px;  /* 12 → 11 */
+  font-weight: 400;
+  line-height: 14px;
+}
+.labelLink {
+  text-decoration: underline dotted;
+  text-underline-offset: 2px;
+  text-decoration-color: #717173;
+  cursor: help;
+}
+.value {
+  font-size: 11px;  /* 12 → 11 */
+  font-weight: 400;
+  line-height: 14px;
+  color: #f3f3f3;
+  font-variant-numeric: tabular-nums;
+}
+
+.fundingGroup {
+  position: relative;
+  display: flex; align-items: center;
+  gap: 10px;  /* 16 → 10 */
+  padding: 0 8px;  /* 0 12 → 0 8 */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.corner {
+  position: absolute;
+  width: 4px; height: 4px;
+  pointer-events: none;
+}
+
+.cornerTL { top: 1px; left: 1px; border-top: 1px solid rgba(255, 255, 255, 0.15); border-left: 1px solid rgba(255, 255, 255, 0.15); }
+.cornerTR { top: 1px; right: 1px; border-top: 1px solid rgba(255, 255, 255, 0.15); border-right: 1px solid rgba(255, 255, 255, 0.15); }
+.cornerBL { bottom: 1px; left: 1px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); border-left: 1px solid rgba(255, 255, 255, 0.15); }
+.cornerBR { bottom: 1px; right: 1px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); border-right: 1px solid rgba(255, 255, 255, 0.15); }
+
+.marketSelectorPanel {
+  width: min(1368px, calc(100vw - 24px));
+  max-height: 680px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}

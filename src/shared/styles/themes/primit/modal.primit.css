@@ -1,0 +1,173 @@
+/**
+ * Primit 主题 · Modal Popup（第 11 章 Popup_PC，variant="primit"）
+ * 基础弹层见 `shared/components/Modal/Modal.css`。
+ */
+
+.Modal.Modal--primit-popup {
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.Modal.Modal--primit-popup .Modal-backdrop {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel {
+  box-sizing: border-box;
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  gap: 40px !important;
+  padding: 24px;
+  border: none;
+  border-radius: 0;
+  /**
+   * 面板恒为炭底稿面；勿用主题里的 --primit-secondary-1 做字色（浅色主题下为深色，会「糊在炭底上」）。
+   * 正文/标题栈见 `--primit-font-body` / `--primit-font-title`（Messina Sans）；按钮见 .primit-ui-button--main-40。
+   */
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+  background: var(--primit-secondary-3, rgba(25, 25, 25, 1));
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  overflow: hidden;
+}
+
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel--small {
+  width: min(500px, calc(100vw - 32px));
+}
+
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel--middle {
+  width: min(500px, calc(100vw - 32px));
+  height: min(400px, 85vh);
+  min-height: min(400px, 85vh);
+}
+
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel--big {
+  width: min(750px, calc(100vw - 32px));
+  height: min(500px, 85vh);
+  min-height: min(500px, 85vh);
+}
+
+.Modal.Modal--primit-popup .Modal-header-wrapper--primit {
+  padding: 0;
+  gap: 0;
+}
+
+.Modal.Modal--primit-popup .Modal-title-bar {
+  height: auto;
+  min-height: 0;
+}
+
+.Modal.Modal--primit-popup .Modal-title-bar--primit-close-only {
+  justify-content: flex-end;
+}
+
+.primit-popup__title-in-modal {
+  margin: 0;
+  font-family: var(--primit-font-title, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+.Modal.Modal--primit-popup .primit-popup-panel--big .primit-popup__title-in-modal {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.Modal.Modal--primit-popup .Modal-close-button {
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+  transition: opacity 0.15s ease;
+}
+
+.Modal.Modal--primit-popup .Modal-close-button:hover {
+  opacity: 0.85;
+}
+
+.Modal.Modal--primit-popup .Modal-close-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 65%, transparent);
+  outline-offset: 2px;
+}
+
+.Modal.Modal--primit-popup .Modal-close-icon--primit {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel--middle > .overflow-auto,
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel--big > .overflow-auto {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto !important;
+}
+
+.Modal.Modal--primit-popup .Modal-body {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 0 !important;
+}
+
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel--middle .Modal-body,
+.Modal.Modal--primit-popup .Modal-content.primit-popup-panel--big .Modal-body {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.Modal.Modal--primit-popup .Modal-footer--primit {
+  padding: 0 !important;
+}
+
+.primit-popup__body {
+  min-height: 0;
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+.primit-popup__body--placeholder {
+  box-sizing: border-box;
+  min-height: 48px;
+  border: 1px dashed var(--primit-accent-a50, rgba(226, 231, 237, 0.5));
+}
+
+.primit-popup__footer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 提高优先级，避免全局 `button` 样式或侧栏继承压过 MainBtn 的 `--primit-font-button` 栈 */
+.Modal.Modal--primit-popup .primit-popup__footer .primit-ui-button.primit-ui-button--main-40 {
+  font-family: var(--primit-font-button, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+}
+
+.primit-popup__footer-btn {
+  flex: 0 0 auto;
+  width: 160px;
+  max-width: 100%;
+}
+
+.primit-popup__footer-btn--big {
+  width: 200px;
+}
+
+/* Storybook：Primit Modal 示例正文去默认段落边距 */
+.primit-modal-primit-story-p {
+  margin: 0;
+}

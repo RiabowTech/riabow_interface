@@ -1,0 +1,208 @@
+/**
+ * Primit 覆盖层 · 交易区金额/价格输入（路径 A）
+ * 钩子：`.BuyInputSection-box`、`Suggestion-input-wrapper .Suggestion-input`
+ * 对齐 `primit-input-select.primit.css` 中 Main Input 壳体（`155-987` 系 token）。
+ */
+
+/* ========== BuyInputSection（TradeBox / Position 等）========== */
+
+html[data-ui-theme="primit"] .BuyInputSection-box {
+  border-radius: 0;
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+  transition:
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+html[data-ui-theme="primit"]
+  .BuyInputSection-box:hover:not([data-ui-disabled="true"]):not(:focus-within) {
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 12%, transparent) 0%,
+      color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 12%, transparent) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box:focus-within:not([data-ui-disabled="true"]) {
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box[data-ui-disabled="true"] {
+  border: 0.5px solid var(--primit-accent-a5, rgba(226, 231, 237, 0.05)) !important;
+  box-shadow: none;
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box input[type="text"] {
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: var(--primit-fs-300, 14px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--primit-secondary-1, #e2e7ed);
+  caret-color: var(--primit-primary-1, #87d7ea);
+  background: transparent !important;
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box input[type="text"]::placeholder {
+  color: var(--primit-accent-a50, rgba(226, 231, 237, 0.5));
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box[data-ui-disabled="true"] input[type="text"] {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+  cursor: not-allowed;
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box [data-label="left"] {
+  color: var(--primit-accent-a60, rgba(226, 231, 237, 0.6));
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box [data-label="right"] .text-typography-secondary {
+  color: var(--primit-accent-a60, rgba(226, 231, 237, 0.6));
+}
+
+html[data-ui-theme="primit"] .BuyInputSection-box .shrink-0.text-20 {
+  font-size: var(--primit-fs-300, 14px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--primit-secondary-1, #e2e7ed);
+}
+
+/* ========== SuggestionInput（侧车价格/百分比等）========== */
+
+html[data-ui-theme="primit"] .Suggestion-input-wrapper .Suggestion-input {
+  border-radius: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+  min-height: 40px;
+  align-items: center;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+  transition:
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+html[data-ui-theme="primit"] .Suggestion-input-wrapper .Suggestion-input:hover:not(.input-error):not(:focus-within) {
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 12%, transparent) 0%,
+      color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 12%, transparent) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+html[data-ui-theme="primit"] .Suggestion-input-wrapper .Suggestion-input:focus-within:not(.input-error) {
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+html[data-ui-theme="primit"] .Suggestion-input-wrapper .Suggestion-input.input-error {
+  box-shadow:
+    0 0 0 0.5px var(--primit-others-red),
+    0 0 4px color-mix(in srgb, var(--primit-others-red) 35%, transparent);
+  background-color: transparent !important;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+html[data-ui-theme="primit"] .Suggestion-input-wrapper .Suggestion-input .text-typography-secondary {
+  color: var(--primit-accent-a60, rgba(226, 231, 237, 0.6));
+}
+
+html[data-ui-theme="primit"] .Suggestion-input-wrapper .Suggestion-input input[type="text"] {
+  padding: 0 4px !important;
+  border-radius: 0 !important;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: var(--primit-fs-300, 14px) !important;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--primit-secondary-1, #e2e7ed) !important;
+  caret-color: var(--primit-primary-1, #87d7ea);
+  background: transparent !important;
+}
+
+html[data-ui-theme="primit"] .Suggestion-input-wrapper .Suggestion-input input[type="text"]::placeholder {
+  color: var(--primit-accent-a50, rgba(226, 231, 237, 0.5)) !important;
+}

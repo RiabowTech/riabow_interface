@@ -1,0 +1,268 @@
+.button {
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  border: none;
+  user-select: none;
+  font-family: "Messina Sans";
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.left {
+    justify-content: start;
+  }
+
+  &.right {
+    justify-content: end;
+  }
+
+  &.primary {
+    color: var(--primary-btn-bg);
+    border-radius: 8px;
+    font-weight: 600; // Slightly bolder for better readability
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: 
+    linear-gradient(#000, #000) padding-box,
+    linear-gradient(
+     90deg,
+      rgba(0, 255, 178, 0.8) 0%,
+      rgba(0, 255, 178, 0.0) 20%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 255, 178, 0.0) 80%,
+      rgba(0, 255, 178, 0.8) 100%
+    ) border-box;
+  transition: all 0.3s ease;
+    &:not([disabled]):hover {
+      background-color: var(--color-button-primaryHover);
+      border: 2px solid  rgba(0, 255, 178, 0.8) ;
+      box-shadow:
+        inset 0 0 20px rgba(0, 255, 178, 0.85);
+      color: var(--primary-btn-bg);
+    }
+
+    &:not([disabled]):active {
+      background-color: var(--color-button-primaryActive);
+      border: 2px solid  rgba(0, 255, 178, 0.8);
+      box-shadow:
+        0 0 10px rgba(0, 255, 178, 0.8),
+        0 0 20px rgba(0, 255, 178, 0.45),
+        inset 0 0 22px rgba(0, 255, 178, 0.95);
+    }
+  }
+
+  &.primary-action {
+    color: var(--primary-btn-bg);
+    font-weight: 600; // Slightly bolder for better readability
+    border: 2px solid transparent;
+    border-radius: 12px;
+    letter-spacing: 0.1em;
+    background:
+      linear-gradient(#000, #000) padding-box,
+      linear-gradient(
+       90deg,
+        rgba(0, 255, 178, 0.8) 0%,
+        rgba(0, 255, 178, 0.0) 10%,
+        rgba(0, 0, 0, 1) 50%,
+        rgba(0, 255, 178, 0.0) 90%,
+        rgba(0, 255, 178, 0.8) 100%
+      ) border-box;
+    transition: all 0.3s ease;
+
+    // 默认 medium 尺寸
+    font-size: 16px;
+    min-height: 40px;
+
+    &:not([disabled], .disabled):hover {
+      /* Hover 时填充绿色渐变并加强外发光，模拟设计稿下图效果 */
+    border: 2px solid  rgba(0, 255, 178, 0.8) ;
+      box-shadow:
+        inset 0 0 20px rgba(0, 255, 178, 0.85);
+      color: var(--primary-btn-bg);
+
+    }
+
+    &:not([disabled], .disabled):active {
+      border: 2px solid  rgba(0, 255, 178, 0.8);
+      box-shadow:
+        0 0 10px rgba(0, 255, 178, 0.8),
+        0 0 20px rgba(0, 255, 178, 0.45),
+        inset 0 0 22px rgba(0, 255, 178, 0.95);
+
+    }
+
+    // Short (sell) 状态 - 红色样式（与预测市场 NO 配色一致）
+    &.short {
+      color: #f6465d;
+      background:
+        linear-gradient(#000, #000) padding-box,
+        linear-gradient(
+         90deg,
+          rgba(246, 70, 93, 0.8) 0%,
+          rgba(246, 70, 93, 0.0) 10%,
+          rgba(0, 0, 0, 1) 50%,
+          rgba(246, 70, 93, 0.0) 90%,
+          rgba(246, 70, 93, 0.8) 100%
+        ) border-box;
+
+      &:not([disabled], .disabled):hover {
+        border: 2px solid rgba(255, 82, 82, 0.8);
+        box-shadow: inset 0 0 20px rgba(255, 82, 82, 0.85);
+        color: #ff5252;
+      }
+
+      &:not([disabled], .disabled):active {
+        border: 2px solid rgba(255, 82, 82, 0.8);
+        box-shadow:
+          0 0 10px rgba(255, 82, 82, 0.8),
+          0 0 20px rgba(255, 82, 82, 0.45),
+          inset 0 0 22px rgba(255, 82, 82, 0.95);
+      }
+    }
+  }
+
+
+  &.secondary {
+    background: var(--color-button-secondary);
+    border-radius: 8px;
+    color: var(--color-typography-secondary);
+    position: relative;
+    letter-spacing: 0;
+
+    > .btn-image {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 2.3rem;
+      max-width: 2.3rem;
+      margin-right: 1.15rem;
+    }
+
+    > .arrow-icon {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      max-width: 0.8rem;
+    }
+
+    &:not([disabled], .disabled):hover {
+      background-color: var(--color-button-secondaryHover);
+      color: var(--color-typography-primary);
+    }
+
+    &:not([disabled], .disabled):active {
+      background: var(--color-button-secondary);
+      color: var(--color-typography-primary);
+    }
+  }
+
+  &.ghost {
+    background-color: transparent;
+    border-radius: 8px;
+    color: var(--color-slate-100);
+    position: relative;
+    letter-spacing: 0;
+
+    > .btn-image {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 2.3rem;
+      max-width: 2.3rem;
+      margin-right: 1.15rem;
+    }
+
+    > .arrow-icon {
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      max-width: 0.8rem;
+    }
+
+    &:not([disabled], .disabled):hover {
+      color: var(--color-typography-primary);
+      background-color: var(--color-fill-surfaceHover);
+    }
+
+    &:not([disabled], .disabled):active {
+      color: var(--color-typography-primary);
+      background: var(--color-slate-800);
+    }
+  }
+
+  &.link {
+    color: var(--color-slate-100);
+    text-decoration: underline;
+    padding: 0;
+
+    &.disabled {
+      text-decoration: none;
+    }
+
+    &:not([disabled], .disabled):hover {
+      color: var(--color-typography-primary);
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    box-shadow: none;
+    cursor: not-allowed;
+    color: var(--color-slate-500);
+
+    &.primary-action,
+    &.primary {
+      background-color: var(--color-slate-800);
+    }
+
+    &.secondary {
+      background-color: var(--color-button-secondaryDisabled);
+    }
+  }
+
+  /* TradeBox trade-mode tabs 特殊样式 - 使用更高优先级覆盖 !text-typography-primary */
+  &[data-qa^="trade-mode-tab-"] {
+    position: relative;
+    background: transparent !important;
+    border-radius: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-family: "Messina Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px !important;
+    letter-spacing: 0.16em !important;
+    padding: 0 16px 6px !important;
+    text-transform: none;
+    transition: color 0.2s ease;
+
+    // 未激活状态
+    &:not(.secondary) {
+      color: rgba(255, 255, 255, 0.6) !important;
+
+      &:hover {
+        color: #ffffff !important;
+        background: transparent !important;
+      }
+    }
+
+    // 激活状态 - 使用更高优先级覆盖 !text-typography-primary
+    &.secondary {
+      color: #00ffb2 !important;
+      background: transparent !important;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -3px;
+        height: 3px;
+        background: #00ffb2;
+        border-radius: 999px;
+      }
+    }
+  }
+}

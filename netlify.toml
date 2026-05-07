@@ -1,0 +1,35 @@
+[build]
+  publish="./build"
+  base = "."
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Clickjacking: deny framing except same-origin (frame-ancestors in CSP is
+    # authoritative on modern browsers; X-Frame-Options remains for legacy UAs).
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+    # Disable powerful APIs we never use. Keeps compromised third-party scripts
+    # from silently flipping a camera/mic/geolocation on.
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), fullscreen=(self)"
+    # HSTS: force HTTPS for 1y across subdomains, preload-eligible.
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+    # CSP — replaces the earlier permissive policy:
+    # * dropped `'unsafe-eval'` (kept `'wasm-unsafe-eval'` only, required by the
+    #   EVM crypto WASM modules in viem / @noble/*)
+    # * dropped `connect-src *` — exhaustive scheme+host allowlist instead. This
+    #   blocks the "exfiltrate localStorage to any URL" XSS payload pattern.
+    # * added `frame-ancestors 'none'`, `object-src 'none'`, `base-uri 'self'`,
+    #   `form-action 'self'`, `upgrade-insecure-requests`.
+    # `'unsafe-inline'` on script-src remains pending a nonce-based build pass;
+    # tracked as P2 (removing it without breaking TradingView / Netlify-CDP is
+    # non-trivial and warrants its own PR).
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' netlify-cdp-loader.netlify.app; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; worker-src 'self' blob:; manifest-src 'self'; media-src 'self' data: blob:; frame-src 'self' https://verify.walletconnect.com https://verify.walletconnect.org https://secure.walletconnect.com https://secure.walletconnect.org app.netlify.com; connect-src 'self' https://api.primit.io wss://api.primit.io https://api-sepolia.primit.io wss://api-sepolia.primit.io https://api.renance.xyz wss://api.renance.xyz https://api-sepolia.renance.xyz wss://api-sepolia.renance.xyz https://*.alchemy.com wss://*.alchemy.com https://*.g.alchemy.com wss://*.g.alchemy.com https://*.publicnode.com wss://*.publicnode.com https://*.drpc.org wss://*.drpc.org https://*.blastapi.io wss://*.blastapi.io https://*.arbitrum.io wss://*.arbitrum.io https://*.avax.network wss://*.avax.network https://*.base.org wss://*.base.org https://*.optimism.io wss://*.optimism.io https://*.gmxinfra.io https://*.ingest.sentry.io https://*.ingest.us.sentry.io https://*.sentry.io https://*.walletconnect.com wss://*.walletconnect.com https://*.walletconnect.org wss://*.walletconnect.org https://*.reown.com wss://*.reown.com https://*.coingecko.com https://assets.coingecko.com"

@@ -1,0 +1,100 @@
+/**
+ * Primit · Referrals（/referrals）
+ * 与 Earn / API Keys / Points 等页一致：主区底色由 AppPageLayout 滚动层
+ * `PRIMIT_MAIN_SURFACE`（炭色 secondary-3）提供，本页不再叠「壳衬底灰 + 居中黑卡」。
+ * 结构钩子：`referrals-page`（包住 Tab + 内容，全宽）。
+ *
+ * Tab：使用 `shared/ui` 的 `Tabs`（`type="block"`），视觉与下划线颜色走全局 `tabs.primit.css`
+ *（`--primit-primary-1`），本文件仅做页面级 padding 与居中，勿再覆盖 `.tab-underline-indicator` / 按钮底色。
+ */
+
+html[data-ui-theme="primit"] .referrals-page {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 0;
+  min-height: 0;
+  flex-direction: column;
+}
+
+html[data-ui-theme="primit"] .referrals-page .referrals-tab-content {
+  margin-top: 0;
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+}
+
+/** 顶栏 Tab 行：左右 padding 归零。下划线 / 字色 / 直角由 `tabs.primit.css` 统一 */
+html[data-ui-theme="primit"].dark .referrals-page > [data-tabs-type="block"],
+html[data-ui-theme="primit"]:not(.dark) .referrals-page > [data-tabs-type="block"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 0 !important;
+}
+
+/** TRADERS / AFFILIATES 两枚居中（组件库默认左对齐） */
+html[data-ui-theme="primit"] .referrals-page [data-qa="referrals-tabs"] .tabs-row--block {
+  justify-content: center;
+}
+
+/** 稿面大写：不改变配色与圆角（由 block Tab 组件库规则决定） */
+html[data-ui-theme="primit"] .referrals-page [data-qa="referrals-tabs"] button {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* 表单区：模块内居中，与 legacy `.referral-card` 同宽节奏，无底色素块冲突 */
+html[data-ui-theme="primit"].dark .referrals-page .referral-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+html[data-ui-theme="primit"]:not(.dark) .referrals-page .referral-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+html[data-ui-theme="primit"].dark .referrals-page .referral-card .title,
+html[data-ui-theme="primit"].dark .referrals-page .referral-card .sub-title {
+  color: var(--primit-fg-on-mainbtn);
+}
+
+/** 主 CTA / 角饰外框与标题同宽居中（避免 w-full 角饰层比按钮宽、右下漂出） */
+html[data-ui-theme="primit"] .referrals-page .referral-card .card-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+html[data-ui-theme="primit"].dark .referrals-page .referral-card .card-action input.text-input,
+html[data-ui-theme="primit"].dark .referrals-page .referral-card input.text-input {
+  border-radius: 6px;
+  border: 1px solid var(--primit-trade-divider-strong);
+  background: var(--primit-soft-5);
+  color: var(--primit-fg-on-mainbtn);
+  padding: 12px 14px;
+}
+
+html[data-ui-theme="primit"].dark .referrals-page .referral-card input.text-input::placeholder {
+  color: var(--primit-soft-50);
+}
+
+html[data-ui-theme="primit"]:not(.dark) .referrals-page .referral-card .card-action input.text-input,
+html[data-ui-theme="primit"]:not(.dark) .referrals-page .referral-card input.text-input {
+  border-radius: 6px;
+}
+
+/**
+ * PrimitReferralsPage（`.ref-page`）不走 legacy `.referrals-page` 壳；
+ * token 与 Points `.pd-page`（`points.primit.css`）对齐。
+ */
+html[data-ui-theme="primit"] .ref-page {
+  --ref-text: var(--primit-secondary-1);
+  --ref-primary-2: var(--primit-primary-2);
+  --ref-card-fill: var(--primit-surface-mainbtn, #20272f);
+  --ref-card-glow: 0 0 4px 0 color-mix(in srgb, var(--primit-primary-1) 20%, transparent);
+  --ref-surface: var(--primit-trade-module-bg, var(--text-bg-color-secondary-3, #191919));
+}

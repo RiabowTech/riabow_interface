@@ -1,0 +1,447 @@
+.modal {
+  :global(.Modal-backdrop) {
+    background: rgba(0, 0, 0, 0.56);
+  }
+}
+
+.modalContent {
+  // 旧实现固定 entire=556/partial=636 高度,切中文或位置数据变长时底部 submit 被裁。
+  // 改成按内容自适应 + 视口上限 calc(100vh - 48px),仍保留 min-height 保证视觉高度。
+  width: 440px;
+  max-height: calc(100vh - 48px);
+  border: 1px solid #35353d;
+  border-radius: 8px;
+  background: #15151b;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #f3f3f3;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+
+  :global(.Modal-header-wrapper) {
+    gap: 0;
+    padding: 0;
+  }
+
+  :global(.Modal-body) {
+    flex: 1;
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  :global(.Modal-title-bar) {
+    width: 100%;
+    height: 41px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #303039;
+    box-sizing: border-box;
+  }
+
+  :global(.Modal-title) {
+    color: #b8b8bc;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+
+  :global(.Modal-close-button) {
+    width: 16px;
+    height: 16px;
+    right: 16px;
+    top: 12px;
+    color: #e8e8ea;
+  }
+
+  :global(.Modal-close-icon) {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// 保留 modifier 类名(供 JSX 侧继续传递、日后需要重新区分高度时扩展用),
+// 当前两档统一由内容+视口决定尺寸,不再钉死高度。
+.modalContentEntire,
+.modalContentPartial {
+  min-height: 480px;
+}
+
+.body {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background: #15151b;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.bodyEntire,
+.bodyPartial {
+  // 两档共用同一套尺寸策略,靠 flex 撑开到 modalContent 剩余空间。
+  // 原来的 480/560 固定值已被 max-height + scrollContent.overflow-y 替代。
+}
+
+.modeTabsWrap {
+  display: flex;
+  height: fit-content;
+  min-height: 32px;
+  overflow: auto;
+  background: #15151b;
+}
+
+.modeTabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 32px;
+  overflow: hidden;
+  background: #15151b;
+}
+
+.tabsDivider {
+  width: 100%;
+  border-bottom: 1px solid #303039;
+}
+
+.modeTab {
+  height: 32px;
+  min-height: 32px;
+  position: relative;
+  border: 0;
+  padding: 8px;
+  background: #15151b;
+  color: #b8b8bc;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 150ms, background 150ms, box-shadow 150ms;
+}
+
+.modeTab:hover {
+  color: #fff;
+}
+
+.modeTabActive {
+  background: #2a2a2f;
+  color: #f3f3f3;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 1px;
+    width: 60%;
+    max-width: 64px;
+    height: 2px;
+    transform: translateX(-50%);
+    // 与 Lighter 主题色对齐(原为 #6f86ff 紫蓝,不符合 Primit 青绿主色)
+    background: var(--primit-primary-1, #87d7ea);
+    border-radius: 999px;
+  }
+}
+
+.scrollContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  border-radius: 4px;
+  background: #15151b;
+  padding: 16px;
+}
+
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.infoLabel {
+  color: #b8b8bc;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.infoValue {
+  color: #f3f3f3;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.up {
+  color: var(--ltr-up);
+}
+
+.down {
+  color: var(--ltr-down);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionTitle {
+  color: #f3f3f3;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.field {
+  height: 32px;
+  // 与 /trade 输入框(global.scss .ltr-form__field)保持一致:20% 主题色描边,hover 40%
+  border: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 20%, transparent);
+  border-radius: 4px;
+  background: #24242a;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  min-width: 0;
+  transition: border-color 150ms, background 150ms;
+
+  &:hover {
+    border-color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 40%, transparent);
+    background: #26262c;
+  }
+
+  &:focus-within {
+    border-color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 55%, transparent);
+  }
+}
+
+.selectField {
+  cursor: default;
+}
+
+.fieldLabel {
+  color: #f3f3f3;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.fieldValue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.input {
+  width: 100%;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f3f3f3;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  appearance: none;
+  -webkit-appearance: none;
+
+  &::placeholder {
+    color: #828285;
+  }
+}
+
+.trailingText,
+.selectValue {
+  color: #b8b8bc;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.caretIcon {
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #b8b8bc;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.slider {
+  position: relative;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sliderTrack {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #24242a;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 -4px;
+    border-radius: 999px;
+    background: #24242a;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+.sliderTicks {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.sliderTick {
+  width: 2px;
+  height: 10px;
+  border-radius: 2px;
+  border: 1px solid #3a3a42;
+  background: transparent;
+}
+
+.sliderRange {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  height: 8px;
+  border-radius: 999px;
+  background: transparent;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 2px 0;
+    left: 0;
+    right: 0;
+    border-radius: 2px 0 0 2px;
+    opacity: 0.5;
+    background: linear-gradient(to right, #51525b, #b8b8bc);
+  }
+}
+
+.sliderThumb {
+  position: absolute;
+  top: 6px;
+  width: 6px;
+  height: 20px;
+  border-radius: 999px;
+  border: 0.4px solid #b8b8bc;
+  backdrop-filter: blur(16px);
+  background: #d7d9df;
+}
+
+.checkboxRow {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.secondaryLabel {
+  color: #b8b8bc;
+}
+
+.lightValue {
+  font-weight: 300;
+}
+
+.submitButton {
+  width: 100%;
+  height: 32px;
+  min-height: 32px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid #2b2b30;
+  border-radius: 4px;
+  background: #1f1f24;
+  color: rgba(243, 243, 243, 0.45);
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 150ms, border-color 150ms, opacity 150ms, color 150ms, box-shadow 150ms;
+  cursor: auto;
+  box-sizing: border-box;
+
+  &:not(:disabled) {
+    cursor: pointer;
+    opacity: 1;
+    color: #f3f3f3;
+    border-color: #2fc48d;
+    background: linear-gradient(180deg, #2fc48d 0%, #24ab79 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  &:not(:disabled):hover {
+    border-color: #36d298;
+    background: linear-gradient(180deg, #36d298 0%, #28b883 100%);
+  }
+
+  &:not(:disabled):active {
+    background: linear-gradient(180deg, #29b27f 0%, #219d6f 100%);
+  }
+
+  &:disabled {
+    cursor: auto;
+    opacity: 0.5;
+    border-color: #2b2b30;
+    background: #15151b;
+  }
+}

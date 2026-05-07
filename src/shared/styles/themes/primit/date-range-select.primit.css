@@ -1,0 +1,86 @@
+/**
+ * Primit · 日期范围/单日选择器（DateRangeSelect）：与 trade 模块同系表面色与主色强调。
+ */
+html[data-ui-theme="primit"] .DateRangeSelect-popover {
+  box-sizing: border-box;
+  padding: 12px 14px 14px;
+  background: var(--primit-trade-module-bg, var(--text-bg-color-secondary-3, #191919));
+  border-color: color-mix(
+    in srgb,
+    var(--primit-primary-1, #87d7ea) 22%,
+    var(--primit-trade-divider, rgba(226, 231, 237, 0.12))
+  );
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar {
+  background: transparent;
+  color: var(--primit-secondary-1, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__navigation {
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 16%, transparent);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__navigation button:enabled {
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 72%, transparent);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__navigation__label {
+  font-family: var(--primit-font-tab, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 90%, transparent);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__month-view__weekdays {
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 55%, transparent);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__month-view__days__day {
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 78%, transparent);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__month-view__days__day--neighboringMonth {
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 32%, transparent);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__tile--active abbr,
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__tile--active.react-calendar__tile--rangeStart abbr,
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__tile--active.react-calendar__tile--rangeEnd abbr,
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__tile--hasActive abbr {
+  background: var(--primit-primary-1, #87d7ea) !important;
+  color: var(--primit-secondary-3, #0f1419) !important;
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__tile--range:not(.react-calendar__tile--rangeStart):not(.react-calendar__tile--rangeEnd) {
+  background: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 14%, transparent);
+  color: var(--primit-secondary-1, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-reactCalendar .react-calendar__tile--now::after {
+  background-color: var(--primit-primary-1, #87d7ea);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-presets {
+  border-top: 1px solid
+    var(--Accent-color-AC-20, color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 20%, transparent));
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-preset {
+  border-color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 42%, transparent);
+  background: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 10%, var(--primit-trade-module-bg, #191919));
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 92%, transparent);
+  font-family: var(--primit-font-button, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-preset:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 18%, var(--primit-trade-module-bg, #191919));
+  color: var(--primit-secondary-1, #e2e7ed);
+}
+
+html[data-ui-theme="primit"] .DateRangeSelect-preset:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 55%, transparent);
+  outline-offset: 1px;
+}

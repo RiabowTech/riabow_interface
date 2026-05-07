@@ -1,0 +1,88 @@
+:root {
+  --modal-z-index: 1001;
+}
+
+.Modal {
+  position: fixed;
+  z-index: var(--modal-z-index);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.Modal-scrollable .Modal-content .Modal-body {
+  overscroll-behavior: smooth;
+  max-height: calc(80vh - 5.5rem);
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.Modal-backdrop {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #090a1480;
+}
+
+.Modal-content {
+  z-index: 20;
+  position: relative;
+  max-width: 100%;
+  max-height: 90vh;
+  overflow: auto;
+  background: var(--color-slate-900);
+  border-radius: 8px;
+  border: 0.5px solid var(--color-slate-600);
+  display: flex;
+  flex-direction: column;
+}
+
+.Modal.non-scrollable .Modal-content {
+  overflow: visible;
+}
+
+.Modal-title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Modal-title {
+  text-align: left;
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body-large);
+}
+
+.Modal-close-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  margin: 0;
+  text-align: right;
+  cursor: pointer;
+  background: transparent;
+  line-height: 0;
+}
+
+.Modal-close-icon {
+  color: var(--color-slate-100);
+  cursor: pointer;
+  text-align: right;
+}
+
+.Modal-close-icon:hover {
+  opacity: 0.9;
+}
+
+/* Primit Popup（variant="primit"）：`styles/themes/primit/modal.primit.css`，由 `app/theme/component-themes.ts` 加载 */

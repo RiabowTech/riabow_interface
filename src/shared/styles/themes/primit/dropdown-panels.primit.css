@@ -1,0 +1,12 @@
+/**
+ * Primit · 下拉 / 浮层列表面板外框：品牌主色描边
+ * 与稿面 `Brand-color-Primary-1` / `#87D7EA` 对齐；未定义变量时回退同色。
+ */
+html[data-ui-theme="primit"] .SelectorBase-panel,
+html[data-ui-theme="primit"] .menu-items,
+html[data-ui-theme="primit"] .nested-tab-dropdown,
+html[data-ui-theme="primit"] .primit-dropdown-panel,
+html[data-ui-theme="primit"] .ui-dropdown-filter__menu {
+  border: 0.5px solid var(--Brand-color-Primary-1, #87d7ea) !important;
+  border-radius: 0 !important;
+}

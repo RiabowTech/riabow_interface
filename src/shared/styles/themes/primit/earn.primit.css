@@ -1,0 +1,125 @@
+/**
+ * 理财页（/earn）：Primit 壳内主区已有 secondary-3 衬底，去掉全屏纯黑 #090909，与账户/交易页一体。
+ * min-height:0 覆盖 Earn.css 的 100vh：避免壳内 flex 最小高度叠视口滚动出现双滚动条。
+ */
+html[data-ui-theme="primit"] .earn-page-wrapper,
+html[data-ui-theme="primit"] .earn-page {
+  background: transparent;
+  min-height: 0;
+}
+
+/**
+ * 个人中心 · Primit Account「理财」Tab（`EarnContent`）
+ * 与 `account-dashboard.primit`、`--earn-accent` / PrimitColors 对齐，避免独立一块霓虹渐变与壳脱节。
+ */
+html[data-ui-theme="primit"] .earn-content {
+  gap: 28px;
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-summary {
+  gap: 20px;
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-summary-card {
+  padding: 20px 24px;
+  border-radius: 0;
+  background: var(--primit-soft-10);
+  border: 1px solid var(--primit-soft-15);
+  box-shadow: 0 0 3px color-mix(in srgb, var(--primit-primary-1) 10%, transparent);
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-summary-label {
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: var(--primit-fs-250, 13px);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--primit-secondary-2);
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-summary-value {
+  font-family: var(--primit-font-title, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: var(--primit-fs-900, 32px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--earn-accent, var(--primit-primary-1));
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-section-title {
+  font-family: var(--primit-font-title, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-size: var(--primit-fs-600, 20px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--earn-accent, var(--primit-primary-1));
+}
+
+html[data-ui-theme="primit"] .earn-content .subscription-row {
+  border-radius: 0;
+  background: var(--primit-soft-5);
+  border: 1px solid var(--primit-soft-15);
+}
+
+html[data-ui-theme="primit"] .earn-content .subscription-field-label {
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  color: var(--primit-secondary-2);
+  text-transform: none;
+  letter-spacing: 0.03em;
+}
+
+html[data-ui-theme="primit"] .earn-content .subscription-product-name,
+html[data-ui-theme="primit"] .earn-content .subscription-field-value {
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  color: var(--primit-secondary-1);
+}
+
+html[data-ui-theme="primit"] .earn-content .subscription-interest {
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-weight: 600;
+  color: var(--earn-accent, var(--primit-primary-1));
+}
+
+html[data-ui-theme="primit"] .earn-content .subscription-divider {
+  background: var(--primit-soft-15);
+}
+
+html[data-ui-theme="primit"] .earn-content .info-label {
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  color: var(--primit-secondary-2);
+  text-transform: none;
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-history-table-container {
+  border-radius: 0;
+  background: var(--primit-soft-10);
+  border: 1px solid var(--primit-soft-15);
+  box-shadow: 0 0 3px color-mix(in srgb, var(--primit-primary-1) 8%, transparent);
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-history-table .TableTh {
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  font-weight: 600;
+  color: var(--primit-secondary-2);
+  text-transform: none;
+  letter-spacing: 0.03em;
+  background: var(--primit-soft-5);
+  border-bottom: 1px solid var(--primit-soft-15);
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-history-table .TableTd {
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+  color: var(--primit-secondary-1);
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-history-table .TableTr {
+  border-bottom-color: var(--primit-soft-15);
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-history-table .TableTr:hover {
+  background: var(--primit-soft-5);
+}
+
+html[data-ui-theme="primit"] .earn-content .earn-history-table .earn-apr-value {
+  color: var(--earn-accent, var(--primit-primary-1));
+  font-weight: 600;
+}

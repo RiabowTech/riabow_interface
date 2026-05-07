@@ -1,0 +1,325 @@
+/* ============================================
+   StarCraft 2 Style Scanning Loading Effect
+   ============================================ */
+
+/* Content area overlay：无侧栏（顶栏导航）时 left 应为 0 */
+.scan-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: var(--detected-sidebar-width, 0px);
+  right: 0;
+  height: 100vh;
+  background: transparent;
+  z-index: 9999;
+ 
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 40px;
+  pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+  .scan-loading-overlay {
+    left: var(--detected-sidebar-width, 0px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .scan-loading-overlay {
+    left: 0;
+    padding: 24px;
+  }
+  
+  .scan-line-horizontal {
+    left: 0;
+  }
+  
+  .scan-line-vertical {
+    left: 0;
+  }
+  
+  /* Unified mobile positioning for both masks */
+  .scan-reveal-mask-vertical,
+  .scan-blur-mask-horizontal {
+    left: 0;
+  }
+  
+  .scan-blur-mask-horizontal {
+    width: 100vw;
+  }
+  
+  @keyframes scanVertical {
+    0% {
+      left: 0;
+      opacity: 1;
+    }
+    100% {
+      left: 100vw;
+      opacity: 1;
+    }
+  }
+}
+
+/* Common blur mask style - unified effect for all directions */
+.scan-reveal-mask-vertical,
+.scan-blur-mask-horizontal {
+  position: fixed;
+  top: var(--detected-header-height, 80px);
+  left: var(--detected-sidebar-width, 0px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Vertical mask - moves down */
+.scan-reveal-mask-vertical {
+  right: 0;
+  height: calc(100vh - var(--detected-header-height, 80px));
+  transform-origin: top;
+  animation: slideRevealVertical var(--scan-duration, 2s) ease-in-out forwards;
+  z-index: 5;
+}
+
+/* Horizontal mask - moves right */
+.scan-blur-mask-horizontal {
+  width: calc(100vw - var(--detected-sidebar-width, 0px));
+  height: calc(100vh - var(--detected-header-height, 80px));
+  transform-origin: left;
+  animation: blurRevealHorizontal var(--scan-duration, 2s) ease-in-out var(--scan-vertical-delay, 0.2s) forwards;
+  z-index: 6;
+}
+
+/* Horizontal scanning line - starts from header */
+.scan-line-horizontal {
+  position: fixed;
+  top: var(--detected-header-height, 80px);
+  left: var(--detected-sidebar-width, 0px);
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    transparent 20%,
+    var(--earn-accent) 50%,
+    transparent 80%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 30px color-mix(in srgb, var(--earn-accent) 100%, transparent),
+    0 0 60px color-mix(in srgb, var(--earn-accent) 60%, transparent),
+    0 0 100px color-mix(in srgb, var(--earn-accent) 30%, transparent);
+  animation: scanHorizontal var(--scan-duration, 2s) ease-in-out forwards;
+  z-index: 10;
+}
+
+/* 竖向扫描线：从顶栏下沿开始，避免与顶栏菜单重叠 */
+.scan-line-vertical {
+  position: fixed;
+  top: var(--detected-header-height, 80px);
+  left: var(--detected-sidebar-width, 0px);
+  width: 2px;
+  height: calc(100vh - var(--detected-header-height, 80px));
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 20%,
+    var(--earn-accent) 50%,
+    transparent 80%,
+    transparent 100%
+  );
+  box-shadow: 
+    0 0 30px color-mix(in srgb, var(--earn-accent) 100%, transparent),
+    0 0 60px color-mix(in srgb, var(--earn-accent) 60%, transparent),
+    0 0 100px color-mix(in srgb, var(--earn-accent) 30%, transparent);
+  animation: scanVertical var(--scan-duration, 2s) ease-in-out var(--scan-vertical-delay, 0.2s) forwards;
+  z-index: 10;
+}
+
+/* Center container for radar and text - positioned in bottom right */
+.scan-center {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 8;
+  animation: centerFadeOut var(--scan-center-fade-duration, 0.75s) ease-out var(--scan-center-fade-delay, 1.5s) forwards;
+}
+
+/* Radar scanning effect */
+.scan-radar {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  border: 2px solid color-mix(in srgb, var(--earn-accent) 40%, transparent);
+  border-radius: 50%;
+  animation: radarPulse var(--scan-duration, 2s) ease-out forwards;
+  z-index: 8;
+}
+
+/* Scanning text */
+.scan-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--earn-accent);
+  font-family: var(--primit-font-title);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-shadow: 
+    0 0 10px color-mix(in srgb, var(--earn-accent) 80%, transparent),
+    0 0 20px color-mix(in srgb, var(--earn-accent) 40%, transparent);
+  animation: textFlicker var(--scan-duration, 2s) ease-in-out infinite;
+  z-index: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes fadeOut {
+  to {
+    opacity: 0.8;
+    visibility: hidden;
+  }
+}
+
+@keyframes centerFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Unified reveal animation - vertical direction */
+@keyframes slideRevealVertical {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0.8;
+  }
+}
+
+/* Unified reveal animation - horizontal direction */
+@keyframes blurRevealHorizontal {
+  0% {
+    transform: translateX(0) scaleX(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) scaleX(0);
+    opacity: 0.8;
+  }
+}
+
+@keyframes scanHorizontal {
+  0% {
+    top: var(--detected-header-height, 80px);
+    opacity: 1;
+  }
+  100% {
+    top: 100vh;
+    opacity: 1;
+  }
+}
+
+@keyframes scanVertical {
+  0% {
+    left: var(--detected-sidebar-width, 0px);
+    opacity: 1;
+  }
+  100% {
+    left: 100vw;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1200px) {
+  @keyframes scanVertical {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: calc(100vw - var(--detected-sidebar-width, 0px));
+      opacity: 0;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  @keyframes scanVertical {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      left: 100vw;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes radarPulse {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes textFlicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ============================================
+   Mobile Adjustments
+   ============================================ */
+
+@media (max-width: 768px) {
+  .scan-radar {
+    width: 160px;
+    height: 160px;
+  }
+
+  .scan-text {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+}
+

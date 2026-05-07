@@ -1,0 +1,374 @@
+/**
+ * 仅当 html 挂 `sb-skin-dex` | `sb-skin-prediction` | `sb-skin-rwa`（Storybook 产品线切换）时生效：
+ * 在 Primit 组件结构上恢复「经典」圆角实色按钮，与各皮肤 `--ui-*` 配色一致。
+ * 生产环境与 Storybook「Primit」皮肤不挂上述 class，仍用 `themes/primit/button.primit.css` 的 Figma 稿面。
+ */
+
+html.sb-skin-dex .primit-ui-button,
+html.sb-skin-prediction .primit-ui-button,
+html.sb-skin-rwa .primit-ui-button {
+  border-width: 1px;
+}
+
+/* —— Main 40：圆角、无左侧竖线、字重与旧版一致 —— */
+html.sb-skin-dex .primit-ui-button--main-40,
+html.sb-skin-prediction .primit-ui-button--main-40,
+html.sb-skin-rwa .primit-ui-button--main-40 {
+  border-radius: var(--layout-radius-8, 8px);
+  padding: 0 16px;
+  gap: 8px;
+  font-weight: 600;
+  line-height: var(--primit-lh-button, 1.2);
+  letter-spacing: 0.06em;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40::before,
+html.sb-skin-prediction .primit-ui-button--main-40::before,
+html.sb-skin-rwa .primit-ui-button--main-40::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  flex: 0 0 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-main,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-main,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-main {
+  background-image: none !important;
+  background-color: var(--ui-btn-main-bg, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-main-fg, var(--primit-secondary-4)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-main:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-main:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-main:hover:not(:disabled) {
+  filter: brightness(1.08);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  background-image: none !important;
+  background-color: var(--ui-btn-main-bg, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-main-fg, var(--primit-secondary-4)) !important;
+  border-color: transparent !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-main:active:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-main:active:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-main:active:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-secondary,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-secondary,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-secondary {
+  background-image: none !important;
+  background-color: var(--ui-btn-secondary-bg, var(--primit-soft-10)) !important;
+  border-color: var(--ui-btn-secondary-border, var(--primit-gray-100)) !important;
+  color: var(--ui-btn-secondary-fg, var(--primit-secondary-1)) !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-secondary:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-secondary:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-secondary:hover:not(:disabled) {
+  filter: none;
+  background-image: none !important;
+  background-color: var(--ui-btn-secondary-hover-bg, var(--primit-soft-15)) !important;
+  border-color: var(--ui-btn-secondary-hover-border, var(--primit-gray-125)) !important;
+  color: var(--ui-btn-secondary-fg, var(--primit-secondary-1)) !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-third,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-third,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-third {
+  background-image: none !important;
+  background-color: var(--ui-btn-third-bg, var(--primit-soft-10)) !important;
+  border-color: transparent !important;
+  color: var(--ui-btn-third-fg, var(--primit-secondary-2)) !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-third:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-third:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-third:hover:not(:disabled) {
+  filter: none;
+  background-image: none !important;
+  background-color: var(--ui-btn-third-hover-bg, var(--primit-soft-15)) !important;
+  color: var(--ui-btn-third-hover-fg, var(--primit-secondary-1)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-connected,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-connected,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-connected {
+  background-image: none !important;
+  background-color: var(--ui-btn-connected-bg, var(--primit-soft-5)) !important;
+  border-color: var(--ui-btn-connected-border, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-connected-fg, var(--primit-secondary-1)) !important;
+  box-shadow: var(
+    --ui-btn-connected-shadow,
+    inset 0 0 0 1px rgba(46, 189, 133, 0.15)
+  ) !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-connected:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-connected:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-connected:hover:not(:disabled) {
+  filter: none;
+  background-image: none !important;
+  background-color: var(--ui-btn-secondary-hover-bg, var(--primit-soft-10)) !important;
+  border-color: var(--ui-btn-connected-border, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-connected-fg, var(--primit-secondary-1)) !important;
+  box-shadow: var(
+    --ui-btn-connected-shadow,
+    inset 0 0 0 1px rgba(46, 189, 133, 0.15)
+  ) !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-connected .primit-ui-button__label,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-connected .primit-ui-button__label,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-connected .primit-ui-button__label {
+  font-family: var(--primit-font-button, "Messina Sans", system-ui, sans-serif);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* outline / ghost 经典 */
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary {
+  background-image: none !important;
+  background-color: transparent !important;
+  border-color: var(--ui-outline-border, var(--primit-primary-1)) !important;
+  color: var(--ui-outline-fg, var(--primit-primary-1)) !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary::before,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary::before,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary::before {
+  display: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--outline-compat.primit-ui-button--intent-secondary:hover:not(:disabled) {
+  filter: brightness(1.06);
+  background-image: none !important;
+  background-color: var(--ui-btn-main-bg, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-main-fg, var(--primit-secondary-4)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third {
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third::before,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third::before,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third::before {
+  display: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--ghost-compat.primit-ui-button--intent-third:hover:not(:disabled) {
+  filter: none;
+  background-image: none !important;
+  background-color: var(--ui-btn-third-hover-bg, var(--primit-soft-15)) !important;
+  color: var(--ui-btn-third-hover-fg, var(--primit-secondary-1)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Main 40 disabled：与旧版一致用整体透明度 */
+html.sb-skin-dex .primit-ui-button--main-40:disabled,
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--disabled,
+html.sb-skin-prediction .primit-ui-button--main-40:disabled,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--disabled,
+html.sb-skin-rwa .primit-ui-button--main-40:disabled,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--disabled {
+  opacity: 0.48 !important;
+  filter: none !important;
+  cursor: not-allowed;
+  pointer-events: none;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40:disabled::before,
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--disabled::before,
+html.sb-skin-prediction .primit-ui-button--main-40:disabled::before,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--disabled::before,
+html.sb-skin-rwa .primit-ui-button--main-40:disabled::before,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--disabled::before {
+  display: none !important;
+}
+
+/* disabled 时保留各 intent 底色（由透明度统一压暗） */
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-main:disabled,
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--disabled,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-main:disabled,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--disabled,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-main:disabled,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-main.primit-ui-button--disabled {
+  background-color: var(--ui-btn-main-bg, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-main-fg, var(--primit-secondary-4)) !important;
+  border-color: transparent !important;
+}
+
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-secondary:disabled,
+html.sb-skin-dex .primit-ui-button--main-40.primit-ui-button--intent-secondary.primit-ui-button--disabled,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-secondary:disabled,
+html.sb-skin-prediction .primit-ui-button--main-40.primit-ui-button--intent-secondary.primit-ui-button--disabled,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-secondary:disabled,
+html.sb-skin-rwa .primit-ui-button--main-40.primit-ui-button--intent-secondary.primit-ui-button--disabled {
+  background-color: var(--ui-btn-secondary-bg, var(--primit-soft-10)) !important;
+  border-color: var(--ui-btn-secondary-border, var(--primit-gray-100)) !important;
+  color: var(--ui-btn-secondary-fg, var(--primit-secondary-1)) !important;
+}
+
+/* —— Icon 40 经典 —— */
+html.sb-skin-dex .primit-ui-button--icon-40,
+html.sb-skin-prediction .primit-ui-button--icon-40,
+html.sb-skin-rwa .primit-ui-button--icon-40 {
+  border-radius: var(--layout-radius-8, 8px);
+  padding: 0 !important;
+  gap: 0 !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40::before,
+html.sb-skin-prediction .primit-ui-button--icon-40::before,
+html.sb-skin-rwa .primit-ui-button--icon-40::before {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40 .primit-ui-button__inner,
+html.sb-skin-prediction .primit-ui-button--icon-40 .primit-ui-button__inner,
+html.sb-skin-rwa .primit-ui-button--icon-40 .primit-ui-button__inner {
+  flex: none;
+  justify-content: center;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--intent-main,
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--intent-main,
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--intent-main {
+  background-image: none !important;
+  background-color: var(--ui-btn-main-bg, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-main-fg, var(--primit-secondary-4)) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--intent-main:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--intent-main:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--intent-main:hover:not(:disabled) {
+  filter: brightness(1.08);
+  background-image: none !important;
+  background-color: var(--ui-btn-main-bg, var(--primit-primary-1)) !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--intent-secondary,
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--intent-secondary,
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--intent-secondary {
+  background-image: none !important;
+  background-color: var(--ui-btn-secondary-bg, var(--primit-soft-10)) !important;
+  border-color: var(--ui-btn-secondary-border, var(--primit-gray-100)) !important;
+  color: var(--ui-btn-secondary-fg, var(--primit-secondary-1)) !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--intent-secondary:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--intent-secondary:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--intent-secondary:hover:not(:disabled) {
+  filter: none;
+  background-image: none !important;
+  background-color: var(--ui-btn-secondary-hover-bg, var(--primit-soft-15)) !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--intent-third,
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--intent-third,
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--intent-third {
+  background-image: none !important;
+  background-color: var(--ui-btn-third-bg, var(--primit-soft-10)) !important;
+  border-color: transparent !important;
+  color: var(--ui-btn-third-fg, var(--primit-secondary-2)) !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--intent-third:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--intent-third:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--intent-third:hover:not(:disabled) {
+  filter: none;
+  background-image: none !important;
+  background-color: var(--ui-btn-third-hover-bg, var(--primit-soft-15)) !important;
+  color: var(--ui-btn-third-hover-fg, var(--primit-secondary-1)) !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--outline-compat,
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--outline-compat,
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--outline-compat {
+  background-image: none !important;
+  background-color: transparent !important;
+  border-color: var(--ui-outline-border, var(--primit-primary-1)) !important;
+  color: var(--ui-outline-fg, var(--primit-primary-1)) !important;
+  box-shadow: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--outline-compat::before,
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--outline-compat::before,
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--outline-compat::before {
+  display: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--outline-compat:hover:not(:disabled),
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--outline-compat:hover:not(:disabled),
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--outline-compat:hover:not(:disabled) {
+  filter: brightness(1.06);
+  background-image: none !important;
+  background-color: var(--ui-btn-main-bg, var(--primit-primary-1)) !important;
+  color: var(--ui-btn-main-fg, var(--primit-secondary-4)) !important;
+  border-color: transparent !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40:disabled,
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--disabled,
+html.sb-skin-prediction .primit-ui-button--icon-40:disabled,
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--disabled,
+html.sb-skin-rwa .primit-ui-button--icon-40:disabled,
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--disabled {
+  opacity: 0.48 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+html.sb-skin-dex .primit-ui-button--icon-40:disabled::before,
+html.sb-skin-dex .primit-ui-button--icon-40.primit-ui-button--disabled::before,
+html.sb-skin-prediction .primit-ui-button--icon-40:disabled::before,
+html.sb-skin-prediction .primit-ui-button--icon-40.primit-ui-button--disabled::before,
+html.sb-skin-rwa .primit-ui-button--icon-40:disabled::before,
+html.sb-skin-rwa .primit-ui-button--icon-40.primit-ui-button--disabled::before {
+  display: none !important;
+}
+
+/* —— Tab 24：略增大圆角以贴近旧文档 —— */
+html.sb-skin-dex .primit-ui-button--tab-24,
+html.sb-skin-prediction .primit-ui-button--tab-24,
+html.sb-skin-rwa .primit-ui-button--tab-24 {
+  border-radius: var(--layout-radius-6, 6px);
+}

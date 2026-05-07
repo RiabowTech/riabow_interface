@@ -1,0 +1,1 @@
+export { EarnErrorBoundary } from "./EarnErrorBoundary";

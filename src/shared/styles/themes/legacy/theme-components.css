@@ -1,0 +1,6 @@
+/**
+ * Legacy 组件主题聚合层（旧版荧光绿 / 渐变描边等）。
+ * 与 `themes/primit/theme-components.css` 一起在 `app/theme/component-themes.ts` 中加载；
+ * 实际生效由根节点 `data-ui-theme="legacy" | "primit"` 限定（见各 `*.legacy.css` 选择器前缀）。
+ */
+@import "./tabs.legacy.css";

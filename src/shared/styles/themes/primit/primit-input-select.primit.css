@@ -1,0 +1,782 @@
+/**
+ * Primit 主题 · Select / Input（第 8 章）
+ * 路径：`styles/themes/primit/primit-input-select.primit.css`（由 `app/theme/component-themes.ts` 聚合加载）。
+ * 对齐 docs/design/PRIMIT-08-INPUT-SELECT.md。
+ */
+
+/* ========== Select · Main / Secondary · 40 ========== */
+
+.primit-ui-select {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  width: auto;
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 40px;
+  padding: 10px 14px;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  transition:
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.primit-ui-select:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 65%, transparent);
+  outline-offset: 2px;
+}
+
+.primit-ui-select:disabled,
+.primit-ui-select[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.primit-ui-select__lead {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+}
+
+.primit-ui-select--no-line .primit-ui-select__lead {
+  gap: 0;
+}
+
+.primit-ui-select__lead::before {
+  content: "";
+  flex-shrink: 0;
+  width: 1px;
+  height: 16px;
+  align-self: center;
+  background: var(--ui-btn-main-bg, var(--primit-primary-1));
+}
+
+.primit-ui-select--no-line .primit-ui-select__lead::before {
+  display: none;
+}
+
+.primit-ui-select__prefix {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-select__prefix svg {
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-select__text-block {
+  display: inline-flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.primit-ui-select__label {
+  overflow: hidden;
+  flex-shrink: 1;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  text-overflow: ellipsis;
+}
+
+.primit-ui-select__sub {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 350;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+.primit-ui-select__trail {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.primit-ui-select__tag-slot {
+  display: inline-flex;
+  min-width: 52px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.primit-ui-select__chevron {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.primit-ui-select__chevron svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-select__chevron--open svg {
+  transform: rotate(180deg);
+}
+
+/* —— intent main —— */
+.primit-ui-select--intent-main {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-select--intent-main .primit-ui-select__lead::before {
+  background: var(--ui-btn-main-bg, var(--primit-primary-1));
+}
+
+.primit-ui-select--intent-main .primit-ui-select__label {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+}
+
+.primit-ui-select--intent-main .primit-ui-select__sub {
+  color: var(--primit-accent-a60, rgba(226, 231, 237, 0.6));
+}
+
+.primit-ui-select--intent-main:hover:not(:disabled):not([aria-disabled="true"]),
+.primit-ui-select--intent-main.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select--intent-main:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__lead::before,
+.primit-ui-select--intent-main.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__lead::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select--intent-main:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__label,
+.primit-ui-select--intent-main.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__label {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select--intent-main:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__sub,
+.primit-ui-select--intent-main.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__sub {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+  opacity: 0.6;
+}
+
+.primit-ui-select--intent-main:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__chevron,
+.primit-ui-select--intent-main.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+.primit-ui-select--intent-main:disabled,
+.primit-ui-select--intent-main[aria-disabled="true"] {
+  box-shadow: none;
+  opacity: 1;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-select--intent-main:disabled .primit-ui-select__lead::before,
+.primit-ui-select--intent-main[aria-disabled="true"] .primit-ui-select__lead::before {
+  background: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-select--intent-main:disabled .primit-ui-select__label,
+.primit-ui-select--intent-main:disabled .primit-ui-select__sub,
+.primit-ui-select--intent-main[aria-disabled="true"] .primit-ui-select__label,
+.primit-ui-select--intent-main[aria-disabled="true"] .primit-ui-select__sub {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-select--intent-main:disabled .primit-ui-select__chevron,
+.primit-ui-select--intent-main[aria-disabled="true"] .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+/* —— intent secondary —— */
+.primit-ui-select--intent-secondary {
+  border-color: transparent;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-secondary-border, var(--primit-primary-2)),
+    var(--ui-btn-secondary-glow, 0 0 4px rgba(3, 119, 136, 0.2));
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+}
+
+.primit-ui-select--intent-secondary .primit-ui-select__lead::before {
+  background: var(--ui-btn-secondary-border, var(--primit-primary-2));
+}
+
+.primit-ui-select--intent-secondary .primit-ui-select__label {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+}
+
+.primit-ui-select--intent-secondary .primit-ui-select__sub {
+  color: var(--primit-accent-a60, rgba(226, 231, 237, 0.6));
+}
+
+.primit-ui-select--intent-secondary:hover:not(:disabled):not([aria-disabled="true"]),
+.primit-ui-select--intent-secondary.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-secondary-hover-from, var(--primit-primary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select--intent-secondary:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__lead::before,
+.primit-ui-select--intent-secondary.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__lead::before {
+  background: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select--intent-secondary:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__label,
+.primit-ui-select--intent-secondary.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__label {
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select--intent-secondary:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__sub,
+.primit-ui-select--intent-secondary.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__sub {
+  opacity: 0.6;
+}
+
+.primit-ui-select--intent-secondary:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__chevron,
+.primit-ui-select--intent-secondary.primit-ui-select--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+.primit-ui-select--intent-secondary:disabled,
+.primit-ui-select--intent-secondary[aria-disabled="true"] {
+  box-shadow: none;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+}
+
+.primit-ui-select--intent-secondary:disabled .primit-ui-select__lead::before,
+.primit-ui-select--intent-secondary[aria-disabled="true"] .primit-ui-select__lead::before {
+  background: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-select--intent-secondary:disabled .primit-ui-select__label,
+.primit-ui-select--intent-secondary:disabled .primit-ui-select__sub,
+.primit-ui-select--intent-secondary[aria-disabled="true"] .primit-ui-select__label,
+.primit-ui-select--intent-secondary[aria-disabled="true"] .primit-ui-select__sub {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-select--intent-secondary:disabled .primit-ui-select__chevron,
+.primit-ui-select--intent-secondary[aria-disabled="true"] .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+/* 前置 icon 与主行文案组：8px（稿面 spacing/200） */
+.primit-ui-select__prefix-wrap {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ========== Input shell · 40 / 24 ========== */
+
+.primit-ui-input-shell {
+  box-sizing: border-box;
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 8px;
+  border-radius: 0;
+  transition: box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.primit-ui-input-shell--h-40 {
+  min-height: 40px;
+  height: 40px;
+  padding: 10px 14px;
+}
+
+.primit-ui-input-shell--h-24 {
+  min-height: 24px;
+  height: 24px;
+  padding: 3px 14px;
+}
+
+.primit-ui-input-shell--intent-main {
+  border: none;
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-input-shell--intent-main:hover:not(.primit-ui-input-shell--disabled):not(:focus-within) {
+  background-image:
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 12%, transparent) 0%,
+      color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 12%, transparent) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-input-shell--intent-main.primit-ui-input-shell--disabled {
+  border: 0.5px solid var(--primit-accent-a5, rgba(226, 231, 237, 0.05));
+  box-shadow: none;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-input__native {
+  box-sizing: border-box;
+  min-width: 0;
+  flex: 1;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  font-size: var(--primit-fs-300, 14px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--primit-secondary-1, #e2e7ed);
+  caret-color: var(--primit-primary-1, #87d7ea);
+  outline: none;
+}
+
+.primit-ui-input-shell--h-40 .primit-ui-input__native {
+  font-size: var(--primit-fs-300, 14px);
+  font-weight: 600;
+}
+
+.primit-ui-input-shell--h-24 .primit-ui-input__native {
+  font-size: var(--primit-fs-200, 12px);
+  font-weight: 600;
+}
+
+.primit-ui-input__native::placeholder {
+  color: var(--primit-accent-a50, rgba(226, 231, 237, 0.5));
+}
+
+.primit-ui-input-shell--intent-main:hover:not(.primit-ui-input-shell--disabled):not(:focus-within)
+  .primit-ui-input__native::placeholder {
+  color: var(--primit-fg-on-mainbtn, #e2e7ed);
+}
+
+.primit-ui-input-shell--disabled .primit-ui-input__native {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+  cursor: not-allowed;
+}
+
+.primit-ui-input-shell--disabled .primit-ui-input__native::placeholder {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+/* Selected / Input：与稿面 Hover 一致叠白 10% + 炭底 + 黑 20%（Figma `155-987`） */
+.primit-ui-input-shell--intent-main:focus-within:not(.primit-ui-input-shell--disabled) {
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-image:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+/* Story / 静态演示：强制 Hover 壳体（勿用于生产） */
+.primit-ui-input-shell--intent-main.primit-ui-input-shell--force-hover:not(.primit-ui-input-shell--disabled):not(:focus-within) {
+  background-image:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+}
+
+.primit-ui-input__suffix {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+}
+
+.primit-ui-input__suffix-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+}
+
+.primit-ui-input__suffix-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.primit-ui-input-shell--disabled .primit-ui-input__suffix-icon {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+  opacity: 0.6;
+}
+
+.primit-ui-input__suffix-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0;
+  font-size: 12px;
+  font-weight: 350;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  color: var(--primit-accent-a60, rgba(226, 231, 237, 0.6));
+  white-space: nowrap;
+}
+
+.primit-ui-input__suffix-text-line--strong {
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+}
+
+/* double text：第二行稿面为下划线 + secondary-1（Figma Style=double text） */
+.primit-ui-input__suffix-text-line--sub {
+  color: var(--primit-secondary-1, #e2e7ed);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.primit-ui-input-shell--disabled .primit-ui-input__suffix-text-line--sub {
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+  text-decoration-color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+/* ========== Select · Icon only · 40（62×40 · `167-1470`）========== */
+
+.primit-ui-select-icon {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  width: 62px;
+  min-width: 62px;
+  height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 12px;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--primit-font-body, "Messina Sans", system-ui, sans-serif);
+  transition:
+    background 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.primit-ui-select-icon--with-line {
+  gap: 10px;
+}
+
+.primit-ui-select-icon__rail {
+  flex-shrink: 0;
+  width: 1px;
+  height: 16px;
+  align-self: center;
+  background: currentColor;
+}
+
+.primit-ui-select-icon__body {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.primit-ui-select-icon:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 65%, transparent);
+  outline-offset: 2px;
+}
+
+.primit-ui-select-icon:disabled,
+.primit-ui-select-icon[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+.primit-ui-select-icon__lead {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: inherit;
+}
+
+.primit-ui-select-icon__lead svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* —— intent main —— */
+.primit-ui-select-icon--intent-main {
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-main-bg, var(--primit-primary-1)),
+    var(
+      --ui-btn-default-glow,
+      0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+    );
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+  color: var(--ui-btn-main-bg, var(--primit-primary-1));
+}
+
+.primit-ui-select-icon--intent-main:hover:not(:disabled):not([aria-disabled="true"]),
+.primit-ui-select-icon--intent-main.primit-ui-select-icon--force-hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-main-bg, var(--primit-primary-1)) 0%,
+    var(--ui-btn-main-gradient-end, var(--primit-primary-2)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select-icon--intent-main:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__chevron,
+.primit-ui-select-icon--intent-main.primit-ui-select-icon--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+.primit-ui-select-icon--intent-main:disabled,
+.primit-ui-select-icon--intent-main[aria-disabled="true"] {
+  box-shadow: none;
+  opacity: 1;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 0%,
+      var(--ui-btn-surface-charcoal, var(--primit-surface-mainbtn)) 100%
+    );
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-select-icon--intent-main:disabled .primit-ui-select__chevron,
+.primit-ui-select-icon--intent-main[aria-disabled="true"] .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+/* —— intent secondary —— */
+.primit-ui-select-icon--intent-secondary {
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-secondary-border, var(--primit-primary-2)),
+    var(--ui-btn-secondary-glow, 0 0 4px rgba(3, 119, 136, 0.2));
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+  color: var(--primit-accent-a80, rgba(226, 231, 237, 0.8));
+}
+
+.primit-ui-select-icon--intent-secondary:hover:not(:disabled):not([aria-disabled="true"]),
+.primit-ui-select-icon--intent-secondary.primit-ui-select-icon--force-hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-secondary-hover-from, var(--primit-primary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select-icon--intent-secondary:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__chevron,
+.primit-ui-select-icon--intent-secondary.primit-ui-select-icon--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+.primit-ui-select-icon--intent-secondary:disabled,
+.primit-ui-select-icon--intent-secondary[aria-disabled="true"] {
+  box-shadow: none;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-select-icon--intent-secondary:disabled .primit-ui-select__chevron,
+.primit-ui-select-icon--intent-secondary[aria-disabled="true"] .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+/* —— intent third（灰底 + ac-15 叠层 + primary-2 环，稿面 Third 列）—— */
+.primit-ui-select-icon--intent-third {
+  box-shadow:
+    0 0 0 0.5px var(--ui-btn-secondary-border, var(--primit-primary-2)),
+    var(--ui-btn-secondary-glow, 0 0 4px rgba(3, 119, 136, 0.2));
+  background-color: transparent;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a15, rgba(226, 231, 237, 0.15)) 0%, var(--primit-accent-a15, rgba(226, 231, 237, 0.15)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+  color: var(--ui-btn-secondary-border, var(--primit-primary-2));
+}
+
+.primit-ui-select-icon--intent-third:hover:not(:disabled):not([aria-disabled="true"]),
+.primit-ui-select-icon--intent-third.primit-ui-select-icon--force-hover:not(:disabled):not([aria-disabled="true"]) {
+  box-shadow: var(
+    --ui-btn-default-glow,
+    0 0 4px color-mix(in srgb, var(--ui-btn-main-bg, var(--primit-primary-1)) 22%, transparent)
+  );
+  background-image: linear-gradient(
+    90deg,
+    var(--ui-btn-secondary-hover-from, var(--primit-primary-2)) 0%,
+    var(--ui-btn-secondary-gradient-end, var(--primit-primary-3)) 100%
+  );
+  color: var(--ui-btn-hover-label, var(--Button-Text-White, #e2e7ed));
+}
+
+.primit-ui-select-icon--intent-third:hover:not(:disabled):not([aria-disabled="true"]) .primit-ui-select__chevron,
+.primit-ui-select-icon--intent-third.primit-ui-select-icon--force-hover:not(:disabled):not([aria-disabled="true"])
+  .primit-ui-select__chevron {
+  opacity: 0.6;
+}
+
+.primit-ui-select-icon--intent-third:disabled,
+.primit-ui-select-icon--intent-third[aria-disabled="true"] {
+  box-shadow: none;
+  background-image:
+    linear-gradient(0deg, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 0%, var(--primit-accent-a10, rgba(226, 231, 237, 0.1)) 100%),
+    linear-gradient(
+      0deg,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 0%,
+      var(--ui-btn-muted-mid, var(--primit-secondary-2)) 100%
+    );
+  color: var(--primit-accent-a40, rgba(226, 231, 237, 0.4));
+}
+
+.primit-ui-select-icon--intent-third:disabled .primit-ui-select__chevron,
+.primit-ui-select-icon--intent-third[aria-disabled="true"] .primit-ui-select__chevron {
+  opacity: 0.6;
+}

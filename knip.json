@@ -1,0 +1,22 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/index.tsx",
+    "vite.config.ts",
+    "vitest.global-setup.js"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx,js,jsx}!"
+  ],
+  "ignore": [
+    "src/charting_library.d.ts",
+    "src/typechain-types-stargate/**",
+    "src/modules/dex/**",
+    "src/shared/sdk/**/__tests__/**",
+    "src/shared/sdk/**/*.spec.ts",
+    "src/shared/locales/**"
+  ],
+  "ignoreDependencies": [
+    "@types/*"
+  ]
+}

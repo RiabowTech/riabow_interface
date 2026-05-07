@@ -1,0 +1,523 @@
+/* Points dashboard (Figma Primit-Website v1.0 node 145:3195) */
+
+.pd-page {
+  --pd-text: #e2e7ed;
+  --pd-muted: rgba(226, 231, 237, 0.6);
+  /* 仅描边用稿面青；强调色/进度条等用 --pd-primary（Primit 下为 --primit-primary-1） */
+  --pd-border: #56bbc9;
+  --neutral-color-gray-100: rgba(0, 0, 0, 0.2);
+  --pd-primary: #56bbc9;
+  --pd-primary-2: #037788;
+  --pd-yellow: #e7a71e;
+  --pd-green: #28e59b;
+  /* 整页衬底与壳主区 /fee-vip 一致（炭灰模块面）；卡片另用 --pd-card-fill */
+  --pd-surface: #191919;
+  --pd-surface-deep: #12191f;
+  /* Figma Points_Card 外层填充（MainBtn 炭底 #20272F） */
+  --pd-card-fill: #20272f;
+  --pd-card-overlay: var(--neutral-color-gray-100);
+  --pd-card-bg: linear-gradient(0deg, var(--pd-card-overlay) 0%, var(--pd-card-overlay) 100%), var(--pd-card-fill);
+  --pd-card-glow: 0 0 4px 0 rgba(86, 187, 201, 0.2);
+  --pd-card-glow-yellow: 0 0 4px 0 rgba(231, 167, 30, 0.2);
+  --pd-card-glow-green: 0 0 4px 0 rgba(40, 229, 155, 0.2);
+
+  /* 滚动交给 Primit 壳主列（AppRoutes），避免与 .pd-main / .pd-side 嵌套双滚动条 */
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  color: var(--pd-text);
+}
+
+.pd-shell {
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px 20px;
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 工具栏全宽；主卡片区与右侧 Leaderboard 同列对齐（标题在左大模块首行之下） */
+.pd-shell__body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+}
+
+html[data-ui-theme="primit"] .pd-shell {
+  padding: var(--primit-route-content-pt) var(--primit-route-gutter-x) 40px;
+  max-width: none;
+}
+
+.pd-main {
+  flex: 1 1 320px;
+  min-width: 0;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 24px;
+}
+
+.pd-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px;
+  border: none;
+  background: var(--pd-card-bg);
+  box-shadow: var(--pd-card-glow);
+}
+
+.pd-hero__value {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.pd-hero__label {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 14px;
+  color: var(--pd-muted);
+  letter-spacing: 1px;
+}
+
+.pd-hero__right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.pd-hero__dl-label {
+  color: var(--pd-muted);
+}
+
+.pd-hero__dl-value {
+  color: var(--pd-primary);
+}
+
+.pd-muted {
+  color: var(--pd-muted);
+}
+
+.pd-grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.pd-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 267px;
+  padding: 14px;
+  border: none;
+  background: var(--pd-card-bg);
+  box-shadow: var(--pd-card-glow);
+}
+
+.pd-card--yellow {
+  border: none;
+  box-shadow: var(--pd-card-glow-yellow);
+}
+
+.pd-card--green {
+  border: none;
+  box-shadow: var(--pd-card-glow-green);
+}
+
+.pd-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pd-card__title {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.pd-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding: 0 14px;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+}
+
+.pd-tag--cyan {
+  color: var(--pd-primary);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--pd-primary);
+}
+
+.pd-tag--yellow {
+  color: var(--pd-yellow);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--pd-yellow);
+}
+
+.pd-tag--green {
+  color: var(--pd-green);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), var(--pd-green);
+}
+
+.pd-card__value {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+.pd-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.pd-card__desc {
+  margin: 0;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  color: var(--pd-muted);
+  line-height: 1.4;
+}
+
+.pd-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+}
+
+.pd-cap-label--cyan {
+  color: var(--pd-primary);
+  text-align: right;
+}
+
+.pd-cap-label--yellow {
+  color: var(--pd-yellow);
+  text-align: right;
+}
+
+.pd-cap-label--green {
+  color: var(--pd-green);
+  text-align: right;
+}
+
+.pd-capbar__track {
+  position: relative;
+  height: 8px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), #20272f;
+  overflow: hidden;
+}
+
+.pd-capbar__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+.pd-capbar--cyan .pd-capbar__fill {
+  background: var(--pd-primary);
+}
+
+.pd-capbar--yellow .pd-capbar__fill {
+  background: var(--pd-yellow);
+}
+
+.pd-capbar--green .pd-capbar__fill {
+  background: var(--pd-green);
+}
+
+.pd-card__btn {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* MainBtn_40：稿面 SVG（figma-mainbtn）已为浅灰填充，勿再加 invert 滤镜 */
+/* 金 / 青绿 MainBtn 变体已迁入 `themes/primit/button.primit.css` + `mainAccent` API */
+
+.pd-side {
+  flex: 0 1 320px;
+  width: 320px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: none;
+  background: var(--pd-card-bg);
+  box-shadow: var(--pd-card-glow);
+  box-sizing: border-box;
+}
+
+.pd-side__title {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.pd-your-rank {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: none;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%), var(--pd-card-fill);
+  box-shadow: var(--pd-card-glow);
+  font-size: 12px;
+}
+
+.pd-your-rank__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pd-your-rank__hash {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: var(--pd-primary);
+}
+
+.pd-your-rank__pts {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--pd-primary);
+}
+
+.pd-lb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/** Epoch 累计榜：侧栏约可视 12 行内，其余纵向滚动 */
+.pd-lb-list--epoch-scroll {
+  gap: 8px;
+  max-height: min(300px, 32vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding-right: 2px;
+}
+
+.pd-lb-list--epoch-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pd-lb-list--epoch-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--pd-text) 22%, transparent);
+  border-radius: 3px;
+}
+
+.pd-lb-list--epoch-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/** 当日增量榜：约可视 5 行内（含地址+Tier 双行），其余滚动 */
+.pd-lb-list--daily-scroll {
+  gap: 8px;
+  max-height: min(190px, 24vh);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding-right: 2px;
+}
+
+.pd-lb-list--daily-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pd-lb-list--daily-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--pd-text) 22%, transparent);
+  border-radius: 3px;
+}
+
+.pd-lb-list--daily-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pd-lb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.pd-lb-row.is-self .pd-lb-row__addr,
+.pd-lb-row.is-self .pd-lb-row__pts {
+  color: var(--pd-primary);
+}
+
+.pd-lb-row__rank {
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.pd-lb-row__rank--gold {
+  color: #fffb10;
+}
+
+.pd-lb-row__rank--silver {
+  color: #ececec;
+}
+
+.pd-lb-row__rank--bronze {
+  color: #ffb42a;
+}
+
+.pd-lb-row__rank--muted {
+  color: var(--pd-muted);
+}
+
+.pd-lb-row__addr {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pd-lb-row__pts {
+  width: 64px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.pd-side__meta {
+  margin: 0;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+  color: var(--pd-muted);
+  line-height: 1.4;
+}
+
+.pd-divider {
+  height: 1px;
+  background: rgba(226, 231, 237, 0.12);
+  width: 100%;
+}
+
+.pd-side__subtitle {
+  font-family: "Messina Sans", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.pd-ep-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Messina Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 350;
+  letter-spacing: 0.5px;
+}
+
+.pd-ep-pct {
+  color: var(--pd-primary);
+}
+
+.pd-side__range {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 350;
+  color: var(--pd-muted);
+  letter-spacing: 0.5px;
+}
+
+.pd-gainers-empty {
+  margin: 0;
+  line-height: 1.45;
+  font-size: 12px;
+}
+
+.pd-lb-list--gainers {
+  margin-top: 4px;
+}
+
+.pd-side__meta--gainers {
+  margin-top: 8px;
+}
+
+@media (max-width: 1180px) {
+  .pd-shell__body {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+
+  .pd-main {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+
+  .pd-side {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: none;
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 820px) {
+  .pd-grid2 {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-shell {
+    padding: 24px 12px;
+  }
+
+  .pd-hero {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .pd-hero__right {
+    white-space: normal;
+    justify-content: flex-start;
+  }
+}

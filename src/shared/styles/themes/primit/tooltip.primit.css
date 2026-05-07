@@ -1,0 +1,37 @@
+/**
+ * Primit · Tooltip 浮层：与 trade 模块弹层 / DateRangeSelect 同系表面与主色强调，
+ * 覆盖 legacy `Tooltip.scss` 中 Storybook 绿渐变描边（--sb-*）。
+ */
+html[data-ui-theme="primit"] .Tooltip-popup {
+  border-radius: 0;
+  border: 1px solid
+    color-mix(
+      in srgb,
+      var(--primit-primary-1, #87d7ea) 22%,
+      var(--primit-trade-divider, rgba(226, 231, 237, 0.12))
+    );
+  background: var(--primit-trade-module-bg, var(--text-bg-color-secondary-3, #191919));
+  backdrop-filter: blur(14px);
+  box-shadow:
+    0 0 0 0.5px color-mix(in srgb, var(--primit-primary-1, #87d7ea) 28%, transparent),
+    0 10px 28px rgba(0, 0, 0, 0.5);
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 94%, transparent);
+  font-family: var(--primit-font-body, "Messina Sans", ui-sans-serif, system-ui, sans-serif);
+}
+
+html[data-ui-theme="primit"] .Tooltip-popup a {
+  color: var(--primit-primary-1, #87d7ea);
+}
+
+html[data-ui-theme="primit"] .Tooltip-arrow path {
+  fill: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 85%, transparent);
+  stroke: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 35%, transparent);
+}
+
+html[data-ui-theme="primit"] .Tooltip-divider {
+  background-color: var(--primit-trade-divider, rgba(226, 231, 237, 0.12));
+}
+
+html[data-ui-theme="primit"] .Tooltip-number {
+  color: color-mix(in srgb, var(--primit-secondary-1, #e2e7ed) 96%, transparent);
+}

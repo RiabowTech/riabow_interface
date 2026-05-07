@@ -1,0 +1,7 @@
+/**
+ * Fee & VIP（/fee-vip）：卡片/表格不再使用亮青描边；强调色跟 `--primit-primary-1`。
+ */
+html[data-ui-theme="primit"] .fee-vip-page {
+  --fee-vip-accent: var(--primit-primary-1);
+  --fee-vip-card-shadow: 0 0 3px color-mix(in srgb, var(--fee-vip-accent) 12%, transparent);
+}

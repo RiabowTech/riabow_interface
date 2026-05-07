@@ -1,0 +1,25 @@
+/**
+ * PnL 图表卡片：用自定义属性供 Recharts / 图例继承，Primit 下在 `account-dashboard.primit.css` 覆写。
+ */
+.account-pnl-chart-card {
+  background: rgba(255, 255, 255, 0.05);
+  --pnl-chart-tick: var(--color-slate-100);
+  --pnl-chart-axis-line: var(--color-slate-600);
+  --pnl-chart-grid: var(--color-slate-600);
+  --pnl-chart-cursor: var(--color-slate-500);
+  --pnl-chart-cumulative: var(--color-blue-300);
+  --pnl-chart-active-dot-stroke: var(--color-blue-300);
+  --pnl-chart-active-dot-fill: var(--color-slate-900);
+  --pnl-chart-profit: var(--color-green-500);
+  --pnl-chart-loss: var(--color-red-500);
+  --pnl-chart-neutral: var(--color-gray-900);
+}
+
+.account-pnl-chart-card__title {
+  color: var(--color-slate-100);
+}
+
+.DailyAndCumulativePnL-hide-last-tick .recharts-cartesian-axis-tick:last-child {
+  /* Last tick is too close to edge. https://github.com/recharts/recharts/issues/661#issuecomment-297588801 */
+  visibility: hidden;
+}

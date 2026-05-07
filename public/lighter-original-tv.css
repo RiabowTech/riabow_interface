@@ -1,0 +1,23 @@
+@import url("/tradingview-chart.css");
+
+/* Hide TradingView's built-in top-left legend in Original mode only. */
+[class*="legendMainSourceWrapper"] [class*="sourcesWrapper"],
+[class*="legendMainSourceWrapper"] [class*="valuesWrapper"],
+[class*="legendMainSourceWrapper"] [class*="titleWrapper"] {
+  display: none !important;
+}
+
+/* Keep the left drawing toolbar hidden in Original mode. */
+[data-name="left-toolbar-container"],
+[data-name="left-toolbar"],
+[class*="leftToolbar"],
+[class*="left-toolbar"] {
+  display: none !important;
+}
+
+/* Keep the price axis visually distinct without a hard separator line,
+   so the current price line is not cut off at the boundary. */
+.price-axis {
+  background: #101117;
+  box-sizing: border-box;
+}

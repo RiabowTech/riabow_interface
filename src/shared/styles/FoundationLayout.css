@@ -1,0 +1,51 @@
+/**
+ * 全局布局基础：间距阶梯 + 圆角语义
+ * 来源: Figma「Primit-UI-Components-Guidelines」— Layout System / 布局（node-id=6-440）
+ * https://www.figma.com/design/Xy4iA3ZnzAZPmOduAyqmtG/Primit-UI-Components-Guidelines?node-id=6-440
+ *
+ * 与 Primit 组件规范同源，但变量为全局基础，任意界面可引用 var(--layout-space-*) / var(--layout-radius-*)。
+ */
+
+:root {
+  /* —— 间距（px）—— 稿面阶梯：2→24 按 2 递增；其后 32→64 按 8 递增 */
+  --layout-space-2: 2px;
+  --layout-space-4: 4px;
+  --layout-space-6: 6px;
+  --layout-space-8: 8px;
+  --layout-space-10: 10px;
+  --layout-space-12: 12px;
+  --layout-space-14: 14px;
+  --layout-space-16: 16px;
+  --layout-space-18: 18px;
+  --layout-space-20: 20px;
+  --layout-space-22: 22px;
+  --layout-space-24: 24px;
+  --layout-space-32: 32px;
+  --layout-space-40: 40px;
+  --layout-space-48: 48px;
+  --layout-space-56: 56px;
+  --layout-space-64: 64px;
+
+  /* —— 圆角（语义 + 数值别名）—— */
+  --layout-radius-min-container: 6px;
+  --layout-radius-small-container: 8px;
+  --layout-radius-component-sm: 10px;
+  --layout-radius-image: 12px;
+  --layout-radius-card-sm: 14px;
+  --layout-radius-feed-card: 16px;
+  --layout-radius-component-lg: 18px;
+  --layout-radius-modal: 20px;
+  --layout-radius-page: 24px;
+  /** 全圆角（胶囊/头像等），外围呈半圆 */
+  --layout-radius-full: 9999px;
+
+  --layout-radius-6: var(--layout-radius-min-container);
+  --layout-radius-8: var(--layout-radius-small-container);
+  --layout-radius-10: var(--layout-radius-component-sm);
+  --layout-radius-12: var(--layout-radius-image);
+  --layout-radius-14: var(--layout-radius-card-sm);
+  --layout-radius-16: var(--layout-radius-feed-card);
+  --layout-radius-18: var(--layout-radius-component-lg);
+  --layout-radius-20: var(--layout-radius-modal);
+  --layout-radius-24: var(--layout-radius-page);
+}

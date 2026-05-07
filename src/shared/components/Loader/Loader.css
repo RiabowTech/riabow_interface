@@ -1,0 +1,40 @@
+/**
+ * 三点 ellipsis 加载动画：每颗点轮流亮，整体呈现 . → .. → ... 的循环。
+ * 颜色通过 currentColor 继承，所以放在任何文字色上下文里都自适应。
+ */
+
+.dots-loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: inherit;
+  line-height: 1;
+}
+
+.dots-loader__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.2;
+  animation: dots-loader-blink 1.2s infinite ease-in-out;
+}
+
+.dots-loader__dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dots-loader__dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes dots-loader-blink {
+  0%,
+  60%,
+  100% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 1;
+  }
+}

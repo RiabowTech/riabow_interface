@@ -1,0 +1,135 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  padding: 16px;
+  background: #121218;
+}
+
+.card {
+  position: relative;
+  border: 0;
+  border-radius: 4px;
+  background: #1f1f24;
+  padding: 12px;
+}
+
+.cardTitle {
+  color: rgba(243, 243, 243, 0.8);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.summaryValue {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #f3f3f3;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.infoLabel {
+  color: rgba(243, 243, 243, 0.5);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.infoValue {
+  color: #f3f3f3;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.rangeButtons {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rangeButton,
+.rangeButtonActive {
+  height: 24px;
+  min-width: 36px;
+  padding: 4px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: rgba(243, 243, 243, 0.5);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 150ms, color 150ms;
+}
+
+.rangeButton:hover {
+  color: #f3f3f3;
+}
+
+.rangeButtonActive {
+  background: #38383d;
+  color: #f3f3f3;
+}
+
+.chartArea {
+  height: 330px;
+}
+
+.tooltip {
+  border: 1px solid #2b2b30;
+  border-radius: 4px;
+  background: #1c1c24;
+  padding: 8px 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.tooltipLabel {
+  color: rgba(243, 243, 243, 0.5);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.tooltipValue {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.positive {
+  color: var(--ltr-up);
+}
+
+.negative {
+  color: var(--ltr-down);
+}

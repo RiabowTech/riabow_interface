@@ -1,0 +1,550 @@
+@import "_toasts.scss";
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-bg-color);
+  color: var(--color-typography-primary);
+}
+
+/* 禁止文档根纵向滚动：否则与 App 内主列 overflow-y-auto 叠成双滚动条；纵向只滚 AppRoutes 那一列 */
+html {
+  overflow-y: hidden;
+}
+
+#root {
+  overflow: hidden;
+  min-height: 0;
+}
+
+#root > div {
+  height: 100%;
+  width: 100%;
+}
+
+/**
+ * @see https://aykevl.nl/2014/09/fix-jumping-scrollbar
+ * Used body selector and !important to avoid collisions with [data-scroll-locked] attribute
+ * attached by react-remove-scroll lib, which is uncontrollable.
+ */
+body {
+  width: 100vw;
+  overflow-x: hidden !important;
+  /* 不用 !important，便于弹层（react-remove-scroll 等）临时改 body overflow */
+  overflow-y: hidden;
+}
+
+body {
+  margin: 0;
+  font-family:
+    "Messina Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@supports (scrollbar-width: auto) {
+  :root {
+    scrollbar-color: var(--color-slate-500) var(--color-slate-900);
+  }
+}
+
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-slate-900);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-slate-500);
+    border-radius: 15px;
+  }
+}
+
+:root {
+  --main-bg-color: #111;
+  --dark-blue: var(--color-slate-900);
+  --dark-blue-bg: var(--color-slate-900);
+  --dark-blue-accent: var(--color-slate-100);
+  --primary-btn-bg: #00FFB2; // Zanbara Gold
+  --primary-btn-hover: #00664E; // Zanbara Gold Hover
+  --primary-btn-active: #003B2E; // Zanbara Gold Active
+  --dark-blue-hover: var(--color-cold-blue-900);
+  --dark-blue-border: var(--color-gray-800);
+  --dark-blue-active: var(--color-cold-blue-700);
+  --warning-yellow: var(--color-yellow-300);
+  --avax-red: #e84143;
+  --arbitrum-blue: #28a0f0;
+  --border-radius-sm: 8px;
+  --error-red: var(--color-red-500);
+  --error-red-hover: var(--color-red-400);
+  --green: var(--color-green-500);
+
+  // Zanbara theme colors
+  --zanbara-gold: #00FFB2;
+  --zanbara-gold-hover: hsl(166, 100%, 20%);
+  --zanbara-gold-active: #003b2e;
+  --zanbara-black: #000000;
+  --zanbara-dark: #0A0A0A;
+  --zanbara-card: #111111;
+  --zanbara-border: rgba(0, 255, 178, 0.2);
+
+  --default-container-padding: 3.2rem;
+  --default-container-padding-mobile: 1rem;
+
+  /** react-loading-skeleton：与转场高光（Skeleton.scss ::after） */
+  --skeleton-base: #b4bbff1a;
+  --skeleton-highlight: #b4bbff1a;
+  --skeleton-shimmer-mid: #b4bbff1a;
+
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.Card-title {
+  font-size: 3.1rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+// TODO: remove this
+input {
+  font-size: var(--font-size-body-medium);
+  color: var(--color-typography-primary);
+  outline: none;
+  background: none;
+  padding: 1.25rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+button {
+  outline: none;
+  cursor: pointer;
+}
+
+button:disabled,
+button.App-cta:disabled {
+  cursor: not-allowed;
+  opacity: 0.9;
+  box-shadow: none;
+}
+
+table {
+  margin: 0;
+  padding: 0;
+}
+
+tr {
+  margin: 0;
+  padding: 0;
+}
+
+.align-right {
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.muted {
+  color: var(--color-slate-100);
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.transition-arrow {
+  vertical-align: middle;
+  margin-top: -0.31rem;
+}
+
+ul {
+  padding-left: 2.325rem;
+  margin-bottom: 0;
+}
+
+ul li {
+  padding-bottom: 1.5rem;
+}
+
+a.plain {
+  text-decoration: none;
+}
+
+.checkbox:checked:before {
+  background-color: green;
+}
+
+.default-btn {
+  background: var(--color-blue-600);
+  border-radius: 4px;
+  font-size: var(--font-size-body-medium);
+  line-height: 2rem;
+  font-weight: normal;
+  letter-spacing: 0px;
+  color: var(--color-white) !important;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  /* padding: 9px 16px!important; */
+  text-decoration: none;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 3.6rem;
+  display: inline-flex !important;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  appearance: none;
+}
+
+.default-btn:hover {
+  background: var(--primary-btn-hover);
+}
+
+s .default-btn:active {
+  background: var(--primary-btn-active);
+  border: none;
+  overflow: hidden;
+}
+
+.default-btn:disabled {
+  background: #2d2e3f 0% 0% no-repeat padding-box;
+  color: #ffffff61;
+}
+
+.default-container-mobile-one-sided {
+  max-width: var(--default-container-max-width);
+  margin: 0 auto;
+  padding-left: var(--default-container-padding);
+  padding-right: var(--default-container-padding);
+
+  // Media order matters
+  @media (max-width: 1264px) {
+    margin-left: var(--default-container-padding);
+    padding-left: 0;
+    max-width: none;
+  }
+
+  @media (max-width: 600px) {
+    margin-left: var(--default-container-padding-mobile);
+    padding-left: 0;
+    max-width: none;
+  }
+}
+
+.secondary-btn {
+  background: #03d1cf;
+  border-radius: 4px;
+  font-size: var(--font-size-body-small);
+  line-height: 2rem;
+  font-weight: normal;
+  letter-spacing: 0px;
+  color: black;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  /* padding: 9px 16px!important; */
+  text-decoration: none;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 3.6rem;
+  border: none;
+  display: inline-flex !important;
+  align-items: center;
+  text-align: center;
+}
+
+.secondary-btn:hover {
+  background: #3fdad9;
+}
+
+.secondary-btn:focus {
+  background: #54dedd;
+  border: 1px solid #1cb5b4fc;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.secondary-btn:active {
+  background: #54dedd;
+  border: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  /* padding: 9px 16px; */
+}
+
+.secondary-btn:active::after {
+  opacity: 0.239;
+  content: " ";
+  width: 5.2rem;
+  height: 5.2rem;
+  position: absolute;
+  left: calc(50% - 2.6rem);
+  top: -0.8rem;
+  background: white;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 500ms linear;
+}
+
+.secondary-btn:disabled {
+  background: #2d2e3f 0% 0% no-repeat padding-box;
+  color: #ffffff61;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(2);
+    opacity: 0.4;
+  }
+}
+
+button.btn-link {
+  margin-top: 1.5rem;
+  background: none;
+  color: var(--color-typography-primary);
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-body-medium);
+  display: block;
+  text-align: left;
+}
+
+.logout-icon {
+  vertical-align: middle;
+  font-size: 1.7rem;
+  margin-top: -0.31rem;
+  margin-right: 0.5rem;
+  margin-left: -0.465rem;
+  opacity: 0.8;
+}
+
+button.btn-link:hover {
+  text-decoration: underline;
+}
+
+button.btn-link:hover .logout-icon {
+  opacity: 1;
+}
+
+.page-container {
+  padding-top: 6.2rem;
+}
+
+.default-sm-container {
+  max-width: 108.8rem;
+}
+
+.page-layout {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.default-cursor.App-cta {
+  cursor: default;
+}
+
+.gap-right > *:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.debug-key {
+  overflow-wrap: break-word;
+  max-width: 30rem;
+}
+
+.subtext {
+  font-size: 1.2rem;
+  color: var(--color-slate-100);
+  margin-left: 0.25rem;
+}
+
+a:hover .text-red {
+  color: var(--error-red-hover);
+}
+
+.gap-right-xs > *:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.checkbox-inline {
+  display: inline-flex;
+}
+
+.font-medium.numbers {
+  letter-spacing: 0.025em;
+}
+
+th {
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+/* Primit side nav: 两个绿色圆角 + 中间发光竖线 */
+.primit-sidenav-deco {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden; /* 让右侧光效跟随容器圆角裁剪 */
+  transition: all 0.3s ease;
+}
+
+/* 顶部 / 底部两个绿色圆角 */
+.primit-sidenav-deco::before,
+.primit-sidenav-deco::after {
+
+  content: "";
+  position: absolute;
+  right: -10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 178, 0.7);
+  box-shadow: 0 0 14px rgba(0, 255, 178, 0.65);
+  pointer-events: none;
+}
+
+/* 右侧主体：左边两个绿色圆角，呼应侧边栏 */
+.primit-sidenav-main-deco {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.primit-sidenav-main-deco::before,
+.primit-sidenav-main-deco::after {
+  
+  content: "";
+  position: absolute;
+  left: -10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 178, 0.7);
+  box-shadow: 0 0 14px rgba(0, 255, 178, 0.65);
+  pointer-events: none;
+}
+
+.primit-sidenav-main-deco::before {
+  top: -13px;
+}
+
+.primit-sidenav-main-deco::after {
+  bottom: -13px;
+}
+
+.primit-sidenav-deco::before {
+  top: -13px;
+}
+
+.primit-sidenav-deco::after {
+  bottom: -13px;
+}
+
+/* 右侧竖线，只在中间一段发光 */
+.primit-sidenav-deco-right-line {
+  position: absolute;
+  right: 1px;
+  top: 1px;    /* 避开顶部圆角 */
+  bottom: 1px; /* 避开底部圆角 */
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 255, 178, 0.7) 0%,
+    rgba(0, 255, 178, 0.1) 5%,
+    rgba(0, 255, 178, 0.1) 40%,
+    rgba(0, 255, 178, 0.7) 50%,
+    rgba(0, 255, 178, 0.1) 60%,
+    rgba(0, 255, 178, 0.1) 90%,
+    rgba(0, 255, 178, 0.7)  100%
+  );
+  box-shadow: 0 0 12px rgba(0, 255, 178, 0.7);
+  pointer-events: none;
+}
+
+/* 允许下拉框显示在 header 外部（与顶栏 overflow 策略配合） */
+[data-qa="header"] {
+  position: relative;
+  overflow: visible;
+}
+
+/**
+ * 列表/卡片等模块统一表面色（与 Primit `--text-bg-color-secondary-3` 同步；浅深主题由 token 解析）。
+ * 圆角由各节点自身的 rounded-* 控制，勿在此全局写 border-radius。
+ */
+.bg-slate-900 {
+  background: var(--text-bg-color-secondary-3, #191919);
+}
+
+/**
+ * ic_spinner.svg：双圆环为 stroke currentColor。默认灰、持仓行 Legacy 蓝（见 DeprecatedExchageStyles / ApproveTokenButton）。
+ */
+:root {
+  --spinner-icon-color: rgb(160, 163, 196);
+}
+
+svg.spin:not(.text-white),
+svg.animate-spin:not(.text-white) {
+  color: var(--spinner-icon-color);
+}
+
+/* Legacy：持仓区与授权按钮等仍为蓝圈（Primit 下由 loading.primit.css 改为主色） */
+svg.spin.position-loading-icon:not(.text-white) {
+  color: var(--color-blue-600);
+}
+
+svg.spin.ApproveTokenButton-spin {
+  color: var(--color-blue-600);
+}
