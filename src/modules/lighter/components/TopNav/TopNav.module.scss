@@ -170,11 +170,12 @@
 }
 
 .authStatusDot {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  margin-right: 4px;
   border-radius: 999px;
-  flex: 0 0 auto;
-  background: #ff5c68;
+  background: #ff5c67;
 }
 
 .walletButton {
