@@ -130,7 +130,7 @@ export async function approveTokens({
   const contract = new ethers.Contract(tokenAddress, TokenAbi, signer);
   const nativeToken = getNativeToken(chainId);
   const networkName = getChainName(chainId);
-  
+
   // For USDT and similar tokens, if there's already a non-zero allowance,
   // we need to reset it to 0 first before approving a new value
   // This is required for some token implementations (e.g., older USDT versions)

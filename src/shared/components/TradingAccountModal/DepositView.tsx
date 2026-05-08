@@ -133,47 +133,47 @@ export const DepositView = () => {
     isPriceDataLoading,
     isBalanceDataLoading,
   } = useMultichainTokensRequest();
-  
+
   const { pricesData } = useTokenRecentPricesRequest(settlementChainId);
-  
+
   // In API trading mode, filter the source asset list down to USDT.
   // If no USDT balance entry exists yet, create a synthetic zero-balance item so deposits stay available.
   const multichainTokens = useMemo(() => {
     if (!isTradeModeActive()) {
       return multichainTokensRaw;
     }
-    
+
     try {
       const usdtToken = getTokenBySymbol(settlementChainId, "USDT");
       console.log("[DepositView] API trading mode - USDT token lookup", {
         settlementChainId,
-        usdtToken: usdtToken ? {
-          symbol: usdtToken.symbol,
-          address: usdtToken.address,
-          decimals: usdtToken.decimals,
-        } : null,
+        usdtToken: usdtToken
+          ? {
+              symbol: usdtToken.symbol,
+              address: usdtToken.address,
+              decimals: usdtToken.decimals,
+            }
+          : null,
         multichainTokensRawCount: multichainTokensRaw.length,
-        multichainTokensRaw: multichainTokensRaw.map(t => ({
+        multichainTokensRaw: multichainTokensRaw.map((t) => ({
           symbol: t.symbol,
           address: t.address,
           sourceChainId: t.sourceChainId,
         })),
       });
-      
+
       if (!usdtToken) {
         console.warn("[DepositView] USDT token not found in API trading mode, using all tokens");
         return multichainTokensRaw;
       }
-      
+
       const usdtAddress = usdtToken.address.toLowerCase();
-      let filtered = multichainTokensRaw.filter(
-        (token) => token.address.toLowerCase() === usdtAddress
-      );
-      
+      let filtered = multichainTokensRaw.filter((token) => token.address.toLowerCase() === usdtAddress);
+
       // If no USDT token exists in the fetched balance list, create a manual zero-balance entry.
       if (filtered.length === 0) {
         console.log("[DepositView] API trading mode - No USDT in multichainTokensRaw, creating manual entry");
-        
+
         // Find USDT mapping from MULTICHAIN_TOKEN_MAPPING
         const mapping = MULTICHAIN_TOKEN_MAPPING[settlementChainId as SettlementChainId];
         if (mapping) {
@@ -181,7 +181,7 @@ export const DepositView = () => {
           for (const sourceChainIdString in mapping) {
             const sourceChainId = parseInt(sourceChainIdString) as SourceChainId;
             const sourceChainMappings = mapping[sourceChainId];
-            
+
             if (sourceChainMappings) {
               // Find USDT address in source chain mappings
               for (const sourceChainTokenAddress in sourceChainMappings) {
@@ -195,7 +195,7 @@ export const DepositView = () => {
                     sourceChainPrices: pricesData?.[usdtToken.address] || undefined,
                     sourceChainBalance: 0n, // Allow deposit even with 0 balance
                   };
-                  
+
                   filtered = [tokenChainData];
                   console.log("[DepositView] API trading mode - Created manual USDT entry", {
                     tokenChainData: {
@@ -213,25 +213,25 @@ export const DepositView = () => {
           }
         }
       }
-      
+
       console.log("[DepositView] API trading mode - Filtered tokens", {
         usdtAddress,
         filteredCount: filtered.length,
-        filtered: filtered.map(t => ({
+        filtered: filtered.map((t) => ({
           symbol: t.symbol,
           address: t.address,
           sourceChainId: t.sourceChainId,
           sourceChainBalance: t.sourceChainBalance?.toString() || "0",
         })),
       });
-      
+
       return filtered;
     } catch (e) {
       console.error("[DepositView] Error filtering USDT tokens in API trading mode:", e);
       return multichainTokensRaw;
     }
   }, [multichainTokensRaw, settlementChainId, pricesData]);
-  
+
   const [isApproving, setIsApproving] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [shouldSendCrossChainDepositWhenLoaded, setShouldSendCrossChainDepositWhenLoaded] = useState(false);
@@ -415,11 +415,14 @@ export const DepositView = () => {
     // missing, which propagates to here. Surface with a readable toast
     // instead of a MetaMask "execution reverted" pop-up.
     if (spenderAddress.toLowerCase() === zeroAddress.toLowerCase()) {
-      console.error("[DepositView] ❌ Approve aborted: spender resolved to zero address. Check VITE_ZTDX_VAULT_PROXY / Stargate pool config.", {
-        depositViewChain,
-        settlementChainId,
-        isSameChain: depositViewChain === settlementChainId,
-      });
+      console.error(
+        "[DepositView] ❌ Approve aborted: spender resolved to zero address. Check VITE_ZTDX_VAULT_PROXY / Stargate pool config.",
+        {
+          depositViewChain,
+          settlementChainId,
+          isSameChain: depositViewChain === settlementChainId,
+        }
+      );
       helperToast.error(t`Deposit contract not configured for this chain. Contact support.`);
       return;
     }
@@ -436,28 +439,31 @@ export const DepositView = () => {
       return;
     }
 
-    await wrapChainAction(depositViewChain, setSettlementChainId, async (signer) => {
-      console.log("[DepositView] ✅ 执行授权交易:", {
-        chainId: depositViewChain,
-        tokenAddress: selectedTokenSourceChainTokenId.address,
-        spender: spenderAddress,
-        approveAmount: amountLD.toString(),
-        isTradeMode: isTradeModeActive(),
-      });
+    await wrapChainAction(
+      depositViewChain,
+      setSettlementChainId,
+      async (signer) => {
+        console.log("[DepositView] ✅ 执行授权交易:", {
+          chainId: depositViewChain,
+          tokenAddress: selectedTokenSourceChainTokenId.address,
+          spender: spenderAddress,
+          approveAmount: amountLD.toString(),
+          isTradeMode: isTradeModeActive(),
+        });
 
-      await approveTokens({
-        chainId: depositViewChain,
-        tokenAddress: selectedTokenSourceChainTokenId.address,
-        signer: signer,
-        spender: spenderAddress,
-        onApproveSubmitted: () => {
-          setIsApproving(true);
-        },
-        setIsApproving: noop,
-        permitParams: undefined,
-        // Use exact amount from input instead of MaxUint256
-        approveAmount: amountLD,
-      });
+        await approveTokens({
+          chainId: depositViewChain,
+          tokenAddress: selectedTokenSourceChainTokenId.address,
+          signer: signer,
+          spender: spenderAddress,
+          onApproveSubmitted: () => {
+            setIsApproving(true);
+          },
+          setIsApproving: noop,
+          permitParams: undefined,
+          // Use exact amount from input instead of MaxUint256
+          approveAmount: amountLD,
+        });
       },
       {
         // Older OKX Wallet versions can emit a provider network-change error
@@ -579,14 +585,14 @@ export const DepositView = () => {
       } else if (txnEvent.event === TxnEventName.Error) {
         const error = txnEvent.data.error;
         console.error("[DepositView] Same-chain deposit error:", error);
-        
+
         // Try to extract more detailed error information
         let errorMessage = "Deposit failed";
-        
+
         // Check for parentError (from additionalTxnErrorValidation)
         const parentError = (error as any)?.parentError;
         const errorToCheck = parentError || error;
-        
+
         if (errorToCheck?.message) {
           errorMessage = errorToCheck.message;
         } else if (errorToCheck?.info?.error?.message) {
@@ -595,19 +601,23 @@ export const DepositView = () => {
           // Try to extract revert reason from error data
           errorMessage = `Deposit failed: ${errorToCheck.info.error.data}`;
         }
-        
+
         // Check for common revert reasons
-        if (errorMessage.toLowerCase().includes("transfer amount exceeds allowance") || 
-            errorMessage.toLowerCase().includes("insufficient allowance")) {
+        if (
+          errorMessage.toLowerCase().includes("transfer amount exceeds allowance") ||
+          errorMessage.toLowerCase().includes("insufficient allowance")
+        ) {
           errorMessage = "Insufficient token allowance. Please approve again.";
-        } else if (errorMessage.toLowerCase().includes("transfer amount exceeds balance") ||
-                   errorMessage.toLowerCase().includes("insufficient balance")) {
+        } else if (
+          errorMessage.toLowerCase().includes("transfer amount exceeds balance") ||
+          errorMessage.toLowerCase().includes("insufficient balance")
+        ) {
           errorMessage = "Insufficient token balance.";
         }
-        
-        helperToast.error(errorMessage, { 
+
+        helperToast.error(errorMessage, {
           toastId: "same-chain-trading-account-deposit",
-          autoClose: 10000 
+          autoClose: 10000,
         });
       }
     },
@@ -661,7 +671,16 @@ export const DepositView = () => {
       account,
       callback: sameChainCallback,
     });
-  }, [account, depositViewTokenAddress, amountLD, needTokenApprove, sameChainCallback, settlementChainId, walletSigner, spenderAddress]);
+  }, [
+    account,
+    depositViewTokenAddress,
+    amountLD,
+    needTokenApprove,
+    sameChainCallback,
+    settlementChainId,
+    walletSigner,
+    spenderAddress,
+  ]);
 
   const makeCrossChainCallback = useCallback(
     (params: {
@@ -713,7 +732,7 @@ export const DepositView = () => {
           setIsSubmitting(false);
 
           sendTxnSentMetric(params.metricId);
-          
+
           // Refresh balances after deposit transaction is sent
           mutateBalances();
 
@@ -850,7 +869,7 @@ export const DepositView = () => {
       spenderAddress,
       isTradeMode: isTradeModeActive(),
     });
-    
+
     if (shouldUseSameChainDeposit) {
       await handleSameChainDeposit();
     } else {

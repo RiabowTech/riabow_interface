@@ -38,7 +38,6 @@ const ZTDX_USDT =
   (import.meta.env.VITE_PRIMIT_USDT as string | undefined) ||
   "0x0000000000000000000000000000000000000000";
 
-
 /**
  * Trading-specific contract addresses by chain ID
  *

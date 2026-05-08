@@ -322,7 +322,7 @@ export class Positions extends Module {
           abiId: "ReferralStorage",
           calls: {
             codeOwner: {
-              methodName: "codeOwners",
+              methodName: "codeOwnerOf",
               params: [code],
             },
           },
@@ -351,7 +351,7 @@ export class Positions extends Module {
         abiId: "ReferralStorage",
         calls: {
           traderReferralCodes: {
-            methodName: "traderReferralCodes",
+            methodName: "traderCodeOf",
             params: [this.account],
           },
         },
@@ -386,7 +386,7 @@ export class Positions extends Module {
           abiId: "ReferralStorage",
           calls: {
             referrerTiers: {
-              methodName: "referrerTiers",
+              methodName: "affiliateTiers",
               params: [this.account],
             },
           },
@@ -414,7 +414,7 @@ export class Positions extends Module {
           abiId: "ReferralStorage",
           calls: {
             tiers: {
-              methodName: "tiers",
+              methodName: "tierSettings",
               params: [tierLevel],
             },
           },
@@ -442,7 +442,7 @@ export class Positions extends Module {
           abiId: "ReferralStorage",
           calls: {
             referrerDiscountShares: {
-              methodName: "referrerDiscountShares",
+              methodName: "affiliateDiscountShares",
               params: [owner],
             },
           },

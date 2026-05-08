@@ -97,7 +97,7 @@ export function useAffiliateTier(signer, chainId, account) {
     mutate: mutateReferrerTier,
     error,
   } = useSWR<bigint>(
-    account && [`ReferralStorage:referrerTiers`, chainId, referralStorageAddress, "referrerTiers", account],
+    account && [`ReferralStorage:affiliateTiers`, chainId, referralStorageAddress, "affiliateTiers", account],
     {
       fetcher: chainId !== BOTANIX ? (contractFetcher(signer, "ReferralStorage") as any) : undefined,
       refreshInterval: CONFIG_UPDATE_INTERVAL,
@@ -115,7 +115,7 @@ export function useTiers(signer: Signer | undefined, chainId: ContractsChainId, 
 
   const { data: [totalRebate, discountShare] = [], error } = useSWR<bigint[]>(
     tierLevel !== undefined
-      ? [`ReferralStorage:referrerTiers`, chainId, referralStorageAddress, "tiers", tierLevel.toString()]
+      ? [`ReferralStorage:tierSettings`, chainId, referralStorageAddress, "tierSettings", tierLevel.toString()]
       : null,
     {
       fetcher: chainId !== BOTANIX ? (contractFetcher(signer, "ReferralStorage") as any) : undefined,
@@ -149,7 +149,7 @@ export async function setTraderReferralCodeByUser(chainId, referralCode, signer,
   const referralCodeHex = encodeReferralCode(referralCode);
   const referralStorageAddress = getContract(chainId, "ReferralStorage");
   const contract = new ethers.Contract(referralStorageAddress, abis.ReferralStorage, signer);
-  const codeOwner = await contract.codeOwners(referralCodeHex);
+  const codeOwner = await contract.codeOwnerOf(referralCodeHex);
   if (isAddressZero(codeOwner)) {
     const errorMsg = "Referral code does not exist";
     helperToast.error(errorMsg);
@@ -165,7 +165,7 @@ export async function getReferralCodeOwner(chainId: ContractsChainId, referralCo
   }
   const provider = getProvider(undefined, chainId);
   const contract = new ethers.Contract(referralStorageAddress, abis.ReferralStorage, provider);
-  const codeOwner = await contract.codeOwners(referralCode);
+  const codeOwner = await contract.codeOwnerOf(referralCode);
   return codeOwner;
 }
 
@@ -173,7 +173,7 @@ export function useUserReferralCode(signer, chainId, account, skipLocalReferralC
   const localStorageCode = window.localStorage.getItem(REFERRAL_CODE_KEY);
   const referralStorageAddress = getContract(chainId, "ReferralStorage");
   const { data: onChainCode, error: onChainCodeError } = useSWR<string>(
-    account && ["ReferralStorage", chainId, referralStorageAddress, "traderReferralCodes", account],
+    account && ["ReferralStorage", chainId, referralStorageAddress, "traderCodeOf", account],
     {
       fetcher: chainId !== BOTANIX ? (contractFetcher(signer, "ReferralStorage") as any) : undefined,
       refreshInterval: CONFIG_UPDATE_INTERVAL,
@@ -182,7 +182,7 @@ export function useUserReferralCode(signer, chainId, account, skipLocalReferralC
 
   const { data: localStorageCodeOwner, error: localStorageCodeOwnerError } = useSWR<string>(
     localStorageCode && REGEX_VERIFY_BYTES32.test(localStorageCode)
-      ? ["ReferralStorage", chainId, referralStorageAddress, "codeOwners", localStorageCode]
+      ? ["ReferralStorage", chainId, referralStorageAddress, "codeOwnerOf", localStorageCode]
       : null,
     {
       fetcher: chainId !== BOTANIX ? (contractFetcher(signer, "ReferralStorage") as any) : undefined,
@@ -264,7 +264,7 @@ export function useReferrerTier(signer, chainId, account) {
   const referralStorageAddress = getContract(chainId, "ReferralStorage");
   const validAccount = useMemo(() => (isAddress(account) ? account : null), [account]);
   const { data: referrerTier, mutate: mutateReferrerTier } = useSWR<bigint>(
-    validAccount && [`ReferralStorage:referrerTiers`, chainId, referralStorageAddress, "referrerTiers", validAccount],
+    validAccount && [`ReferralStorage:affiliateTiers`, chainId, referralStorageAddress, "affiliateTiers", validAccount],
     {
       fetcher: chainId !== BOTANIX ? (contractFetcher(signer, "ReferralStorage") as any) : undefined,
     }
@@ -282,7 +282,7 @@ export function useCodeOwner(signer, chainId, account, code) {
     mutate: mutateCodeOwner,
     error,
   } = useSWR<string>(
-    account && code && [`ReferralStorage:codeOwners`, chainId, referralStorageAddress, "codeOwners", code],
+    account && code && [`ReferralStorage:codeOwnerOf`, chainId, referralStorageAddress, "codeOwnerOf", code],
     {
       fetcher: chainId !== BOTANIX ? (contractFetcher(signer, "ReferralStorage") as any) : undefined,
       refreshInterval: CONFIG_UPDATE_INTERVAL,
@@ -303,10 +303,10 @@ export function useReferrerDiscountShare(library, chainId, owner) {
     error,
   } = useSWR<bigint | undefined>(
     owner && [
-      `ReferralStorage:referrerDiscountShares`,
+      `ReferralStorage:affiliateDiscountShares`,
       chainId,
       referralStorageAddress,
-      "referrerDiscountShares",
+      "affiliateDiscountShares",
       owner.toLowerCase(),
     ],
     {

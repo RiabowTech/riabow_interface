@@ -24,6 +24,9 @@ export default [
   { name: "affiliateTiers", type: "function", inputs: [
       { name: "account", type: "address" }
     ], outputs: [{ type: "uint256" }], stateMutability: "view" },
+  { name: "affiliateDiscountShares", type: "function", inputs: [
+      { name: "account", type: "address" }
+    ], outputs: [{ type: "uint256" }], stateMutability: "view" },
   { name: "tierSettings", type: "function", inputs: [
       { name: "tierLevel", type: "uint256" }
     ], outputs: [
