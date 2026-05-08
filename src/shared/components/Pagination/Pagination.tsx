@@ -33,7 +33,7 @@ const baseButtonClasses =
   "text-slate-300 hover:text-white hover:bg-[#1f1f1f] transition-colors border border-transparent";
 
 const activePageClasses =
-  "!bg-[#00FFB2] !text-black  border border-[#00FFB2]";
+  "!bg-[#cbd5e1] !text-black  border border-[#cbd5e1]";
 
 const disabledButtonClasses = "opacity-40 cursor-not-allowed";
 

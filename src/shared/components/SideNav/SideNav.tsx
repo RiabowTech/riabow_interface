@@ -118,7 +118,7 @@ export function NavItem({ icon, label, badge, isActive = false, isCollapsed = fa
         className={cx(
           "relative flex cursor-pointer items-center gap-10 rounded-[10px] px-16 py-14 transition-colors duration-200",
           {
-            "bg-[#262626] text-[#00FFB2]": isActive,
+            "bg-[#262626] text-[#cbd5e1]": isActive,
             "text-slate-100 hover:bg-[#1b1b1b]": !isActive,
             "w-full": !isCollapsed,
           }
@@ -127,7 +127,7 @@ export function NavItem({ icon, label, badge, isActive = false, isCollapsed = fa
         <div
           className={cx(
             "flex size-20 shrink-0 items-center justify-center [&>svg]:w-full transition-colors duration-200",
-            isActive ? "text-[#00FFB2]" : "text-slate-300 group-hover:text-[#00FFB2]"
+            isActive ? "text-[#cbd5e1]" : "text-slate-300 group-hover:text-[#cbd5e1]"
           )}
         >
           {icon}
@@ -137,7 +137,7 @@ export function NavItem({ icon, label, badge, isActive = false, isCollapsed = fa
             className={cx(
               // 不允许在收缩/展开动画过程中换行，避免文字“交易 / Earn”等抖动
               "shrink-0 whitespace-nowrap text-[14px] font-chakraPetch font-bold tracking-[0.1em] uppercase",
-              isActive ? "text-[#00FFB2]" : "text-slate-200"
+              isActive ? "text-[#cbd5e1]" : "text-slate-200"
             )}
           >
             {label}
@@ -150,7 +150,7 @@ export function NavItem({ icon, label, badge, isActive = false, isCollapsed = fa
         </div>
 
         {isActive ? (
-          <div className="pointer-events-none absolute right-1 top-2 bottom-2 w-[3px] rounded-full bg-[#00FFB2] shadow-[0_0_10px_rgba(0,255,178,0.9)]" />
+          <div className="pointer-events-none absolute right-1 top-2 bottom-2 w-[3px] rounded-full bg-[#cbd5e1] shadow-[0_0_10px_rgba(203,213,225,0.9)]" />
         ) : null}
       </div>
     </button>

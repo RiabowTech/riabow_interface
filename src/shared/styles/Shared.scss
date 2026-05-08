@@ -98,9 +98,9 @@ code {
   --dark-blue: var(--color-slate-900);
   --dark-blue-bg: var(--color-slate-900);
   --dark-blue-accent: var(--color-slate-100);
-  --primary-btn-bg: #00FFB2; // Zanbara Gold
-  --primary-btn-hover: #00664E; // Zanbara Gold Hover
-  --primary-btn-active: #003B2E; // Zanbara Gold Active
+  --primary-btn-bg: #cbd5e1; // Zanbara Gold
+  --primary-btn-hover: #475569; // Zanbara Gold Hover
+  --primary-btn-active: #334155; // Zanbara Gold Active
   --dark-blue-hover: var(--color-cold-blue-900);
   --dark-blue-border: var(--color-gray-800);
   --dark-blue-active: var(--color-cold-blue-700);
@@ -113,13 +113,13 @@ code {
   --green: var(--color-green-500);
 
   // Zanbara theme colors
-  --zanbara-gold: #00FFB2;
+  --zanbara-gold: #cbd5e1;
   --zanbara-gold-hover: hsl(166, 100%, 20%);
-  --zanbara-gold-active: #003b2e;
+  --zanbara-gold-active: #334155;
   --zanbara-black: #000000;
   --zanbara-dark: #0A0A0A;
   --zanbara-card: #111111;
-  --zanbara-border: rgba(0, 255, 178, 0.2);
+  --zanbara-border: rgba(203, 213, 225, 0.2);
 
   --default-container-padding: 3.2rem;
   --default-container-padding-mobile: 1rem;
@@ -450,8 +450,8 @@ th {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  border: 2px solid rgba(0, 255, 178, 0.7);
-  box-shadow: 0 0 14px rgba(0, 255, 178, 0.65);
+  border: 2px solid rgba(203, 213, 225, 0.7);
+  box-shadow: 0 0 14px rgba(203, 213, 225, 0.65);
   pointer-events: none;
 }
 
@@ -471,8 +471,8 @@ th {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  border: 2px solid rgba(0, 255, 178, 0.7);
-  box-shadow: 0 0 14px rgba(0, 255, 178, 0.65);
+  border: 2px solid rgba(203, 213, 225, 0.7);
+  box-shadow: 0 0 14px rgba(203, 213, 225, 0.65);
   pointer-events: none;
 }
 
@@ -502,15 +502,15 @@ th {
   border-radius: 999px;
   background: linear-gradient(
     to bottom,
-    rgba(0, 255, 178, 0.7) 0%,
-    rgba(0, 255, 178, 0.1) 5%,
-    rgba(0, 255, 178, 0.1) 40%,
-    rgba(0, 255, 178, 0.7) 50%,
-    rgba(0, 255, 178, 0.1) 60%,
-    rgba(0, 255, 178, 0.1) 90%,
-    rgba(0, 255, 178, 0.7)  100%
+    rgba(203, 213, 225, 0.7) 0%,
+    rgba(203, 213, 225, 0.1) 5%,
+    rgba(203, 213, 225, 0.1) 40%,
+    rgba(203, 213, 225, 0.7) 50%,
+    rgba(203, 213, 225, 0.1) 60%,
+    rgba(203, 213, 225, 0.1) 90%,
+    rgba(203, 213, 225, 0.7)  100%
   );
-  box-shadow: 0 0 12px rgba(0, 255, 178, 0.7);
+  box-shadow: 0 0 12px rgba(203, 213, 225, 0.7);
   pointer-events: none;
 }
 

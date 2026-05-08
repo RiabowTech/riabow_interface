@@ -45,7 +45,7 @@
 }
 
 .earn-summary-value {
-  color: var(--earn-accent, #00ffb2);
+  color: var(--earn-accent, #cbd5e1);
   font-family: "Chakra Petch", sans-serif;
   font-size: 36px;
   font-weight: 400;
@@ -64,7 +64,7 @@
 }
 
 .earn-section-title {
-  color: var(--earn-accent, #00ffb2);
+  color: var(--earn-accent, #cbd5e1);
   font-family: "Chakra Petch", sans-serif;
   font-size: 20px;
   font-weight: 500;
@@ -137,7 +137,7 @@
 }
 
 .subscription-interest {
-  color: var(--earn-accent, #00ffb2);
+  color: var(--earn-accent, #cbd5e1);
   font-family: Outfit, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -217,7 +217,7 @@
 }
 
 .earn-history-table .earn-apr-value {
-  color: var(--earn-accent, #00ffb2);
+  color: var(--earn-accent, #cbd5e1);
   font-weight: 500;
 }
 

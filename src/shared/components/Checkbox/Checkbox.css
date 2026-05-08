@@ -28,18 +28,18 @@
   border: 2px solid transparent;
 
   background: 
-    linear-gradient(#00ffb2, #00ffb2) padding-box,
-    linear-gradient(90deg, rgba(0, 255, 178, 1) 0%, rgba(0, 255, 178, 0) 20%, rgb(0, 0, 0) 50%, rgba(0, 255, 178, 0) 80%, rgba(0, 255, 178, 1) 100%) border-box;
-  box-shadow: 0 0 4px rgba(0, 255, 178, 0.6); /* 发光效果 */
+    linear-gradient(#cbd5e1, #cbd5e1) padding-box,
+    linear-gradient(90deg, rgba(203, 213, 225, 1) 0%, rgba(203, 213, 225, 0) 20%, rgb(0, 0, 0) 50%, rgba(203, 213, 225, 0) 80%, rgba(203, 213, 225, 1) 100%) border-box;
+  box-shadow: 0 0 4px rgba(203, 213, 225, 0.6); /* 发光效果 */
 }
 
 /* Checkbox 方框 - 部分选中状态 */
 .checkbox-box.partial-checked {
   border: 2px solid transparent;
   background: 
-    linear-gradient(#00ffb2, #00ffb2) padding-box,
-    linear-gradient (90deg, rgba(0, 255, 178, 1) 0%, rgba(0, 255, 178, 0) 10%, rgb(0, 0, 0) 50%, rgba(0, 255, 178, 0) 90%, rgba(0, 255, 178, 1) 100%) border-box;
-  box-shadow: 0 0 4px rgba(0, 255, 178, 0.6);
+    linear-gradient(#cbd5e1, #cbd5e1) padding-box,
+    linear-gradient (90deg, rgba(203, 213, 225, 1) 0%, rgba(203, 213, 225, 0) 10%, rgb(0, 0, 0) 50%, rgba(203, 213, 225, 0) 90%, rgba(203, 213, 225, 1) 100%) border-box;
+  box-shadow: 0 0 4px rgba(203, 213, 225, 0.6);
 }
 
 /* Checkbox 方框 - 禁用状态 */

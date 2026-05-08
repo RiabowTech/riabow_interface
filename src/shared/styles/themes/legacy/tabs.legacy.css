@@ -7,7 +7,7 @@
 html[data-ui-theme="legacy"] [data-unified-style="true"] {
   border-radius: 10px;
   border: 2px solid transparent;
-  background: linear-gradient(var(--sb-surface-0, #000), var(--sb-surface-0, #000)) padding-box, linear-gradient(90deg, rgba(var(--sb-accent-rgb, 0, 255, 178), 0.8) 0%, rgba(var(--sb-accent-rgb, 0, 255, 178), 0) 10%, rgb(0, 0, 0) 50%, rgba(var(--sb-accent-rgb, 0, 255, 178), 0) 90%, rgba(var(--sb-accent-rgb, 0, 255, 178), 0.8) 100%) border-box;
+  background: linear-gradient(var(--sb-surface-0, #000), var(--sb-surface-0, #000)) padding-box, linear-gradient(90deg, rgba(var(--sb-accent-rgb, 203, 213, 225), 0.8) 0%, rgba(var(--sb-accent-rgb, 203, 213, 225), 0) 10%, rgb(0, 0, 0) 50%, rgba(var(--sb-accent-rgb, 203, 213, 225), 0) 90%, rgba(var(--sb-accent-rgb, 203, 213, 225), 0.8) 100%) border-box;
   transition: all 0.3s ease;
 }
 
@@ -26,13 +26,13 @@ html[data-ui-theme="legacy"] [data-unified-style="true"] button:not(.trade-direc
 }
 
 html[data-ui-theme="legacy"] [data-unified-style="true"] button.trade-direction-tab--active {
-  color: var(--sb-accent, #00ffb2);
+  color: var(--sb-accent, #cbd5e1);
   background: linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.2) 100%), var(--sb-surface-0, #090909);
 }
 
 html[data-ui-theme="legacy"] [data-unified-style="true"] button:first-child.trade-direction-tab--active {
-  color: var(--sb-accent, #00ffb2) !important;
-  box-shadow: -1px 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7);
+  color: var(--sb-accent, #cbd5e1) !important;
+  box-shadow: -1px 0 4px rgba(var(--sb-accent-rgb, 203, 213, 225), 0.7);
 }
 
 html[data-ui-theme="legacy"] [data-qa="trade-direction"][data-unified-style="true"] button:last-child.trade-direction-tab--active {
@@ -41,35 +41,35 @@ html[data-ui-theme="legacy"] [data-qa="trade-direction"][data-unified-style="tru
 }
 
 html[data-ui-theme="legacy"] [data-unified-style="true"]:not([data-qa="trade-direction"]) button:last-child.trade-direction-tab--active {
-  color: var(--sb-accent, #00ffb2) !important;
-  box-shadow: 1px 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7);
+  color: var(--sb-accent, #cbd5e1) !important;
+  box-shadow: 1px 0 4px rgba(var(--sb-accent-rgb, 203, 213, 225), 0.7);
 }
 
 html[data-ui-theme="legacy"] [data-unified-style="true"] button:not(:first-child):not(:last-child).trade-direction-tab--active {
-  box-shadow: 0 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7), 0 0 4px rgba(var(--sb-accent-rgb, 0, 255, 178), 0.7);
+  box-shadow: 0 0 4px rgba(var(--sb-accent-rgb, 203, 213, 225), 0.7), 0 0 4px rgba(var(--sb-accent-rgb, 203, 213, 225), 0.7);
 }
 
 /* ========== Block tabs：荧光字色与下划线 ========== */
 html[data-ui-theme="legacy"] .tab-active-green {
-  color: var(--sb-accent, #00ffb2) !important;
+  color: var(--sb-accent, #cbd5e1) !important;
   border-bottom-color: transparent !important;
 }
 
 html[data-ui-theme="legacy"] .tab-underline-indicator {
-  background: var(--sb-accent, #00ffb2);
+  background: var(--sb-accent, #cbd5e1);
 }
 
 /* ========== NestedTab（More）荧光 ========== */
 html[data-ui-theme="legacy"] .nested-tab-button--active .nested-tab-label--active {
-  color: #00ffb2 !important;
+  color: #cbd5e1 !important;
 }
 
 html[data-ui-theme="legacy"] .nested-tab-button--active .nested-tab-icon {
-  color: #00ffb2 !important;
+  color: #cbd5e1 !important;
 }
 
 html[data-ui-theme="legacy"] .nested-tab-icon--up {
-  color: #00ffb2 !important;
+  color: #cbd5e1 !important;
 }
 
 html[data-ui-theme="legacy"] .nested-tab-dropdown {
@@ -77,12 +77,12 @@ html[data-ui-theme="legacy"] .nested-tab-dropdown {
   background: linear-gradient(#090909, #090909) padding-box,
     linear-gradient(
       90deg,
-      rgba(0, 255, 178, 0.8) 0%,
-      rgba(0, 255, 178, 0) 10%,
+      rgba(203, 213, 225, 0.8) 0%,
+      rgba(203, 213, 225, 0) 10%,
       rgb(0, 0, 0) 50%,
-      rgba(0, 255, 178, 0) 90%,
-      rgba(0, 255, 178, 0.8) 100%
+      rgba(203, 213, 225, 0) 90%,
+      rgba(203, 213, 225, 0.8) 100%
     )
       border-box;
-  box-shadow: 0 0 12px rgba(0, 255, 178, 0.3), 0 10px 24px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 12px rgba(203, 213, 225, 0.3), 0 10px 24px rgba(0, 0, 0, 0.6);
 }

@@ -1,6 +1,6 @@
 import { useDesignSystem } from "shared/context/DesignSystemContext/DesignSystemContext";
 
-const EARN_ACCENT_LEGACY = "#00ffb2";
+const EARN_ACCENT_LEGACY = "#cbd5e1";
 
 /** 与 `PrimitColors.css` 中 html.dark / :root 的 --primit-primary-1 一致（供 Recharts 等无法用 CSS 变量的场景） */
 export function useEarnAccentHex(): string {
