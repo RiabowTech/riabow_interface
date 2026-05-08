@@ -332,10 +332,7 @@ export function useAffiliateCodes(chainId, account) {
   // Query referralCodes by owner to get all registered codes (not just those with trading volume)
   const query = gql`
     query userReferralCodes($account: String!) {
-      referralCodes(
-        first: 1000
-        where: { owner: $account }
-      ) {
+      referralCodes(first: 1000, where: { owner: $account }) {
         code
       }
     }
