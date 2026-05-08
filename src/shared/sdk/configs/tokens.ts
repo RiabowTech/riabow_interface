@@ -1768,7 +1768,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     {
       name: "USDT",
       symbol: "USDT",
-      address: "0xc96BDE5008518332Bb5c45177f9E70D75Ea5D865",
+      address: "0xfA70c5A9221d239Cd51DBf48967ABc79d7B9D61d",
       decimals: 6,
       isStable: true,
       imageUrl: "https://assets.coingecko.com/coins/images/325/small/Tether-logo.png",
