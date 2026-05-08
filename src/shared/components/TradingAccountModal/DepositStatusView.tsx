@@ -2,7 +2,10 @@ import { Trans } from "@lingui/macro";
 import cx from "classnames";
 import { useEffect, useState } from "react";
 
-import { useTradingAccountModalOpen, useTradingAccountSelectedTransferGuid } from "@/modules/lighter/context/TradingAccountContext";
+import {
+  useTradingAccountModalOpen,
+  useTradingAccountSelectedTransferGuid,
+} from "@/modules/lighter/context/TradingAccountContext";
 import { useSubaccountContext } from "@/modules/lighter/context/SubaccountContext";
 import { useTradingAccountFundingHistoryItem } from "@/modules/lighter/domain/multichain/useTradingAccountFundingHistory";
 import { userAnalytics } from "lib/userAnalytics";
