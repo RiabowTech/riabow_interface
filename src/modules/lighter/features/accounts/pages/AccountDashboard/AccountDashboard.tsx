@@ -44,7 +44,7 @@ export function AccountDashboard() {
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">
           <div className="default-container page-layout">
-            <PageTitle title={t`Primit Account`} className="p-12" />
+            <PageTitle title={t`Zanbara Account`} className="p-12" />
             <div className="text-center text-red-500">
               <Trans>Invalid address. Please make sure you have entered a valid Ethereum address</Trans>
             </div>
@@ -65,10 +65,10 @@ export function AccountDashboard() {
         <div className="default-container page-layout flex flex-col gap-8">
           <div className="account-dashboard-card">
             <PageTitle
-              title={t`Primit Account`}
+              title={t`Zanbara Account`}
               subtitle={
                 <div className="text-body-medium mb-20 flex flex-wrap items-center gap-4 font-medium">
-                  <Trans>Primit information for account</Trans>
+                  <Trans>Zanbara information for account</Trans>
                   <AddressView noLink address={account} size={20} breakpoint={isMobile ? "XL" : undefined} />
                 </div>
               }

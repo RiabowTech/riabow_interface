@@ -28,7 +28,7 @@ const FILTERS: FilterType[] = ["all", "wallet", "tradingAccount"];
 
 const FILTER_TITLE_MAP: Record<FilterType, MessageDescriptor> = {
   all: msg`All`,
-  tradingAccount: msg`Primit Account`,
+  tradingAccount: msg`Zanbara Account`,
   wallet: msg`Wallet`,
 };
 
@@ -116,7 +116,7 @@ const AssetsList = ({ tokens, noChainFilter }: { tokens: DisplayToken[]; noChain
                 <div>{displayToken.symbol}</div>
                 <div className="text-body-small text-slate-100">
                   {displayToken.chainId === TRADING_ACCOUNT_CHAIN_ID
-                    ? t`Primit Account`
+                    ? t`Zanbara Account`
                     : getChainName(displayToken.chainId)}
                 </div>
               </div>

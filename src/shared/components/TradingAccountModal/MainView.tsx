@@ -247,7 +247,7 @@ const Toolbar = ({ account }: { account: string }) => {
 function TradingAccountBalanceTooltipContent() {
   return (
     <Trans>
-      Your Primit Account balance, usable for trading from any supported chain. {/* DOCS_LINK_COMMENTED: */}
+      Your Zanbara Account balance, usable for trading from any supported chain. {/* DOCS_LINK_COMMENTED: */}
       {/* <span className="text-blue-300">Read more</span>. */}
     </Trans>
   );

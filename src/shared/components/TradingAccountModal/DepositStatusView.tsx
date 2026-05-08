@@ -77,9 +77,9 @@ export const DepositStatusView = () => {
   const statusVariant: "loading" | "success" = isCompleted ? "success" : "loading";
 
   const description = isCompleted ? (
-    <Trans>Funds are now in your Primit Account.</Trans>
+    <Trans>Funds are now in your Zanbara Account.</Trans>
   ) : (
-    <Trans>Funds will appear in your Primit Account soon.</Trans>
+    <Trans>Funds will appear in your Zanbara Account soon.</Trans>
   );
   const statusLabel = isCompleted ? <Trans>Deposit completed</Trans> : <Trans>Deposit in progress</Trans>;
 
