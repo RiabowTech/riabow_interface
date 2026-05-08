@@ -14,7 +14,6 @@ import {
   useTokenPermitsContext,
 } from "@/modules/lighter/context/TokenPermitsContext/TokenPermitsContextProvider";
 import { UserReferralInfo, useUserReferralInfoRequest } from "domain/referrals";
-import { useIsLargeAccountTracker } from "domain/stats/isLargeAccount";
 import {
   AccountStats,
   PeriodAccountStats,
@@ -136,7 +135,6 @@ export type SyntheticsState = {
     accountStats?: AccountStats;
     isCandlesLoaded: boolean;
     setIsCandlesLoaded: (isLoaded: boolean) => void;
-    isLargeAccount?: boolean;
     isFirstOrder: boolean;
     blockTimestampData: BlockTimestampData | undefined;
 
@@ -460,8 +458,6 @@ export function SyntheticsStateContextProvider({
 
   const timePerios = useMemo(() => getTimePeriodsInSeconds(), []);
 
-  const isLargeAccount = useIsLargeAccountTracker(walletAccount);
-
   const { data: lastWeekAccountStats } = usePeriodAccountStats(chainId, {
     account,
     from: timePerios.week[0],
@@ -563,7 +559,6 @@ export function SyntheticsStateContextProvider({
         accountStats,
         isCandlesLoaded,
         setIsCandlesLoaded,
-        isLargeAccount,
         isFirstOrder,
         blockTimestampData,
 
@@ -606,7 +601,6 @@ export function SyntheticsStateContextProvider({
     glvInfo,
     isCandlesLoaded,
     isFirstOrder,
-    isLargeAccount,
     isLoading,
     keepLeverage,
     l1ExpressOrderGasReference,

@@ -59,7 +59,6 @@ export function LighterLeaderboardStateProvider({ children }: { children: ReactN
           accountStats: undefined,
           isCandlesLoaded: false,
           setIsCandlesLoaded: () => undefined,
-          isLargeAccount: undefined,
           isFirstOrder: false,
           blockTimestampData: undefined,
           oracleSettings: undefined,

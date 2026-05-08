@@ -2,7 +2,6 @@ import uniqueId from "lodash/uniqueId";
 
 import { getAbFlags } from "config/ab";
 import { PRODUCTION_PREVIEW_KEY } from "config/localStorage";
-import { getIsLargeAccount } from "domain/stats/isLargeAccount";
 import { MetricEventParams, MulticallTimeoutEvent } from "lib/metrics";
 import { emitMetricCounter, emitMetricEvent, emitMetricTiming } from "lib/metrics/emitMetricEvent";
 import { getCurrentRpcUrls } from "lib/rpc/bestRpcTracker";
@@ -83,7 +82,6 @@ export async function executeMulticallWorker(
     providerUrls,
     request,
     abFlags: getAbFlags(),
-    isLargeAccount: getIsLargeAccount(),
     PRODUCTION_PREVIEW_KEY: localStorage.getItem(PRODUCTION_PREVIEW_KEY),
   });
 
