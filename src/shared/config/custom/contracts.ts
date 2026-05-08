@@ -7,20 +7,21 @@
 import { ARBITRUM, ARBITRUM_SEPOLIA } from "../chains";
 
 /**
- * 主网 ARBITRUM 的 Primit 代理合约地址支持从 .env 覆盖,便于部署/灰度切换而不改代码:
- *   VITE_PRIMIT_VAULT_PROXY   → PRIMIT_VAULT
- *   VITE_PRIMIT_REBATE_PROXY  → REFERRAL_REBATE
- *   VITE_PRIMIT_EARN_PROXY    → EARN
- * 没配置时回退到下面的默认值(当前版本上线时已部署的 v5 代理)。
+ * ZTDX 代理合约地址从 .env 覆盖,便于部署/灰度切换而不改代码:
+ *   VITE_ZTDX_VAULT_PROXY  → ZTDX_VAULT
+ *   VITE_ZTDX_REBATE_PROXY → REFERRAL_REBATE
+ *   VITE_ZTDX_EARN_PROXY   → EARN
+ *   VITE_ZTDX_USDT         → USDT
+ * 没配置时回退到 0x0000…0000 占位地址 (部署时通过 .env 填充实际地址).
  */
-const PRIMIT_VAULT_PROXY =
-  (import.meta.env.VITE_PRIMIT_VAULT_PROXY as string | undefined) || "0x27671cf5864cEC3F4e409fc0e0f652B52fB834E8";
-const PRIMIT_REBATE_PROXY =
-  (import.meta.env.VITE_PRIMIT_REBATE_PROXY as string | undefined) || "0x82D108Fd7b0746c6D3282c6132b1Ca55AD9E54ca";
-const PRIMIT_EARN_PROXY =
-  (import.meta.env.VITE_PRIMIT_EARN_PROXY as string | undefined) || "0xD006B6d0fff5f5c5fE9A17aCADe72b518205a288";
-const PRIMIT_USDT =
-  (import.meta.env.VITE_PRIMIT_USDT as string | undefined) || "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9";
+const ZTDX_VAULT_PROXY =
+  (import.meta.env.VITE_ZTDX_VAULT_PROXY as string | undefined) || "0x0000000000000000000000000000000000000000";
+const ZTDX_REBATE_PROXY =
+  (import.meta.env.VITE_ZTDX_REBATE_PROXY as string | undefined) || "0x0000000000000000000000000000000000000000";
+const ZTDX_EARN_PROXY =
+  (import.meta.env.VITE_ZTDX_EARN_PROXY as string | undefined) || "0x0000000000000000000000000000000000000000";
+const ZTDX_USDT =
+  (import.meta.env.VITE_ZTDX_USDT as string | undefined) || "0x0000000000000000000000000000000000000000";
 
 
 /**
@@ -36,16 +37,16 @@ const PRIMIT_USDT =
  */
 export const TRADING_CONTRACTS = {
   [ARBITRUM_SEPOLIA]: {
-    USDT: PRIMIT_USDT,
-    PRIMIT_VAULT: PRIMIT_VAULT_PROXY,
-    REFERRAL_REBATE: PRIMIT_REBATE_PROXY,
-    EARN: PRIMIT_EARN_PROXY,
+    USDT: ZTDX_USDT,
+    ZTDX_VAULT: ZTDX_VAULT_PROXY,
+    REFERRAL_REBATE: ZTDX_REBATE_PROXY,
+    EARN: ZTDX_EARN_PROXY,
   },
   [ARBITRUM]: {
-    USDT: PRIMIT_USDT,
-    PRIMIT_VAULT: PRIMIT_VAULT_PROXY,
-    REFERRAL_REBATE: PRIMIT_REBATE_PROXY,
-    EARN: PRIMIT_EARN_PROXY,
+    USDT: ZTDX_USDT,
+    ZTDX_VAULT: ZTDX_VAULT_PROXY,
+    REFERRAL_REBATE: ZTDX_REBATE_PROXY,
+    EARN: ZTDX_EARN_PROXY,
   },
 };
 
@@ -107,7 +108,7 @@ export function isTradingUsdtAddress(chainId: number, tokenAddress: string): boo
  * Get the trading vault contract address for a given chain ID in API trading mode.
  */
 export function getTradingVaultAddress(chainId: number): string | undefined {
-  return TRADING_CONTRACTS[chainId as keyof typeof TRADING_CONTRACTS]?.PRIMIT_VAULT;
+  return TRADING_CONTRACTS[chainId as keyof typeof TRADING_CONTRACTS]?.ZTDX_VAULT;
 }
 
 /**
