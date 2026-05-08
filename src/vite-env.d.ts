@@ -45,7 +45,9 @@ interface ImportMetaEnv {
   readonly VITE_ZTDX_REBATE_PROXY: string;
   readonly VITE_ZTDX_EARN_PROXY: string;
   readonly VITE_ZTDX_USDT: string;
-  readonly VITE_PRIMIT_APP_ORIGIN: string;
+
+  // ZTDX app origin for brand link navigation
+  readonly VITE_ZTDX_APP_ORIGIN: string;
 }
 
 interface ImportMeta {
