@@ -12,16 +12,31 @@ import { ARBITRUM, ARBITRUM_SEPOLIA } from "../chains";
  *   VITE_ZTDX_REBATE_PROXY → REFERRAL_REBATE
  *   VITE_ZTDX_EARN_PROXY   → EARN
  *   VITE_ZTDX_USDT         → USDT
+ *
+ * Backward compatibility: 在 ops 切换 CI 环境变量名前,继续接受旧的
+ * VITE_PRIMIT_* 名称作为回退,避免环境变量重命名期间整个 deploy 把
+ * vault 地址解析成 0x0000…0000(会让 ERC20.approve(0x0, ...) revert,
+ * 用户看到不可读的 MetaMask "execution reverted")。等 ops 把 server
+ * 配置切到 VITE_ZTDX_* 后,这个回退分支可以删掉。
+ *
  * 没配置时回退到 0x0000…0000 占位地址 (部署时通过 .env 填充实际地址).
  */
 const ZTDX_VAULT_PROXY =
-  (import.meta.env.VITE_ZTDX_VAULT_PROXY as string | undefined) || "0x0000000000000000000000000000000000000000";
+  (import.meta.env.VITE_ZTDX_VAULT_PROXY as string | undefined) ||
+  (import.meta.env.VITE_PRIMIT_VAULT_PROXY as string | undefined) ||
+  "0x0000000000000000000000000000000000000000";
 const ZTDX_REBATE_PROXY =
-  (import.meta.env.VITE_ZTDX_REBATE_PROXY as string | undefined) || "0x0000000000000000000000000000000000000000";
+  (import.meta.env.VITE_ZTDX_REBATE_PROXY as string | undefined) ||
+  (import.meta.env.VITE_PRIMIT_REBATE_PROXY as string | undefined) ||
+  "0x0000000000000000000000000000000000000000";
 const ZTDX_EARN_PROXY =
-  (import.meta.env.VITE_ZTDX_EARN_PROXY as string | undefined) || "0x0000000000000000000000000000000000000000";
+  (import.meta.env.VITE_ZTDX_EARN_PROXY as string | undefined) ||
+  (import.meta.env.VITE_PRIMIT_EARN_PROXY as string | undefined) ||
+  "0x0000000000000000000000000000000000000000";
 const ZTDX_USDT =
-  (import.meta.env.VITE_ZTDX_USDT as string | undefined) || "0x0000000000000000000000000000000000000000";
+  (import.meta.env.VITE_ZTDX_USDT as string | undefined) ||
+  (import.meta.env.VITE_PRIMIT_USDT as string | undefined) ||
+  "0x0000000000000000000000000000000000000000";
 
 
 /**
