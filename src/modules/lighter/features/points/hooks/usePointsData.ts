@@ -179,7 +179,7 @@ function mapUserPayload(d: PointsUserServerData): PointsApiResponse {
 
 function normalizeLeaderboard(
   payload: PointsLeaderboardPayload | null | undefined,
-  currentUserAddress: string | null,
+  currentUserAddress: string | null
 ): LeaderboardApiResponse {
   const entries = payload?.entries || [];
   const norm = currentUserAddress?.toLowerCase() || null;
@@ -200,7 +200,7 @@ function usePointsApi(
   epochId: number | null,
   isWalletConnected: boolean,
   userAddress?: string | null,
-  jwtToken?: string | null,
+  jwtToken?: string | null
 ): PointsApiResponse | null {
   const shouldFetch = isWalletConnected && epochId !== null;
   const { chainId } = useChainId();
@@ -219,7 +219,7 @@ function usePointsApi(
       errorRetryCount: 0,
       dedupingInterval: 0,
       refreshInterval: 0,
-    },
+    }
   );
 
   if (error || !data || !data.success || !data.data) return null;
@@ -240,7 +240,7 @@ function useLeaderboardApi(epochId: number | null, currentUserAddress: string | 
       shouldRetryOnError: false,
       errorRetryCount: 0,
       dedupingInterval: 0,
-    },
+    }
   );
 
   return normalizeLeaderboard(data?.success ? data.data : null, currentUserAddress);
@@ -250,7 +250,7 @@ function transformPointsData(
   apiData: PointsApiResponse | null,
   leaderboardData: LeaderboardApiResponse,
   isWalletConnected: boolean,
-  selectedEpoch: EpochOption | null,
+  selectedEpoch: EpochOption | null
 ): PointsPageData {
   const tr = apiData?.pointsBreakdown?.trading ?? null;
   const ho = apiData?.pointsBreakdown?.holding ?? null;
@@ -272,13 +272,9 @@ function transformPointsData(
       ? computeEpochProgressPct(selectedEpoch.startDate, selectedEpoch.endDate)
       : 0;
 
-  const seasonEpochLine =
-    selectedEpoch != null
-      ? `Epoch ${selectedEpoch.id} · ${selectedEpoch.seasonLabel}`
-      : "—";
+  const seasonEpochLine = selectedEpoch != null ? `Epoch ${selectedEpoch.id} · ${selectedEpoch.seasonLabel}` : "—";
 
-  const epochDateRangeLabel =
-    selectedEpoch != null ? `${selectedEpoch.startDate} → ${selectedEpoch.endDate}` : "—";
+  const epochDateRangeLabel = selectedEpoch != null ? `${selectedEpoch.startDate} → ${selectedEpoch.endDate}` : "—";
 
   return {
     isWalletConnected,
@@ -360,10 +356,7 @@ export function usePointsData(epochId: number | null, epochs: EpochOption[]): Po
   const userAddress = account || null;
   const { token: authToken } = useAuthToken();
 
-  const selectedEpoch = useMemo(
-    () => epochs.find((e) => e.id === epochId) ?? null,
-    [epochs, epochId],
-  );
+  const selectedEpoch = useMemo(() => epochs.find((e) => e.id === epochId) ?? null, [epochs, epochId]);
 
   const pointsApiData = usePointsApi(epochId, isWalletConnected, userAddress, authToken);
   const rawAddress = pointsApiData?.walletAddress || userAddress;
@@ -371,7 +364,7 @@ export function usePointsData(epochId: number | null, epochs: EpochOption[]): Po
 
   return useMemo(
     () => transformPointsData(pointsApiData, leaderboardApiData, isWalletConnected, selectedEpoch),
-    [pointsApiData, leaderboardApiData, isWalletConnected, selectedEpoch],
+    [pointsApiData, leaderboardApiData, isWalletConnected, selectedEpoch]
   );
 }
 
@@ -409,7 +402,7 @@ export function useDailyPointsLeaderboard(epochId: number | null, limit = 80): U
       errorRetryCount: 0,
       dedupingInterval: 60_000,
       refreshInterval: DAILY_LEADERBOARD_REFRESH_MS,
-    },
+    }
   );
 
   return useMemo((): UseDailyPointsLeaderboardResult => {

@@ -406,6 +406,24 @@ export const DepositView = () => {
       return;
     }
 
+    // Defensive guard: refuse zero-address spender. Most ERC20s revert on
+    // approve(address(0), ...) (OpenZeppelin: `ERC20InvalidSpender`), and even
+    // when they don't, "approve to zero" silently destroys allowance instead
+    // of granting it. Hitting this branch means VITE_ZTDX_VAULT_PROXY (or the
+    // cross-chain Stargate pool address) wasn't resolved at build time —
+    // contracts.ts falls back to 0x0000…0000 placeholder when the env is
+    // missing, which propagates to here. Surface with a readable toast
+    // instead of a MetaMask "execution reverted" pop-up.
+    if (spenderAddress.toLowerCase() === zeroAddress.toLowerCase()) {
+      console.error("[DepositView] ❌ Approve aborted: spender resolved to zero address. Check VITE_ZTDX_VAULT_PROXY / Stargate pool config.", {
+        depositViewChain,
+        settlementChainId,
+        isSameChain: depositViewChain === settlementChainId,
+      });
+      helperToast.error(t`Deposit contract not configured for this chain. Contact support.`);
+      return;
+    }
+
     const isNative = depositViewTokenAddress === zeroAddress;
 
     if (isNative) {

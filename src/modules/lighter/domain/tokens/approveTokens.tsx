@@ -116,6 +116,17 @@ export async function approveTokens({
     throw new Error("Signer is required for token approval");
   }
 
+  // Reject zero-address spender. Calling ERC20.approve(0x0, ...) reverts on
+  // OZ-based implementations (ERC20InvalidSpender) and on legacy USDT-like
+  // implementations silently nukes allowance — neither is what callers want.
+  // This usually means a missing contract env var (VITE_ZTDX_VAULT_PROXY)
+  // — shared/config/custom/contracts.ts falls back to the 0x0000…0000
+  // placeholder when the build env is unset, and that propagates here.
+  if (!spender || spender.toLowerCase() === ethers.ZeroAddress.toLowerCase()) {
+    setIsApproving(false);
+    throw new Error("Token approval refused: spender resolved to zero address (check chain contract config)");
+  }
+
   const contract = new ethers.Contract(tokenAddress, TokenAbi, signer);
   const nativeToken = getNativeToken(chainId);
   const networkName = getChainName(chainId);
