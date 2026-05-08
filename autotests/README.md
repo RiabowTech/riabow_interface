@@ -1,6 +1,6 @@
 # Autotests
 
-This repository contains the autotests for the Primit interface.
+This repository contains the autotests for the ZTDX interface.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ This repository contains the autotests for the Primit interface.
 1. Setup `.env` file in same directory as tests with the following content:
 
 ```bash
-PRIMIT_BASE_URL=<URL to Primit interface for testing>
+PRIMIT_BASE_URL=<URL to ZTDX interface for testing>
 SEED=<SEED PHRASE FOR WALLET>
 PWDEBUG=<true if want to see tests UI>
 USE_METAMASK=<true if using real metamask>
