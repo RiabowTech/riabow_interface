@@ -13,7 +13,7 @@ import { isGlvEnabled } from "domain/synthetics/markets/glv";
 import { SwapPricingType } from "domain/synthetics/orders";
 import { TokenPrices, TokensData, convertToContractPrice, getTokenData } from "domain/synthetics/tokens";
 import { SignedTokenPermit } from "domain/tokens";
-import { getExpressProvider, getProvider } from "lib/rpc";
+import { getProvider } from "lib/rpc";
 import { getTenderlyConfig, simulateTxWithTenderly } from "lib/tenderly";
 import { BlockTimestampData, adjustBlockTimestamp } from "lib/useBlockTimestampRequest";
 import { abis } from "sdk/abis";
@@ -45,14 +45,7 @@ export function isSimulationPassed(errorData: ErrorData) {
 }
 
 export async function simulateExecution(chainId: ContractsChainId, p: SimulateExecuteParams) {
-  let provider: JsonRpcProvider;
-
-  if (p.isExpress) {
-    // Use alchemy rpc for express transactions simulation to increase reliability
-    provider = getExpressProvider(chainId) ?? getProvider(undefined, chainId);
-  } else {
-    provider = getProvider(undefined, chainId);
-  }
+  const provider: JsonRpcProvider = getProvider(undefined, chainId);
 
   if (isDevelopment()) {
   }

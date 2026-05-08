@@ -16,7 +16,6 @@ import {
   getAlchemyBscMainnetWsUrl,
   getAlchemyOptimismSepoliaWsUrl,
   getAlchemySepoliaWsUrl,
-  getExpressRpcUrl,
   getFallbackRpcUrl,
   SOURCE_BASE_MAINNET,
   SOURCE_BSC_MAINNET,
@@ -24,7 +23,6 @@ import {
   SOURCE_SEPOLIA,
 } from "config/chains";
 import { isDevelopment } from "config/env";
-import { getIsLargeAccount } from "domain/stats/isLargeAccount";
 import { getCurrentRpcUrls, useCurrentRpcUrls } from "lib/rpc/bestRpcTracker";
 
 export function getProvider(signer: undefined, chainId: number): ethers.JsonRpcProvider;
@@ -48,11 +46,7 @@ export function getWsProvider(chainId: AnyChainId): WebSocketProvider | JsonRpcP
   const network = Network.from(chainId);
 
   if (chainId === ARBITRUM) {
-    return new ethers.WebSocketProvider(
-      getAlchemyArbitrumWsUrl(getIsLargeAccount() ? "largeAccount" : "fallback"),
-      network,
-      { staticNetwork: network }
-    );
+    return new ethers.WebSocketProvider(getAlchemyArbitrumWsUrl(), network, { staticNetwork: network });
   }
 
   if (chainId === AVALANCHE) {
@@ -71,50 +65,36 @@ export function getWsProvider(chainId: AnyChainId): WebSocketProvider | JsonRpcP
   }
 
   if (chainId === ARBITRUM_SEPOLIA) {
-    const provider = new ethers.WebSocketProvider(getAlchemyArbitrumSepoliaWsUrl("fallback"), network, {
+    const provider = new ethers.WebSocketProvider(getAlchemyArbitrumSepoliaWsUrl(), network, {
       staticNetwork: network,
     });
     return provider;
   }
 
   if (chainId === SOURCE_SEPOLIA) {
-    const provider = new ethers.WebSocketProvider(getAlchemySepoliaWsUrl("fallback"), network, {
+    const provider = new ethers.WebSocketProvider(getAlchemySepoliaWsUrl(), network, {
       staticNetwork: network,
     });
     return provider;
   }
 
   if (chainId === SOURCE_OPTIMISM_SEPOLIA) {
-    const provider = new ethers.WebSocketProvider(getAlchemyOptimismSepoliaWsUrl("fallback"), network, {
+    const provider = new ethers.WebSocketProvider(getAlchemyOptimismSepoliaWsUrl(), network, {
       staticNetwork: network,
     });
     return provider;
   }
 
   if (chainId === BOTANIX) {
-    return new ethers.WebSocketProvider(
-      getAlchemyBotanixWsUrl(getIsLargeAccount() ? "largeAccount" : "fallback"),
-      network,
-      { staticNetwork: network }
-    );
+    return new ethers.WebSocketProvider(getAlchemyBotanixWsUrl(), network, { staticNetwork: network });
   }
 
   if (chainId === SOURCE_BASE_MAINNET) {
-    return new ethers.WebSocketProvider(
-      getAlchemyBaseMainnetWsUrl(getIsLargeAccount() ? "largeAccount" : "fallback"),
-      network,
-      {
-        staticNetwork: network,
-      }
-    );
+    return new ethers.WebSocketProvider(getAlchemyBaseMainnetWsUrl(), network, { staticNetwork: network });
   }
 
   if (chainId === SOURCE_BSC_MAINNET) {
-    return new ethers.WebSocketProvider(
-      getAlchemyBscMainnetWsUrl(getIsLargeAccount() ? "largeAccount" : "fallback"),
-      network,
-      { staticNetwork: network }
-    );
+    return new ethers.WebSocketProvider(getAlchemyBscMainnetWsUrl(), network, { staticNetwork: network });
   }
 
   const castedChainId: never = chainId;
@@ -127,33 +107,18 @@ export function getFallbackProvider(chainId: number) {
     return;
   }
 
-  const providerUrl = getFallbackRpcUrl(chainId, getIsLargeAccount());
+  const providerUrl = getFallbackRpcUrl(chainId);
 
   return new ethers.JsonRpcProvider(providerUrl, chainId, {
     staticNetwork: Network.from(chainId),
   });
 }
 
-export function getExpressProvider(chainId: number): JsonRpcProvider | undefined {
-  const providerUrl: string | undefined = getExpressRpcUrl(chainId);
-
-  if (!providerUrl) {
-    return;
-  }
-
-  return new ethers.JsonRpcProvider(providerUrl, chainId, {
-    staticNetwork: Network.from(chainId),
-  });
-}
-
-export function useJsonRpcProvider(chainId: number | undefined, { isExpress = false }: { isExpress?: boolean } = {}) {
+export function useJsonRpcProvider(chainId: number | undefined) {
   const [provider, setProvider] = useState<JsonRpcProvider>();
 
   const { primary } = useCurrentRpcUrls(chainId);
-  const rpcUrl = useMemo(
-    () => (isExpress && chainId ? getExpressRpcUrl(chainId) : primary),
-    [chainId, isExpress, primary]
-  );
+  const rpcUrl = useMemo(() => primary, [primary]);
 
   useEffect(() => {
     if (!chainId) {

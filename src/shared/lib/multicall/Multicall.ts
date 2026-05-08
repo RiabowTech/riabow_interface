@@ -88,12 +88,7 @@ export class Multicall {
     private abFlags: Record<string, boolean>
   ) {}
 
-  async call(
-    providerUrls: MulticallProviderUrls,
-    request: MulticallRequestConfig<any>,
-    maxTimeout: number,
-    isLargeAccount: boolean
-  ) {
+  async call(providerUrls: MulticallProviderUrls, request: MulticallRequestConfig<any>, maxTimeout: number) {
     const originalKeys: {
       contractKey: string;
       callKey: string;
@@ -158,7 +153,7 @@ export class Multicall {
           isInMainThread: !isWebWorker,
           requestType,
           rpcProvider,
-          isLargeAccount,
+          isLargeAccount: false,
         },
       });
     };
@@ -179,7 +174,7 @@ export class Multicall {
           chainId: this.chainId,
           requestType,
           rpcProvider,
-          isLargeAccount,
+          isLargeAccount: false,
         },
       });
     };

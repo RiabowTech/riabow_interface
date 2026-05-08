@@ -6,19 +6,10 @@ import orderBy from "lodash/orderBy";
 import { useEffect, useState } from "react";
 import { Address } from "viem";
 
-import {
-  AnyChainId,
-  CONTRACTS_CHAIN_IDS,
-  ContractsChainId,
-  FALLBACK_PROVIDERS,
-  getFallbackRpcUrl,
-  PRIVATE_RPC_PROVIDERS,
-  RPC_PROVIDERS,
-} from "config/chains";
+import { AnyChainId, CONTRACTS_CHAIN_IDS, ContractsChainId, getFallbackRpcUrl, RPC_PROVIDERS } from "config/chains";
 import { getContract, getDataStoreContract, getMulticallContract } from "config/contracts";
 import { getRpcProviderKey } from "config/localStorage";
 import { RPC_PROBE_MARKETS } from "config/rpcProbeMarkets";
-import { getIsLargeAccount } from "domain/stats/isLargeAccount";
 import { isDebugMode } from "lib/localStorage";
 import { RpcTrackerRankingCounter } from "lib/metrics";
 import { emitMetricCounter } from "lib/metrics/emitMetricEvent";
@@ -94,7 +85,7 @@ function trackRpcProviders({ warmUp = false } = {}) {
           }
 
           // Use fallback provider both as primary and secondary if no successful probes received
-          const fallbackRpcUrl = getFallbackRpcUrl(chainId, getIsLargeAccount());
+          const fallbackRpcUrl = getFallbackRpcUrl(chainId);
 
           return {
             primaryUrl: fallbackRpcUrl,
@@ -116,7 +107,7 @@ function trackRpcProviders({ warmUp = false } = {}) {
 async function getBestRpcProvidersForChain({ providers, chainId }: RpcTrackerState[ContractsChainId]) {
   const providersList = Object.values(providers);
 
-  const providersToProbe = getIsLargeAccount() ? providersList : providersList.filter(({ isPublic }) => isPublic);
+  const providersToProbe = providersList.filter(({ isPublic }) => isPublic);
 
   const probePromises = providersToProbe.map((providerInfo) => {
     return probeRpc(chainId, providerInfo.provider, providerInfo.url, providerInfo.isPublic);
@@ -169,20 +160,10 @@ async function getBestRpcProvidersForChain({ providers, chainId }: RpcTrackerSta
     throw new Error("no-success-probes");
   }
 
-  let nextPrimaryRpc = bestResponseTimeValidProbe;
-  let nextSecondaryRpc = {
-    url: getFallbackRpcUrl(chainId, getIsLargeAccount()),
+  const nextPrimaryRpc = bestResponseTimeValidProbe;
+  const nextSecondaryRpc = {
+    url: getFallbackRpcUrl(chainId),
   };
-
-  if (getIsLargeAccount()) {
-    const privateRpcResult = validProbesStats.find((probe) => !probe.isPublic);
-
-    if (privateRpcResult) {
-      nextPrimaryRpc = privateRpcResult;
-    }
-
-    nextSecondaryRpc = bestResponseTimeValidProbe;
-  }
 
   if (isDebugMode()) {
     console.table(
@@ -225,7 +206,7 @@ function setCurrentProviders(chainId: number, { primaryUrl, secondaryUrl, bestBe
       chainId,
       rpcProvider: getProviderNameFromUrl(primaryUrl),
       bestBlockGap: bestBestBlockGap ?? "unknown",
-      isLargeAccount: getIsLargeAccount(),
+      isLargeAccount: false,
     },
   });
 
@@ -362,17 +343,10 @@ function initTrackerState() {
       }, {});
     };
 
-    const privateRpcProviders = getIsLargeAccount() ? PRIVATE_RPC_PROVIDERS[chainId] : FALLBACK_PROVIDERS[chainId];
+    const providers = prepareProviders(RPC_PROVIDERS[chainId], { isPublic: true });
 
-    const providers = {
-      ...prepareProviders(RPC_PROVIDERS[chainId], { isPublic: true }),
-      ...prepareProviders(privateRpcProviders ?? [], { isPublic: false }),
-    };
-
-    let currentPrimaryUrl: string =
-      (getIsLargeAccount() ? privateRpcProviders?.[0] : RPC_PROVIDERS[chainId][0]) ?? RPC_PROVIDERS[chainId][0];
-    let currentSecondaryUrl: string =
-      (getIsLargeAccount() ? RPC_PROVIDERS[chainId][0] : privateRpcProviders?.[0]) ?? RPC_PROVIDERS[chainId][0];
+    let currentPrimaryUrl: string = RPC_PROVIDERS[chainId][0];
+    const currentSecondaryUrl: string = RPC_PROVIDERS[chainId][0];
 
     const storageKey = JSON.stringify(getRpcProviderKey(chainId));
     const storedProviderData = localStorage.getItem(storageKey);
@@ -419,10 +393,8 @@ export function getCurrentRpcUrls(rawChainId: number): { primary: string; second
     trackerState[chainId].lastUsage = new Date();
   }
 
-  const privateRpcProviders = getIsLargeAccount() ? PRIVATE_RPC_PROVIDERS[chainId] : FALLBACK_PROVIDERS[chainId];
-
   const primary = trackerState?.[chainId]?.currentPrimaryUrl ?? RPC_PROVIDERS[chainId][0];
-  const secondary = trackerState?.[chainId]?.currentSecondaryUrl ?? privateRpcProviders?.[0] ?? primary;
+  const secondary = trackerState?.[chainId]?.currentSecondaryUrl ?? primary;
 
   return { primary, secondary };
 }
