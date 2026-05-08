@@ -32,11 +32,11 @@ const NAV_ITEMS: {
 }[] = [
   { to: "/futures", labelKey: "Futures" },
   { to: "/spot", labelKey: "Spot" },
-  { to: "/earn", labelKey: "Earn" },
+  // { to: "/earn", labelKey: "Earn" },
   { to: "/accounts/", labelKey: "Portfolio" },
-  { to: "/leaderboard/", labelKey: "Leaderboard" },
+  // { to: "/leaderboard/", labelKey: "Leaderboard" },
   { to: "/referrals", labelKey: "Referrals" },
-  { to: "/points", labelKey: "Points" },
+  // { to: "/points", labelKey: "Points" },
   { to: "/fee-vip", labelKey: "Fee & VIP" },
 ];
 

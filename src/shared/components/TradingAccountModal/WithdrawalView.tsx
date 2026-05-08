@@ -44,7 +44,10 @@ import {
   selectGasPaymentToken,
 } from "@/modules/lighter/store/SyntheticsStateContext/selectors/expressSelectors";
 import { useSelector } from "@/modules/lighter/store/SyntheticsStateContext/utils";
-import { useArbitraryError, useArbitraryRelayParamsAndPayload } from "@/modules/lighter/domain/multichain/arbitraryRelayParams";
+import {
+  useArbitraryError,
+  useArbitraryRelayParamsAndPayload,
+} from "@/modules/lighter/domain/multichain/arbitraryRelayParams";
 import { fallbackCustomError } from "@/modules/lighter/domain/multichain/fallbackCustomError";
 import { getMultichainTransferSendParams } from "@/modules/lighter/domain/multichain/getSendParams";
 import { BridgeOutParams } from "@/modules/lighter/domain/multichain/types";
@@ -87,7 +90,10 @@ import { Amount } from "components/Amount/Amount";
 import { AmountWithUsdBalance } from "components/AmountWithUsd/AmountWithUsd";
 import Button from "components/Button/Button";
 import { DropdownSelector } from "components/DropdownSelector/DropdownSelector";
-import { useAvailableToTradeAssetMultichain, useTradingAccountWithdrawNetworks } from "components/TradingAccountModal/hooks";
+import {
+  useAvailableToTradeAssetMultichain,
+  useTradingAccountWithdrawNetworks,
+} from "components/TradingAccountModal/hooks";
 import NumberInput from "components/NumberInput/NumberInput";
 import TokenIcon from "components/TokenIcon/TokenIcon";
 import { ValueTransition } from "components/ValueTransition/ValueTransition";
@@ -172,7 +178,7 @@ export const WithdrawalView = () => {
   const { setIsSettingsVisible } = useSettings();
   const { setMultichainSubmittedWithdrawal, setMultichainWithdrawalSentTxnHash, setMultichainWithdrawalSentError } =
     useSyntheticsEvents();
-  
+
   // API trading mode check - keep this above dependent effects.
   const isTradeMode = isTradeModeActive();
 
@@ -188,9 +194,7 @@ export const WithdrawalView = () => {
   const { walletClient } = useWallet();
   const publicClient = usePublicClient({ chainId });
   // Only subscribe to API balances in API trading mode to avoid unnecessary state churn.
-  const balancesResult = usePrimitUserBalances(
-    isTradeMode ? { refreshInterval: 10000 } : undefined
-  );
+  const balancesResult = usePrimitUserBalances(isTradeMode ? { refreshInterval: 10000 } : undefined);
   const mutateBalances = isTradeMode ? balancesResult.mutate : undefined;
 
   const { tokensData } = useTokensDataRequest(chainId, withdrawalViewChain);
@@ -567,7 +571,14 @@ export const WithdrawalView = () => {
 
     // In API trading mode, use the backend withdrawal flow with the vault contract call.
     if (isTradeMode) {
-      if (!chainId || !walletClient || !publicClient || !inputValue || inputAmountUsd === undefined || inputAmountUsd === 0n) {
+      if (
+        !chainId ||
+        !walletClient ||
+        !publicClient ||
+        !inputValue ||
+        inputAmountUsd === undefined ||
+        inputAmountUsd === 0n
+      ) {
         helperToast.error(t`Missing required parameters for withdrawal`);
         return;
       }
@@ -642,26 +653,27 @@ export const WithdrawalView = () => {
           });
         } catch (simulateError: any) {
           console.error("[WithdrawalView] Contract simulation failed:", simulateError);
-          
+
           // Extract error information
           const errorMessage = simulateError?.message || "";
           const shortMessage = simulateError?.shortMessage || "";
           const errorData = simulateError?.data;
           const errorCause = simulateError?.cause;
-          
+
           // Try to extract error signature if available
           let errorSignature = "";
           if (errorCause?.data) {
-            errorSignature = typeof errorCause.data === "string" 
-              ? errorCause.data.substring(0, 10) 
-              : errorCause.data.toString().substring(0, 10);
+            errorSignature =
+              typeof errorCause.data === "string"
+                ? errorCause.data.substring(0, 10)
+                : errorCause.data.toString().substring(0, 10);
           } else if (shortMessage.includes("0x")) {
             const match = shortMessage.match(/0x[a-fA-F0-9]{8}/);
             if (match) {
               errorSignature = match[0];
             }
           }
-          
+
           console.error("[WithdrawalView] Simulation error details:", {
             message: errorMessage,
             shortMessage: shortMessage,
@@ -671,18 +683,22 @@ export const WithdrawalView = () => {
             name: simulateError?.name,
             stack: simulateError?.stack,
           });
-          
+
           // Provide user-friendly error message
           let userMessage = "Transaction simulation failed";
           if (errorSignature) {
             userMessage += ` (Error: ${errorSignature})`;
-            console.error(`[WithdrawalView] Error signature ${errorSignature} - Check contract for specific error definition`);
-            console.error(`[WithdrawalView] Look up error at: https://openchain.xyz/signatures?query=${errorSignature}`);
+            console.error(
+              `[WithdrawalView] Error signature ${errorSignature} - Check contract for specific error definition`
+            );
+            console.error(
+              `[WithdrawalView] Look up error at: https://openchain.xyz/signatures?query=${errorSignature}`
+            );
           }
           if (shortMessage) {
             userMessage += `: ${shortMessage}`;
           }
-          
+
           throw new Error(userMessage);
         }
 
@@ -1351,7 +1367,9 @@ export const WithdrawalView = () => {
           {!isTradeMode && (
             <SyntheticsInfoRow
               label={<Trans>Trading Account Balance</Trans>}
-              value={<ValueTransition from={formatUsd(tradingAccountUsd)} to={formatUsd(nextTradingAccountBalanceUsd)} />}
+              value={
+                <ValueTransition from={formatUsd(tradingAccountUsd)} to={formatUsd(nextTradingAccountBalanceUsd)} />
+              }
             />
           )}
         </div>
