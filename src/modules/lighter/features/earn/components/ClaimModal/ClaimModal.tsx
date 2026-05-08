@@ -25,27 +25,20 @@ function formatUsdtAmount(amount: string | number): string {
   return converted.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: maxDecimals });
 }
 
-// Earn contract ABI for claim functions
+// Earn contract ABI for redeem functions
 const EARN_CLAIM_ABI = [
   {
-    name: "claim",
+    name: "redeemPlan",
     type: "function",
-    inputs: [{ name: "productId", type: "uint256" }],
+    inputs: [{ name: "planId", type: "uint256" }],
     outputs: [],
     stateMutability: "nonpayable",
   },
   {
-    name: "emergencyClaim",
-    type: "function",
-    inputs: [{ name: "productId", type: "uint256" }],
-    outputs: [],
-    stateMutability: "nonpayable",
-  },
-  {
-    name: "getSubscription",
+    name: "getPlanPosition",
     type: "function",
     inputs: [
-      { name: "productId", type: "uint256" },
+      { name: "planId", type: "uint256" },
       { name: "user", type: "address" },
     ],
     outputs: [
@@ -135,11 +128,11 @@ export function ClaimModal({
       setCurrentStep("claiming");
       setErrorMessage("");
 
-      // Check if user has subscription and hasn't claimed yet
+      // Check if user has plan position and hasn't redeemed yet
       const subscriptionData = await publicClient.readContract({
         address: earnContractAddress as `0x${string}`,
         abi: EARN_CLAIM_ABI,
-        functionName: "getSubscription",
+        functionName: "getPlanPosition",
         args: [BigInt(subscription.chain_product_id), walletAddress as `0x${string}`],
       });
 
@@ -162,7 +155,7 @@ export function ClaimModal({
         await publicClient.simulateContract({
           address: earnContractAddress as `0x${string}`,
           abi: EARN_CLAIM_ABI,
-          functionName: "claim",
+          functionName: "redeemPlan",
           args: [BigInt(subscription.chain_product_id)],
           account: walletAddress as `0x${string}`,
         });
@@ -183,11 +176,11 @@ export function ClaimModal({
         return;
       }
 
-      // Execute claim transaction
+      // Execute redeem transaction
       const txHash = await walletClient.writeContract({
         address: earnContractAddress as `0x${string}`,
         abi: EARN_CLAIM_ABI,
-        functionName: "claim",
+        functionName: "redeemPlan",
         args: [BigInt(subscription.chain_product_id)],
       });
 
