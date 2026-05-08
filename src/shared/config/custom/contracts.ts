@@ -85,7 +85,7 @@ export const MARKET_SYMBOL_TO_ADDRESS: Record<number, Record<string, string>> = 
  * Used by API adapters for order/position/trade conversion
  */
 export const DEFAULT_COLLATERAL_ADDRESS: Record<number, string> = {
-  [ARBITRUM_SEPOLIA]: "0xc96BDE5008518332Bb5c45177f9E70D75Ea5D865", // Test USDT on Arbitrum Sepolia (redeployed 2026-01-27)
+  [ARBITRUM_SEPOLIA]: "0xfA70c5A9221d239Cd51DBf48967ABc79d7B9D61d", // Test USDT on Arbitrum Sepolia (redeployed 2026-05-08)
   [ARBITRUM]: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9", // Official Tether USDT on Arbitrum mainnet
 } as const;
 

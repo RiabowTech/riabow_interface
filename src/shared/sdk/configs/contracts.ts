@@ -254,7 +254,7 @@ export const CONTRACTS = {
     LayerZeroProvider: "0xCaDa136eb3503eE2b2DB01757750d12212b657D1",
 
     ChainlinkPriceFeedProvider: "0x161D0F1eE4b8F4B94130572ECa509574ad7c1EC9",
-    ReferralStorage: "0x8Af45aB19EcDC51a63775f52b03f5160f2CdA5E8",
+    ReferralStorage: "0xcb794a7fb4c7c73e151771aDF79eDCb300807f9b",
     ClaimHandler: "0xDEE5c9530Da5695aa16Cd228118149ab9a4C41eb",
 
     // External
