@@ -19,6 +19,7 @@ import { useDisconnectAndClose } from "@/modules/lighter/domain/multichain/useDi
 import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
 import { BOTANIX, getExplorerUrl } from "config/chains";
 import { getTradingVaultAddress } from "config/custom/contracts";
+import VaultAbi from "sdk/abis/Vault";
 import { isSettlementChain } from "config/multichain";
 import { isMultichainFundingItemLoading } from "@/modules/lighter/domain/multichain/isMultichainFundingItemLoading";
 import type { MultichainFundingHistoryItem } from "@/modules/lighter/domain/multichain/types";
@@ -569,20 +570,11 @@ const FundingHistorySection = () => {
         throw new Error("Vault contract not found");
       }
 
-      // Vault ABI - releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
-      const vaultAbi = [
-        {
-          inputs: [
-            { name: "amount", type: "uint256" },
-            { name: "deadline", type: "uint256" },
-            { name: "signature", type: "bytes" },
-          ],
-          name: "releaseFunds",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-      ] as const;
+      // Reuse the shared Vault ABI — includes all custom error definitions
+      // from ZtdxReserveVault + ZtdxSignatureCodec, so revert reasons surface
+      // as readable names (e.g. InvalidSignature, SignatureExpired) instead
+      // of raw 4-byte selectors.
+      const vaultAbi = VaultAbi;
 
       // The amount is already in bigint format from item.amount
       const amountInWei = item.amount;

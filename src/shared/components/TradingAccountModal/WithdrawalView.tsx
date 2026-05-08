@@ -101,6 +101,7 @@ import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/Tra
 import { usePrimitUserBalances } from "@/modules/lighter/api";
 import { requestWithdraw, confirmWithdraw, isAuthenticated } from "@/modules/lighter/api/custom/client";
 import { getTradingVaultAddress, getTradingUsdtAddress } from "config/custom/contracts";
+import VaultAbi from "sdk/abis/Vault";
 import { usePublicClient } from "wagmi";
 import useWallet from "lib/wallets/useWallet";
 import { parseUnits } from "viem";
@@ -599,71 +600,11 @@ export const WithdrawalView = () => {
           throw new Error("Vault contract not found");
         }
 
-        // Vault ABI - according to contract: releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
-        // Include all error definitions from the contract ABI to help decode revert reasons
-        const vaultAbi = [
-          {
-            inputs: [
-              { name: "amount", type: "uint256" },
-              { name: "deadline", type: "uint256" },
-              { name: "signature", type: "bytes" },
-            ],
-            name: "releaseFunds",
-            outputs: [],
-            stateMutability: "nonpayable",
-            type: "function",
-          },
-          // Error definitions from contract ABI
-          {
-            inputs: [
-              { name: "amount", type: "uint256" },
-              { name: "minimum", type: "uint256" },
-            ],
-            name: "AmountBelowMinimum",
-            type: "error",
-          },
-          {
-            inputs: [
-              { name: "requested", type: "uint256" },
-              { name: "available", type: "uint256" },
-            ],
-            name: "InsufficientBalance",
-            type: "error",
-          },
-          {
-            inputs: [],
-            name: "InvalidSignature",
-            type: "error",
-          },
-          {
-            inputs: [{ name: "length", type: "uint256" }],
-            name: "InvalidSignatureLength",
-            type: "error",
-          },
-          {
-            inputs: [],
-            name: "InvalidSigner",
-            type: "error",
-          },
-          {
-            inputs: [],
-            name: "ReferralStorageNotSet",
-            type: "error",
-          },
-          {
-            inputs: [
-              { name: "deadline", type: "uint256" },
-              { name: "currentTime", type: "uint256" },
-            ],
-            name: "SignatureExpired",
-            type: "error",
-          },
-          {
-            inputs: [],
-            name: "ZeroAddress",
-            type: "error",
-          },
-        ] as const;
+        // Reuse the shared Vault ABI — includes the full custom error list
+        // from ZtdxReserveVault + ZtdxSignatureCodec so revert reasons surface
+        // as readable names (e.g. InvalidSignature, SignatureExpired) rather
+        // than raw 4-byte selectors when releaseFunds reverts.
+        const vaultAbi = VaultAbi;
 
         // Use amount directly from response (already in wei format)
         // Response format: "amount":"10000000" (string representation of wei)
