@@ -569,7 +569,7 @@ const FundingHistorySection = () => {
         throw new Error("Vault contract not found");
       }
 
-      // Vault ABI - withdraw(uint256 amount, uint256 deadline, bytes calldata signature)
+      // Vault ABI - releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
       const vaultAbi = [
         {
           inputs: [
@@ -577,7 +577,7 @@ const FundingHistorySection = () => {
             { name: "deadline", type: "uint256" },
             { name: "signature", type: "bytes" },
           ],
-          name: "withdraw",
+          name: "releaseFunds",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -594,7 +594,7 @@ const FundingHistorySection = () => {
         await publicClient.simulateContract({
           address: vaultAddress as `0x${string}`,
           abi: vaultAbi,
-          functionName: "withdraw",
+          functionName: "releaseFunds",
           args: [amountInWei, BigInt(deadline), signature as `0x${string}`],
           account: getAddress(account),
         });
@@ -607,7 +607,7 @@ const FundingHistorySection = () => {
       const txHash = await walletClient.writeContract({
         address: vaultAddress as `0x${string}`,
         abi: vaultAbi,
-        functionName: "withdraw",
+        functionName: "releaseFunds",
         args: [amountInWei, BigInt(deadline), signature as `0x${string}`],
         account: getAddress(account),
         chain: publicClient.chain,

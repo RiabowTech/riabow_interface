@@ -39,12 +39,15 @@ interface ImportMetaEnv {
   // Git Info
   readonly VITE_GIT_COMMIT_HASH: string;
 
-  // Primit proxy contracts (per-chain env override; falls back to hardcoded
-  // mainnet addresses in src/shared/config/custom/contracts.ts when unset).
-  readonly VITE_PRIMIT_VAULT_PROXY: string;
-  readonly VITE_PRIMIT_REBATE_PROXY: string;
-  readonly VITE_PRIMIT_EARN_PROXY: string;
-  readonly VITE_PRIMIT_APP_ORIGIN: string;
+  // ZTDX proxy contracts (per-chain env override; falls back to 0x0000…0000
+  // placeholder addresses in src/shared/config/custom/contracts.ts when unset).
+  readonly VITE_ZTDX_VAULT_PROXY: string;
+  readonly VITE_ZTDX_REBATE_PROXY: string;
+  readonly VITE_ZTDX_EARN_PROXY: string;
+  readonly VITE_ZTDX_USDT: string;
+
+  // ZTDX app origin for brand link navigation
+  readonly VITE_ZTDX_APP_ORIGIN: string;
 }
 
 interface ImportMeta {

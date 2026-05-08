@@ -15,6 +15,7 @@ import GlvRouter from "./GlvRouter";
 import GovToken from "./GovToken";
 import LayerZeroProvider from "./LayerZeroProvider";
 import MintableBaseToken from "./MintableBaseToken";
+import MockUSDT from "./MockUSDT";
 import Multicall from "./Multicall";
 import MultichainClaimsRouter from "./MultichainClaimsRouter";
 import MultichainGlvRouter from "./MultichainGlvRouter";
@@ -51,6 +52,8 @@ import VaultV2b from "./VaultV2b";
 import VenusVToken from "./VenusVToken";
 import Vester from "./Vester";
 import WETH from "./WETH";
+import ZtdxRewardRouter from "./ZtdxRewardRouter";
+import ZtdxTermYield from "./ZtdxTermYield";
 
 const AbstractSubaccountApprovalNonceable = [
   {
@@ -101,6 +104,7 @@ export const abis = {
   MultichainTransferRouter,
   MultichainUtils,
   MultichainVault,
+  MockUSDT,
   ReferralStorage,
   RelayParams,
   RewardReader,
@@ -128,6 +132,8 @@ export const abis = {
   VenusVToken,
   Vester,
   WETH,
+  ZtdxRewardRouter,
+  ZtdxTermYield,
 } satisfies Record<string, any>;
 
 export type AbiId = keyof typeof abis;

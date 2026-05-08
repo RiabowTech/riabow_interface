@@ -599,7 +599,7 @@ export const WithdrawalView = () => {
           throw new Error("Vault contract not found");
         }
 
-        // Vault ABI - according to contract: withdraw(uint256 amount, uint256 deadline, bytes calldata signature)
+        // Vault ABI - according to contract: releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
         // Include all error definitions from the contract ABI to help decode revert reasons
         const vaultAbi = [
           {
@@ -608,7 +608,7 @@ export const WithdrawalView = () => {
               { name: "deadline", type: "uint256" },
               { name: "signature", type: "bytes" },
             ],
-            name: "withdraw",
+            name: "releaseFunds",
             outputs: [],
             stateMutability: "nonpayable",
             type: "function",
@@ -691,7 +691,7 @@ export const WithdrawalView = () => {
           await publicClient.simulateContract({
             address: vaultAddress as `0x${string}`,
             abi: vaultAbi,
-            functionName: "withdraw",
+            functionName: "releaseFunds",
             args: [
               amountInWei, // uint256 amount - from response.amount (already in wei)
               BigInt(deadline), // uint256 deadline - from response.expiry
@@ -746,12 +746,12 @@ export const WithdrawalView = () => {
         }
 
         // Step 3: Call Vault contract using walletClient (only if simulation succeeds)
-        // Contract signature: withdraw(uint256 amount, uint256 deadline, bytes calldata signature)
+        // Contract signature: releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
         // Parameters from response: amount, expiry (as deadline), backend_signature
         const txHash = await walletClient.writeContract({
           address: vaultAddress as `0x${string}`,
           abi: vaultAbi,
-          functionName: "withdraw",
+          functionName: "releaseFunds",
           args: [
             amountInWei, // uint256 amount - from response.amount (already in wei)
             BigInt(deadline), // uint256 deadline - from response.expiry

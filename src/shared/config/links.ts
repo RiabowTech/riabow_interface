@@ -5,9 +5,7 @@ import { TOKENS_BY_SYMBOL_MAP } from "sdk/configs/tokens";
 export const PRODUCTION_HOST = "https://ztdx.io";
 
 /** 交易 SPA 生产部署源站（品牌链接 / cross-origin nav 用） */
-const rawAppOrigin =
-  (import.meta.env.VITE_ZTDX_APP_ORIGIN as string | undefined) ??
-  (import.meta.env.VITE_PRIMIT_APP_ORIGIN as string | undefined);
+const rawAppOrigin = import.meta.env.VITE_ZTDX_APP_ORIGIN as string | undefined;
 export const PRODUCTION_APP_ORIGIN = (rawAppOrigin?.trim() || "https://app.ztdx.io").replace(/\/$/, "");
 
 /**

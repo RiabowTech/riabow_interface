@@ -33,7 +33,7 @@ export async function sendSameChainDepositTxn({
     {
       type: "function",
       stateMutability: "nonpayable",
-      name: "deposit",
+      name: "fundAccount",
       inputs: [
         { name: "amount", type: "uint256" },
         { name: "referralCode", type: "bytes32" },
@@ -45,7 +45,7 @@ export async function sendSameChainDepositTxn({
   const emptyReferralCode = ("0x" + "0".repeat(64)) as Hex;
   const callData = encodeFunctionData({
     abi: vaultAbi,
-    functionName: "deposit",
+    functionName: "fundAccount",
     args: [amount, emptyReferralCode],
   });
 

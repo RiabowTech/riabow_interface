@@ -43,25 +43,19 @@ const ERC20_ABI = [
   },
 ] as const;
 
-// Earn contract ABI for subscribe
+// Earn contract ABI for joinPlan
 const EARN_ABI = [
   {
-    name: "subscribe",
+    name: "joinPlan",
     type: "function",
     inputs: [
-      { name: "productId", type: "uint256" },
+      { name: "planId", type: "uint256" },
       { name: "amount", type: "uint256" },
       { name: "deadline", type: "uint256" },
       { name: "signature", type: "bytes" },
     ],
     outputs: [],
-  },
-  {
-    name: "usdtToken",
-    type: "function",
-    inputs: [],
-    outputs: [{ type: "address" }],
-    stateMutability: "view",
+    stateMutability: "nonpayable",
   },
 ] as const;
 
@@ -146,9 +140,9 @@ export function SubscriptionModal({
       }
 
       try {
-        // Estimate gas for a subscribe transaction (approximate)
-        // Using a reasonable gas estimate for the subscribe function
-        const estimatedGasLimit = 150000n; // Conservative estimate for ERC20 approve + subscribe
+        // Estimate gas for a joinPlan transaction (approximate)
+        // Using a reasonable gas estimate for the joinPlan function
+        const estimatedGasLimit = 150000n; // Conservative estimate for ERC20 approve + joinPlan
         const gasCostWei = estimatedGasLimit * gasPrice;
         const gasCostEth = formatUnits(gasCostWei, 18);
         setEstimatedGasInEth(parseFloat(gasCostEth).toFixed(6));
@@ -218,16 +212,8 @@ export function SubscriptionModal({
 
       const earnContractAddress = prepareResponse.contract_address;
 
-      // Debug: Read the contract's expected USDT token address
-      const contractUsdtAddress = (await publicClient.readContract({
-        address: earnContractAddress as `0x${string}`,
-        abi: EARN_ABI,
-        functionName: "usdtToken",
-      })) as `0x${string}`;
-
-
-      // Use the contract's expected USDT address for approval
-      const actualUsdtAddress = contractUsdtAddress;
+      // Resolve USDT address from config (usdtToken ABI entry removed; use getTradingUsdtAddress)
+      const actualUsdtAddress = getTradingUsdtAddress(chainId) as `0x${string}`;
 
       // Use amount from backend response (already in smallest unit) for consistency
       const amountWei = BigInt(prepareResponse.amount);
@@ -274,7 +260,7 @@ export function SubscriptionModal({
 
       // Debug: Log prepare response
 
-      const subscribeArgs = [
+      const joinPlanArgs = [
         BigInt(prepareResponse.chain_product_id),
         BigInt(prepareResponse.amount),
         BigInt(prepareResponse.deadline),
@@ -286,8 +272,8 @@ export function SubscriptionModal({
         const { request } = await publicClient.simulateContract({
           address: prepareResponse.contract_address as `0x${string}`,
           abi: EARN_ABI,
-          functionName: "subscribe",
-          args: subscribeArgs,
+          functionName: "joinPlan",
+          args: joinPlanArgs,
           account: walletAddress as `0x${string}`,
         });
       } catch (simulateError: unknown) {
@@ -303,16 +289,16 @@ export function SubscriptionModal({
         throw simulateError;
       }
 
-      // Step 5: Call subscribe on contract
-      const subscribeTxHash = await walletClient.writeContract({
+      // Step 5: Call joinPlan on contract
+      const joinPlanTxHash = await walletClient.writeContract({
         address: prepareResponse.contract_address as `0x${string}`,
         abi: EARN_ABI,
-        functionName: "subscribe",
-        args: subscribeArgs,
+        functionName: "joinPlan",
+        args: joinPlanArgs,
       });
 
-      // Wait for subscribe transaction
-      await publicClient.waitForTransactionReceipt({ hash: subscribeTxHash });
+      // Wait for joinPlan transaction
+      await publicClient.waitForTransactionReceipt({ hash: joinPlanTxHash });
 
       setStep("success");
       helperToast.success(t`Subscription successful!`);
