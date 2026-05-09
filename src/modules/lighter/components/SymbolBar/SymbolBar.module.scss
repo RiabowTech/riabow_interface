@@ -46,10 +46,11 @@
 
 .root {
   display: flex; align-items: center;
-  gap: 16px;
-  padding: 4px 8px;  /* 给 32px 按钮 + 2px focus outline + 2px offset 上下各 4px 呼吸 */
+  gap: 22px;
+  padding: 4px 14px;
   min-height: 40px;  /* 32 + 4×2 = 40px，刚好装下 button + focus ring */
-  background: var(--ltr-bg-root);
+  background: linear-gradient(180deg, rgba(255, 225, 164, 0.035), rgba(255, 225, 164, 0.008)), #0d0f0d;
+  border-bottom: 1px solid rgba(215, 170, 67, 0.14);
 }
 /**
  * Zanbara 市场选择器：左侧 cyan accent 竖条 + "BASE/QUOTE" 主标 + "[BASE-USDT]" 次标。
@@ -64,9 +65,9 @@
   color: var(--ltr-text-primary);
   /** 与 interface_copy 一致：父 module 用 `--zanbara-trade-module-bg`，按钮本身透明；
    *  这里直接把 module bg 贴到按钮上，避免再引入额外 token 分叉 */
-  background: var(--zanbara-trade-module-bg);
-  border: 0;
-  border-radius: var(--layout-radius-8, 8px);
+  background: linear-gradient(180deg, rgba(255, 225, 164, 0.08), rgba(255, 225, 164, 0.02)), #171713;
+  border: 1px solid rgba(215, 170, 67, 0.24);
+  border-radius: 5px;
   cursor: pointer;
   transition: background 0.15s ease;
 }
@@ -78,12 +79,13 @@
   top: 8px;
   bottom: 8px;
   width: 2px;
-  background: var(--zanbara-primary-1, #87d7ea);
+  background: var(--ltr-gold-bright, #f1c979);
   border-radius: 2px;
 }
 .symbol:hover {
   /** 保持透视：在 module bg 上叠一层 zanbara-soft overlay（与 3013 hover 行为一致） */
-  background: color-mix(in srgb, var(--zanbara-soft-5) 100%, var(--zanbara-trade-module-bg));
+  background: linear-gradient(180deg, rgba(255, 225, 164, 0.12), rgba(255, 225, 164, 0.035)), #1e1a12;
+  border-color: rgba(241, 201, 121, 0.5);
 }
 .symbol:hover,
 .symbol:focus,
@@ -113,7 +115,7 @@
   font-family: var(--zanbara-font-body, var(--ltr-font-family));
   font-weight: 400;
   font-size: 12px;
-  color: var(--ltr-text-secondary);
+  color: var(--ltr-gold-bright, #f1c979);
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
@@ -123,7 +125,7 @@
 .lev {
   display: inline-flex; align-items: center; justify-content: center;
   height: 20px; padding: 0 6px;
-  background: var(--ltr-overlay-soft);
+  background: rgba(215, 170, 67, 0.1);
   border-radius: 4px;
   color: var(--ltr-text-secondary);
   font-size: 12px; font-weight: 400;
@@ -160,7 +162,7 @@
   white-space: nowrap;
 }
 .label {
-  color: #b4b4b6;
+  color: var(--ltr-text-secondary);
   font-size: 11px;  /* 12 → 11 */
   font-weight: 400;
   line-height: 14px;
@@ -175,7 +177,7 @@
   font-size: 11px;  /* 12 → 11 */
   font-weight: 400;
   line-height: 14px;
-  color: #f3f3f3;
+  color: var(--ltr-text-primary);
   font-variant-numeric: tabular-nums;
 }
 
@@ -184,8 +186,8 @@
   display: flex; align-items: center;
   gap: 10px;  /* 16 → 10 */
   padding: 0 8px;  /* 0 12 → 0 8 */
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.02);
+  background: rgba(215, 170, 67, 0.055);
+  border: 1px solid rgba(215, 170, 67, 0.14);
 }
 
 .corner {

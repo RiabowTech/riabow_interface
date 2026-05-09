@@ -1,16 +1,20 @@
 .root {
   display: flex; flex-direction: column; height: 100%;
-  background: var(--ltr-bg-panel);
+  background:
+    linear-gradient(180deg, rgba(255, 225, 164, 0.04), rgba(255, 225, 164, 0.008)),
+    var(--ltr-bg-panel);
+  border: 1px solid rgba(215, 170, 67, 0.2);
+  box-shadow: var(--ltr-panel-glow);
 }
 
 .topTabs {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 4px;
+  gap: 0;
   /** 与 LighterTradePage `.chartCol` SymbolBar 行 40px + 下行间距一致 */
   height: 40px;
   margin: 0 0 4px;
-  background: transparent;
+  background: #11120f;
   border-radius: 0;
 }
 
@@ -30,22 +34,28 @@
   font-size: 11px;
   font-weight: 400;
   color: #f5f5f5;
-  background: #22232b;
-  border: 0;
-  border-radius: 4px;
+  background: #11120f;
+  border: 1px solid rgba(215, 170, 67, 0.18);
+  border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;
   transition: color 150ms ease, background 150ms ease;
 
   &:hover {
     color: #f5f5f5;
-    background: #282932;
+    background: #211d14;
   }
 }
 
 .topTabActive {
-  color: #f5f5f5;
-  background: #22232b;
+  color: #f4ead4;
+  background: #11120f;
+  border-color: rgba(215, 170, 67, 0.18);
+
+  &:hover {
+    background: linear-gradient(180deg, rgba(118, 86, 38, 0.72), rgba(82, 61, 31, 0.92));
+    border-color: rgba(183, 138, 58, 0.58);
+  }
 }
 
 .modes {
@@ -55,8 +65,9 @@
   /** 与 `.chartCol` 收藏条 25px + 与主体区间 row-gap 对齐 */
   height: 25px;
   padding: 0;
-  background: #2a2b31;
-  border-radius: 4px;
+  background: #11120f;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(215, 170, 67, 0.16);
   margin: 0 0 4px;
   /** 原 gap: 1px 通过深灰底色透出竖分割线；去掉 gap 和底色让 Market/Limit/Advanced 之间干净衔接 */
   gap: 0;
@@ -69,15 +80,15 @@
   padding: 0 4px;
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
   font-size: 11px; font-weight: 400;
-  color: #959597; // gray-3
-  background: #14151b; border: 0; cursor: pointer;
+  color: var(--ltr-text-secondary);
+  background: #11120f; border: 0; cursor: pointer;
   white-space: nowrap;
   transition: color 150ms;
   &:hover { color: #f5f5f5; }
 }
 .modeActive {
-  color: #f5f5f5; // gray-0
-  background: #22232b; // gray-9
+  color: var(--ltr-gold-bright, #f1c979);
+  background: #171713;
   border-radius: 0;
 }
 .mode::after, .modeActive::after {
@@ -86,7 +97,7 @@
   left: 0; right: 0; bottom: 1px; margin: 0 auto;
   width: 52%; max-width: 52px;
   height: 2px; border-radius: 999px;
-  background: var(--ltr-accent-cyan);
+  background: var(--ltr-gold-bright, #f1c979);
   transform: scaleX(0); opacity: 0;
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
 }
@@ -111,9 +122,9 @@
   width: max-content;
   min-width: 0;
   overflow: hidden;
-  background: #1f1f24;
-  border: 1px solid #2b2b30;
-  border-radius: 4px;
+  background: #10120f;
+  border: 1px solid rgba(215, 170, 67, 0.24);
+  border-radius: 6px;
   padding: 0;
   z-index: 50;
   display: flex;
@@ -133,7 +144,7 @@
   cursor: pointer;
   text-align: left;
   white-space: nowrap;
-  &:hover { background: #2a2b31; color: #f5f5f5; }
+  &:hover { background: #211d14; color: #f5f5f5; }
 }
 
 .sides {
@@ -142,8 +153,9 @@
   margin: 0 0 4px;
   height: 32px;
   padding: 2px;
-  background: #121218;
-  border-radius: 4px;
+  background: #0c0e0c;
+  border: 1px solid rgba(215, 170, 67, 0.22);
+  border-radius: 6px;
   font-size: 12px;
   line-height: 16px;
 }
@@ -155,9 +167,9 @@
   font-size: 12px;
   line-height: 16px;
   font-weight: 400;
-  color: #f3f3f3;
+  color: #f8f4e8;
   background: transparent; border: 0; cursor: pointer;
-  border-radius: 2px;
+  border-radius: 4px;
   transition: opacity 150ms;
   &:active { opacity: 0.5; }
   &:disabled { cursor: default; opacity: 0.5; }
@@ -168,7 +180,7 @@
   bottom: 2px;
   width: calc(50% - 2px);
   height: 28px;
-  border-radius: 2px;
+  border-radius: 4px;
   border: 1px solid;
   transition: left 200ms ease, background 200ms, border-color 200ms;
 }
@@ -202,8 +214,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #17181f;
-  border: 1px solid #31323a;
+  background: #10120f;
+  border: 1px solid rgba(215, 170, 67, 0.28);
   border-radius: 8px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
@@ -214,7 +226,7 @@
   justify-content: space-between;
   height: 41px;
   padding: 12px;
-  border-bottom: 1px solid #31323a;
+  border-bottom: 1px solid rgba(215, 170, 67, 0.22);
   font-size: 12px;
   font-weight: 400;
   color: #b4b4b6;

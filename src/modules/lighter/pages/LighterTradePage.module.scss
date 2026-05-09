@@ -10,17 +10,21 @@
   min-width: 0;
   height: 100vh;
   min-height: 0;
-  background: #000;
-  padding: 4px;
+  background:
+    linear-gradient(180deg, rgba(215, 170, 67, 0.045), transparent 132px),
+    #070907;
+  padding: 2px;
   display: grid;
   /** 交易区 `.tradeGrid` 内部已含底栏行，此处只占顶栏 + 一块可伸缩主区域，避免上下两段 grid 列宽独立计算导致竖线错位 */
   grid-template-rows: var(--ltr-topnav-h) minmax(0, 1fr);
-  row-gap: 4px;
+  row-gap: 2px;
   overflow: hidden;
+  border: 1px solid rgba(215, 170, 67, 0.36);
+  border-radius: 6px;
 }
 
 .topnav {
-  border-bottom: 1px solid var(--ltr-border);
+  border-bottom: 1px solid rgba(215, 170, 67, 0.28);
   /** 让顶栏建立自己的 stacking context 并高于下面的 main 区，
    *  这样语言 / 设置等下拉菜单不会被 OrderFormPanel 的 Market/Limit tabs 盖住 */
   position: relative;
@@ -43,8 +47,8 @@
   min-height: 0;
   grid-template-columns: minmax(0, 1fr) var(--ltr-side-col) var(--ltr-side-col);
   grid-template-rows: minmax(0, 1fr) var(--ltr-bottom-h);
-  column-gap: 4px;
-  row-gap: 4px;
+  column-gap: 2px;
+  row-gap: 2px;
   > * {
     min-width: 0;
     min-height: 0;
@@ -81,7 +85,7 @@
   display: flex;
   flex-direction: column;
   /** 与 chartCol 一致不在列内再垫 4px,避免与底栏 row-gap 叠出「底缝」与 K 线列不齐 */
-  background: #000;
+  background: #070907;
 }
 
 .orderbook > *,
@@ -97,8 +101,8 @@
   grid-row: 1;
   display: grid;
   grid-template-rows: 40px 25px minmax(0, 1fr);
-  row-gap: 4px;
-  background: #000;
+  row-gap: 2px;
+  background: #070907;
   min-width: 0;
   min-height: 0;
   overflow: hidden;
@@ -110,8 +114,9 @@
   align-items: center;
   padding: 0 8px;
   height: 25px;
-  background: #17181f;
-  border-top: 1px solid #20222a;
+  background: linear-gradient(180deg, #12130f, #0d0f0d);
+  border-top: 1px solid rgba(215, 170, 67, 0.16);
+  border-bottom: 1px solid rgba(215, 170, 67, 0.14);
 }
 
 .favoriteButton {
@@ -121,16 +126,16 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: #8f93a2;
+  color: var(--ltr-gold-bright, #f1c979);
   background: transparent;
   border: 0;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 .favoriteButton:hover {
-  color: #c8ccd6;
-  background: rgba(255, 255, 255, 0.03);
+  color: #ffe0a3;
+  background: rgba(215, 170, 67, 0.1);
 }
 
 .tabs {

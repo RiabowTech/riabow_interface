@@ -1,6 +1,6 @@
 .root {
   display: flex; flex-direction: column; height: 100%;
-  background: #000; overflow: hidden;
+  background: #070907; overflow: hidden;
 }
 
 /** Tab 布局:顶栏 + subbar 之后,订单簿/成交主体占满剩余高度,避免底部大块留白与左侧 K 线底不齐 */
@@ -24,14 +24,17 @@
   min-width: 0;
   min-height: 0;
   overflow: visible;
-  background: #14151b;
-  border: 1px solid #20222a;
-  border-radius: 4px;
+  background:
+    linear-gradient(180deg, rgba(255, 225, 164, 0.035), rgba(255, 225, 164, 0.006)),
+    var(--ltr-bg-panel);
+  border: 1px solid rgba(215, 170, 67, 0.2);
+  border-radius: 5px;
+  box-shadow: var(--ltr-panel-glow);
 }
 .stackedLayout {
   display: grid;
   grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 4px;
+  gap: 2px;
   flex: 1;
   min-height: 0;
 }
@@ -41,15 +44,16 @@
 .largeLayout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 4px;
+  gap: 2px;
   flex: 1;
   min-height: 0;
 }
 .tabs {
   position: relative;
   display: flex; align-items: center; justify-content: space-between;
-  background: #14151b;
-  border-radius: 4px;
+  background: #11120f;
+  border-radius: 0;
+  border-bottom: 1px solid rgba(215, 170, 67, 0.16);
   overflow: visible;
   /** 与 LighterTradePage `.chartCol` 首行 SymbolBar(40px) + row-gap 对齐 */
   min-height: 40px;
@@ -62,7 +66,7 @@
   min-width: 80px;
   padding: 0 8px;
   font-size: 11px; font-weight: 400;
-  color: #a9aaad;
+  color: var(--ltr-text-secondary);
   background: transparent; border: 0; cursor: pointer;
   display: inline-flex; align-items: center; justify-content: center;
   white-space: nowrap;
@@ -71,14 +75,15 @@
 }
 .tabActive {
   color: var(--ltr-text-primary);
-  background: #22232b; // gray-9
+  background: #171713;
+  color: var(--ltr-gold-bright, #f1c979);
 }
 .tab::after, .tabActive::after {
   content: ""; position: absolute;
   left: 0; right: 0; bottom: 1px; margin: 0 auto;
   width: 52%; max-width: 52px;
   height: 2px; border-radius: 999px;
-  background: var(--zanbara-primary-1, #87d7ea);
+  background: var(--ltr-gold-bright, #f1c979);
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   transform: scaleX(0);
   opacity: 0;
@@ -96,9 +101,9 @@
   align-items: center;
   min-height: 28px;
   padding: 0 8px 0 10px;
-  background: #14151b;
+  background: #10120f;
   /** 主题色 1px · 50% alpha */
-  border-bottom: 1px solid color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 50%, transparent);
+  border-bottom: 1px solid rgba(215, 170, 67, 0.38);
   overflow: visible;
   z-index: 3;
 }
@@ -133,7 +138,8 @@
   height: 25px;
   padding: 0 10px;
   margin-bottom: 4px;
-  background: var(--ltr-bg-panel);
+  background: #0e100e;
+  border-bottom: 1px solid rgba(215, 170, 67, 0.12);
 }
 .subRight { display: inline-flex; gap: 6px; align-items: center; }
 .modeBtns { display: inline-flex; gap: 4px; align-items: center; }
@@ -143,11 +149,11 @@
   padding: 2px; border: 0; border-radius: 2px;
   background: transparent; cursor: pointer;
   opacity: 0.5;
-  &:hover { opacity: 1; background: var(--ltr-bg-hover); }
+  &:hover { opacity: 1; background: rgba(215, 170, 67, 0.12); }
 }
 .modeActive {
   opacity: 1;
-  background: var(--ltr-bg-hover);
+  background: rgba(215, 170, 67, 0.16);
 }
 .modeIcon {
   display: inline-flex; align-items: center; justify-content: center;
@@ -176,13 +182,13 @@
   top: calc(100% + 4px);
   right: 0;
   min-width: 100px;
-  background: #121218;
-  border: 1px solid var(--ltr-border);
-  border-radius: 4px;
+  background: #10120f;
+  border: 1px solid rgba(215, 170, 67, 0.28);
+  border-radius: 6px;
   padding: 4px 0;
   z-index: 50;
   display: flex; flex-direction: column;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.5);
 }
 .tradeMenu {
   min-width: 164px;
@@ -196,7 +202,7 @@
   background: transparent; border: 0; cursor: pointer;
   text-align: left;
   white-space: nowrap;
-  &:hover { background: var(--ltr-bg-hover); }
+  &:hover { background: #211d14; }
 }
 
 .header {
@@ -206,24 +212,24 @@
   padding: 4px 10px;
   text-align: right;
   align-items: center;
-  background: var(--ltr-bg-panel);
+  background: #0f110f;
   > div:first-child { text-align: left; }
 }
 .unitBadge {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 1px 4px; margin-left: 4px;
   font-size: 11px; color: var(--ltr-text-primary);
-  background: var(--ltr-border); border-radius: 2px;
+  background: rgba(215, 170, 67, 0.18); border-radius: 3px;
 }
 .asks, .bids {
   flex: 0 0 auto;
   overflow: hidden;
   min-height: 0;
-  background: var(--ltr-bg-panel);
+  background: #0f110f;
 }
 .row {
   display: grid; grid-template-columns: 1fr 1fr 1fr;
-  height: 20px;
+  height: 19px;
   position: relative; align-items: center;
 }
 .rowEmpty {
@@ -249,13 +255,13 @@
   position: absolute; top: 0; left: 0; height: 100%;
   z-index: 0; pointer-events: none;
 }
-.depthTotalAsk { background: var(--ltr-down-bg); }
-.depthTotalBid { background: var(--ltr-up-bg); }
+.depthTotalAsk { background: rgba(255, 94, 88, 0.075); }
+.depthTotalBid { background: rgba(83, 200, 120, 0.075); }
 .depthSizeAsk {
-  background: color-mix(in srgb, var(--ltr-down) 32%, transparent);
+  background: rgba(255, 94, 88, 0.16);
 }
 .depthSizeBid {
-  background: color-mix(in srgb, var(--ltr-up) 32%, transparent);
+  background: rgba(83, 200, 120, 0.16);
 }
 
 .spreadRow {
@@ -263,7 +269,8 @@
   display: grid; grid-template-columns: 1fr 1fr 1fr;
   padding: 4px 10px;
   font-size: 12px;
-  background: var(--ltr-overlay-faint);
+  background: rgba(215, 170, 67, 0.045);
+  border-block: 1px solid rgba(215, 170, 67, 0.12);
 }
 .spreadLabel { color: var(--ltr-text-secondary); text-align: center; }
 .spreadRow > span:last-child { text-align: right; color: var(--ltr-text-primary); }
@@ -277,7 +284,7 @@
   font-size: 12px; color: var(--ltr-text-secondary);
   padding: 4px 10px;
   align-items: center;
-  background: var(--ltr-bg-panel);
+  background: #0f110f;
   > div:nth-child(1) { text-align: left; }
   > div:nth-child(2) { text-align: center; }
   > div:nth-child(3) { text-align: right; }
@@ -286,7 +293,7 @@
   flex: 1;
   overflow: auto;
   min-height: 0;
-  background: var(--ltr-bg-panel);
+  background: #0f110f;
   /** 隐藏滚动条，仍可用滚轮 / 触控滑动 */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -303,8 +310,8 @@
   color: var(--ltr-text-secondary);
   > div { flex: 1; }
 }
-.tradeBuy { background: rgb(7, 16, 18); }
-.tradeSell { background: rgb(18, 9, 15); }
+.tradeBuy { background: rgba(83, 200, 120, 0.055); }
+.tradeSell { background: rgba(255, 94, 88, 0.06); }
 .tradeTime { text-align: left; }
 .tradeSize { text-align: center; font-variant-numeric: tabular-nums; }
 .tradePrice { text-align: right; color: var(--ltr-text-primary); font-variant-numeric: tabular-nums; }

@@ -1,9 +1,13 @@
 .root {
   height: 100%; overflow: auto;
-  background: var(--ltr-bg-panel);
-  padding: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 225, 164, 0.035), rgba(255, 225, 164, 0.006)),
+    var(--ltr-bg-panel);
+  border: 1px solid rgba(215, 170, 67, 0.2);
+  padding: 10px 12px;
   display: flex; flex-direction: column;
   gap: 12px;
+  box-shadow: var(--ltr-panel-glow);
 }
 .section {
   display: flex; flex-direction: column;
@@ -11,7 +15,7 @@
 }
 .head {
   font-size: 12px; font-weight: 400;
-  color: #f3f3f3; // gray-0
+  color: var(--ltr-text-primary);
   padding: 0;
   margin: 0;
 }
@@ -20,10 +24,10 @@
   font-size: 12px;
 }
 .label {
-  color: #b4b4b6; // gray-3
+  color: var(--ltr-text-secondary);
   white-space: nowrap;
 }
 .value {
-  color: #f3f3f3; // gray-0
+  color: var(--ltr-text-primary);
   font-variant-numeric: tabular-nums;
 }

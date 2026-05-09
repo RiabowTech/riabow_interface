@@ -1,7 +1,7 @@
 .root {
   height: 100%;
   overflow: auto;
-  background: var(--ltr-bg-panel);
+  background: #10120f;
 }
 
 .table {
@@ -12,7 +12,7 @@
 .table thead th {
   height: 32px;
   padding: 0 12px;
-  color: #b4b4b6;
+  color: var(--ltr-text-secondary);
   font-size: 12px;
   font-weight: 500;
   line-height: 32px;
@@ -23,7 +23,7 @@
 .table tbody td {
   height: 36px;
   padding: 0 12px;
-  color: #f3f3f3;
+  color: var(--ltr-text-primary);
   font-size: 12px;
   font-weight: 400;
   line-height: 36px;
@@ -38,11 +38,11 @@
 }
 
 .placeholder {
-  color: rgba(243, 243, 243, 0.4);
+  color: var(--ltr-text-muted);
 }
 
 .market {
-  color: #f3f3f3;
+  color: var(--ltr-text-primary);
   font-weight: 500;
 }
 
@@ -144,8 +144,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
-  background: #2b2b30;
-  border: 1px solid #38383d;
+  background: #171713;
+  border: 1px solid rgba(215, 170, 67, 0.22);
   line-height: 1;
   cursor: pointer;
 }
@@ -156,7 +156,7 @@
 }
 
 .editAction {
-  color: #d7d9df;
+  color: var(--ltr-text-secondary);
 }
 
 .cancelAction {
@@ -210,12 +210,12 @@
   width: 440px;
   min-height: 240px;
   max-height: calc(100vh - 48px);
-  border: 1px solid #35353d;
+  border: 1px solid rgba(215, 170, 67, 0.28);
   border-radius: 8px;
-  background: #15151b;
+  background: #10120f;
   overflow: visible;
   box-sizing: border-box;
-  color: #f3f3f3;
+  color: var(--ltr-text-primary);
   font-size: 12px;
 
   :global(.Modal-header-wrapper) {

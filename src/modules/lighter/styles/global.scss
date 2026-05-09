@@ -3,7 +3,10 @@
 @import "./tokens.scss";
 
 .lighter-root {
-  background: var(--ltr-bg-root);
+  background:
+    linear-gradient(180deg, rgba(220, 170, 73, 0.045), transparent 160px),
+    radial-gradient(circle at 52% 12%, rgba(214, 169, 70, 0.04), transparent 36%),
+    var(--ltr-bg-root);
   color: var(--ltr-text-primary);
   font-family: var(--ltr-font-family);
   font-size: var(--ltr-font-body);
@@ -64,16 +67,16 @@
     display: flex; align-items: center; gap: 4px;
     height: 32px; min-height: 32px; padding: 0 8px;
     /** 主题色 input 边框 · 20% alpha（与 3013 trade 输入框一致） */
-    border: 1px solid color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 20%, transparent);
-    background: #1f1f24;
-    border-radius: 4px;
+    border: 1px solid rgba(214, 169, 70, 0.24);
+    background: linear-gradient(180deg, rgba(255, 224, 159, 0.045), rgba(255, 224, 159, 0.015)), #171713;
+    border-radius: 5px;
     color: var(--ltr-text-primary);
     font-size: 12px;
     line-height: 16px;
     transition: background 150ms, border-color 150ms;
     &:hover {
-      border-color: color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 40%, transparent);
-      background: #26262c;
+      border-color: rgba(241, 201, 121, 0.48);
+      background: linear-gradient(180deg, rgba(255, 224, 159, 0.08), rgba(255, 224, 159, 0.025)), #1d1a13;
     }
   }
   .ltr-form__label {
@@ -105,14 +108,14 @@
     height: 16px; padding: 0;
     background: transparent; border: 0; cursor: pointer;
     font-size: 12px; font-weight: 500;
-    color: var(--ltr-text-secondary);
+    color: var(--ltr-gold-bright, #f1c979);
     &:hover { color: var(--ltr-text-primary); }
     svg { opacity: 0.85; }
   }
   .ltr-form__trailing--link {
-    color: var(--ltr-accent-cyan);
+    color: var(--ltr-gold-bright, #f1c979);
     &:hover {
-      color: color-mix(in srgb, var(--ltr-accent-cyan) 72%, #ffffff);
+      color: #ffe0a3;
     }
   }
   .ltr-form__trailing--plain {
@@ -127,8 +130,8 @@
     line-height: 1.4;
   }
   .ltr-form__note--warn {
-    background: rgba(235, 180, 45, 0.10);
-    color: #eab645;
+    background: rgba(214, 169, 70, 0.12);
+    color: var(--ltr-gold-bright, #f1c979);
   }
   .ltr-form__note--error {
     background: rgba(255, 92, 103, 0.12);
@@ -143,7 +146,7 @@
     top: calc(100% + 6px);
     right: 0;
     min-width: 120px;
-    background: #1f1f24;
+    background: #14130f;
     border: 1px solid var(--ltr-border);
     border-radius: 4px;
     padding: 0;
@@ -162,7 +165,7 @@
     background: transparent; border: 0; cursor: pointer;
     text-align: left;
     white-space: nowrap;
-    &:hover { background: #2a2b31; }
+    &:hover { background: #211d14; }
     & + & { border-top: 1px solid var(--ltr-border); }
   }
   .ltr-form__disclosure {
@@ -197,14 +200,14 @@
     gap: 8px;
     width: 100%;
     height: 32px; padding: 0 8px;
-    background: #2b2b30; // gray-10
-    border: 1px solid #26262c; // gray-9
-    border-radius: 4px;
+    background: #171713;
+    border: 1px solid rgba(214, 169, 70, 0.2);
+    border-radius: 5px;
     color: #f5f5f5;
     font-size: 12px;
     cursor: pointer;
     transition: background 150ms, border-color 150ms;
-    &:hover { background: #1c1c24; border-color: #3a3a42; }
+    &:hover { background: #211d14; border-color: rgba(241, 201, 121, 0.46); }
     > span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     svg { opacity: 0.85; flex-shrink: 0; }
   }
@@ -220,14 +223,14 @@
     top: calc(100% + 4px);
     left: 0;
     min-width: 100%;
-    background: #1c1c24;
-    border: 1px solid #2b2b30;
-    border-radius: 4px;
+    background: #11120f;
+    border: 1px solid rgba(214, 169, 70, 0.28);
+    border-radius: 6px;
     padding: 0;
     z-index: 50;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.5);
     overflow: hidden;
   }
   .ltr-form__select-item {
@@ -244,8 +247,8 @@
     cursor: pointer;
     text-align: left;
     white-space: nowrap;
-    &:hover { background: #2b2b30; }
-    & + & { border-top: 1px solid #2b2b30; }
+    &:hover { background: #211d14; }
+    & + & { border-top: 1px solid rgba(214, 169, 70, 0.14); }
   }
   .ltr-form__field--num {
     width: 32px;
