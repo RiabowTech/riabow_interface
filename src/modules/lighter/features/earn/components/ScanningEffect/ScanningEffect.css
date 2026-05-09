@@ -167,7 +167,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--earn-accent);
-  font-family: var(--primit-font-title);
+  font-family: var(--zanbara-font-title);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 3px;

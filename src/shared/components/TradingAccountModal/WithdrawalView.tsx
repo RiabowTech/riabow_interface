@@ -104,7 +104,7 @@ import { SyntheticsInfoRow } from "../SyntheticsInfoRow";
 import { InsufficientWntBanner } from "./InsufficientWntBanner";
 import { toastCustomOrStargateError } from "./toastCustomOrStargateError";
 import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
-import { usePrimitUserBalances } from "@/modules/lighter/api";
+import { useZanbaraUserBalances } from "@/modules/lighter/api";
 import { requestWithdraw, confirmWithdraw, isAuthenticated } from "@/modules/lighter/api/custom/client";
 import { getTradingVaultAddress, getTradingUsdtAddress } from "config/custom/contracts";
 import VaultAbi from "sdk/abis/Vault";
@@ -194,7 +194,7 @@ export const WithdrawalView = () => {
   const { walletClient } = useWallet();
   const publicClient = usePublicClient({ chainId });
   // Only subscribe to API balances in API trading mode to avoid unnecessary state churn.
-  const balancesResult = usePrimitUserBalances(isTradeMode ? { refreshInterval: 10000 } : undefined);
+  const balancesResult = useZanbaraUserBalances(isTradeMode ? { refreshInterval: 10000 } : undefined);
   const mutateBalances = isTradeMode ? balancesResult.mutate : undefined;
 
   const { tokensData } = useTokensDataRequest(chainId, withdrawalViewChain);

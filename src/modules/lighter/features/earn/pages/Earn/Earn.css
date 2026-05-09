@@ -8,7 +8,7 @@
   width: 100%;
   min-height: 100vh;
   background: #090909;
-  /* 勿用 overflow:hidden，会裁切长内容导致 Primit 壳内无法向下滚到底 */
+  /* 勿用 overflow:hidden，会裁切长内容导致 Zanbara 壳内无法向下滚到底 */
   overflow-x: hidden;
   overflow-y: visible;
 }
@@ -142,7 +142,7 @@
   right: -22px;
   width: 80px;
   padding: 3px 0;
-  font-family: var(--primit-font-title);
+  font-family: var(--zanbara-font-title);
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
@@ -202,7 +202,7 @@
 .subscription-period-badge,
 .status-badge-progress {
   padding: 6px 12px;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 12px;
   line-height: normal;
   letter-spacing: 1px;
@@ -218,7 +218,7 @@
   background-repeat: no-repeat;
   color: #fff;
   text-align: center;
-  font-family: var(--primit-font-title);
+  font-family: var(--zanbara-font-title);
   font-size: 16px;
   font-weight: 500;
   line-height: normal;
@@ -264,13 +264,13 @@
    Typography Styles
    ============================================ */
 
-/* 正文档：--primit-font-body（Messina Sans 栈，随 locale） */
+/* 正文档：--zanbara-font-body（Messina Sans 栈，随 locale） */
 .info-label,
 .value-number,
 .faq-title,
 .faq-question,
 .faq-answer {
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   line-height: normal;
 }
 
@@ -326,10 +326,10 @@
    APR Card Styles
    ============================================ */
 
-/* APR 数字区：--primit-font-title */
+/* APR 数字区：--zanbara-font-title */
 .apr-card-label,
 .apr-card-value {
-  font-family: var(--primit-font-title);
+  font-family: var(--zanbara-font-title);
   font-weight: 400;
   line-height: normal;
 }
@@ -368,7 +368,7 @@
 
 .apr-card-unit {
   color: rgba(255, 255, 255, 0.6);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 16px;
   font-weight: 400;
   line-height: normal;
@@ -422,7 +422,7 @@
 .subscription-product-name,
 .subscription-field-value,
 .subscription-interest {
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 400;
   line-height: normal;
@@ -483,7 +483,7 @@
 
 .subscription-field-label {
   color: rgba(255, 255, 255, 0.6);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 12px;
   font-weight: 400;
   line-height: normal;
@@ -574,7 +574,7 @@
 .claim-button {
   min-height: 40px;
   padding: 8px 24px;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.5px;

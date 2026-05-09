@@ -32,7 +32,7 @@ const HIDDEN_STYLES: React.CSSProperties = {
 
 const TRANSITION = { duration: 0.2 };
 
-export type ModalPrimitSize = "small" | "middle" | "big";
+export type ModalZanbaraSize = "small" | "middle" | "big";
 
 export type ModalProps = PropsWithChildren<{
   className?: string;
@@ -52,16 +52,16 @@ export type ModalProps = PropsWithChildren<{
   disableOverflowHandling?: boolean;
   withMobileBottomPosition?: boolean;
   /**
-   * - **`primit`（默认）**：第 11 章 Popup_PC — 炭底直角、85% 遮罩；业务无需再手写 `variant`。
+   * - **`zanbara`（默认）**：第 11 章 Popup_PC — 炭底直角、85% 遮罩；业务无需再手写 `variant`。
    * - **`default`**：历史圆角 + 浅灰遮罩；仅旧版式或特殊布局时使用。
    */
-  variant?: "default" | "primit";
-  /** `variant="primit"` 且存在 `label` 时用于 `aria-labelledby`；省略则内部 `useId` */
-  primitDialogTitleId?: string;
-  /** `variant="primit"` 时稿面 Small / Middle / Big；默认 **small**（高度随内容，不锁 400px） */
-  primitSize?: ModalPrimitSize;
-  /** `variant="primit"` 时在正文外包一层 `.primit-popup__body`，可叠稿面占位等 class */
-  primitBodyClassName?: string;
+  variant?: "default" | "zanbara";
+  /** `variant="zanbara"` 且存在 `label` 时用于 `aria-labelledby`；省略则内部 `useId` */
+  zanbaraDialogTitleId?: string;
+  /** `variant="zanbara"` 时稿面 Small / Middle / Big；默认 **small**（高度随内容，不锁 400px） */
+  zanbaraSize?: ModalZanbaraSize;
+  /** `variant="zanbara"` 时在正文外包一层 `.zanbara-popup__body`，可叠稿面占位等 class */
+  zanbaraBodyClassName?: string;
 }>;
 
 /**
@@ -83,13 +83,13 @@ export default function Modal({
   contentClassName,
   disableOverflowHandling = false,
   withMobileBottomPosition = false,
-  variant = "primit",
-  primitDialogTitleId,
-  primitSize = "small",
-  primitBodyClassName = "",
+  variant = "zanbara",
+  zanbaraDialogTitleId,
+  zanbaraSize = "small",
+  zanbaraBodyClassName = "",
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const generatedPrimitTitleId = useId();
+  const generatedZanbaraTitleId = useId();
 
   useEffect(() => {
     function close(e: KeyboardEvent) {
@@ -120,36 +120,36 @@ export default function Modal({
     [isVisible],
   );
 
-  const isPrimit = variant === "primit";
-  const showPrimitTitle = Boolean(label);
-  const effectiveContentPadding = isPrimit ? false : contentPadding;
-  const primitTitleId =
-    isPrimit && showPrimitTitle ? (primitDialogTitleId ?? generatedPrimitTitleId) : undefined;
+  const isZanbara = variant === "zanbara";
+  const showZanbaraTitle = Boolean(label);
+  const effectiveContentPadding = isZanbara ? false : contentPadding;
+  const zanbaraTitleId =
+    isZanbara && showZanbaraTitle ? (zanbaraDialogTitleId ?? generatedZanbaraTitleId) : undefined;
 
   const mergedContentClassName = useMemo(() => {
-    if (!isPrimit) return contentClassName;
+    if (!isZanbara) return contentClassName;
     return cx(
-      "primit-popup-panel",
-      primitSize === "small" && "primit-popup-panel--small",
-      primitSize === "middle" && "primit-popup-panel--middle",
-      primitSize === "big" && "primit-popup-panel--big",
+      "zanbara-popup-panel",
+      zanbaraSize === "small" && "zanbara-popup-panel--small",
+      zanbaraSize === "middle" && "zanbara-popup-panel--middle",
+      zanbaraSize === "big" && "zanbara-popup-panel--big",
       contentClassName,
     );
-  }, [isPrimit, primitSize, contentClassName]);
+  }, [isZanbara, zanbaraSize, contentClassName]);
 
-  const showPrimitBody =
-    isPrimit &&
-    (children != null || (typeof primitBodyClassName === "string" && primitBodyClassName.trim() !== ""));
+  const showZanbaraBody =
+    isZanbara &&
+    (children != null || (typeof zanbaraBodyClassName === "string" && zanbaraBodyClassName.trim() !== ""));
 
-  const bodyChildren = showPrimitBody ? (
-    <div className={cx("primit-popup__body", primitBodyClassName)}>{children}</div>
+  const bodyChildren = showZanbaraBody ? (
+    <div className={cx("zanbara-popup__body", zanbaraBodyClassName)}>{children}</div>
   ) : (
     children
   );
 
   const modalStyle = useMemo(
-    () => ({ zIndex: zIndex ?? (isPrimit ? 1200 : undefined) }),
-    [zIndex, isPrimit],
+    () => ({ zIndex: zIndex ?? (isZanbara ? 1200 : undefined) }),
+    [zIndex, isZanbara],
   );
 
   const stopPropagation = useCallback((e: React.MouseEvent) => {
@@ -164,7 +164,7 @@ export default function Modal({
             className={cx(
               "Modal",
               className,
-              isPrimit && "Modal--primit-popup",
+              isZanbara && "Modal--zanbara-popup",
               { "max-md:!items-end": withMobileBottomPosition },
             )}
             ref={modalRef}
@@ -192,33 +192,33 @@ export default function Modal({
               )}
               onClick={stopPropagation}
               data-qa={qa}
-              role={isPrimit ? "dialog" : undefined}
-              aria-modal={isPrimit ? true : undefined}
-              aria-labelledby={primitTitleId}
+              role={isZanbara ? "dialog" : undefined}
+              aria-modal={isZanbara ? true : undefined}
+              aria-labelledby={zanbaraTitleId}
             >
               <div
                 className={cx(
                   "Modal-header-wrapper flex flex-col gap-8",
-                  isPrimit ? "Modal-header-wrapper--primit" : "px-adaptive pt-adaptive",
+                  isZanbara ? "Modal-header-wrapper--zanbara" : "px-adaptive pt-adaptive",
                 )}
               >
                 <div
                   className={cx(
                     "Modal-title-bar h-28",
-                    isPrimit && !showPrimitTitle && "Modal-title-bar--primit-close-only",
+                    isZanbara && !showZanbaraTitle && "Modal-title-bar--zanbara-close-only",
                   )}
                 >
-                  {showPrimitTitle ? (
+                  {showZanbaraTitle ? (
                     <div
-                      id={primitTitleId}
+                      id={zanbaraTitleId}
                       className={cx(
                         "Modal-title font-medium text-typography-primary",
-                        isPrimit && "primit-popup__title-in-modal",
+                        isZanbara && "zanbara-popup__title-in-modal",
                       )}
                     >
                       {label}
                     </div>
-                  ) : !isPrimit ? (
+                  ) : !isZanbara ? (
                     <div className="Modal-title font-medium text-typography-primary">{label}</div>
                   ) : null}
                   <button
@@ -228,7 +228,7 @@ export default function Modal({
                     onClick={() => setIsVisible(false)}
                   >
                     <CloseIcon
-                      className={cx("Modal-close-icon", isPrimit ? "Modal-close-icon--primit" : "size-20")}
+                      className={cx("Modal-close-icon", isZanbara ? "Modal-close-icon--zanbara" : "size-20")}
                     />
                   </button>
                 </div>
@@ -249,8 +249,8 @@ export default function Modal({
                 </div>
               )}
               {footerContent && (
-                <div className={cx("px-adaptive pb-adaptive", isPrimit && "Modal-footer--primit")}>
-                  {isPrimit ? <div className="primit-popup__footer">{footerContent}</div> : footerContent}
+                <div className={cx("px-adaptive pb-adaptive", isZanbara && "Modal-footer--zanbara")}>
+                  {isZanbara ? <div className="zanbara-popup__footer">{footerContent}</div> : footerContent}
                 </div>
               )}
             </div>

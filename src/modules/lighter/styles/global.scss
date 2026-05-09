@@ -27,7 +27,7 @@
   .ltr-up { color: var(--ltr-up); }
   .ltr-down { color: var(--ltr-down); }
 
-  // Lighter form primitives
+  // Lighter form zanbaraives
   .ltr-form {
     display: flex; flex-direction: column; gap: 10px;
     padding: 12px;
@@ -64,7 +64,7 @@
     display: flex; align-items: center; gap: 4px;
     height: 32px; min-height: 32px; padding: 0 8px;
     /** 主题色 input 边框 · 20% alpha（与 3013 trade 输入框一致） */
-    border: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 20%, transparent);
+    border: 1px solid color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 20%, transparent);
     background: #1f1f24;
     border-radius: 4px;
     color: var(--ltr-text-primary);
@@ -72,7 +72,7 @@
     line-height: 16px;
     transition: background 150ms, border-color 150ms;
     &:hover {
-      border-color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 40%, transparent);
+      border-color: color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 40%, transparent);
       background: #26262c;
     }
   }
@@ -294,7 +294,7 @@
     &:hover { filter: brightness(1.1); }
     &:disabled { opacity: 0.5; cursor: default; }
   }
-  /** 与 OrderForm 侧栏指示条、PercentSlider 同源 token；Primit 下随 tokens.scss 映射到涨跌色 */
+  /** 与 OrderForm 侧栏指示条、PercentSlider 同源 token；Zanbara 下随 tokens.scss 映射到涨跌色 */
   .ltr-form__submit--buy {
     background: linear-gradient(180deg, var(--ltr-trade-buy-bright) 0%, var(--ltr-trade-buy-mid) 100%);
   }

@@ -182,7 +182,7 @@ export function DateRangeSelect({ startDate, endDate, onChange, handleClassName 
                 key={preset}
                 variant="secondary"
                 size="small"
-                className="primit-ui-button--no-navbar-line"
+                className="zanbara-ui-button--no-navbar-line"
                 data-preset={preset}
                 onClick={handlePresetSelect}
               >
@@ -292,7 +292,7 @@ export function DateSelect({
                 key={preset}
                 variant="secondary"
                 size="small"
-                className="primit-ui-button--no-navbar-line"
+                className="zanbara-ui-button--no-navbar-line"
                 data-preset={preset}
                 onClick={handlePresetSelect}
               >

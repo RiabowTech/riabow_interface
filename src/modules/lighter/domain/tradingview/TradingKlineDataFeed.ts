@@ -177,7 +177,7 @@ export class TradingKlineDataFeed extends EventTarget implements IBasicDataFeed 
 
   constructor(
     chainId: number,
-    private brandName = "Primit",
+    private brandName = "Zanbara",
     private visiblePlotsSet: VisiblePlotsSet = "ohlcv",
     private volumeMetric: VolumeMetric = "base"
   ) {

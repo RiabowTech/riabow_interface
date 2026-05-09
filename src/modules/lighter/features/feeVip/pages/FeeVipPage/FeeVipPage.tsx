@@ -9,7 +9,7 @@ import useWallet from "lib/wallets/useWallet";
 import AppPageLayout from "shared/components/AppPageLayout/AppPageLayout";
 import SEO from "shared/components/Seo/SEO";
 import { useDesignSystem } from "shared/context/DesignSystemContext/DesignSystemContext";
-import { PrimaryActionButton, PrimitCornerBracketFrame } from "shared/ui";
+import { PrimaryActionButton, ZanbaraCornerBracketFrame } from "shared/ui";
 
 import Loader from "components/Loader/Loader";
 
@@ -19,7 +19,7 @@ import { useFeeVipSummary } from "../../hooks/useFeeVipSummary";
 
 import "./FeeVipPage.css";
 
-/** 无后端 `tierDisplayLabel` 时的占位文案（Primit `fee-info` 的 `label` 仅为 `VIP n`，不含金属名） */
+/** 无后端 `tierDisplayLabel` 时的占位文案（Zanbara `fee-info` 的 `label` 仅为 `VIP n`，不含金属名） */
 const TIER_LEVEL_MSG: Record<FeeVipTierId, ReturnType<typeof msg>> = {
   0: msg`VIP 0 Bronze`,
   1: msg`VIP 1 Silver`,
@@ -132,7 +132,7 @@ function DataFreshness({ timestampMs, refreshing }: { timestampMs: number; refre
  */
 export function FeeVipPage() {
   const { i18n } = useLingui();
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
   const { openConnectModal } = useConnectModal();
   const { account } = useWallet();
   const { chainId } = useChainId();
@@ -275,7 +275,7 @@ export function FeeVipPage() {
                     )}
                   </p>
                   {showConnectWalletCta ? (
-                    <PrimitCornerBracketFrame className="fee-vip-page__connect-frame w-fit" enabled={isPrimit}>
+                    <ZanbaraCornerBracketFrame className="fee-vip-page__connect-frame w-fit" enabled={isZanbara}>
                       <PrimaryActionButton
                         type="button"
                         className="connect-wallet-cta min-w-[240px]"
@@ -283,7 +283,7 @@ export function FeeVipPage() {
                       >
                         <Trans>Connect Wallet</Trans>
                       </PrimaryActionButton>
-                    </PrimitCornerBracketFrame>
+                    </ZanbaraCornerBracketFrame>
                   ) : null}
                 </div>
               )}
@@ -528,11 +528,11 @@ export function FeeVipPage() {
     );
   })();
 
-  if (isPrimit) {
+  if (isZanbara) {
     return (
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">
-          <SEO title={t`Fee & VIP | Primit`} description={t`Trading fee tiers and VIP levels on Primit.`} />
+          <SEO title={t`Fee & VIP | Zanbara`} description={t`Trading fee tiers and VIP levels on Zanbara.`} />
           {body}
         </div>
       </LighterShell>
@@ -541,7 +541,7 @@ export function FeeVipPage() {
 
   return (
     <AppPageLayout>
-      <SEO title={t`Fee & VIP | Primit`} description={t`Trading fee tiers and VIP levels on Primit.`} />
+      <SEO title={t`Fee & VIP | Zanbara`} description={t`Trading fee tiers and VIP levels on Zanbara.`} />
       {body}
     </AppPageLayout>
   );

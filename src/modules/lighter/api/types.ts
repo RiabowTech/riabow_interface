@@ -1,4 +1,4 @@
-// API Response Types for Primit Backend
+// API Response Types for Zanbara Backend
 
 // ============================================
 // Auth Types
@@ -603,7 +603,7 @@ export interface OperatorStatus {
   backend_address: string;
 }
 
-// Primit API Referral Types (根据 API 文档)
+// Zanbara API Referral Types (根据 API 文档)
 // ============================================
 export interface CreateReferralCodeResponse {
   success: boolean;

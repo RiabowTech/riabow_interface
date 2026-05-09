@@ -75,7 +75,7 @@
 
 .claim-field-label {
   color: rgba(255, 255, 255, 0.6);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.5px;
@@ -84,7 +84,7 @@
 
 .claim-field-value {
   color: #fff;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 0.5px;
@@ -98,7 +98,7 @@
 
 .claim-total-amount {
   color: var(--earn-accent);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 18px;
   font-weight: 600;
   line-height: normal;
@@ -208,7 +208,7 @@
 
 /* Status Text */
 .claim-status-title {
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 24px;
   font-weight: 500;
   margin: 0;
@@ -225,14 +225,14 @@
 
 .claim-status-text {
   color: rgba(255, 255, 255, 0.8);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 16px;
   margin: 0;
 }
 
 .claim-error-detail {
   color: rgba(255, 255, 255, 0.6);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   margin: 0;
   text-align: center;

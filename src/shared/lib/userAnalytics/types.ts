@@ -32,7 +32,7 @@ export type LandingPageProtocolTokenEvent = {
   data: {
     action: "ProtocolTokenAction";
     chain: ChainName | undefined;
-    type: "PRIMIT" | "GM" | "GLV" | "GLP";
+    type: "ZANBARA" | "GM" | "GLV" | "GLP";
   };
 };
 

@@ -318,7 +318,7 @@ export function AffiliateCodeCreateButton({
   recentlyAddedCodes: _recentlyAddedCodes,
   initialReferralCode: _initialReferralCode,
   onSuccess,
-  /** 为 true 时增加内嵌布局用 class（如 Primit 推荐页） */
+  /** 为 true 时增加内嵌布局用 class（如 Zanbara 推荐页） */
   embedded,
 }: {
   handleCreateReferralCode?: (code: string) => Promise<unknown>;

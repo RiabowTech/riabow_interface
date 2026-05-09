@@ -128,7 +128,7 @@ export function useTradingAccountTokenBalances(
 
   // Include chainId in the SWR key so each chain keeps an isolated cache entry.
   const swrKey = chainId && account && authenticated && enabled
-    ? [`primit-balances`, chainId, account]
+    ? [`zanbara-balances`, chainId, account]
     : null;
 
   const { data: apiBalancesResponse, error, isLoading } = useSWR<BalancesResponse>(

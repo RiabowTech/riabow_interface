@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { usePrimitUserPositions } from "modules/lighter/api/hooks";
+import { useZanbaraUserPositions } from "modules/lighter/api/hooks";
 import type { Position } from "modules/lighter/api/types";
 
 export type LighterPosition = {
@@ -57,7 +57,7 @@ function toPosition(position: Position): LighterPosition {
 }
 
 export function usePositionsAdapter(): LighterPosition[] {
-  const { data } = usePrimitUserPositions();
+  const { data } = useZanbaraUserPositions();
 
   return useMemo(() => {
     return (data?.positions ?? []).map(toPosition);

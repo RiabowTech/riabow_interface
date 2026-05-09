@@ -29,7 +29,7 @@ export * from "./custom/websocket";
 export * from "./custom/useWebSocket";
 
 // Auth
-export * from "./custom/usePrimitAuth";
+export * from "./custom/useZanbaraAuth";
 export * from "./custom/useAuthToken";
 export * from "./custom/useTokenStorage";
 
@@ -40,7 +40,7 @@ export * from "./custom/useTradingFundingHistory";
 // Orders
 export * from "./custom/orderAdapter";
 export * from "./custom/useApiOrders";
-export * from "./custom/usePrimitOrderSubmit";
+export * from "./custom/useZanbaraOrderSubmit";
 
 // Positions
 export * from "./custom/positionAdapter";

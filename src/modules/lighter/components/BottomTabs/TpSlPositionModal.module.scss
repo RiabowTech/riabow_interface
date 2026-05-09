@@ -142,8 +142,8 @@
     max-width: 64px;
     height: 2px;
     transform: translateX(-50%);
-    // 与 Lighter 主题色对齐(原为 #6f86ff 紫蓝,不符合 Primit 青绿主色)
-    background: var(--primit-primary-1, #87d7ea);
+    // 与 Lighter 主题色对齐(原为 #6f86ff 紫蓝,不符合 Zanbara 青绿主色)
+    background: var(--zanbara-primary-1, #87d7ea);
     border-radius: 999px;
   }
 }
@@ -219,7 +219,7 @@
 .field {
   height: 32px;
   // 与 /trade 输入框(global.scss .ltr-form__field)保持一致:20% 主题色描边,hover 40%
-  border: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 20%, transparent);
   border-radius: 4px;
   background: #24242a;
   padding: 0 8px;
@@ -231,12 +231,12 @@
   transition: border-color 150ms, background 150ms;
 
   &:hover {
-    border-color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 40%, transparent);
+    border-color: color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 40%, transparent);
     background: #26262c;
   }
 
   &:focus-within {
-    border-color: color-mix(in srgb, var(--primit-primary-1, #87d7ea) 55%, transparent);
+    border-color: color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 55%, transparent);
   }
 }
 

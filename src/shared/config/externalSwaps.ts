@@ -35,7 +35,7 @@ export const DISABLED_OPEN_OCEAN_DEXES = {
    *  @see https://open-api.openocean.finance/v3/avax/dexList
    */
   [AVALANCHE]: [
-    18, // Primit
+    18, // Zanbara
   ],
 };
 

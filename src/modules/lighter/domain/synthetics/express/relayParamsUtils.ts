@@ -71,7 +71,7 @@ export function getGelatoRelayRouterDomain(
   chainId: SourceChainId | ContractsChainId,
   relayRouterAddress: string
 ): SignatureDomain {
-  const name = "PrimitBaseGelatoRelayRouter";
+  const name = "ZanbaraBaseGelatoRelayRouter";
 
   return {
     name,

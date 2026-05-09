@@ -11,8 +11,8 @@ type ChartDataInfo = ChartData & {
   appVersion?: number;
 };
 
-const V1_CHART_ID = "primit-chart-v1";
-const V2_CHART_ID = "primit-chart-v2";
+const V1_CHART_ID = "zanbara-chart-v1";
+const V2_CHART_ID = "zanbara-chart-v2";
 
 function isValidChartId(id: string | number | undefined) {
   return id === V1_CHART_ID || id === V2_CHART_ID;

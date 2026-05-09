@@ -40,16 +40,16 @@ export function feeVipMockRandomizeFromEnv(): boolean {
 
 /**
  * Fee & VIP 页真实数据来源（mock 关闭时）：
- * - `primit_fee_info`（默认）：`GET {getTradingBackendUrl}/api/v1/account/fee-info`（Primit U 本位 VIP / 手续费，与开发者文档一致）
+ * - `zanbara_fee_info`（默认）：`GET {getTradingBackendUrl}/api/v1/account/fee-info`（Zanbara U 本位 VIP / 手续费，与开发者文档一致）
  * - `points_tier`：`GET {getPointsApiUrl}/points/tier` + 静态 T1–T3（积分系统 §6，仅当显式配置）
  * - `legacy_fee_summary`：`GET {getTradingBackendUrl}/api/v1/account/fee-vip-summary` 旧约定
  */
-export type FeeVipDataSource = "points_tier" | "primit_fee_info" | "legacy_fee_summary";
+export type FeeVipDataSource = "points_tier" | "zanbara_fee_info" | "legacy_fee_summary";
 
 export function feeVipDataSourceFromEnv(): FeeVipDataSource {
   const u = norm(import.meta.env.VITE_FEE_VIP_DATA_SOURCE as string | undefined);
   if (u === "legacy" || u === "legacy_fee_summary" || u === "fee_summary") return "legacy_fee_summary";
   if (u === "points" || u === "points_tier" || u === "tp" || u === "trading_points") return "points_tier";
-  if (u === "primit" || u === "primit_fee_info" || u === "fee_info" || u === "account_fee_info") return "primit_fee_info";
-  return "primit_fee_info";
+  if (u === "zanbara" || u === "zanbara_fee_info" || u === "fee_info" || u === "account_fee_info") return "zanbara_fee_info";
+  return "zanbara_fee_info";
 }

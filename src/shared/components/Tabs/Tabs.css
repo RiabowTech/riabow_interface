@@ -1,5 +1,5 @@
 /* ================================
- * 基础 Tab 样式（冷色块 Tab，与荧光 Legacy / Primit 稿面独立）
+ * 基础 Tab 样式（冷色块 Tab，与荧光 Legacy / Zanbara 稿面独立）
  * ==============================*/
 .Tab.Tab__block {
   display: grid;
@@ -181,7 +181,7 @@
 }
 
 /* ================================
- * Block 下划线动画（条形色值：Legacy / Primit 主题层）
+ * Block 下划线动画（条形色值：Legacy / Zanbara 主题层）
  * ==============================*/
 .tab-active-green {
   border-bottom-color: transparent !important;

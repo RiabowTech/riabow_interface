@@ -1,7 +1,7 @@
 /**
- * Account 弹窗（MainView）：Primit MainBtn 左侧竖线在此场景不需要
+ * Account 弹窗（MainView）：Zanbara MainBtn 左侧竖线在此场景不需要
  */
-.trading-account-modal-main .primit-ui-button--main-40::before {
+.trading-account-modal-main .zanbara-ui-button--main-40::before {
   content: none !important;
   display: none !important;
   width: 0 !important;

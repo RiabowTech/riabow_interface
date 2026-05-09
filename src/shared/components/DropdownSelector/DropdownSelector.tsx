@@ -3,12 +3,12 @@ import cx from "classnames";
 
 import ChevronDownIcon from "img/ic_chevron_down.svg?react";
 
-type Primitive = string | number;
-type WithConditionalItemKey<Id extends Primitive, Option> = Id extends Primitive
+type Zanbaraive = string | number;
+type WithConditionalItemKey<Id extends Zanbaraive, Option> = Id extends Zanbaraive
   ? { itemKey?: (option: Option) => Id }
   : { itemKey: (option: Option) => Id };
 
-export const DropdownSelector = <Id extends Primitive, Option>({
+export const DropdownSelector = <Id extends Zanbaraive, Option>({
   value,
   onChange,
   button,
@@ -56,8 +56,8 @@ export const DropdownSelector = <Id extends Primitive, Option>({
         >
           {options.map((option) => (
             <Listbox.Option
-              key={itemKey ? itemKey(option) : (option as Primitive)}
-              value={itemKey ? itemKey(option) : (option as Primitive)}
+              key={itemKey ? itemKey(option) : (option as Zanbaraive)}
+              value={itemKey ? itemKey(option) : (option as Zanbaraive)}
               className={({ active, selected }) =>
                 cx(
                   "cursor-pointer",

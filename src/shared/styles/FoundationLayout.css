@@ -1,9 +1,9 @@
 /**
  * 全局布局基础：间距阶梯 + 圆角语义
- * 来源: Figma「Primit-UI-Components-Guidelines」— Layout System / 布局（node-id=6-440）
+ * 来源: Figma「Zanbara-UI-Components-Guidelines」— Layout System / 布局（node-id=6-440）
  * https://www.figma.com/design/Xy4iA3ZnzAZPmOduAyqmtG/Primit-UI-Components-Guidelines?node-id=6-440
  *
- * 与 Primit 组件规范同源，但变量为全局基础，任意界面可引用 var(--layout-space-*) / var(--layout-radius-*)。
+ * 与 Zanbara 组件规范同源，但变量为全局基础，任意界面可引用 var(--layout-space-*) / var(--layout-radius-*)。
  */
 
 :root {

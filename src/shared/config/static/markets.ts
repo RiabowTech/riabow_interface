@@ -106,7 +106,7 @@ const MARKETS_UI_CONFIGS: Record<ContractsChainId, Record<string, MarketUiConfig
     "0x450bb6774Dd8a756274E0ab4107953259d2ac541": {
       enabled: true,
     },
-    // Primit/USD market
+    // Zanbara/USD market
     "0x55391D178Ce46e7AC8eaAEa50A72D1A5a8A622Da": {
       enabled: true,
     },
@@ -226,7 +226,7 @@ const MARKETS_UI_CONFIGS: Record<ContractsChainId, Record<string, MarketUiConfig
     "0x71B7fF592a974e2B501D8A7a11f5c42DcD365244": {
       enabled: true,
     },
-    // Primit
+    // Zanbara
     "0xbD48149673724f9cAeE647bb4e9D9dDaF896Efeb": {
       enabled: true,
     },

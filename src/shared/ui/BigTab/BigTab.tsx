@@ -1,10 +1,10 @@
 import cx from "classnames";
 import React from "react";
 
-import { primitGuidelinesFigmaUrl } from "../../docs/primit/primitFigmaNodes";
+import { zanbaraGuidelinesFigmaUrl } from "../../docs/zanbara/zanbaraFigmaNodes";
 
 /** Figma 第 9 章 · Big_Tab 大标签选项 / Item（`152-691`） */
-export const PRIMIT_BIG_TAB_ITEM_FIGMA_URL = primitGuidelinesFigmaUrl("152-691");
+export const ZANBARA_BIG_TAB_ITEM_FIGMA_URL = zanbaraGuidelinesFigmaUrl("152-691");
 
 export type BigTabProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   /** 选中：主色文案 + 2px 底边线；未选中为同色宽透明底边占位，避免切换抖动 */

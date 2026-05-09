@@ -3,7 +3,7 @@ export * from "./Button";
 export * from "./Tabs";
 export * from "./BigTab";
 export * from "./Table";
-export * from "./PrimitCornerBracketFrame";
+export * from "./ZanbaraCornerBracketFrame";
 export * from "./PrimaryActionButton";
 export * from "./Modal";
 export * from "./ExchangeTabs";

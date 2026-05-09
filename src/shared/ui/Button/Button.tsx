@@ -1,7 +1,7 @@
 /**
- * Primit 对齐的基础按钮（Storybook / 新界面试点）
+ * Zanbara 对齐的基础按钮（Storybook / 新界面试点）
  *
- * 对应文档：docs/design/PRIMIT-07-BUTTON.md
+ * 对应文档：docs/design/ZANBARA-07-BUTTON.md
  * — MainBtn_40（Figma `119-1124`）· IconBtn_40 · Small TabBtn 24
  *
  *
@@ -12,22 +12,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { primitGuidelinesFigmaUrl } from "../../docs/primit/primitFigmaNodes";
+import { zanbaraGuidelinesFigmaUrl } from "../../docs/zanbara/zanbaraFigmaNodes";
 
 import "./Button.storybook-classic-skins.css";
 
 /** Figma MainBtn / IconBtn 的 Style；Tab 仅使用 main | secondary */
-export type PrimitButtonIntent = "main" | "secondary" | "connected" | "third";
+export type ZanbaraButtonIntent = "main" | "secondary" | "connected" | "third";
 
-/** 三类组件规格（PRIMIT §1–§3） */
-export type PrimitButtonAppearance = "main-40" | "icon-40" | "tab-24";
+/** 三类组件规格（ZANBARA §1–§3） */
+export type ZanbaraButtonAppearance = "main-40" | "icon-40" | "tab-24";
 
 /** MainBtn_40 + intent main 时的金 / 青绿外环与 Hover（Points 卡片等，Figma 168:4189） */
-export type PrimitMainButtonAccent = "yellow" | "green";
+export type ZanbaraMainButtonAccent = "yellow" | "green";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * SPA 内链：渲染为 `react-router` 的 `Link`，与 `button` 共用同一套 Primit 外形类名。
+   * SPA 内链：渲染为 `react-router` 的 `Link`，与 `button` 共用同一套 Zanbara 外形类名。
    * 外部 URL 请用普通 `href`（若后续扩展）或包裹层；勿与 `type=submit` 同用。
    */
   routerTo?: string;
@@ -38,15 +38,15 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   variant?: "primary" | "secondary" | "outline" | "ghost";
   /** 旧版尺寸：md ≈ MainBtn 40；sm ≈ Tab 24；lg ≈ 更高主按钮 */
   size?: "sm" | "md" | "lg" | "icon";
-  /** 显式 Primit 规格（若设置，优先于 size 推导 appearance） */
-  appearance?: PrimitButtonAppearance;
-  /** Primit Style（Main / Secondary / Connected / Third） */
-  intent?: PrimitButtonIntent;
+  /** 显式 Zanbara 规格（若设置，优先于 size 推导 appearance） */
+  appearance?: ZanbaraButtonAppearance;
+  /** Zanbara Style（Main / Secondary / Connected / Third） */
+  intent?: ZanbaraButtonIntent;
   /**
    * 仅对 `appearance="main-40"` 且 intent 为 main（含 legacy `primary` 映射）生效：
    * 哑光金 / 青绿 0.5px 环、左侧竖条与 Hover 渐变。
    */
-  mainAccent?: PrimitMainButtonAccent;
+  mainAccent?: ZanbaraMainButtonAccent;
   /** MainBtn：前置 / 后置图标（由父级传入 SVG 或组件） */
   iconStart?: React.ReactNode;
   iconEnd?: React.ReactNode;
@@ -57,23 +57,23 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 /** Design 插件用 Figma 节点（MainBtn_40） */
-export const PRIMIT_BUTTON_FIGMA_URL = primitGuidelinesFigmaUrl("119-1124");
+export const ZANBARA_BUTTON_FIGMA_URL = zanbaraGuidelinesFigmaUrl("119-1124");
 /** IconBtn_40 */
-export const PRIMIT_ICON_BUTTON_FIGMA_URL = primitGuidelinesFigmaUrl("119-1450");
+export const ZANBARA_ICON_BUTTON_FIGMA_URL = zanbaraGuidelinesFigmaUrl("119-1450");
 /** SmallTabBtn（Size=24 等） */
-export const PRIMIT_TAB_BUTTON_FIGMA_URL = primitGuidelinesFigmaUrl("147-337");
+export const ZANBARA_TAB_BUTTON_FIGMA_URL = zanbaraGuidelinesFigmaUrl("147-337");
 
 function resolveAppearance(
-  appearance: PrimitButtonAppearance | undefined,
+  appearance: ZanbaraButtonAppearance | undefined,
   size: ButtonProps["size"],
-): PrimitButtonAppearance {
+): ZanbaraButtonAppearance {
   if (appearance) return appearance;
   if (size === "icon") return "icon-40";
   if (size === "sm") return "tab-24";
   return "main-40";
 }
 
-function resolveIntent(variant: ButtonProps["variant"], intent: PrimitButtonIntent | undefined): PrimitButtonIntent {
+function resolveIntent(variant: ButtonProps["variant"], intent: ZanbaraButtonIntent | undefined): ZanbaraButtonIntent {
   if (intent) return intent;
   switch (variant) {
     case "secondary":
@@ -87,7 +87,7 @@ function resolveIntent(variant: ButtonProps["variant"], intent: PrimitButtonInte
   }
 }
 
-export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(function PrimitUIButton(
+export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(function ZanbaraUIButton(
   {
     variant = "primary",
     size = "md",
@@ -114,19 +114,19 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
   const accentClass =
     appearance === "main-40" && intent === "main" && mainAccent
-      ? `primit-ui-button--accent-${mainAccent}`
+      ? `zanbara-ui-button--accent-${mainAccent}`
       : "";
 
   const classes = [
-    "primit-ui-button",
-    `primit-ui-button--${appearance}`,
-    `primit-ui-button--intent-${intent}`,
+    "zanbara-ui-button",
+    `zanbara-ui-button--${appearance}`,
+    `zanbara-ui-button--intent-${intent}`,
     accentClass,
-    tabSelected && appearance === "tab-24" ? "primit-ui-button--tab-selected" : "",
-    isOutline ? "primit-ui-button--outline-compat" : "",
-    isGhost ? "primit-ui-button--ghost-compat" : "",
-    loading ? "primit-ui-button--loading" : "",
-    disabled || loading ? "primit-ui-button--disabled" : "",
+    tabSelected && appearance === "tab-24" ? "zanbara-ui-button--tab-selected" : "",
+    isOutline ? "zanbara-ui-button--outline-compat" : "",
+    isGhost ? "zanbara-ui-button--ghost-compat" : "",
+    loading ? "zanbara-ui-button--loading" : "",
+    disabled || loading ? "zanbara-ui-button--disabled" : "",
     className,
   ]
     .filter(Boolean)
@@ -134,14 +134,14 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
   const showText = appearance !== "icon-40" && children != null && children !== false;
   const heightClass =
-    appearance === "main-40" && size === "lg" ? "primit-ui-button--main-tall" : "";
+    appearance === "main-40" && size === "lg" ? "zanbara-ui-button--main-tall" : "";
   const hasLeadingIcon = Boolean(iconStart);
   const hasTrailingIcon = Boolean(iconEnd);
   const mainPadCompact =
-    appearance === "main-40" && (hasLeadingIcon || hasTrailingIcon) ? "primit-ui-button--main-40-pad-compact" : "";
+    appearance === "main-40" && (hasLeadingIcon || hasTrailingIcon) ? "zanbara-ui-button--main-40-pad-compact" : "";
   const mainDualIcons =
     appearance === "main-40" && hasLeadingIcon && hasTrailingIcon
-      ? "primit-ui-button--main-40-dual-icons"
+      ? "zanbara-ui-button--main-40-dual-icons"
       : "";
 
   const soloIcon = appearance === "icon-40" ? (iconStart ?? children) : null;
@@ -150,36 +150,36 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
 
   const inner = (
     <>
-      {loading && <span className="primit-ui-button__spinner" aria-hidden />}
-      <span className="primit-ui-button__inner">
+      {loading && <span className="zanbara-ui-button__spinner" aria-hidden />}
+      <span className="zanbara-ui-button__inner">
         {appearance === "icon-40" ? (
           soloIcon != null && soloIcon !== false ? (
-            <span className="primit-ui-button__icon primit-ui-button__icon--solo">{soloIcon}</span>
+            <span className="zanbara-ui-button__icon zanbara-ui-button__icon--solo">{soloIcon}</span>
           ) : null
         ) : appearance === "main-40" ? (
           <>
             <span
               className={[
-                "primit-ui-button__main-row",
-                hasLeadingIcon && hasTrailingIcon ? "primit-ui-button__main-row--tight" : "",
+                "zanbara-ui-button__main-row",
+                hasLeadingIcon && hasTrailingIcon ? "zanbara-ui-button__main-row--tight" : "",
               ]
                 .filter(Boolean)
                 .join(" ")}
             >
               {iconStart ? (
-                <span className="primit-ui-button__icon primit-ui-button__icon--start">{iconStart}</span>
+                <span className="zanbara-ui-button__icon zanbara-ui-button__icon--start">{iconStart}</span>
               ) : null}
-              {showText ? <span className="primit-ui-button__label">{children}</span> : null}
+              {showText ? <span className="zanbara-ui-button__label">{children}</span> : null}
             </span>
-            {iconEnd ? <span className="primit-ui-button__icon primit-ui-button__icon--end">{iconEnd}</span> : null}
+            {iconEnd ? <span className="zanbara-ui-button__icon zanbara-ui-button__icon--end">{iconEnd}</span> : null}
           </>
         ) : (
           <>
             {iconStart ? (
-              <span className="primit-ui-button__icon primit-ui-button__icon--start">{iconStart}</span>
+              <span className="zanbara-ui-button__icon zanbara-ui-button__icon--start">{iconStart}</span>
             ) : null}
-            {showText ? <span className="primit-ui-button__label">{children}</span> : null}
-            {iconEnd ? <span className="primit-ui-button__icon primit-ui-button__icon--end">{iconEnd}</span> : null}
+            {showText ? <span className="zanbara-ui-button__label">{children}</span> : null}
+            {iconEnd ? <span className="zanbara-ui-button__icon zanbara-ui-button__icon--end">{iconEnd}</span> : null}
           </>
         )}
       </span>
@@ -229,6 +229,6 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
   );
 });
 
-Button.displayName = "PrimitUIButton";
+Button.displayName = "ZanbaraUIButton";
 
 export default Button;

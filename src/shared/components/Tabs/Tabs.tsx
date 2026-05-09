@@ -17,7 +17,7 @@ type Props<V extends BaseOptionValue> = {
   /**
    * `primit-big-tab`：Primit 第 9 章 Big_Tab（40px、ac-15、选中底边线），见 `BigTab` / `primit-big-tab.primit.css`
    */
-  type?: "inline" | "block" | "inline-primary" | "primit-big-tab";
+  type?: "inline" | "block" | "inline-primary" | "zanbara-big-tab";
   className?: string;
   regularOptionClassname?: string;
   qa?: string;
@@ -27,10 +27,10 @@ type Props<V extends BaseOptionValue> = {
   /** block 类型：完全隐藏动画下划线 */
   hideBlockUnderline?: boolean;
   /**
-   * 与 useUnifiedStyle 联用：未传时由全局 `useDesignSystem().isPrimit`（`html[data-ui-theme]`）决定；
-   * 显式 `"default"` | `"primit"` 可覆盖。
+   * 与 useUnifiedStyle 联用：未传时由全局 `useDesignSystem().isZanbara`（`html[data-ui-theme]`）决定；
+   * 显式 `"default"` | `"zanbara"` 可覆盖。
    */
-  unifiedStyleVariant?: "default" | "primit";
+  unifiedStyleVariant?: "default" | "zanbara";
 };
 
 /**
@@ -52,9 +52,9 @@ export default function Tabs<V extends string | number>({
   hideBlockUnderline = false,
   unifiedStyleVariant,
 }: Props<V>) {
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
   const effectiveUnifiedVariant =
-    unifiedStyleVariant !== undefined ? unifiedStyleVariant : isPrimit ? "primit" : "default";
+    unifiedStyleVariant !== undefined ? unifiedStyleVariant : isZanbara ? "zanbara" : "default";
 
   const tabsContainerRef = useRef<HTMLDivElement>(null);
   const [underlineStyle, setUnderlineStyle] = useState<{ left: number; width: number } | null>(null);
@@ -131,7 +131,7 @@ export default function Tabs<V extends string | number>({
         {
           "rounded-t-8": type === "block",
         },
-        type === "primit-big-tab" && "min-w-0",
+        type === "zanbara-big-tab" && "min-w-0",
         className,
       )}
     >
@@ -139,7 +139,7 @@ export default function Tabs<V extends string | number>({
         className={cx("flex w-full", {
           "gap-8": type === "inline" || type === "inline-primary",
           "tabs-row--block": type === "block",
-          "min-w-0 shrink-0 gap-1": type === "primit-big-tab",
+          "min-w-0 shrink-0 gap-1": type === "zanbara-big-tab",
         })}
       >
         {processedOptions.map((opt) =>

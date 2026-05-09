@@ -127,13 +127,13 @@ export const DepositStatusView = () => {
             <div className="flex items-center gap-8">
               <div className="size-6 rotate-[45deg] transform rounded-1 bg-blue-300" />
               <span className="text-12 text-typography-secondary">
-                <Trans>Faster execution with Primit premium RPCs</Trans>
+                <Trans>Faster execution with Zanbara premium RPCs</Trans>
               </span>
             </div>
             <div className="flex items-center gap-8">
               <div className="size-6 rotate-[45deg] transform rounded-1 bg-blue-300" />
               <span className="text-12 text-typography-secondary">
-                <Trans>Reliable Primit-powered transactions</Trans>
+                <Trans>Reliable Zanbara-powered transactions</Trans>
               </span>
             </div>
           </div>

@@ -19,7 +19,7 @@ import SearchInput from "components/SearchInput/SearchInput";
 import { VerticalScrollFadeContainer } from "components/TableScrollFade/VerticalScrollFade";
 import TokenIcon from "components/TokenIcon/TokenIcon";
 
-// Virtual chain ID used to represent Primit Account (off-chain balances)
+// Virtual chain ID used to represent Zanbara Account (off-chain balances)
 const TRADING_ACCOUNT_CHAIN_ID = 0;
 
 type FilterType = "all" | "tradingAccount" | "wallet";

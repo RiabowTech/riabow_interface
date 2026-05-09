@@ -853,7 +853,7 @@ export function ChartPanel() {
                           extraDisabledFeatures={disabledFeatures}
                           removeEnabledFeatures={TV_ENABLED_FEATURES_TO_REMOVE}
                           extraOverrides={LIGHTER_TV_OVERRIDES}
-                          brandName="Primit"
+                          brandName="Zanbara"
                           customCssUrl="/lighter-tv.css"
                           initialBarsCount={170}
                           forcedPeriod={tf}

@@ -191,8 +191,8 @@ msgstr "请选择部分仓位数量"
 msgid "Connecting wallet..."
 msgstr "连接钱包中..."
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "My Invite Link"
 msgstr "我的邀請連結"
 
@@ -258,8 +258,8 @@ msgstr "资金费"
 msgid "Max {0} short exceeded"
 msgstr "超過最大 {0} 做空"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Cumulative earnings (lifetime)"
 msgstr "累計收益（終身）"
 
@@ -327,7 +327,7 @@ msgid "No"
 msgstr "否"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Taker Fee"
 msgstr "吃單手續費"
 
@@ -417,7 +417,7 @@ msgid "≥ $2,000,000,000"
 msgstr "≥ $2,000,000,000"
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Primit Frozen Balance"
+msgid "Zanbara Frozen Balance"
 msgstr ""
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
@@ -465,8 +465,8 @@ msgstr "點選[建立錢包]開始使用您的 Web3 錢包。"
 msgid "Highest VIP level reached for volume requirement."
 msgstr "已達成交量條件下最高 VIP 等級。"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invite friends, earn commissions, accumulate forever"
 msgstr "邀請好友、賺取返傭、長期累積"
 
@@ -495,7 +495,7 @@ msgstr "创建或导入钱包"
 msgid "Updated {0}h ago"
 msgstr "{0} 小时前更新"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invitee Benefits"
 msgstr "被邀請人福利"
 
@@ -517,7 +517,7 @@ msgstr "最低所需抵押品"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Rank"
 msgstr "排名"
 
@@ -662,7 +662,7 @@ msgid "Earnings available to claim."
 msgstr "可領取的收益。"
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Signing..."
 msgstr "簽名中..."
 
@@ -863,7 +863,7 @@ msgid "Hide error"
 msgstr "隱藏錯誤"
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds will appear in your Primit Account soon."
+msgid "Funds will appear in your Zanbara Account soon."
 msgstr ""
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
@@ -992,7 +992,7 @@ msgstr "V2 Avalanche"
 msgid "Failed Market Decrease"
 msgstr "市場減少失敗"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "VIP0: 0.040% → 0.032%"
 msgstr "VIP0：0.040% → 0.032%"
 
@@ -1177,8 +1177,8 @@ msgstr "无效的产品 ID"
 msgid "Updated {0}m ago"
 msgstr "{0} 分钟前更新"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral Link"
 msgstr "邀請連結"
 
@@ -1243,7 +1243,7 @@ msgstr "積分"
 msgid "Affiliates"
 msgstr "推薦夥伴"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Friends who register with your code receive these benefits immediately"
 msgstr "使用您的推薦碼註冊的好友，將立即獲得以下福利"
 
@@ -1301,7 +1301,7 @@ msgstr "充值進行中"
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -1320,8 +1320,8 @@ msgstr "系統"
 msgid "Open positions"
 msgstr "未平倉位"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Total Commission"
 msgstr "累計返傭"
 
@@ -1331,21 +1331,21 @@ msgstr "全部平仓"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Fee & VIP | Primit"
-msgstr "手續費與 VIP｜Primit"
+msgid "Fee & VIP | Zanbara"
+msgstr "手續費與 VIP｜Zanbara"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled."
 msgstr "賣出訂單已取消。"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Claim commission"
 msgstr "領取返傭"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-msgid "Leaderboard for traders on Primit."
+msgid "Leaderboard for traders on Zanbara."
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -1457,7 +1457,7 @@ msgstr "執行價格未達到可接受價格。當條件滿足時，訂單將成
 msgid "Trading Volume"
 msgstr "交易量"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Claim rebate"
 msgstr "領取返傭"
 
@@ -1558,7 +1558,7 @@ msgstr "第 2 期"
 msgid "Change to {0}"
 msgstr "更改為 {0}"
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 msgid "Signing transaction will also authenticate your account"
 msgstr "簽署交易將同時驗證您的帳戶"
 
@@ -1571,7 +1571,7 @@ msgid "Relayer request failed"
 msgstr "中繼器請求失敗"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "Primit Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
+msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
 msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
@@ -1620,7 +1620,7 @@ msgstr "觸發"
 msgid "Positions ({0})"
 msgstr "仓位 ({0})"
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order cancelled"
 msgstr "訂單已取消"
@@ -1637,7 +1637,7 @@ msgstr "摺疊"
 msgid "Market Name:"
 msgstr "市场名称:"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "10% discount"
 msgstr "10% 折扣"
 
@@ -1691,7 +1691,7 @@ msgstr "原生图表"
 msgid "Next tier referrals"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Commission Rate"
 msgstr "返傭比例"
 
@@ -1767,7 +1767,7 @@ msgstr "分解淨價格影響"
 msgid "Cumulative PnL <0>{0}</0>"
 msgstr "累計盈虧 <0>{0}</0>"
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 #: src/modules/lighter/api/useClosePositionHandler.ts
 msgid "Position close order submitted"
 msgstr "平倉訂單已提交"
@@ -1795,11 +1795,11 @@ msgid "Show Debug Values"
 msgstr "顯示除錯值"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-msgid "Primit information for account"
+msgid "Zanbara information for account"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Total Referrals"
 msgstr "總推薦數"
@@ -1898,7 +1898,7 @@ msgid "Leave your Telegram if you’re okay with being contacted for a quick fol
 msgstr "如果您同意被聯絡進行快速跟進，請留下您的 Telegram。"
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Primit Account Balance"
+msgid "Zanbara Account Balance"
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -1976,7 +1976,7 @@ msgstr "可用流動性不足。當有流動性可用時，訂單將成交。"
 msgid "Market"
 msgstr "市場"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
@@ -1988,7 +1988,7 @@ msgstr "市場"
 msgid "Enter referral code"
 msgstr "輸入推薦碼"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "You can rebind now."
 msgstr "您現在可以重新綁定。"
 
@@ -2079,7 +2079,7 @@ msgstr "選擇語言"
 msgid "VIP {nextTier} requires {0} (14-day rolling)"
 msgstr "VIP {nextTier} 需 {0}（14 日滾動）"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 msgid "Already Bound"
 msgstr "已綁定"
@@ -2166,12 +2166,12 @@ msgstr ""
 msgid "Sending settle request"
 msgstr "傳送結算請求"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral Center"
 msgstr "推薦中心"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Minimum claim is {REFERRAL_OFFCHAIN_MIN_CLAIM_USDT} USDT."
 msgstr "最低領取金額為 {REFERRAL_OFFCHAIN_MIN_CLAIM_USDT} USDT。"
 
@@ -2183,7 +2183,7 @@ msgstr "訂單無法執行，因為剩餘倉位將小於 5.00 美元"
 msgid "Failed to create referral code"
 msgstr "建立推薦碼失敗"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 #: src/shared/components/Referrals/ReferralDashboard.tsx
@@ -2215,7 +2215,7 @@ msgstr "目前交易等級"
 msgid "TWAP"
 msgstr "TWAP"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "20% discount"
 msgstr "20% 折扣"
 
@@ -2280,7 +2280,7 @@ msgid "App disabled, pending {0} upgrade"
 msgstr "應用程式禁用，待 {0} 升級"
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds are now in your Primit Account."
+msgid "Funds are now in your Zanbara Account."
 msgstr ""
 
 #: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
@@ -2505,8 +2505,8 @@ msgstr "预估年化收益率"
 msgid "Show last-trade price line"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Direct invitees"
 msgstr "直推人數"
 
@@ -2695,7 +2695,7 @@ msgstr "請先连接钱包並登入"
 msgid "Execute order simulation failed."
 msgstr "執行訂單模擬失敗。"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Current bound code: {0}"
 msgstr "目前綁定推薦碼：{0}"
 
@@ -2988,7 +2988,7 @@ msgstr "轉移請求已傳送。"
 msgid "Failed to cancel {ordersText}."
 msgstr "取消 {ordersText} 失敗。"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Instant credit to your balance — no on-chain transaction."
 msgstr "即時入帳至餘額，無需鏈上交易。"
 
@@ -3146,7 +3146,7 @@ msgstr "無法載入手續費與 VIP 資料。"
 msgid "Your frozen balance, locked in open orders and unavailable for trading until the orders are closed or cancelled."
 msgstr "您的凍結餘額，已鎖定在未結訂單中，在訂單關閉或取消前無法用於交易。"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Bind someone else's invitation code to obtain the benefits of the invitee"
 msgstr "綁定他人的邀請碼以取得被邀請人福利"
 
@@ -3155,7 +3155,7 @@ msgid "Partial Position"
 msgstr "部分仓位"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "All Primit users are eligible."
+msgid "All Zanbara users are eligible."
 msgstr ""
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -3272,7 +3272,7 @@ msgstr "無效的清算價格"
 msgid "<0>Smart wallets are not supported on {0}.</0><1/><2>Please switch to a different network or use a EOA wallet.</2>"
 msgstr ""
 
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Sign Out"
 msgstr "登出"
 
@@ -3321,7 +3321,7 @@ msgid "TP Limit Price"
 msgstr "止盈限价"
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Reliable Primit-powered transactions"
+msgid "Reliable Zanbara-powered transactions"
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -3503,7 +3503,7 @@ msgstr "下次资金费"
 msgid "Collateral at Liquidation"
 msgstr "清算時的抵押品"
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 msgid "Please connect your wallet first"
 msgstr "請先连接钱包"
 
@@ -3587,7 +3587,7 @@ msgstr "未實現費用"
 msgid "Traders Referred"
 msgstr "推薦的交易者"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral code copied"
 msgstr "已複製推薦碼"
 
@@ -3734,7 +3734,7 @@ msgid "Open positions with orders"
 msgstr "帶訂單的未平倉位"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -3750,7 +3750,7 @@ msgstr "已领取"
 msgid "Permit signed!"
 msgstr "許可已簽名！"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "RP Points Bonus"
 msgstr "RP 積分加碼"
 
@@ -3759,7 +3759,7 @@ msgid "less than a minute"
 msgstr "不到一分鐘"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "1. Who's eligible to join Primit Strategy?"
+msgid "1. Who's eligible to join Zanbara Strategy?"
 msgstr ""
 
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
@@ -3773,10 +3773,10 @@ msgstr "建立"
 msgid "Last 7d"
 msgstr "過去 7 天"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Copy"
 msgstr "複製"
 
@@ -3793,7 +3793,7 @@ msgstr "複製"
 msgid "Amount"
 msgstr "金額"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "First Qualifying Trade"
 msgstr "首筆達標交易"
 
@@ -3992,7 +3992,7 @@ msgstr ""
 msgid "Subscription Successful"
 msgstr "申购成功"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Need {0} more"
 msgstr "尚需 {0}"
 
@@ -4082,7 +4082,7 @@ msgstr "啟用一鍵交易"
 msgid "Yes"
 msgstr "是"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Rebinding available in {rebindDaysLeft} days."
 msgstr "可於 {rebindDaysLeft} 天後重新綁定。"
 
@@ -4142,8 +4142,8 @@ msgstr "超出個人限額"
 msgid "TP Price"
 msgstr "止盈价"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "First Month Only"
 msgstr "僅首月"
 
@@ -4258,7 +4258,7 @@ msgstr "將 {0} 交換為 {1}"
 msgid "Maker"
 msgstr "掛單"
 
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Sign In"
 msgstr "登入"
 
@@ -4279,7 +4279,7 @@ msgid "Withdraw from Account"
 msgstr "從帳戶提取"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Maker Fee"
 msgstr "掛單手續費"
 
@@ -4287,7 +4287,7 @@ msgstr "掛單手續費"
 msgid "Realized Base PnL"
 msgstr "已實現基礎盈虧"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Tier"
 msgstr "等級"
 
@@ -4339,8 +4339,8 @@ msgstr "通过限制分配给每个仓位的保证金来管理单仓风险。当
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Trading fee tiers and VIP levels on Primit."
-msgstr "Primit 上的交易手續費階梯與 VIP 等級。"
+msgid "Trading fee tiers and VIP levels on Zanbara."
+msgstr "Zanbara 上的交易手續費階梯與 VIP 等級。"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Tier T3"
@@ -4371,7 +4371,7 @@ msgstr "吃單每千美元（$1k）"
 msgid "Raw Prices"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Recent Tier"
 msgstr "目前階級"
 
@@ -4391,7 +4391,7 @@ msgstr "此程式碼已被他人用於 {takenNetworkNames}，您將無法從使�
 msgid "Confirm Claim"
 msgstr "確認領取"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "≥ $1,000 trade, both parties receive"
 msgstr "單筆成交 ≥ $1,000，雙方皆可獲得"
 
@@ -4567,11 +4567,11 @@ msgstr "已完成"
 msgid "Trading Points"
 msgstr "交易積分"
 
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Error: {error}"
 msgstr "錯誤：{error}"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Need"
 msgstr "尚需"
 
@@ -4604,7 +4604,7 @@ msgstr "您的 {1} 賬戶中沒有足夠的 {0} 來傳送此交易。<0/><1/><2>
 msgid "Total Volume"
 msgstr "總交易量"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral link copied"
 msgstr "已複製邀請連結"
 
@@ -4638,7 +4638,7 @@ msgid "Candles"
 msgstr ""
 
 #: src/shared/components/BotanixBanner/BotanixBanner.tsx
-msgid "using GLV and pool tokens. Buying or staking Primit, or using referrals, is not supported at this time."
+msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -4661,7 +4661,7 @@ msgstr "最小 {0} 数量:"
 msgid "Activate 1CT (One-Click Trading)"
 msgstr "啟用 1CT（一鍵交易）"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Wallet"
@@ -4743,12 +4743,12 @@ msgstr "無可用資料"
 msgid "Next tier volume (USD)"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "VIP0: 0.040% → 0.036%"
 msgstr "VIP0：0.040% → 0.036%"
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Your Primit Account balance, usable for trading from any supported chain."
+msgid "Your Zanbara Account balance, usable for trading from any supported chain."
 msgstr ""
 
 #: src/shared/components/TradeHistory/keys.ts
@@ -4829,7 +4829,7 @@ msgid "Limit - Long Inc."
 msgstr "限價 - 多頭增加"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Your Rank"
 msgstr "您的排名"
 
@@ -4847,7 +4847,7 @@ msgid "Oops! Something went wrong"
 msgstr "出错了"
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Faster execution with Primit premium RPCs"
+msgid "Faster execution with Zanbara premium RPCs"
 msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -4876,12 +4876,12 @@ msgstr "交換"
 msgid "long"
 msgstr "多頭"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "+10 RP"
 msgstr "+10 RP"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "My Referral Code"
 msgstr "我的推薦碼"
 
@@ -4893,7 +4893,7 @@ msgstr "此程式碼尚未在 {nonTakenNetworkNames} 上註冊，您將無法在
 msgid "Entire Position"
 msgstr "整仓"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Reward"
 msgstr "獎勵"
 
@@ -4910,7 +4910,7 @@ msgstr "語言"
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
 #: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-msgid "Primit Account"
+msgid "Zanbara Account"
 msgstr ""
 
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
@@ -5001,11 +5001,11 @@ msgstr "觸發"
 msgid "7d"
 msgstr "7 天"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invitees Required"
 msgstr "所需邀請人數"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Enter Referral Code"
 msgstr "輸入推薦碼"
 
@@ -5092,7 +5092,7 @@ msgstr "您的收益已成功领取。"
 msgid "short"
 msgstr "空頭"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Volume Required"
 msgstr "所需成交量"
 
@@ -5187,7 +5187,7 @@ msgstr "剩餘時間"
 msgid "Bars"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "No pending commission"
 msgstr "尚無待領返傭"
 
@@ -5305,7 +5305,7 @@ msgstr "资产 ({0})"
 msgid "Insufficient balance"
 msgstr "餘額不足"
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Reward Leaderboard"
 msgstr "返傭排行榜"
 

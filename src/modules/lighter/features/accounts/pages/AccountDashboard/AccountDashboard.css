@@ -10,9 +10,9 @@
   gap: 32px;
 }
 
-/* 账户页 Tab 与 Hero 标题一致的左右内边距（与 /earn 的 primit-page-hero--inset 对齐） */
+/* 账户页 Tab 与 Hero 标题一致的左右内边距（与 /earn 的 zanbara-page-hero--inset 对齐） */
 .account-dashboard-card > .account-tabs {
-  margin-left: var(--primit-route-gutter-x, 20px);
+  margin-left: var(--zanbara-route-gutter-x, 20px);
 }
 
 /* Portfolio tabs container */

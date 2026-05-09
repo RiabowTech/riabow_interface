@@ -1,14 +1,14 @@
 /**
- * 强调色（霓虹绿 ↔ Primit 主色）：Earn / AI Strategy、`PageTitle` 大标题等共用。
- * Primit 壳内与 --primit-primary-1 同步（随 html.dark 切换）。
- * 字体栈见 `PrimitTypography.css`：`--primit-font-title` / `--primit-font-body`（理财页已改用变量）。
+ * 强调色（霓虹绿 ↔ Zanbara 主色）：Earn / AI Strategy、`PageTitle` 大标题等共用。
+ * Zanbara 壳内与 --zanbara-primary-1 同步（随 html.dark 切换）。
+ * 字体栈见 `ZanbaraTypography.css`：`--zanbara-font-title` / `--zanbara-font-body`（理财页已改用变量）。
  */
 :root {
   --earn-accent: #EBB800;
 }
 
-html[data-ui-theme="primit"] {
-  --earn-accent: var(--primit-primary-1);
+html[data-ui-theme="zanbara"] {
+  --earn-accent: var(--zanbara-primary-1);
 }
 
 /**

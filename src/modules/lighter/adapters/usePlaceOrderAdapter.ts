@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { usePrimitOrderSubmit } from "modules/lighter/api/custom/usePrimitOrderSubmit";
+import { useZanbaraOrderSubmit } from "modules/lighter/api/custom/useZanbaraOrderSubmit";
 import type { OrderType as ApiOrderType, PositionModeSide, TimeInForce, WorkingType } from "modules/lighter/api/types";
 import { useTradeState } from "modules/lighter/store/TradeStateContext";
 
@@ -41,7 +41,7 @@ export type PlaceOrderParams = {
 };
 
 // Synthetics OrderType enum 的数字编码(沿用当前 lighter 交易态定义)
-// 对应 orderType 解析规则见 usePrimitOrderSubmit:
+// 对应 orderType 解析规则见 useZanbaraOrderSubmit:
 //   MarketIncrease / MarketDecrease => "market"
 //   LimitIncrease / LimitDecrease  => "limit"
 // 这里只使用 Market/Limit 两类
@@ -68,7 +68,7 @@ function toDecimalString(value: number, fractionDigits = 6): string | undefined 
 }
 
 export function usePlaceOrderAdapter() {
-  const { submitOrder, isReady } = usePrimitOrderSubmit();
+  const { submitOrder, isReady } = useZanbaraOrderSubmit();
   const { selectedSymbol } = useTradeState();
 
   const placeOrder = useCallback(

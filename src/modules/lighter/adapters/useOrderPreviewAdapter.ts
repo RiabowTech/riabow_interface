@@ -157,7 +157,7 @@ function buildSwrKey(
 ): readonly unknown[] | null {
   if (!chainId || !request) return null;
   return [
-    "primit:order-preview",
+    "zanbara:order-preview",
     chainId,
     address ?? "anon",
     request.symbol,

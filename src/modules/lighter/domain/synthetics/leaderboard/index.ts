@@ -96,11 +96,11 @@ export type LeaderboardPosition = LeaderboardPositionBase & {
 };
 
 /**
- * Primit `GET /api/v1/leaderboard/traders` 响应里 `traders` 项形状。
+ * Zanbara `GET /api/v1/leaderboard/traders` 响应里 `traders` 项形状。
  * 与后端 `LeaderboardResponse::traders[*]` 严格对齐
  * (`backend/src/api/handlers/leaderboard_traders.rs`)。
  */
-type PrimitTraderDto = {
+type ZanbaraTraderDto = {
   address: string;
   rank: number;
   realized_pnl: string;
@@ -112,10 +112,10 @@ type PrimitTraderDto = {
   has_rank: boolean;
 };
 
-type PrimitLeaderboardEnvelope = {
+type ZanbaraLeaderboardEnvelope = {
   success: boolean;
   data?: {
-    traders: PrimitTraderDto[];
+    traders: ZanbaraTraderDto[];
     from: number;
     to: number;
     updated_at: string;
@@ -139,7 +139,7 @@ const fetchAccounts = async (
 
   const url = `${base}/api/v1/leaderboard/traders?${params.toString()}`;
 
-  let env: PrimitLeaderboardEnvelope | null = null;
+  let env: ZanbaraLeaderboardEnvelope | null = null;
   try {
     const res = await fetch(url, {
       method: "GET",
@@ -151,7 +151,7 @@ const fetchAccounts = async (
       console.warn(`leaderboard fetch failed: ${res.status}`);
       return [];
     }
-    env = (await res.json()) as PrimitLeaderboardEnvelope;
+    env = (await res.json()) as ZanbaraLeaderboardEnvelope;
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error("leaderboard fetch error", err);
@@ -167,7 +167,7 @@ const fetchAccounts = async (
     return {
       account: t.address,
 
-      // Primit 模型不维护这些 GMX-only 累积量,留 0;
+      // Zanbara 模型不维护这些 GMX-only 累积量,留 0;
       // 对应 selectors / 列(averageSize / averageLeverage / maxCapital / pnlPercentage)
       // 在 LeaderboardAccountsTable 已被砍掉,这里给 0 不会渲染出错。
       cumsumCollateral: 0n,
@@ -183,7 +183,7 @@ const fetchAccounts = async (
       realizedPnl,
       realizedFees,
       volume,
-      // closedCount 仅作为分母在 averageSize selector 里用,Primit 没有"关仓笔数",
+      // closedCount 仅作为分母在 averageSize selector 里用,Zanbara 没有"关仓笔数",
       // 用 wins+losses (= 实现 PnL 事件总数) 近似;由于 averageSize 列也已隐,
       // 这里近似不会被展示,只为防止其它残留消费方除零。
       closedCount: t.wins + t.losses,
@@ -238,7 +238,7 @@ export function useLeaderboardData(
 }
 
 /**
- * Top Positions tab was retired with the move from GMX subsquid to the Primit
+ * Top Positions tab was retired with the move from GMX subsquid to the Zanbara
  * trader-leaderboard backend (no historical position-snapshot infra exists).
  * The UI tab is gone (`LeaderboardContainer.tsx`); this stub stays so any
  * residual import resolves cleanly to an empty list rather than throwing.

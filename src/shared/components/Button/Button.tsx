@@ -1,11 +1,11 @@
 import cx from "classnames";
 import React, { HTMLProps, MouseEvent as ReactMouseEvent, ReactNode, RefObject, useMemo } from "react";
 
-import { Button as PrimitUIButton, type PrimitMainButtonAccent } from "shared/ui/Button/Button";
+import { Button as ZanbaraUIButton, type ZanbaraMainButtonAccent } from "shared/ui/Button/Button";
 import { useDesignSystem } from "shared/context/DesignSystemContext/DesignSystemContext";
 
 import ButtonLink from "./ButtonLink";
-import { buildPrimitIconStart, mapLegacySizeToPrimit, mapLegacyVariantToPrimit } from "./mapLegacyButtonToPrimit";
+import { buildZanbaraIconStart, mapLegacySizeToZanbara, mapLegacyVariantToZanbara } from "./mapLegacyButtonToZanbara";
 
 import "./Button.scss";
 
@@ -24,18 +24,18 @@ type ButtonProps = Omit<HTMLProps<HTMLButtonElement>, "size"> & {
   imgAlt?: string;
   imgClassName?: string;
   /** Primit MainBtn：金 / 青绿强调环（见 `themes/primit/button.primit.css`） */
-  mainAccent?: PrimitMainButtonAccent;
+  mainAccent?: ZanbaraMainButtonAccent;
   newTab?: boolean;
   showExternalLinkArrow?: boolean;
   buttonRef?: RefObject<HTMLButtonElement>;
-  /** `icon` → Primit IconBtn_40（顶栏齿轮等纯图标） */
+  /** `icon` → Zanbara IconBtn_40（顶栏齿轮等纯图标） */
   size?: "small" | "medium" | "controlled" | "icon";
   qa?: string;
 };
 
 /**
- * 默认委托到 `shared/ui/Button`（Primit 稿面）。
- * Primit 界面主题下，内部路由 `to` 使用 Primit `Link`（与纯按钮同形）；外链仍用 `ButtonLink`。
+ * 默认委托到 `shared/ui/Button`（Zanbara 稿面）。
+ * Zanbara 界面主题下，内部路由 `to` 使用 Zanbara `Link`（与纯按钮同形）；外链仍用 `ButtonLink`。
  * Legacy 界面主题下，带 `to` 仍用 `ButtonLink` + SCSS。
  * Storybook 切到 DEX / Prediction / RWA 时由 `Button.storybook-classic-skins.css` 覆盖为产品线经典外形与配色。
  */
@@ -59,15 +59,15 @@ export default function Button({
   qa,
   ...rest
 }: ButtonProps) {
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
 
   const isHttpLikeTo =
     Boolean(to) &&
     (to!.startsWith("http://") || to!.startsWith("https://") || to!.startsWith("//"));
 
-  /** Primit：无路由或与壳同主题的站内 `to` 走 Primit 按钮/链；外链或 Legacy+to 走经典 ButtonLink */
-  const usePrimitUi =
-    variant !== "link" && (!to || (isPrimit && Boolean(to) && !isHttpLikeTo));
+  /** Zanbara：无路由或与壳同主题的站内 `to` 走 Zanbara 按钮/链；外链或 Legacy+to 走经典 ButtonLink */
+  const useZanbaraUi =
+    variant !== "link" && (!to || (isZanbara && Boolean(to) && !isHttpLikeTo));
 
   const classNames = cx("button", variant, className, textAlign, {
     "px-12 py-8 text-[13px] min-h-32": variant === "primary-action" && size === "small",
@@ -97,11 +97,11 @@ export default function Button({
     }
   }
 
-  if (usePrimitUi) {
-    const { style: restStyle, ...restForPrimit } = rest;
-    const primitVariant = mapLegacyVariantToPrimit(variant);
-    const primitSize = mapLegacySizeToPrimit(variant, size);
-    const iconStart = buildPrimitIconStart(imgSrc, imgAlt, imgClassName ? cx("btn-image", imgClassName) : "btn-image");
+  if (useZanbaraUi) {
+    const { style: restStyle, ...restForZanbara } = rest;
+    const zanbaraVariant = mapLegacyVariantToZanbara(variant);
+    const zanbaraSize = mapLegacySizeToZanbara(variant, size);
+    const iconStart = buildZanbaraIconStart(imgSrc, imgAlt, imgClassName ? cx("btn-image", imgClassName) : "btn-image");
     const mergedStyle =
       textAlign && textAlign !== "center"
         ? { ...(typeof restStyle === "object" && restStyle ? restStyle : {}), textAlign }
@@ -110,13 +110,13 @@ export default function Button({
     const routerTo = to && !isHttpLikeTo ? to : undefined;
 
     return (
-      <PrimitUIButton
-        {...restForPrimit}
+      <ZanbaraUIButton
+        {...restForZanbara}
         ref={buttonRef as React.Ref<HTMLButtonElement & HTMLAnchorElement>}
         data-qa={qa}
         type={type}
-        variant={primitVariant}
-        size={primitSize}
+        variant={zanbaraVariant}
+        size={zanbaraSize}
         className={className}
         disabled={disabled}
         onClick={onClick ? handleClick : undefined}
@@ -126,7 +126,7 @@ export default function Button({
         routerTo={routerTo}
       >
         {children}
-      </PrimitUIButton>
+      </ZanbaraUIButton>
     );
   }
 

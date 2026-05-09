@@ -12,7 +12,7 @@ export const PRODUCTION_APP_ORIGIN = (rawAppOrigin?.trim() || "https://app.ztdx.
  * 顶栏品牌 Logo 目标：在「交易应用」源站（与 `PRODUCTION_APP_ORIGIN` 同 origin）时回到营销站根；
  * 其余情况（营销站、本地）保持站内 `/`。
  */
-export function getPrimitBrandLinkHref(): "/" | string {
+export function getZanbaraBrandLinkHref(): "/" | string {
   if (typeof window === "undefined") return "/";
   try {
     if (window.location.origin === PRODUCTION_APP_ORIGIN) {

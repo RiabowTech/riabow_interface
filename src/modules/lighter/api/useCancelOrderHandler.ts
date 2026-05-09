@@ -1,6 +1,6 @@
 import { t } from "@lingui/macro";
 /**
- * Primit Cancel Order Handler Hook
+ * Zanbara Cancel Order Handler Hook
  *
  * This hook provides a unified interface for cancelling orders,
  * with support for both API-based and on-chain cancellation.
@@ -24,7 +24,7 @@ import { useJsonRpcProvider } from "lib/rpc";
 import useWallet from "lib/wallets/useWallet";
 
 import { cancelOrder, batchCancelOrders, isAuthenticated, getNonce, deletePositionTpSl, cancelTriggerOrder } from "./custom/client";
-import { shouldUseApiOrderSubmit } from "./custom/usePrimitOrderSubmit";
+import { shouldUseApiOrderSubmit } from "./custom/useZanbaraOrderSubmit";
 import { useApiOrders } from "./custom/useApiOrders";
 
 export interface UseCancelOrderHandlerResult {
@@ -147,7 +147,7 @@ export function useCancelOrderHandler(): UseCancelOrderHandlerResult {
     [chainId, address, signTypedDataAsync]
   );
 
-  // Cancel via Primit API
+  // Cancel via Zanbara API
   const cancelViaApi = useCallback(
     async (orderKeys: string[]): Promise<void> => {
       if (!isAuthenticated(address, chainId)) {

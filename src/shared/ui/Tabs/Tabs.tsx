@@ -8,15 +8,15 @@ export type TabsProps<V extends BaseOptionValue> = {
   selectedValue: V | undefined;
   onChange?: (value: V) => void;
   size?: "l" | "m";
-  type?: "inline" | "block" | "inline-primary" | "primit-big-tab";
+  type?: "inline" | "block" | "inline-primary" | "zanbara-big-tab";
   className?: string;
   regularOptionClassname?: string;
   qa?: string;
   rightContent?: ReactNode;
   useUnifiedStyle?: boolean;
   hideBlockUnderline?: boolean;
-  /** 未传时由全局 `useDesignSystem().isPrimit` 决定 */
-  unifiedStyleVariant?: "default" | "primit";
+  /** 未传时由全局 `useDesignSystem().isZanbara` 决定 */
+  unifiedStyleVariant?: "default" | "zanbara";
 };
 
 export function Tabs<V extends BaseOptionValue>(props: TabsProps<V>) {

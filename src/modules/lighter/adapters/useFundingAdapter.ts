@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 
 import { useChainId } from "lib/chains";
-import { usePrimitFundingHistory, usePrimitFundingRate } from "modules/lighter/api/hooks";
+import { useZanbaraFundingHistory, useZanbaraFundingRate } from "modules/lighter/api/hooks";
 import { useTradeState } from "modules/lighter/store/TradeStateContext";
 
 import type {
@@ -84,8 +84,8 @@ export function useFundingAdapter(range: FundingRange): FundingViewModel {
   const { selectedSymbol } = useTradeState();
   const symbol = selectedSymbol ?? undefined;
 
-  const { data: currentRate } = usePrimitFundingRate(chainId, symbol);
-  const { data: history } = usePrimitFundingHistory(chainId, symbol, {
+  const { data: currentRate } = useZanbaraFundingRate(chainId, symbol);
+  const { data: history } = useZanbaraFundingHistory(chainId, symbol, {
     period: RANGE_TO_PERIOD[range],
     limit: RANGE_TO_LIMIT[range],
   });

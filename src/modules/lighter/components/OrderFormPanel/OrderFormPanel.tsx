@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import useWallet from "@/shared/lib/wallets/useWallet";
 import { useChainId } from "lib/chains";
-import { useApiMarketDetails, usePrimitUserPositions } from "modules/lighter/api/hooks";
+import { useApiMarketDetails, useZanbaraUserPositions } from "modules/lighter/api/hooks";
 import { useTradeState } from "modules/lighter/store/TradeStateContext";
 
 import { AdvancedOrderForm } from "./AdvancedOrderForm";
@@ -50,7 +50,7 @@ export function OrderFormPanel() {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
-  const { data: positionsData } = usePrimitUserPositions({
+  const { data: positionsData } = useZanbaraUserPositions({
     refreshInterval: 5000,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,

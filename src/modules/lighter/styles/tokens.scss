@@ -1,7 +1,7 @@
 // src/modules/lighter/styles/tokens.scss
 // Tokens extracted from app.lighter.xyz computed styles (2026-04-13).
-// Primit override block at the bottom re-aliases every color/font `--ltr-*`
-// to the corresponding `--primit-*` token when `html[data-ui-theme="primit"]`
+// Zanbara override block at the bottom re-aliases every color/font `--ltr-*`
+// to the corresponding `--zanbara-*` token when `html[data-ui-theme="zanbara"]`
 // is on. Structural sizes (row height, nav height, font-size) stay the same so
 // the trading grid keeps its Lighter-style compact density.
 :root {
@@ -37,7 +37,7 @@
   --ltr-radius: 2px;
   --ltr-cell-pad-x: 8px;
 
-  /** Lighter 交易页强调色（默认稿）；Primit 下由下方块覆写 */
+  /** Lighter 交易页强调色（默认稿）；Zanbara 下由下方块覆写 */
   --ltr-accent-cyan: #4ea7ff;
   --ltr-trade-buy-solid: #159564;
   --ltr-trade-buy-bright: #19be7d;
@@ -52,32 +52,32 @@
 }
 
 /**
- * Primit 主题：交易页强调色 / 涨跌 / 字体对齐 Primit token。
+ * Zanbara 主题：交易页强调色 / 涨跌 / 字体对齐 Zanbara token。
  * 背景 `--ltr-bg-*`、分割 `--ltr-border*` 保持 :root Lighter 值（不覆写）。
  */
-html[data-ui-theme="primit"] {
+html[data-ui-theme="zanbara"] {
   --ltr-text-primary: var(--color-typography-primary);
   --ltr-text-secondary: var(--color-typography-secondary);
-  --ltr-text-muted: var(--primit-soft-50);
-  --ltr-up: var(--primit-others-green);
-  --ltr-down: var(--primit-others-red);
-  --ltr-up-bg: color-mix(in srgb, var(--primit-others-green) 12%, transparent);
-  --ltr-down-bg: color-mix(in srgb, var(--primit-others-red) 12%, transparent);
-  --ltr-warn-bg: color-mix(in srgb, var(--primit-others-red) 22%, transparent);
-  --ltr-font-family: var(--primit-font-body);
+  --ltr-text-muted: var(--zanbara-soft-50);
+  --ltr-up: var(--zanbara-others-green);
+  --ltr-down: var(--zanbara-others-red);
+  --ltr-up-bg: color-mix(in srgb, var(--zanbara-others-green) 12%, transparent);
+  --ltr-down-bg: color-mix(in srgb, var(--zanbara-others-red) 12%, transparent);
+  --ltr-warn-bg: color-mix(in srgb, var(--zanbara-others-red) 22%, transparent);
+  --ltr-font-family: var(--zanbara-font-body);
   --ltr-radius: var(--layout-radius-small-container, 8px);
 
-  --ltr-accent-cyan: var(--primit-primary-1);
-  --ltr-trade-buy-solid: color-mix(in srgb, var(--primit-others-green) 78%, #000000);
-  --ltr-trade-buy-bright: color-mix(in srgb, var(--primit-others-green) 88%, #ffffff);
-  --ltr-trade-buy-mid: var(--primit-others-green);
-  --ltr-trade-buy-mid-soft: color-mix(in srgb, var(--primit-others-green) 72%, #ffffff);
-  --ltr-trade-buy-gradient-start: color-mix(in srgb, var(--primit-others-green) 30%, #000000);
-  --ltr-trade-buy-gradient-end: var(--primit-others-green);
-  --ltr-trade-sell-solid: color-mix(in srgb, var(--primit-others-red) 78%, #000000);
-  --ltr-trade-sell-bright: color-mix(in srgb, var(--primit-others-red) 88%, #ffffff);
-  --ltr-trade-sell-gradient-start: color-mix(in srgb, var(--primit-others-red) 34%, #000000);
-  --ltr-trade-sell-gradient-end: var(--primit-others-red);
+  --ltr-accent-cyan: var(--zanbara-primary-1);
+  --ltr-trade-buy-solid: color-mix(in srgb, var(--zanbara-others-green) 78%, #000000);
+  --ltr-trade-buy-bright: color-mix(in srgb, var(--zanbara-others-green) 88%, #ffffff);
+  --ltr-trade-buy-mid: var(--zanbara-others-green);
+  --ltr-trade-buy-mid-soft: color-mix(in srgb, var(--zanbara-others-green) 72%, #ffffff);
+  --ltr-trade-buy-gradient-start: color-mix(in srgb, var(--zanbara-others-green) 30%, #000000);
+  --ltr-trade-buy-gradient-end: var(--zanbara-others-green);
+  --ltr-trade-sell-solid: color-mix(in srgb, var(--zanbara-others-red) 78%, #000000);
+  --ltr-trade-sell-bright: color-mix(in srgb, var(--zanbara-others-red) 88%, #ffffff);
+  --ltr-trade-sell-gradient-start: color-mix(in srgb, var(--zanbara-others-red) 34%, #000000);
+  --ltr-trade-sell-gradient-end: var(--zanbara-others-red);
 }
 
 [data-ltr-scope] {

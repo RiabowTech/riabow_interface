@@ -165,7 +165,7 @@ export class OracleKeeperFetcher implements OracleFetcher {
   }
 
   fetchTickers(): Promise<TickersResponse> {
-    // Disabled: price data is fetched from Primit API
+    // Disabled: price data is fetched from Zanbara API
     return Promise.resolve([]);
 
     // return fetch(buildUrl(this.url!, "/prices/tickers"))

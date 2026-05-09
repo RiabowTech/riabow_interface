@@ -75,7 +75,7 @@ import { useCollectSyntheticsMetrics } from "./useCollectSyntheticsMetrics";
 import { LeaderboardState, useLeaderboardState } from "./useLeaderboardState";
 import { latestStateRef, StateCtx } from "./utils";
 
-// Primit API Layer - Feature Flag controlled data sources
+// Zanbara API Layer - Feature Flag controlled data sources
 import { shouldUseApiPositions, useApiPositions, shouldUseApiOrders, useApiOrders } from "@/modules/lighter/api";
 import { useTradingMarketsWithTickers } from "@/modules/lighter/api/custom/useTradingMarkets";
 import { MarketInfo, MarketsInfoData } from "domain/synthetics/markets";

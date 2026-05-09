@@ -17,7 +17,7 @@
 
 .subscription-modal .Modal-title {
   color: #fff !important;
-  font-family: var(--primit-font-title) !important;
+  font-family: var(--zanbara-font-title) !important;
   font-size: 20px !important;
   font-weight: 500 !important;
   letter-spacing: 1px !important;
@@ -131,7 +131,7 @@
 
 .subscription-field-label {
   color: rgba(255, 255, 255, 0.75);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -142,7 +142,7 @@
 
 .subscription-field-value {
   color: #fff;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -161,7 +161,7 @@
 
 .subscription-hint {
   color: rgba(255, 255, 255, 0.75);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 1px;
@@ -188,7 +188,7 @@
   border-radius: 10px;
   padding: 10px 14px;
   color: #fff;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 1px;
@@ -213,7 +213,7 @@
   border: none;
   padding: 0;
   color: rgba(255, 255, 255, 0.75);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   font-weight: 300;
   cursor: pointer;
@@ -236,7 +236,7 @@
   border-radius: 8px;
   padding: 12px;
   color: #ef4444;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 13px;
   text-align: center;
 }
@@ -255,7 +255,7 @@
   width: 160px;
   height: 40px;
   padding: 12px 22px !important;
-  font-family: var(--primit-font-title) !important;
+  font-family: var(--zanbara-font-title) !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   letter-spacing: 1px !important;
@@ -304,7 +304,7 @@
 
 .subscription-status-text {
   color: rgba(255, 255, 255, 0.8);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 16px;
   margin: 0;
 }
@@ -345,7 +345,7 @@
 }
 
 .subscription-status-title {
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 24px;
   font-weight: 500;
   margin: 0;
@@ -362,7 +362,7 @@
 
 .subscription-error-detail {
   color: rgba(255, 255, 255, 0.6);
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 14px;
   margin: 0;
   text-align: center;

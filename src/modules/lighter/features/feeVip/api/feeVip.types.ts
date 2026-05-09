@@ -1,7 +1,7 @@
 /**
  * Fee / VIP 摘要 — 与后端约定字段（camelCase 为前端归一化后形态）。
  *
- * - 默认（未设置或 `primit_fee_info`）：Primit `GET /api/v1/account/fee-info`（U 本位 VIP / 手续费），见 Primit 开发者文档。
+ * - 默认（未设置或 `zanbara_fee_info`）：Zanbara `GET /api/v1/account/fee-info`（U 本位 VIP / 手续费），见 Zanbara 开发者文档。
  * - 积分档（`VITE_FEE_VIP_DATA_SOURCE=points_tier`）：`GET /api/v1/points/tier` + 静态 T1–T3。
  * - 旧版：`GET /api/v1/account/fee-vip-summary`（`legacy_fee_summary`）。
  */
@@ -30,7 +30,7 @@ export type FeeVipScheduleKind = "trading_fee_vip" | "points_trading_tier";
 export interface FeeVipTierRow {
   tier: FeeVipTierId;
   /**
-   * 后端档位展示名（如 Primit `fee-info.fee_tiers[].label` 的 `VIP 3`）。
+   * 后端档位展示名（如 Zanbara `fee-info.fee_tiers[].label` 的 `VIP 3`）。
    * 有值时表格优先显示，不再使用前端硬编码的 Bronze/Silver 文案。
    */
   tierDisplayLabel?: string | null;
@@ -49,19 +49,19 @@ export interface FeeVipTierRow {
 /** 当前用户 VIP / 费率快照（未登录时 user 可为 null，仅 tiers 有数据） */
 export interface FeeVipUserSnapshot {
   currentTier: FeeVipTierId;
-  /** Primit `fee-info.current_label` 等，优于纯 `VIP n` */
+  /** Zanbara `fee-info.current_label` 等，优于纯 `VIP n` */
   currentTierLabel?: string | null;
   nextTier: FeeVipTierId | null;
-  /** Primit `progress_to_next.next_label` */
+  /** Zanbara `progress_to_next.next_label` */
   nextTierLabel?: string | null;
   /** 近 14 日折合成交量（USD） */
   rolling14dVolumeUsd: number;
   /** 升至 nextTier 所需的 14D 成交量下限；已满级则为 null */
   nextTierVolumeFloorUsd: number | null;
-  /** VIP 档位基础费率（Primit `current_maker` / `current_taker`），与表格当前档一致 */
+  /** VIP 档位基础费率（Zanbara `current_maker` / `current_taker`），与表格当前档一致 */
   makerFeeBps: number;
   takerFeeBps: number;
-  /** 折后实际费率（Primit `effective_maker` / `effective_taker`）；与档位基础不同时即存在折扣 */
+  /** 折后实际费率（Zanbara `effective_maker` / `effective_taker`）；与档位基础不同时即存在折扣 */
   effectiveMakerFeeBps?: number;
   effectiveTakerFeeBps?: number;
   /** 积分 Tier：如 `T2`，用于标题展示 */

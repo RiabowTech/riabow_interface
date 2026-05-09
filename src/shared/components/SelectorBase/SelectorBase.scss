@@ -5,11 +5,11 @@
 
     cursor: pointer;
 
-    .primit-chevron-rotate {
+    .zanbara-chevron-rotate {
       transition: transform 180ms ease;
     }
 
-    &-open .primit-chevron-rotate {
+    &-open .zanbara-chevron-rotate {
       transform: rotate(180deg);
     }
 

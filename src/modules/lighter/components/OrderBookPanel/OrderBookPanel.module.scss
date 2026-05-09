@@ -78,7 +78,7 @@
   left: 0; right: 0; bottom: 1px; margin: 0 auto;
   width: 52%; max-width: 52px;
   height: 2px; border-radius: 999px;
-  background: var(--primit-primary-1, #87d7ea);
+  background: var(--zanbara-primary-1, #87d7ea);
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   transform: scaleX(0);
   opacity: 0;
@@ -98,7 +98,7 @@
   padding: 0 8px 0 10px;
   background: #14151b;
   /** 主题色 1px · 50% alpha */
-  border-bottom: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 50%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 50%, transparent);
   overflow: visible;
   z-index: 3;
 }

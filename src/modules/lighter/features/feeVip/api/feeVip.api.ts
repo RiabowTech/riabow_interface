@@ -4,7 +4,7 @@ import { getEmptyFeeVipSummary } from "./feeVip.empty";
 import { mapFeeVipSummaryPayload } from "./feeVip.mappers";
 import { getFeeVipMockResponseDto } from "./feeVip.mock";
 import { fetchPointsTierSummary } from "./feeVip.pointsTier";
-import { fetchPrimitFeeInfoSummary } from "./feeVip.primitFeeInfo";
+import { fetchZanbaraFeeInfoSummary } from "./feeVip.zanbaraFeeInfo";
 import type { FeeVipSummary, FeeVipSummaryResponseDto } from "./feeVip.types";
 import { feeVipDataSourceFromEnv, feeVipUseMockFromEnv } from "./feeVipEnv";
 
@@ -47,8 +47,8 @@ export async function fetchFeeVipSummary(
 
   /** 未 Sign / 无 JWT：只走远程接口；个人区不展示（`user: null`）。失败或空档为「空表」，不使用本地参考表。 */
   if (!jwtTrim) {
-    if (source === "primit_fee_info") {
-      const s = await fetchPrimitFeeInfoSummary(chainId, undefined);
+    if (source === "zanbara_fee_info") {
+      const s = await fetchZanbaraFeeInfoSummary(chainId, undefined);
       return { ...s, user: null };
     }
     if (source === "points_tier") {
@@ -62,8 +62,8 @@ export async function fetchFeeVipSummary(
     return fetchPointsTierSummary(chainId, jwtTrim);
   }
 
-  if (source === "primit_fee_info") {
-    return fetchPrimitFeeInfoSummary(chainId, jwtTrim);
+  if (source === "zanbara_fee_info") {
+    return fetchZanbaraFeeInfoSummary(chainId, jwtTrim);
   }
 
   const base = getTradingBackendUrl(chainId);

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { useApiTicker, usePrimitFundingRate, usePrimitMarkets } from "modules/lighter/api/hooks";
+import { useApiTicker, useZanbaraFundingRate, useZanbaraMarkets } from "modules/lighter/api/hooks";
 import { useChainId } from "lib/chains";
 import { useTradeState } from "modules/lighter/store/TradeStateContext";
 
@@ -55,8 +55,8 @@ export function useMarketInfoAdapter(): LighterMarketInfo {
   const { selectedSymbol } = useTradeState();
   const symbol = selectedSymbol?.split("-")[0] ?? "BTC";
   const { ticker } = useApiTicker(chainId, selectedSymbol ?? undefined);
-  const { data: marketsData } = usePrimitMarkets(chainId);
-  const { data: fundingRateData } = usePrimitFundingRate(chainId, selectedSymbol ?? undefined);
+  const { data: marketsData } = useZanbaraMarkets(chainId);
+  const { data: fundingRateData } = useZanbaraFundingRate(chainId, selectedSymbol ?? undefined);
 
   const marketLeverage = useMemo(() => {
     if (!selectedSymbol || !marketsData?.markets?.length) return null;

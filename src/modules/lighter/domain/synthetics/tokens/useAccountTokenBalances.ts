@@ -12,7 +12,7 @@ import {
   useTokensBalancesUpdates,
   useUpdatedTokensBalances,
 } from "@/modules/lighter/context/TokensBalancesContext";
-import { usePrimitUserBalances } from "@/modules/lighter/api";
+import { useZanbaraUserBalances } from "@/modules/lighter/api";
 import { getTokenBySymbol, getV2Tokens } from "sdk/configs/tokens";
 import type { ContractsChainId } from "sdk/configs/chains";
 
@@ -32,7 +32,7 @@ export function useAccountTokenBalances(
   const { enabled = true, refreshInterval } = params ?? {};
 
   // Get balances from REST API
-  const { data: balancesResponse, error, isLoading } = usePrimitUserBalances({
+  const { data: balancesResponse, error, isLoading } = useZanbaraUserBalances({
     refreshInterval,
     revalidateOnFocus: false,
   });

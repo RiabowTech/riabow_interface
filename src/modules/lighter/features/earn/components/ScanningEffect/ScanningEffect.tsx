@@ -35,11 +35,11 @@ export function ScanningEffect({ duration = 2500, onComplete }: ScanningEffectPr
     }, duration);
 
     /**
-     * Primit 壳为顶栏 + 主内容，通常无左侧 `.primit-sidenav`；未检测到侧栏时须为 0，
+     * Zanbara 壳为顶栏 + 主内容，通常无左侧 `.zanbara-sidenav`；未检测到侧栏时须为 0，
      * 否则 CSS 回退 210px 会把整段扫描画在错误偏移上。
      */
     const detectDimensions = () => {
-      const sidebar = document.querySelector(".primit-sidenav");
+      const sidebar = document.querySelector(".zanbara-sidenav");
       if (sidebar) {
         const w = sidebar.getBoundingClientRect().width;
         document.documentElement.style.setProperty("--detected-sidebar-width", `${w > 0.5 ? w : 0}px`);
@@ -58,7 +58,7 @@ export function ScanningEffect({ duration = 2500, onComplete }: ScanningEffectPr
     detectDimensions();
     window.addEventListener("resize", detectDimensions);
 
-    const sidebar = document.querySelector(".primit-sidenav");
+    const sidebar = document.querySelector(".zanbara-sidenav");
     const sidebarObserver = sidebar ? new MutationObserver(detectDimensions) : null;
     if (sidebarObserver && sidebar) {
       sidebarObserver.observe(sidebar, { attributes: true, attributeFilter: ["class"] });

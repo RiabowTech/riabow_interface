@@ -58,7 +58,7 @@ function isSubsquidEnabledRoute(): boolean {
 
 export function getSubsquidGraphClient(chainId: number) {
   // Only enable Subsquid GraphQL for specific routes
-  // Other routes use Primit API for data
+  // Other routes use Zanbara API for data
   if (!isSubsquidEnabledRoute()) {
     return null;
   }

@@ -40,10 +40,10 @@ const LeaderboardBreadcrumbs = () => {
 
 export function LeaderboardPage() {
   const leaderboardPageKey = useLeaderboardPageKey();
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
 
   const tooltipContent = useMemo(() => {
-    const description = leaderboardPageKey === "leaderboard" ? t`Leaderboard for traders on Primit.` : null;
+    const description = leaderboardPageKey === "leaderboard" ? t`Leaderboard for traders on Zanbara.` : null;
 
     return (
       <div>
@@ -52,18 +52,18 @@ export function LeaderboardPage() {
     );
   }, [leaderboardPageKey]);
 
-  if (isPrimit) {
+  if (isZanbara) {
     return (
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">
           <div className="page-layout">
-            <header className="primit-page-hero primit-page-hero--inset">
-              <h1 className="primit-page-hero__title">
+            <header className="zanbara-page-hero zanbara-page-hero--inset">
+              <h1 className="zanbara-page-hero__title">
                 <Trans>Leaderboard</Trans>
               </h1>
-              <p className="primit-page-hero__subtitle">
+              <p className="zanbara-page-hero__subtitle">
                 {leaderboardPageKey === "leaderboard" ? (
-                  <Trans>Leaderboard for traders on Primit.</Trans>
+                  <Trans>Leaderboard for traders on Zanbara.</Trans>
                 ) : (
                   <span aria-hidden className="select-none opacity-0">
                     &nbsp;

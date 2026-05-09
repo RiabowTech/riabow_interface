@@ -1,0 +1,45 @@
+/**
+ * Zanbara · 顶栏网络下拉选项：选中行左侧主色条、弱混底、主色文案与圆点；未选中图标灰阶弱化。
+ */
+html[data-ui-theme="zanbara"] .network-dropdown-items.menu-items .network-dropdown-menu-item--zanbara {
+  border-radius: 0;
+  padding: 10px 14px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+html[data-ui-theme="zanbara"]
+  .network-dropdown-items.menu-items
+  .network-dropdown-menu-item--zanbara:not(.disabled):not(.network-dropdown-menu-item--selected):hover {
+  background: color-mix(in srgb, var(--zanbara-primary-1) 10%, var(--zanbara-secondary-3)) !important;
+  color: var(--zanbara-secondary-1) !important;
+  opacity: 1 !important;
+}
+
+html[data-ui-theme="zanbara"]
+  .network-dropdown-items.menu-items
+  .network-dropdown-menu-item--zanbara.network-dropdown-menu-item--selected {
+  background: color-mix(in srgb, var(--zanbara-primary-1) 14%, var(--zanbara-secondary-3)) !important;
+  box-shadow: inset 3px 0 0 var(--zanbara-primary-1);
+  color: var(--zanbara-primary-1) !important;
+}
+
+html[data-ui-theme="zanbara"]
+  .network-dropdown-items.menu-items
+  .network-dropdown-menu-item--zanbara.network-dropdown-menu-item--selected:not(.disabled):hover {
+  background: color-mix(in srgb, var(--zanbara-primary-1) 20%, var(--zanbara-secondary-3)) !important;
+}
+
+html[data-ui-theme="zanbara"] .network-dropdown-menu-item--zanbara .network-dropdown-menu-item__icon--muted {
+  filter: grayscale(1);
+  opacity: 0.72;
+}
+
+html[data-ui-theme="zanbara"] .network-dropdown-menu-item--zanbara .network-dropdown-menu-item__dot--zanbara {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: var(--zanbara-primary-1);
+  border: none;
+}

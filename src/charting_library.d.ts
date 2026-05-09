@@ -28580,7 +28580,7 @@ export type IBarArray = [
 ];
 export type IBasicDataFeed = IDatafeedChartApi & IExternalDatafeed;
 export type IPineStudyResult = IPineStudyResultTypes<IPineStudyResultSimple>;
-export type IPineStudyResultSimple = StudyPrimitiveResult | ISeriesStudyResult | INonSeriesStudyBarsResult | IProjectionStudyResult | INonSeriesStudyResult;
+export type IPineStudyResultSimple = StudyZanbaraiveResult | ISeriesStudyResult | INonSeriesStudyBarsResult | IProjectionStudyResult | INonSeriesStudyResult;
 export type IPineStudyResultTypes<TPineStudyResultSimple> = TPineStudyResultSimple | PineStudyResultComposite<TPineStudyResultSimple>;
 export type IProjectionBar = [
 	number,
@@ -28770,7 +28770,7 @@ export type StudyPlotValueFormat = StudyPlotValueInheritFormat | StudyPlotValueP
  * * `as-series` - attach the study to the price scale where the main series is attached (it is only applicable the study is added to the pane with the main series)
  */
 export type StudyPriceScale = "new-left" | "new-right" | "no-scale" | "as-series";
-export type StudyPrimitiveResult = (number | StudyResultValueWithOffset)[];
+export type StudyZanbaraiveResult = (number | StudyResultValueWithOffset)[];
 export type SubscribeBarsCallback = (bar: Bar) => void;
 export type SuggestedQtyChangedListener = (newQty: number) => void;
 export type SupportedLineTools = "text" | "anchored_text" | "note" | "anchored_note" | "signpost" | "double_curve" | "arc" | "icon" | "emoji" | "sticker" | "arrow_up" | "arrow_down" | "arrow_left" | "arrow_right" | "price_label" | "price_note" | "arrow_marker" | "flag" | "vertical_line" | "horizontal_line" | "cross_line" | "horizontal_ray" | "trend_line" | "info_line" | "trend_angle" | "arrow" | "ray" | "extended" | "parallel_channel" | "disjoint_angle" | "flat_bottom" | "anchored_vwap" | "pitchfork" | "schiff_pitchfork_modified" | "schiff_pitchfork" | "balloon" | "comment" | "inside_pitchfork" | "pitchfan" | "gannbox" | "gannbox_square" | "gannbox_fixed" | "gannbox_fan" | "fib_retracement" | "fib_trend_ext" | "fib_speed_resist_fan" | "fib_timezone" | "fib_trend_time" | "fib_circles" | "fib_spiral" | "fib_speed_resist_arcs" | "fib_channel" | "xabcd_pattern" | "cypher_pattern" | "abcd_pattern" | "callout" | "triangle_pattern" | "3divers_pattern" | "head_and_shoulders" | "fib_wedge" | "elliott_impulse_wave" | "elliott_triangle_wave" | "elliott_triple_combo" | "elliott_correction" | "elliott_double_combo" | "cyclic_lines" | "time_cycles" | "sine_line" | "long_position" | "short_position" | "forecast" | "date_range" | "price_range" | "date_and_price_range" | "bars_pattern" | "ghost_feed" | "projection" | "rectangle" | "rotated_rectangle" | "circle" | "ellipse" | "triangle" | "polyline" | "path" | "curve" | "cursor" | "dot" | "arrow_cursor" | "eraser" | "measure" | "zoom" | "brush" | "highlighter" | "regression_trend" | "fixed_range_volume_profile";

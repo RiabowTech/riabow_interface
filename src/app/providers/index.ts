@@ -10,7 +10,7 @@
 // Theme Management
 export { ThemeProvider, useTheme, type Theme } from "shared/context/ThemeContext/ThemeContext";
 
-// UI theme (Primit vs Legacy) — `document.documentElement` 上 `data-ui-theme`（颜色亮/暗仍用 `html.dark` + ThemeProvider）
+// UI theme (Zanbara vs Legacy) — `document.documentElement` 上 `data-ui-theme`（颜色亮/暗仍用 `html.dark` + ThemeProvider）
 export {
   DesignSystemProvider,
   useDesignSystem,

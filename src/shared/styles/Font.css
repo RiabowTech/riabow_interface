@@ -79,7 +79,7 @@
     url("../fonts/tthoves/tthoves-pro-medium.ttf") format("truetype");
 }
 
-/* Primit 历史字重：Alternox / Messina / Chakra / Outfit 文件仍在此注册；全局栈见 PrimitTypography.css（Messina Sans） */
+/* Zanbara 历史字重：Alternox / Messina / Chakra / Outfit 文件仍在此注册；全局栈见 ZanbaraTypography.css（Messina Sans） */
 @font-face {
   font-family: "Alternox";
   font-style: normal;
@@ -176,7 +176,7 @@
   src: url("../fonts/messina%20sans/messinasans-black.otf") format("opentype");
 }
 
-/* Primit landing page fonts */
+/* Zanbara landing page fonts */
 @font-face {
   font-family: "Outfit";
   font-style: normal;

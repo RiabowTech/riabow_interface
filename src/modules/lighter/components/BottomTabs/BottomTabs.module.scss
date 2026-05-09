@@ -35,7 +35,7 @@
   left: 0; right: 0; bottom: 1px; margin: 0 auto;
   width: 60%; max-width: 64px;
   height: 2px; border-radius: 999px;
-  background: var(--primit-primary-1, #87d7ea);
+  background: var(--zanbara-primary-1, #87d7ea);
   transform: scaleX(0); opacity: 0;
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
 }
@@ -347,6 +347,6 @@
   font-size: 12px; font-weight: 400;
   padding: 8px 12px;
   /** 主题色 1px · 50% alpha */
-  border-bottom: 1px solid color-mix(in srgb, var(--primit-primary-1, #87d7ea) 50%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--zanbara-primary-1, #87d7ea) 50%, transparent);
 }
 .td { padding: 8px 12px; height: var(--ltr-row-h); font-size: 12px; }

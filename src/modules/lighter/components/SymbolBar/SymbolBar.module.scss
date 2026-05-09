@@ -12,7 +12,7 @@
    *    - Chevron 16 → 14
    *    - gap / padding 全部收紧
    */
-  :global(.primit-ui-button--intent-secondary) {
+  :global(.zanbara-ui-button--intent-secondary) {
     min-height: 32px;
     height: 32px;
     /** min-width: max-content 防止父 flex 压缩 button，导致 chevron 被 border 裁 */
@@ -22,22 +22,22 @@
     padding-inline-end: 10px;
   }
   /* TokenIcon（.Token-icon 带 inline rounded-full） → 14×14 */
-  :global(.primit-ui-button--intent-secondary .Token-icon) {
+  :global(.zanbara-ui-button--intent-secondary .Token-icon) {
     width: 14px !important;
     height: 14px !important;
   }
   /* 主标 BTC/USD → 11px */
-  :global(.primit-ui-button--intent-secondary .text-typography-primary) {
+  :global(.zanbara-ui-button--intent-secondary .text-typography-primary) {
     font-size: 11px;
     line-height: 1.2;
   }
   /* 次标 [BTC-USDT] → 10px */
-  :global(.primit-ui-button--intent-secondary .text-typography-secondary) {
+  :global(.zanbara-ui-button--intent-secondary .text-typography-secondary) {
     font-size: 10px;
     line-height: 1.2;
   }
   /* ChevronDownIcon 16 → 14 */
-  :global(.primit-ui-button--intent-secondary svg) {
+  :global(.zanbara-ui-button--intent-secondary svg) {
     flex-shrink: 0;
     width: 14px;
     height: 14px;
@@ -52,8 +52,8 @@
   background: var(--ltr-bg-root);
 }
 /**
- * Primit 市场选择器：左侧 cyan accent 竖条 + "BASE/QUOTE" 主标 + "[BASE-USDT]" 次标。
- * 颜色全部走 --ltr-* token（已在 tokens.scss primit override 块里指向 --primit-*）。
+ * Zanbara 市场选择器：左侧 cyan accent 竖条 + "BASE/QUOTE" 主标 + "[BASE-USDT]" 次标。
+ * 颜色全部走 --ltr-* token（已在 tokens.scss zanbara override 块里指向 --zanbara-*）。
  */
 .symbol {
   position: relative;
@@ -62,9 +62,9 @@
   padding: 0 12px 0 18px;
   font-size: 14px; font-weight: 500;
   color: var(--ltr-text-primary);
-  /** 与 interface_copy 一致：父 module 用 `--primit-trade-module-bg`，按钮本身透明；
+  /** 与 interface_copy 一致：父 module 用 `--zanbara-trade-module-bg`，按钮本身透明；
    *  这里直接把 module bg 贴到按钮上，避免再引入额外 token 分叉 */
-  background: var(--primit-trade-module-bg);
+  background: var(--zanbara-trade-module-bg);
   border: 0;
   border-radius: var(--layout-radius-8, 8px);
   cursor: pointer;
@@ -78,12 +78,12 @@
   top: 8px;
   bottom: 8px;
   width: 2px;
-  background: var(--primit-primary-1, #87d7ea);
+  background: var(--zanbara-primary-1, #87d7ea);
   border-radius: 2px;
 }
 .symbol:hover {
-  /** 保持透视：在 module bg 上叠一层 primit-soft overlay（与 3013 hover 行为一致） */
-  background: color-mix(in srgb, var(--primit-soft-5) 100%, var(--primit-trade-module-bg));
+  /** 保持透视：在 module bg 上叠一层 zanbara-soft overlay（与 3013 hover 行为一致） */
+  background: color-mix(in srgb, var(--zanbara-soft-5) 100%, var(--zanbara-trade-module-bg));
 }
 .symbol:hover,
 .symbol:focus,
@@ -102,7 +102,7 @@
   border-radius: 50%;
 }
 .pairName {
-  font-family: var(--primit-font-title, var(--ltr-font-family));
+  font-family: var(--zanbara-font-title, var(--ltr-font-family));
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.02em;
@@ -110,7 +110,7 @@
   white-space: nowrap;
 }
 .instId {
-  font-family: var(--primit-font-body, var(--ltr-font-family));
+  font-family: var(--zanbara-font-body, var(--ltr-font-family));
   font-weight: 400;
   font-size: 12px;
   color: var(--ltr-text-secondary);

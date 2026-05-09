@@ -31,7 +31,7 @@ if (!WALLET_CONNECT_PROJECT_ID) {
   );
 }
 
-const APP_NAME = "Primit";
+const APP_NAME = "Zanbara";
 
 const popularWalletList: WalletList = [
   {

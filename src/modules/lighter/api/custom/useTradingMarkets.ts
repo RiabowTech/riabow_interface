@@ -1,7 +1,7 @@
 /**
  * useTradingMarkets - Hook for fetching market data from backend API
  *
- * This hook fetches markets and tickers from the Primit backend and
+ * This hook fetches markets and tickers from the Zanbara backend and
  * provides the data in a format suitable for the trading page UI.
  */
 

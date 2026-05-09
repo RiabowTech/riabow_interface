@@ -4,18 +4,18 @@ import { useLocation } from "react-router-dom";
 import { APP_UI_THEME_MODE_KEY } from "config/localStorage";
 import { useTheme } from "shared/context/ThemeContext/ThemeContext";
 import { useLocalStorageSerializeKey } from "lib/localStorage";
-import { isPrimitAppShellPath } from "shared/lib/isPrimitAppShellPath";
+import { isZanbaraAppShellPath } from "shared/lib/isZanbaraAppShellPath";
 
-export type DesignSystem = "primit" | "legacy";
-export type DesignSystemMode = "auto" | "primit" | "legacy";
+export type DesignSystem = "zanbara" | "legacy";
+export type DesignSystemMode = "auto" | "zanbara" | "legacy";
 
 export type DesignSystemContextValue = {
   /** 当前解析后的界面体系（路由 + 可选用户覆盖） */
   designSystem: DesignSystem;
-  isPrimit: boolean;
-  /** 与 `ThemeProvider` 一致：Primit 色板在 `PrimitColors.css` 中随 `html.dark` 切换 */
+  isZanbara: boolean;
+  /** 与 `ThemeProvider` 一致：Zanbara 色板在 `ZanbaraColors.css` 中随 `html.dark` 切换 */
   colorScheme: "light" | "dark";
-  /** `auto` = 按 `isPrimitAppShellPath`；`primit` / `legacy` 为全局强制，供后续设置页切换 */
+  /** `auto` = 按 `isZanbaraAppShellPath`；`zanbara` / `legacy` 为全局强制，供后续设置页切换 */
   designSystemMode: DesignSystemMode;
   setDesignSystemMode: (mode: DesignSystemMode) => void;
 };
@@ -33,7 +33,7 @@ function readDesignSystemFromDom(): DesignSystem {
   if (typeof document === "undefined") {
     return "legacy";
   }
-  return document.documentElement.getAttribute("data-ui-theme") === "primit" ? "primit" : "legacy";
+  return document.documentElement.getAttribute("data-ui-theme") === "zanbara" ? "zanbara" : "legacy";
 }
 
 function noopSetMode(_mode: DesignSystemMode) {
@@ -44,7 +44,7 @@ function getFallbackDesignSystemValue(): DesignSystemContextValue {
   const designSystem = readDesignSystemFromDom();
   return {
     designSystem,
-    isPrimit: designSystem === "primit",
+    isZanbara: designSystem === "zanbara",
     colorScheme: readInitialColorScheme(),
     designSystemMode: "auto",
     setDesignSystemMode: noopSetMode,
@@ -70,13 +70,13 @@ export function DesignSystemProvider({ children }: { children: ReactNode }) {
   const mode = designSystemMode ?? "auto";
 
   const designSystem: DesignSystem = useMemo(() => {
-    if (mode === "primit") {
-      return "primit";
+    if (mode === "zanbara") {
+      return "zanbara";
     }
     if (mode === "legacy") {
       return "legacy";
     }
-    return isPrimitAppShellPath(pathname) ? "primit" : "legacy";
+    return isZanbaraAppShellPath(pathname) ? "zanbara" : "legacy";
   }, [mode, pathname]);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export function DesignSystemProvider({ children }: { children: ReactNode }) {
   const value = useMemo<DesignSystemContextValue>(
     () => ({
       designSystem,
-      isPrimit: designSystem === "primit",
+      isZanbara: designSystem === "zanbara",
       colorScheme,
       designSystemMode: mode,
       setDesignSystemMode,

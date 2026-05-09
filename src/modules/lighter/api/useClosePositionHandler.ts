@@ -1,6 +1,6 @@
 import { t } from "@lingui/macro";
 /**
- * Primit Close Position Handler Hook
+ * Zanbara Close Position Handler Hook
  *
  * This hook provides a unified interface for closing positions,
  * with support for both API-based and on-chain closure.
@@ -18,7 +18,7 @@ import { helperToast } from "lib/helperToast";
 
 // Use custom client with address-specific authentication
 import { closePosition, isAuthenticated, CreateOrderResponse } from "./custom/client";
-import { shouldUseApiOrderSubmit } from "./custom/usePrimitOrderSubmit";
+import { shouldUseApiOrderSubmit } from "./custom/useZanbaraOrderSubmit";
 import type { ClosePositionRequest } from "./types";
 
 export interface UseClosePositionHandlerResult {

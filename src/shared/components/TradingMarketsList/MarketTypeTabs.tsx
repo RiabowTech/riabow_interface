@@ -1,7 +1,7 @@
 /**
  * MarketTypeTabs - Dynamic market type tabs
  *
- * 与 TradeBox 订单类型一致：Primit 用普通 block Tab（底部分割线 + 指示条），Legacy 用 inline；
+ * 与 TradeBox 订单类型一致：Zanbara 用普通 block Tab（底部分割线 + 指示条），Legacy 用 inline；
  * 容器背景与下拉内表头同为 slate-900。
  */
 
@@ -44,7 +44,7 @@ export function MarketTypeTabs({
   className,
 }: MarketTypeTabsProps) {
   const { i18n } = useLingui();
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
 
   const marketTypes = useMemo(() => {
     const types = new Set<string>();
@@ -76,7 +76,7 @@ export function MarketTypeTabs({
     [tabOptionValues, i18n],
   );
 
-  const usePrimitBlock = isPrimit;
+  const useZanbaraBlock = isZanbara;
 
   return (
     <div className={cx("min-w-0 bg-slate-900", className)}>
@@ -84,11 +84,11 @@ export function MarketTypeTabs({
         options={tabsOptions}
         selectedValue={selectedTab}
         onChange={(v) => onTabChange(v as TokenFavoritesTabOption)}
-        type={usePrimitBlock ? "block" : "inline"}
+        type={useZanbaraBlock ? "block" : "inline"}
         qa="trade-market-type-tabs"
-        className={cx("bg-slate-900 text-13", usePrimitBlock && "min-w-0 !rounded-none")}
+        className={cx("bg-slate-900 text-13", useZanbaraBlock && "min-w-0 !rounded-none")}
         regularOptionClassname={
-          usePrimitBlock ? "min-w-0 shrink-0 whitespace-nowrap px-8" : "shrink-0 whitespace-nowrap"
+          useZanbaraBlock ? "min-w-0 shrink-0 whitespace-nowrap px-8" : "shrink-0 whitespace-nowrap"
         }
       />
     </div>

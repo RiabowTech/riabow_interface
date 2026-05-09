@@ -14,7 +14,7 @@
   gap: 8px;
   height: 100%;
   padding: 0 8px;
-  color: var(--primit-header-wordmark, #ffffff);
+  color: var(--zanbara-header-wordmark, #ffffff);
   outline: none;
 }
 
@@ -83,8 +83,8 @@
 
 /* === lighter.xyz 风格：所有右侧按钮统一为 4px 圆角 + 实心 slate-800 填充 === */
 
-/* 统一所有 primit-ui-button 子类的外观（main-40 / icon-40 / 其它） */
-.rightDense :global(.primit-ui-button) {
+/* 统一所有 zanbara-ui-button 子类的外观（main-40 / icon-40 / 其它） */
+.rightDense :global(.zanbara-ui-button) {
   border-radius: 4px !important;
   background-color: #1e293b !important; /* dark surface */
   background-image: none !important;
@@ -93,14 +93,14 @@
   transition: background-color 0.15s ease !important;
 }
 
-.rightDense :global(.primit-ui-button:hover:not(:disabled)) {
+.rightDense :global(.zanbara-ui-button:hover:not(:disabled)) {
   background-color: #8A6C00 !important; /* dark gold */
   background-image: none !important;
 }
 
-/* 移除 Primit MainBtn 左侧竖线装饰 */
-.rightDense :global(.primit-ui-button::before),
-.rightDense :global(.primit-ui-button::after) {
+/* 移除 Zanbara MainBtn 左侧竖线装饰 */
+.rightDense :global(.zanbara-ui-button::before),
+.rightDense :global(.zanbara-ui-button::after) {
   content: none !important;
   display: none !important;
   width: 0 !important;
@@ -111,20 +111,20 @@
   border: 0 !important;
 }
 
-/* 内层容器清掉 Primit 主题里的内框 / hover 收缩 / 渐变 */
-.rightDense :global(.primit-ui-button .primit-ui-button__inner) {
+/* 内层容器清掉 Zanbara 主题里的内框 / hover 收缩 / 渐变 */
+.rightDense :global(.zanbara-ui-button .zanbara-ui-button__inner) {
   border: 0 !important;
   padding: 0 !important;
   background: transparent !important;
 }
 
-.rightDense :global(.primit-ui-button:hover:not(:disabled) .primit-ui-button__inner) {
+.rightDense :global(.zanbara-ui-button:hover:not(:disabled) .zanbara-ui-button__inner) {
   padding: 0 !important;
   border-color: transparent !important;
 }
 
 /* 文本按钮 (Globe / SIGN) 尺寸 */
-.rightDense :global(.primit-ui-button--main-40) {
+.rightDense :global(.zanbara-ui-button--main-40) {
   min-height: 32px;
   height: 32px;
   padding: 0 12px !important;
@@ -133,7 +133,7 @@
 }
 
 /* 图标按钮 (Wallet / OneClick / 其它 size=icon) 尺寸 */
-.rightDense :global(.primit-ui-button--icon-40) {
+.rightDense :global(.zanbara-ui-button--icon-40) {
   width: 32px;
   height: 32px;
   min-width: 32px;
@@ -141,20 +141,20 @@
   padding: 0 !important;
 }
 
-.rightDense :global(.primit-ui-button--icon-40 .primit-ui-button__icon--solo svg),
-.rightDense :global(.primit-ui-button--icon-40 .primit-ui-button__icon svg) {
+.rightDense :global(.zanbara-ui-button--icon-40 .zanbara-ui-button__icon--solo svg),
+.rightDense :global(.zanbara-ui-button--icon-40 .zanbara-ui-button__icon svg) {
   width: 16px;
   height: 16px;
 }
 
 /* 隐藏 lighter 风格不要的 L 形角饰 */
-.rightDense :global(.primit-corner-bracket-frame) {
+.rightDense :global(.zanbara-corner-bracket-frame) {
   display: inline-flex;
   vertical-align: middle;
 }
 
-.rightDense :global(.primit-corner-bracket-frame__corners),
-.rightDense :global(.primit-corner-bracket-frame__corner) {
+.rightDense :global(.zanbara-corner-bracket-frame__corners),
+.rightDense :global(.zanbara-corner-bracket-frame__corner) {
   display: none !important;
 }
 
@@ -285,7 +285,7 @@
 
   &:hover {
     background: var(--ltr-overlay-soft);
-    color: var(--primit-primary-1, var(--ltr-text-primary));
+    color: var(--zanbara-primary-1, var(--ltr-text-primary));
   }
 
   &:disabled {
@@ -295,5 +295,5 @@
 }
 
 .langItemActive {
-  color: var(--primit-primary-1, var(--ltr-text-primary));
+  color: var(--zanbara-primary-1, var(--ltr-text-primary));
 }

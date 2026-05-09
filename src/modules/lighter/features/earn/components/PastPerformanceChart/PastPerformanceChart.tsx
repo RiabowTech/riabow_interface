@@ -82,7 +82,7 @@ export function PastPerformanceChart({ completedStrategies }: PastPerformanceCha
 
   return (
     <div className="strategy-card border-1/2 border-slate-700 p-24 max-md:p-16">
-      <h3 className="earn-accent-text text-h3 m-0 mb-20 font-primitTitle max-md:text-body-large">
+      <h3 className="earn-accent-text text-h3 m-0 mb-20 font-zanbaraTitle max-md:text-body-large">
         <Trans>Past Performance</Trans>
       </h3>
       <div className=" ">
@@ -97,14 +97,14 @@ export function PastPerformanceChart({ completedStrategies }: PastPerformanceCha
               angle={chartData.length > 5 ? -45 : 0}
               textAnchor={chartData.length > 5 ? "end" : "middle"}
               dy={chartData.length > 5 ? 5 : 0}
-              tick={{ fill: "rgba(255, 255, 255, 1)", fontSize: chartData.length > 10 ? 10 : 12, fontFamily: "var(--primit-font-body)" }}
+              tick={{ fill: "rgba(255, 255, 255, 1)", fontSize: chartData.length > 10 ? 10 : 12, fontFamily: "var(--zanbara-font-body)" }}
             />
             <YAxis
               domain={[yMin, yMax]}
               ticks={yTicks}
               orientation="right"
               tickMargin={20}
-              tick={{ fill: "rgba(255, 255, 255,0.75)", fontSize: 12, fontFamily: "var(--primit-font-body)" }}
+              tick={{ fill: "rgba(255, 255, 255,0.75)", fontSize: 12, fontFamily: "var(--zanbara-font-body)" }}
               tickFormatter={(value) => `${value}%`}
               label={{
                 value: "APY",
@@ -114,7 +114,7 @@ export function PastPerformanceChart({ completedStrategies }: PastPerformanceCha
                 style: {
                   fill: "rgba(255, 255, 255,0.75)",
                   fontSize: 12,
-                  fontFamily: "var(--primit-font-body)",
+                  fontFamily: "var(--zanbara-font-body)",
                   letterSpacing: "1px",
                 },
               }}
@@ -131,14 +131,14 @@ export function PastPerformanceChart({ completedStrategies }: PastPerformanceCha
               labelStyle={{
                 color: accent,
                 marginBottom: "8px",
-                fontFamily: "var(--primit-font-body)",
+                fontFamily: "var(--zanbara-font-body)",
                 fontSize: "14px",
                 fontWeight: "500",
                 letterSpacing: "0.5px",
               }}
               itemStyle={{
                 color: "#fff",
-                fontFamily: "var(--primit-font-body)",
+                fontFamily: "var(--zanbara-font-body)",
                 fontSize: "16px",
                 fontWeight: "600",
               }}
@@ -169,7 +169,7 @@ export function PastPerformanceChart({ completedStrategies }: PastPerformanceCha
                       textAnchor="middle"
                       fontSize="14px"
                       fontWeight="300"
-                      fontFamily="var(--primit-font-body)"
+                      fontFamily="var(--zanbara-font-body)"
                     >
                       {displayValue}
                     </text>

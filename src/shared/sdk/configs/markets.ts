@@ -160,7 +160,7 @@ export const MARKETS: Record<ContractsChainId, Record<string, MarketConfig>> = {
       longTokenAddress: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
       shortTokenAddress: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
     },
-    // Primit/USD market
+    // Zanbara/USD market
     "0x55391D178Ce46e7AC8eaAEa50A72D1A5a8A622Da": {
       marketTokenAddress: "0x55391D178Ce46e7AC8eaAEa50A72D1A5a8A622Da",
       indexTokenAddress: "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
@@ -370,7 +370,7 @@ export const MARKETS: Record<ContractsChainId, Record<string, MarketConfig>> = {
       longTokenAddress: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
       shortTokenAddress: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
     },
-    // Primit
+    // Zanbara
     "0xbD48149673724f9cAeE647bb4e9D9dDaF896Efeb": {
       marketTokenAddress: "0xbD48149673724f9cAeE647bb4e9D9dDaF896Efeb",
       indexTokenAddress: "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",

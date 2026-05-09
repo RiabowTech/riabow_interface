@@ -95,7 +95,7 @@ export function getIsSubaccountActive(subaccount: {
  * moving the signing operation out of the renderer (service worker + HttpOnly
  * session, or wallet-held subaccount). Tracked for a follow-up refactor.
  */
-const SUBACCOUNT_KEK_PREFIX = "primit_subaccount_kek_";
+const SUBACCOUNT_KEK_PREFIX = "zanbara_subaccount_kek_";
 
 function normalizeAccount(account: string): string {
   return account.toLowerCase();

@@ -5,7 +5,7 @@ import cx from "classnames";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import { usePrimitAuth } from "@/modules/lighter/api/custom/usePrimitAuth";
+import { useZanbaraAuth } from "@/modules/lighter/api/custom/useZanbaraAuth";
 import { useSettings } from "@/modules/lighter/context/SettingsContext";
 import { useTradingAccountModalOpen } from "@/modules/lighter/context/TradingAccountContext";
 import logoIcon from "@/shared/img/logo-icon.png";
@@ -22,7 +22,7 @@ import WalletIcon from "img/ic_wallet.svg?react";
 import styles from "./TopNav.module.scss";
 
 /**
- * 顺序/命名与 3013 PrimitTradeHeaderNav 一致。label 全大写由 SCSS 的
+ * 顺序/命名与 3013 ZanbaraTradeHeaderNav 一致。label 全大写由 SCSS 的
  * `.link { text-transform: uppercase }` 统一处理，这里保留 Title case 原文。
  */
 const NAV_ITEMS: {
@@ -51,7 +51,7 @@ export function TopNav() {
   const { setIsSettingsVisible } = useSettings();
   const [, setTradingAccountModalOpen] = useTradingAccountModalOpen();
   const { openConnectModal, connectModalOpen } = useConnectModal();
-  const { isAuthenticated, isAuthenticating, authenticate, clearError } = usePrimitAuth();
+  const { isAuthenticated, isAuthenticating, authenticate, clearError } = useZanbaraAuth();
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [isLanguageSwitching, setIsLanguageSwitching] = useState(false);
   const languageRef = useRef<HTMLDivElement>(null);

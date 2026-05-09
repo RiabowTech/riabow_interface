@@ -53,53 +53,53 @@ const defaultConfig: SWRConfiguration = {
 // ============================================
 // Market Hooks
 // ============================================
-export function usePrimitMarkets(chainId: number | undefined, config?: SWRConfiguration) {
+export function useZanbaraMarkets(chainId: number | undefined, config?: SWRConfiguration) {
   return useSWR<{ markets: Market[]; total: number }>(
-    chainId ? [`primit-markets`, chainId] : null,
+    chainId ? [`zanbara-markets`, chainId] : null,
     () => getMarkets(chainId!),
     { ...defaultConfig, ...config }
   );
 }
 
-export function usePrimitOrderbook(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+export function useZanbaraOrderbook(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
   return useSWR<Orderbook>(
-    chainId && symbol ? [`primit-orderbook`, chainId, symbol] : null,
+    chainId && symbol ? [`zanbara-orderbook`, chainId, symbol] : null,
     () => getOrderbook(chainId!, symbol!),
     { ...defaultConfig, refreshInterval: 1000, ...config }
   );
 }
 
-export function usePrimitTicker(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+export function useZanbaraTicker(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
   return useSWR<Ticker>(
-    chainId && symbol ? [`primit-ticker`, chainId, symbol] : null,
+    chainId && symbol ? [`zanbara-ticker`, chainId, symbol] : null,
     () => getTicker(chainId!, symbol!),
     { ...defaultConfig, refreshInterval: 2000, dedupingInterval: 1000, ...config }
   );
 }
 
-export function usePrimitMarketDetails(
+export function useZanbaraMarketDetails(
   chainId: number | undefined,
   symbol: string | undefined,
   config?: SWRConfiguration
 ) {
   return useSWR<MarketDetailsResponse>(
-    chainId && symbol ? [`primit-market-details`, chainId, symbol] : null,
+    chainId && symbol ? [`zanbara-market-details`, chainId, symbol] : null,
     () => getMarketDetails(chainId!, symbol!),
     { ...defaultConfig, ...config }
   );
 }
 
-export function usePrimitTrades(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+export function useZanbaraTrades(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
   return useSWR<{ symbol: string; trades: Trade[] }>(
-    chainId && symbol ? [`primit-trades`, chainId, symbol] : null,
+    chainId && symbol ? [`zanbara-trades`, chainId, symbol] : null,
     () => getTrades(chainId!, symbol!),
     { ...defaultConfig, refreshInterval: 1000, ...config }
   );
 }
 
-export function usePrimitPrice(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+export function useZanbaraPrice(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
   return useSWR<PriceResponse>(
-    chainId && symbol ? [`primit-price`, chainId, symbol] : null,
+    chainId && symbol ? [`zanbara-price`, chainId, symbol] : null,
     () => getPrice(chainId!, symbol!),
     { ...defaultConfig, refreshInterval: 1000, ...config }
   );
@@ -108,23 +108,23 @@ export function usePrimitPrice(chainId: number | undefined, symbol: string | und
 // ============================================
 // Funding Rate Hooks
 // ============================================
-export function usePrimitFundingRates(chainId: number | undefined, config?: SWRConfiguration) {
+export function useZanbaraFundingRates(chainId: number | undefined, config?: SWRConfiguration) {
   return useSWR<{ rates: FundingRate[] }>(
-    chainId ? [`primit-funding-rates`, chainId] : null,
+    chainId ? [`zanbara-funding-rates`, chainId] : null,
     () => getAllFundingRates(chainId!),
     { ...defaultConfig, refreshInterval: 30000, ...config }
   );
 }
 
-export function usePrimitFundingRate(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+export function useZanbaraFundingRate(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
   return useSWR<FundingRate>(
-    chainId && symbol ? [`primit-funding-rate`, chainId, symbol] : null,
+    chainId && symbol ? [`zanbara-funding-rate`, chainId, symbol] : null,
     () => getFundingRate(chainId!, symbol!),
     { ...defaultConfig, refreshInterval: 30000, ...config }
   );
 }
 
-export function usePrimitFundingHistory(
+export function useZanbaraFundingHistory(
   chainId: number | undefined,
   symbol: string | undefined,
   params?: { period?: string; limit?: number },
@@ -133,7 +133,7 @@ export function usePrimitFundingHistory(
   const period = params?.period;
   const limit = params?.limit;
   return useSWR<FundingHistory[]>(
-    chainId && symbol ? [`primit-funding-history`, chainId, symbol, period, limit] : null,
+    chainId && symbol ? [`zanbara-funding-history`, chainId, symbol, period, limit] : null,
     () => getFundingHistory(chainId!, symbol!, params),
     { ...defaultConfig, ...config }
   );
@@ -142,28 +142,28 @@ export function usePrimitFundingHistory(
 // ============================================
 // Referral Hooks (`GET /referral/dashboard` → 映射为 OnChainDashboard)
 // ============================================
-export function usePrimitOnChainDashboard(
+export function useZanbaraOnChainDashboard(
   chainId: number | undefined,
   address: string | undefined,
   config?: SWRConfiguration
 ) {
   return useSWR<OnChainDashboard>(
-    chainId && address ? [`primit-onchain-dashboard`, chainId, address] : null,
+    chainId && address ? [`zanbara-onchain-dashboard`, chainId, address] : null,
     () => getOnChainDashboard(chainId!, address!),
     { ...defaultConfig, ...config }
   );
 }
 
-export function usePrimitClaimable(chainId: number | undefined, address: string | undefined, config?: SWRConfiguration) {
+export function useZanbaraClaimable(chainId: number | undefined, address: string | undefined, config?: SWRConfiguration) {
   return useSWR<ClaimableAmount>(
-    chainId && address ? [`primit-claimable`, chainId, address] : null,
+    chainId && address ? [`zanbara-claimable`, chainId, address] : null,
     () => getOnChainClaimable(chainId!, address!),
     { ...defaultConfig, ...config }
   );
 }
 
-export function usePrimitOperatorStatus(chainId: number | undefined, config?: SWRConfiguration) {
-  return useSWR<OperatorStatus>(chainId ? [`primit-operator-status`, chainId] : null, () => getOperatorStatus(chainId!), {
+export function useZanbaraOperatorStatus(chainId: number | undefined, config?: SWRConfiguration) {
+  return useSWR<OperatorStatus>(chainId ? [`zanbara-operator-status`, chainId] : null, () => getOperatorStatus(chainId!), {
     ...defaultConfig,
     ...config,
   });
@@ -172,22 +172,22 @@ export function usePrimitOperatorStatus(chainId: number | undefined, config?: SW
 // ============================================
 // Combined Hooks (with wallet)
 // ============================================
-export function usePrimitUserDashboard(config?: SWRConfiguration) {
+export function useZanbaraUserDashboard(config?: SWRConfiguration) {
   const { address, chainId } = useAccount();
-  return usePrimitOnChainDashboard(chainId, address, config);
+  return useZanbaraOnChainDashboard(chainId, address, config);
 }
 
-export function usePrimitUserClaimable(config?: SWRConfiguration) {
+export function useZanbaraUserClaimable(config?: SWRConfiguration) {
   const { address, chainId } = useAccount();
-  return usePrimitClaimable(chainId, address, config);
+  return useZanbaraClaimable(chainId, address, config);
 }
 
 // ============================================
 // Utility: Check if backend is available
 // ============================================
-export function usePrimitBackendStatus(chainId: number | undefined) {
+export function useZanbaraBackendStatus(chainId: number | undefined) {
   return useSWR<boolean>(
-    chainId ? [`primit-backend-status`, chainId] : null,
+    chainId ? [`zanbara-backend-status`, chainId] : null,
     async () => {
       try {
         const baseUrl = getServerBaseUrl(chainId!);
@@ -204,31 +204,31 @@ export function usePrimitBackendStatus(chainId: number | undefined) {
 // ============================================
 // Protected Account Hooks (Requires Auth)
 // ============================================
-export function usePrimitPositions(chainId: number | undefined, config?: SWRConfiguration) {
+export function useZanbaraPositions(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<PositionsResponse>(
-    chainId && authenticated && address ? [`primit-positions`, chainId, address] : null,
+    chainId && authenticated && address ? [`zanbara-positions`, chainId, address] : null,
     () => getPositions(chainId!, address),
     { ...defaultConfig, refreshInterval: 2000, ...config }
   );
 }
 
-export function usePrimitOrders(chainId: number | undefined, config?: SWRConfiguration) {
+export function useZanbaraOrders(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<OrdersResponse>(
-    chainId && authenticated && address ? [`primit-orders`, chainId, address] : null,
+    chainId && authenticated && address ? [`zanbara-orders`, chainId, address] : null,
     () => getOrders(chainId!, address),
     { ...defaultConfig, refreshInterval: 5000, ...config }
   );
 }
 
-export function usePrimitBalances(chainId: number | undefined, config?: SWRConfiguration) {
+export function useZanbaraBalances(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<BalancesResponse>(
-    chainId && authenticated && address ? [`primit-balances`, chainId, address] : null,
+    chainId && authenticated && address ? [`zanbara-balances`, chainId, address] : null,
     () => getBalances(chainId!, address),
     {
       ...defaultConfig,
@@ -237,7 +237,7 @@ export function usePrimitBalances(chainId: number | undefined, config?: SWRConfi
       onError: (error: any, key: string, swrConfig: any) => {
         // Handle 401 errors by clearing token
         if (error?.status === 401 || error?.message?.includes("401") || error?.message?.includes("Unauthorized")) {
-          console.warn(" 401 error in usePrimitBalances, token will be cleared by apiFetch");
+          console.warn(" 401 error in useZanbaraBalances, token will be cleared by apiFetch");
           // Token is already cleared in apiFetch, but we can trigger re-authentication if needed
         }
         // Call custom onError if provided
@@ -249,11 +249,11 @@ export function usePrimitBalances(chainId: number | undefined, config?: SWRConfi
   );
 }
 
-export function usePrimitUnifiedAccount(chainId: number | undefined, config?: SWRConfiguration) {
+export function useZanbaraUnifiedAccount(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<UnifiedAccountResponse>(
-    chainId && authenticated && address ? [`primit-unified-account`, chainId, address] : null,
+    chainId && authenticated && address ? [`zanbara-unified-account`, chainId, address] : null,
     () => getUnifiedAccount(chainId!, address),
     {
       ...defaultConfig,
@@ -266,45 +266,45 @@ export function usePrimitUnifiedAccount(chainId: number | undefined, config?: SW
 // ============================================
 // Combined User Hooks (with wallet)
 // ============================================
-export function usePrimitUserPositions(config?: SWRConfiguration) {
+export function useZanbaraUserPositions(config?: SWRConfiguration) {
   const { chainId } = useAccount();
-  return usePrimitPositions(chainId, config);
+  return useZanbaraPositions(chainId, config);
 }
 
-export function usePrimitUserOrders(config?: SWRConfiguration) {
+export function useZanbaraUserOrders(config?: SWRConfiguration) {
   const { chainId } = useAccount();
-  return usePrimitOrders(chainId, config);
+  return useZanbaraOrders(chainId, config);
 }
 
-export function usePrimitUserBalances(config?: SWRConfiguration) {
+export function useZanbaraUserBalances(config?: SWRConfiguration) {
   const { chainId } = useAccount();
-  return usePrimitBalances(chainId, config);
+  return useZanbaraBalances(chainId, config);
 }
 
-export function usePrimitUserUnifiedAccount(config?: SWRConfiguration) {
+export function useZanbaraUserUnifiedAccount(config?: SWRConfiguration) {
   const { chainId } = useAccount();
-  return usePrimitUnifiedAccount(chainId, config);
+  return useZanbaraUnifiedAccount(chainId, config);
 }
 
-export function usePrimitWithdrawHistory(chainId: number | undefined, config?: SWRConfiguration) {
+export function useZanbaraWithdrawHistory(chainId: number | undefined, config?: SWRConfiguration) {
   const authenticated = isAuthenticated();
   return useSWR<WithdrawHistoryResponse>(
-    chainId && authenticated ? [`primit-withdraw-history`, chainId] : null,
+    chainId && authenticated ? [`zanbara-withdraw-history`, chainId] : null,
     () => getWithdrawHistory(chainId!),
     { ...defaultConfig, refreshInterval: 30000, ...config }
   );
 }
 
-export function usePrimitUserWithdrawHistory(config?: SWRConfiguration) {
+export function useZanbaraUserWithdrawHistory(config?: SWRConfiguration) {
   const { chainId } = useAccount();
-  return usePrimitWithdrawHistory(chainId, config);
+  return useZanbaraWithdrawHistory(chainId, config);
 }
 
 // ============================================
 // Alias exports for the trading page
 // ============================================
 export function useApiMarkets(chainId: number | undefined, config?: SWRConfiguration) {
-  const result = usePrimitMarkets(chainId, config);
+  const result = useZanbaraMarkets(chainId, config);
   return {
     markets: result.data ? { markets: result.data } : undefined,
     isLoading: result.isLoading,
@@ -314,7 +314,7 @@ export function useApiMarkets(chainId: number | undefined, config?: SWRConfigura
 }
 
 export function useApiTicker(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
-  const result = usePrimitTicker(chainId, symbol, config);
+  const result = useZanbaraTicker(chainId, symbol, config);
   return {
     ticker: result.data,
     isLoading: result.isLoading,
@@ -328,7 +328,7 @@ export function useApiMarketDetails(
   symbol: string | undefined,
   config?: SWRConfiguration
 ) {
-  const result = usePrimitMarketDetails(chainId, symbol, config);
+  const result = useZanbaraMarketDetails(chainId, symbol, config);
   return {
     details: result.data,
     isLoading: result.isLoading,
@@ -338,7 +338,7 @@ export function useApiMarketDetails(
 }
 
 export function useApiOrderbook(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
-  const result = usePrimitOrderbook(chainId, symbol, config);
+  const result = useZanbaraOrderbook(chainId, symbol, config);
   return {
     orderbook: result.data,
     isLoading: result.isLoading,
@@ -348,7 +348,7 @@ export function useApiOrderbook(chainId: number | undefined, symbol: string | un
 }
 
 export function useApiTrades(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
-  const result = usePrimitTrades(chainId, symbol, config);
+  const result = useZanbaraTrades(chainId, symbol, config);
   return {
     trades: result.data,
     isLoading: result.isLoading,
@@ -358,7 +358,7 @@ export function useApiTrades(chainId: number | undefined, symbol: string | undef
 }
 
 export function useApiPrice(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
-  const result = usePrimitPrice(chainId, symbol, config);
+  const result = useZanbaraPrice(chainId, symbol, config);
   return {
     price: result.data,
     isLoading: result.isLoading,

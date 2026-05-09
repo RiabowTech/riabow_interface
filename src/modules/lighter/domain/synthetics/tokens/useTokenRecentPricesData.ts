@@ -92,8 +92,8 @@ export function useTokenRecentPricesRequest(chainId: number): TokenPricesDataRes
 
       // Inject stable token price ($1) for Arbitrum Sepolia
       // This stable token is pegged to $1, Oracle Keeper doesn't have its price
-      const protocolStableAddress = getMarketAddressFromSymbol(chainId, "PRIMIT-USD") ||
-                           getMarketAddressFromSymbol(chainId, "PRIMITUSDT");
+      const protocolStableAddress = getMarketAddressFromSymbol(chainId, "ZANBARA-USD") ||
+                           getMarketAddressFromSymbol(chainId, "ZANBARAUSDT");
       if (chainId === ARBITRUM_SEPOLIA && protocolStableAddress && !result[protocolStableAddress]) {
         // Price format: $1 = 1e30 (30 decimal precision standard)
         const stablePrice = BigInt("1000000000000000000000000000000"); // 1e30 = $1

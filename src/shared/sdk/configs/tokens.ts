@@ -1000,7 +1000,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Primit Market tokens",
+      name: "Zanbara Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1482,7 +1482,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Primit Market tokens",
+      name: "Zanbara Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1689,7 +1689,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Primit Market tokens",
+      name: "Zanbara Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1775,8 +1775,8 @@ export const TOKENS: { [chainId: number]: Token[] } = {
       coingeckoUrl: "https://www.coingecko.com/en/coins/tether",
     },
     {
-      name: "PRIMIT",
-      symbol: "PRIMIT",
+      name: "ZANBARA",
+      symbol: "ZANBARA",
       address: "0x21358c79Ea3104784827De6FB8Ab9d39d83EC89A",
       decimals: 6,
       isStable: true,
@@ -1784,7 +1784,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Primit Market tokens",
+      name: "Zanbara Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1864,7 +1864,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Primit Market tokens",
+      name: "Zanbara Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,

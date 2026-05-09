@@ -60,10 +60,10 @@ export function useTokenStorage(
   // Listen for localStorage changes from other tabs
   useEffect(() => {
     const handleStorageChange = (e: StorageEvent) => {
-      // 兼容新旧两套前缀:primit_* 是当前写路径,axblade_* 是历史数据(读到即迁移,见 client.ts)
+      // 兼容新旧两套前缀:zanbara_* 是当前写路径,axblade_* 是历史数据(读到即迁移,见 client.ts)
       if (
-        e.key?.includes("primit_jwt_token") ||
-        e.key?.includes("primit_jwt_expiry") ||
+        e.key?.includes("zanbara_jwt_token") ||
+        e.key?.includes("zanbara_jwt_expiry") ||
         e.key?.includes("axblade_jwt_token") ||
         e.key?.includes("axblade_jwt_expiry")
       ) {

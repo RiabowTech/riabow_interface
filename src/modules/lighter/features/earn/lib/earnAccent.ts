@@ -2,10 +2,10 @@ import { useDesignSystem } from "shared/context/DesignSystemContext/DesignSystem
 
 const EARN_ACCENT_LEGACY = "#EBB800";
 
-/** 与 `PrimitColors.css` 中 html.dark / :root 的 --primit-primary-1 一致（供 Recharts 等无法用 CSS 变量的场景） */
+/** 与 `ZanbaraColors.css` 中 html.dark / :root 的 --zanbara-primary-1 一致（供 Recharts 等无法用 CSS 变量的场景） */
 export function useEarnAccentHex(): string {
-  const { isPrimit, colorScheme } = useDesignSystem();
-  if (!isPrimit) {
+  const { isZanbara, colorScheme } = useDesignSystem();
+  if (!isZanbara) {
     return EARN_ACCENT_LEGACY;
   }
   return colorScheme === "dark" ? "#87d7ea" : "#037788";

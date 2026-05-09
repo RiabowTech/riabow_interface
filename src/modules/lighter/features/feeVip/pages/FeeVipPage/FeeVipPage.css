@@ -1,5 +1,5 @@
 /**
- * Fee & VIP（/fee-vip）：Primit-Website v1 稿 node 161-5095；令牌随 html.dark / data-ui-theme。
+ * Fee & VIP（/fee-vip）：Zanbara-Website v1 稿 node 161-5095；令牌随 html.dark / data-ui-theme。
  */
 .fee-vip-page--state {
   display: flex;
@@ -12,23 +12,23 @@
   margin: 0;
   max-width: 480px;
   text-align: center;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-300);
-  color: var(--primit-others-red, #f6465d);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-300);
+  color: var(--zanbara-others-red, #f6465d);
 }
 
 .fee-vip-page__reference-hint {
   margin: 0 0 20px;
   width: 100%;
   padding: 12px 14px;
-  border: 0.5px solid var(--primit-soft-30, rgba(226, 231, 237, 0.3));
-  background: var(--primit-soft-5, rgba(226, 231, 237, 0.05));
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  border: 0.5px solid var(--zanbara-soft-30, rgba(226, 231, 237, 0.3));
+  background: var(--zanbara-soft-5, rgba(226, 231, 237, 0.05));
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.5;
   letter-spacing: 0.5px;
-  color: var(--primit-soft-70, rgba(226, 231, 237, 0.7));
+  color: var(--zanbara-soft-70, rgba(226, 231, 237, 0.7));
 }
 
 /**
@@ -53,9 +53,9 @@
  */
 .fee-vip-page__freshness {
   margin: -12px 0 16px;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
   font-size: 11px;
-  color: var(--primit-soft-50, rgba(226, 231, 237, 0.5));
+  color: var(--zanbara-soft-50, rgba(226, 231, 237, 0.5));
 }
 .fee-vip-page__freshness-text--stale {
   color: #eab645;
@@ -75,12 +75,12 @@
 }
 
 .fee-vip-page {
-  --fee-vip-accent: var(--primit-primary-1, #56bbc9);
+  --fee-vip-accent: var(--zanbara-primary-1, #56bbc9);
   --fee-vip-gold: #ffb42a;
   --fee-vip-card-bg: linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
-    linear-gradient(0deg, var(--primit-surface-mainbtn, #20272f) 0%, var(--primit-surface-mainbtn, #20272f) 100%);
+    linear-gradient(0deg, var(--zanbara-surface-mainbtn, #20272f) 0%, var(--zanbara-surface-mainbtn, #20272f) 100%);
   --fee-vip-card-shadow: 0 0 3px color-mix(in srgb, var(--fee-vip-accent) 12%, transparent);
-  --fee-vip-muted: var(--primit-soft-60, rgba(226, 231, 237, 0.6));
+  --fee-vip-muted: var(--zanbara-soft-60, rgba(226, 231, 237, 0.6));
   --fee-vip-table-row-active: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.7) 0%,
@@ -92,24 +92,24 @@
   min-height: calc(100vh - var(--header-height, 112px));
   box-sizing: border-box;
   padding: 40px clamp(20px, 8vw, 300px) 48px;
-  color: var(--primit-secondary-1);
+  color: var(--zanbara-secondary-1);
 }
 
-html[data-ui-theme="primit"] .fee-vip-page {
-  padding-top: var(--primit-route-content-pt);
+html[data-ui-theme="zanbara"] .fee-vip-page {
+  padding-top: var(--zanbara-route-content-pt);
   padding-bottom: 48px;
-  padding-left: var(--primit-route-gutter-x);
-  padding-right: var(--primit-route-gutter-x);
+  padding-left: var(--zanbara-route-gutter-x);
+  padding-right: var(--zanbara-route-gutter-x);
 }
 
 .fee-vip-page__title {
   margin: 0 0 20px;
-  font-family: var(--primit-font-title);
-  font-size: var(--primit-fs-600);
+  font-family: var(--zanbara-font-title);
+  font-size: var(--zanbara-fs-600);
   font-weight: 600;
-  line-height: var(--primit-lh-title);
+  line-height: var(--zanbara-lh-title);
   letter-spacing: 1px;
-  color: var(--primit-secondary-1);
+  color: var(--zanbara-secondary-1);
 }
 
 .fee-vip-page__cards {
@@ -140,12 +140,12 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-card__label {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-300);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-300);
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 1px;
-  color: var(--primit-secondary-1);
+  color: var(--zanbara-secondary-1);
 }
 
 .fee-vip-card__row {
@@ -163,8 +163,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
   padding: 3px 14px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     linear-gradient(0deg, var(--fee-vip-gold), var(--fee-vip-gold));
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: 0.5px;
@@ -173,8 +173,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-tag__muted {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: 0.5px;
@@ -195,8 +195,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-next__target {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-300);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-300);
   line-height: 1.4;
   letter-spacing: 1px;
   color: var(--fee-vip-accent);
@@ -229,8 +229,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
   border-radius: 0;
   border: none;
   box-shadow: none;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0.5px;
@@ -252,8 +252,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-fee-block__strike {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: 0.4px;
@@ -263,8 +263,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-fee-block__value {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-700);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-700);
   line-height: 1.4;
   letter-spacing: 1px;
   color: var(--fee-vip-accent);
@@ -272,8 +272,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-fee-block__role {
   margin: 2px 0 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: 0.5px;
@@ -282,8 +282,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-hint {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: 0.5px;
@@ -292,11 +292,11 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-volume__value {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-700);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-700);
   line-height: 1.4;
   letter-spacing: 1px;
-  color: var(--primit-secondary-1);
+  color: var(--zanbara-secondary-1);
 }
 
 .fee-vip-progress {
@@ -306,7 +306,7 @@ html[data-ui-theme="primit"] .fee-vip-page {
   border-radius: 10px;
   overflow: hidden;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    linear-gradient(0deg, var(--primit-surface-mainbtn), var(--primit-surface-mainbtn));
+    linear-gradient(0deg, var(--zanbara-surface-mainbtn), var(--zanbara-surface-mainbtn));
 }
 
 .fee-vip-progress__fill {
@@ -321,8 +321,8 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-footnote {
   margin: 0;
-  font-family: var(--primit-font-body);
-  font-size: var(--primit-fs-200);
+  font-family: var(--zanbara-font-body);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: 0.5px;
@@ -342,18 +342,18 @@ html[data-ui-theme="primit"] .fee-vip-page {
   width: 100%;
   min-width: 640px;
   border-collapse: collapse;
-  font-family: var(--primit-font-body);
+  font-family: var(--zanbara-font-body);
 }
 
 .fee-vip-table thead th {
   padding: 0 0 14px 24px;
   text-align: left;
-  font-size: var(--primit-fs-200);
+  font-size: var(--zanbara-fs-200);
   font-weight: 350;
   line-height: 1.2;
   letter-spacing: 0.5px;
-  color: var(--primit-secondary-1);
-  border-bottom: 1px solid var(--primit-trade-divider, rgba(226, 231, 237, 0.14));
+  color: var(--zanbara-secondary-1);
+  border-bottom: 1px solid var(--zanbara-trade-divider, rgba(226, 231, 237, 0.14));
 }
 
 .fee-vip-table thead th:first-child {
@@ -364,7 +364,7 @@ html[data-ui-theme="primit"] .fee-vip-page {
   padding: 24px 14px;
   text-align: center;
   color: var(--fee-vip-muted);
-  font-size: var(--primit-fs-200);
+  font-size: var(--zanbara-fs-200);
   line-height: 1.45;
 }
 
@@ -382,7 +382,7 @@ html[data-ui-theme="primit"] .fee-vip-page {
 
 .fee-vip-table tbody td {
   padding: 10px 14px;
-  font-size: var(--primit-fs-300);
+  font-size: var(--zanbara-fs-300);
   line-height: 1.4;
   letter-spacing: 1px;
   vertical-align: middle;

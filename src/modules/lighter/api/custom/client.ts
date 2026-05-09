@@ -79,9 +79,9 @@ import type {
   GetPnlParams,
 } from "../types";
 
-const JWT_STORAGE_KEY_PREFIX = "primit_jwt_token";
-const JWT_EXPIRY_KEY_PREFIX = "primit_jwt_expiry";
-const LAST_ADDRESS_KEY = "primit_last_address";
+const JWT_STORAGE_KEY_PREFIX = "zanbara_jwt_token";
+const JWT_EXPIRY_KEY_PREFIX = "zanbara_jwt_expiry";
+const LAST_ADDRESS_KEY = "zanbara_last_address";
 /**
  * 历史品牌 key 前缀,仅用于一次性读/迁移。读到立刻拷贝到新前缀并删掉老 key,
  * 保证用户改域后不被登出。历史数据完全清空后可下线这些常量。
@@ -103,7 +103,7 @@ function getStorageKey(address: string | null | undefined, keyPrefix: string, ch
 }
 
 /**
- * 把一对 legacy (axblade_*) 存储 key 搬到新 (primit_*) 前缀。
+ * 把一对 legacy (axblade_*) 存储 key 搬到新 (zanbara_*) 前缀。
  * 新 key 已有值时不覆盖,避免回写老 token 顶掉新 session;
  * 搬完后立即删除 legacy key,防止下次读到旧数据。
  */
@@ -128,7 +128,7 @@ function migrateLegacyPair(
 }
 
 /**
- * 尝试把给定 address/chainId 组合下的 axblade_* token 迁到 primit_*。
+ * 尝试把给定 address/chainId 组合下的 axblade_* token 迁到 zanbara_*。
  * 顺序覆盖三种历史布局:
  *  1) {prefix}_{chainId}_{addr}
  *  2) {prefix}_{addr}(无 chainId)
@@ -136,7 +136,7 @@ function migrateLegacyPair(
  */
 function migrateLegacyJwtFor(address: string | null, chainId: number | null | undefined): void {
   if (typeof window === "undefined") return;
-  // legacy last-address key → primit
+  // legacy last-address key → zanbara
   const legacyLastAddr = localStorage.getItem(LEGACY_LAST_ADDRESS_KEY);
   if (legacyLastAddr && !localStorage.getItem(LAST_ADDRESS_KEY)) {
     localStorage.setItem(LAST_ADDRESS_KEY, legacyLastAddr);
@@ -198,7 +198,7 @@ export function getStoredToken(address?: string | null, chainId?: number | null)
   // Normalize address to lowercase for consistent lookup
   const normalizedAddress = targetAddress ? targetAddress.toLowerCase() : null;
 
-  // 读老 axblade_* token → 迁移到 primit_* 命名空间;迁移后后续逻辑按新 key 读即可。
+  // 读老 axblade_* token → 迁移到 zanbara_* 命名空间;迁移后后续逻辑按新 key 读即可。
   migrateLegacyJwtFor(normalizedAddress, chainId ?? null);
 
   // First, try to get address and chainId-specific token (new format)

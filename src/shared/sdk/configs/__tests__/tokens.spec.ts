@@ -36,7 +36,7 @@ const getIgnoredTokensByChain = (chainId: number) => {
 };
 
 // Integration test against the upstream GMX oracle keeper. Skipped in CI because
-// it hits the public network and isn't validating primit-owned code.
+// it hits the public network and isn't validating zanbara-owned code.
 describe.skip("tokens config", () => {
   CONTRACTS_CHAIN_IDS.forEach(async (chainId) => {
     it(`tokens should be consistent with keeper for ${getChainName(chainId)}`, async () => {

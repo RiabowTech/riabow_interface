@@ -31,8 +31,8 @@ import type {
   CollateralRequest,
 } from "./types";
 
-const JWT_STORAGE_KEY = "primit_jwt_token";
-const JWT_EXPIRY_KEY = "primit_jwt_expiry";
+const JWT_STORAGE_KEY = "zanbara_jwt_token";
+const JWT_EXPIRY_KEY = "zanbara_jwt_expiry";
 /** 历史 key(品牌改名前),仅用于一次性读/迁移,避免老用户换域后被登出。 */
 const LEGACY_JWT_STORAGE_KEY = "axblade_jwt_token";
 const LEGACY_JWT_EXPIRY_KEY = "axblade_jwt_expiry";

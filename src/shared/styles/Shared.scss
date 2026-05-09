@@ -432,8 +432,8 @@ th {
   letter-spacing: 0.08em;
 }
 
-/* Primit side nav: 两个绿色圆角 + 中间发光竖线 */
-.primit-sidenav-deco {
+/* Zanbara side nav: 两个绿色圆角 + 中间发光竖线 */
+.zanbara-sidenav-deco {
   position: relative;
   border-radius: 20px;
   overflow: hidden; /* 让右侧光效跟随容器圆角裁剪 */
@@ -441,8 +441,8 @@ th {
 }
 
 /* 顶部 / 底部两个绿色圆角 */
-.primit-sidenav-deco::before,
-.primit-sidenav-deco::after {
+.zanbara-sidenav-deco::before,
+.zanbara-sidenav-deco::after {
 
   content: "";
   position: absolute;
@@ -456,14 +456,14 @@ th {
 }
 
 /* 右侧主体：左边两个绿色圆角，呼应侧边栏 */
-.primit-sidenav-main-deco {
+.zanbara-sidenav-main-deco {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
 }
 
-.primit-sidenav-main-deco::before,
-.primit-sidenav-main-deco::after {
+.zanbara-sidenav-main-deco::before,
+.zanbara-sidenav-main-deco::after {
   
   content: "";
   position: absolute;
@@ -476,24 +476,24 @@ th {
   pointer-events: none;
 }
 
-.primit-sidenav-main-deco::before {
+.zanbara-sidenav-main-deco::before {
   top: -13px;
 }
 
-.primit-sidenav-main-deco::after {
+.zanbara-sidenav-main-deco::after {
   bottom: -13px;
 }
 
-.primit-sidenav-deco::before {
+.zanbara-sidenav-deco::before {
   top: -13px;
 }
 
-.primit-sidenav-deco::after {
+.zanbara-sidenav-deco::after {
   bottom: -13px;
 }
 
 /* 右侧竖线，只在中间一段发光 */
-.primit-sidenav-deco-right-line {
+.zanbara-sidenav-deco-right-line {
   position: absolute;
   right: 1px;
   top: 1px;    /* 避开顶部圆角 */
@@ -521,7 +521,7 @@ th {
 }
 
 /**
- * 列表/卡片等模块统一表面色（与 Primit `--text-bg-color-secondary-3` 同步；浅深主题由 token 解析）。
+ * 列表/卡片等模块统一表面色（与 Zanbara `--text-bg-color-secondary-3` 同步；浅深主题由 token 解析）。
  * 圆角由各节点自身的 rounded-* 控制，勿在此全局写 border-radius。
  */
 .bg-slate-900 {

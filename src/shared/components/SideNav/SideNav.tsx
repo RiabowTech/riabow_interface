@@ -40,7 +40,7 @@ function SideNav({ className }: { className?: string }) {
   return (
     <nav
       className={cx(
-        "flex h-full shrink-0 flex-col bg-slate-950 rounded-tr-[20px] rounded-br-[20px] primit-sidenav",
+        "flex h-full shrink-0 flex-col bg-slate-950 rounded-tr-[20px] rounded-br-[20px] zanbara-sidenav",
         className,
         {
           "w-[210px] max-xl:w-[184px]": !isCollapsed,
@@ -48,7 +48,7 @@ function SideNav({ className }: { className?: string }) {
         }
       )}
     >
-      <div className="primit-sidenav-right-line" />
+      <div className="zanbara-sidenav-right-line" />
       <div className="flex w-full justify-start">
         <LogoSection isCollapsed={isCollapsed} />
       </div>
@@ -88,7 +88,7 @@ export function LogoSection({ isCollapsed }: { isCollapsed: boolean | undefined 
       <div className="flex h-20 items-center justify-start shrink-0">
         <img
           src={isCollapsed ? logoCompact : logoFull}
-          alt="Primit Logo"
+          alt="Zanbara Logo"
           className={cx(
             "logo-glow object-contain",
             isCollapsed ? "h-20" : "h-20"

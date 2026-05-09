@@ -12,19 +12,19 @@ export interface WalletChangeInfo {
 }
 
 /**
- * SWR cache keys related to Primit
+ * SWR cache keys related to Zanbara
  */
-const PRIMIT_CACHE_KEYS = [
-  "primit-balances",
-  "primit-positions",
-  "primit-orders",
-  "primit-balances",
+const ZANBARA_CACHE_KEYS = [
+  "zanbara-balances",
+  "zanbara-positions",
+  "zanbara-orders",
+  "zanbara-balances",
 ];
 
 /**
  * Clear SWR cache entries for a specific address and/or chain
  */
-function clearPrimitCache(options: {
+function clearZanbaraCache(options: {
   address?: string;
   chainId?: number;
   onlyChainId?: boolean;
@@ -35,12 +35,12 @@ function clearPrimitCache(options: {
   cacheKeys.forEach((key) => {
     const keyArray = Array.isArray(key) ? key : [key];
 
-    // Check if this is a Primit-related key
-    const isPrimitKey = keyArray.some(
-      (k) => typeof k === "string" && PRIMIT_CACHE_KEYS.includes(k)
+    // Check if this is a Zanbara-related key
+    const isZanbaraKey = keyArray.some(
+      (k) => typeof k === "string" && ZANBARA_CACHE_KEYS.includes(k)
     );
 
-    if (!isPrimitKey) return;
+    if (!isZanbaraKey) return;
 
     // Check address match
     const hasAddress =
@@ -115,7 +115,7 @@ export function useWalletChange(
 
     // Handle chain change: clear old chain's cache
     if (didChainIdChange && prevChainId && address) {
-      clearPrimitCache({
+      clearZanbaraCache({
         address,
         chainId: prevChainId,
         onlyChainId: true,
@@ -131,7 +131,7 @@ export function useWalletChange(
 
     // Handle address change: clear old address's cache
     if (didAddressChange && prevAddress) {
-      clearPrimitCache({
+      clearZanbaraCache({
         address: prevAddress,
       });
 

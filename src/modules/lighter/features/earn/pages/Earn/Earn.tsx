@@ -105,10 +105,10 @@ function getStrategyEndTime(strategy: EarnProduct | null | undefined): number | 
 // 辅助函数：获取策略名称（直接使用 name 字段）
 function getStrategyBaseName(name: string | null | undefined): string {
   try {
-    return name && typeof name === "string" && name.trim() ? name.trim() : "Primit Strategy";
+    return name && typeof name === "string" && name.trim() ? name.trim() : "Zanbara Strategy";
   } catch (error) {
     console.error("[getStrategyBaseName] Error:", error);
-    return "Primit Strategy";
+    return "Zanbara Strategy";
   }
 }
 
@@ -235,17 +235,17 @@ function StrategyCard({
           {isCompleted ? (
             // Completed: Stacked title layout
             <div className="flex min-w-0 flex-1 flex-col gap-0">
-              <h2 className="earn-accent-text font-primitTitle text-h3 m-0 truncate tracking-wider max-md:text-body-large">
+              <h2 className="earn-accent-text font-zanbaraTitle text-h3 m-0 truncate tracking-wider max-md:text-body-large">
                 {getStrategyBaseName(strategy.name)}
               </h2>
-              <span className="font-primitTitle text-body-medium truncate tracking-wider">
+              <span className="font-zanbaraTitle text-body-medium truncate tracking-wider">
                 {getStrategyTerm(strategy.chain_product_id)}
               </span>
             </div>
           ) : (
             // Active: Inline layout with FAQ tooltip
             <div className="flex min-w-0 flex-1 items-center gap-10">
-              <h2 className="earn-accent-text font-primitTitle text-h3 m-0 whitespace-nowrap tracking-wider max-md:text-body-large">
+              <h2 className="earn-accent-text font-zanbaraTitle text-h3 m-0 whitespace-nowrap tracking-wider max-md:text-body-large">
                 {getStrategyBaseName(strategy.name)}
               </h2>
               {isSubscribing ? (
@@ -286,10 +286,10 @@ function StrategyCard({
                       <div className="flex flex-col gap-12">
                         <div>
                           <p className="faq-question m-0 mb-4">
-                            <Trans>1. Who's eligible to join Primit Strategy?</Trans>
+                            <Trans>1. Who's eligible to join Zanbara Strategy?</Trans>
                           </p>
                           <p className="faq-answer m-0">
-                            <Trans>All Primit users are eligible.</Trans>
+                            <Trans>All Zanbara users are eligible.</Trans>
                           </p>
                         </div>
                         <div>
@@ -298,7 +298,7 @@ function StrategyCard({
                           </p>
                           <p className="faq-answer m-0">
                             <Trans>
-                              Primit Strategy is a fixed-term product that's automatically redeemed to your account at
+                              Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at
                               maturity.
                             </Trans>
                           </p>
@@ -688,7 +688,7 @@ function SubscriptionsTable({
 
   return (
     <div className="flex flex-col gap-16">
-      <h2 className="earn-accent-text font-primitTitle text-h3 m-0 max-md:text-body-large">
+      <h2 className="earn-accent-text font-zanbaraTitle text-h3 m-0 max-md:text-body-large">
         <Trans>My Subscriptions</Trans>
       </h2>
       <div className="subscription-table-container">
@@ -803,7 +803,7 @@ const ERC20_BALANCE_ABI = [
 ] as const;
 
 export default function Earn() {
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
   const { chainId } = useChainId();
   const { active: isWalletConnected, account } = useWallet();
   const { openConnectModal } = useConnectModal();
@@ -948,7 +948,7 @@ export default function Earn() {
     if (!isLoadingProducts) return;
 
     const detectDimensions = () => {
-      const sidebar = document.querySelector(".primit-sidenav");
+      const sidebar = document.querySelector(".zanbara-sidenav");
       if (sidebar) {
         const w = sidebar.getBoundingClientRect().width;
         document.documentElement.style.setProperty("--detected-sidebar-width", `${w > 0.5 ? w : 0}px`);
@@ -966,7 +966,7 @@ export default function Earn() {
     detectDimensions();
     window.addEventListener("resize", detectDimensions);
 
-    const sidebar = document.querySelector(".primit-sidenav");
+    const sidebar = document.querySelector(".zanbara-sidenav");
     const sidebarObserver = sidebar ? new MutationObserver(detectDimensions) : null;
     if (sidebarObserver && sidebar) {
       sidebarObserver.observe(sidebar, { attributes: true, attributeFilter: ["class"] });
@@ -1071,7 +1071,7 @@ export default function Earn() {
                   <div className="flex flex-col gap-20">
                     {/* COMPLETED Badge - centered above the grid */}
                     <div className="flex justify-center">
-                      {isPrimit ? (
+                      {isZanbara ? (
                         <SectionLabel>
                           <Trans>COMPLETED</Trans>
                         </SectionLabel>
@@ -1144,7 +1144,7 @@ export default function Earn() {
     </>
   );
 
-  if (isPrimit) {
+  if (isZanbara) {
     return (
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">{inner}</div>

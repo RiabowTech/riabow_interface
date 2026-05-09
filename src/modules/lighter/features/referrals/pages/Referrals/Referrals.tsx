@@ -46,7 +46,7 @@ import TradersStats from "components/Referrals/TradersStats";
 import SEO from "components/Seo/SEO";
 import { Tabs } from "shared/ui";
 
-import { PrimitReferralsPage } from "../PrimitReferralsPage/PrimitReferralsPage";
+import { ZanbaraReferralsPage } from "../ZanbaraReferralsPage/ZanbaraReferralsPage";
 
 import "./Referrals.css";
 
@@ -56,7 +56,7 @@ const TAB_OPTIONS = [TRADERS, AFFILIATES];
 const TAB_OPTION_LABELS: Record<string, string> = { [TRADERS]: "Traders", [AFFILIATES]: "Affiliates" };
 
 function Referrals() {
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
   const { active, account: walletAccount, signer } = useWallet();
   const { account: queryAccount } = useParams<{ account?: string }>();
   let account;
@@ -89,8 +89,8 @@ function Referrals() {
 
   const createReferralCodePrefill = routeQuery.get(CREATE_REFERRAL_CODE_QUERY_PARAM) ?? undefined;
   const isBotanix = chainId === BOTANIX;
-  const isPrimitReferralsRoute = isPrimit && !isBotanix;
-  const shouldFetchTopLevelDashboard = Boolean(account && active) && !isPrimitReferralsRoute;
+  const isZanbaraReferralsRoute = isZanbara && !isBotanix;
+  const shouldFetchTopLevelDashboard = Boolean(account && active) && !isZanbaraReferralsRoute;
 
   // Fetch referral dashboard data at component level (hooks must be at top level)
   const {
@@ -99,7 +99,7 @@ function Referrals() {
     error: dashboardError,
     mutate: mutateDashboard,
   } = useReferralDashboard(chainId, {
-    enabled: shouldFetchTopLevelDashboard, // Primit route fetches inside PrimitReferralsPage
+    enabled: shouldFetchTopLevelDashboard, // Zanbara route fetches inside ZanbaraReferralsPage
   });
 
   function handleCreateReferralCode(referralCode: string) {
@@ -110,12 +110,12 @@ function Referrals() {
     });
   }
 
-  if (isPrimit && !isBotanix) {
+  if (isZanbara && !isBotanix) {
     return (
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">
           <SEO title={getPageTitle(t`Referrals`)}>
-            <PrimitReferralsPage
+            <ZanbaraReferralsPage
               chainId={chainId}
               account={account}
               active={active}

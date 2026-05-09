@@ -200,8 +200,8 @@ export function PositionsTab({ mode = "all" }: { mode?: BottomTabFilterMode }) {
         await closePositionViaApi(positionId, sizePayload);
         // 手动触发持仓/订单 SWR 重算,不用等 2s 轮询;与 ModifyOrderModal 内的 mutate 保持一致。
         await Promise.all([
-          mutate(["primit-positions", chainId, address], undefined, { revalidate: true }),
-          mutate(["primit-orders", chainId, address], undefined, { revalidate: true }),
+          mutate(["zanbara-positions", chainId, address], undefined, { revalidate: true }),
+          mutate(["zanbara-orders", chainId, address], undefined, { revalidate: true }),
         ]);
       } catch (_error) {
         // closePositionViaApi 内部已经 toast,无需在这里重复处理

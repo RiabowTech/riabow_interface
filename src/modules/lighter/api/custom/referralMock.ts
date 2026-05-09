@@ -72,7 +72,7 @@ export function getReferralDashboardMock(): ReferralDashboardResponse {
 
   const now = Date.now();
   return {
-    code: scene === "gold" ? "PRIMITGOLD" : "PRIMIT001",
+    code: scene === "gold" ? "ZANBARAGOLD" : "ZANBARA001",
     total_referrals: scene === "gold" ? 58 : 3,
     active_referrals: scene === "gold" ? 29 : 1,
     total_referred_volume: scene === "gold" ? "865000.00" : "2200.00",
@@ -175,7 +175,7 @@ export function getReferralStatusMock(_address?: string): ReferralStatusResponse
   return {
     as_referrer: {
       has_code: hasCode,
-      code: hasCode ? (scene === "gold" ? "PRIMITGOLD" : "PRIMIT001") : null,
+      code: hasCode ? (scene === "gold" ? "ZANBARAGOLD" : "ZANBARA001") : null,
       code_created_at: hasCode ? now - 60 * 24 * 60 * 60 * 1000 : null,
       total_referrals: scene === "gold" ? 58 : scene === "starter" ? 3 : 0,
       referees:
@@ -199,7 +199,7 @@ export function getOnChainReferralDashboardMock(_address: string): OnChainDashbo
   const scene = getReferralMockScene();
   if (scene === "gold") {
     return {
-      code: "PRIMITGOLD",
+      code: "ZANBARAGOLD",
       total_referees: 58,
       total_volume_usd: "865000",
       total_earnings_usd: "4521.67",
@@ -224,7 +224,7 @@ export function getOnChainReferralDashboardMock(_address: string): OnChainDashbo
     };
   }
   return {
-    code: "PRIMIT001",
+    code: "ZANBARA001",
     total_referees: 3,
     total_volume_usd: "8300",
     total_earnings_usd: "68.20",

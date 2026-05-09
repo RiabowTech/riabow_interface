@@ -192,8 +192,8 @@ msgstr ""
 msgid "Connecting wallet..."
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "My Invite Link"
 msgstr ""
 
@@ -259,8 +259,8 @@ msgstr ""
 msgid "Max {0} short exceeded"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Cumulative earnings (lifetime)"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgid "No"
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Taker Fee"
 msgstr ""
 
@@ -418,7 +418,7 @@ msgid "≥ $2,000,000,000"
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Primit Frozen Balance"
+msgid "Zanbara Frozen Balance"
 msgstr ""
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
@@ -466,8 +466,8 @@ msgstr ""
 msgid "Highest VIP level reached for volume requirement."
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invite friends, earn commissions, accumulate forever"
 msgstr ""
 
@@ -496,7 +496,7 @@ msgstr ""
 msgid "Updated {0}h ago"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invitee Benefits"
 msgstr ""
 
@@ -518,7 +518,7 @@ msgstr ""
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Rank"
 msgstr ""
 
@@ -663,7 +663,7 @@ msgid "Earnings available to claim."
 msgstr ""
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Signing..."
 msgstr ""
 
@@ -864,7 +864,7 @@ msgid "Hide error"
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds will appear in your Primit Account soon."
+msgid "Funds will appear in your Zanbara Account soon."
 msgstr ""
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
@@ -993,7 +993,7 @@ msgstr ""
 msgid "Failed Market Decrease"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "VIP0: 0.040% → 0.032%"
 msgstr ""
 
@@ -1178,8 +1178,8 @@ msgstr ""
 msgid "Updated {0}m ago"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral Link"
 msgstr ""
 
@@ -1244,7 +1244,7 @@ msgstr ""
 msgid "Affiliates"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Friends who register with your code receive these benefits immediately"
 msgstr ""
 
@@ -1302,7 +1302,7 @@ msgstr ""
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -1321,8 +1321,8 @@ msgstr ""
 msgid "Open positions"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Total Commission"
 msgstr ""
 
@@ -1332,21 +1332,21 @@ msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Fee & VIP | Primit"
+msgid "Fee & VIP | Zanbara"
 msgstr ""
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled."
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Claim commission"
 msgstr ""
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-msgid "Leaderboard for traders on Primit."
+msgid "Leaderboard for traders on Zanbara."
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -1458,7 +1458,7 @@ msgstr ""
 msgid "Trading Volume"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Claim rebate"
 msgstr ""
 
@@ -1559,7 +1559,7 @@ msgstr ""
 msgid "Change to {0}"
 msgstr ""
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 msgid "Signing transaction will also authenticate your account"
 msgstr ""
 
@@ -1572,7 +1572,7 @@ msgid "Relayer request failed"
 msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "Primit Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
+msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
 msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
@@ -1621,7 +1621,7 @@ msgstr ""
 msgid "Positions ({0})"
 msgstr ""
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order cancelled"
 msgstr ""
@@ -1638,7 +1638,7 @@ msgstr ""
 msgid "Market Name:"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "10% discount"
 msgstr ""
 
@@ -1692,7 +1692,7 @@ msgstr ""
 msgid "Next tier referrals"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Commission Rate"
 msgstr ""
 
@@ -1768,7 +1768,7 @@ msgstr ""
 msgid "Cumulative PnL <0>{0}</0>"
 msgstr ""
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 #: src/modules/lighter/api/useClosePositionHandler.ts
 msgid "Position close order submitted"
 msgstr ""
@@ -1796,11 +1796,11 @@ msgid "Show Debug Values"
 msgstr ""
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-msgid "Primit information for account"
+msgid "Zanbara information for account"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Total Referrals"
 msgstr ""
@@ -1899,7 +1899,7 @@ msgid "Leave your Telegram if you’re okay with being contacted for a quick fol
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Primit Account Balance"
+msgid "Zanbara Account Balance"
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -1977,7 +1977,7 @@ msgstr ""
 msgid "Market"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
@@ -1989,7 +1989,7 @@ msgstr ""
 msgid "Enter referral code"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "You can rebind now."
 msgstr ""
 
@@ -2080,7 +2080,7 @@ msgstr ""
 msgid "VIP {nextTier} requires {0} (14-day rolling)"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 msgid "Already Bound"
 msgstr ""
@@ -2167,12 +2167,12 @@ msgstr ""
 msgid "Sending settle request"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral Center"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Minimum claim is {REFERRAL_OFFCHAIN_MIN_CLAIM_USDT} USDT."
 msgstr ""
 
@@ -2184,7 +2184,7 @@ msgstr ""
 msgid "Failed to create referral code"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 #: src/shared/components/Referrals/ReferralDashboard.tsx
@@ -2216,7 +2216,7 @@ msgstr ""
 msgid "TWAP"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "20% discount"
 msgstr ""
 
@@ -2281,7 +2281,7 @@ msgid "App disabled, pending {0} upgrade"
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds are now in your Primit Account."
+msgid "Funds are now in your Zanbara Account."
 msgstr ""
 
 #: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
@@ -2506,8 +2506,8 @@ msgstr ""
 msgid "Show last-trade price line"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Direct invitees"
 msgstr ""
 
@@ -2696,7 +2696,7 @@ msgstr ""
 msgid "Execute order simulation failed."
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Current bound code: {0}"
 msgstr ""
 
@@ -2989,7 +2989,7 @@ msgstr ""
 msgid "Failed to cancel {ordersText}."
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Instant credit to your balance — no on-chain transaction."
 msgstr ""
 
@@ -3147,7 +3147,7 @@ msgstr ""
 msgid "Your frozen balance, locked in open orders and unavailable for trading until the orders are closed or cancelled."
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Bind someone else's invitation code to obtain the benefits of the invitee"
 msgstr ""
 
@@ -3156,7 +3156,7 @@ msgid "Partial Position"
 msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "All Primit users are eligible."
+msgid "All Zanbara users are eligible."
 msgstr ""
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -3273,7 +3273,7 @@ msgstr ""
 msgid "<0>Smart wallets are not supported on {0}.</0><1/><2>Please switch to a different network or use a EOA wallet.</2>"
 msgstr ""
 
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Sign Out"
 msgstr ""
 
@@ -3322,7 +3322,7 @@ msgid "TP Limit Price"
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Reliable Primit-powered transactions"
+msgid "Reliable Zanbara-powered transactions"
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -3504,7 +3504,7 @@ msgstr ""
 msgid "Collateral at Liquidation"
 msgstr ""
 
-#: src/modules/lighter/api/custom/usePrimitOrderSubmit.ts
+#: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 msgid "Please connect your wallet first"
 msgstr ""
 
@@ -3588,7 +3588,7 @@ msgstr ""
 msgid "Traders Referred"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral code copied"
 msgstr ""
 
@@ -3735,7 +3735,7 @@ msgid "Open positions with orders"
 msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -3751,7 +3751,7 @@ msgstr ""
 msgid "Permit signed!"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "RP Points Bonus"
 msgstr ""
 
@@ -3760,7 +3760,7 @@ msgid "less than a minute"
 msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "1. Who's eligible to join Primit Strategy?"
+msgid "1. Who's eligible to join Zanbara Strategy?"
 msgstr ""
 
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
@@ -3774,10 +3774,10 @@ msgstr ""
 msgid "Last 7d"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Copy"
 msgstr ""
 
@@ -3794,7 +3794,7 @@ msgstr ""
 msgid "Amount"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "First Qualifying Trade"
 msgstr ""
 
@@ -3993,7 +3993,7 @@ msgstr ""
 msgid "Subscription Successful"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Need {0} more"
 msgstr ""
 
@@ -4083,7 +4083,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Rebinding available in {rebindDaysLeft} days."
 msgstr ""
 
@@ -4143,8 +4143,8 @@ msgstr ""
 msgid "TP Price"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "First Month Only"
 msgstr ""
 
@@ -4259,7 +4259,7 @@ msgstr ""
 msgid "Maker"
 msgstr ""
 
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Sign In"
 msgstr ""
 
@@ -4280,7 +4280,7 @@ msgid "Withdraw from Account"
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Maker Fee"
 msgstr ""
 
@@ -4288,7 +4288,7 @@ msgstr ""
 msgid "Realized Base PnL"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Tier"
 msgstr ""
 
@@ -4340,7 +4340,7 @@ msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Trading fee tiers and VIP levels on Primit."
+msgid "Trading fee tiers and VIP levels on Zanbara."
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -4372,7 +4372,7 @@ msgstr ""
 msgid "Raw Prices"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Recent Tier"
 msgstr ""
 
@@ -4392,7 +4392,7 @@ msgstr ""
 msgid "Confirm Claim"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "≥ $1,000 trade, both parties receive"
 msgstr ""
 
@@ -4568,11 +4568,11 @@ msgstr ""
 msgid "Trading Points"
 msgstr ""
 
-#: src/shared/components/PrimitAuth/PrimitAuthButton.tsx
+#: src/shared/components/ZanbaraAuth/ZanbaraAuthButton.tsx
 msgid "Error: {error}"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Need"
 msgstr ""
 
@@ -4605,7 +4605,7 @@ msgstr ""
 msgid "Total Volume"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral link copied"
 msgstr ""
 
@@ -4639,7 +4639,7 @@ msgid "Candles"
 msgstr ""
 
 #: src/shared/components/BotanixBanner/BotanixBanner.tsx
-msgid "using GLV and pool tokens. Buying or staking Primit, or using referrals, is not supported at this time."
+msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -4662,7 +4662,7 @@ msgstr ""
 msgid "Activate 1CT (One-Click Trading)"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Wallet"
@@ -4744,12 +4744,12 @@ msgstr ""
 msgid "Next tier volume (USD)"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "VIP0: 0.040% → 0.036%"
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Your Primit Account balance, usable for trading from any supported chain."
+msgid "Your Zanbara Account balance, usable for trading from any supported chain."
 msgstr ""
 
 #: src/shared/components/TradeHistory/keys.ts
@@ -4830,7 +4830,7 @@ msgid "Limit - Long Inc."
 msgstr ""
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Your Rank"
 msgstr ""
 
@@ -4848,7 +4848,7 @@ msgid "Oops! Something went wrong"
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Faster execution with Primit premium RPCs"
+msgid "Faster execution with Zanbara premium RPCs"
 msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -4877,12 +4877,12 @@ msgstr ""
 msgid "long"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "+10 RP"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "My Referral Code"
 msgstr ""
 
@@ -4894,7 +4894,7 @@ msgstr ""
 msgid "Entire Position"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Reward"
 msgstr ""
 
@@ -4911,7 +4911,7 @@ msgstr ""
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
 #: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-msgid "Primit Account"
+msgid "Zanbara Account"
 msgstr ""
 
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
@@ -5002,11 +5002,11 @@ msgstr ""
 msgid "7d"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invitees Required"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Enter Referral Code"
 msgstr ""
 
@@ -5093,7 +5093,7 @@ msgstr ""
 msgid "short"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Volume Required"
 msgstr ""
 
@@ -5188,7 +5188,7 @@ msgstr ""
 msgid "Bars"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "No pending commission"
 msgstr ""
 
@@ -5306,7 +5306,7 @@ msgstr ""
 msgid "Insufficient balance"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/PrimitReferralsPage/PrimitReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Reward Leaderboard"
 msgstr ""
 

@@ -7,7 +7,7 @@ import { useCopyToClipboard } from "react-use";
 import { parseUnits, getAddress } from "viem";
 import { useAccount, usePublicClient } from "wagmi";
 
-import { usePrimitUserBalances } from "@/modules/lighter/api";
+import { useZanbaraUserBalances } from "@/modules/lighter/api";
 import { confirmWithdraw } from "@/modules/lighter/api/custom/client";
 import { useTradingFundingHistory } from "@/modules/lighter/api/custom/useTradingFundingHistory";
 import {
@@ -212,7 +212,7 @@ const Toolbar = ({ account }: { account: string }) => {
             size="small"
             className={buttonClassName}
             onClick={() => {
-              // 走 onClick + window.open:与同排 PnL / Logout 按钮共享 Primit 按钮边框样式。
+              // 走 onClick + window.open:与同排 PnL / Logout 按钮共享 Zanbara 按钮边框样式。
               // 直接传 `to={externalUrl}` 会落到 legacy ButtonLink 分支,导致失去青色 L 角框。
               if (typeof window !== "undefined" && accountUrl) window.open(accountUrl, "_blank", "noopener,noreferrer");
             }}
@@ -377,7 +377,7 @@ const BalanceSection = () => {
   const { chainId } = useAccount();
   const isTradeMode = isTradeModeActive();
 
-  // In API trading mode, show Wallet and Primit Account Balance using SettlementChainBalance.
+  // In API trading mode, show Wallet and Zanbara Account Balance using SettlementChainBalance.
   // That path reads backend balances through the trading account balance hooks.
   if (isTradeMode) {
     return <SettlementChainBalance />;
@@ -446,7 +446,7 @@ const FundingHistorySection = () => {
   const publicClient = usePublicClient({ chainId });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isTradeMode = isTradeModeActive();
-  const { mutate: mutateBalances } = usePrimitUserBalances({
+  const { mutate: mutateBalances } = useZanbaraUserBalances({
     refreshInterval: isTradeMode ? 10000 : 0,
   });
 

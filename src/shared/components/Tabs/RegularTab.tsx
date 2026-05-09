@@ -12,7 +12,7 @@ type Props<V extends string | number> = {
   onOptionClick: ((value: V) => void) | undefined;
   regularOptionClassname?: string;
   qa?: string;
-  type: "inline" | "block" | "inline-primary" | "primit-big-tab";
+  type: "inline" | "block" | "inline-primary" | "zanbara-big-tab";
   dataTabValue?: V;
 };
 
@@ -61,7 +61,7 @@ export default function RegularTab<V extends string | number>({
     );
   }
 
-  if (type === "primit-big-tab") {
+  if (type === "zanbara-big-tab") {
     return (
       <BigTab
         key={option.value}

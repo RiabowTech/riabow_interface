@@ -1,0 +1,272 @@
+/**
+ * Zanbara 色板 — 浅色（默认 :root）与深色（html.dark）
+ * 来源: Figma「4. Colors / 颜色」canvas node 1:20；子区块 16:754 深色、16:755 浅色；Others 112:287（深）/ 112:373（浅）
+ * https://www.figma.com/design/Xy4iA3ZnzAZPmOduAyqmtG/Primit-UI-Components-Guidelines?node-id=1-20&m=dev
+ *
+ * 稿面「Secondsry」拼写错误，代码中统一为 secondary。
+ * 与 Tailwind `html.dark` 一致；未加 .dark 时为浅色 Zanbara token。
+ * 组件是否采用 Zanbara 稿面布局/控件样式由根节点 **`data-ui-theme="zanbara"|"legacy"`** 区分（`DesignSystemProvider` + `useDesignSystem()`）；
+ * Legacy 路由下即使存在本文件变量，也不应依赖未加 `data-ui-theme="zanbara"` 的 Zanbara-only 选择器。
+ */
+
+/* ========== 浅色主题（Light） ========== */
+:root {
+  /* Brand — Zanbara Gold (Primary / Hover / Active) */
+  --zanbara-primary-1: #D4A600;
+  --zanbara-primary-2: #D4A600;
+  --zanbara-primary-3: #8A6C00;
+
+  /* Text & BG（Secondary） */
+  --zanbara-secondary-1: #20272f;
+  --zanbara-secondary-2: #768892;
+  --zanbara-secondary-3: #e2e7ed;
+  /** 浅色稿仅 3 档；与深色 Secondary-4 对齐用 */
+  --zanbara-secondary-4: #161a1f;
+
+  /* Neutral（稿面为 #E9E9E9 / #000000 透明度阶梯） */
+  --zanbara-gray-0: rgba(233, 233, 233, 0.2);
+  --zanbara-gray-25: rgba(233, 233, 233, 0.3);
+  --zanbara-gray-50: rgba(233, 233, 233, 0.4);
+  --zanbara-gray-75: rgba(233, 233, 233, 0.5);
+  --zanbara-gray-100: rgba(233, 233, 233, 0.7);
+  --zanbara-gray-125: rgba(233, 233, 233, 0.8);
+  --zanbara-gray-150: rgba(0, 0, 0, 0.1);
+  --zanbara-gray-175: rgba(0, 0, 0, 0.2);
+  --zanbara-gray-200: rgba(0, 0, 0, 0.3);
+  --zanbara-gray-225: rgba(0, 0, 0, 0.4);
+  --zanbara-gray-250: rgba(0, 0, 0, 0.5);
+  --zanbara-gray-300: rgba(0, 0, 0, 0.7);
+
+  /**
+   * 表面叠色（浅色稿「Black」系：#20272F 透明度 + 纯色）
+   * 与深色稿「White」系（#E2E7ED 透明度）角色对称，统一用 soft-* 语义可在 TS 中成组引用
+   */
+  --zanbara-soft-2: rgba(32, 39, 47, 0.02);
+  --zanbara-soft-5: rgba(32, 39, 47, 0.05);
+  --zanbara-soft-10: rgba(32, 39, 47, 0.1);
+  --zanbara-soft-15: rgba(32, 39, 47, 0.15);
+  --zanbara-soft-20: rgba(32, 39, 47, 0.2);
+  --zanbara-soft-30: rgba(32, 39, 47, 0.3);
+  --zanbara-soft-40: rgba(32, 39, 47, 0.4);
+  --zanbara-soft-50: rgba(32, 39, 47, 0.5);
+  --zanbara-soft-60: rgba(32, 39, 47, 0.6);
+  --zanbara-soft-70: rgba(32, 39, 47, 0.7);
+  --zanbara-soft-80: rgba(32, 39, 47, 0.8);
+  --zanbara-soft-90: rgba(32, 39, 47, 0.9);
+  --zanbara-soft-100: #131414;
+
+  /* Others（功能色，浅色稿 node 112:373） */
+  --zanbara-others-red: #f6465d;
+  --zanbara-others-green: #2ebd85;
+
+  /**
+   * MainBtn_40（Figma node 119-1124）稿面语义：与主题无关的固定炭底 / 强调字色透明度
+   * 浅色画布上按钮区仍按稿使用炭色块时可沿用；若浅色产品要改底，可覆写 --zanbara-surface-mainbtn
+   */
+  --zanbara-surface-mainbtn: #20272f;
+  --zanbara-accent-a80: rgba(226, 231, 237, 0.8);
+  --zanbara-accent-a50: rgba(226, 231, 237, 0.5);
+  --zanbara-accent-a40: rgba(226, 231, 237, 0.4);
+  --zanbara-accent-a15: rgba(226, 231, 237, 0.15);
+  --zanbara-accent-a10: rgba(226, 231, 237, 0.1);
+  /** 炭底 MainBtn 默认态前景（稿面 #E2E7ED；不随全局 secondary-1 反转） */
+  --zanbara-fg-on-mainbtn: #e2e7ed;
+  /** Figma「button-text / white」：渐变 Hover 上字色与左侧竖线（与 Dev 导出 --Button-Text-White 对齐） */
+  --Button-Text-White: #ffffff;
+  --ui-btn-hover-label: var(--Button-Text-White, #ffffff);
+
+  /**
+   * MainBtn_40 金 / 青绿强调环与 Hover 渐变（Points · Figma 168:4189；`button.primit.css` accent 变体）
+   */
+  --zanbara-btn-accent-yellow-ring: #b8893a;
+  --zanbara-btn-accent-green-ring: #33987f;
+  --zanbara-btn-accent-yellow-hover-start: #e7a71e;
+  --zanbara-btn-accent-yellow-hover-end: #9e7a2f;
+  --zanbara-btn-accent-green-hover-start: #28e59b;
+  --zanbara-btn-accent-green-hover-end: #1d8d61;
+
+  /**
+   * Figma / Dev 导出命名（与 Website 一致），与 `--zanbara-secondary-*` 同步。
+   */
+  --text-bg-color-secondary-3: var(--zanbara-secondary-3);
+  --text-bg-color-secondary-2: var(--zanbara-secondary-2);
+
+  /**
+   * 顶栏 / 主导航（Figma Zanbara-Website Header 89-929）
+   * 背景：Dev 导出，使用 `--text-bg-color-secondary-*` + 字面 fallback。
+   */
+  --zanbara-header-background: linear-gradient(
+    24deg,
+    var(--text-bg-color-secondary-3, #20272f) 16.92%,
+    var(--text-bg-color-secondary-2, #768892) 608.23%
+  );
+  /** 无渐变场景下的兜底（旧稿纯色） */
+  --zanbara-header-surface: var(--zanbara-secondary-3, #e2e7ed);
+  --zanbara-nav-fg-active: var(--zanbara-primary-1);
+  --zanbara-nav-fg-inactive: var(--zanbara-secondary-2);
+  --zanbara-nav-fg-hover: var(--zanbara-primary-2);
+  /** 字标 / 顶栏主文案（与稿面 White lockups 一致） */
+  --zanbara-header-wordmark: var(--zanbara-secondary-1);
+
+  /**
+   * Zanbara 壳页面衬底 = Secondary-2；与模块（secondary-3）形成对比，gap-1 沟槽即此色。
+   */
+  --zanbara-app-shell-canvas-bg: var(--text-bg-color-secondary-2);
+
+  /** 交易主区画布 + 1px 网格分割线（Zanbara-Website Trade 桌面稿） */
+  --zanbara-trade-canvas-bg: #f8fafc;
+  --zanbara-trade-divider: #e2e8f0;
+  --zanbara-trade-divider-strong: #EBB800;
+  /**
+   * 大模块表面 = Dev `--text-bg-color-secondary-3`（与 zanbara-secondary-3 同步）
+   */
+  --zanbara-trade-module-bg: var(--text-bg-color-secondary-3, #20272f);
+  /** 与壳衬底一致：模块间 gap 与页面沟槽同色 */
+  --zanbara-trade-gutter-bg: var(--text-bg-color-secondary-2);
+
+  /**
+   * Legacy typography 兼容映射：
+   * 部分存量组件仍引用 `--color-typography-secondary(-raw)`，
+   * 在 Zanbara 主题下统一桥接到 Secondary-2，避免出现旧配色偏紫/偏灰。
+   */
+  --color-typography-secondary: var(--zanbara-secondary-2);
+  --color-typography-secondary-raw: 118 136 146;
+}
+
+/* ========== 深色主题（Dark） ========== */
+html.dark {
+  --zanbara-primary-1: #D4A600;
+  --zanbara-primary-2: #D4A600;
+  --zanbara-primary-3: #8A6C00;
+
+  --zanbara-secondary-1: #ffffff;
+  --zanbara-secondary-2: #768892;
+  --zanbara-secondary-3: rgba(25, 25, 25, 1);
+  --zanbara-secondary-4: #161a1f;
+
+  --zanbara-gray-0: rgba(0, 0, 0, 0.7);
+  --zanbara-gray-25: rgba(0, 0, 0, 0.5);
+  --zanbara-gray-50: rgba(0, 0, 0, 0.4);
+  --zanbara-gray-75: rgba(0, 0, 0, 0.3);
+  --zanbara-gray-100: rgba(0, 0, 0, 0.2);
+  --zanbara-gray-125: rgba(0, 0, 0, 0.1);
+  --zanbara-gray-150: rgba(255, 255, 255, 0.1);
+  --zanbara-gray-175: rgba(255, 255, 255, 0.2);
+  --zanbara-gray-200: rgba(255, 255, 255, 0.3);
+  --zanbara-gray-225: rgba(255, 255, 255, 0.4);
+  --zanbara-gray-250: rgba(255, 255, 255, 0.5);
+  --zanbara-gray-300: rgba(255, 255, 255, 0.7);
+
+  /* 深色稿「White」系：#E2E7ED 透明度 + 高光色 */
+  --zanbara-soft-2: rgba(226, 231, 237, 0.02);
+  --zanbara-soft-5: rgba(226, 231, 237, 0.05);
+  --zanbara-soft-10: rgba(226, 231, 237, 0.1);
+  --zanbara-soft-15: rgba(226, 231, 237, 0.15);
+  --zanbara-soft-20: rgba(226, 231, 237, 0.2);
+  --zanbara-soft-30: rgba(226, 231, 237, 0.3);
+  --zanbara-soft-40: rgba(226, 231, 237, 0.4);
+  --zanbara-soft-50: rgba(226, 231, 237, 0.5);
+  --zanbara-soft-60: rgba(226, 231, 237, 0.6);
+  --zanbara-soft-70: rgba(226, 231, 237, 0.7);
+  --zanbara-soft-80: rgba(226, 231, 237, 0.8);
+  --zanbara-soft-90: rgba(226, 231, 237, 0.9);
+  --zanbara-soft-100: #fcfffe;
+
+  /* Others（功能色，深色稿 node 112:287） */
+  --zanbara-others-red: #ff6175;
+  --zanbara-others-green: #28e59b;
+
+  --zanbara-surface-mainbtn: #20272f;
+  --zanbara-accent-a80: rgba(226, 231, 237, 0.8);
+  --zanbara-accent-a50: rgba(226, 231, 237, 0.5);
+  --zanbara-accent-a40: rgba(226, 231, 237, 0.4);
+  --zanbara-accent-a15: rgba(226, 231, 237, 0.15);
+  --zanbara-accent-a10: rgba(226, 231, 237, 0.1);
+  --zanbara-fg-on-mainbtn: #e2e7ed;
+  --Button-Text-White: #ffffff;
+  --ui-btn-hover-label: var(--Button-Text-White, #ffffff);
+
+  /** MainBtn_40 金 / 青绿强调（与浅色稿同一语义，见 :root 注释） */
+  --zanbara-btn-accent-yellow-ring: #b8893a;
+  --zanbara-btn-accent-green-ring: #33987f;
+  --zanbara-btn-accent-yellow-hover-start: #e7a71e;
+  --zanbara-btn-accent-yellow-hover-end: #9e7a2f;
+  --zanbara-btn-accent-green-hover-start: #28e59b;
+  --zanbara-btn-accent-green-hover-end: #1d8d61;
+
+  /* Zanbara-Website 顶栏：渐变底；导航选中 primary-1 */
+  --zanbara-header-background: linear-gradient(
+    24deg,
+    var(--text-bg-color-secondary-3, rgba(25, 25, 25, 1)) 16.92%,
+    var(--text-bg-color-secondary-2, #768892) 608.23%
+  );
+  --zanbara-header-surface: #1a1d23;
+  --zanbara-nav-fg-active: var(--zanbara-primary-1);
+  --zanbara-nav-fg-inactive: rgba(226, 231, 237, 0.8);
+  --zanbara-nav-fg-hover: var(--zanbara-primary-1);
+  --zanbara-header-wordmark: var(--zanbara-secondary-1);
+
+  --zanbara-app-shell-canvas-bg: var(--text-bg-color-secondary-2);
+
+  /** 页级衬底（略深于模块，滚动边隙可见） */
+  --zanbara-trade-canvas-bg: #0d1117;
+  /**
+   * 模块 1px 分割线：须与 --zanbara-trade-module-bg（深色 secondary-3 ≈ #191919）有足够对比。
+   * 旧值 #21262d 与底几乎同色，线上与 Storybook 均不可见。
+   */
+  --zanbara-trade-divider: rgba(226, 231, 237, 0.14);
+  --zanbara-trade-divider-strong: rgba(226, 231, 237, 0.26);
+  --zanbara-trade-module-bg: var(--text-bg-color-secondary-3, rgba(25, 25, 25, 1));
+  --zanbara-trade-gutter-bg: var(--text-bg-color-secondary-2);
+
+  /** 同步 legacy typography 兼容映射（Dark） */
+  --color-typography-secondary: var(--zanbara-secondary-2);
+  --color-typography-secondary-raw: 118 136 146;
+}
+
+/* ========== ZTDX：lighter.xyz 风格按钮全局覆盖 ========== */
+/**
+ * 把所有 .zanbara-ui-button 统一为：圆角 4px + 实心 slate-800 + slate-700 hover；
+ * 抹掉 Zanbara 主题的渐变背景、左侧白竖线、L 形角饰、内框 hover 收缩等装饰。
+ * 仅外观重置，不改变交互/尺寸/可访问性。
+ */
+.zanbara-ui-button {
+  border-radius: 4px !important;
+  background-color: #1e293b !important;
+  background-image: none !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  transition: background-color 0.15s ease !important;
+}
+
+.zanbara-ui-button:hover:not(:disabled):not(.zanbara-ui-button--disabled) {
+  background-color: #8A6C00 !important;
+  background-image: none !important;
+}
+
+.zanbara-ui-button::before,
+.zanbara-ui-button::after {
+  content: none !important;
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  border: 0 !important;
+}
+
+.zanbara-ui-button .zanbara-ui-button__inner {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.zanbara-ui-button:hover:not(:disabled):not(.zanbara-ui-button--disabled) .zanbara-ui-button__inner {
+  border-color: transparent !important;
+}
+
+/* 隐藏 lighter 风格不要的 L 形角饰（ZanbaraCornerBracketFrame） */
+.zanbara-corner-bracket-frame__corners,
+.zanbara-corner-bracket-frame__corner {
+  display: none !important;
+}

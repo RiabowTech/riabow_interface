@@ -8,7 +8,7 @@ import { sendUserAnalyticsConnectWalletClickEvent } from "lib/userAnalytics";
 import useWallet from "lib/wallets/useWallet";
 
 import { OneClickButton } from "components/OneClickButton/OneClickButton";
-import { PrimitAuthButton } from "components/PrimitAuth/PrimitAuthButton";
+import { ZanbaraAuthButton } from "components/ZanbaraAuth/ZanbaraAuthButton";
 
 import { AddressDropdown } from "../AddressDropdown/AddressDropdown";
 import ConnectWalletButton from "../ConnectWalletButton/ConnectWalletButton";
@@ -63,7 +63,7 @@ export function AppHeaderUser({ openSettings, menuToggle }: Props) {
       <div data-qa="user-address">
         <AddressDropdown account={account} />
       </div>
-      <PrimitAuthButton variant="secondary" />
+      <ZanbaraAuthButton variant="secondary" />
       <OneClickButton openSettings={openSettings} />
       <NetworkDropdown chainId={visualChainId} networkOptions={NETWORK_OPTIONS} openSettings={openSettings} />
       {menuToggle ? menuToggle : null}

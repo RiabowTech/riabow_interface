@@ -67,7 +67,7 @@ export default function ChartTokenSelector({ oneRowLabels }: Props) {
                   </span>
                 </span>
 
-                <ChevronDownIcon className="primit-chevron-rotate inline-block size-16" />
+                <ChevronDownIcon className="zanbara-chevron-rotate inline-block size-16" />
               </div>
             </div>
           </span>

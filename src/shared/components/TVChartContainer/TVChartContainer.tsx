@@ -75,7 +75,7 @@ type Props = {
   loadLastChart?: boolean;
   disableAutoSave?: boolean;
   chartName?: string;
-  /** 图表左上角图例显示的品牌名 (默认 Primit) */
+  /** 图表左上角图例显示的品牌名 (默认 Zanbara) */
   brandName?: string;
   /** 自定义 CSS URL,会注入 TradingView iframe (默认 /tradingview-chart.css) */
   customCssUrl?: string;
@@ -145,7 +145,7 @@ export default function TVChartContainer({
   const { theme } = useTheme();
 
   const [tradePageVersion] = useTradePageVersion();
-  const resolvedChartName = chartName ?? `primit-chart-v${tradePageVersion}`;
+  const resolvedChartName = chartName ?? `zanbara-chart-v${tradePageVersion}`;
 
   const oracleKeeperFetcher = useOracleKeeperFetcher(chainId);
 

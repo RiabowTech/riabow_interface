@@ -43,7 +43,7 @@ import { useQuoteOft } from "@/modules/lighter/domain/multichain/useQuoteOft";
 import { useQuoteOftLimits } from "@/modules/lighter/domain/multichain/useQuoteOftLimits";
 import { useQuoteSend } from "@/modules/lighter/domain/multichain/useQuoteSend";
 import { getNeedTokenApprove, useTokensAllowanceData, useTokensDataRequest } from "domain/synthetics/tokens";
-import { usePrimitUserBalances } from "@/modules/lighter/api";
+import { useZanbaraUserBalances } from "@/modules/lighter/api";
 import { NativeTokenSupportedAddress, approveTokens } from "domain/tokens";
 import { useChainId } from "lib/chains";
 import { useLeadingDebounce } from "lib/debounce/useLeadingDebounde";
@@ -573,7 +573,7 @@ export const DepositView = () => {
   const isExpressTradingDisabled = isNonEoaAccountOnAnyChain || isGeminiWallet;
 
   // Get mutate function to refresh balances after deposit
-  const { mutate: mutateBalances } = usePrimitUserBalances();
+  const { mutate: mutateBalances } = useZanbaraUserBalances();
 
   const sameChainCallback: TxnCallback<WalletTxnCtx> = useCallback(
     (txnEvent) => {

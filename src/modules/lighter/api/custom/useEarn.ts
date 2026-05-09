@@ -241,7 +241,7 @@ export function mapProductToStrategy(product: EarnProduct) {
   return {
     id: product.id,
     chainProductId: product.chain_product_id,
-    name: product.name.split(" ").slice(0, 2).join(" ") || "Primit Strategy", // Extract base name
+    name: product.name.split(" ").slice(0, 2).join(" ") || "Zanbara Strategy", // Extract base name
     term: product.name.split(" ").slice(2).join(" ") || "", // Extract term part
     token: "USDT",
     totalQuota: formatUsdtAmount(product.total_quota),

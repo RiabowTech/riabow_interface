@@ -22,7 +22,7 @@ import avalancheTestnet from "img/tokens/ic_avalanche_testnet.svg";
 import base from "img/tokens/ic_base.svg";
 import botanix from "img/tokens/ic_botanix.svg";
 import glvIcon from "img/tokens/ic_glv.svg";
-import protocolTokenIcon from "img/tokens/ic_primit.svg";
+import protocolTokenIcon from "img/tokens/ic_zanbara.svg";
 import optimismSepolia from "img/tokens/ic_op.svg";
 import sepolia from "img/tokens/ic_sepolia.svg";
 

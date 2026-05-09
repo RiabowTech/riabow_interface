@@ -1,0 +1,254 @@
+/**
+ * Zanbara 多语言字体与行高
+ * 来源: Figma「1. Typography-desktop」整页 node 1-17；子区块 16-173（字体行高）、16-752（字号）
+ * https://www.figma.com/design/Xy4iA3ZnzAZPmOduAyqmtG/Primit-UI-Components-Guidelines?node-id=1-17&m=dev
+ * 设计文档：docs/design/ZANBARA-01-TYPOGRAPHY-DESKTOP.md
+ *
+ * 标题/正文/按钮统一 Messina Sans；行高为相对字号的比例（与稿中 140%、160% 等一致）。
+ * Messina / Outfit 等 @font-face 见 styles/Font.css（与历史 Alternox / Chakra 文件并存）。
+ * 中文等字魂等若未授权网页嵌入，仍依赖系统/回退字体。
+ */
+
+:root {
+  /* English（默认） */
+  --zanbara-font-title: "Messina Sans", ui-sans-serif, system-ui, sans-serif;
+  --zanbara-font-body: "Messina Sans", ui-sans-serif, system-ui, sans-serif;
+  --zanbara-font-button: "Messina Sans", ui-sans-serif, system-ui, sans-serif;
+  /** Tab 标签（block / inline / Long·Short 等）：与稿面 Tab 一致，随 locale 跟 title 栈 */
+  --zanbara-font-tab: var(--zanbara-font-title);
+
+  --zanbara-lh-title: 1.4;
+  --zanbara-lh-body: 1.6;
+  --zanbara-lh-body-long: 1.6;
+  --zanbara-lh-button: 1.2;
+  /** 顶边距修正 / 按钮&标签紧凑行高 */
+  --zanbara-lh-tight: 1.1;
+
+  /* 字号阶梯（英语 / 西语基准），单位 px — Figma 16-752 */
+  --zanbara-fs-100: 10px;
+  --zanbara-fs-150: 11px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 24px;
+  --zanbara-fs-750: 26px;
+  --zanbara-fs-800: 28px;
+  --zanbara-fs-900: 32px;
+  --zanbara-fs-1000: 36px;
+}
+
+html[data-zanbara-locale="zh-cn"] {
+  --zanbara-font-title: "Messina Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --zanbara-font-body: "Messina Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --zanbara-font-button: "Messina Sans", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --zanbara-lh-title: 1;
+  --zanbara-lh-body: 1.6;
+  --zanbara-lh-body-long: 1.65;
+  --zanbara-lh-button: 1.2;
+  --zanbara-lh-tight: 1.1;
+
+  --zanbara-fs-100: 10px;
+  --zanbara-fs-150: 11px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 22px;
+  --zanbara-fs-750: 24px;
+  --zanbara-fs-800: 26px;
+  --zanbara-fs-900: 28px;
+  --zanbara-fs-1000: 32px;
+}
+
+html[data-zanbara-locale="zh-tw"] {
+  --zanbara-font-title: "Messina Sans", "PingFang TC", "PingFang SC", sans-serif;
+  --zanbara-font-body: "Messina Sans", "PingFang TC", "PingFang SC", sans-serif;
+  --zanbara-font-button: "Messina Sans", "PingFang TC", "PingFang SC", sans-serif;
+
+  --zanbara-lh-title: 1;
+  --zanbara-lh-body: 1.6;
+  --zanbara-lh-body-long: 1.65;
+  --zanbara-lh-button: 1.2;
+  --zanbara-lh-tight: 1.1;
+
+  --zanbara-fs-100: 10px;
+  --zanbara-fs-150: 11px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 22px;
+  --zanbara-fs-750: 24px;
+  --zanbara-fs-800: 26px;
+  --zanbara-fs-900: 28px;
+  --zanbara-fs-1000: 32px;
+}
+
+html[data-zanbara-locale="ko"] {
+  --zanbara-font-title: "Messina Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --zanbara-font-body: "Messina Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --zanbara-font-button: "Messina Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+
+  --zanbara-lh-title: 1;
+  --zanbara-lh-body: 1.6;
+  --zanbara-lh-body-long: 1.65;
+  --zanbara-lh-button: 1.2;
+  --zanbara-lh-tight: 1.1;
+
+  --zanbara-fs-100: 10px;
+  --zanbara-fs-150: 11px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 22px;
+  --zanbara-fs-750: 24px;
+  --zanbara-fs-800: 26px;
+  --zanbara-fs-900: 28px;
+  --zanbara-fs-1000: 32px;
+}
+
+html[data-zanbara-locale="ja"] {
+  --zanbara-font-title: "Messina Sans", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
+  --zanbara-font-body: "Messina Sans", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", sans-serif;
+  --zanbara-font-button: "Messina Sans", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+
+  --zanbara-lh-title: 1;
+  --zanbara-lh-body: 1.65;
+  --zanbara-lh-body-long: 1.65;
+  --zanbara-lh-button: 1.25;
+  --zanbara-lh-tight: 1.1;
+
+  --zanbara-fs-100: 10px;
+  --zanbara-fs-150: 11px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 22px;
+  --zanbara-fs-750: 24px;
+  --zanbara-fs-800: 26px;
+  --zanbara-fs-900: 28px;
+  --zanbara-fs-1000: 32px;
+}
+
+html[data-zanbara-locale="vi"] {
+  --zanbara-font-title: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --zanbara-font-body: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --zanbara-font-button: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+
+  --zanbara-lh-title: 1;
+  --zanbara-lh-body: 1.6;
+  --zanbara-lh-body-long: 1.8;
+  --zanbara-lh-button: 1.2;
+  --zanbara-lh-tight: 1.1;
+
+  /* 与英语阶梯一致（越南语 700 档起与西文对齐） */
+  --zanbara-fs-100: 10px;
+  --zanbara-fs-150: 11px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 24px;
+  --zanbara-fs-750: 26px;
+  --zanbara-fs-800: 28px;
+  --zanbara-fs-900: 32px;
+  --zanbara-fs-1000: 36px;
+}
+
+html[data-zanbara-locale="th"] {
+  --zanbara-font-title: "Messina Sans", "SF Pro TH", "Thonburi", "Leelawadee UI", system-ui, sans-serif;
+  --zanbara-font-body: "Messina Sans", "SF Pro TH", "Thonburi", "Leelawadee UI", system-ui, sans-serif;
+  --zanbara-font-button: "Messina Sans", "SF Pro TH", "Thonburi", "Leelawadee UI", system-ui, sans-serif;
+
+  --zanbara-lh-title: 1;
+  --zanbara-lh-body: 1.6;
+  --zanbara-lh-body-long: 1.8;
+  --zanbara-lh-button: 1.2;
+  --zanbara-lh-tight: 1.1;
+
+  /* 泰语：提高最小档；200/250 同为 12px — Figma 16-752 */
+  --zanbara-fs-100: 11px;
+  --zanbara-fs-150: 12px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 24px;
+  --zanbara-fs-750: 26px;
+  --zanbara-fs-800: 28px;
+  --zanbara-fs-900: 32px;
+  --zanbara-fs-1000: 36px;
+}
+
+html[data-zanbara-locale="ru"] {
+  --zanbara-font-title: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --zanbara-font-body: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+  --zanbara-font-button: "Messina Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", sans-serif;
+
+  --zanbara-lh-title: 1;
+  --zanbara-lh-body: 1.6;
+  --zanbara-lh-body-long: 1.6;
+  --zanbara-lh-button: 1.2;
+  --zanbara-lh-tight: 1.1;
+
+  --zanbara-fs-100: 10px;
+  --zanbara-fs-150: 11px;
+  --zanbara-fs-200: 12px;
+  --zanbara-fs-250: 13px;
+  --zanbara-fs-300: 14px;
+  --zanbara-fs-400: 16px;
+  --zanbara-fs-500: 18px;
+  --zanbara-fs-600: 20px;
+  --zanbara-fs-700: 24px;
+  --zanbara-fs-750: 26px;
+  --zanbara-fs-800: 28px;
+  --zanbara-fs-900: 32px;
+  --zanbara-fs-1000: 36px;
+}
+
+body {
+  font-family: var(--zanbara-font-body);
+  line-height: var(--zanbara-lh-body);
+}
+
+.zanbara-text-title {
+  font-family: var(--zanbara-font-title);
+  line-height: var(--zanbara-lh-title);
+}
+
+.zanbara-text-body {
+  font-family: var(--zanbara-font-body);
+  line-height: var(--zanbara-lh-body);
+}
+
+.zanbara-text-body-long {
+  font-family: var(--zanbara-font-body);
+  line-height: var(--zanbara-lh-body-long);
+}
+
+.zanbara-text-button {
+  font-family: var(--zanbara-font-button);
+  line-height: var(--zanbara-lh-button);
+}
+
+.zanbara-text-tight {
+  line-height: var(--zanbara-lh-tight);
+}

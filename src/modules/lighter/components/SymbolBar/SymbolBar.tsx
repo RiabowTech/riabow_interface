@@ -67,7 +67,7 @@ export function SymbolBar() {
   // ---- 旧 SymbolBar 自建 selector 逻辑（已弃用，改为使用 interface_copy 的 ChartTokenSelector）----
   // const { selectedSymbol, setSelectedSymbol } = useTradeState();
   // const baseSymbol = useMemo(() => getNormalizedTokenSymbol(m.symbol.replace(/[-/]?USD[T]?$/i, "")), [m.symbol]);
-  // /** 主/次符号排版与 Primit 市场选择器一致：`BASE/QUOTE [BASE-USDT]` */
+  // /** 主/次符号排版与 Zanbara 市场选择器一致：`BASE/QUOTE [BASE-USDT]` */
   // const displayPair = useMemo(() => {
   //   const quote = (selectedSymbol?.split("-")[1] ?? "USD").toUpperCase();
   //   return `${baseSymbol}/${quote}`;

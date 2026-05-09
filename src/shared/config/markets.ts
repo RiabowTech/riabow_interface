@@ -38,7 +38,7 @@ export const GLV_MARKETS: {
   [ARBITRUM]: {
     "0x528A5bac7E746C9A509A1f4F6dF58A03d44279F9": {
       name: undefined,
-      subtitle: "Primit Liquidity Vault",
+      subtitle: "Zanbara Liquidity Vault",
       shortening: "GLV",
       glvTokenAddress: "0x528A5bac7E746C9A509A1f4F6dF58A03d44279F9",
       longTokenAddress: "0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f",
@@ -46,7 +46,7 @@ export const GLV_MARKETS: {
     },
     "0xdF03EEd325b82bC1d4Db8b49c30ecc9E05104b96": {
       name: undefined,
-      subtitle: "Primit Liquidity Vault",
+      subtitle: "Zanbara Liquidity Vault",
       shortening: "GLV",
       glvTokenAddress: "0xdF03EEd325b82bC1d4Db8b49c30ecc9E05104b96",
       longTokenAddress: "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
@@ -56,7 +56,7 @@ export const GLV_MARKETS: {
   [AVALANCHE]: {
     "0x901eE57f7118A7be56ac079cbCDa7F22663A3874": {
       name: undefined,
-      subtitle: "Primit Liquidity Vault",
+      subtitle: "Zanbara Liquidity Vault",
       shortening: "GLV",
       glvTokenAddress: "0x901eE57f7118A7be56ac079cbCDa7F22663A3874",
       longTokenAddress: "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",

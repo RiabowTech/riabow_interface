@@ -1,9 +1,9 @@
-/* Points dashboard (Figma Primit-Website v1.0 node 145:3195) */
+/* Points dashboard (Figma Zanbara-Website v1.0 node 145:3195) */
 
 .pd-page {
   --pd-text: #e2e7ed;
   --pd-muted: rgba(226, 231, 237, 0.6);
-  /* 仅描边用稿面青；强调色/进度条等用 --pd-primary（Primit 下为 --primit-primary-1） */
+  /* 仅描边用稿面青；强调色/进度条等用 --pd-primary（Zanbara 下为 --zanbara-primary-1） */
   --pd-border: #56bbc9;
   --neutral-color-gray-100: rgba(0, 0, 0, 0.2);
   --pd-primary: #56bbc9;
@@ -21,7 +21,7 @@
   --pd-card-glow-yellow: 0 0 4px 0 rgba(231, 167, 30, 0.2);
   --pd-card-glow-green: 0 0 4px 0 rgba(40, 229, 155, 0.2);
 
-  /* 滚动交给 Primit 壳主列（AppRoutes），避免与 .pd-main / .pd-side 嵌套双滚动条 */
+  /* 滚动交给 Zanbara 壳主列（AppRoutes），避免与 .pd-main / .pd-side 嵌套双滚动条 */
   width: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -53,8 +53,8 @@
   min-width: 0;
 }
 
-html[data-ui-theme="primit"] .pd-shell {
-  padding: var(--primit-route-content-pt) var(--primit-route-gutter-x) 40px;
+html[data-ui-theme="zanbara"] .pd-shell {
+  padding: var(--zanbara-route-content-pt) var(--zanbara-route-gutter-x) 40px;
   max-width: none;
 }
 

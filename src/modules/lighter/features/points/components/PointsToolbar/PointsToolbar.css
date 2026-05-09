@@ -9,10 +9,10 @@
 }
 
 .points-toolbar__title {
-  font-family: var(--primit-font-title);
-  font-size: var(--primit-fs-600);
+  font-family: var(--zanbara-font-title);
+  font-size: var(--zanbara-fs-600);
   font-weight: 600;
-  line-height: var(--primit-lh-title);
+  line-height: var(--zanbara-lh-title);
   letter-spacing: 1px;
   color: var(--pd-text, #e2e7ed);
 }

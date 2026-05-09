@@ -1,7 +1,7 @@
 /**
- * Primit WebSocket Service
+ * Zanbara WebSocket Service
  * 
- * 中心化的 Primit WebSocket 服务
+ * 中心化的 Zanbara WebSocket 服务
  * 使用配置的 WebSocket URL
  */
 
@@ -129,7 +129,7 @@ type MessageHandler = (message: WsMessage) => void;
 type ErrorHandler = (error: Event) => void;
 type ConnectionHandler = () => void;
 
-// Primit WebSocket URL - use relative path in dev (proxied by Vite), full URL in production
+// Zanbara WebSocket URL - use relative path in dev (proxied by Vite), full URL in production
 // 使用统一的后端 URL 配置（根据链 ID 自动切换）
 import { getTradingWsUrl } from "config/backend";
 

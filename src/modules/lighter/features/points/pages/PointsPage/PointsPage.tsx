@@ -5,13 +5,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { LighterShell } from "@/modules/lighter/components/LighterShell/LighterShell";
 import AppPageLayout from "shared/components/AppPageLayout/AppPageLayout";
 import { useDesignSystem } from "shared/context/DesignSystemContext/DesignSystemContext";
-import { PrimaryActionButton, PrimitCornerBracketFrame } from "shared/ui";
+import { PrimaryActionButton, ZanbaraCornerBracketFrame } from "shared/ui";
 import { LeaderboardRow } from "shared/ui/LeaderboardRow";
 import { LinearProgressBar } from "shared/ui/LinearProgressBar";
 
 import Button from "components/Button/Button";
 
-// Figma Primit-Website v1.0 · node 156:2399 MainBtn 图标（Figma MCP get_design_context 拉取）
+// Figma Zanbara-Website v1.0 · node 156:2399 MainBtn 图标（Figma MCP get_design_context 拉取）
 import pdMainBtnInviteIcon from "../../assets/figma-mainbtn/invite.svg";
 import pdMainBtnTradeIcon from "../../assets/figma-mainbtn/trade.svg";
 import { PointsToolbar } from "../../components/PointsToolbar";
@@ -42,7 +42,7 @@ function PointsCapBar({ value, cap, variant }: { value: number; cap: number; var
 
 export function PointsPage() {
   const { openConnectModal } = useConnectModal();
-  const { isPrimit } = useDesignSystem();
+  const { isZanbara } = useDesignSystem();
   const { epochs, currentEpochId } = useEpochs();
   const [selectedEpochId, setSelectedEpochId] = useState<number | null>(null);
   const [selectedSeasonId, setSelectedSeasonId] = useState<number | null>(null);
@@ -303,7 +303,7 @@ export function PointsPage() {
                     <span className="pd-your-rank__pts">{pointsData.currentEpochPoints}</span>
                   </div>
                 ) : (
-                  <PrimitCornerBracketFrame className="w-fit max-w-full" enabled={isPrimit}>
+                  <ZanbaraCornerBracketFrame className="w-fit max-w-full" enabled={isZanbara}>
                     <PrimaryActionButton
                       type="button"
                       className="connect-wallet-cta min-w-[240px]"
@@ -311,7 +311,7 @@ export function PointsPage() {
                     >
                       <Trans>Connect Wallet</Trans>
                     </PrimaryActionButton>
-                  </PrimitCornerBracketFrame>
+                  </ZanbaraCornerBracketFrame>
                 )}
               </div>
 
@@ -383,7 +383,7 @@ export function PointsPage() {
     </>
   );
 
-  if (isPrimit) {
+  if (isZanbara) {
     return (
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">{pointsBody}</div>
