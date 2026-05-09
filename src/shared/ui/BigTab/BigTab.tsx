@@ -13,7 +13,7 @@ export type BigTabProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 /**
  * 大标签 Tab 单项（订单簿 Order book / Trades 等大 Tab）。
- * 样式见 `themes/primit/primit-big-tab.primit.css`（随 `component-themes` 加载）。
+ * 样式见 `themes/zanbara/zanbara-big-tab.zanbara.css`（随 `component-themes` 加载）。
  */
 export const BigTab = React.forwardRef<HTMLButtonElement, BigTabProps>(function BigTab(
   { selected = false, className, type = "button", children, disabled, ...rest },

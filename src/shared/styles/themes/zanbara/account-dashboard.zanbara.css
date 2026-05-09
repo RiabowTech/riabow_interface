@@ -1,6 +1,6 @@
 /**
  * Zanbara Account（/accounts）：与 Zanbara 壳衬底一体，图表/子 Tab 用 soft 与主色。
- * 「理财」Tab 样式见 `earn.primit.css`（`.earn-content`）。
+ * 「理财」Tab 样式见 `earn.zanbara.css`（`.earn-content`）。
  */
 html[data-ui-theme="zanbara"] .account-pnl-chart-card {
   --account-dashboard-chart-accent: var(--zanbara-primary-1);

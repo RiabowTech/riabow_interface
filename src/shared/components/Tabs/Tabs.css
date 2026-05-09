@@ -80,7 +80,7 @@
 }
 
 /* ================================
- * 统一样式 Tabs — 结构层（配色见 themes/legacy/tabs.legacy.css 或 primit/tabs.primit.css）
+ * 统一样式 Tabs — 结构层（配色见 themes/legacy/tabs.legacy.css 或 primit/tabs.zanbara.css）
  * ==============================*/
 [data-unified-style="true"] {
   display: flex;
@@ -206,7 +206,7 @@
   display: none !important;
 }
 
-/* Primit 壳：见 `styles/themes/primit/tabs.primit.css` */
+/* Primit 壳：见 `styles/themes/zanbara/tabs.zanbara.css` */
 
 /* ================================
  * NestedTab (More 下拉框) — 结构；荧光见 legacy/tabs.legacy.css

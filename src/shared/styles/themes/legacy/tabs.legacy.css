@@ -1,6 +1,6 @@
 /**
  * Legacy 交易站 · 荧光绿 / 渐变描边 Tabs（原 `Tabs.css` 内旧版视觉）
- * 仅在 `html[data-ui-theme="legacy"]` 下生效；Primit 壳由 `themes/primit/tabs.primit.css` 负责。
+ * 仅在 `html[data-ui-theme="legacy"]` 下生效；Primit 壳由 `themes/zanbara/tabs.zanbara.css` 负责。
  */
 
 /* ========== 统一样式 Long/Short 等：绿（红）渐变外框与发光 ========== */

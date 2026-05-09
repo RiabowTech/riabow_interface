@@ -1,7 +1,7 @@
 /**
  * Zanbara 覆盖层 · 交易区金额/价格输入（路径 A）
  * 钩子：`.BuyInputSection-box`、`Suggestion-input-wrapper .Suggestion-input`
- * 对齐 `primit-input-select.primit.css` 中 Main Input 壳体（`155-987` 系 token）。
+ * 对齐 `zanbara-input-select.zanbara.css` 中 Main Input 壳体（`155-987` 系 token）。
  */
 
 /* ========== BuyInputSection（TradeBox / Position 等）========== */

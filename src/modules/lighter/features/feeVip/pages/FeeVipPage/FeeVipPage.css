@@ -61,7 +61,7 @@
   color: #eab645;
 }
 
-/* Connect Wallet：与 ConnectWalletPrompt / Referrals 一致 — PrimitCornerBracketFrame + `connect-wallet-cta`（button.primit.css） */
+/* Connect Wallet：与 ConnectWalletPrompt / Referrals 一致 — PrimitCornerBracketFrame + `connect-wallet-cta`（button.zanbara.css） */
 .fee-vip-page__connect-frame {
   max-width: 100%;
 }

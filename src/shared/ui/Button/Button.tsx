@@ -5,7 +5,7 @@
  * — MainBtn_40（Figma `119-1124`）· IconBtn_40 · Small TabBtn 24
  *
  *
- * 生产与 Storybook「Primit」稿面样式：`styles/themes/primit/button.primit.css`（经 `app/theme/component-themes.ts` 加载）。
+ * 生产与 Storybook「Primit」稿面样式：`styles/themes/zanbara/button.zanbara.css`（经 `app/theme/component-themes.ts` 加载）。
  * Storybook 切 DEX / Prediction / RWA：`Button.storybook-classic-skins.css` 覆盖为圆角 + 实色经典产品按钮（仍用各皮肤 `--ui-*`）。
  */
 

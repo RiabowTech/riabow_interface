@@ -1,6 +1,6 @@
 /**
  * Zanbara 主题 · Button（MainBtn_40 / IconBtn_40 / Tab 24）
- * 路径：`styles/themes/primit/button.primit.css`（由 `app/theme/component-themes.ts` 聚合加载）。
+ * 路径：`styles/themes/zanbara/button.zanbara.css`（由 `app/theme/component-themes.ts` 聚合加载）。
  * Storybook DEX / Prediction / RWA 经典外形仍由 `Button.storybook-classic-skins.css` 覆盖。
  * 颜色：优先 var(--ui-*)，回退 var(--zanbara-*)。
  */

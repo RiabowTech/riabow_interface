@@ -76,7 +76,7 @@
   --ui-btn-hover-label: var(--Button-Text-White, #ffffff);
 
   /**
-   * MainBtn_40 金 / 青绿强调环与 Hover 渐变（Points · Figma 168:4189；`button.primit.css` accent 变体）
+   * MainBtn_40 金 / 青绿强调环与 Hover 渐变（Points · Figma 168:4189；`button.zanbara.css` accent 变体）
    */
   --zanbara-btn-accent-yellow-ring: #b8893a;
   --zanbara-btn-accent-green-ring: #33987f;

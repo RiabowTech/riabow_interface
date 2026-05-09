@@ -540,7 +540,7 @@ svg.animate-spin:not(.text-white) {
   color: var(--spinner-icon-color);
 }
 
-/* Legacy：持仓区与授权按钮等仍为蓝圈（Primit 下由 loading.primit.css 改为主色） */
+/* Legacy：持仓区与授权按钮等仍为蓝圈（Primit 下由 loading.zanbara.css 改为主色） */
 svg.spin.position-loading-icon:not(.text-white) {
   color: var(--color-blue-600);
 }

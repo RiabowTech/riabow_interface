@@ -1,7 +1,7 @@
 /**
  * 仅当 html 挂 `sb-skin-dex` | `sb-skin-prediction` | `sb-skin-rwa`（Storybook 产品线切换）时生效：
  * 在 Zanbara 组件结构上恢复「经典」圆角实色按钮，与各皮肤 `--ui-*` 配色一致。
- * 生产环境与 Storybook「Primit」皮肤不挂上述 class，仍用 `themes/primit/button.primit.css` 的 Figma 稿面。
+ * 生产环境与 Storybook「Primit」皮肤不挂上述 class，仍用 `themes/zanbara/button.zanbara.css` 的 Figma 稿面。
  */
 
 html.sb-skin-dex .zanbara-ui-button,

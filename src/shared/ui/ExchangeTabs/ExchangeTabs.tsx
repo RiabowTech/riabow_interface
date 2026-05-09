@@ -3,7 +3,7 @@
  *
  * 基于 trade 页 Positions / Orders / Trades 这一类列表 Tabs 抽象：
  * - 固定使用 `type="block"`
- * - Primit 壳上 block 稿面见 `styles/themes/primit/tabs.primit.css`（`html[data-ui-theme="primit"]` + `html.dark`）
+ * - Primit 壳上 block 稿面见 `styles/themes/zanbara/tabs.zanbara.css`（`html[data-ui-theme="primit"]` + `html.dark`）
  * - 支持右侧附加操作区域（如批量取消按钮）
  *
  * 推荐用于：交易列表、账户历史、预测市场顶部分类等。

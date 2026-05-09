@@ -269,7 +269,7 @@ html[data-ui-theme="zanbara"] .pd-shell {
 }
 
 /* MainBtn_40：稿面 SVG（figma-mainbtn）已为浅灰填充，勿再加 invert 滤镜 */
-/* 金 / 青绿 MainBtn 变体已迁入 `themes/primit/button.primit.css` + `mainAccent` API */
+/* 金 / 青绿 MainBtn 变体已迁入 `themes/zanbara/button.zanbara.css` + `mainAccent` API */
 
 .pd-side {
   flex: 0 1 320px;

@@ -15,7 +15,7 @@ type Props<V extends BaseOptionValue> = {
   onChange?: (value: V) => void;
   size?: "l" | "m";
   /**
-   * `primit-big-tab`：Primit 第 9 章 Big_Tab（40px、ac-15、选中底边线），见 `BigTab` / `primit-big-tab.primit.css`
+   * `zanbara-big-tab`：Primit 第 9 章 Big_Tab（40px、ac-15、选中底边线），见 `BigTab` / `zanbara-big-tab.zanbara.css`
    */
   type?: "inline" | "block" | "inline-primary" | "zanbara-big-tab";
   className?: string;

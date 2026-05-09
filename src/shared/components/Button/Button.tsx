@@ -23,7 +23,7 @@ type ButtonProps = Omit<HTMLProps<HTMLButtonElement>, "size"> & {
   imgSrc?: string;
   imgAlt?: string;
   imgClassName?: string;
-  /** Primit MainBtn：金 / 青绿强调环（见 `themes/primit/button.primit.css`） */
+  /** Primit MainBtn：金 / 青绿强调环（见 `themes/zanbara/button.zanbara.css`） */
   mainAccent?: ZanbaraMainButtonAccent;
   newTab?: boolean;
   showExternalLinkArrow?: boolean;

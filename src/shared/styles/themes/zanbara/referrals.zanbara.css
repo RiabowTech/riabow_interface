@@ -4,7 +4,7 @@
  * `ZANBARA_MAIN_SURFACE`（炭色 secondary-3）提供，本页不再叠「壳衬底灰 + 居中黑卡」。
  * 结构钩子：`referrals-page`（包住 Tab + 内容，全宽）。
  *
- * Tab：使用 `shared/ui` 的 `Tabs`（`type="block"`），视觉与下划线颜色走全局 `tabs.primit.css`
+ * Tab：使用 `shared/ui` 的 `Tabs`（`type="block"`），视觉与下划线颜色走全局 `tabs.zanbara.css`
  *（`--zanbara-primary-1`），本文件仅做页面级 padding 与居中，勿再覆盖 `.tab-underline-indicator` / 按钮底色。
  */
 
@@ -24,7 +24,7 @@ html[data-ui-theme="zanbara"] .referrals-page .referrals-tab-content {
   min-width: 0;
 }
 
-/** 顶栏 Tab 行：左右 padding 归零。下划线 / 字色 / 直角由 `tabs.primit.css` 统一 */
+/** 顶栏 Tab 行：左右 padding 归零。下划线 / 字色 / 直角由 `tabs.zanbara.css` 统一 */
 html[data-ui-theme="zanbara"].dark .referrals-page > [data-tabs-type="block"],
 html[data-ui-theme="zanbara"]:not(.dark) .referrals-page > [data-tabs-type="block"] {
   padding-left: 0 !important;
@@ -89,7 +89,7 @@ html[data-ui-theme="zanbara"]:not(.dark) .referrals-page .referral-card input.te
 
 /**
  * ZanbaraReferralsPage（`.ref-page`）不走 legacy `.referrals-page` 壳；
- * token 与 Points `.pd-page`（`points.primit.css`）对齐。
+ * token 与 Points `.pd-page`（`points.zanbara.css`）对齐。
  */
 html[data-ui-theme="zanbara"] .ref-page {
   --ref-text: var(--zanbara-secondary-1);

@@ -1,5 +1,5 @@
 /**
- * PnL 图表卡片：用自定义属性供 Recharts / 图例继承，Primit 下在 `account-dashboard.primit.css` 覆写。
+ * PnL 图表卡片：用自定义属性供 Recharts / 图例继承，Primit 下在 `account-dashboard.zanbara.css` 覆写。
  */
 .account-pnl-chart-card {
   background: rgba(255, 255, 255, 0.05);
