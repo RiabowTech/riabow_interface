@@ -1,11 +1,11 @@
 import { ColorTree } from "lib/generateColorConfig";
 
 export const colors: ColorTree = {
-  // XBlade Gold Theme - Matching landing page #D4A574
+  // XBlade Gold Theme - Matching landing page #EBB800
   gold: {
-    100: { light: "#D4A574", dark: "#D4A574" }, // Primary gold
-    300: { light: "#D4A574", dark: "#D4A574" }, // Primary gold
-    500: { light: "#D4A574", dark: "#D4A574" }, // Primary gold
+    100: { light: "#EBB800", dark: "#EBB800" }, // Primary gold
+    300: { light: "#EBB800", dark: "#EBB800" }, // Primary gold
+    500: { light: "#EBB800", dark: "#EBB800" }, // Primary gold
     600: { light: "#00664E", dark: "#00664E" }, // Darker gold for hover
     700: { light: "#003B2E", dark: "#003B2E" }, // Darkest gold for active
   },
@@ -18,10 +18,10 @@ export const colors: ColorTree = {
     700: { light: "#404040", dark: "#404040" }, // Lighter border
   },
   blue: {
-    100: { light: "#D4A574", dark: "#D4A574" }, // Primary gold
-    300: { light: "#D4A574", dark: "#D4A574" }, // Primary gold
-    400: { light: "#D4A574", dark: "#D4A574" }, // Primary gold
-    500: { light: "#D4A574", dark: "#D4A574" }, // Primary gold
+    100: { light: "#EBB800", dark: "#EBB800" }, // Primary gold
+    300: { light: "#EBB800", dark: "#EBB800" }, // Primary gold
+    400: { light: "#EBB800", dark: "#EBB800" }, // Primary gold
+    500: { light: "#EBB800", dark: "#EBB800" }, // Primary gold
     600: { light: "#00664E", dark: "#00664E" }, // Darker gold for hover
     700: { light: "#003B2E", dark: "#003B2E" }, // Darkest gold for active
   },

@@ -30,28 +30,28 @@
     linear-gradient(#000, #000) padding-box,
     linear-gradient(
      90deg,
-      rgba(212, 165, 116, 0.8) 0%,
-      rgba(212, 165, 116, 0.0) 20%,
+      rgba(235, 184, 0, 0.8) 0%,
+      rgba(235, 184, 0, 0.0) 20%,
       rgba(0, 0, 0, 1) 50%,
-      rgba(212, 165, 116, 0.0) 80%,
-      rgba(212, 165, 116, 0.8) 100%
+      rgba(235, 184, 0, 0.0) 80%,
+      rgba(235, 184, 0, 0.8) 100%
     ) border-box;
   transition: all 0.3s ease;
     &:not([disabled]):hover {
       background-color: var(--color-button-primaryHover);
-      border: 2px solid  rgba(212, 165, 116, 0.8) ;
+      border: 2px solid  rgba(235, 184, 0, 0.8) ;
       box-shadow:
-        inset 0 0 20px rgba(212, 165, 116, 0.85);
+        inset 0 0 20px rgba(235, 184, 0, 0.85);
       color: var(--primary-btn-bg);
     }
 
     &:not([disabled]):active {
       background-color: var(--color-button-primaryActive);
-      border: 2px solid  rgba(212, 165, 116, 0.8);
+      border: 2px solid  rgba(235, 184, 0, 0.8);
       box-shadow:
-        0 0 10px rgba(212, 165, 116, 0.8),
-        0 0 20px rgba(212, 165, 116, 0.45),
-        inset 0 0 22px rgba(212, 165, 116, 0.95);
+        0 0 10px rgba(235, 184, 0, 0.8),
+        0 0 20px rgba(235, 184, 0, 0.45),
+        inset 0 0 22px rgba(235, 184, 0, 0.95);
     }
   }
 
@@ -65,11 +65,11 @@
       linear-gradient(#000, #000) padding-box,
       linear-gradient(
        90deg,
-        rgba(212, 165, 116, 0.8) 0%,
-        rgba(212, 165, 116, 0.0) 10%,
+        rgba(235, 184, 0, 0.8) 0%,
+        rgba(235, 184, 0, 0.0) 10%,
         rgba(0, 0, 0, 1) 50%,
-        rgba(212, 165, 116, 0.0) 90%,
-        rgba(212, 165, 116, 0.8) 100%
+        rgba(235, 184, 0, 0.0) 90%,
+        rgba(235, 184, 0, 0.8) 100%
       ) border-box;
     transition: all 0.3s ease;
 
@@ -79,19 +79,19 @@
 
     &:not([disabled], .disabled):hover {
       /* Hover 时填充绿色渐变并加强外发光，模拟设计稿下图效果 */
-    border: 2px solid  rgba(212, 165, 116, 0.8) ;
+    border: 2px solid  rgba(235, 184, 0, 0.8) ;
       box-shadow:
-        inset 0 0 20px rgba(212, 165, 116, 0.85);
+        inset 0 0 20px rgba(235, 184, 0, 0.85);
       color: var(--primary-btn-bg);
 
     }
 
     &:not([disabled], .disabled):active {
-      border: 2px solid  rgba(212, 165, 116, 0.8);
+      border: 2px solid  rgba(235, 184, 0, 0.8);
       box-shadow:
-        0 0 10px rgba(212, 165, 116, 0.8),
-        0 0 20px rgba(212, 165, 116, 0.45),
-        inset 0 0 22px rgba(212, 165, 116, 0.95);
+        0 0 10px rgba(235, 184, 0, 0.8),
+        0 0 20px rgba(235, 184, 0, 0.45),
+        inset 0 0 22px rgba(235, 184, 0, 0.95);
 
     }
 
@@ -250,7 +250,7 @@
 
     // 激活状态 - 使用更高优先级覆盖 !text-typography-primary
     &.secondary {
-      color: #D4A574 !important;
+      color: #EBB800 !important;
       background: transparent !important;
 
       &::after {
@@ -260,7 +260,7 @@
         right: 0;
         bottom: -3px;
         height: 3px;
-        background: #D4A574;
+        background: #EBB800;
         border-radius: 999px;
       }
     }

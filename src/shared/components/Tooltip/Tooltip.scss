@@ -21,16 +21,16 @@
     /* 外层：slate 渐变描边 */
     linear-gradient(
       90deg,
-      rgba(168, 133, 85, 0.9) 0%,
-      rgba(168, 133, 85, 0.0) 15%,
+      rgba(212, 166, 0, 0.9) 0%,
+      rgba(212, 166, 0, 0.0) 15%,
       rgba(0, 0, 0, 1) 50%,
-      rgba(168, 133, 85, 0.0) 85%,
-      rgba(168, 133, 85, 0.9) 100%
+      rgba(212, 166, 0, 0.0) 85%,
+      rgba(212, 166, 0, 0.9) 100%
     )
       border-box;
   backdrop-filter: blur(14px);
   box-shadow:
-    0 0 12px rgba(168, 133, 85, 0.4),
+    0 0 12px rgba(212, 166, 0, 0.4),
     0 10px 24px rgba(0, 0, 0, 0.6);
   z-index: 10000;
   color: var(--color-typography-primary);
@@ -44,7 +44,7 @@
 
 .Tooltip-arrow path {
 
-  fill: rgba(168, 133, 85, 0.7);
+  fill: rgba(212, 166, 0, 0.7);
   stroke-width: 1;
 }
 

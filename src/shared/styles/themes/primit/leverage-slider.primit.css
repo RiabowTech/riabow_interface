@@ -1,7 +1,7 @@
 /**
  * Primit 覆盖层 · LeverageSlider（rc-slider）
  * 钩子：`.LeverageSlider`（`components/LeverageSlider/LeverageSlider.scss`）
- * 替换 legacy 轨道/节点的 `blue-300` 与 `#D4A574`，与做多绿/做空红 token 对齐。
+ * 替换 legacy 轨道/节点的 `blue-300` 与 `#EBB800`，与做多绿/做空红 token 对齐。
  */
 
 html[data-ui-theme="primit"] .LeverageSlider .rc-slider-rail {

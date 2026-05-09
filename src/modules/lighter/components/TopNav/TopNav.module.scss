@@ -60,7 +60,19 @@
 }
 
 .active {
-  color: #ffffff;
+  color: #EBB800;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: linear-gradient(135deg, #EBB800 0%, #D4A600 100%);
+    border-radius: 2px;
+  }
 }
 
 .right {
@@ -82,7 +94,7 @@
 }
 
 .rightDense :global(.primit-ui-button:hover:not(:disabled)) {
-  background-color: #5C4528 !important; /* dark gold */
+  background-color: #8A6C00 !important; /* dark gold */
   background-image: none !important;
 }
 

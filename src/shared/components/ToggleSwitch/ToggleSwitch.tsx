@@ -35,7 +35,7 @@ export default function ToggleSwitch({
         {beforeSwitchContent}
         <div
           className={cx("group relative w-36 h-20 cursor-pointer rounded-full border-2 transition-colors duration-200", {
-            "border-[#D4A574] bg-[#4A4A4A]": isChecked,
+            "border-[#EBB800] bg-[#4A4A4A]": isChecked,
             "border-slate-600 bg-[#4A4A4A]": !isChecked,
             "pointer-events-none opacity-50": disabled,
           })}
@@ -49,7 +49,7 @@ export default function ToggleSwitch({
               transition: "transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
               background: !isChecked
                 ? "radial-gradient(circle at 30% 30%, rgba(255,255,255,1) 0%, rgba(240,240,240,1) 100%)"
-                : "#D4A574",
+                : "#EBB800",
               boxShadow: !isChecked ? "0px 2px 4px rgba(0,0,0,0.2)" : "0 0 8px rgba(203,213,225,0.6)",
             }}
           />
