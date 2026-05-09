@@ -263,7 +263,7 @@ $app-card-padding: 1.5rem;
   letter-spacing: 0.05em;
   position: relative;
   /* 添加绿色发光效果 */
-  text-shadow: 0 0 8px rgba(203, 213, 225, 0.3);
+  text-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
 }
 
 .section-title-content .section-title-content__description {
@@ -302,7 +302,7 @@ $app-card-padding: 1.5rem;
   letter-spacing: 0.05em;
   position: relative;
   /* 添加绿色发光效果 */
-  text-shadow: 0 0 8px rgba(203, 213, 225, 0.3);
+  text-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
   
   .Page-title-icon {
     width: 24px;
@@ -822,7 +822,7 @@ button.App-button {
 }
 
 .App-slider .rc-slider-track {
-  background: linear-gradient(90deg, #334155, #cbd5e1);
+  background: linear-gradient(90deg, #5C4528, #D4A574);
 }
 
 .App-slider .rc-slider-dot {
@@ -834,16 +834,16 @@ button.App-button {
 }
 
 .App-slider .rc-slider-dot-active {
-  background: #cbd5e1;
+  background: #D4A574;
 }
 
 .App-slider .rc-slider-handle {
   background: var(--color-slate-600);
-  border: 2px solid #cbd5e1;
+  border: 2px solid #D4A574;
 }
 
 .App-slider .rc-slider-handle:active {
-  box-shadow: 0 0 0.4rem 0.6rem rgba(203, 213, 225, 0.2);
+  box-shadow: 0 0 0.4rem 0.6rem rgba(212, 165, 116, 0.2);
 }
 
 .App-slider .rc-slider-mark-text,
@@ -874,24 +874,24 @@ button.App-button {
 }
 
 .header-connect-btn {
-  background: #cbd5e1;
+  background: #D4A574;
   color: #000000;
 }
 
 .header-connect-btn:hover {
-  background: #475569;
+  background: #A88555;
 }
 
 .header-connect-btn:focus {
-  background: #475569;
-  border: 1px solid #cbd5e1;
+  background: #A88555;
+  border: 1px solid #D4A574;
   box-sizing: border-box;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
 
 .header-connect-btn:active {
-  background: #334155;
+  background: #5C4528;
 }
 
 .short-connect-btn {

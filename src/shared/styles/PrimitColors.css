@@ -11,10 +11,10 @@
 
 /* ========== 浅色主题（Light） ========== */
 :root {
-  /* Brand — 中性灰 (对齐 ztdx 生产 slate-600/700/800) */
-  --primit-primary-1: #475569;
+  /* Brand — Zanbara Gold (Primary / Hover / Active) */
+  --primit-primary-1: #A88555;
   --primit-primary-2: #64748b;
-  --primit-primary-3: #334155;
+  --primit-primary-3: #5C4528;
 
   /* Text & BG（Secondary） */
   --primit-secondary-1: #20272f;
@@ -116,7 +116,7 @@
   /** 交易主区画布 + 1px 网格分割线（Primit-Website Trade 桌面稿） */
   --primit-trade-canvas-bg: #f8fafc;
   --primit-trade-divider: #e2e8f0;
-  --primit-trade-divider-strong: #cbd5e1;
+  --primit-trade-divider-strong: #D4A574;
   /**
    * 大模块表面 = Dev `--text-bg-color-secondary-3`（与 primit-secondary-3 同步）
    */
@@ -135,9 +135,9 @@
 
 /* ========== 深色主题（Dark） ========== */
 html.dark {
-  --primit-primary-1: #475569;
+  --primit-primary-1: #A88555;
   --primit-primary-2: #64748b;
-  --primit-primary-3: #334155;
+  --primit-primary-3: #5C4528;
 
   --primit-secondary-1: #ffffff;
   --primit-secondary-2: #768892;
@@ -240,7 +240,7 @@ html.dark {
 }
 
 .primit-ui-button:hover:not(:disabled):not(.primit-ui-button--disabled) {
-  background-color: #334155 !important;
+  background-color: #5C4528 !important;
   background-image: none !important;
 }
 

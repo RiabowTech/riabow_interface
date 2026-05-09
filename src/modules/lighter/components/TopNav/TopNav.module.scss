@@ -74,7 +74,7 @@
 /* 统一所有 primit-ui-button 子类的外观（main-40 / icon-40 / 其它） */
 .rightDense :global(.primit-ui-button) {
   border-radius: 4px !important;
-  background-color: #1e293b !important; /* slate-800 */
+  background-color: #1e293b !important; /* dark surface */
   background-image: none !important;
   border: 1px solid transparent !important;
   box-shadow: none !important;
@@ -82,7 +82,7 @@
 }
 
 .rightDense :global(.primit-ui-button:hover:not(:disabled)) {
-  background-color: #334155 !important; /* slate-700 */
+  background-color: #5C4528 !important; /* dark gold */
   background-image: none !important;
 }
 

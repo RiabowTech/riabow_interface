@@ -4,7 +4,7 @@
  * 字体栈见 `PrimitTypography.css`：`--primit-font-title` / `--primit-font-body`（理财页已改用变量）。
  */
 :root {
-  --earn-accent: #cbd5e1;
+  --earn-accent: #D4A574;
 }
 
 html[data-ui-theme="primit"] {
