@@ -17,6 +17,8 @@ import {
   type OrdersResponse,
 } from "./client";
 import { convertApiOrdersToSdk } from "./orderAdapter";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
+import { tradeProductSWRKey } from "./productRouting";
 
 // Default SWR configuration for orders
 const defaultConfig: SWRConfiguration = {
@@ -113,6 +115,7 @@ export function useApiOrders(
   account: string | null | undefined,
   config?: SWRConfiguration
 ): UseApiOrdersResult {
+  const product = useTradeProduct();
   // Use state to track token existence so component re-renders when token changes
   const [hasToken, setHasToken] = useState(() => {
     // Use same logic as apiFetch: try account first, then fallback to last address
@@ -161,7 +164,10 @@ export function useApiOrders(
   const authenticated = hasToken;
   // Use account or fallback to lastAddress for SWR key
   const effectiveAccount = account || getLastAddress();
-  const swrKey = chainId && effectiveAccount && authenticated ? [`api-orders`, chainId, effectiveAccount] : null;
+  const swrKey =
+    chainId && effectiveAccount && authenticated
+      ? tradeProductSWRKey(product, [`api-orders`, chainId, effectiveAccount])
+      : null;
 
   // Fetch both account orders and trigger orders, then merge
   const {
@@ -175,10 +181,16 @@ export function useApiOrders(
       try {
         // Fetch both endpoints in parallel using Promise.allSettled
         // This ensures that if one fails, the other can still succeed
-        const [accountOrdersResult, triggerOrdersResult] = await Promise.allSettled([
-          getOrders(chainId!, effectiveAccount),
-          getTriggerOrders(chainId!, effectiveAccount),
-        ]);
+        const [accountOrdersResult, triggerOrdersResult] =
+          product === "spot"
+            ? await Promise.allSettled([
+                getOrders(chainId!, effectiveAccount, product),
+                Promise.resolve({ data: [] }),
+              ])
+            : await Promise.allSettled([
+                getOrders(chainId!, effectiveAccount, product),
+                getTriggerOrders(chainId!, effectiveAccount, product),
+              ]);
 
         // Extract orders from successful responses
         const accountOrders =

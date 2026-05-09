@@ -12,6 +12,8 @@ import type { PositionsData } from "sdk/types/positions";
 import { getPositions, getStoredToken, getLastAddress, type PositionsResponse } from "./client";
 import { convertApiPositionsToSdk } from "./positionAdapter";
 import { useEffect, useState } from "react";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
+import { tradeProductSWRKey } from "./productRouting";
 
 // Default SWR configuration for positions
 const defaultConfig: SWRConfiguration = {
@@ -38,6 +40,7 @@ export function useApiPositions(
   account: string | null | undefined,
   config?: SWRConfiguration
 ): UseApiPositionsResult {
+  const product = useTradeProduct();
   // Use state to track token existence so component re-renders when token changes
   const [hasToken, setHasToken] = useState(() => {
     // Use same logic as apiFetch: try account first, then fallback to last address
@@ -86,7 +89,10 @@ export function useApiPositions(
   const authenticated = hasToken;
   // Use account or fallback to lastAddress for SWR key
   const effectiveAccount = account || getLastAddress();
-  const swrKey = chainId && effectiveAccount && authenticated ? [`api-positions`, chainId, effectiveAccount] : null;
+  const swrKey =
+    product !== "spot" && chainId && effectiveAccount && authenticated
+      ? tradeProductSWRKey(product, [`api-positions`, chainId, effectiveAccount])
+      : null;
 
   const {
     data: apiResponse,
@@ -98,7 +104,7 @@ export function useApiPositions(
     async () => {
       try {
         // Pass effectiveAccount to getPositions for consistent token lookup
-        const result = await getPositions(chainId!, effectiveAccount);
+        const result = await getPositions(chainId!, effectiveAccount, product);
         return result;
       } catch (err) {
         console.error("[useApiPositions] ❌ Positions fetch error", err);

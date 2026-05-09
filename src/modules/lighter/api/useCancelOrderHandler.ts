@@ -26,6 +26,7 @@ import useWallet from "lib/wallets/useWallet";
 import { cancelOrder, batchCancelOrders, isAuthenticated, getNonce, deletePositionTpSl, cancelTriggerOrder } from "./custom/client";
 import { shouldUseApiOrderSubmit } from "./custom/useZanbaraOrderSubmit";
 import { useApiOrders } from "./custom/useApiOrders";
+import { useTradeProduct } from "../store/TradeStateContext";
 
 export interface UseCancelOrderHandlerResult {
   cancelSingleOrder: (order: OrderInfo, onStart?: () => void, onComplete?: () => void) => Promise<void>;
@@ -38,6 +39,7 @@ export function useCancelOrderHandler(): UseCancelOrderHandlerResult {
   const { signer } = useWallet();
   const { address } = useAccount();
   const { signTypedDataAsync } = useSignTypedData();
+  const product = useTradeProduct();
   const { provider } = useJsonRpcProvider(chainId);
   const srcChainId = useSelector(selectSrcChainId);
   const globalExpressParams = useSelector(selectExpressGlobalParams);
@@ -160,16 +162,16 @@ export function useCancelOrderHandler(): UseCancelOrderHandlerResult {
         await cancelOrder(chainId, orderKeys[0], {
           signature,
           timestamp,
-        });
+        }, product);
       } else {
         await batchCancelOrders(chainId, {
           order_ids: orderKeys,
           signature,
           timestamp,
-        });
+        }, product);
       }
     },
-    [chainId, address, generateCancelSignature]
+    [chainId, product, address, generateCancelSignature]
   );
 
   // Cancel via on-chain transaction
@@ -263,7 +265,7 @@ export function useCancelOrderHandler(): UseCancelOrderHandlerResult {
             if (positionId) {
               await deletePositionTpSl(chainId, positionId);
             } else {
-              await cancelTriggerOrder(chainId, apiOrderIds[0], address);
+              await cancelTriggerOrder(chainId, apiOrderIds[0], address, product);
             }
             helperToast.success(t`TP/SL cancelled successfully`);
           } else {

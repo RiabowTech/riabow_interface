@@ -4,12 +4,6 @@ import { useAccount } from "wagmi";
 import { getServerBaseUrl } from "config/backend";
 
 import {
-  getMarkets,
-  getMarketDetails,
-  getOrderbook,
-  getTicker,
-  getTrades,
-  getPrice,
   getAllFundingRates,
   getFundingRate,
   getFundingHistory,
@@ -22,6 +16,12 @@ import {
   type BalancesResponse,
 } from "./client";
 import {
+  getMarkets as getCustomMarkets,
+  getMarketDetails as getCustomMarketDetails,
+  getOrderbook as getCustomOrderbook,
+  getTicker as getCustomTicker,
+  getTrades as getCustomTrades,
+  getPrice as getCustomPrice,
   getBalances,
   isAuthenticated,
   getWithdrawHistory,
@@ -43,6 +43,8 @@ import type {
   ClaimableAmount,
   OperatorStatus,
 } from "./types";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
+import { tradeProductSWRKey } from "./custom/productRouting";
 
 // Default SWR configuration
 const defaultConfig: SWRConfiguration = {
@@ -54,25 +56,28 @@ const defaultConfig: SWRConfiguration = {
 // Market Hooks
 // ============================================
 export function useZanbaraMarkets(chainId: number | undefined, config?: SWRConfiguration) {
+  const product = useTradeProduct();
   return useSWR<{ markets: Market[]; total: number }>(
-    chainId ? [`zanbara-markets`, chainId] : null,
-    () => getMarkets(chainId!),
+    chainId ? tradeProductSWRKey(product, [`zanbara-markets`, chainId]) : null,
+    () => getCustomMarkets(chainId!, undefined, product),
     { ...defaultConfig, ...config }
   );
 }
 
 export function useZanbaraOrderbook(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+  const product = useTradeProduct();
   return useSWR<Orderbook>(
-    chainId && symbol ? [`zanbara-orderbook`, chainId, symbol] : null,
-    () => getOrderbook(chainId!, symbol!),
+    chainId && symbol ? tradeProductSWRKey(product, [`zanbara-orderbook`, chainId, symbol]) : null,
+    () => getCustomOrderbook(chainId!, symbol!, product),
     { ...defaultConfig, refreshInterval: 1000, ...config }
   );
 }
 
 export function useZanbaraTicker(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+  const product = useTradeProduct();
   return useSWR<Ticker>(
-    chainId && symbol ? [`zanbara-ticker`, chainId, symbol] : null,
-    () => getTicker(chainId!, symbol!),
+    chainId && symbol ? tradeProductSWRKey(product, [`zanbara-ticker`, chainId, symbol]) : null,
+    () => getCustomTicker(chainId!, symbol!, product),
     { ...defaultConfig, refreshInterval: 2000, dedupingInterval: 1000, ...config }
   );
 }
@@ -82,25 +87,28 @@ export function useZanbaraMarketDetails(
   symbol: string | undefined,
   config?: SWRConfiguration
 ) {
+  const product = useTradeProduct();
   return useSWR<MarketDetailsResponse>(
-    chainId && symbol ? [`zanbara-market-details`, chainId, symbol] : null,
-    () => getMarketDetails(chainId!, symbol!),
+    chainId && symbol ? tradeProductSWRKey(product, [`zanbara-market-details`, chainId, symbol]) : null,
+    () => getCustomMarketDetails(chainId!, symbol!, product),
     { ...defaultConfig, ...config }
   );
 }
 
 export function useZanbaraTrades(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+  const product = useTradeProduct();
   return useSWR<{ symbol: string; trades: Trade[] }>(
-    chainId && symbol ? [`zanbara-trades`, chainId, symbol] : null,
-    () => getTrades(chainId!, symbol!),
+    chainId && symbol ? tradeProductSWRKey(product, [`zanbara-trades`, chainId, symbol]) : null,
+    () => getCustomTrades(chainId!, symbol!, product),
     { ...defaultConfig, refreshInterval: 1000, ...config }
   );
 }
 
 export function useZanbaraPrice(chainId: number | undefined, symbol: string | undefined, config?: SWRConfiguration) {
+  const product = useTradeProduct();
   return useSWR<PriceResponse>(
-    chainId && symbol ? [`zanbara-price`, chainId, symbol] : null,
-    () => getPrice(chainId!, symbol!),
+    chainId && symbol ? tradeProductSWRKey(product, [`zanbara-price`, chainId, symbol]) : null,
+    () => getCustomPrice(chainId!, symbol!, product),
     { ...defaultConfig, refreshInterval: 1000, ...config }
   );
 }
@@ -206,30 +214,35 @@ export function useZanbaraBackendStatus(chainId: number | undefined) {
 // ============================================
 export function useZanbaraPositions(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<PositionsResponse>(
-    chainId && authenticated && address ? [`zanbara-positions`, chainId, address] : null,
-    () => getPositions(chainId!, address),
+    product !== "spot" && chainId && authenticated && address
+      ? tradeProductSWRKey(product, [`zanbara-positions`, chainId, address])
+      : null,
+    () => getPositions(chainId!, address, product),
     { ...defaultConfig, refreshInterval: 2000, ...config }
   );
 }
 
 export function useZanbaraOrders(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<OrdersResponse>(
-    chainId && authenticated && address ? [`zanbara-orders`, chainId, address] : null,
-    () => getOrders(chainId!, address),
+    chainId && authenticated && address ? tradeProductSWRKey(product, [`zanbara-orders`, chainId, address]) : null,
+    () => getOrders(chainId!, address, product),
     { ...defaultConfig, refreshInterval: 5000, ...config }
   );
 }
 
 export function useZanbaraBalances(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<BalancesResponse>(
-    chainId && authenticated && address ? [`zanbara-balances`, chainId, address] : null,
-    () => getBalances(chainId!, address),
+    chainId && authenticated && address ? tradeProductSWRKey(product, [`zanbara-balances`, chainId, address]) : null,
+    () => getBalances(chainId!, address, product),
     {
       ...defaultConfig,
       refreshInterval: 10000,
@@ -251,10 +264,13 @@ export function useZanbaraBalances(chainId: number | undefined, config?: SWRConf
 
 export function useZanbaraUnifiedAccount(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(address, chainId);
   return useSWR<UnifiedAccountResponse>(
-    chainId && authenticated && address ? [`zanbara-unified-account`, chainId, address] : null,
-    () => getUnifiedAccount(chainId!, address),
+    chainId && authenticated && address
+      ? tradeProductSWRKey(product, [`zanbara-unified-account`, chainId, address])
+      : null,
+    () => getUnifiedAccount(chainId!, address, product),
     {
       ...defaultConfig,
       refreshInterval: 5000,

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useChainId } from "lib/chains";
 import { useApiOrderbook } from "modules/lighter/api/hooks";
 import { getWebSocketService, normalizeMarketSymbolToApiFormat } from "modules/lighter/api/custom/websocket";
-import { useTradeState } from "modules/lighter/store/TradeStateContext";
+import { useTradeProduct, useTradeState } from "modules/lighter/store/TradeStateContext";
 import type { Orderbook } from "modules/lighter/api/types";
 
 import { aggregateOrderBookLevels, parseOrderBookGroupTick } from "./orderBookAggregation";
@@ -37,6 +37,7 @@ const EMPTY: OrderBookData = { asks: [], bids: [], spread: 0, spreadPct: 0, tick
  */
 export function useOrderBookAdapter(group?: string): OrderBookData {
   const { chainId } = useChainId();
+  const product = useTradeProduct();
   const { selectedSymbol } = useTradeState();
   const { orderbook: restOrderbook } = useApiOrderbook(chainId, selectedSymbol ?? undefined);
   const [wsOrderbook, setWsOrderbook] = useState<Orderbook | null>(null);
@@ -48,7 +49,7 @@ export function useOrderBookAdapter(group?: string): OrderBookData {
 
   useEffect(() => {
     if (!chainId || !selectedSymbol) return undefined;
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
     ws.connect();
     ws.subscribeOrderbook(selectedSymbol);
 
@@ -70,7 +71,7 @@ export function useOrderBookAdapter(group?: string): OrderBookData {
       unsub();
       ws.unsubscribeOrderbook(selectedSymbol);
     };
-  }, [chainId, selectedSymbol]);
+  }, [chainId, product, selectedSymbol]);
 
   const orderbook = wsOrderbook ?? restOrderbook;
 

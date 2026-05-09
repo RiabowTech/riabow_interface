@@ -7,7 +7,7 @@ import { EMPTY_ARRAY, EMPTY_OBJECT } from "lib/objects";
 import type { TokenCategory } from "sdk/types/tokens";
 
 export type TokenFavoritesTabOption = "all" | "favorites" | TokenCategory;
-export type TokenFavoritesType = "gm" | "index" | "trade";
+export type TokenFavoritesType = "gm" | "index" | "trade" | "futures" | "spot";
 export type TokenFavoriteKey =
   | "chart-token-selector"
   | "market-selector"
@@ -17,7 +17,9 @@ export type TokenFavoriteKey =
   | "gm-list"
   | "gm-pool-selector"
   // Trading-page market selector
-  | "trade-market-selector";
+  | "trade-market-selector"
+  | "futures-market-selector"
+  | "spot-market-selector";
 
 const TAB_TYPE_MAP: Record<TokenFavoriteKey, TokenFavoritesType> = {
   "chart-token-selector": "index",
@@ -28,6 +30,8 @@ const TAB_TYPE_MAP: Record<TokenFavoriteKey, TokenFavoritesType> = {
   "gm-list": "gm",
   "gm-pool-selector": "gm",
   "trade-market-selector": "trade",
+  "futures-market-selector": "futures",
+  "spot-market-selector": "spot",
 };
 
 type TokensFavoritesStore = {
@@ -37,6 +41,8 @@ type TokensFavoritesStore = {
   gmFavoriteTokens: string[];
   indexFavoriteTokens: string[];
   tradeFavoriteTokens: string[];
+  futuresFavoriteTokens: string[];
+  spotFavoriteTokens: string[];
 };
 
 const DEFAULT_TOKENS_FAVORITES_STORE: TokensFavoritesStore = {
@@ -44,6 +50,8 @@ const DEFAULT_TOKENS_FAVORITES_STORE: TokensFavoritesStore = {
   gmFavoriteTokens: EMPTY_ARRAY,
   indexFavoriteTokens: EMPTY_ARRAY,
   tradeFavoriteTokens: EMPTY_ARRAY,
+  futuresFavoriteTokens: EMPTY_ARRAY,
+  spotFavoriteTokens: EMPTY_ARRAY,
 };
 
 type TokensFavoritesContextType = {
@@ -51,6 +59,8 @@ type TokensFavoritesContextType = {
   gmFavoriteTokens: string[];
   indexFavoriteTokens: string[];
   tradeFavoriteTokens: string[];
+  futuresFavoriteTokens: string[];
+  spotFavoriteTokens: string[];
   setTab: (key: TokenFavoriteKey, tab: TokenFavoritesTabOption) => void;
   toggleFavoriteToken: (type: TokenFavoritesType, address: string) => void;
 };
@@ -67,6 +77,8 @@ const context = createContext<TokensFavoritesContextType>({
   gmFavoriteTokens: EMPTY_ARRAY,
   indexFavoriteTokens: EMPTY_ARRAY,
   tradeFavoriteTokens: EMPTY_ARRAY,
+  futuresFavoriteTokens: EMPTY_ARRAY,
+  spotFavoriteTokens: EMPTY_ARRAY,
   setTab: noop,
   toggleFavoriteToken: noop,
 });
@@ -107,6 +119,10 @@ export function TokensFavoritesContextProvider({ children }: PropsWithChildren) 
         let favoriteTokens: string[];
         if (type === "gm") {
           favoriteTokens = prev.gmFavoriteTokens;
+        } else if (type === "futures") {
+          favoriteTokens = prev.futuresFavoriteTokens ?? prev.tradeFavoriteTokens;
+        } else if (type === "spot") {
+          favoriteTokens = prev.spotFavoriteTokens ?? EMPTY_ARRAY;
         } else if (type === "trade") {
           favoriteTokens = prev.tradeFavoriteTokens;
         } else {
@@ -123,6 +139,10 @@ export function TokensFavoritesContextProvider({ children }: PropsWithChildren) 
 
         if (type === "gm") {
           newState.gmFavoriteTokens = updatedFavoriteTokens;
+        } else if (type === "futures") {
+          newState.futuresFavoriteTokens = updatedFavoriteTokens;
+        } else if (type === "spot") {
+          newState.spotFavoriteTokens = updatedFavoriteTokens;
         } else if (type === "trade") {
           newState.tradeFavoriteTokens = updatedFavoriteTokens;
         } else {
@@ -142,6 +162,8 @@ export function TokensFavoritesContextProvider({ children }: PropsWithChildren) 
       gmFavoriteTokens: s.gmFavoriteTokens,
       indexFavoriteTokens: s.indexFavoriteTokens,
       tradeFavoriteTokens: s.tradeFavoriteTokens,
+      futuresFavoriteTokens: s.futuresFavoriteTokens ?? s.tradeFavoriteTokens,
+      spotFavoriteTokens: s.spotFavoriteTokens ?? EMPTY_ARRAY,
       setTab,
       toggleFavoriteToken,
     };
@@ -151,14 +173,26 @@ export function TokensFavoritesContextProvider({ children }: PropsWithChildren) 
 }
 
 export function useTokensFavorites(key: TokenFavoriteKey): TokenFavoritesState {
-  const { tabs, setTab, toggleFavoriteToken, indexFavoriteTokens, gmFavoriteTokens, tradeFavoriteTokens } =
-    useContext(context);
+  const {
+    tabs,
+    setTab,
+    toggleFavoriteToken,
+    indexFavoriteTokens,
+    gmFavoriteTokens,
+    tradeFavoriteTokens,
+    futuresFavoriteTokens,
+    spotFavoriteTokens,
+  } = useContext(context);
   const type = TAB_TYPE_MAP[key];
 
   const tab = tabs[key] || "all";
   let favoriteTokens: string[];
   if (type === "gm") {
     favoriteTokens = gmFavoriteTokens;
+  } else if (type === "futures") {
+    favoriteTokens = futuresFavoriteTokens;
+  } else if (type === "spot") {
+    favoriteTokens = spotFavoriteTokens;
   } else if (type === "trade") {
     favoriteTokens = tradeFavoriteTokens;
   } else {

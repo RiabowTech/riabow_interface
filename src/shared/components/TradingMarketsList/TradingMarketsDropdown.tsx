@@ -21,6 +21,7 @@ import { Sorter, useSorterHandlers } from "components/Sorter/Sorter";
 import { ButtonRowScrollFadeContainer } from "components/TableScrollFade/TableScrollFade";
 import { SelectorBaseMobileHeaderContent, useSelectorClose } from "components/SelectorBase/SelectorBase";
 import { useTokensFavorites } from "@/modules/lighter/store/TokensFavoritesContext/TokensFavoritesContextProvider";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import TokenIcon from "components/TokenIcon/TokenIcon";
 import { MarketTypeTabs } from "./MarketTypeTabs";
 
@@ -34,11 +35,13 @@ interface TradingMarketsDropdownProps {
 
 export function TradingMarketsDropdown({ onMarketSelect }: TradingMarketsDropdownProps) {
   const { chainId } = useChainId();
+  const product = useTradeProduct();
   const { markets, isLoading } = useTradingMarketsWithTickers(chainId);
   const { isMobile, isSmallMobile } = useBreakpoints();
   const close = useSelectorClose();
 
-  const { tab, setTab, favoriteTokens, toggleFavoriteToken } = useTokensFavorites("trade-market-selector");
+  const favoriteKey = product === "spot" ? "spot-market-selector" : "futures-market-selector";
+  const { tab, setTab, favoriteTokens, toggleFavoriteToken } = useTokensFavorites(favoriteKey);
   const { orderBy, direction, getSorterProps } = useSorterHandlers<SortField>("trade-markets-dropdown");
 
   const [searchKeyword, setSearchKeyword] = useState("");

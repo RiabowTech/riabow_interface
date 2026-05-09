@@ -9,6 +9,8 @@ import useSWR, { SWRConfiguration } from "swr";
 import { useAccount } from "wagmi";
 
 import { getAccountTrades, getStoredToken, getLastAddress, type AccountTradesResponse } from "./client";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
+import { tradeProductSWRKey } from "./productRouting";
 
 // Default SWR configuration for trades
 const defaultConfig: SWRConfiguration = {
@@ -33,6 +35,7 @@ export function useAccountTrades(
   account: string | null | undefined,
   config?: SWRConfiguration
 ): UseApiTradesResult {
+  const product = useTradeProduct();
   // Use state to track token existence so component re-renders when token changes
   const [hasToken, setHasToken] = useState(() => {
     // Use same logic as apiFetch: try account first, then fallback to last address
@@ -79,7 +82,10 @@ export function useAccountTrades(
   
   const authenticated = hasToken;
   const effectiveAccount = account || getLastAddress();
-  const swrKey = chainId && effectiveAccount && authenticated ? [`api-trades`, chainId, effectiveAccount] : null;
+  const swrKey =
+    chainId && effectiveAccount && authenticated
+      ? tradeProductSWRKey(product, [`api-trades`, chainId, effectiveAccount])
+      : null;
 
   const {
     data: apiResponse,
@@ -90,7 +96,7 @@ export function useAccountTrades(
     swrKey,
     async () => {
       try {
-        const result = await getAccountTrades(chainId!, effectiveAccount);
+        const result = await getAccountTrades(chainId!, effectiveAccount, product);
         return result;
       } catch (err) {
         // eslint-disable-next-line no-console
@@ -101,10 +107,10 @@ export function useAccountTrades(
     { 
       ...defaultConfig, 
       ...config,
-      onError: (err) => {
+      onError: (err, key, swrConfig) => {
         // eslint-disable-next-line no-console
         console.error("[useAccountTrades] onError", err);
-        config?.onError?.(err);
+        config?.onError?.(err, key, swrConfig);
       },
     }
   );

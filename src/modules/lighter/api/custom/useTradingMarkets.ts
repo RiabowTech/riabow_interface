@@ -8,7 +8,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import useSWR, { SWRConfiguration } from "swr";
 
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import { getMarkets } from "./client";
+import { tradeProductSWRKey, type TradeProduct } from "./productRouting";
 import { getWebSocketService, normalizeMarketSymbolToApiFormat } from "./websocket";
 import type { Market, Ticker } from "../types";
 import type { WsTickerUpdate } from "./websocket";
@@ -68,15 +70,21 @@ function extractMarketsArray(data: unknown): Market[] {
 /**
  * Fetch all markets from API
  */
-export function useTradingMarkets(chainId: number | undefined, config?: SWRConfiguration): UseTradingMarketsResult {
+export function useTradingMarkets(
+  chainId: number | undefined,
+  config?: SWRConfiguration,
+  productOverride?: TradeProduct
+): UseTradingMarketsResult {
+  const routeProduct = useTradeProduct();
+  const product = productOverride ?? routeProduct;
   const {
     data: marketsData,
     error: marketsError,
     isLoading: marketsLoading,
     mutate,
   } = useSWR<{ markets: Market[]; total: number }>(
-    chainId ? [`trade-markets`, chainId] : null,
-    () => getMarkets(chainId!),
+    chainId ? tradeProductSWRKey(product, ["trade-markets", chainId]) : null,
+    () => getMarkets(chainId!, undefined, product),
     { ...defaultConfig, ...config }
   );
 
@@ -104,8 +112,11 @@ export function useTradingMarkets(chainId: number | undefined, config?: SWRConfi
  */
 export function useTradingMarketsWithTickers(
   chainId: number | undefined,
-  config?: SWRConfiguration
+  config?: SWRConfiguration,
+  productOverride?: TradeProduct
 ): UseTradingMarketsResult {
+  const routeProduct = useTradeProduct();
+  const product = productOverride ?? routeProduct;
   // First fetch markets
   const {
     data: marketsData,
@@ -113,8 +124,8 @@ export function useTradingMarketsWithTickers(
     isLoading: marketsLoading,
     mutate: mutateMarkets,
   } = useSWR<{ markets: Market[]; total: number }>(
-    chainId ? [`trade-markets`, chainId] : null,
-    () => getMarkets(chainId!),
+    chainId ? tradeProductSWRKey(product, ["trade-markets", chainId]) : null,
+    () => getMarkets(chainId!, undefined, product),
     { ...defaultConfig, ...config }
   );
 
@@ -139,7 +150,7 @@ export function useTradingMarketsWithTickers(
       return;
     }
 
-    const wsService = getWebSocketService(chainId);
+    const wsService = getWebSocketService(chainId, product);
     const unsubscribers: Array<() => void> = [];
     const tickerMap: Record<string, Ticker> = {};
 
@@ -213,7 +224,7 @@ export function useTradingMarketsWithTickers(
     setTickersLoading(false);
 
     return cleanup;
-  }, [chainId, symbols.join(",")]); // Use symbols.join(",") as dependency to avoid array reference issues
+  }, [chainId, product, symbols.join(",")]); // Use symbols.join(",") as dependency to avoid array reference issues
 
   // Combine markets with tickers — use REST API data as fallback when WebSocket
   // hasn't delivered ticker updates yet
@@ -252,7 +263,13 @@ export function useTradingMarketsWithTickers(
 /**
  * Get single market ticker (using WebSocket)
  */
-export function useTradingTicker(chainId: number | undefined, symbol: string | undefined) {
+export function useTradingTicker(
+  chainId: number | undefined,
+  symbol: string | undefined,
+  productOverride?: TradeProduct
+) {
+  const routeProduct = useTradeProduct();
+  const product = productOverride ?? routeProduct;
   const [ticker, setTicker] = useState<Ticker | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | undefined>();
@@ -264,7 +281,7 @@ export function useTradingTicker(chainId: number | undefined, symbol: string | u
       return;
     }
 
-    const wsService = getWebSocketService(chainId);
+    const wsService = getWebSocketService(chainId, product);
     const apiSymbol = convertSymbolToApiFormat(symbol);
 
     // Ensure WebSocket is connected
@@ -311,7 +328,7 @@ export function useTradingTicker(chainId: number | undefined, symbol: string | u
       unsubscribe();
       wsService.unsubscribeTicker(apiSymbol);
     };
-  }, [chainId, symbol]);
+  }, [chainId, product, symbol]);
 
   return {
     data: ticker,
@@ -328,9 +345,10 @@ export function useTradingTicker(chainId: number | undefined, symbol: string | u
  */
 export function useSelectedTradingMarket(
   chainId: number | undefined,
-  selectedSymbol: string | null | undefined
+  selectedSymbol: string | null | undefined,
+  productOverride?: TradeProduct
 ): TradingMarket | null {
-  const { markets } = useTradingMarketsWithTickers(chainId);
+  const { markets } = useTradingMarketsWithTickers(chainId, undefined, productOverride);
 
   return useMemo(() => {
     if (!selectedSymbol || !markets.length) return null;

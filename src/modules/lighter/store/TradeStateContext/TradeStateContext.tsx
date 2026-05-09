@@ -8,14 +8,18 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
+export type TradeProduct = "futures" | "spot";
+
 interface TradeStateContextValue {
   isTradeMode: boolean;
+  product: TradeProduct;
   selectedSymbol: string | null;
   setSelectedSymbol: (symbol: string) => void;
 }
 
 const TradeStateContext = createContext<TradeStateContextValue>({
   isTradeMode: false,
+  product: "futures",
   selectedSymbol: null,
   setSelectedSymbol: (_symbol: string) => undefined,
 });
@@ -30,6 +34,16 @@ export function useTradeState() {
 export function useIsTradeMode(): boolean {
   const context = useContext(TradeStateContext);
   return context.isTradeMode;
+}
+
+export function useTradeProduct(): TradeProduct {
+  return useContext(TradeStateContext).product;
+}
+
+let activeTradeProduct: TradeProduct = "futures";
+
+export function getActiveTradeProduct(): TradeProduct {
+  return activeTradeProduct;
 }
 
 /**
@@ -64,10 +78,14 @@ export function disableTradeMode(): void {
 
 interface TradeStateProviderProps {
   children: ReactNode;
+  product?: TradeProduct;
 }
 
 const TRADE_MODE_STORAGE_KEY = "trade_mode";
 export const SELECTED_SYMBOL_STORAGE_KEY = "trade_selected_symbol";
+export function getSelectedSymbolStorageKey(product: TradeProduct): string {
+  return `${SELECTED_SYMBOL_STORAGE_KEY}_${product}`;
+}
 // Default symbol matches backend API format (e.g., "BTC-USD")
 const DEFAULT_SYMBOL = "BTC-USD";
 
@@ -75,35 +93,46 @@ const DEFAULT_SYMBOL = "BTC-USD";
  * Provider that marks the subtree as running in API-backed trading mode and
  * owns the currently-selected chart symbol.
  */
-export function TradeStateProvider({ children }: TradeStateProviderProps) {
+export function TradeStateProvider({ children, product = "futures" }: TradeStateProviderProps) {
   // Initialize selected symbol from localStorage or default
   const [selectedSymbol, setSelectedSymbolState] = useState<string | null>(() => {
     if (typeof window === "undefined") return DEFAULT_SYMBOL;
-    return localStorage.getItem(SELECTED_SYMBOL_STORAGE_KEY) || DEFAULT_SYMBOL;
+    return localStorage.getItem(getSelectedSymbolStorageKey(product)) || DEFAULT_SYMBOL;
   });
 
-  const setSelectedSymbol = useCallback((symbol: string) => {
-    setSelectedSymbolState(symbol);
-    if (typeof window !== "undefined") {
-      localStorage.setItem(SELECTED_SYMBOL_STORAGE_KEY, symbol);
-    }
-  }, []);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    setSelectedSymbolState(localStorage.getItem(getSelectedSymbolStorageKey(product)) || DEFAULT_SYMBOL);
+  }, [product]);
+
+  const setSelectedSymbol = useCallback(
+    (symbol: string) => {
+      setSelectedSymbolState(symbol);
+      if (typeof window !== "undefined") {
+        localStorage.setItem(getSelectedSymbolStorageKey(product), symbol);
+      }
+    },
+    [product]
+  );
 
   // Set the API trading mode flag on mount, clear it on unmount.
   useEffect(() => {
+    activeTradeProduct = product;
     enableTradeMode();
     return () => {
       disableTradeMode();
+      activeTradeProduct = "futures";
     };
-  }, []);
+  }, [product]);
 
   const value = useMemo<TradeStateContextValue>(
     () => ({
       isTradeMode: true,
+      product,
       selectedSymbol,
       setSelectedSymbol,
     }),
-    [selectedSymbol, setSelectedSymbol]
+    [product, selectedSymbol, setSelectedSymbol]
   );
 
   return <TradeStateContext.Provider value={value}>{children}</TradeStateContext.Provider>;

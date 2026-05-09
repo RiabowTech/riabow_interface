@@ -93,21 +93,21 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
       </Route>
 
       <Route exact path="/futures/:tradeType?">
-        <LighterTradeRuntimeProviders>
-          <TradeStateProvider>
+        <TradeStateProvider product="futures">
+          <LighterTradeRuntimeProviders>
             <LighterTradePage />
             <TradingAccountModal />
-          </TradeStateProvider>
-        </LighterTradeRuntimeProviders>
+          </LighterTradeRuntimeProviders>
+        </TradeStateProvider>
       </Route>
 
       <Route exact path="/spot/:tradeType?">
-        <LighterTradeRuntimeProviders>
-          <TradeStateProvider>
+        <TradeStateProvider product="spot">
+          <LighterTradeRuntimeProviders>
             <LighterSpotPage />
             <TradingAccountModal />
-          </TradeStateProvider>
-        </LighterTradeRuntimeProviders>
+          </LighterTradeRuntimeProviders>
+        </TradeStateProvider>
       </Route>
 
       <Route exact path="/fee-vip">

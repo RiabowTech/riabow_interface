@@ -6,6 +6,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAccount } from "wagmi";
 
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import { isAuthenticated } from "./client";
 import {
   getWebSocketService,
@@ -28,6 +29,7 @@ export type WsConnectionStatus = "disconnected" | "connecting" | "connected" | "
  */
 export function useWebSocketConnection(chainId: number | undefined) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const [status, setStatus] = useState<WsConnectionStatus>("disconnected");
   const wsRef = useRef<WebSocketService | null>(null);
 
@@ -37,7 +39,7 @@ export function useWebSocketConnection(chainId: number | undefined) {
       return;
     }
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
     wsRef.current = ws;
 
     const unsubConnect = ws.onConnect(() => {
@@ -65,7 +67,7 @@ export function useWebSocketConnection(chainId: number | undefined) {
       unsubDisconnect();
       unsubError();
     };
-  }, [chainId, address]);
+  }, [chainId, address, product]);
 
   return { status, ws: wsRef.current };
 }
@@ -78,13 +80,14 @@ export function usePositionUpdates(
   onUpdate?: (update: WsPositionUpdate) => void
 ) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(address, chainId);
   const [lastUpdate, setLastUpdate] = useState<WsPositionUpdate | null>(null);
 
   useEffect(() => {
     if (!chainId || !authenticated || !address) return;
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
 
     // Subscribe to positions
     ws.subscribePositions(address);
@@ -99,7 +102,7 @@ export function usePositionUpdates(
       unsub();
       ws.unsubscribePositions();
     };
-  }, [chainId, authenticated, address, onUpdate]);
+  }, [chainId, product, authenticated, address, onUpdate]);
 
   return { lastUpdate };
 }
@@ -112,13 +115,14 @@ export function useOrderUpdates(
   onUpdate?: (update: WsOrderUpdate) => void
 ) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(address, chainId);
   const [lastUpdate, setLastUpdate] = useState<WsOrderUpdate | null>(null);
 
   useEffect(() => {
     if (!chainId || !authenticated || !address) return;
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
 
     // Subscribe to orders
     ws.subscribeOrders(address);
@@ -133,7 +137,7 @@ export function useOrderUpdates(
       unsub();
       ws.unsubscribeOrders();
     };
-  }, [chainId, authenticated, address, onUpdate]);
+  }, [chainId, product, authenticated, address, onUpdate]);
 
   return { lastUpdate };
 }
@@ -146,13 +150,14 @@ export function useBalanceUpdates(
   onUpdate?: (update: WsBalanceUpdate) => void
 ) {
   const { address } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(address, chainId);
   const [lastUpdate, setLastUpdate] = useState<WsBalanceUpdate | null>(null);
 
   useEffect(() => {
     if (!chainId || !authenticated || !address) return;
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
 
     // Subscribe to balances
     ws.subscribeBalances(address);
@@ -167,7 +172,7 @@ export function useBalanceUpdates(
       unsub();
       ws.unsubscribeBalances();
     };
-  }, [chainId, authenticated, address, onUpdate]);
+  }, [chainId, product, authenticated, address, onUpdate]);
 
   return { lastUpdate };
 }
@@ -180,12 +185,13 @@ export function usePriceUpdates(
   symbols: string[],
   onUpdate?: (update: WsPriceUpdate) => void
 ) {
+  const product = useTradeProduct();
   const [prices, setPrices] = useState<Record<string, WsPriceUpdate>>({});
 
   useEffect(() => {
     if (!chainId || symbols.length === 0) return;
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
 
     // Subscribe to prices
     ws.subscribePrices(symbols);
@@ -203,7 +209,7 @@ export function usePriceUpdates(
       unsub();
       ws.unsubscribePrices(symbols);
     };
-  }, [chainId, symbols.join(","), onUpdate]);
+  }, [chainId, product, symbols.join(","), onUpdate]);
 
   return { prices };
 }
@@ -216,12 +222,13 @@ export function useOrderbookUpdates(
   symbol: string | undefined,
   onUpdate?: (update: WsOrderbookUpdate) => void
 ) {
+  const product = useTradeProduct();
   const [orderbook, setOrderbook] = useState<WsOrderbookUpdate | null>(null);
 
   useEffect(() => {
     if (!chainId || !symbol) return;
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
 
     // Ensure WebSocket is connected
     if (!ws.isConnected()) {
@@ -253,7 +260,7 @@ export function useOrderbookUpdates(
       unsub();
       ws.unsubscribeOrderbook(symbol);
     };
-  }, [chainId, symbol, onUpdate]);
+  }, [chainId, product, symbol, onUpdate]);
 
   return { orderbook };
 }
@@ -266,12 +273,13 @@ export function useTickerUpdates(
   symbol: string | undefined,
   onUpdate?: (update: WsTickerUpdate) => void
 ) {
+  const product = useTradeProduct();
   const [ticker, setTicker] = useState<WsTickerUpdate | null>(null);
 
   useEffect(() => {
     if (!chainId || !symbol) return;
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
 
     // Ensure WebSocket is connected
     if (!ws.isConnected()) {
@@ -296,7 +304,7 @@ export function useTickerUpdates(
       unsub();
       ws.unsubscribeTicker(symbol);
     };
-  }, [chainId, symbol, onUpdate]);
+  }, [chainId, product, symbol, onUpdate]);
 
   return { ticker };
 }
@@ -309,12 +317,13 @@ export function useTradesUpdates(
   symbol: string | undefined,
   onUpdate?: (update: WsTradeUpdate) => void
 ) {
+  const product = useTradeProduct();
   const [lastTrade, setLastTrade] = useState<WsTradeUpdate | null>(null);
 
   useEffect(() => {
     if (!chainId || !symbol) return;
 
-    const ws = getWebSocketService(chainId);
+    const ws = getWebSocketService(chainId, product);
 
     // Ensure WebSocket is connected
     if (!ws.isConnected()) {
@@ -339,7 +348,7 @@ export function useTradesUpdates(
       unsub();
       ws.unsubscribeTrades(symbol);
     };
-  }, [chainId, symbol, onUpdate]);
+  }, [chainId, product, symbol, onUpdate]);
 
   return { lastTrade };
 }

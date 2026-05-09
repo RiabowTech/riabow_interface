@@ -14,8 +14,9 @@ import {
   useUpdatedTokensBalances,
 } from "@/modules/lighter/context/TokensBalancesContext";
 import type { BalancesDataResult } from "domain/synthetics/tokens";
-import { getBalances, isAuthenticated } from "@/modules/lighter/api/custom/client";
-import type { BalancesResponse } from "@/modules/lighter/api/types";
+import { getBalances, isAuthenticated, type BalancesResponse } from "@/modules/lighter/api/custom/client";
+import { tradeProductSWRKey } from "@/modules/lighter/api/custom/productRouting";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import { getTokenBySymbol } from "sdk/configs/tokens";
 import type { ContractsChainId } from "sdk/configs/chains";
 import type { TokenBalancesData } from "domain/synthetics/tokens/types";
@@ -124,17 +125,18 @@ export function useTradingAccountTokenBalances(
 ): TradingAccountBalancesDataResult {
   const { enabled = true, refreshInterval = 10000 } = params ?? {};
   const { address: account } = useAccount();
+  const product = useTradeProduct();
   const authenticated = isAuthenticated(account, chainId);
 
   // Include chainId in the SWR key so each chain keeps an isolated cache entry.
   const swrKey = chainId && account && authenticated && enabled
-    ? [`zanbara-balances`, chainId, account]
+    ? tradeProductSWRKey(product, [`zanbara-balances`, chainId, account])
     : null;
 
   const { data: apiBalancesResponse, error, isLoading } = useSWR<BalancesResponse>(
     swrKey,
     () => {
-      return getBalances(chainId!, account);
+      return getBalances(chainId!, account, product);
     },
     { ...defaultConfig, refreshInterval, ...params }
   );

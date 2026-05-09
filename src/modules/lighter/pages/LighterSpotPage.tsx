@@ -1,5 +1,3 @@
-// src/modules/lighter/pages/LighterSpotPage.tsx — 复制自 LighterTradePage，
-// 当前作为 /spot 路由的占位实现；后续可按 spot 业务规则替换面板组合。
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useTokensFavorites } from "@/modules/lighter/store/TokensFavoritesContext/TokensFavoritesContextProvider";
@@ -8,10 +6,8 @@ import "../styles/global.scss";
 import styles from "./LighterSpotPage.module.scss";
 import { useTradeState } from "@/modules/lighter/store/TradeStateContext";
 import { AccountsPanel } from "../components/AccountsPanel/AccountsPanel";
-import { BottomTabs } from "../components/BottomTabs/BottomTabs";
 import { ChartPanel } from "../components/ChartPanel/ChartPanel";
 import { OrderBookPanel, type OrderBookLayout } from "../components/OrderBookPanel/OrderBookPanel";
-import { OrderFormPanel } from "../components/OrderFormPanel/OrderFormPanel";
 import { SymbolBar } from "../components/SymbolBar/SymbolBar";
 import { TopNav } from "../components/TopNav/TopNav";
 
@@ -24,12 +20,12 @@ export default function LighterSpotPage() {
   }, []);
 
   /** ========= Favorite market 按钮逻辑 =========
-   *  - key "trade-market-selector" 与交易对下拉面板共用，
+   *  - key "spot-market-selector" 与交易对下拉面板共用，
    *    这样 SymbolBar 下方的星星和搜索面板里的星星状态同步。
    *  - token id 是 "BTCUSDT" 形式（与 market.symbol / 收藏 store 格式一致）。
    *    selectedSymbol 形如 "BTCUSDT-USD"，截前半段即可。 */
   const { selectedSymbol } = useTradeState();
-  const { favoriteTokens, toggleFavoriteToken } = useTokensFavorites("trade-market-selector");
+  const { favoriteTokens, toggleFavoriteToken } = useTokensFavorites("spot-market-selector");
   const currentMarketKey = useMemo(() => {
     if (!selectedSymbol) return "";
     const base = selectedSymbol.split("-")[0]?.toUpperCase();
@@ -89,15 +85,24 @@ export default function LighterSpotPage() {
           <OrderBookPanel layout={orderBookLayout} onLayoutChange={setOrderBookLayout} />
         </div>
         <div className={styles.orderform}>
-          <OrderFormPanel />
+          <SpotUnavailablePanel title="Spot orders" description="Spot order submission will use the spot API route." />
         </div>
         <div className={`${styles.tabs} ${orderBookLayout === "Large" ? styles.tabsLarge : ""}`}>
-          <BottomTabs />
+          <SpotUnavailablePanel title="Spot account activity" description="Spot order history and fills will be wired to spot APIs." />
         </div>
         <div className={`${styles.accounts} ${orderBookLayout === "Large" ? styles.accountsLarge : ""}`}>
           <AccountsPanel />
         </div>
       </div>
+    </div>
+  );
+}
+
+function SpotUnavailablePanel({ title, description }: { title: string; description: string }) {
+  return (
+    <div className={styles.spotUnavailablePanel}>
+      <div className={styles.spotUnavailableTitle}>{title}</div>
+      <div className={styles.spotUnavailableDescription}>{description}</div>
     </div>
   );
 }

@@ -23,12 +23,12 @@ export default function LighterTradePage() {
   }, []);
 
   /** ========= Favorite market 按钮逻辑 =========
-   *  - key "trade-market-selector" 与交易对下拉面板共用，
+   *  - key "futures-market-selector" 与交易对下拉面板共用，
    *    这样 SymbolBar 下方的星星和搜索面板里的星星状态同步。
    *  - token id 是 "BTCUSDT" 形式（与 market.symbol / 收藏 store 格式一致）。
    *    selectedSymbol 形如 "BTCUSDT-USD"，截前半段即可。 */
   const { selectedSymbol } = useTradeState();
-  const { favoriteTokens, toggleFavoriteToken } = useTokensFavorites("trade-market-selector");
+  const { favoriteTokens, toggleFavoriteToken } = useTokensFavorites("futures-market-selector");
   const currentMarketKey = useMemo(() => {
     if (!selectedSymbol) return "";
     const base = selectedSymbol.split("-")[0]?.toUpperCase();

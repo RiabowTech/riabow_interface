@@ -5,8 +5,7 @@
  * It does not depend on mode checks and talks directly to the trading backend.
  */
 
-// 使用统一的后端 URL 配置
-import { getTradingBackendUrl } from "config/backend";
+import { tradeProductApiBaseUrl, tradeProductApiPath, type TradeProduct } from "./productRouting";
 
 import {
   mapReferralDashboardToOnChainResponse,
@@ -392,14 +391,16 @@ export function isAuthenticated(address?: string | null, chainId?: number | null
 interface FetchOptions extends RequestInit {
   requireAuth?: boolean;
   address?: string | null; // Optional address for address-specific token lookup
+  product?: TradeProduct;
 }
 
 async function apiFetch<T>(chainId: number, path: string, options: FetchOptions = {}): Promise<T> {
-  const baseUrl = getTradingBackendUrl(chainId);
-  const url = `${baseUrl}/api/v1${path}`;
+  const baseUrl = tradeProductApiBaseUrl(chainId, options.product);
+  const resolvedPath = options.product ? tradeProductApiPath(options.product, path) : path;
+  const url = `${baseUrl}/api/v1${resolvedPath}`;
 
   // Debug log for K-line requests
-  if (path.includes("/candles")) {
+  if (resolvedPath.includes("/candles")) {
   }
 
   const headers: HeadersInit = {
@@ -600,19 +601,19 @@ function convertSymbolToApiFormat(symbol: string): string {
   return `${cleaned}USDT`;
 }
 
-export async function getMarkets(chainId: number, limit?: number): Promise<MarketsResponse> {
+export async function getMarkets(chainId: number, limit?: number, product?: TradeProduct): Promise<MarketsResponse> {
   const queryParams = limit ? `?limit=${limit}` : "";
-  return apiFetch<MarketsResponse>(chainId, `/markets${queryParams}`);
+  return apiFetch<MarketsResponse>(chainId, `/markets${queryParams}`, { product });
 }
 
-export async function getMarketDetails(chainId: number, symbol: string): Promise<MarketDetailsResponse> {
+export async function getMarketDetails(chainId: number, symbol: string, product?: TradeProduct): Promise<MarketDetailsResponse> {
   const apiSymbol = convertSymbolToApiFormat(symbol).toLowerCase();
-  return apiFetch<MarketDetailsResponse>(chainId, `/markets/${apiSymbol}/details`);
+  return apiFetch<MarketDetailsResponse>(chainId, `/markets/${apiSymbol}/details`, { product });
 }
 
-export async function getOrderbook(chainId: number, symbol: string): Promise<Orderbook> {
+export async function getOrderbook(chainId: number, symbol: string, product?: TradeProduct): Promise<Orderbook> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
-  return apiFetch<Orderbook>(chainId, `/markets/${apiSymbol}/orderbook`);
+  return apiFetch<Orderbook>(chainId, `/markets/${apiSymbol}/orderbook`, { product });
 }
 
 export interface TradesResponse {
@@ -620,19 +621,19 @@ export interface TradesResponse {
   trades: Trade[];
 }
 
-export async function getTrades(chainId: number, symbol: string): Promise<TradesResponse> {
+export async function getTrades(chainId: number, symbol: string, product?: TradeProduct): Promise<TradesResponse> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
-  return apiFetch<TradesResponse>(chainId, `/markets/${apiSymbol}/trades`);
+  return apiFetch<TradesResponse>(chainId, `/markets/${apiSymbol}/trades`, { product });
 }
 
-export async function getTicker(chainId: number, symbol: string): Promise<Ticker> {
+export async function getTicker(chainId: number, symbol: string, product?: TradeProduct): Promise<Ticker> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
-  return apiFetch<Ticker>(chainId, `/markets/${apiSymbol}/ticker`);
+  return apiFetch<Ticker>(chainId, `/markets/${apiSymbol}/ticker`, { product });
 }
 
-export async function getPrice(chainId: number, symbol: string): Promise<PriceResponse> {
+export async function getPrice(chainId: number, symbol: string, product?: TradeProduct): Promise<PriceResponse> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
-  return apiFetch<PriceResponse>(chainId, `/markets/${apiSymbol}/price`);
+  return apiFetch<PriceResponse>(chainId, `/markets/${apiSymbol}/price`, { product });
 }
 
 // ============================================
@@ -685,22 +686,23 @@ export interface UnifiedAccountResponse {
   account_status: string;
 }
 
-export async function getPositions(chainId: number, address?: string | null): Promise<PositionsResponse> {
-  return apiFetch<PositionsResponse>(chainId, "/account/positions", { requireAuth: true, address });
+export async function getPositions(chainId: number, address?: string | null, product?: TradeProduct): Promise<PositionsResponse> {
+  return apiFetch<PositionsResponse>(chainId, "/account/positions", { requireAuth: true, address, product });
 }
 
-export async function getOrders(chainId: number, address?: string | null): Promise<OrdersResponse> {
-  return apiFetch<OrdersResponse>(chainId, "/account/orders", { requireAuth: true, address });
+export async function getOrders(chainId: number, address?: string | null, product?: TradeProduct): Promise<OrdersResponse> {
+  return apiFetch<OrdersResponse>(chainId, "/account/orders", { requireAuth: true, address, product });
 }
 
-export async function getTriggerOrders(chainId: number, address?: string | null): Promise<TriggerOrdersResponse> {
-  return apiFetch<TriggerOrdersResponse>(chainId, "/trigger-orders", { requireAuth: true, address });
+export async function getTriggerOrders(chainId: number, address?: string | null, product?: TradeProduct): Promise<TriggerOrdersResponse> {
+  return apiFetch<TriggerOrdersResponse>(chainId, "/trigger-orders", { requireAuth: true, address, product });
 }
 
 export async function createTriggerOrder(
   chainId: number,
   request: CreateTriggerOrderRequest,
-  address?: string | null
+  address?: string | null,
+  product?: TradeProduct
 ): Promise<TriggerOrderResponse> {
   // 后端实际返回 `{success, data:{id,...}, error}` envelope,这里拆包成扁平 TriggerOrderResponse
   // (历史上曾直接返回扁平对象,发现有包裹后再剥一层;两种格式都兼容)。
@@ -712,6 +714,7 @@ export async function createTriggerOrder(
       body: JSON.stringify(request),
       requireAuth: true,
       address,
+      product,
     }
   );
   if (raw && typeof raw === "object" && "data" in raw && (raw as any).data) {
@@ -723,29 +726,31 @@ export async function createTriggerOrder(
 export async function cancelTriggerOrder(
   chainId: number,
   triggerOrderId: string,
-  address?: string | null
+  address?: string | null,
+  product?: TradeProduct
 ): Promise<void> {
   await apiFetch<unknown>(chainId, `/trigger-orders/${triggerOrderId}`, {
     method: "DELETE",
     requireAuth: true,
     address,
+    product,
   });
 }
 
-export async function getBalances(chainId: number, address?: string | null): Promise<BalancesResponse> {
-  return apiFetch<BalancesResponse>(chainId, "/account/balances", { requireAuth: true, address });
+export async function getBalances(chainId: number, address?: string | null, product?: TradeProduct): Promise<BalancesResponse> {
+  return apiFetch<BalancesResponse>(chainId, "/account/balances", { requireAuth: true, address, product });
 }
 
-export async function getUnifiedAccount(chainId: number, address?: string | null): Promise<UnifiedAccountResponse> {
-  return apiFetch<UnifiedAccountResponse>(chainId, "/unified/account", { requireAuth: true, address });
+export async function getUnifiedAccount(chainId: number, address?: string | null, product?: TradeProduct): Promise<UnifiedAccountResponse> {
+  return apiFetch<UnifiedAccountResponse>(chainId, "/unified/account", { requireAuth: true, address, product });
 }
 
 export interface AccountTradesResponse {
   trades: Trade[];
 }
 
-export async function getAccountTrades(chainId: number, address?: string | null): Promise<AccountTradesResponse> {
-  return apiFetch<AccountTradesResponse>(chainId, "/account/trades", { requireAuth: true, address });
+export async function getAccountTrades(chainId: number, address?: string | null, product?: TradeProduct): Promise<AccountTradesResponse> {
+  return apiFetch<AccountTradesResponse>(chainId, "/account/trades", { requireAuth: true, address, product });
 }
 
 export interface WithdrawHistoryResponse {
@@ -830,13 +835,15 @@ export interface CreateOrderResponse {
 export async function createOrder(
   chainId: number,
   request: CreateOrderRequest,
-  address?: string | null
+  address?: string | null,
+  product?: TradeProduct
 ): Promise<CreateOrderResponse> {
   return apiFetch<CreateOrderResponse>(chainId, "/orders", {
     method: "POST",
     body: JSON.stringify(request),
     requireAuth: true,
     address,
+    product,
   });
 }
 
@@ -847,7 +854,8 @@ export async function createOrder(
 export async function getOrderPreview(
   chainId: number,
   request: import("../types").OrderPreviewRequest,
-  address?: string | null
+  address?: string | null,
+  product?: TradeProduct
 ): Promise<import("../types").OrderPreviewResponse> {
   // Backend expects API symbol format (e.g. "BTCUSDT"), but state may hold "BTC-USD"
   const normalized = { ...request, symbol: convertSymbolToApiFormat(request.symbol) };
@@ -856,6 +864,7 @@ export async function getOrderPreview(
     body: JSON.stringify(normalized),
     requireAuth: true,
     address,
+    product,
   });
 }
 
@@ -873,12 +882,14 @@ export interface CancelOrderResponse {
 export async function cancelOrder(
   chainId: number,
   orderId: string,
-  request: CancelOrderRequest
+  request: CancelOrderRequest,
+  product?: TradeProduct
 ): Promise<CancelOrderResponse> {
   return apiFetch<CancelOrderResponse>(chainId, `/orders/${orderId}`, {
     method: "DELETE",
     body: JSON.stringify(request),
     requireAuth: true,
+    product,
   });
 }
 
@@ -886,7 +897,8 @@ export async function updateOrder(
   chainId: number,
   orderId: string,
   request: UpdateOrderRequest,
-  address?: string | null
+  address?: string | null,
+  product?: TradeProduct
 ): Promise<UpdateOrderResponse> {
   try {
     return await apiFetch<UpdateOrderResponse>(chainId, `/orders/${orderId}`, {
@@ -894,6 +906,7 @@ export async function updateOrder(
       body: JSON.stringify(request),
       requireAuth: true,
       address,
+      product,
     });
   } catch (error) {
     const status = (error as { status?: number })?.status;
@@ -907,15 +920,17 @@ export async function updateOrder(
       body: JSON.stringify(request),
       requireAuth: true,
       address,
+      product,
     });
   }
 }
 
-export async function batchCancelOrders(chainId: number, request: BatchCancelRequest): Promise<BatchCancelResponse> {
+export async function batchCancelOrders(chainId: number, request: BatchCancelRequest, product?: TradeProduct): Promise<BatchCancelResponse> {
   return apiFetch<BatchCancelResponse>(chainId, "/orders/batch", {
     method: "POST",
     body: JSON.stringify(request),
     requireAuth: true,
+    product,
   });
 }
 

@@ -129,13 +129,12 @@ type MessageHandler = (message: WsMessage) => void;
 type ErrorHandler = (error: Event) => void;
 type ConnectionHandler = () => void;
 
-// Zanbara WebSocket URL - use relative path in dev (proxied by Vite), full URL in production
-// 使用统一的后端 URL 配置（根据链 ID 自动切换）
-import { getTradingWsUrl } from "config/backend";
+import { DEFAULT_TRADE_PRODUCT, tradeProductChannel, tradeProductWsUrl, type TradeProduct } from "./productRouting";
 
 export class WebSocketService {
   private ws: WebSocket | null = null;
   private chainId: number;
+  private product: TradeProduct;
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;
   private reconnectDelay = 1000;
@@ -167,8 +166,9 @@ export class WebSocketService {
   private static readonly SUBSCRIBE_BATCH_SIZE = 5;
   private static readonly SUBSCRIBE_BATCH_INTERVAL_MS = 250;
 
-  constructor(chainId: number) {
+  constructor(chainId: number, product: TradeProduct = DEFAULT_TRADE_PRODUCT) {
     this.chainId = chainId;
+    this.product = product;
   }
 
   // private getWsUrl(): string {
@@ -208,7 +208,7 @@ export class WebSocketService {
     }
     
     // In production, use configured URL based on chainId (根据链 ID 自动切换)
-    const baseWsUrl = getTradingWsUrl(this.chainId);
+    const baseWsUrl = tradeProductWsUrl(this.chainId, this.product);
     if (baseWsUrl) {
       // Ensure the URL ends with /ws/external
       if (baseWsUrl.endsWith("/ws")) {
@@ -304,14 +304,15 @@ export class WebSocketService {
    * 同一 channel 多个组件分别 subscribe 不会重复发 wire 消息,也不会被第一个 unmount 的人带走。
    */
   private addSubscription(channel: string, requireAuth = false, address?: string | null): void {
-    const prev = this.subscriptions.get(channel) ?? 0;
-    this.subscriptions.set(channel, prev + 1);
+    const routedChannel = this.channel(channel);
+    const prev = this.subscriptions.get(routedChannel) ?? 0;
+    this.subscriptions.set(routedChannel, prev + 1);
     if (requireAuth) {
       // 记录 auth 上下文,重连时 onopen 照此重订阅
-      this.privateSubscriptions.set(channel, address);
+      this.privateSubscriptions.set(routedChannel, address);
     }
     if (prev === 0) {
-      this.sendSubscribe(channel, requireAuth, address);
+      this.sendSubscribe(routedChannel, requireAuth, address);
     }
   }
 
@@ -321,16 +322,21 @@ export class WebSocketService {
    * 下次 reconnect 的 `onopen` 自然不会把这个 channel 重订回来 —— 语义一致。
    */
   private removeSubscription(channel: string): void {
-    const prev = this.subscriptions.get(channel) ?? 0;
+    const routedChannel = this.channel(channel);
+    const prev = this.subscriptions.get(routedChannel) ?? 0;
     if (prev <= 1) {
-      this.subscriptions.delete(channel);
-      this.privateSubscriptions.delete(channel);
+      this.subscriptions.delete(routedChannel);
+      this.privateSubscriptions.delete(routedChannel);
       if (prev === 1) {
-        this.sendUnsubscribe(channel);
+        this.sendUnsubscribe(routedChannel);
       }
       return;
     }
-    this.subscriptions.set(channel, prev - 1);
+    this.subscriptions.set(routedChannel, prev - 1);
+  }
+
+  private channel(channel: string): string {
+    return tradeProductChannel(this.product, channel);
   }
 
   private attemptReconnect(): void {
@@ -750,13 +756,14 @@ export class WebSocketService {
 }
 
 // Singleton instances per chain
-const wsInstances: Map<number, WebSocketService> = new Map();
+const wsInstances: Map<string, WebSocketService> = new Map();
 
-export function getWebSocketService(chainId: number): WebSocketService {
-  if (!wsInstances.has(chainId)) {
-    wsInstances.set(chainId, new WebSocketService(chainId));
+export function getWebSocketService(chainId: number, product: TradeProduct = DEFAULT_TRADE_PRODUCT): WebSocketService {
+  const key = `${chainId}:${product}`;
+  if (!wsInstances.has(key)) {
+    wsInstances.set(key, new WebSocketService(chainId, product));
   }
-  return wsInstances.get(chainId)!;
+  return wsInstances.get(key)!;
 }
 
 export function disconnectAllWebSockets(): void {

@@ -8,6 +8,7 @@ import { useChainId } from "lib/chains";
 import { helperToast } from "lib/helperToast";
 
 import { cancelOrder, cancelTriggerOrder, getNonce } from "../api/custom/client";
+import { useTradeProduct } from "../store/TradeStateContext";
 import type { Order } from "../api/types";
 
 function isTriggerOrder(order: Pick<Order, "trigger_type">) {
@@ -18,6 +19,7 @@ export function useCancelApiOrder() {
   const { chainId } = useChainId();
   const { address } = useAccount();
   const { signTypedDataAsync } = useSignTypedData();
+  const product = useTradeProduct();
   const { mutate } = useSWRConfig();
 
   const generateCancelSignature = useCallback(
@@ -71,10 +73,10 @@ export function useCancelApiOrder() {
       const orderId = String(order.id);
 
       if (isTriggerOrder(order)) {
-        await cancelTriggerOrder(chainId, orderId, address);
+        await cancelTriggerOrder(chainId, orderId, address, product);
       } else {
         const { signature, timestamp } = await generateCancelSignature(orderId);
-        await cancelOrder(chainId, orderId, { signature, timestamp });
+        await cancelOrder(chainId, orderId, { signature, timestamp }, product);
       }
 
       await Promise.all([
@@ -84,7 +86,7 @@ export function useCancelApiOrder() {
 
       helperToast.success(t`Order canceled`);
     },
-    [address, chainId, generateCancelSignature, mutate]
+    [address, chainId, product, generateCancelSignature, mutate]
   );
 
   return { cancel };

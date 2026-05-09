@@ -22,6 +22,8 @@ import { useChainId } from "lib/chains";
 import { helperToast } from "lib/helperToast";
 import { getTradingVaultAddress } from "config/custom/contracts";
 import { useApiOrders } from "./useApiOrders";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
+import { tradeProductSWRKey } from "./productRouting";
 
 import {
   createOrder,
@@ -217,6 +219,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
   const { chainId } = useChainId();
   const { address } = useAccount();
   const { signTypedDataAsync } = useSignTypedData();
+  const product = useTradeProduct();
   const isApiEnabled = shouldUseApiOrderSubmit();
   const isReady = isApiEnabled && isAuthenticated(address, chainId);
 
@@ -227,9 +230,9 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
 
   const refreshBalances = useCallback(() => {
     if (!address || !chainId) return;
+    globalMutate(tradeProductSWRKey(product, [`zanbara-balances`, chainId, address]), undefined, { revalidate: true });
     globalMutate([`zanbara-balances`, chainId, address], undefined, { revalidate: true });
-    globalMutate([`zanbara-balances`, chainId, address], undefined, { revalidate: true });
-  }, [globalMutate, address, chainId]);
+  }, [globalMutate, product, address, chainId]);
 
   const submitOrder = useCallback(
     async (params: ZanbaraOrderParams): Promise<CreateOrderResponse> => {
@@ -483,7 +486,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
           };
 
           const { createTriggerOrder } = await import("./client");
-          const triggerResponse = await createTriggerOrder(chainId, triggerRequest, address);
+          const triggerResponse = await createTriggerOrder(chainId, triggerRequest, address, product);
           helperToast.success(`Trigger order created: ${triggerResponse.id}`);
           refreshOrders();
           refreshBalances();
@@ -500,7 +503,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
         }
 
         // Regular orders go to POST /orders
-        const response = await createOrder(chainId, request, address);
+        const response = await createOrder(chainId, request, address, product);
         helperToast.success(`Order submitted: ${response.order_id}`);
 
         // Refresh orders list after successful order creation
@@ -514,7 +517,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
         throw error;
       }
     },
-    [chainId, address, refreshOrders, refreshBalances, signTypedDataAsync]
+    [chainId, product, address, refreshOrders, refreshBalances, signTypedDataAsync]
   );
 
   const cancelOrderById = useCallback(
@@ -581,7 +584,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
         await cancelOrder(chainId, orderId, {
           signature,
           timestamp,
-        });
+        }, product);
         helperToast.success(t`Order cancelled`);
 
         // Refresh orders list after successful order cancellation
@@ -597,7 +600,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
         throw error;
       }
     },
-    [chainId, address, refreshOrders, refreshBalances, signTypedDataAsync]
+    [chainId, product, address, refreshOrders, refreshBalances, signTypedDataAsync]
   );
 
   const batchCancel = useCallback(
@@ -665,7 +668,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
           order_ids: request.order_ids,
           signature,
           timestamp,
-        });
+        }, product);
         const cancelledCount = response.cancelled.length;
         const failedCount = response.failed.length;
 
@@ -688,7 +691,7 @@ export function useZanbaraOrderSubmit(): UseZanbaraOrderSubmitResult {
         throw error;
       }
     },
-    [chainId, address, refreshOrders, refreshBalances, signTypedDataAsync]
+    [chainId, product, address, refreshOrders, refreshBalances, signTypedDataAsync]
   );
 
   const closePositionById = useCallback(

@@ -7,7 +7,8 @@ import { useAccount } from "wagmi";
 import { useChainId } from "lib/chains";
 import { getOrderPreview } from "modules/lighter/api/custom/client";
 import type { OrderPreviewData, OrderPreviewRequest } from "modules/lighter/api/types";
-import { useTradeState } from "modules/lighter/store/TradeStateContext";
+import { useTradeProduct, useTradeState } from "modules/lighter/store/TradeStateContext";
+import { tradeProductSWRKey, type TradeProduct } from "@/modules/lighter/api/custom/productRouting";
 
 export type PreviewInput = {
   side: "buy" | "sell";
@@ -151,12 +152,13 @@ export function usePreviewErrorMessage(state: Pick<PreviewState, "error" | "erro
 }
 
 function buildSwrKey(
+  product: TradeProduct,
   chainId: number | undefined,
   address: string | undefined,
   request: OrderPreviewRequest | null
 ): readonly unknown[] | null {
   if (!chainId || !request) return null;
-  return [
+  return tradeProductSWRKey(product, [
     "zanbara:order-preview",
     chainId,
     address ?? "anon",
@@ -168,7 +170,7 @@ function buildSwrKey(
     request.margin_mode,
     request.reduce_only,
     request.price ?? "",
-  ] as const;
+  ]);
 }
 
 /**
@@ -183,6 +185,7 @@ function buildSwrKey(
 export function useOrderPreviewAdapter(input: PreviewInput): PreviewState {
   const { chainId } = useChainId();
   const { address } = useAccount();
+  const product = useTradeProduct();
   const { selectedSymbol } = useTradeState();
 
   const priceNeeded = input.orderType === "limit";
@@ -205,7 +208,7 @@ export function useOrderPreviewAdapter(input: PreviewInput): PreviewState {
 
   // 经过 debounce 的 key:只有当输入稳定 debounceMs 后才切换 SWR key,避免在输入过程中打满请求。
   const debounceMs = input.debounceMs ?? 300;
-  const currentKey = buildSwrKey(chainId, address, request);
+  const currentKey = buildSwrKey(product, chainId, address, request);
   const [debouncedKey, setDebouncedKey] = useState<readonly unknown[] | null>(currentKey);
   const currentKeyStr = currentKey ? JSON.stringify(currentKey) : null;
   const debouncedKeyStr = debouncedKey ? JSON.stringify(debouncedKey) : null;
@@ -224,7 +227,7 @@ export function useOrderPreviewAdapter(input: PreviewInput): PreviewState {
     debouncedKey,
     async () => {
       if (!chainId || !request) return null;
-      return getOrderPreview(chainId, request, address);
+      return getOrderPreview(chainId, request, address, product);
     },
     {
       revalidateOnFocus: false,

@@ -160,3 +160,29 @@
   grid-column: 4;
   grid-row: 2;
 }
+
+.spotUnavailablePanel {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  background: #111217;
+  border: 1px solid var(--ltr-border);
+  color: #d7d9e0;
+}
+
+.spotUnavailableTitle {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.spotUnavailableDescription {
+  max-width: 260px;
+  color: #8f93a2;
+  font-size: 12px;
+  line-height: 1.4;
+}
