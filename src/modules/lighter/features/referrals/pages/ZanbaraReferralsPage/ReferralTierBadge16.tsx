@@ -186,11 +186,21 @@ function DiamondBadge16() {
   );
 }
 
-export type ReferralTierBadgeKind = "none" | "crownGold" | "crownTeal" | "crownYellow" | "diamond";
+export type ReferralTierBadgeKind = "none" | "star" | "crownGold" | "crownTeal" | "crownYellow" | "diamond";
 
 export function ReferralTierBadge16({ kind }: { kind: ReferralTierBadgeKind }) {
   if (kind === "none") {
     return <span className="ref-tier-badge-spacer" aria-hidden />;
+  }
+  if (kind === "star") {
+    return (
+      <svg className="ref-tier-badge-star" width={16} height={16} viewBox="0 0 16 16" aria-hidden>
+        <path
+          d="M8 1.25 10.08 5.48l4.67.68-3.38 3.29.8 4.65L8 11.9 3.83 14.1l.8-4.65L1.25 6.16l4.67-.68L8 1.25Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
   }
   if (kind === "crownGold") {
     return <CrownBadge16 variant="bronze" />;

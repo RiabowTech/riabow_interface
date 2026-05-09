@@ -1,5 +1,4 @@
 import { Trans, t } from "@lingui/macro";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { type FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { useCopyToClipboard } from "react-use";
 import useSWR from "swr";
@@ -22,8 +21,7 @@ import { parseValue } from "lib/numbers";
 import { formatUsd } from "lib/numbers";
 import { userAnalytics } from "lib/userAnalytics";
 import type { ReferralShareEvent } from "lib/userAnalytics/types";
-import { useDesignSystem } from "shared/context/DesignSystemContext/DesignSystemContext";
-import { Button, ExchangeTabs, PrimaryActionButton, ZanbaraCornerBracketFrame } from "shared/ui";
+import { Button, ExchangeTabs } from "shared/ui";
 
 import { AffiliateCodeCreateButton } from "components/Referrals/AddAffiliateCode";
 import { getReferralCodeTradeUrl } from "components/Referrals/referralsHelper";
@@ -33,6 +31,8 @@ import { ReferralTierBadge16 } from "./ReferralTierBadge16";
 import { REFERRAL_OFFCHAIN_MIN_CLAIM_USDT, useReferralRebateClaim } from "../../hooks/useReferralRebateClaim";
 import "./ZanbaraReferralsPage.css";
 
+const referralHeroGiftAsset = new URL("./assets/referral-hero-gift.png", import.meta.url).href;
+
 /** Figma Zanbara-Website v1.0 · Referrals 156:2400 — tier ladder (invitees + volume + display rate) */
 const FIGMA_TIER_ROWS: ReadonlyArray<{
   id: string;
@@ -40,10 +40,10 @@ const FIGMA_TIER_ROWS: ReadonlyArray<{
   minInvitees: number;
   minVolumeUsd: number;
   displayRatePct: number;
-  tierBadge: "none" | "crownGold" | "crownTeal" | "crownYellow" | "diamond";
+  tierBadge: "none" | "star" | "crownGold" | "crownTeal" | "crownYellow" | "diamond";
   nameColor: "muted" | "gold" | "silver" | "yellow" | "cyan";
 }> = [
-  { id: "starter", displayName: "Starter", minInvitees: 1, minVolumeUsd: 1_000, displayRatePct: 10, tierBadge: "none", nameColor: "muted" },
+  { id: "starter", displayName: "Starter", minInvitees: 1, minVolumeUsd: 1_000, displayRatePct: 10, tierBadge: "star", nameColor: "gold" },
   { id: "bronze", displayName: "Bronze", minInvitees: 5, minVolumeUsd: 10_000, displayRatePct: 12, tierBadge: "crownGold", nameColor: "gold" },
   { id: "silver", displayName: "Silver", minInvitees: 20, minVolumeUsd: 100_000, displayRatePct: 17, tierBadge: "crownTeal", nameColor: "silver" },
   { id: "gold", displayName: "Gold", minInvitees: 50, minVolumeUsd: 500_000, displayRatePct: 22, tierBadge: "crownYellow", nameColor: "yellow" },
@@ -51,6 +51,7 @@ const FIGMA_TIER_ROWS: ReadonlyArray<{
 ];
 /** 再次绑定不同推荐码的最短间隔 */
 const REFERRAL_REBIND_COOLDOWN_MS = 90 * 24 * 60 * 60 * 1000;
+const LEADERBOARD_VISIBLE_ROWS = 4;
 
 type InvitePanelTab = "invite" | "bind";
 
@@ -164,20 +165,141 @@ function CheckIcon({ accent }: { accent?: boolean }) {
   return <img className="ref-tier-check" src={accent ? refFigmaAsset.checkAccent : refFigmaAsset.checkMuted} alt="" width={16} height={16} />;
 }
 
+type ReferralIconName =
+  | "users"
+  | "coins"
+  | "wallet"
+  | "copy"
+  | "link"
+  | "gift"
+  | "tag"
+  | "trophy";
+
+function ReferralLineIcon({ name }: { name: ReferralIconName }) {
+  if (name === "users") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8.5 11a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5ZM3 20v-1.2c0-3 2.45-5.4 5.5-5.4s5.5 2.4 5.5 5.4V20" />
+        <path d="M16 11.2a2.8 2.8 0 1 0-.7-5.5M15.8 13.6c2.7.25 4.7 2.45 4.7 5.2V20" />
+      </svg>
+    );
+  }
+  if (name === "coins") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <ellipse cx="12" cy="6" rx="6.5" ry="3" />
+        <path d="M5.5 6v4c0 1.65 2.9 3 6.5 3s6.5-1.35 6.5-3V6" />
+        <path d="M5.5 10v4c0 1.65 2.9 3 6.5 3s6.5-1.35 6.5-3v-4" />
+        <path d="M5.5 14v4c0 1.65 2.9 3 6.5 3s6.5-1.35 6.5-3v-4" />
+      </svg>
+    );
+  }
+  if (name === "wallet") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7.5h15a2 2 0 0 1 2 2v8A2.5 2.5 0 0 1 18.5 20h-13A2.5 2.5 0 0 1 3 17.5V6a2 2 0 0 1 2-2h12v3.5" />
+        <path d="M16 12h5v4h-5a2 2 0 1 1 0-4Z" />
+      </svg>
+    );
+  }
+  if (name === "copy") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 9h9a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9Z" />
+        <path d="M6 15H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1" />
+      </svg>
+    );
+  }
+  if (name === "link") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M10 13.5a4 4 0 0 0 5.65 0l2.35-2.35a4 4 0 0 0-5.65-5.65L11 6.85" />
+        <path d="M14 10.5a4 4 0 0 0-5.65 0L6 12.85a4 4 0 0 0 5.65 5.65L13 17.15" />
+      </svg>
+    );
+  }
+  if (name === "gift") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 10h16v10H4V10Z" />
+        <path d="M3 7h18v3H3V7Z" />
+        <path d="M12 7v13M8 7C6.2 5.7 6.25 3.4 8.1 3.2c1.55-.15 2.65 1.7 3.9 3.8M16 7c1.8-1.3 1.75-3.6-.1-3.8C14.35 3.05 13.25 4.9 12 7" />
+      </svg>
+    );
+  }
+  if (name === "tag") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m4.5 12.4 7.9 7.9 7.9-7.9V4.5h-7.9L4.5 12.4Z" />
+        <path d="M15.5 8.5h.01" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M8 4h8v2h4c0 3.3-1.8 5.6-4.8 6.25A5.4 5.4 0 0 1 13 14.8V18h3v2H8v-2h3v-3.2a5.4 5.4 0 0 1-2.2-2.55C5.8 11.6 4 9.3 4 6h4V4Z" />
+      <path d="M8 6v3M16 6v3" />
+    </svg>
+  );
+}
+
+function RefIconBox({ name, className = "" }: { name: ReferralIconName; className?: string }) {
+  return (
+    <span className={`ref-icon-box ${className}`}>
+      <ReferralLineIcon name={name} />
+    </span>
+  );
+}
+
+function ReferralHeroIcon() {
+  return (
+    <span className="ref-hero-icon">
+      <ReferralLineIcon name="users" />
+    </span>
+  );
+}
+
+function ReferralHeroGift() {
+  return (
+    <div className="ref-hero-gift" aria-hidden>
+      <img src={referralHeroGiftAsset} alt="" className="ref-hero-gift__image" draggable={false} />
+    </div>
+  );
+}
+
+function InviteEnvelopeArt() {
+  return (
+    <div className="ref-invite-art" aria-hidden>
+      <div className="ref-invite-art__card">
+        <ReferralLineIcon name="link" />
+        <span />
+        <span />
+      </div>
+      <div className="ref-invite-art__flap" />
+      <span className="ref-invite-art__spark ref-invite-art__spark--a" />
+      <span className="ref-invite-art__spark ref-invite-art__spark--b" />
+      <span className="ref-invite-art__spark ref-invite-art__spark--c" />
+    </div>
+  );
+}
+
 function InviteeBenefitsBlock() {
   return (
     <section className="ref-benefits">
       <div className="ref-benefits__head">
-        <h2 className="ref-benefits__title">
-          <Trans>Invitee Benefits</Trans>
-        </h2>
+        <div className="ref-section-title-row">
+          <ReferralLineIcon name="gift" />
+          <h2 className="ref-benefits__title">
+            <Trans>Invitee Benefits</Trans>
+          </h2>
+        </div>
         <p className="ref-benefits__sub">
           <Trans>Friends who register with your code receive these benefits immediately</Trans>
         </p>
       </div>
-      <FigmaHLine variant="line2" />
       <div className="ref-benefits__cols">
         <div className="ref-benefits__col">
+          <RefIconBox name="tag" className="ref-benefits__icon" />
           <div className="ref-benefits__k">
             <Trans>Taker Fee</Trans>
           </div>
@@ -193,8 +315,8 @@ function InviteeBenefitsBlock() {
             </p>
           </div>
         </div>
-        <FigmaVLine className="ref-benefits__vr" />
         <div className="ref-benefits__col">
+          <RefIconBox name="tag" className="ref-benefits__icon" />
           <div className="ref-benefits__k">
             <Trans>Maker Fee</Trans>
           </div>
@@ -210,8 +332,8 @@ function InviteeBenefitsBlock() {
             </p>
           </div>
         </div>
-        <FigmaVLine className="ref-benefits__vr" />
         <div className="ref-benefits__col">
+          <RefIconBox name="coins" className="ref-benefits__icon" />
           <div className="ref-benefits__k">
             <Trans>RP Points Bonus</Trans>
           </div>
@@ -358,11 +480,14 @@ function ClaimCommissionStatCard({
   );
   return (
     <article className={`ref-stat-card${canClaimOffChain ? " ref-stat-card--claimable" : ""}`}>
-      <div className="ref-stat-card__label">
-        <Trans>Claim commission</Trans>
+      <RefIconBox name="wallet" />
+      <div className="ref-stat-card__content">
+        <div className="ref-stat-card__label">
+          <Trans>Claim commission</Trans>
+        </div>
+        <div className={`ref-stat-card__value ${hasPendingEarnings ? "ref-stat-card__value--accent" : ""}`}>{mainValue}</div>
+        <div className="ref-stat-card__hint">{hint}</div>
       </div>
-      <div className={`ref-stat-card__value ${hasPendingEarnings ? "ref-stat-card__value--accent" : ""}`}>{mainValue}</div>
-      <div className="ref-stat-card__hint">{hint}</div>
       {canClaimOffChain ? (
         <Button
           type="button"
@@ -397,8 +522,6 @@ export function ZanbaraReferralsPage({
   referralsData: _referralsData,
   recentlyAddedCodes: _recentlyAddedCodes,
 }: ZanbaraReferralsPageProps) {
-  const { openConnectModal } = useConnectModal();
-  const { isZanbara } = useDesignSystem();
   const [, copyToClipboard] = useCopyToClipboard();
   const referralCodeFromUrl = useReferralCodeFromUrl();
 
@@ -531,173 +654,209 @@ export function ZanbaraReferralsPage({
   );
 
   /** `omitHero`：外层已渲染 `ref-hero`（已连接等 dashboard）时不再重复页头 */
-  const renderDisconnectedStyleMain = (showConnectWallet: boolean, omitHero?: boolean) => (
+  const renderDisconnectedStyleMain = (_showConnectWallet: boolean, omitHero?: boolean) => (
     <>
       {!omitHero ? (
         <section className="ref-hero">
-          <h1 className="ref-hero__title">
-            <Trans>Referral Center</Trans>
-          </h1>
-          <p className="ref-hero__sub">
-            <Trans>Invite friends, earn commissions, accumulate forever</Trans>
-          </p>
-          {showConnectWallet ? (
-            <ZanbaraCornerBracketFrame className="w-fit max-w-full" enabled={isZanbara}>
-              <PrimaryActionButton
-                type="button"
-                className="connect-wallet-cta min-w-[240px]"
-                onClick={() => openConnectModal?.()}
-              >
-                <Trans>Connect Wallet</Trans>
-              </PrimaryActionButton>
-            </ZanbaraCornerBracketFrame>
-          ) : null}
+          <div className="ref-hero__copy">
+            <ReferralHeroIcon />
+            <div>
+              <h1 className="ref-hero__title">
+                <Trans>Referral Center</Trans>
+              </h1>
+              <p className="ref-hero__sub">
+                <Trans>Invite friends, earn commissions, accumulate forever</Trans>
+              </p>
+            </div>
+          </div>
+          <ReferralHeroGift />
         </section>
       ) : null}
 
       <div className="ref-stat-grid">
         <article className="ref-stat-card">
-          <div className="ref-stat-card__label">
-            <Trans>Total Referrals</Trans>
-          </div>
-          <div className="ref-stat-card__value">—</div>
-          <div className="ref-stat-card__hint">
-            <Trans>Direct invitees</Trans>
+          <RefIconBox name="users" />
+          <div className="ref-stat-card__content">
+            <div className="ref-stat-card__label">
+              <Trans>Total Referrals</Trans>
+            </div>
+            <div className="ref-stat-card__value">0</div>
+            <div className="ref-stat-card__hint">
+              <Trans>Direct invitees</Trans>
+            </div>
           </div>
         </article>
         <article className="ref-stat-card ref-stat-card--accent">
-          <div className="ref-stat-card__label">
-            <Trans>Total Commission</Trans>
-          </div>
-          <div className="ref-stat-card__value ref-stat-card__value--accent">—</div>
-          <div className="ref-stat-card__hint">
-            <Trans>Cumulative earnings (lifetime)</Trans>
+          <RefIconBox name="coins" />
+          <div className="ref-stat-card__content">
+            <div className="ref-stat-card__label">
+              <Trans>Total Commission</Trans>
+            </div>
+            <div className="ref-stat-card__value ref-stat-card__value--accent">$0.00</div>
+            <div className="ref-stat-card__hint">
+              <Trans>Cumulative earnings (lifetime)</Trans>
+            </div>
           </div>
         </article>
         <article className="ref-stat-card">
-          <div className="ref-stat-card__label">
-            <Trans>Claim commission</Trans>
+          <RefIconBox name="wallet" />
+          <div className="ref-stat-card__content">
+            <div className="ref-stat-card__label">
+              <Trans>Claim commission</Trans>
+            </div>
+            <div className="ref-stat-card__value">—</div>
+            <div className="ref-stat-card__hint">—</div>
           </div>
-          <div className="ref-stat-card__value">—</div>
-          <div className="ref-stat-card__hint">—</div>
         </article>
       </div>
 
       <section className="ref-panel ref-panel--invite">
         <div className="ref-panel__head">
-          <h2 className="ref-panel__title">
-            <Trans>My Invite Link</Trans>
-          </h2>
+          <ExchangeTabs<InvitePanelTab>
+            className="ref-invite-tabs"
+            qa="zanbara-referrals-invite"
+            options={invitePanelTabOptions}
+            value={inviteTab}
+            onChange={setInviteTab}
+          />
           {/* Share CTA hidden temporarily by product request */}
         </div>
         <FigmaHLine />
-        <div className="ref-invite-grid">
-          <div>
-            <div className="ref-field-label">
-              <Trans>Referral Link</Trans>
+        <div className="ref-invite-tab-panels">
+          {inviteTab === "invite" ? (
+            <div className="ref-invite-empty">
+              <InviteEnvelopeArt />
+              <div className="ref-invite-empty__body">
+                <h3 className="ref-invite-title">
+                  <Trans>Share your invite link with friends</Trans>
+                </h3>
+                <p className="ref-invite-create__hint">
+                  <Trans>Earn commissions when your friends trade</Trans>
+                </p>
+                <div className="ref-invite-actions">
+                  <div className="ref-faux-input">
+                    <span className="ref-faux-input__val ref-faux-input__val--link">—</span>
+                    <button type="button" className="ref-copy-icon" disabled aria-label={t`Copy`}>
+                      <ReferralLineIcon name="copy" />
+                    </button>
+                  </div>
+                  <button type="button" className="ref-create-code-btn" disabled>
+                    <Trans>Create Referral Code</Trans>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="ref-faux-input">
-              <span className="ref-faux-input__val ref-faux-input__val--link">—</span>
-              <button type="button" className="ref-copy-link" disabled>
-                <Trans>Copy</Trans>
-              </button>
-            </div>
-          </div>
-          <div>
-            <div className="ref-field-label">
-              <Trans>My Referral Code</Trans>
-            </div>
-            <div className="ref-faux-input">
-              <span className="ref-faux-input__val">—</span>
-              <button type="button" className="ref-copy-link" disabled>
-                <Trans>Copy</Trans>
-              </button>
-            </div>
-          </div>
+          ) : (
+            <form className="ref-bind-form" onSubmit={(event) => event.preventDefault()}>
+              <p className="ref-invite-create__hint">
+                <Trans>Bind someone else's invitation code to obtain the benefits of the invitee</Trans>
+              </p>
+              <div className="ref-bind-row">
+                <input
+                  type="text"
+                  className="ref-bind-input"
+                  placeholder={t`Enter referral code`}
+                  value={bindCodeInput}
+                  onChange={(event) => setBindCodeInput(event.target.value.toUpperCase())}
+                />
+                <Button type="button" appearance="main-40" intent="main" className="ref-bind-submit" disabled>
+                  <Trans>Submit</Trans>
+                </Button>
+              </div>
+            </form>
+          )}
         </div>
       </section>
 
       <RecentTierSection disconnected totalReferrals={0} volumeUsd={0} />
-
-      <InviteeBenefitsBlock />
     </>
   );
 
   const renderRewardSide = (disconnected: boolean) => {
     const showLbPlaceholders = isLeaderboardLoading || !leaderboardRows.length;
     return (
-    <aside className="ref-side">
-      <div className="ref-side__head">
-        <div className="ref-side__title">
-          <Trans>Reward Leaderboard</Trans>
-        </div>
-        <div className="ref-side__tag">
-          TOP {leaderboardN}
-        </div>
-      </div>
-      <div className="ref-side__table-head">
-        <span>
-          <Trans>Rank</Trans>
-        </span>
-        <span className="ref-side__th-mid">
-          <Trans>Wallet</Trans>
-        </span>
-        <span className="ref-side__th-end">
-          <Trans>Reward</Trans>
-        </span>
-      </div>
-      <div className="ref-lb-list">
-        {showLbPlaceholders
-          ? Array.from({ length: leaderboardN }, (_, i) => (
-              <div key={i} className="ref-lb-row">
-                <span className={`ref-lb-row__rank ${rankTone(i + 1)}`}>{i + 1}</span>
-                <span className="ref-lb-row__addr">—</span>
-                <span className="ref-lb-row__pts">—</span>
-              </div>
-            ))
-          : leaderboardRows.map((row) => (
-              <div key={`${row.rank}-${row.address ?? "x"}`} className={`ref-lb-row ${row.isSelf ? "is-self" : ""}`}>
-                <span className={`ref-lb-row__rank ${rankTone(row.rank)}`}>{row.rank}</span>
-                <span className="ref-lb-row__addr" title={row.address}>
-                  {row.address ? formatAddrMid(row.address) : "—"}
-                </span>
-                <span className="ref-lb-row__pts">{row.reward}</span>
-              </div>
-            ))}
-      </div>
-      <FigmaHLine variant="line7" />
-      <div className="ref-your-label">
-        <Trans>Your Rank</Trans>
-      </div>
-      <FigmaHLine variant="line7" />
-      <div className="ref-your-bar">
-        <div className="ref-your-bar__accent" aria-hidden>
-          <img src={refFigmaAsset.line8} width={2} height={40} className="ref-your-bar__accent-img" alt="" />
-        </div>
-        <div className="ref-your-bar__inner">
-          <span className="ref-your-bar__rank">
-            {disconnected || isDashboardLoading || !selfRowInTop ? "—" : selfRowInTop.rank}
-          </span>
-          <div className="ref-your-bar__mid">
-            <span className="ref-your-bar__addr" title={account}>
-              {account ? formatAddrMid(account) : "—"}
-            </span>
-            {!disconnected && !isDashboardLoading && dashboard?.tier?.name ? (
-              <span className="ref-your-pill">
-                <span className="ref-your-pill__txt">{dashboard.tier.name}</span>
-              </span>
-            ) : null}
+    <div className="ref-side-stack">
+      <aside className="ref-side">
+        <div className="ref-side__head">
+          <div className="ref-section-title-row ref-section-title-row--side">
+            <ReferralLineIcon name="trophy" />
+            <div className="ref-side__title">
+              <Trans>Reward Leaderboard</Trans>
+            </div>
           </div>
-          <span className="ref-your-bar__amt">
-            {disconnected || isDashboardLoading
-              ? "—"
-              : selfRowInTop
-                ? selfRowInTop.reward
-                : formatUsdCompact(dashboard?.total_earnings)}
+          <div className="ref-side__tag">
+            TOP {leaderboardN}
+          </div>
+        </div>
+        <div className="ref-side__table-head">
+          <span>
+            <Trans>Rank</Trans>
+          </span>
+          <span className="ref-side__th-mid">
+            <Trans>Wallet</Trans>
+          </span>
+          <span className="ref-side__th-end">
+            <Trans>Reward</Trans>
           </span>
         </div>
-      </div>
-    </aside>
+        <div className="ref-lb-list">
+          {showLbPlaceholders
+            ? Array.from({ length: LEADERBOARD_VISIBLE_ROWS }, (_, i) => (
+                <div key={i} className="ref-lb-row">
+                  <span className={`ref-lb-row__rank ${rankTone(i + 1)}`}>
+                    {i + 1 <= 3 ? <span className="ref-lb-medal">{i + 1}</span> : i + 1}
+                  </span>
+                  <span className="ref-lb-row__addr">—</span>
+                  <span className="ref-lb-row__pts">—</span>
+                </div>
+              ))
+            : leaderboardRows.slice(0, LEADERBOARD_VISIBLE_ROWS).map((row) => (
+                <div key={`${row.rank}-${row.address ?? "x"}`} className={`ref-lb-row ${row.isSelf ? "is-self" : ""}`}>
+                  <span className={`ref-lb-row__rank ${rankTone(row.rank)}`}>
+                    {row.rank <= 3 ? <span className="ref-lb-medal">{row.rank}</span> : row.rank}
+                  </span>
+                  <span className="ref-lb-row__addr" title={row.address}>
+                    {row.address ? formatAddrMid(row.address) : "—"}
+                  </span>
+                  <span className="ref-lb-row__pts">{row.reward}</span>
+                </div>
+              ))}
+        </div>
+        <FigmaHLine variant="line7" />
+        <div className="ref-your-label">
+          <Trans>Your Rank</Trans>
+        </div>
+        <FigmaHLine variant="line7" />
+        <div className="ref-your-bar">
+          <div className="ref-your-bar__accent" aria-hidden>
+            <img src={refFigmaAsset.line8} width={2} height={40} className="ref-your-bar__accent-img" alt="" />
+          </div>
+          <div className="ref-your-bar__inner">
+            <span className="ref-your-bar__rank">
+              {disconnected || isDashboardLoading || !selfRowInTop ? "—" : selfRowInTop.rank}
+            </span>
+            <div className="ref-your-bar__mid">
+              <span className="ref-your-bar__addr" title={account}>
+                {account ? formatAddrMid(account) : "—"}
+              </span>
+              {!disconnected && !isDashboardLoading && dashboard?.tier?.name ? (
+                <span className="ref-your-pill">
+                  <span className="ref-your-pill__txt">{dashboard.tier.name}</span>
+                </span>
+              ) : null}
+            </div>
+            <span className="ref-your-bar__amt">
+              {disconnected || isDashboardLoading
+                ? "—"
+                : selfRowInTop
+                  ? selfRowInTop.reward
+                  : formatUsdCompact(dashboard?.total_earnings)}
+            </span>
+          </div>
+        </div>
+      </aside>
+      <InviteeBenefitsBlock />
+    </div>
     );
   };
 
@@ -705,8 +864,22 @@ export function ZanbaraReferralsPage({
     return (
       <div className="ref-page">
         <div className="ref-shell">
+          <section className="ref-hero">
+            <div className="ref-hero__copy">
+              <ReferralHeroIcon />
+              <div>
+                <h1 className="ref-hero__title">
+                  <Trans>Referral Center</Trans>
+                </h1>
+                <p className="ref-hero__sub">
+                  <Trans>Invite friends, earn commissions, accumulate forever</Trans>
+                </p>
+              </div>
+            </div>
+            <ReferralHeroGift />
+          </section>
           <div className="ref-shell__body">
-            <div className="ref-main">{renderDisconnectedStyleMain(true)}</div>
+            <div className="ref-main">{renderDisconnectedStyleMain(true, true)}</div>
             {renderRewardSide(true)}
           </div>
         </div>
@@ -720,23 +893,29 @@ export function ZanbaraReferralsPage({
         <>
           <div className="ref-stat-grid">
             <article className="ref-stat-card">
-              <div className="ref-stat-card__label">
-                <Trans>Total Referrals</Trans>
-              </div>
-              <div className="ref-stat-card__value">{dashboard.total_referrals}</div>
-              <div className="ref-stat-card__hint">
-                <Trans>Direct invitees</Trans>
+              <RefIconBox name="users" />
+              <div className="ref-stat-card__content">
+                <div className="ref-stat-card__label">
+                  <Trans>Total Referrals</Trans>
+                </div>
+                <div className="ref-stat-card__value">{dashboard.total_referrals}</div>
+                <div className="ref-stat-card__hint">
+                  <Trans>Direct invitees</Trans>
+                </div>
               </div>
             </article>
             <article className="ref-stat-card ref-stat-card--accent">
-              <div className="ref-stat-card__label">
-                <Trans>Total Commission</Trans>
-              </div>
-              <div className="ref-stat-card__value ref-stat-card__value--accent">
-                {formatUsd(parseValue(dashboard.total_earnings, 30), { fallbackToZero: true })}
-              </div>
-              <div className="ref-stat-card__hint">
-                <Trans>Cumulative earnings (lifetime)</Trans>
+              <RefIconBox name="coins" />
+              <div className="ref-stat-card__content">
+                <div className="ref-stat-card__label">
+                  <Trans>Total Commission</Trans>
+                </div>
+                <div className="ref-stat-card__value ref-stat-card__value--accent">
+                  {formatUsd(parseValue(dashboard.total_earnings, 30), { fallbackToZero: true })}
+                </div>
+                <div className="ref-stat-card__hint">
+                  <Trans>Cumulative earnings (lifetime)</Trans>
+                </div>
               </div>
             </article>
             <ClaimCommissionStatCard
@@ -760,33 +939,36 @@ export function ZanbaraReferralsPage({
             <FigmaHLine />
             <div className="ref-invite-tab-panels">
             {inviteTab === "invite" ? (
-              dashboard.code ? (
-                <div className="ref-invite-grid">
-                  <div>
-                    <div className="ref-field-label">
-                      <Trans>Referral Link</Trans>
-                    </div>
+              <div className="ref-invite-empty">
+                <InviteEnvelopeArt />
+                <div className="ref-invite-empty__body">
+                  <h3 className="ref-invite-title">
+                    <Trans>Share your invite link with friends</Trans>
+                  </h3>
+                  <p className="ref-invite-create__hint">
+                    <Trans>Earn commissions when your friends trade</Trans>
+                  </p>
+                  <div className="ref-invite-actions">
                     <div className="ref-faux-input">
-                      <span className="ref-faux-input__val ref-faux-input__val--link">{referralLink || "—"}</span>
-                      <button type="button" className="ref-copy-link" onClick={handleCopyLink} disabled={!referralLink}>
-                        <Trans>Copy</Trans>
+                      <span className="ref-faux-input__val ref-faux-input__val--link">
+                        {dashboard.code ? referralLink || "—" : account ? `https://www.zanbara.com/referral/${formatAddrMid(account)}` : "—"}
+                      </span>
+                      <button
+                        type="button"
+                        className="ref-copy-icon"
+                        onClick={dashboard.code ? handleCopyLink : undefined}
+                        disabled={!dashboard.code || !referralLink}
+                        aria-label={t`Copy`}
+                      >
+                        <ReferralLineIcon name="copy" />
                       </button>
                     </div>
-                  </div>
-                  <div>
-                    <div className="ref-field-label">
-                      <Trans>My Referral Code</Trans>
-                    </div>
-                    <div className="ref-faux-input">
-                      <span className="ref-faux-input__val">{dashboard.code}</span>
-                      <button type="button" className="ref-copy-link" onClick={handleCopyCodeOnly}>
-                        <Trans>Copy</Trans>
+                    {dashboard.code ? (
+                      <button type="button" className="ref-create-code-btn" onClick={handleCopyCodeOnly}>
+                        <Trans>Copy Referral Code</Trans>
                       </button>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="ref-invite-create">
+                    ) : (
+                      <div className="ref-invite-create">
                   <AffiliateCodeCreateButton
                     embedded
                     onSuccess={() => {
@@ -794,8 +976,11 @@ export function ZanbaraReferralsPage({
                       void mutateStatus();
                     }}
                   />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )
+              </div>
             ) : (
               <form className="ref-bind-form" onSubmit={handleBindCodeSubmit}>
                 <p className="ref-invite-create__hint">
@@ -851,8 +1036,6 @@ export function ZanbaraReferralsPage({
             apiTier={dashboard.tier ?? undefined}
             onChain={onChainDash}
           />
-
-          <InviteeBenefitsBlock />
         </>
       );
     }
@@ -864,12 +1047,18 @@ export function ZanbaraReferralsPage({
     <div className="ref-page">
       <div className="ref-shell">
         <section className="ref-hero">
-          <h1 className="ref-hero__title">
-            <Trans>Referral Center</Trans>
-          </h1>
-          <p className="ref-hero__sub">
-            <Trans>Invite friends, earn commissions, accumulate forever</Trans>
-          </p>
+          <div className="ref-hero__copy">
+            <ReferralHeroIcon />
+            <div>
+              <h1 className="ref-hero__title">
+                <Trans>Referral Center</Trans>
+              </h1>
+              <p className="ref-hero__sub">
+                <Trans>Invite friends, earn commissions, accumulate forever</Trans>
+              </p>
+            </div>
+          </div>
+          <ReferralHeroGift />
         </section>
         <div className="ref-shell__body">
           <div className="ref-main">{renderInviteMain()}</div>
