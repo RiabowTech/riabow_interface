@@ -110,7 +110,7 @@ export function MainRoutes({ openSettings: _openSettings }: { openSettings: () =
         </TradeStateProvider>
       </Route>
 
-      <Route exact path="/fee-vip">
+      <Route exact path="/vip">
         <LegacyPageProviders>
           <SuspenseWrapper>
             <FeeVipPage />

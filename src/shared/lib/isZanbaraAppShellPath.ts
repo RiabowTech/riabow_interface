@@ -8,7 +8,7 @@ const ZANBARA_APP_SHELL_PREFIXES = [
   "/leaderboard",
   "/referrals",
   "/points",
-  "/fee-vip",
+  "/vip",
 ] as const;
 
 export function isZanbaraAppShellPath(pathname: string): boolean {

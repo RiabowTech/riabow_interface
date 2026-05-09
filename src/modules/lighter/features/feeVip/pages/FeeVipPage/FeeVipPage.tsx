@@ -1,6 +1,5 @@
 import { msg, Trans, t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 
 import { LighterShell } from "@/modules/lighter/components/LighterShell/LighterShell";
@@ -9,7 +8,6 @@ import useWallet from "lib/wallets/useWallet";
 import AppPageLayout from "shared/components/AppPageLayout/AppPageLayout";
 import SEO from "shared/components/Seo/SEO";
 import { useDesignSystem } from "shared/context/DesignSystemContext/DesignSystemContext";
-import { PrimaryActionButton, ZanbaraCornerBracketFrame } from "shared/ui";
 
 import Loader from "components/Loader/Loader";
 
@@ -42,6 +40,30 @@ const VOLUME_CAPTION_MSG: Record<FeeVipVolumeCaptionKey, ReturnType<typeof msg>>
 };
 
 const EMPTY_TIER_ROWS: FeeVipTierRow[] = [];
+
+const FALLBACK_TIER_ROWS: FeeVipTierRow[] = [
+  { tier: 0, tierDisplayLabel: "VIP 0", volumeCaptionKey: "lt_5m", makerFeeBps: 1, takerFeeBps: 4 },
+  { tier: 1, tierDisplayLabel: "VIP 1", volumeCaptionKey: "gte_5m", makerFeeBps: 0.8, takerFeeBps: 3.6 },
+  { tier: 2, tierDisplayLabel: "VIP 2", volumeCaptionKey: "gte_25m", makerFeeBps: 0.4, takerFeeBps: 3.2 },
+  { tier: 3, tierDisplayLabel: "VIP 3", volumeCaptionKey: "gte_100m", makerFeeBps: 0, takerFeeBps: 2.8 },
+  { tier: 4, tierDisplayLabel: "VIP 4", volumeCaptionKey: "gte_500m", makerFeeBps: 0, takerFeeBps: 2.6 },
+  { tier: 5, tierDisplayLabel: "VIP 5", volumeCaptionKey: "gte_2b", makerFeeBps: 0, takerFeeBps: 2.4 },
+];
+
+const FALLBACK_USER = {
+  currentTier: 0 as FeeVipTierId,
+  currentTierLabel: "VIP 0",
+  nextTier: 1 as FeeVipTierId,
+  nextTierLabel: "VIP 1",
+  rolling14dVolumeUsd: 378,
+  nextTierVolumeFloorUsd: 5_000_000,
+  makerFeeBps: 1,
+  takerFeeBps: 4,
+  effectiveMakerFeeBps: 0.9,
+  effectiveTakerFeeBps: 3.6,
+  nextTakerDiscountPercent: 10,
+  currentTierDescriptionKey: null,
+};
 
 /** 积分系统文档 T1–T3（与 `GET /points/tier` 一致） */
 const POINTS_TIER_LEVEL_MSG: Partial<Record<FeeVipTierId, ReturnType<typeof msg>>> = {
@@ -94,6 +116,60 @@ function ArrowRightIcon({ className }: { className?: string }) {
   );
 }
 
+function ClockIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" aria-hidden="true">
+      <circle cx="10" cy="10" r="7" />
+      <path d="M10 6.5v4l2.8 1.6" />
+    </svg>
+  );
+}
+
+function CrownIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M5.7 24.2h20.6l1.4-13.8-6.1 5.3L16 6.3l-5.6 9.4-6.1-5.3 1.4 13.8Z" />
+      <path d="M7.8 27h16.4" />
+      <path d="M10.5 20.8h11" />
+    </svg>
+  );
+}
+
+function VolumeIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 17V11" />
+      <path d="M10 17V7" />
+      <path d="M15 17V4" />
+      <path d="M20 17V9" />
+    </svg>
+  );
+}
+
+function SparkIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M10 2.5 12.1 8l5.4 2-5.4 2L10 17.5 7.9 12l-5.4-2 5.4-2L10 2.5Z" />
+    </svg>
+  );
+}
+
+function FeeVipHeroIcon() {
+  return (
+    <span className="fee-vip-hero__icon" aria-hidden="true">
+      <CrownIcon />
+    </span>
+  );
+}
+
+function FeeVipTierBadge({ tier }: { tier: FeeVipTierId }) {
+  return (
+    <span className={`fee-vip-tier-badge fee-vip-tier-badge--${tier}`} aria-hidden="true">
+      <CrownIcon />
+    </span>
+  );
+}
+
 /**
  * 小组件:基于传入的时间戳做"X 秒/分钟前更新"的相对时间展示,每 10s 自刷新。
  * 超过 60s 没有刷新数据(= 后端可能抖动)时切换为黄色 warn 样式提示用户数据偏旧。
@@ -133,22 +209,21 @@ function DataFreshness({ timestampMs, refreshing }: { timestampMs: number; refre
 export function FeeVipPage() {
   const { i18n } = useLingui();
   const { isZanbara } = useDesignSystem();
-  const { openConnectModal } = useConnectModal();
   const { account } = useWallet();
   const { chainId } = useChainId();
   const { summary, error, isLoading, isValidating, hasAuthToken, lastUpdatedAt } = useFeeVipSummary();
   /** 表格中用户点选的档位；Sign 成功后清空以默认高亮接口返回的当前档 */
   const [pickedTableTier, setPickedTableTier] = useState<FeeVipTierId | null>(null);
+  const fallbackUpdatedAtRef = useRef(Date.now());
 
-  const showConnectWalletCta = !account;
   const showReconnectSignInHint = Boolean(account) && !hasAuthToken;
 
   const effectiveSummary = summary;
   const hasServerTiers = Boolean(effectiveSummary?.tiers?.length);
   const isPointsSchedule = (effectiveSummary?.scheduleKind ?? "trading_fee_vip") === "points_trading_tier";
 
-  const user = effectiveSummary?.user ?? null;
-  const tiers = effectiveSummary?.tiers ?? EMPTY_TIER_ROWS;
+  const user = effectiveSummary?.user ?? (!account || !chainId ? FALLBACK_USER : null);
+  const tiers = effectiveSummary?.tiers?.length ? effectiveSummary.tiers : isPointsSchedule ? EMPTY_TIER_ROWS : FALLBACK_TIER_ROWS;
   const hasUser = user !== null;
   const hasTierRows = tiers.length > 0;
 
@@ -193,9 +268,10 @@ export function FeeVipPage() {
     () => ({ "--fee-vip-progress-pct": `${progressPct}%` }) as CSSProperties,
     [progressPct]
   );
+  const displayUpdatedAt = lastUpdatedAt ?? fallbackUpdatedAtRef.current;
 
   const body = (() => {
-    if (!chainId) {
+    if (!chainId && account) {
       return (
         <div className="fee-vip-page fee-vip-page--state">
           <Loader />
@@ -203,7 +279,7 @@ export function FeeVipPage() {
       );
     }
 
-    if (isLoading && !summary) {
+    if (isLoading && !summary && account && chainId) {
       return (
         <div className="fee-vip-page fee-vip-page--state">
           <Loader />
@@ -211,7 +287,7 @@ export function FeeVipPage() {
       );
     }
 
-    if (!isLoading && error && !summary) {
+    if (!isLoading && error && !summary && account && chainId) {
       return (
         <div className="fee-vip-page fee-vip-page--state">
           <p className="fee-vip-page__error" role="alert">
@@ -224,29 +300,41 @@ export function FeeVipPage() {
 
     return (
       <div className="fee-vip-page">
-        <h1 className="fee-vip-page__title">
-          <Trans>Fee &amp; VIP</Trans>
-        </h1>
+        <div className="fee-vip-hero">
+          <FeeVipHeroIcon />
+          <div>
+            <h1 className="fee-vip-page__title">
+              <Trans>Fee &amp; VIP</Trans>
+            </h1>
+            <p className="fee-vip-page__subtitle">
+              <Trans>Enjoy lower trading fees and exclusive benefits as your VIP level increases.</Trans>
+            </p>
+          </div>
+        </div>
 
-        {hasServerTiers && lastUpdatedAt ? (
+        {(hasServerTiers || !account || !chainId) && displayUpdatedAt ? (
           <p className="fee-vip-page__freshness" role="status" aria-live="polite">
-            <DataFreshness timestampMs={lastUpdatedAt} refreshing={isValidating} />
+            <ClockIcon className="fee-vip-page__freshness-icon" />
+            <DataFreshness timestampMs={displayUpdatedAt} refreshing={isValidating} />
           </p>
         ) : null}
 
         <div className="fee-vip-page__cards">
           <section className="fee-vip-card fee-vip-card--vip" aria-labelledby="fee-vip-current-heading">
             <h2 id="fee-vip-current-heading" className="fee-vip-card__label">
-              {isPointsSchedule ? <Trans>Current Trading Tier</Trans> : <Trans>Current VIP Level</Trans>}
+              {isPointsSchedule ? <Trans>Current Trading Tier</Trans> : <Trans>Your VIP Status</Trans>}
             </h2>
             <div className="fee-vip-card__row">
               {hasUser ? (
                 <>
-                  <span className="fee-vip-tag">
-                    {isPointsSchedule && user.pointsTierLabel
-                      ? user.pointsTierLabel
-                      : user.currentTierLabel ?? t`VIP ${user.currentTier}`}
-                  </span>
+                  <div className="fee-vip-status">
+                    <FeeVipTierBadge tier={user.currentTier} />
+                    <span className="fee-vip-status__level">
+                      {isPointsSchedule && user.pointsTierLabel
+                        ? user.pointsTierLabel
+                        : user.currentTierLabel ?? t`VIP ${user.currentTier}`}
+                    </span>
+                  </div>
                   {user.currentTierDescriptionKey === "default_new_user" ? (
                     <p className="fee-vip-tag__muted">
                       <Trans>Default level for new users</Trans>
@@ -274,40 +362,39 @@ export function FeeVipPage() {
                       <Trans>Connect wallet to see your VIP level.</Trans>
                     )}
                   </p>
-                  {showConnectWalletCta ? (
-                    <ZanbaraCornerBracketFrame className="fee-vip-page__connect-frame w-fit" enabled={isZanbara}>
-                      <PrimaryActionButton
-                        type="button"
-                        className="connect-wallet-cta min-w-[240px]"
-                        onClick={openConnectModal}
-                      >
-                        <Trans>Connect Wallet</Trans>
-                      </PrimaryActionButton>
-                    </ZanbaraCornerBracketFrame>
-                  ) : null}
                 </div>
               )}
             </div>
             {hasUser ? (
               <>
-                <p className="fee-vip-card__label">
+                <div className="fee-vip-card__divider" />
+                <p className="fee-vip-card__label fee-vip-card__label--small">
                   {isPointsSchedule ? <Trans>Next Tier</Trans> : <Trans>Next Level</Trans>}
                 </p>
                 <div className="fee-vip-next">
                   <span className="fee-vip-tag">
-                    {isPointsSchedule && user.pointsTierLabel
-                      ? user.pointsTierLabel
-                      : user.currentTierLabel ?? t`VIP ${user.currentTier}`}
-                  </span>
-                  <ArrowRightIcon className="fee-vip-next__arrow" />
-                  <p className="fee-vip-next__target">
                     {nextTier !== null
                       ? isPointsSchedule
                         ? `T${nextTier}`
                         : user.nextTierLabel ?? t`VIP ${nextTier}`
                       : t`Max`}
-                  </p>
+                  </span>
+                  <span className="fee-vip-next__progress">
+                    {formatRollingUsd(rolling14dUsd)} / {nextFloor != null ? formatRollingUsd(nextFloor) : "—"}
+                  </span>
+                  <span className="fee-vip-next__caption">
+                    <Trans>14D Volume</Trans>
+                  </span>
+                  <ArrowRightIcon className="fee-vip-next__arrow" />
                 </div>
+                <div className="fee-vip-progress fee-vip-progress--compact" style={progressStyle} aria-hidden="true">
+                  <div className="fee-vip-progress__fill" />
+                </div>
+                <p className="fee-vip-footnote">
+                  <Trans>
+                    Trade another {nextFloor != null ? formatRollingUsd(Math.max(0, nextFloor - rolling14dUsd)) : "—"} to unlock VIP {nextTier ?? user.currentTier}
+                  </Trans>
+                </p>
               </>
             ) : null}
           </section>
@@ -397,6 +484,7 @@ export function FeeVipPage() {
             </div>
             {user && user.nextTakerDiscountPercent != null && nextTier !== null ? (
               <p className="fee-vip-hint">
+                <SparkIcon className="fee-vip-hint__icon" />
                 {isPointsSchedule ? (
                   <Trans>
                     Upgrade to T{nextTier} to save {user.nextTakerDiscountPercent}% on taker TP rate (per $1k)
@@ -411,8 +499,9 @@ export function FeeVipPage() {
           </section>
 
           <section className="fee-vip-card" aria-labelledby="fee-vip-volume-heading">
-            <h2 id="fee-vip-volume-heading" className="fee-vip-card__label">
-              <Trans>14D Volume</Trans>
+            <h2 id="fee-vip-volume-heading" className="fee-vip-card__label fee-vip-card__label--icon">
+              <VolumeIcon className="fee-vip-card__label-icon" />
+              <span><Trans>14D Volume</Trans></span>
             </h2>
             <p className="fee-vip-volume__value">{hasUser ? formatRollingUsd(rolling14dUsd) : "—"}</p>
             <div
@@ -497,14 +586,7 @@ export function FeeVipPage() {
                     >
                       <td>
                         <div className="fee-vip-table__level-cell">
-                          <span
-                            className={
-                              isHighlighted
-                                ? "fee-vip-table__bar"
-                                : "fee-vip-table__bar fee-vip-table__bar--inactive"
-                            }
-                            aria-hidden
-                          />
+                          <FeeVipTierBadge tier={row.tier} />
                           <p className="fee-vip-table__level">{levelText}</p>
                         </div>
                       </td>

@@ -28,7 +28,7 @@ import styles from "./TopNav.module.scss";
 const NAV_ITEMS: {
   to?: string;
   href?: string;
-  labelKey: "Futures" | "Spot" | "Earn" | "Portfolio" | "Leaderboard" | "Referrals" | "Points" | "Fee & VIP";
+  labelKey: "Futures" | "Spot" | "Earn" | "Portfolio" | "Leaderboard" | "Referrals" | "Points" | "VIP";
 }[] = [
   { to: "/futures", labelKey: "Futures" },
   { to: "/spot", labelKey: "Spot" },
@@ -37,7 +37,7 @@ const NAV_ITEMS: {
   // { to: "/leaderboard/", labelKey: "Leaderboard" },
   { to: "/referrals", labelKey: "Referrals" },
   // { to: "/points", labelKey: "Points" },
-  { to: "/fee-vip", labelKey: "Fee & VIP" },
+  { to: "/vip", labelKey: "VIP" },
 ];
 
 const LANGUAGE_OPTIONS = [
@@ -140,7 +140,7 @@ export function TopNav() {
             ) : item.labelKey === "Points" ? (
               <Trans>Points</Trans>
             ) : (
-              <Trans>Fee & VIP</Trans>
+              <Trans>VIP</Trans>
             );
 
           return item.to ? (
