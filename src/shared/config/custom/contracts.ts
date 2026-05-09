@@ -37,6 +37,12 @@ const ZTDX_USDT =
   (import.meta.env.VITE_ZTDX_USDT as string | undefined) ||
   (import.meta.env.VITE_PRIMIT_USDT as string | undefined) ||
   "0x0000000000000000000000000000000000000000";
+const ZTDX_SPOT_VAULT_PROXY =
+  (import.meta.env.VITE_ZTDX_SPOT_VAULT_PROXY as string | undefined) ||
+  (import.meta.env.VITE_PRIMIT_SPOT_VAULT_PROXY as string | undefined) ||
+  "0x0000000000000000000000000000000000000000";
+
+export const DEFAULT_SPOT_CHAIN_ID = Number(import.meta.env.VITE_DEFAULT_SPOT_CHAIN || 97);
 
 /**
  * Trading-specific contract addresses by chain ID
@@ -123,6 +129,10 @@ export function isTradingUsdtAddress(chainId: number, tokenAddress: string): boo
  */
 export function getTradingVaultAddress(chainId: number): string | undefined {
   return TRADING_CONTRACTS[chainId as keyof typeof TRADING_CONTRACTS]?.ZTDX_VAULT;
+}
+
+export function getSpotVaultAddress(_chainId: number = DEFAULT_SPOT_CHAIN_ID): string | undefined {
+  return ZTDX_SPOT_VAULT_PROXY;
 }
 
 /**

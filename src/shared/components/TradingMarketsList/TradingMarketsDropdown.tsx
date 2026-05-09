@@ -24,6 +24,7 @@ import { useTokensFavorites } from "@/modules/lighter/store/TokensFavoritesConte
 import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import TokenIcon from "components/TokenIcon/TokenIcon";
 import { MarketTypeTabs } from "./MarketTypeTabs";
+import { EMPTY_ARRAY } from "lib/objects";
 
 import "./TradingMarketsList.scss";
 
@@ -42,6 +43,7 @@ export function TradingMarketsDropdown({ onMarketSelect }: TradingMarketsDropdow
 
   const favoriteKey = product === "spot" ? "spot-market-selector" : "futures-market-selector";
   const { tab, setTab, favoriteTokens, toggleFavoriteToken } = useTokensFavorites(favoriteKey);
+  const safeFavoriteTokens = favoriteTokens ?? EMPTY_ARRAY;
   const { orderBy, direction, getSorterProps } = useSorterHandlers<SortField>("trade-markets-dropdown");
 
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -50,7 +52,7 @@ export function TradingMarketsDropdown({ onMarketSelect }: TradingMarketsDropdow
     markets,
     searchKeyword,
     tab,
-    favoriteTokens,
+    favoriteTokens: safeFavoriteTokens,
     orderBy,
     direction,
   });
@@ -193,7 +195,7 @@ export function TradingMarketsDropdown({ onMarketSelect }: TradingMarketsDropdow
                   key={market.symbol}
                   market={market}
                   isMobile={isMobile}
-                  isFavorite={favoriteTokens?.includes(market.symbol)}
+                  isFavorite={safeFavoriteTokens.includes(market.symbol)}
                   onFavorite={() => toggleFavoriteToken(market.symbol)}
                   onSelect={() => handleMarketSelect(market.symbol)}
                   rowVerticalPadding={rowVerticalPadding}
@@ -226,25 +228,26 @@ function useFilterSortMarkets({
   markets: TradingMarket[];
   searchKeyword: string;
   tab: string;
-  favoriteTokens: string[];
+  favoriteTokens?: string[];
   orderBy: SortField;
   direction: string;
 }) {
   const filtered = useMemo(() => {
     let result = markets;
+    const safeFavoriteTokens = favoriteTokens ?? EMPTY_ARRAY;
 
     // Filter by search
     if (searchKeyword.trim()) {
       result = searchBy(
         result,
-        [(m) => m.symbol, (m) => m.base_asset, (m) => m.quote_asset],
+        [(m) => m.symbol ?? "", (m) => m.base_asset ?? "", (m) => m.quote_asset ?? ""],
         searchKeyword
       );
     }
 
     // Filter by tab
     if (tab === "favorites") {
-      result = result.filter((m) => favoriteTokens.includes(m.symbol));
+      result = result.filter((m) => safeFavoriteTokens.includes(m.symbol));
     } else if (tab !== "all") {
       // Filter by market type (layer1, meme, defi, ai, rwa, layer2)
       result = result.filter((m) => m.type === tab);
@@ -285,8 +288,9 @@ function useFilterSortMarkets({
 
   // Put favorites first
   return useMemo(() => {
-    const favorites = sorted.filter((m) => favoriteTokens.includes(m.symbol));
-    const nonFavorites = sorted.filter((m) => !favoriteTokens.includes(m.symbol));
+    const safeFavoriteTokens = favoriteTokens ?? EMPTY_ARRAY;
+    const favorites = sorted.filter((m) => safeFavoriteTokens.includes(m.symbol));
+    const nonFavorites = sorted.filter((m) => !safeFavoriteTokens.includes(m.symbol));
     return [...favorites, ...nonFavorites];
   }, [sorted, favoriteTokens]);
 }

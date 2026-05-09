@@ -16,10 +16,11 @@ import {
 } from "@/modules/lighter/context/TradingAccountContext";
 import { useSettings } from "@/modules/lighter/context/SettingsContext";
 import { useDisconnectAndClose } from "@/modules/lighter/domain/multichain/useDisconnectAndClose";
-import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
+import { isTradeModeActive, useTradeProduct } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
 import { BOTANIX, getExplorerUrl } from "config/chains";
-import { getTradingVaultAddress } from "config/custom/contracts";
+import { DEFAULT_SPOT_CHAIN_ID, getSpotVaultAddress, getTradingVaultAddress } from "config/custom/contracts";
 import VaultAbi from "sdk/abis/Vault";
+import SpotVaultAbi from "sdk/abis/SpotVault";
 import { isSettlementChain } from "config/multichain";
 import { isMultichainFundingItemLoading } from "@/modules/lighter/domain/multichain/isMultichainFundingItemLoading";
 import type { MultichainFundingHistoryItem } from "@/modules/lighter/domain/multichain/types";
@@ -37,6 +38,7 @@ import useWallet from "lib/wallets/useWallet";
 import { getToken, getTokenBySymbol } from "sdk/configs/tokens";
 import { Token } from "sdk/types/tokens";
 import { buildAccountDashboardUrl } from "shared/utils/buildAccountDashboardUrl";
+import { findWalletTokenConfig, useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
 
 import { Amount } from "components/Amount/Amount";
 import { Avatar } from "components/Avatar/Avatar";
@@ -442,8 +444,13 @@ const FundingHistorySection = () => {
   // const [searchQuery, setSearchQuery] = useState("");
   const [, setSelectedTransferGuid] = useTradingAccountSelectedTransferGuid();
   const { address: account, chainId } = useAccount();
+  const product = useTradeProduct();
+  const isSpotProduct = product === "spot";
+  const fundingChainId = isSpotProduct ? DEFAULT_SPOT_CHAIN_ID : chainId;
+  const spotVaultAddress = getSpotVaultAddress(DEFAULT_SPOT_CHAIN_ID);
+  const { data: walletTokenConfigs } = useWalletTokensConfig();
   const { walletClient } = useWallet();
-  const publicClient = usePublicClient({ chainId });
+  const publicClient = usePublicClient({ chainId: fundingChainId });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isTradeMode = isTradeModeActive();
   const { mutate: mutateBalances } = useZanbaraUserBalances({
@@ -451,7 +458,7 @@ const FundingHistorySection = () => {
   });
 
   // Use backend funding history in API trading mode, otherwise use regular multichain funding history.
-  const tradingFundingHistory = useTradingFundingHistory(chainId, { enabled: isTradeMode });
+  const tradingFundingHistory = useTradingFundingHistory(isTradeMode ? fundingChainId : undefined, undefined, product);
   const regularFundingHistory = useTradingAccountFundingHistory({ enabled: !isTradeMode });
 
   const fundingHistory = isTradeMode ? undefined : regularFundingHistory.fundingHistory;
@@ -467,7 +474,18 @@ const FundingHistorySection = () => {
       .map((item): TradingDisplayFundingHistoryItem | undefined => {
         // API returns token as symbol (e.g., "USDT"), not address
         // Use getTokenBySymbol to find token by symbol
-        const token = getTokenBySymbol(chainId!, item.token);
+        const spotTokenConfig = isSpotProduct
+          ? findWalletTokenConfig(walletTokenConfigs, DEFAULT_SPOT_CHAIN_ID, item.token)
+          : undefined;
+        const token = spotTokenConfig
+          ? {
+              name: spotTokenConfig.symbol,
+              symbol: spotTokenConfig.symbol,
+              decimals: spotTokenConfig.decimals,
+              address: spotTokenConfig.contract,
+              isStable: spotTokenConfig.symbol.toUpperCase().includes("USD"),
+            }
+          : getTokenBySymbol(chainId!, item.token);
         if (!token) {
           console.warn(`[FundingHistorySection] Token not found for symbol: ${item.token}`);
           return undefined;
@@ -491,7 +509,7 @@ const FundingHistorySection = () => {
         };
       })
       .filter((item): item is TradingDisplayFundingHistoryItem => item !== undefined);
-  }, [isTradeMode, tradingFundingHistory.fundingHistory, chainId]);
+  }, [isTradeMode, tradingFundingHistory.fundingHistory, chainId, isSpotProduct, walletTokenConfigs]);
 
   // Regular funding history for non-API trading mode.
   const filteredFundingHistory: DisplayFundingHistoryItem[] | undefined = useMemo(() => {
@@ -545,7 +563,7 @@ const FundingHistorySection = () => {
 
   // Handler for continuing signed withdrawal (calling contract with existing signature)
   const handleSignedWithdrawalContinue = async (item: TradingDisplayFundingHistoryItem) => {
-    if (!chainId || !walletClient || !publicClient || !account) {
+    if (!fundingChainId || !walletClient || !publicClient || !account) {
       helperToast.error(t`Missing required parameters`);
       return;
     }
@@ -565,45 +583,65 @@ const FundingHistorySection = () => {
     setIsSubmitting(true);
     try {
       // Get vault address
-      const vaultAddress = getTradingVaultAddress(chainId);
+      const vaultAddress = isSpotProduct ? spotVaultAddress : getTradingVaultAddress(fundingChainId);
       if (!vaultAddress) {
         throw new Error("Vault contract not found");
       }
-
-      // Reuse the shared Vault ABI — includes all custom error definitions
-      // from ZtdxReserveVault + ZtdxSignatureCodec, so revert reasons surface
-      // as readable names (e.g. InvalidSignature, SignatureExpired) instead
-      // of raw 4-byte selectors.
-      const vaultAbi = VaultAbi;
 
       // The amount is already in bigint format from item.amount
       const amountInWei = item.amount;
       const deadline = item.expiry;
       const signature = item.backend_signature;
+      const spotWithdrawArgs = [
+        getAddress(item.token.address),
+        amountInWei,
+        BigInt(deadline),
+        signature as `0x${string}`,
+      ] as const;
+      const futuresWithdrawArgs = [amountInWei, BigInt(deadline), signature as `0x${string}`] as const;
 
       // Step 1: Simulate contract call
       try {
-        await publicClient.simulateContract({
-          address: vaultAddress as `0x${string}`,
-          abi: vaultAbi,
-          functionName: "releaseFunds",
-          args: [amountInWei, BigInt(deadline), signature as `0x${string}`],
-          account: getAddress(account),
-        });
+        if (isSpotProduct) {
+          await publicClient.simulateContract({
+            address: vaultAddress as `0x${string}`,
+            abi: SpotVaultAbi,
+            functionName: "withdraw",
+            args: spotWithdrawArgs,
+            account: getAddress(account),
+          });
+        } else {
+          await publicClient.simulateContract({
+            address: vaultAddress as `0x${string}`,
+            abi: VaultAbi,
+            functionName: "releaseFunds",
+            args: futuresWithdrawArgs,
+            account: getAddress(account),
+          });
+        }
       } catch (simulateError: any) {
         console.error("[FundingHistory] Contract simulation failed:", simulateError);
         throw new Error(simulateError?.shortMessage || "Transaction simulation failed");
       }
 
       // Step 2: Call contract
-      const txHash = await walletClient.writeContract({
-        address: vaultAddress as `0x${string}`,
-        abi: vaultAbi,
-        functionName: "releaseFunds",
-        args: [amountInWei, BigInt(deadline), signature as `0x${string}`],
-        account: getAddress(account),
-        chain: publicClient.chain,
-      });
+      const txHash = isSpotProduct
+        ? await walletClient.writeContract({
+            address: vaultAddress as `0x${string}`,
+            abi: SpotVaultAbi,
+            functionName: "withdraw",
+            args: spotWithdrawArgs,
+            account: getAddress(account),
+            chain: publicClient.chain,
+          })
+        : await walletClient.writeContract({
+            address: vaultAddress as `0x${string}`,
+            abi: VaultAbi,
+            functionName: "releaseFunds",
+            args: futuresWithdrawArgs,
+            account: getAddress(account),
+            chain: publicClient.chain,
+          });
 
       helperToast.success(t`Withdraw transaction submitted`);
 
@@ -614,9 +652,9 @@ const FundingHistorySection = () => {
 
       // Confirm with backend
       try {
-        await confirmWithdraw(chainId, item.id, {
+        await confirmWithdraw(fundingChainId, item.id, {
           tx_hash: receipt.transactionHash,
-        });
+        }, product);
       } catch (confirmError) {
         console.warn("[FundingHistory] Failed to confirm withdraw:", confirmError);
       }

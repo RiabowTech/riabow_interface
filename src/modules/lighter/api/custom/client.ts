@@ -764,8 +764,8 @@ export interface GetFundingFeeHistoryParams {
   limit?: number;
 }
 
-export async function getWithdrawHistory(chainId: number): Promise<WithdrawHistoryResponse> {
-  return apiFetch<WithdrawHistoryResponse>(chainId, "/withdraw/history", { requireAuth: true });
+export async function getWithdrawHistory(chainId: number, product?: TradeProduct): Promise<WithdrawHistoryResponse> {
+  return apiFetch<WithdrawHistoryResponse>(chainId, "/withdraw/history", { requireAuth: true, product });
 }
 
 export async function getFundingFeeHistory(
@@ -787,11 +787,16 @@ export async function getFundingFeeHistory(
   return apiFetch<FundingFeeHistoryItem[]>(chainId, `/fapi/v1/fundingFeeHistory${suffix}`, { requireAuth: true });
 }
 
-export async function requestWithdraw(chainId: number, request: WithdrawRequest): Promise<WithdrawResponse> {
+export async function requestWithdraw(
+  chainId: number,
+  request: WithdrawRequest,
+  product?: TradeProduct
+): Promise<WithdrawResponse> {
   return apiFetch<WithdrawResponse>(chainId, "/withdraw/request", {
     method: "POST",
     body: JSON.stringify(request),
     requireAuth: true,
+    product,
   });
 }
 
@@ -811,12 +816,14 @@ export interface ConfirmWithdrawResponse {
 export async function confirmWithdraw(
   chainId: number,
   withdrawId: string,
-  request: ConfirmWithdrawRequest
+  request: ConfirmWithdrawRequest,
+  product?: TradeProduct
 ): Promise<ConfirmWithdrawResponse> {
   return apiFetch<ConfirmWithdrawResponse>(chainId, `/withdraw/${withdrawId}/confirm`, {
     method: "POST",
     body: JSON.stringify(request),
     requireAuth: true,
+    product,
   });
 }
 

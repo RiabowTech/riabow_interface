@@ -12,12 +12,13 @@ import type {
 
 import { getStoredToken } from "./client";
 // 使用统一的后端 URL 配置
-import { getTradingBackendUrl } from "config/backend";
+import { tradeProductApiBaseUrl, tradeProductApiPath, type TradeProduct } from "./productRouting";
 import { helperToast } from "lib/helperToast";
 import type { ApiError } from "../types";
 
 interface FetchOptions extends RequestInit {
   requireAuth?: boolean;
+  product?: TradeProduct;
 }
 
 async function apiFetch<T>(
@@ -25,8 +26,9 @@ async function apiFetch<T>(
   path: string,
   options: FetchOptions = {}
 ): Promise<T> {
-  const baseUrl = getTradingBackendUrl(chainId);
-  const url = `${baseUrl}/api/v1${path}`;
+  const baseUrl = tradeProductApiBaseUrl(chainId, options.product);
+  const resolvedPath = options.product ? tradeProductApiPath(options.product, path) : path;
+  const url = `${baseUrl}/api/v1${resolvedPath}`;
 
   const headers: HeadersInit = {
     "Content-Type": "application/json",
@@ -95,9 +97,10 @@ export async function prepareDeposit(
 /**
  * Get deposit history
  */
-export async function getDepositHistory(chainId: number): Promise<DepositHistoryResponse> {
+export async function getDepositHistory(chainId: number, product?: TradeProduct): Promise<DepositHistoryResponse> {
   return apiFetch<DepositHistoryResponse>(chainId, "/deposit/history", {
     method: "GET",
     requireAuth: true,
+    product,
   });
 }

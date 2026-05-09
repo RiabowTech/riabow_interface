@@ -1,21 +1,19 @@
 import { Trans } from "@lingui/macro";
 import cx from "classnames";
 import { useMemo, useState } from "react";
+import { Address, erc20Abi } from "viem";
+import { useAccount, useReadContracts } from "wagmi";
 
 import { getChainName } from "config/chains";
 import { getChainIcon } from "config/icons";
-import { MULTICHAIN_TOKEN_MAPPING } from "config/multichain";
-import { ARBITRUM, ARBITRUM_SEPOLIA } from "sdk/configs/chains";
 import {
   useTradingAccountDepositViewChain,
   useTradingAccountDepositViewTokenAddress,
   useTradingAccountModalOpen,
 } from "@/modules/lighter/context/TradingAccountContext";
 import { TokenChainData } from "@/modules/lighter/domain/multichain/types";
-import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
-import { useChainId } from "lib/chains";
+import { useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
 import { formatUsd } from "lib/numbers";
-import { EMPTY_OBJECT } from "lib/objects";
 import { convertToUsd, getMidPrice } from "sdk/utils/tokens";
 
 import { Amount } from "components/Amount/Amount";
@@ -46,16 +44,17 @@ const TokenListItem = ({ tokenChainData, onClick, className }: TokenListItemProp
         <TokenIcon symbol={tokenChainData.symbol} displaySize={40} chainIdBadge={tokenChainData.sourceChainId} />
         <div>
           <div className="text-body-large">{tokenChainData.symbol}</div>
-          <div className="text-body-small text-typography-secondary">{getChainName(tokenChainData.sourceChainId)}</div>
+          <div className="text-body-small text-typography-secondary">{getFundingChainName(tokenChainData.sourceChainId)}</div>
         </div>
       </div>
       <div className="text-right">
-        <Amount
-          className="text-body-large"
-          amount={tokenChainData.sourceChainBalance}
-          decimals={tokenChainData.sourceChainDecimals}
-          isStable={tokenChainData.isStable}
-        />
+            <Amount
+              className="text-body-large"
+              amount={tokenChainData.sourceChainBalance}
+              decimals={tokenChainData.sourceChainDecimals}
+              isStable={tokenChainData.isStable}
+              showZero
+            />
         <div className="text-body-small text-typography-secondary">
           {tokenChainData.sourceChainBalanceUsd > 0n ? formatUsd(tokenChainData.sourceChainBalanceUsd) : "-"}
         </div>
@@ -68,8 +67,27 @@ type DisplayTokenChainData = TokenChainData & {
   sourceChainBalanceUsd: bigint;
 };
 
+function getFundingChainName(chainId: number) {
+  if (chainId === 97) {
+    return "BNB Testnet";
+  }
+  return getChainName(chainId);
+}
+
+function getFundingChainIcon(chainId: number) {
+  try {
+    return getChainIcon(chainId);
+  } catch (_error) {
+    return undefined;
+  }
+}
+
+function getTokenConfigKey(chainId: number, address: string) {
+  return `${chainId}:${address.toLowerCase()}`;
+}
+
 export const SelectAssetToDepositView = () => {
-  const { chainId } = useChainId();
+  const { address: account } = useAccount();
   const [, setIsVisibleOrView] = useTradingAccountModalOpen();
   const [, setDepositViewChain] = useTradingAccountDepositViewChain();
   const [, setDepositViewTokenAddress] = useTradingAccountDepositViewTokenAddress();
@@ -78,32 +96,78 @@ export const SelectAssetToDepositView = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const { tokenChainDataArray: tokenChainDataArrayRaw } = useMultichainTokensRequest();
+  const { data: walletTokenConfigs } = useWalletTokensConfig();
+  const configuredBalanceContracts = useMemo(
+    () =>
+      walletTokenConfigs?.map((token) => ({
+        address: token.contract as Address,
+        abi: erc20Abi,
+        functionName: "balanceOf",
+        args: [account as Address],
+        chainId: token.chainId,
+      })) ?? [],
+    [account, walletTokenConfigs]
+  );
+  const { data: configuredBalanceResults } = useReadContracts({
+    contracts: configuredBalanceContracts,
+    query: {
+      enabled: Boolean(account && configuredBalanceContracts.length > 0),
+    },
+  });
+  const configuredBalanceByToken = useMemo(() => {
+    const balances = new Map<string, bigint>();
+    walletTokenConfigs?.forEach((token, index) => {
+      const result = configuredBalanceResults?.[index];
+      if (result?.status === "success" && typeof result.result === "bigint") {
+        balances.set(getTokenConfigKey(token.chainId, token.contract), result.result);
+      }
+    });
+    return balances;
+  }, [configuredBalanceResults, walletTokenConfigs]);
 
-  // Trading-mode product requirement: deposit is USDT-only. Filter by symbol
-  // (more robust than address comparison — stays correct regardless of how
-  // mappings normalise addresses across source/settlement chains).
+  // Wallet deposit assets now come from backend configuration. Keep the old
+  // multichain balance source only as a fallback while config is loading.
   const tokenChainDataArray = useMemo(() => {
-    if (!isTradeModeActive()) {
-      return tokenChainDataArrayRaw;
+    if (walletTokenConfigs && walletTokenConfigs.length > 0) {
+      return walletTokenConfigs.map(
+        (token): TokenChainData => ({
+          name: token.symbol,
+          symbol: token.symbol,
+          decimals: token.decimals,
+          address: token.contract,
+          isStable: token.symbol.toUpperCase().includes("USD"),
+          imageUrl: token.image || undefined,
+          sourceChainId: token.chainId as TokenChainData["sourceChainId"],
+          sourceChainDecimals: token.decimals,
+          sourceChainPrices: undefined,
+          sourceChainBalance: configuredBalanceByToken.get(getTokenConfigKey(token.chainId, token.contract)) ?? 0n,
+        })
+      );
     }
-    return tokenChainDataArrayRaw.filter((token) => token.symbol === "USDT");
-  }, [tokenChainDataArrayRaw]);
+
+    return tokenChainDataArrayRaw;
+  }, [configuredBalanceByToken, tokenChainDataArrayRaw, walletTokenConfigs]);
 
   const NETWORKS_FILTER = useMemo(() => {
     const wildCard = { id: "all" as const, name: "All Networks" };
 
-    // Only show ARBITRUM and ARBITRUM_SEPOLIA chains
-    const allowedChains = [ARBITRUM, ARBITRUM_SEPOLIA];
-    const chainFilters = Object.keys(MULTICHAIN_TOKEN_MAPPING[chainId] ?? EMPTY_OBJECT)
-      .map((sourceChainId) => parseInt(sourceChainId))
-      .filter((sourceChainId) => allowedChains.includes(sourceChainId))
+    const seen = new Set<number>();
+    const chainFilters = tokenChainDataArray
+      .map((token) => Number(token.sourceChainId))
+      .filter((sourceChainId) => {
+        if (!Number.isFinite(sourceChainId) || seen.has(sourceChainId)) {
+          return false;
+        }
+        seen.add(sourceChainId);
+        return true;
+      })
       .map((sourceChainId) => ({
         id: sourceChainId,
-        name: getChainName(sourceChainId),
+        name: getFundingChainName(sourceChainId),
       }));
 
     return [wildCard, ...chainFilters];
-  }, [chainId]);
+  }, [tokenChainDataArray]);
 
   const filteredBalances: DisplayTokenChainData[] = useMemo(() => {
     return tokenChainDataArray
@@ -157,7 +221,7 @@ export const SelectAssetToDepositView = () => {
                   "!text-typography-primary": selectedNetwork === network.id,
                 })}
                 onClick={() => setSelectedNetwork(network.id as number | "all")}
-                imgSrc={network.id !== "all" ? getChainIcon(network.id) : undefined}
+                imgSrc={network.id !== "all" ? getFundingChainIcon(network.id) : undefined}
                 imgClassName="size-16 !mr-4"
               >
                 {network.name}
@@ -184,7 +248,7 @@ export const SelectAssetToDepositView = () => {
             {selectedNetwork === "all" ? (
               <Trans>No assets are available for deposit</Trans>
             ) : (
-              <Trans>No eligible tokens available on {getChainName(selectedNetwork)} for deposit</Trans>
+              <Trans>No eligible tokens available on {getFundingChainName(selectedNetwork)} for deposit</Trans>
             )}
           </div>
         )}

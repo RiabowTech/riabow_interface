@@ -7,7 +7,9 @@ interface ImportMetaEnv {
 
   // Backend API URLs
   readonly VITE_PROXY_API_URL: string;
+  readonly VITE_PROXY_SEPOLIA_API_URL: string;
   readonly VITE_PROXY_WS_URL: string;
+  readonly VITE_PROXY_SEPOLIA_WS_URL: string;
   readonly VITE_BACKEND_URL: string;
 
   // Feature Flags
@@ -24,6 +26,7 @@ interface ImportMetaEnv {
   // Default chain ID (numeric, e.g. "421614" for Arbitrum Sepolia)
   // Falls back to ARBITRUM_SEPOLIA when unset or invalid.
   readonly VITE_DEFAULT_CHAIN: string;
+  readonly VITE_DEFAULT_SPOT_CHAIN: string;
 
   // RPC URLs
   readonly VITE_APP_ARBITRUM_RPC_URLS: string;
@@ -45,6 +48,7 @@ interface ImportMetaEnv {
   readonly VITE_ZTDX_REBATE_PROXY: string;
   readonly VITE_ZTDX_EARN_PROXY: string;
   readonly VITE_ZTDX_USDT: string;
+  readonly VITE_PRIMIT_SPOT_VAULT_PROXY: string;
 
   // ZTDX app origin for brand link navigation
   readonly VITE_ZTDX_APP_ORIGIN: string;

@@ -7,6 +7,10 @@ export const PROTOCOL_STATS_API_URL = "";
 // pair is sufficient — operators point env vars at the chain-specific cluster.
 const TRADING_API_URL = import.meta.env.VITE_PROXY_API_URL || "https://api.primit.io";
 const TRADING_WS_URL = import.meta.env.VITE_PROXY_WS_URL || "wss://api.primit.io";
+const TRADING_SEPOLIA_API_URL = import.meta.env.VITE_PROXY_SEPOLIA_API_URL || TRADING_API_URL;
+const TRADING_SEPOLIA_WS_URL = import.meta.env.VITE_PROXY_SEPOLIA_WS_URL || TRADING_WS_URL;
+const DEFAULT_BACKEND_CHAIN_ID = Number(import.meta.env.VITE_DEFAULT_CHAIN || 0);
+const ARBITRUM_SEPOLIA_CHAIN_ID = 421614;
 
 // Legacy trading backend URL（已弃用，保留兼容）
 const LEGACY_BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
@@ -24,7 +28,9 @@ export function getTradingBackendUrl(_chainId: number): string {
   if (import.meta.env.DEV) {
     return "";
   }
-  return TRADING_API_URL;
+  return _chainId === ARBITRUM_SEPOLIA_CHAIN_ID || DEFAULT_BACKEND_CHAIN_ID === ARBITRUM_SEPOLIA_CHAIN_ID
+    ? TRADING_SEPOLIA_API_URL
+    : TRADING_API_URL;
 }
 
 /**
@@ -34,7 +40,9 @@ export function getTradingWsUrl(_chainId: number): string {
   if (import.meta.env.DEV) {
     return "";
   }
-  return TRADING_WS_URL;
+  return _chainId === ARBITRUM_SEPOLIA_CHAIN_ID || DEFAULT_BACKEND_CHAIN_ID === ARBITRUM_SEPOLIA_CHAIN_ID
+    ? TRADING_SEPOLIA_WS_URL
+    : TRADING_WS_URL;
 }
 
 /**

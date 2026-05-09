@@ -155,17 +155,17 @@ export function TokensFavoritesContextProvider({ children }: PropsWithChildren) 
     [setSettings]
   );
 
-  const stableObj = useMemo<TokensFavoritesContextType>(() => {
-    const s = settings ?? DEFAULT_TOKENS_FAVORITES_STORE;
-    return {
-      tabs: s.tabs,
-      gmFavoriteTokens: s.gmFavoriteTokens,
-      indexFavoriteTokens: s.indexFavoriteTokens,
-      tradeFavoriteTokens: s.tradeFavoriteTokens,
-      futuresFavoriteTokens: s.futuresFavoriteTokens ?? s.tradeFavoriteTokens,
-      spotFavoriteTokens: s.spotFavoriteTokens ?? EMPTY_ARRAY,
-      setTab,
-      toggleFavoriteToken,
+	  const stableObj = useMemo<TokensFavoritesContextType>(() => {
+	    const s = settings ?? DEFAULT_TOKENS_FAVORITES_STORE;
+	    return {
+	      tabs: s.tabs ?? EMPTY_OBJECT,
+	      gmFavoriteTokens: s.gmFavoriteTokens ?? EMPTY_ARRAY,
+	      indexFavoriteTokens: s.indexFavoriteTokens ?? EMPTY_ARRAY,
+	      tradeFavoriteTokens: s.tradeFavoriteTokens ?? EMPTY_ARRAY,
+	      futuresFavoriteTokens: s.futuresFavoriteTokens ?? s.tradeFavoriteTokens ?? EMPTY_ARRAY,
+	      spotFavoriteTokens: s.spotFavoriteTokens ?? EMPTY_ARRAY,
+	      setTab,
+	      toggleFavoriteToken,
     };
   }, [settings, setTab, toggleFavoriteToken]);
 
@@ -193,11 +193,12 @@ export function useTokensFavorites(key: TokenFavoriteKey): TokenFavoritesState {
     favoriteTokens = futuresFavoriteTokens;
   } else if (type === "spot") {
     favoriteTokens = spotFavoriteTokens;
-  } else if (type === "trade") {
-    favoriteTokens = tradeFavoriteTokens;
-  } else {
-    favoriteTokens = indexFavoriteTokens;
-  }
+	  } else if (type === "trade") {
+	    favoriteTokens = tradeFavoriteTokens;
+	  } else {
+	    favoriteTokens = indexFavoriteTokens;
+	  }
+	  favoriteTokens = favoriteTokens ?? EMPTY_ARRAY;
 
   const internalSetTab = useCallback(
     (tab: TokenFavoritesTabOption) => {

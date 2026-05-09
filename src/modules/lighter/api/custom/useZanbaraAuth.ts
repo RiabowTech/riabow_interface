@@ -1,12 +1,19 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { useAccount, useSignTypedData } from "wagmi";
+import { useAccount } from "wagmi";
 import { getAddress } from "viem";
 import { useSWRConfig } from "swr";
 
 import { getNonce, login, logout as apiLogout, setStoredToken } from "./client";
 import { useTokenStorage } from "./useTokenStorage";
 import { useWalletChange } from "./useWalletChange";
+import { DEFAULT_CHAIN_ID, getChainName } from "config/chains";
+import { helperToast } from "lib/helperToast";
+import { getRainbowKitConfig } from "lib/wallets/rainbowKitConfig";
 import type { LoginResponse } from "../types";
+
+type WalletProvider = {
+  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
+};
 
 export interface ZanbaraAuthState {
   isAuthenticated: boolean;
@@ -26,15 +33,15 @@ export interface UseZanbaraAuthReturn extends ZanbaraAuthState {
  * Uses composition of smaller hooks for better maintainability
  */
 export function useZanbaraAuth(): UseZanbaraAuthReturn {
-  const { address, chainId, isConnected, connector } = useAccount();
+  const { address, isConnected, connector } = useAccount();
   const { mutate } = useSWRConfig();
-  const { signTypedDataAsync } = useSignTypedData();
+  const authChainId = DEFAULT_CHAIN_ID;
 
   // Compose smaller hooks
-  const { state: tokenState, saveToken, removeToken, refreshState } = useTokenStorage(address, chainId);
+  const { state: tokenState, saveToken, removeToken, refreshState } = useTokenStorage(address, authChainId);
 
   // Track wallet/chain changes and clear cache automatically
-  useWalletChange(address, chainId);
+  useWalletChange(address, authChainId);
 
   // Local state for authenticating and error
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -52,7 +59,7 @@ export function useZanbaraAuth(): UseZanbaraAuthReturn {
 
   // Authenticate function
   const authenticate = useCallback(async (): Promise<LoginResponse | null> => {
-    if (!address || !chainId) {
+    if (!address || !authChainId) {
       setError("Wallet not connected");
       return null;
     }
@@ -61,8 +68,12 @@ export function useZanbaraAuth(): UseZanbaraAuthReturn {
     setError(null);
 
     try {
+      const provider = await getConnectorProvider(connector);
+
+      await ensureWalletChain(provider, authChainId);
+
       // Step 1: Get nonce from backend
-      const nonceResponse = await getNonce(chainId, address);
+      const nonceResponse = await getNonce(authChainId, address);
 
       if (!isConnected || !address) {
         throw new Error("Wallet is not connected. Please connect your wallet first.");
@@ -97,17 +108,13 @@ export function useZanbaraAuth(): UseZanbaraAuthReturn {
       // Build typed data for signing
       const typedDataForSigning = buildTypedDataForSigning(typedData, checksumAddress);
 
-      // Sign with wallet using wagmi's signTypedDataAsync
-      const signature = await signTypedDataAsync({
-        domain: typedDataForSigning.domain as any,
-        types: typedDataForSigning.types as any,
-        primaryType: typedDataForSigning.primaryType as any,
-        message: typedDataForSigning.message as any,
-      });
+      await ensureWalletChain(provider, Number((typedDataForSigning.domain as any).chainId ?? authChainId));
+
+      const signature = await signTypedDataWithProvider(provider, checksumAddress, typedDataForSigning);
 
       // Step 3: Login with signature
       const loginResponse = await login(
-        chainId,
+        authChainId,
         { address, signature, timestamp },
         address
       );
@@ -116,39 +123,40 @@ export function useZanbaraAuth(): UseZanbaraAuthReturn {
       justLoggedInRef.current = Date.now();
 
       // Ensure token is stored
-      await ensureTokenStored(loginResponse, address, chainId, saveToken, refreshState);
+      await ensureTokenStored(loginResponse, address, authChainId, saveToken, refreshState);
 
       // Trigger SWR revalidation
-      revalidateBalanceKeys(chainId, address, mutate);
+      revalidateBalanceKeys(authChainId, address, mutate);
 
       setIsAuthenticating(false);
       return loginResponse;
     } catch (err) {
       const errorMessage = formatAuthError(err);
       setError(errorMessage);
+      helperToast.error(errorMessage);
       setIsAuthenticating(false);
       return null;
     }
-  }, [address, chainId, isConnected, connector, signTypedDataAsync, saveToken, refreshState, mutate]);
+  }, [address, authChainId, isConnected, connector, saveToken, refreshState, mutate]);
 
   // Logout function
   const logout = useCallback(() => {
-    apiLogout(address, chainId);
+    apiLogout(address, authChainId);
     removeToken();
 
     // Clear SWR cache for positions, orders, and balances so tables are emptied immediately
-    if (address && chainId) {
+    if (address && authChainId) {
       const cacheKeys = [
-        [`zanbara-positions`, chainId, address],
-        [`zanbara-orders`, chainId, address],
-        [`zanbara-balances`, chainId, address],
-        [`zanbara-balances`, chainId, address],
+        [`zanbara-positions`, authChainId, address],
+        [`zanbara-orders`, authChainId, address],
+        [`zanbara-balances`, authChainId, address],
+        [`zanbara-balances`, authChainId, address],
       ];
       cacheKeys.forEach((key) => {
         mutate(key, undefined, { revalidate: false });
       });
     }
-  }, [address, chainId, removeToken, mutate]);
+  }, [address, authChainId, removeToken, mutate]);
 
   // Clear error function
   const clearError = useCallback(() => {
@@ -207,6 +215,126 @@ function buildTypedDataForSigning(
       },
     })
   );
+}
+
+async function getConnectorProvider(connector: ReturnType<typeof useAccount>["connector"]): Promise<WalletProvider> {
+  const provider = (await connector?.getProvider?.()) as Partial<WalletProvider> | undefined;
+  if (typeof provider?.request !== "function") {
+    throw new Error("No wallet provider found. Please reconnect your wallet.");
+  }
+
+  return provider as WalletProvider;
+}
+
+async function getWalletChainId(provider: WalletProvider): Promise<number | undefined> {
+  if (!provider?.request) {
+    return undefined;
+  }
+
+  const chainIdHex = (await provider.request({ method: "eth_chainId" })) as string;
+  return parseInt(chainIdHex, 16);
+}
+
+async function waitForWalletChain(provider: WalletProvider, targetChainId: number): Promise<void> {
+  const timeoutAt = Date.now() + 10_000;
+
+  while (Date.now() < timeoutAt) {
+    const currentChainId = await getWalletChainId(provider);
+    if (currentChainId === targetChainId) {
+      return;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+
+  const currentChainId = await getWalletChainId(provider);
+  throw new Error(`Please switch wallet network to ${targetChainId}. Current wallet chain is ${currentChainId ?? "unknown"}.`);
+}
+
+async function ensureWalletChain(provider: WalletProvider, targetChainId: number): Promise<void> {
+  const currentChainId = await getWalletChainId(provider);
+  if (currentChainId === targetChainId) {
+    return;
+  }
+
+  await switchProviderChain(provider, targetChainId);
+  await waitForWalletChain(provider, targetChainId);
+}
+
+async function switchProviderChain(provider: WalletProvider, targetChainId: number): Promise<void> {
+  if (!provider?.request) {
+    throw new Error("No wallet provider found");
+  }
+
+  const chainIdHex = `0x${targetChainId.toString(16)}`;
+
+  try {
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: chainIdHex }],
+    });
+  } catch (switchError: any) {
+    if (switchError?.code === 4001) {
+      throw new Error("User rejected the chain switch");
+    }
+
+    if (switchError?.code !== 4902) {
+      throw switchError;
+    }
+
+    const targetChain = getRainbowKitConfig().chains.find((chain) => chain.id === targetChainId);
+    if (!targetChain) {
+      throw new Error(`Unsupported wallet network ${targetChainId}`);
+    }
+
+    await provider.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          chainId: chainIdHex,
+          chainName: targetChain.name,
+          nativeCurrency: targetChain.nativeCurrency,
+          rpcUrls: targetChain.rpcUrls.default.http,
+          blockExplorerUrls: targetChain.blockExplorers?.default?.url
+            ? [targetChain.blockExplorers.default.url]
+            : [],
+        },
+      ],
+    });
+
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: chainIdHex }],
+    });
+  }
+}
+
+async function signTypedDataWithProvider(
+  provider: WalletProvider,
+  checksumAddress: string,
+  typedData: Record<string, unknown>
+): Promise<string> {
+  if (!provider?.request) {
+    throw new Error("No wallet provider found");
+  }
+
+  const requiredChainId = Number((typedData.domain as any)?.chainId);
+  const currentChainId = await getWalletChainId(provider);
+  if (requiredChainId && currentChainId !== requiredChainId) {
+    throw new Error(
+      `Wallet is on ${getChainName(currentChainId as any) || currentChainId}, but this signature requires ${getChainName(requiredChainId as any) || requiredChainId}.`
+    );
+  }
+
+  const signature = (await provider.request({
+    method: "eth_signTypedData_v4",
+    params: [checksumAddress, JSON.stringify(typedData)],
+  })) as string;
+
+  if (!signature || typeof signature !== "string" || !signature.startsWith("0x")) {
+    throw new Error("Invalid signature format received from wallet");
+  }
+
+  return signature;
 }
 
 /**

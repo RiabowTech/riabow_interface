@@ -16,6 +16,16 @@ export default defineConfig(({ mode }) => {
   // Load env file based on `mode` in the current working directory.
   const root = path.dirname(fileURLToPath(import.meta.url));
   const env = loadEnv(mode, root, "");
+  const isArbitrumSepolia = Number(env.VITE_DEFAULT_CHAIN || 0) === 421614;
+  const proxyApiUrl =
+    isArbitrumSepolia && env.VITE_PROXY_SEPOLIA_API_URL
+      ? env.VITE_PROXY_SEPOLIA_API_URL
+      : env.VITE_PROXY_API_URL || "https://api.primit.io";
+  const proxyWsUrl =
+    isArbitrumSepolia && env.VITE_PROXY_SEPOLIA_WS_URL
+      ? env.VITE_PROXY_SEPOLIA_WS_URL
+      : env.VITE_PROXY_WS_URL || "wss://api.primit.io";
+
   return {
     worker: {
       format: "es",
@@ -37,20 +47,20 @@ export default defineConfig(({ mode }) => {
       proxy: {
         "/api": {
           // 支持通过环境变量切换：VITE_PROXY_API_URL
-          target: env.VITE_PROXY_API_URL || "https://api.primit.io",
+          target: proxyApiUrl,
           changeOrigin: true,
           secure: false,
         },
         "/ws": {
           // 支持通过环境变量切换：VITE_PROXY_WS_URL
-          target: env.VITE_PROXY_WS_URL || "wss://api.primit.io",
+          target: proxyWsUrl,
           changeOrigin: true,
           secure: false,
           ws: true,
         },
         "/ws/external": {
           // 支持通过环境变量切换：VITE_PROXY_WS_URL
-          target: env.VITE_PROXY_WS_URL || "wss://api.primit.io",
+          target: proxyWsUrl,
           changeOrigin: true,
           secure: false,
           ws: true,

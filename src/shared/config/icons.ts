@@ -59,7 +59,7 @@ const ICONS: Record<number | "common", ChainIcons> = {
   },
 };
 
-export const CHAIN_ID_TO_NETWORK_ICON: Record<AnyChainId | 0, string> = {
+export const CHAIN_ID_TO_NETWORK_ICON: Record<AnyChainId | 0 | 97, string> = {
   [ARBITRUM]: arbitrum,
   [AVALANCHE]: avalanche,
   0: protocolTokenIcon,
@@ -70,6 +70,7 @@ export const CHAIN_ID_TO_NETWORK_ICON: Record<AnyChainId | 0, string> = {
   [SOURCE_SEPOLIA]: sepolia,
   [BOTANIX]: botanix,
   [SOURCE_BSC_MAINNET]: bsc,
+  97: bsc,
 };
 
 /**

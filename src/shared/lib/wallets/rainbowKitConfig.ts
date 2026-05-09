@@ -13,7 +13,7 @@ import {
 } from "@rainbow-me/rainbowkit/wallets";
 import once from "lodash/once";
 import { http } from "viem";
-import { arbitrum, arbitrumSepolia } from "viem/chains"; // 只保留 Arbitrum 相关链
+import { arbitrum, arbitrumSepolia, bscTestnet } from "viem/chains";
 
 import { isDevelopment } from "config/env";
 
@@ -32,6 +32,9 @@ if (!WALLET_CONNECT_PROJECT_ID) {
 }
 
 const APP_NAME = "Zanbara";
+const DEFAULT_WALLET_CHAIN_ID = Number(import.meta.env.VITE_DEFAULT_CHAIN);
+const ENABLE_ARBITRUM_SEPOLIA = isDevelopment() || DEFAULT_WALLET_CHAIN_ID === arbitrumSepolia.id;
+const ENABLE_BSC_TESTNET = Number(import.meta.env.VITE_DEFAULT_SPOT_CHAIN) === bscTestnet.id;
 
 const popularWalletList: WalletList = [
   {
@@ -63,11 +66,13 @@ export const getRainbowKitConfig = once(() =>
     projectId: WALLET_CONNECT_PROJECT_ID,
     chains: [
       arbitrum, // Arbitrum 主网
-      ...(isDevelopment() ? [arbitrumSepolia] : []), // 开发环境包含测试网
+      ...(ENABLE_ARBITRUM_SEPOLIA ? [arbitrumSepolia] : []),
+      ...(ENABLE_BSC_TESTNET ? [bscTestnet] : []),
     ],
     transports: {
       [arbitrum.id]: http(),
       [arbitrumSepolia.id]: http(),
+      [bscTestnet.id]: http(),
     },
     wallets: [...popularWalletList, ...othersWalletList],
   })

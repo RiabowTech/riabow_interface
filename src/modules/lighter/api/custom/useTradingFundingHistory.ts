@@ -9,6 +9,7 @@ import { useAccount } from "wagmi";
 import { getDepositHistory } from "./deposit";
 import { getWithdrawHistory, getStoredToken, getLastAddress } from "./client";
 import type { DepositRecord, WithdrawRecord } from "../types";
+import type { TradeProduct } from "./productRouting";
 
 const defaultConfig: SWRConfiguration = {
   revalidateOnFocus: false,
@@ -39,7 +40,8 @@ type UseTradingFundingHistoryResult = {
 
 export function useTradingFundingHistory(
   chainId: number | undefined,
-  config?: SWRConfiguration
+  config?: SWRConfiguration,
+  product?: TradeProduct
 ): UseTradingFundingHistoryResult {
   const { address: account, chainId: wagmiChainId } = useAccount();
   const effectiveChainId = chainId || wagmiChainId;
@@ -47,7 +49,7 @@ export function useTradingFundingHistory(
   // Use state to track token existence so component re-renders when token changes
   const [hasToken, setHasToken] = useState(() => {
     // Use same logic as apiFetch: try account first, then fallback to last address
-    let targetAddress = account;
+    let targetAddress: string | null | undefined = account;
     if (!targetAddress) {
       targetAddress = getLastAddress();
     }
@@ -59,7 +61,7 @@ export function useTradingFundingHistory(
   useEffect(() => {
     const checkToken = () => {
       // Use same logic as apiFetch: try account first, then fallback to last address
-      let targetAddress = account;
+      let targetAddress: string | null | undefined = account;
       if (!targetAddress) {
         targetAddress = getLastAddress();
       }
@@ -89,8 +91,8 @@ export function useTradingFundingHistory(
   }, [account, effectiveChainId]);
   
   const authenticated = hasToken;
-  const depositKey = effectiveChainId && account && authenticated ? [`trade-deposit-history`, effectiveChainId] : null;
-  const withdrawKey = effectiveChainId && account && authenticated ? [`trade-withdraw-history`, effectiveChainId] : null;
+  const depositKey = effectiveChainId && account && authenticated ? [`trade-deposit-history`, product, effectiveChainId] : null;
+  const withdrawKey = effectiveChainId && account && authenticated ? [`trade-withdraw-history`, product, effectiveChainId] : null;
 
   // Fetch deposit history
   const {
@@ -102,7 +104,7 @@ export function useTradingFundingHistory(
     depositKey,
     async () => {
       try {
-        const result = await getDepositHistory(effectiveChainId!);
+        const result = await getDepositHistory(effectiveChainId!, product);
         console.log("[useTradingFundingHistory] ✅ Deposit history fetched", { depositCount: result.deposits?.length || 0 });
         return result;
       } catch (err) {
@@ -115,7 +117,7 @@ export function useTradingFundingHistory(
       ...config,
       onError: (err) => {
         console.error("[useTradingFundingHistory] Deposit onError", err);
-        config?.onError?.(err);
+        config?.onError?.(err, "trade-deposit-history", config as any);
       },
     }
   );
@@ -130,7 +132,7 @@ export function useTradingFundingHistory(
     withdrawKey,
     async () => {
       try {
-        const result = await getWithdrawHistory(effectiveChainId!);
+        const result = await getWithdrawHistory(effectiveChainId!, product);
         console.log("[useTradingFundingHistory] ✅ Withdraw history fetched", { withdrawCount: result.withdrawals?.length || 0 });
         return result;
       } catch (err) {
@@ -143,7 +145,7 @@ export function useTradingFundingHistory(
       ...config,
       onError: (err) => {
         console.error("[useTradingFundingHistory] Withdraw onError", err);
-        config?.onError?.(err);
+        config?.onError?.(err, "trade-withdraw-history", config as any);
       },
     }
   );

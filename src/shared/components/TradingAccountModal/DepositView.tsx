@@ -4,11 +4,11 @@ import noop from "lodash/noop";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useLatest } from "react-use";
-import { Address, Hex, decodeErrorResult, zeroAddress } from "viem";
-import { useAccount, useChains } from "wagmi";
+import { Address, Hex, decodeErrorResult, erc20Abi, getAddress, zeroAddress } from "viem";
+import { useAccount, useChains, usePublicClient } from "wagmi";
 
 import { SettlementChainId, SourceChainId, getChainName, isTestnetChain } from "config/chains";
-import { getTradingVaultAddress } from "config/custom/contracts";
+import { DEFAULT_SPOT_CHAIN_ID, getSpotVaultAddress, getTradingVaultAddress } from "config/custom/contracts";
 import { isDevelopment } from "config/env";
 import { getChainIcon } from "config/icons";
 import {
@@ -44,7 +44,7 @@ import { useQuoteOftLimits } from "@/modules/lighter/domain/multichain/useQuoteO
 import { useQuoteSend } from "@/modules/lighter/domain/multichain/useQuoteSend";
 import { getNeedTokenApprove, useTokensAllowanceData, useTokensDataRequest } from "domain/synthetics/tokens";
 import { useZanbaraUserBalances } from "@/modules/lighter/api";
-import { NativeTokenSupportedAddress, approveTokens } from "domain/tokens";
+import { NativeTokenSupportedAddress, TokenData, approveTokens } from "domain/tokens";
 import { useChainId } from "lib/chains";
 import { useLeadingDebounce } from "lib/debounce/useLeadingDebounde";
 import { helperToast } from "lib/helperToast";
@@ -64,6 +64,7 @@ import { TxnCallback, TxnEventName, WalletTxnCtx } from "lib/transactions";
 import { useIsNonEoaAccountOnAnyChain } from "lib/wallets/useAccountType";
 import { useEthersSigner } from "lib/wallets/useEthersSigner";
 import { useIsGeminiWallet } from "lib/wallets/useIsGeminiWallet";
+import { switchNetwork } from "lib/wallets";
 import { convertTokenAddress, getNativeToken, getToken } from "sdk/configs/tokens";
 import { bigMath } from "sdk/utils/bigmath";
 import { convertToTokenAmount, convertToUsd, getMidPrice } from "sdk/utils/tokens";
@@ -85,10 +86,13 @@ import SpinnerIcon from "img/ic_spinner.svg?react";
 
 import { useAvailableToTradeAssetMultichain, useMultichainTokensRequest } from "./hooks";
 import { wrapChainAction } from "./wrapChainAction";
-import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
+import { isTradeModeActive, useTradeProduct } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
 import { getTokenBySymbol } from "sdk/configs/tokens";
 import type { TokenChainData } from "@/modules/lighter/domain/multichain/types";
 import { useTokenRecentPricesRequest } from "domain/synthetics/tokens";
+import { findWalletTokenConfig, useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
+import SpotVaultAbi from "sdk/abis/SpotVault";
+import useWallet from "lib/wallets/useWallet";
 
 const useIsFirstDeposit = () => {
   const [enabled, setEnabled] = useState(true);
@@ -114,13 +118,25 @@ const useIsFirstDeposit = () => {
   return isFirstDeposit;
 };
 
+function getFundingChainName(chainId: number) {
+  return chainId === DEFAULT_SPOT_CHAIN_ID ? "BNB Testnet" : getChainName(chainId);
+}
+
 export const DepositView = () => {
   const { chainId: settlementChainId, srcChainId } = useChainId();
   const { address: account, chainId: walletChainId } = useAccount();
+  const product = useTradeProduct();
+  const isSpotProduct = product === "spot";
+  const spotChainId = DEFAULT_SPOT_CHAIN_ID;
+  const spotVaultAddress = getSpotVaultAddress(spotChainId);
+  const { data: walletTokenConfigs } = useWalletTokensConfig();
+  const spotTokenConfig = findWalletTokenConfig(walletTokenConfigs, spotChainId);
+  const { walletClient } = useWallet();
+  const spotPublicClient = usePublicClient({ chainId: spotChainId });
 
   const [, setSettlementChainId] = useTradingAccountSettlementChainId();
   const [depositViewChain, setDepositViewChain] = useTradingAccountDepositViewChain();
-  const walletSigner = useEthersSigner({ chainId: srcChainId });
+  const walletSigner = useEthersSigner({ chainId: depositViewChain ?? srcChainId });
   const { provider: sourceChainProvider } = useJsonRpcProvider(depositViewChain);
 
   const [isVisibleOrView, setIsVisibleOrView] = useTradingAccountModalOpen();
@@ -202,7 +218,7 @@ export const DepositView = () => {
                       symbol: tokenChainData.symbol,
                       address: tokenChainData.address,
                       sourceChainId: tokenChainData.sourceChainId,
-                      sourceChainBalance: tokenChainData.sourceChainBalance.toString(),
+                      sourceChainBalance: tokenChainData.sourceChainBalance?.toString() || "0",
                     },
                   });
                   break;
@@ -238,28 +254,123 @@ export const DepositView = () => {
 
   const { setMultichainSubmittedDeposit } = useSyntheticsEvents();
 
+  const selectedWalletTokenConfig = useMemo(() => {
+    if (depositViewChain === undefined || depositViewTokenAddress === undefined) {
+      return undefined;
+    }
+
+    return walletTokenConfigs?.find(
+      (token) =>
+        token.chainId === Number(depositViewChain) &&
+        token.contract.toLowerCase() === depositViewTokenAddress.toLowerCase()
+    );
+  }, [depositViewChain, depositViewTokenAddress, walletTokenConfigs]);
+
+  const spotDepositTokenConfig =
+    selectedWalletTokenConfig?.chainId === spotChainId
+      ? selectedWalletTokenConfig
+      : isSpotProduct
+        ? spotTokenConfig
+        : undefined;
+  const isSpotVaultDeposit = spotDepositTokenConfig !== undefined;
+
+  const spotToken = useMemo<TokenData | undefined>(() => {
+    if (!isSpotVaultDeposit || !spotDepositTokenConfig) {
+      return undefined;
+    }
+
+    return {
+      name: spotDepositTokenConfig.symbol,
+      symbol: spotDepositTokenConfig.symbol,
+      decimals: spotDepositTokenConfig.decimals,
+      address: spotDepositTokenConfig.contract,
+      isStable: spotDepositTokenConfig.symbol.toUpperCase().includes("USD"),
+      prices: { minPrice: 0n, maxPrice: 0n },
+      walletBalance: 0n,
+      balance: 0n,
+      tradingAccountBalance: 0n,
+    };
+  }, [isSpotVaultDeposit, spotDepositTokenConfig]);
+
   const selectedToken =
-    depositViewTokenAddress !== undefined ? getToken(settlementChainId, depositViewTokenAddress) : undefined;
+    isSpotVaultDeposit && depositViewTokenAddress !== undefined
+      ? spotToken
+      : depositViewTokenAddress !== undefined
+        ? getToken(settlementChainId, depositViewTokenAddress)
+        : undefined;
 
   const { tokensData } = useTokensDataRequest(settlementChainId, depositViewChain);
-  const selectedTokenData = getByKey(tokensData, depositViewTokenAddress);
+  const selectedTokenData = isSpotVaultDeposit ? spotToken : getByKey(tokensData, depositViewTokenAddress);
 
   const selectedTokenSourceChainTokenId =
-    depositViewTokenAddress !== undefined && depositViewChain !== undefined
+    isSpotVaultDeposit && spotDepositTokenConfig
+      ? {
+          chainId: spotDepositTokenConfig.chainId,
+          address: spotDepositTokenConfig.contract,
+          decimals: spotDepositTokenConfig.decimals,
+          stargate: "",
+          symbol: spotDepositTokenConfig.symbol,
+          isTestnet: true,
+        }
+      : depositViewTokenAddress !== undefined && depositViewChain !== undefined
       ? getMappedTokenId(settlementChainId as SettlementChainId, depositViewTokenAddress, depositViewChain)
       : undefined;
 
   const unwrappedSelectedTokenAddress =
-    depositViewTokenAddress !== undefined
+    isSpotVaultDeposit
+      ? depositViewTokenAddress
+      : depositViewTokenAddress !== undefined
       ? convertTokenAddress(settlementChainId, depositViewTokenAddress, "native")
       : undefined;
 
+  const [spotSourceChainBalance, setSpotSourceChainBalance] = useState<bigint | undefined>(undefined);
+
+  useEffect(() => {
+    if (!isSpotVaultDeposit || !spotPublicClient || !account || !spotDepositTokenConfig?.contract) {
+      setSpotSourceChainBalance(undefined);
+      return;
+    }
+
+    let cancelled = false;
+    spotPublicClient
+      .readContract({
+        address: getAddress(spotDepositTokenConfig.contract),
+        abi: erc20Abi,
+        functionName: "balanceOf",
+        args: [getAddress(account)],
+      })
+      .then((balance) => {
+        if (!cancelled) {
+          setSpotSourceChainBalance(balance);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setSpotSourceChainBalance(undefined);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [account, isSpotVaultDeposit, spotDepositTokenConfig?.contract, spotPublicClient]);
+
   const selectedTokenChainData = useMemo(() => {
     if (selectedToken === undefined) return undefined;
+    if (isSpotVaultDeposit && spotDepositTokenConfig) {
+      return {
+        ...selectedToken,
+        sourceChainId: spotDepositTokenConfig.chainId as SourceChainId,
+        sourceChainDecimals: spotDepositTokenConfig.decimals,
+        sourceChainBalance: spotSourceChainBalance,
+        sourceChainPrices: { minPrice: 0n, maxPrice: 0n },
+      } as TokenChainData;
+    }
+
     return multichainTokens.find(
       (token) => token.address === selectedToken.address && token.sourceChainId === depositViewChain
     );
-  }, [selectedToken, multichainTokens, depositViewChain]);
+  }, [selectedToken, multichainTokens, depositViewChain, isSpotVaultDeposit, spotDepositTokenConfig, spotSourceChainBalance]);
 
   const selectedTokenSourceChainBalance = selectedTokenChainData?.sourceChainBalance;
   const selectedTokenSourceChainDecimals = selectedTokenChainData?.sourceChainDecimals;
@@ -349,13 +460,17 @@ export const DepositView = () => {
   }, [tradingAccountUsd, inputAmount, inputAmountUsd, selectedTokenData?.tradingAccountBalance]);
 
   const spenderAddress = useMemo(() => {
+    if (isSpotVaultDeposit) {
+      return spotVaultAddress as Address | undefined;
+    }
+
     console.log("[DepositView] 🔍 计算授权地址 (spenderAddress):", {
       depositViewChain,
       settlementChainId,
-      isSameChain: depositViewChain === settlementChainId,
+      isSameChain: Number(depositViewChain) === settlementChainId,
     });
 
-    if (depositViewChain === settlementChainId) {
+    if (Number(depositViewChain) === settlementChainId) {
       const vaultAddress = getTradingVaultAddress(settlementChainId);
       console.log("[DepositView] ✅ 使用交易 vault 作为授权地址:", {
         vaultAddress,
@@ -367,23 +482,71 @@ export const DepositView = () => {
     // For cross-chain deposits, use Stargate address
     const stargateAddress = selectedTokenSourceChainTokenId?.stargate;
     return stargateAddress;
-  }, [depositViewChain, settlementChainId, selectedTokenSourceChainTokenId?.stargate]);
+  }, [depositViewChain, isSpotVaultDeposit, settlementChainId, selectedTokenSourceChainTokenId?.stargate, spotVaultAddress]);
 
   useMultichainApprovalsActiveListener(depositViewChain, "multichain-deposit-view");
 
   const tokensAllowanceResult = useTokensAllowanceData(depositViewChain, {
     spenderAddress,
     tokenAddresses: selectedTokenSourceChainTokenId ? [selectedTokenSourceChainTokenId.address] : [],
-    skip: depositViewChain === undefined,
+    skip: isSpotVaultDeposit || depositViewChain === undefined,
   });
   const tokensAllowanceData = depositViewChain !== undefined ? tokensAllowanceResult.tokensAllowanceData : undefined;
+  const [spotAllowance, setSpotAllowance] = useState<bigint | undefined>(undefined);
 
-  const needTokenApprove = getNeedTokenApprove(
-    tokensAllowanceData,
-    depositViewTokenAddress === zeroAddress ? zeroAddress : selectedTokenSourceChainTokenId?.address,
-    amountLD,
-    EMPTY_ARRAY
-  );
+  useEffect(() => {
+    if (
+      !isSpotVaultDeposit ||
+      !spotPublicClient ||
+      !account ||
+      !spotVaultAddress ||
+      !spotDepositTokenConfig?.contract ||
+      !depositViewTokenAddress
+    ) {
+      setSpotAllowance(undefined);
+      return;
+    }
+
+    let cancelled = false;
+    spotPublicClient
+      .readContract({
+        address: getAddress(spotDepositTokenConfig.contract),
+        abi: erc20Abi,
+        functionName: "allowance",
+        args: [getAddress(account), getAddress(spotVaultAddress)],
+      })
+      .then((allowance) => {
+        if (!cancelled) {
+          setSpotAllowance(allowance);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setSpotAllowance(undefined);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    account,
+    depositViewTokenAddress,
+    isSpotVaultDeposit,
+    spotPublicClient,
+    spotDepositTokenConfig?.contract,
+    spotVaultAddress,
+  ]);
+
+  const needTokenApprove =
+    isSpotVaultDeposit && amountLD !== undefined && amountLD > 0n
+      ? spotAllowance === undefined || spotAllowance < amountLD
+      : getNeedTokenApprove(
+          tokensAllowanceData,
+          depositViewTokenAddress === zeroAddress ? zeroAddress : selectedTokenSourceChainTokenId?.address,
+          amountLD,
+          EMPTY_ARRAY
+        );
 
   const handleApprove = useCallback(async () => {
     console.log("[DepositView] 🔐 开始授权流程:", {
@@ -420,7 +583,7 @@ export const DepositView = () => {
         {
           depositViewChain,
           settlementChainId,
-          isSameChain: depositViewChain === settlementChainId,
+          isSameChain: Number(depositViewChain) === settlementChainId,
         }
       );
       helperToast.error(t`Deposit contract not configured for this chain. Contact support.`);
@@ -431,6 +594,34 @@ export const DepositView = () => {
 
     if (isNative) {
       helperToast.error(t`Native token cannot be approved`);
+      return;
+    }
+
+    if (isSpotVaultDeposit) {
+      if (!walletClient || !spotPublicClient || !spotDepositTokenConfig?.contract || !spotVaultAddress || !account) {
+        helperToast.error(t`Approval failed`);
+        return;
+      }
+
+      try {
+        setIsApproving(true);
+        await switchNetwork(spotChainId, true);
+        const txHash = await walletClient.writeContract({
+          address: getAddress(spotDepositTokenConfig.contract),
+          abi: erc20Abi,
+          functionName: "approve",
+          args: [getAddress(spotVaultAddress), amountLD],
+          account: getAddress(account),
+          chain: spotPublicClient.chain,
+        });
+        await spotPublicClient.waitForTransactionReceipt({ hash: txHash });
+        setSpotAllowance(amountLD);
+        helperToast.success(t`Approval submitted`);
+      } catch (error: any) {
+        helperToast.error(error?.shortMessage || error?.message || t`Approval failed`);
+      } finally {
+        setIsApproving(false);
+      }
       return;
     }
 
@@ -474,11 +665,18 @@ export const DepositView = () => {
   }, [
     depositViewTokenAddress,
     amountLD,
+    account,
     spenderAddress,
     depositViewChain,
+    isSpotVaultDeposit,
     settlementChainId,
     selectedTokenSourceChainTokenId,
     setSettlementChainId,
+    spotPublicClient,
+    spotDepositTokenConfig?.contract,
+    spotChainId,
+    spotVaultAddress,
+    walletClient,
   ]);
 
   useEffect(() => {
@@ -633,13 +831,49 @@ export const DepositView = () => {
       isTradeMode: isTradeModeActive(),
     });
 
-    if (!account || !depositViewTokenAddress || amountLD === undefined || !walletSigner) {
+    if (!account || !depositViewTokenAddress || amountLD === undefined || (!walletSigner && !isSpotVaultDeposit)) {
       console.error("[DepositView] ❌ 充值失败: 缺少必要参数", {
         account,
         depositViewTokenAddress,
         amountLD,
         walletSigner: !!walletSigner,
       });
+      return;
+    }
+
+    if (isSpotVaultDeposit) {
+      if (!walletClient || !spotPublicClient || !spotVaultAddress || !spotDepositTokenConfig?.contract) {
+        helperToast.error(t`Deposit contract not configured for this chain. Contact support.`);
+        return;
+      }
+
+      try {
+        setIsSubmitting(true);
+        await switchNetwork(spotChainId, true);
+        await spotPublicClient.simulateContract({
+          address: getAddress(spotVaultAddress),
+          abi: SpotVaultAbi,
+          functionName: "deposit",
+          args: [getAddress(spotDepositTokenConfig.contract), amountLD],
+          account: getAddress(account),
+        });
+        const txHash = await walletClient.writeContract({
+          address: getAddress(spotVaultAddress),
+          abi: SpotVaultAbi,
+          functionName: "deposit",
+          args: [getAddress(spotDepositTokenConfig.contract), amountLD],
+          account: getAddress(account),
+          chain: spotPublicClient.chain,
+        });
+        helperToast.success(t`Deposit sent`);
+        await spotPublicClient.waitForTransactionReceipt({ hash: txHash });
+        mutateBalances();
+        setIsVisibleOrView("main");
+      } catch (error: any) {
+        helperToast.error(error?.shortMessage || error?.message || t`Deposit failed`);
+      } finally {
+        setIsSubmitting(false);
+      }
       return;
     }
 
@@ -666,7 +900,7 @@ export const DepositView = () => {
 
     await sendSameChainDepositTxn({
       chainId: settlementChainId as SettlementChainId,
-      signer: walletSigner,
+      signer: walletSigner!,
       amount: amountLD,
       account,
       callback: sameChainCallback,
@@ -675,11 +909,19 @@ export const DepositView = () => {
     account,
     depositViewTokenAddress,
     amountLD,
+    isSpotVaultDeposit,
     needTokenApprove,
     sameChainCallback,
     settlementChainId,
-    walletSigner,
     spenderAddress,
+    spotPublicClient,
+    spotDepositTokenConfig?.contract,
+    spotChainId,
+    spotVaultAddress,
+    walletClient,
+    walletSigner,
+    mutateBalances,
+    setIsVisibleOrView,
   ]);
 
   const makeCrossChainCallback = useCallback(
@@ -852,12 +1094,17 @@ export const DepositView = () => {
   ]);
 
   const handleDeposit = useCallback(async () => {
+    if (isSpotVaultDeposit) {
+      await handleSameChainDeposit();
+      return;
+    }
+
     // In development mode or when DEBUG_MULTICHAIN_SAME_CHAIN_DEPOSIT is enabled,
     // use same chain deposit if wallet chain equals settlement chain
     const shouldUseSameChainDeposit =
       (DEBUG_MULTICHAIN_SAME_CHAIN_DEPOSIT || isDevelopment()) &&
       (walletChainId as SettlementChainId) === settlementChainId &&
-      depositViewChain === settlementChainId;
+      Number(depositViewChain) === settlementChainId;
 
     console.log("[DepositView] 🚀 处理充值请求:", {
       shouldUseSameChainDeposit,
@@ -876,7 +1123,7 @@ export const DepositView = () => {
       setIsSubmitting(true);
       setShouldSendCrossChainDepositWhenLoaded(true);
     }
-  }, [walletChainId, settlementChainId, depositViewChain, handleSameChainDeposit]);
+  }, [depositViewChain, handleSameChainDeposit, isSpotVaultDeposit, settlementChainId, walletChainId]);
 
   const isCrossChainDepositLoading = useRef(false);
   useEffect(() => {
@@ -901,16 +1148,47 @@ export const DepositView = () => {
         return;
       }
 
+      if (isSpotProduct) {
+        setDepositViewChain(spotChainId as unknown as SourceChainId);
+        return;
+      }
+
       if (srcChainId !== undefined) {
         setDepositViewChain(srcChainId);
       }
     },
-    [depositViewChain, isVisibleOrView, setDepositViewChain, srcChainId, walletChainId]
+    [depositViewChain, isSpotProduct, isVisibleOrView, setDepositViewChain, spotChainId, srcChainId, walletChainId]
   );
+
+  useEffect(() => {
+    if (!isSpotProduct || isVisibleOrView === false || !spotTokenConfig) {
+      return;
+    }
+
+    if (depositViewChain !== spotChainId) {
+      setDepositViewChain(spotChainId as unknown as SourceChainId);
+    }
+    if (depositViewTokenAddress?.toLowerCase() !== spotTokenConfig.contract.toLowerCase()) {
+      setDepositViewTokenAddress(spotTokenConfig.contract);
+    }
+  }, [
+    depositViewChain,
+    depositViewTokenAddress,
+    isSpotProduct,
+    isVisibleOrView,
+    setDepositViewChain,
+    setDepositViewTokenAddress,
+    spotChainId,
+    spotTokenConfig,
+  ]);
 
   useEffect(
     function fallbackTokenOnSourceChain() {
       if (isVisibleOrView === false) {
+        return;
+      }
+
+      if (isSpotProduct || isSpotVaultDeposit) {
         return;
       }
 
@@ -974,6 +1252,7 @@ export const DepositView = () => {
     },
     [
       depositViewTokenAddress,
+      isSpotVaultDeposit,
       isPriceDataLoading,
       multichainTokens,
       setDepositViewTokenAddress,
@@ -983,7 +1262,11 @@ export const DepositView = () => {
     ]
   );
 
-  const tokenSelectorDisabled = !isBalanceDataLoading && multichainTokens.length === 0;
+  const tokenSelectorDisabled = isSpotProduct
+    ? !spotTokenConfig
+    : isSpotVaultDeposit
+      ? false
+      : !isBalanceDataLoading && multichainTokens.length === 0;
 
   let buttonState: {
     text: React.ReactNode;
@@ -1008,7 +1291,7 @@ export const DepositView = () => {
     buttonState = {
       text:
         depositViewChain !== undefined
-          ? t`No eligible tokens available on ${getChainName(depositViewChain)} for deposit`
+          ? t`No eligible tokens available on ${getFundingChainName(depositViewChain)} for deposit`
           : t`No eligible tokens available for deposit`,
       disabled: true,
     };
@@ -1106,7 +1389,7 @@ export const DepositView = () => {
             <div className="rounded-8 border border-slate-800 bg-slate-800 px-14 py-13 text-typography-secondary">
               <span className="flex min-h-20 items-center">
                 {depositViewChain !== undefined ? (
-                  <Trans>No eligible tokens available on {getChainName(depositViewChain)} for deposit</Trans>
+                  <Trans>No eligible tokens available on {getFundingChainName(depositViewChain)} for deposit</Trans>
                 ) : (
                   <Trans>No eligible tokens available for deposit</Trans>
                 )}
@@ -1120,8 +1403,8 @@ export const DepositView = () => {
               <Trans>From Network</Trans>
             </div>
             <div className="flex items-center gap-8 rounded-8 border border-slate-600 px-14 py-13">
-              <img src={getChainIcon(depositViewChain)} alt={getChainName(depositViewChain)} className="size-20" />
-              <span className="text-16 leading-base text-typography-secondary">{getChainName(depositViewChain)}</span>
+              <img src={getChainIcon(depositViewChain)} alt={getFundingChainName(depositViewChain)} className="size-20" />
+              <span className="text-16 leading-base text-typography-secondary">{getFundingChainName(depositViewChain)}</span>
             </div>
           </div>
         )}

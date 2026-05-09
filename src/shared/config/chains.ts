@@ -133,7 +133,7 @@ const constants = {
 const _ALCHEMY_WHITELISTED_DOMAINS = ["primit.io", "www.primit.io", "app.primit.io", "api.primit.io"];
 const _PRIMIT_DOMAINS = ["primit.io", "www.primit.io", "app.primit.io", "api.primit.io"];
 
-export const RPC_PROVIDERS: Record<AnyChainId | typeof ETH_MAINNET, string[]> = {
+export const RPC_PROVIDERS: Record<number, string[]> = {
   [ETH_MAINNET]: ["https://rpc.ankr.com/eth"],
   [ARBITRUM]: [
     "https://arb1.arbitrum.io/rpc",
@@ -183,9 +183,14 @@ export const RPC_PROVIDERS: Record<AnyChainId | typeof ETH_MAINNET, string[]> = 
     "https://bsc.drpc.org",
     "https://bsc-rpc.publicnode.com",
   ],
+  97: [
+    "https://data-seed-prebsc-1-s1.bnbchain.org:8545",
+    "https://data-seed-prebsc-2-s1.bnbchain.org:8545",
+    "https://bsc-testnet-rpc.publicnode.com",
+  ],
 };
 
-export const FALLBACK_PROVIDERS: Record<AnyChainId, string[]> = {
+export const FALLBACK_PROVIDERS: Record<number, string[]> = {
   [ARBITRUM]: ENV_ARBITRUM_RPC_URLS ? JSON.parse(ENV_ARBITRUM_RPC_URLS) : [getAlchemyArbitrumHttpUrl()],
   [AVALANCHE]: ENV_AVALANCHE_RPC_URLS ? JSON.parse(ENV_AVALANCHE_RPC_URLS) : [getAlchemyAvalancheHttpUrl()],
   [AVALANCHE_FUJI]: [
@@ -194,11 +199,20 @@ export const FALLBACK_PROVIDERS: Record<AnyChainId, string[]> = {
     "https://ava-testnet.public.blastapi.io/ext/bc/C/rpc",
   ],
   [BOTANIX]: ENV_BOTANIX_RPC_URLS ? JSON.parse(ENV_BOTANIX_RPC_URLS) : [getAlchemyBotanixHttpUrl()],
-  [ARBITRUM_SEPOLIA]: [getAlchemyArbitrumSepoliaHttpUrl()],
+  [ARBITRUM_SEPOLIA]: [
+    "https://sepolia-rollup.arbitrum.io/rpc",
+    "https://arbitrum-sepolia.drpc.org",
+    "https://arbitrum-sepolia-rpc.publicnode.com",
+  ],
   [SOURCE_BASE_MAINNET]: [getAlchemyBaseMainnetHttpUrl()],
   [SOURCE_OPTIMISM_SEPOLIA]: [getAlchemyOptimismSepoliaHttpUrl()],
   [SOURCE_SEPOLIA]: [getAlchemySepoliaHttpUrl()],
   [SOURCE_BSC_MAINNET]: [getAlchemyBscMainnetHttpUrl()],
+  97: [
+    "https://data-seed-prebsc-1-s1.bnbchain.org:8545",
+    "https://data-seed-prebsc-2-s1.bnbchain.org:8545",
+    "https://bsc-testnet-rpc.publicnode.com",
+  ],
 };
 
 type ConstantName = keyof (typeof constants)[ContractsChainId];
@@ -219,7 +233,11 @@ export const getConstant = <T extends ContractsChainId, K extends ConstantName>(
 };
 
 export function getFallbackRpcUrl(chainId: number): string {
-  return sample(FALLBACK_PROVIDERS[chainId]);
+  const fallbackUrl = sample(FALLBACK_PROVIDERS[chainId]);
+  if (!fallbackUrl) {
+    throw new Error(`No fallback RPC provider configured for chainId: ${chainId}`);
+  }
+  return fallbackUrl;
 }
 
 function getAlchemyKey() {
