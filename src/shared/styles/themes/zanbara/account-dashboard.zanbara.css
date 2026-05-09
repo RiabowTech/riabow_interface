@@ -1,32 +1,16 @@
-/**
- * Zanbara Account（/accounts）：与 Zanbara 壳衬底一体，图表/子 Tab 用 soft 与主色。
- * 「理财」Tab 样式见 `earn.zanbara.css`（`.earn-content`）。
- */
 html[data-ui-theme="zanbara"] .account-pnl-chart-card {
-  --account-dashboard-chart-accent: var(--zanbara-primary-1);
-  background: var(--zanbara-soft-10);
-  border: 1px solid var(--zanbara-soft-15);
-  box-shadow: 0 0 3px color-mix(in srgb, var(--zanbara-primary-1) 8%, transparent);
-  /* DailyAndCumulativePnL：与主色 / 功能色对齐 */
-  --pnl-chart-tick: color-mix(in srgb, var(--zanbara-secondary-1) 72%, transparent);
-  --pnl-chart-axis-line: var(--zanbara-soft-15);
-  --pnl-chart-grid: var(--zanbara-soft-15);
-  --pnl-chart-cursor: var(--zanbara-soft-30);
-  --pnl-chart-cumulative: var(--zanbara-primary-1);
-  --pnl-chart-active-dot-stroke: var(--zanbara-primary-1);
-  --pnl-chart-active-dot-fill: var(--zanbara-secondary-3);
+  --pnl-chart-tick: rgba(244, 234, 212, 0.72);
+  --pnl-chart-axis-line: rgba(191, 148, 68, 0.22);
+  --pnl-chart-grid: rgba(191, 148, 68, 0.16);
+  --pnl-chart-cursor: rgba(215, 170, 67, 0.45);
+  --pnl-chart-cumulative: #d7aa43;
+  --pnl-chart-active-dot-stroke: #ffd16a;
+  --pnl-chart-active-dot-fill: #161511;
   --pnl-chart-profit: var(--zanbara-others-green);
   --pnl-chart-loss: var(--zanbara-others-red);
-  --pnl-chart-neutral: color-mix(in srgb, var(--zanbara-secondary-1) 22%, transparent);
+  --pnl-chart-neutral: rgba(244, 234, 212, 0.24);
 }
 
-html[data-ui-theme="zanbara"] .account-pnl-chart-card__title {
-  color: var(--zanbara-secondary-1);
-}
-
-/* HistoricalLists 已与 Trade 页共用 zanbara-trade-module-bg + Tab 分隔线，不再单独覆写 Tab 条背景 */
-
-/** 未连接钱包时的引导页：与壳衬底一体，避免单独一块深色板 */
 html[data-ui-theme="zanbara"] .connect-wallet-prompt {
   background: transparent;
 }

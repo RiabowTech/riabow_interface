@@ -116,6 +116,33 @@ function EditTpSlIcon() {
   );
 }
 
+function EmptyPositionsIcon() {
+  return (
+    <span className={styles.emptyIcon}>
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M13 17.5 24 12l11 5.5-11 5.5-11-5.5Z"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M13 17.5v13L24 36l11-5.5v-13"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+        <path d="M24 23v13" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+        <path d="M18 9h12" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+      </svg>
+    </span>
+  );
+}
+
 function formatNumber(value: number, maximumFractionDigits = 4) {
   return new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 0,
@@ -281,7 +308,21 @@ export function PositionsTab({ mode = "all" }: { mode?: BottomTabFilterMode }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => {
+          {rows.length === 0 ? (
+            <tr>
+              <td colSpan={11} className={styles.emptyCell}>
+                <div className={styles.emptyState}>
+                  <EmptyPositionsIcon />
+                  <div className={styles.emptyTitle}>
+                    <Trans>No positions yet</Trans>
+                  </div>
+                  <div className={styles.emptyDescription}>
+                    <Trans>Open a position to see your active trades here.</Trans>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          ) : rows.map((row, index) => {
             const rowKey = `${row.market}-${index}`;
             const pnlTone =
               row.unrealizedPnlValue == null

@@ -63,7 +63,7 @@ export function HistoricalLists({ chainId }: Props) {
   const activeTab = (tabKey as TabKey) ?? TabKey.Positions;
 
   return (
-    <div>
+    <div className="account-history-card">
       <div className="overflow-x-auto scrollbar-hide">
         <Tabs
           options={tabsOptions}

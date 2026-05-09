@@ -182,6 +182,33 @@ function LoadingSpinnerIcon() {
   );
 }
 
+function EmptyOrdersIcon() {
+  return (
+    <span className={styles.emptyIcon}>
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M13 17.5 24 12l11 5.5-11 5.5-11-5.5Z"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M13 17.5v13L24 36l11-5.5v-13"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+        <path d="M24 23v13" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+        <path d="M18 9h12" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+      </svg>
+    </span>
+  );
+}
+
 function toRow(order: LighterOpenOrder, i18n: ReturnType<typeof useLingui>["i18n"]): OpenOrderRow {
   return {
     market: order.market,
@@ -311,7 +338,21 @@ export function OpenOrdersTab({
           </tr>
         </thead>
         <tbody>
-          {filteredOrders.map((order, index) => {
+          {filteredOrders.length === 0 ? (
+            <tr>
+              <td colSpan={13} className={styles.emptyCell}>
+                <div className={styles.emptyState}>
+                  <EmptyOrdersIcon />
+                  <div className={styles.emptyTitle}>
+                    <Trans>No positions yet</Trans>
+                  </div>
+                  <div className={styles.emptyDescription}>
+                    <Trans>Open a position to see your active trades here.</Trans>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          ) : filteredOrders.map((order, index) => {
             const row = toRow(order, i18n);
             const isClosing = closingOrderId === order.id;
             return (

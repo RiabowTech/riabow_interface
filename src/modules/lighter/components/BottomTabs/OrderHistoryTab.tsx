@@ -47,6 +47,33 @@ function formatDate(timestamp: number) {
   return `${month}/${day}/${year} ${hour}:${minute}:${second}`;
 }
 
+function EmptyHistoryIcon() {
+  return (
+    <span className={styles.emptyIcon}>
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path
+          d="M13 17.5 24 12l11 5.5-11 5.5-11-5.5Z"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M13 17.5v13L24 36l11-5.5v-13"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+        <path d="M24 23v13" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+        <path d="M18 9h12" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+      </svg>
+    </span>
+  );
+}
+
 /**
  * Order History 里这几个短词(Yes/No/Filled/Cancelled/Rejected/Expired)
  * 之前走 Lingui 的 t`...` 宏时会跟项目内其他同文本条目合并到同一 catalog 条目,
@@ -179,7 +206,21 @@ export function OrderHistoryTab({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => {
+          {rows.length === 0 ? (
+            <tr>
+              <td colSpan={10} className={styles.emptyCell}>
+                <div className={styles.emptyState}>
+                  <EmptyHistoryIcon />
+                  <div className={styles.emptyTitle}>
+                    <Trans>No positions yet</Trans>
+                  </div>
+                  <div className={styles.emptyDescription}>
+                    <Trans>Open a position to see your active trades here.</Trans>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          ) : rows.map((row, index) => {
             return (
               <tr key={`${row.market}-${index}`}>
                 <td>

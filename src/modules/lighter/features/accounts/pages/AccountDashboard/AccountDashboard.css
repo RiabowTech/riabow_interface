@@ -1,48 +1,190 @@
-/* Account Dashboard Card */
 .account-dashboard-card {
-  padding: 0 0 40px;
-  background: transparent;
   width: 100%;
   max-width: 100%;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 14px;
+  padding: 12px 18px 22px;
+  box-sizing: border-box;
+  color: #f4ead4;
 }
 
-/* 账户页 Tab 与 Hero 标题一致的左右内边距（与 /earn 的 zanbara-page-hero--inset 对齐） */
-.account-dashboard-card > .account-tabs {
-  margin-left: var(--zanbara-route-gutter-x, 20px);
+.account-hero-card,
+.account-history-card {
+  border: 1px solid rgba(191, 148, 68, 0.26);
+  background:
+    radial-gradient(circle at 9% 7%, rgba(181, 137, 58, 0.12), transparent 25%),
+    linear-gradient(180deg, rgba(31, 29, 24, 0.88), rgba(12, 14, 13, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 225, 165, 0.07), 0 18px 45px rgba(0, 0, 0, 0.24);
 }
 
-/* Portfolio tabs container */
-.account-tabs {
+.account-hero-card {
+  min-height: 100px;
   display: flex;
-  justify-content: flex-start;
-  margin-bottom: 0;
-  width: 100%;
-  max-width: 380px; /* 增加最大宽度，让 tabs 更长 */
+  align-items: center;
+  gap: 24px;
+  padding: 16px;
+  border-radius: 8px;
 }
 
-/* Historical Lists tabs background */
+.account-hero-icon {
+  width: 68px;
+  height: 68px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 158, 73, 0.24);
+  background: linear-gradient(145deg, rgba(72, 61, 42, 0.62), rgba(28, 27, 24, 0.92));
+  color: #e4b755;
+  box-shadow: inset 0 1px 0 rgba(255, 229, 174, 0.1);
+}
+
+.account-hero-icon svg {
+  width: 42px;
+  height: 42px;
+}
+
+.account-hero-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.account-hero-title-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.account-hero-title-row h1 {
+  margin: 0;
+  color: #f7f0df;
+  font-size: 24px;
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.account-hero-copy p {
+  margin: 0;
+  color: rgba(244, 234, 212, 0.68);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.account-address-pill {
+  max-width: min(480px, 100%);
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 10px 0 14px;
+  border-radius: 5px;
+  border: 1px solid rgba(191, 148, 68, 0.28);
+  background: rgba(16, 15, 13, 0.78);
+  color: #d6aa43;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 32px;
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
+}
+
+.account-address-pill:hover {
+  border-color: rgba(214, 170, 67, 0.58);
+  background: rgba(42, 33, 19, 0.78);
+  color: #f0c96f;
+}
+
+.account-address-pill span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.account-address-pill svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+}
+
+.account-trade-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.account-history-card {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
 .historical-lists-tabs {
-  background: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(16, 15, 13, 0.68) !important;
+  border-bottom: 1px solid rgba(191, 148, 68, 0.18);
 }
 
-/* Mobile responsive */
+.historical-lists-tabs button {
+  color: rgba(244, 234, 212, 0.62);
+  background: transparent !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.historical-lists-tabs button:hover {
+  color: #f0c96f;
+}
+
+.historical-lists-tabs button.tab-active-green {
+  color: #ffd16a;
+  border-bottom-color: #d7aa43 !important;
+}
+
+.historical-lists-tabs .tab-underline-indicator {
+  height: 2px;
+  background: #d7aa43;
+  box-shadow: 0 0 10px rgba(215, 170, 67, 0.34);
+}
+
+html[data-ui-theme="zanbara"] .connect-wallet-prompt {
+  background: transparent;
+}
+
 @media (max-width: 768px) {
   .account-dashboard-card {
-    padding: 0 0 24px;
-    gap: 24px;
+    gap: 12px;
+    padding: 8px 6px 20px;
   }
 
-  .account-tabs {
+  .account-hero-card {
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .account-hero-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .account-hero-icon svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .account-hero-title-row h1 {
+    font-size: 21px;
+  }
+
+  .account-address-pill {
     width: 100%;
   }
 
-  [data-qa="portfolio-tabs"] {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
 }
-
