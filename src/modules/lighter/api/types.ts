@@ -53,6 +53,11 @@ export interface Market {
   leverage: number;
   price_decimals: number;
   size_decimals: number;
+  tick_size?: string;
+  lot_size?: string;
+  min_notional?: string;
+  maker_fee_bps?: number;
+  taker_fee_bps?: number;
   status: "active" | "inactive" | "suspended";
 }
 

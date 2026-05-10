@@ -38,7 +38,7 @@ import useWallet from "lib/wallets/useWallet";
 import { getToken, getTokenBySymbol } from "sdk/configs/tokens";
 import { Token } from "sdk/types/tokens";
 import { buildAccountDashboardUrl } from "shared/utils/buildAccountDashboardUrl";
-import { findWalletTokenConfig, useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
+import { findWalletTokenConfig, useWalletTokensConfig, type WalletTokenConfig } from "@/modules/lighter/api/custom/walletTokens";
 
 import { Amount } from "components/Amount/Amount";
 import { Avatar } from "components/Avatar/Avatar";
@@ -106,6 +106,26 @@ const TokenIcons = ({ tokens }: { tokens: string[] }) => {
     </div>
   );
 };
+
+function tokenFromWalletConfig(config: WalletTokenConfig): Token {
+  return {
+    name: config.symbol,
+    symbol: config.symbol,
+    decimals: config.decimals,
+    address: config.contract,
+    isStable: config.symbol.toUpperCase().includes("USD"),
+  };
+}
+
+function getTokenBySymbolOptional(chainId: number | undefined, symbol: string): Token | undefined {
+  if (!chainId || !symbol) return undefined;
+
+  try {
+    return getTokenBySymbol(chainId, symbol);
+  } catch {
+    return undefined;
+  }
+}
 
 function parseUsdStringToBigint(value: string | undefined, decimals = 30) {
   if (!value) return 0n;
@@ -776,18 +796,9 @@ const FundingHistorySection = () => {
       .map((item): TradingDisplayFundingHistoryItem | undefined => {
         // API returns token as symbol (e.g., "USDT"), not address
         // Use getTokenBySymbol to find token by symbol
-        const spotTokenConfig = item.product === "spot"
-          ? findWalletTokenConfig(walletTokenConfigs, DEFAULT_SPOT_CHAIN_ID, item.token)
-          : undefined;
-        const token = spotTokenConfig
-          ? {
-              name: spotTokenConfig.symbol,
-              symbol: spotTokenConfig.symbol,
-              decimals: spotTokenConfig.decimals,
-              address: spotTokenConfig.contract,
-              isStable: spotTokenConfig.symbol.toUpperCase().includes("USD"),
-            }
-          : getTokenBySymbol(chainId!, item.token);
+        const spotTokenConfig =
+          item.product === "spot" ? findWalletTokenConfig(walletTokenConfigs, DEFAULT_SPOT_CHAIN_ID, item.token) : undefined;
+        const token = spotTokenConfig ? tokenFromWalletConfig(spotTokenConfig) : getTokenBySymbolOptional(chainId, item.token);
         if (!token) {
           console.warn(`[FundingHistorySection] Token not found for symbol: ${item.token}`);
           return undefined;

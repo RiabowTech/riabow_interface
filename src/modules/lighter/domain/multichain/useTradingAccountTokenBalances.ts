@@ -17,7 +17,7 @@ import type { BalancesDataResult } from "domain/synthetics/tokens";
 import { getBalances, isAuthenticated, type BalancesResponse } from "@/modules/lighter/api/custom/client";
 import { tradeProductSWRKey } from "@/modules/lighter/api/custom/productRouting";
 import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
-import { getTokenBySymbol } from "sdk/configs/tokens";
+import { getTokenBySymbolSafe } from "sdk/configs/tokens";
 import type { ContractsChainId } from "sdk/configs/chains";
 import type { TokenBalancesData } from "domain/synthetics/tokens/types";
 import { parseUnits } from "viem";
@@ -74,7 +74,7 @@ function convertApiBalancesToTokenBalancesData(
       }
 
       // Get token by symbol to find the address
-      const token = getTokenBySymbol(chainId, symbolToLookup);
+      const token = getTokenBySymbolSafe(chainId, symbolToLookup);
       if (!token) {
         console.warn("[convertApiBalancesToTokenBalancesData] Token not found", {
           symbol: symbolToLookup,

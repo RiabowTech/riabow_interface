@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useSWR from "swr";
 
 import { getCandles, type KlinePeriod } from "@/modules/lighter/api/custom/client";
-import { useTradeState } from "@/modules/lighter/store/TradeStateContext";
+import { useTradeProduct, useTradeState } from "@/modules/lighter/store/TradeStateContext";
 import { useChainId } from "lib/chains";
 
 import { TVChart } from "components/TVChart/TVChart";
@@ -158,14 +158,15 @@ function parseHoverStats(params: CrossHairMovedEventParams | null): HoverStats |
 export function LighterOriginalChart({ timeframe }: { timeframe: string }) {
   const { chainId } = useChainId();
   const { selectedSymbol } = useTradeState();
+  const product = useTradeProduct();
   const period = PERIOD_MAP[timeframe] ?? "5m";
   const [hoverStats, setHoverStats] = useState<HoverStats | null>(null);
   const [layout, setLayout] = useState<TVChartLayout | null>(null);
   const chartRef = useRef<HTMLDivElement | null>(null);
   const [chartHeight, setChartHeight] = useState(0);
   const { data } = useSWR(
-    chainId && selectedSymbol ? ["lighter-original-candle", chainId, selectedSymbol, period] : null,
-    () => getCandles(chainId!, selectedSymbol!, { period, limit: 30 }),
+    chainId && selectedSymbol ? [product, "lighter-original-candle", chainId, selectedSymbol, period] : null,
+    () => getCandles(chainId!, selectedSymbol!, { period, limit: 30 }, product),
     { refreshInterval: 5000, revalidateOnFocus: false }
   );
 

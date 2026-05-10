@@ -559,6 +559,238 @@ export interface MarketsResponse {
   total: number;
 }
 
+export interface SpotMarket {
+  id: string;
+  base_token: string;
+  quote_token: string;
+  tick_size: string;
+  lot_size: string;
+  min_notional: string;
+  maker_fee_bps: number;
+  taker_fee_bps: number;
+  status: "listed" | "halted" | "delisted" | string;
+}
+
+export interface SpotTicker24h {
+  symbol: string;
+  last_price: string;
+  open_price: string;
+  high: string;
+  low: string;
+  volume: string;
+  quote_volume: string;
+  trade_count: number;
+  open_time: number;
+  close_time: number;
+}
+
+export type SpotOrderSide = "buy" | "sell";
+export type SpotOrderType = "limit" | "market";
+export type SpotTimeInForce = "gtc" | "ioc" | "post_only";
+
+export interface CreateSpotOrderRequest {
+  symbol: string;
+  side: SpotOrderSide;
+  type: SpotOrderType;
+  tif?: SpotTimeInForce;
+  price?: string;
+  quantity?: string;
+  quote_quantity?: string;
+}
+
+export interface CreateSpotOrderResponse {
+  id: string;
+  symbol: string;
+  side: SpotOrderSide;
+  type: SpotOrderType;
+  tif?: SpotTimeInForce;
+  price?: string | null;
+  quantity?: string | null;
+  quote_quantity?: string | null;
+  filled_qty?: string;
+  avg_fill_price?: string | null;
+  status: string;
+  reject_reason?: string | null;
+  created_at?: number;
+  updated_at?: number;
+  fills?: Array<{
+    trade_id: string;
+    price: string;
+    quantity: string;
+    fee: string;
+    fee_token: string;
+  }>;
+}
+
+function normalizeSpotMarketsResponse(raw: unknown): MarketsResponse {
+  const data = unwrapApiData<unknown>(raw);
+  const spotMarkets = Array.isArray(data)
+    ? data
+    : Array.isArray((data as any)?.markets)
+      ? (data as any).markets
+      : [];
+
+  const markets = spotMarkets.map((market: any): Market => {
+    const id = String(market.id ?? market.symbol ?? "").toUpperCase();
+    const base = String(market.base_token ?? market.base_asset ?? id.replace(/USDT$/, "")).toUpperCase();
+    const quote = String(market.quote_token ?? market.quote_asset ?? "USDT").toUpperCase();
+    const symbol = id.endsWith("USDT") ? id.replace(/USDT$/, "-USD") : `${base}-USD`;
+
+    return {
+      symbol,
+      base_asset: base,
+      quote_asset: quote,
+      last_price: String(market.last_price ?? "0"),
+      price_change_24h: "0",
+      price_change_percent_24h: "0",
+      high_24h: "0",
+      low_24h: "0",
+      volume_24h: "0",
+      volume_24h_usd: "0",
+      rank: 0,
+      type: "spot",
+      leverage: 1,
+      tick_size: String(market.tick_size ?? "0.0001"),
+      lot_size: String(market.lot_size ?? "0.01"),
+      min_notional: String(market.min_notional ?? "0"),
+      maker_fee_bps: Number(market.maker_fee_bps ?? 0),
+      taker_fee_bps: Number(market.taker_fee_bps ?? 0),
+      price_decimals: countDecimalPlaces(String(market.tick_size ?? "0.0001")),
+      size_decimals: countDecimalPlaces(String(market.lot_size ?? "0.01")),
+      status: market.status === "listed" || market.status === "active" ? "active" : "inactive",
+    };
+  });
+
+  return { markets, total: markets.length };
+}
+
+function countDecimalPlaces(value: string): number {
+  const fractional = value.split(".")[1];
+  if (!fractional) return 0;
+  return fractional.replace(/0+$/, "").length;
+}
+
+function normalizeSpotTicker(raw: unknown, symbol: string): Ticker {
+  const data = unwrapApiData<any>(raw);
+  const ticker = Array.isArray(data)
+    ? data.find((item) => String(item?.symbol ?? "").toUpperCase() === symbol.toUpperCase()) || data[0]
+    : data;
+  const lastPrice = String(ticker?.last_price ?? "0");
+
+  return {
+    symbol: String(ticker?.symbol ?? symbol),
+    last_price: lastPrice,
+    price_change_24h: "0",
+    price_change_percent_24h: "0",
+    high_24h: String(ticker?.high ?? lastPrice),
+    low_24h: String(ticker?.low ?? lastPrice),
+    volume_24h: String(ticker?.volume ?? "0"),
+    open_interest: "0",
+    funding_rate: "0",
+    next_funding_time: 0,
+  };
+}
+
+function normalizeSpotOrderbook(raw: unknown, symbol: string): Orderbook {
+  const data = unwrapApiData<any>(raw);
+  const normalizeLevels = (levels: any): [string, string][] => {
+    if (!Array.isArray(levels)) return [];
+
+    return levels
+      .map((level: any): [string, string] | null => {
+        if (Array.isArray(level)) {
+          const price = level[0];
+          const size = level[1];
+          if (price === undefined || size === undefined) return null;
+          return [String(price), String(size)];
+        }
+
+        const price = level?.price ?? level?.p;
+        const size = level?.quantity ?? level?.qty ?? level?.amount ?? level?.size ?? level?.q;
+        if (price === undefined || size === undefined) return null;
+        return [String(price), String(size)];
+      })
+      .filter((level): level is [string, string] => level !== null);
+  };
+
+  return {
+    symbol: String(data?.symbol ?? symbol),
+    bids: normalizeLevels(data?.bids),
+    asks: normalizeLevels(data?.asks),
+    timestamp: Number(data?.timestamp ?? data?.ts ?? Date.now()),
+  };
+}
+
+function normalizeSpotTrades(raw: unknown, symbol: string): TradesResponse {
+  const data = unwrapApiData<any>(raw);
+  const rows = Array.isArray(data)
+    ? data
+    : Array.isArray(data?.trades)
+      ? data.trades
+      : [];
+
+  return {
+    symbol,
+    trades: rows.map((trade: any, index: number): Trade => {
+      const timestamp = trade?.ts ?? trade?.timestamp ?? trade?.created_at ?? Date.now();
+      return {
+        id: String(trade?.trade_id ?? trade?.id ?? `${symbol}-${timestamp}-${index}`),
+        symbol: String(trade?.symbol ?? symbol),
+        price: String(trade?.price ?? "0"),
+        amount: String(trade?.quantity ?? trade?.amount ?? trade?.size ?? "0"),
+        side: String(trade?.side ?? "").toLowerCase() === "sell" ? "sell" : "buy",
+        timestamp,
+      };
+    }),
+  };
+}
+
+function normalizeSpotCandles(raw: unknown, symbol: string, period: KlinePeriod): CandlesResponse {
+  const data = unwrapApiData<any>(raw);
+  const rows = Array.isArray(data)
+    ? data
+    : Array.isArray(data?.klines)
+      ? data.klines
+      : Array.isArray(data?.candles)
+        ? data.candles
+        : [];
+
+  return {
+    symbol,
+    period,
+    candles: rows.map((row: any): Candle => {
+      if (Array.isArray(row)) {
+        const openTime = Number(row[0] ?? Date.now());
+        return {
+          time: openTime > 1e12 ? Math.floor(openTime / 1000) : openTime,
+          open: String(row[1] ?? "0"),
+          high: String(row[2] ?? "0"),
+          low: String(row[3] ?? "0"),
+          close: String(row[4] ?? "0"),
+          volume: String(row[5] ?? "0"),
+          quote_volume: row[7] !== undefined ? String(row[7]) : undefined,
+          trade_count: row[8] !== undefined ? Number(row[8]) : undefined,
+        };
+      }
+
+      const rawTime = Number(row?.open_time ?? row?.time ?? row?.ts ?? row?.timestamp ?? Date.now());
+      const time = rawTime > 1e12 ? Math.floor(rawTime / 1000) : rawTime;
+      const volume = row?.volume ?? row?.base_volume ?? "0";
+      return {
+        time,
+        open: String(row?.open ?? "0"),
+        high: String(row?.high ?? "0"),
+        low: String(row?.low ?? "0"),
+        close: String(row?.close ?? "0"),
+        volume: String(volume),
+        quote_volume: row?.quote_volume !== undefined ? String(row.quote_volume) : undefined,
+        trade_count: row?.trade_count !== undefined ? Number(row.trade_count) : undefined,
+        is_final: row?.is_final,
+      };
+    }),
+  };
+}
+
 export interface MarketDetailsResponse {
   symbol: string;
   market_name: string;
@@ -603,6 +835,10 @@ function convertSymbolToApiFormat(symbol: string): string {
 
 export async function getMarkets(chainId: number, limit?: number, product?: TradeProduct): Promise<MarketsResponse> {
   const queryParams = limit ? `?limit=${limit}` : "";
+  if (product === "spot") {
+    const raw = await apiFetch<unknown>(chainId, `/markets${queryParams}`, { product });
+    return normalizeSpotMarketsResponse(raw);
+  }
   return apiFetch<MarketsResponse>(chainId, `/markets${queryParams}`, { product });
 }
 
@@ -613,6 +849,10 @@ export async function getMarketDetails(chainId: number, symbol: string, product?
 
 export async function getOrderbook(chainId: number, symbol: string, product?: TradeProduct): Promise<Orderbook> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
+  if (product === "spot") {
+    const raw = await apiFetch<unknown>(chainId, `/depth?symbol=${encodeURIComponent(apiSymbol)}&limit=100`, { product });
+    return normalizeSpotOrderbook(raw, apiSymbol);
+  }
   return apiFetch<Orderbook>(chainId, `/markets/${apiSymbol}/orderbook`, { product });
 }
 
@@ -623,12 +863,208 @@ export interface TradesResponse {
 
 export async function getTrades(chainId: number, symbol: string, product?: TradeProduct): Promise<TradesResponse> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
+  if (product === "spot") {
+    const raw = await apiFetch<unknown>(chainId, `/trades?symbol=${encodeURIComponent(apiSymbol)}&limit=50`, { product });
+    return normalizeSpotTrades(raw, apiSymbol);
+  }
   return apiFetch<TradesResponse>(chainId, `/markets/${apiSymbol}/trades`, { product });
 }
 
 export async function getTicker(chainId: number, symbol: string, product?: TradeProduct): Promise<Ticker> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
+  if (product === "spot") {
+    const raw = await apiFetch<unknown>(chainId, `/ticker/24hr?symbol=${encodeURIComponent(apiSymbol)}`, { product });
+    return normalizeSpotTicker(raw, apiSymbol);
+  }
   return apiFetch<Ticker>(chainId, `/markets/${apiSymbol}/ticker`, { product });
+}
+
+export async function createSpotOrder(
+  chainId: number,
+  request: CreateSpotOrderRequest,
+  address?: string | null
+): Promise<CreateSpotOrderResponse> {
+  const raw = await apiFetch<CreateSpotOrderResponse | ApiEnvelope<CreateSpotOrderResponse>>(chainId, "/orders", {
+    method: "POST",
+    body: JSON.stringify(request),
+    requireAuth: true,
+    address,
+    product: "spot",
+  });
+
+  return unwrapApiData(raw);
+}
+
+export type SpotOrderStatus =
+  | "pending"
+  | "open"
+  | "partially_filled"
+  | "filled"
+  | "canceled"
+  | "cancelled"
+  | "rejected"
+  | "expired";
+
+export interface SpotOrderRecord {
+  id: string;
+  order_id?: string;
+  client_order_id?: string;
+  symbol: string;
+  side: SpotOrderSide;
+  type: SpotOrderType;
+  tif?: SpotTimeInForce;
+  price?: string | null;
+  quantity?: string | null;
+  quote_quantity?: string | null;
+  filled_qty?: string | null;
+  avg_fill_price?: string | null;
+  status: SpotOrderStatus;
+  reject_reason?: string | null;
+  created_at?: number | string;
+  updated_at?: number | string;
+}
+
+export interface SpotTradeRecord {
+  trade_id: string;
+  id?: string;
+  symbol: string;
+  side: SpotOrderSide;
+  price: string;
+  quantity: string;
+  fee?: string;
+  fee_token?: string;
+  role?: string;
+  order_id?: string;
+  created_at?: number | string;
+  timestamp?: number | string;
+}
+
+export interface GetSpotOrdersParams {
+  symbol?: string;
+  status?: SpotOrderStatus;
+  limit?: number;
+}
+
+export interface GetSpotTradesParams {
+  symbol?: string;
+  startTime?: number;
+  endTime?: number;
+  limit?: number;
+}
+
+function buildQueryString(params: Record<string, string | number | undefined | null>): string {
+  const query = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      query.set(key, String(value));
+    }
+  });
+  const text = query.toString();
+  return text ? `?${text}` : "";
+}
+
+function normalizeSpotOrders(raw: unknown): SpotOrderRecord[] {
+  const data = unwrapApiData<unknown>(raw);
+  const orders = Array.isArray(data)
+    ? data
+    : Array.isArray((data as any)?.orders)
+      ? (data as any).orders
+      : [];
+
+  return orders.map((order: any) => ({
+    id: String(order.id ?? order.order_id ?? ""),
+    order_id: order.order_id ? String(order.order_id) : undefined,
+    client_order_id: order.client_order_id ? String(order.client_order_id) : undefined,
+    symbol: String(order.symbol ?? ""),
+    side: String(order.side ?? "").toLowerCase() === "sell" ? "sell" : "buy",
+    type: String(order.type ?? order.order_type ?? "").toLowerCase() === "market" ? "market" : "limit",
+    tif: order.tif ?? order.time_in_force,
+    price: order.price ?? null,
+    quantity: order.quantity ?? order.size ?? null,
+    quote_quantity: order.quote_quantity ?? null,
+    filled_qty: order.filled_qty ?? order.filled_size ?? order.filled_amount ?? null,
+    avg_fill_price: order.avg_fill_price ?? order.average_price ?? null,
+    status: String(order.status ?? "open").toLowerCase() as SpotOrderStatus,
+    reject_reason: order.reject_reason ?? null,
+    created_at: order.created_at,
+    updated_at: order.updated_at,
+  }));
+}
+
+function normalizeSpotAccountTrades(raw: unknown): SpotTradeRecord[] {
+  const data = unwrapApiData<unknown>(raw);
+  const trades = Array.isArray(data)
+    ? data
+    : Array.isArray((data as any)?.trades)
+      ? (data as any).trades
+      : [];
+
+  return trades.map((trade: any) => ({
+    trade_id: String(trade.trade_id ?? trade.id ?? ""),
+    id: trade.id ? String(trade.id) : undefined,
+    symbol: String(trade.symbol ?? ""),
+    side: String(trade.side ?? "").toLowerCase() === "sell" ? "sell" : "buy",
+    price: String(trade.price ?? "0"),
+    quantity: String(trade.quantity ?? trade.amount ?? trade.size ?? "0"),
+    fee: trade.fee != null ? String(trade.fee) : undefined,
+    fee_token: trade.fee_token ?? trade.fee_asset ?? undefined,
+    role: trade.role ?? trade.liquidity ?? undefined,
+    order_id: trade.order_id ? String(trade.order_id) : undefined,
+    created_at: trade.created_at,
+    timestamp: trade.timestamp,
+  }));
+}
+
+export async function getSpotOrders(
+  chainId: number,
+  params: GetSpotOrdersParams = {},
+  address?: string | null
+): Promise<SpotOrderRecord[]> {
+  const query = buildQueryString({
+    symbol: params.symbol ? convertSymbolToApiFormat(params.symbol) : undefined,
+    status: params.status,
+    limit: params.limit,
+  });
+  const raw = await apiFetch<unknown>(chainId, `/orders${query}`, {
+    requireAuth: true,
+    address,
+    product: "spot",
+  });
+  return normalizeSpotOrders(raw);
+}
+
+export async function getSpotAccountTrades(
+  chainId: number,
+  params: GetSpotTradesParams = {},
+  address?: string | null
+): Promise<SpotTradeRecord[]> {
+  const query = buildQueryString({
+    symbol: params.symbol ? convertSymbolToApiFormat(params.symbol) : undefined,
+    startTime: params.startTime,
+    endTime: params.endTime,
+    limit: params.limit,
+  });
+  const raw = await apiFetch<unknown>(chainId, `/trades/me${query}`, {
+    requireAuth: true,
+    address,
+    product: "spot",
+  });
+  return normalizeSpotAccountTrades(raw);
+}
+
+export async function cancelSpotOrder(
+  chainId: number,
+  orderId: string,
+  address?: string | null
+): Promise<SpotOrderRecord> {
+  const raw = await apiFetch<unknown>(chainId, `/orders/${encodeURIComponent(orderId)}`, {
+    method: "DELETE",
+    requireAuth: true,
+    address,
+    product: "spot",
+  });
+  const data = unwrapApiData(raw);
+  return normalizeSpotOrders(Array.isArray(data) ? data : [data])[0];
 }
 
 export async function getPrice(chainId: number, symbol: string, product?: TradeProduct): Promise<PriceResponse> {
@@ -1186,14 +1622,25 @@ export interface GetCandlesParams {
   end?: number;
 }
 
-export async function getCandles(chainId: number, symbol: string, params: GetCandlesParams): Promise<CandlesResponse> {
+export async function getCandles(
+  chainId: number,
+  symbol: string,
+  params: GetCandlesParams,
+  product?: TradeProduct
+): Promise<CandlesResponse> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
   const queryParams = new URLSearchParams();
-  queryParams.set("period", params.period);
+  queryParams.set(product === "spot" ? "interval" : "period", params.period);
   if (params.limit !== undefined) queryParams.set("limit", params.limit.toString());
   // Convert milliseconds to seconds for backend API
   if (params.start !== undefined) queryParams.set("from", Math.floor(params.start / 1000).toString());
   if (params.end !== undefined) queryParams.set("to", Math.floor(params.end / 1000).toString());
+
+  if (product === "spot") {
+    queryParams.set("symbol", apiSymbol);
+    const raw = await apiFetch<unknown>(chainId, `/klines?${queryParams.toString()}`, { product });
+    return normalizeSpotCandles(raw, apiSymbol, params.period);
+  }
 
   return apiFetch<CandlesResponse>(chainId, `/markets/${apiSymbol}/candles?${queryParams.toString()}`);
 }

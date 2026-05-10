@@ -12,6 +12,7 @@ import {
   type WsKlineUpdate,
   type WsTickerUpdate,
 } from "@/modules/lighter/api/custom/websocket";
+import { getActiveTradeProduct, type TradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import {
   DatafeedErrorCallback,
   HistoryCallback,
@@ -172,6 +173,7 @@ interface Subscription {
 
 export class TradingKlineDataFeed extends EventTarget implements IBasicDataFeed {
   private chainId: number;
+  private product: TradeProduct;
   private subscriptions: Map<string, Subscription> = new Map();
   private wsConnected = false;
 
@@ -179,15 +181,17 @@ export class TradingKlineDataFeed extends EventTarget implements IBasicDataFeed 
     chainId: number,
     private brandName = "Zanbara",
     private visiblePlotsSet: VisiblePlotsSet = "ohlcv",
-    private volumeMetric: VolumeMetric = "base"
+    private volumeMetric: VolumeMetric = "base",
+    product: TradeProduct = getActiveTradeProduct()
   ) {
     super();
     this.chainId = chainId;
+    this.product = product;
     this.initWebSocket();
   }
 
   private initWebSocket(): void {
-    const ws = getWebSocketService(this.chainId);
+    const ws = getWebSocketService(this.chainId, this.product);
 
     // Connect if not already connected
     if (!ws.isConnected()) {
@@ -377,7 +381,7 @@ export class TradingKlineDataFeed extends EventTarget implements IBasicDataFeed 
       const response = await getCandles(this.chainId, backendSymbol, {
         period,
         limit: requestLimit,
-      });
+      }, this.product);
 
       if (!response.candles || response.candles.length === 0) {
         const isRequestingPastData = to < Date.now() / 1000;
@@ -455,7 +459,7 @@ export class TradingKlineDataFeed extends EventTarget implements IBasicDataFeed 
     this.subscriptions.set(listenerGuid, subscription);
 
     // Subscribe to WebSocket if connected
-    const ws = getWebSocketService(this.chainId);
+    const ws = getWebSocketService(this.chainId, this.product);
     if (ws.isConnected()) {
       ws.subscribeKline(backendSymbol, period);
       ws.subscribeTicker(backendSymbol);
@@ -467,7 +471,7 @@ export class TradingKlineDataFeed extends EventTarget implements IBasicDataFeed 
     if (!subscription) return;
 
     // Unsubscribe from WebSocket
-    const ws = getWebSocketService(this.chainId);
+    const ws = getWebSocketService(this.chainId, this.product);
     ws.unsubscribeKline(subscription.backendSymbol, subscription.period);
     ws.unsubscribeTicker(subscription.backendSymbol);
 

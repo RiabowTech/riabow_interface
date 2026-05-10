@@ -14,11 +14,10 @@ import styles from "./OrderBookPanel.module.scss";
 
 type Tab = "OrderBook" | "Trades";
 type Mode = "all" | "asks" | "bids";
-type Unit = "BTC" | "USD";
+type Unit = string;
 type GroupKey = string;
 export type OrderBookLayout = "Tab" | "Stacked" | "Large";
 
-const UNIT_OPTIONS: Unit[] = ["USD", "BTC"];
 const LAYOUT_OPTIONS: OrderBookLayout[] = ["Tab", "Stacked", "Large"];
 
 function DropdownMenu<T extends string>({
@@ -120,7 +119,7 @@ function formatTradeTime(timestamp: number | string): string {
 function formatOrderBookValue(value: number, unit: Unit): string {
   if (!Number.isFinite(value) || value <= 0) return "--";
 
-  if (unit === "BTC") {
+  if (unit !== "USD") {
     return value.toFixed(5);
   }
 
@@ -166,6 +165,11 @@ export function OrderBookPanel({
 }) {
   const { chainId } = useChainId();
   const { selectedSymbol } = useTradeState();
+  const baseSymbol = useMemo(() => {
+    const base = selectedSymbol?.replace(/[-/]?USD[T]?$/i, "").replace(/[-/]$/, "").toUpperCase();
+    return base || "BTC";
+  }, [selectedSymbol]);
+  const unitOptions = useMemo<Unit[]>(() => ["USD", baseSymbol], [baseSymbol]);
   const [tab, setTab] = useState<Tab>("OrderBook");
   const [orderBookMode, setOrderBookMode] = useState<Mode>("all");
   const [tradesMode, setTradesMode] = useState<Mode>("all");
@@ -203,6 +207,12 @@ export function OrderBookPanel({
     ob.observe(el);
     return () => ob.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (unit !== "USD" && unit !== baseSymbol) {
+      setUnit(baseSymbol);
+    }
+  }, [baseSymbol, unit]);
 
   useEffect(() => {
     if (!openMenu) return;
@@ -369,7 +379,7 @@ export function OrderBookPanel({
         </button>
         <DropdownMenu
           open={openMenu === "unit"}
-          options={UNIT_OPTIONS}
+          options={unitOptions}
           value={unit}
           onSelect={(v) => {
             setUnit(v);
@@ -509,7 +519,7 @@ export function OrderBookPanel({
           <Trans>Time</Trans>
         </div>
         <div>
-          <Trans>Size</Trans> <span className={styles.unitBadge}>{unit}</span>
+          <Trans>Size</Trans> <span className={styles.unitBadge}>{baseSymbol}</span>
         </div>
         <div>
           <Trans>Price</Trans>
