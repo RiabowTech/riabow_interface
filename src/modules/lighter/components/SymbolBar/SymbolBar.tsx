@@ -94,11 +94,19 @@ export function SymbolBar() {
         <ChartTokenSelector selectedToken={undefined} oneRowLabels={true} />
 
         <div className={styles.stats}>
-          <Stat label={<Trans>Mark Price</Trans>} value={fmt(m.markPrice, 1)} clickable />
-          <Stat label={<Trans>Index Price</Trans>} value={fmt(m.indexPrice, 1)} clickable />
+          {/* Mark/Index Price + Open Interest are perpetual-only concepts.
+              On spot, show a single Last Price instead and drop OI. */}
+          {isSpot ? (
+            <Stat label={<Trans>Last Price</Trans>} value={fmt(m.markPrice, 1)} clickable />
+          ) : (
+            <>
+              <Stat label={<Trans>Mark Price</Trans>} value={fmt(m.markPrice, 1)} clickable />
+              <Stat label={<Trans>Index Price</Trans>} value={fmt(m.indexPrice, 1)} clickable />
+            </>
+          )}
           <Stat label={<Trans>24h Change</Trans>} value={fmtPct(m.change24hPct)} cls={changeCls} />
           <Stat label={<Trans>24h Volume</Trans>} value={fmtCompactUsd(m.volume24hUsd)} />
-          <Stat label={<Trans>Open Interest</Trans>} value={fmtCompactUsd(m.openInterestUsd)} clickable />
+          {!isSpot && <Stat label={<Trans>Open Interest</Trans>} value={fmtCompactUsd(m.openInterestUsd)} clickable />}
           {/* Funding rate is a perpetual concept — hidden on spot. */}
           {!isSpot && (
             <div className={styles.fundingGroup}>

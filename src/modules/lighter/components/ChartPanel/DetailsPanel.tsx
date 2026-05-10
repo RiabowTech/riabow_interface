@@ -3,7 +3,7 @@ import { useMemo, type ReactNode } from "react";
 
 import { useChainId } from "lib/chains";
 import { useApiMarketDetails } from "modules/lighter/api/hooks";
-import { useTradeState } from "modules/lighter/store/TradeStateContext";
+import { useTradeProduct, useTradeState } from "modules/lighter/store/TradeStateContext";
 
 import TokenIcon from "components/TokenIcon/TokenIcon";
 
@@ -22,6 +22,8 @@ function SummaryRow({ label, value }: { label: ReactNode; value: string }) {
 export function DetailsPanel() {
   const { chainId } = useChainId();
   const { selectedSymbol } = useTradeState();
+  const product = useTradeProduct();
+  const isSpot = product === "spot";
   const { details } = useApiMarketDetails(chainId, selectedSymbol ?? undefined);
   const model = useMemo(() => buildDetailsViewModel(details), [details]);
 
@@ -60,13 +62,21 @@ export function DetailsPanel() {
           <SummaryRow label={<Trans>Min {model.assetSymbol} Amount:</Trans>} value={model.summary.minBtcAmount} />
           <SummaryRow label={<Trans>Min USD Amount:</Trans>} value={model.summary.minUsdAmount} />
           <SummaryRow label={<Trans>Price Steps:</Trans>} value={model.summary.priceSteps} />
-          <SummaryRow label={<Trans>Max Leverage:</Trans>} value={model.summary.maxLeverage} />
-          <SummaryRow label={<Trans>Initial Margin Fraction:</Trans>} value={model.summary.initialMarginFraction} />
-          <SummaryRow
-            label={<Trans>Maintenance Margin Fraction:</Trans>}
-            value={model.summary.maintenanceMarginFraction}
-          />
-          <SummaryRow label={<Trans>Close Out Margin Fraction:</Trans>} value={model.summary.closeOutMarginFraction} />
+          {/* Leverage / margin fractions are perpetual-only — hidden on spot. */}
+          {!isSpot && (
+            <>
+              <SummaryRow label={<Trans>Max Leverage:</Trans>} value={model.summary.maxLeverage} />
+              <SummaryRow label={<Trans>Initial Margin Fraction:</Trans>} value={model.summary.initialMarginFraction} />
+              <SummaryRow
+                label={<Trans>Maintenance Margin Fraction:</Trans>}
+                value={model.summary.maintenanceMarginFraction}
+              />
+              <SummaryRow
+                label={<Trans>Close Out Margin Fraction:</Trans>}
+                value={model.summary.closeOutMarginFraction}
+              />
+            </>
+          )}
           <SummaryRow label={<Trans>Market Cap:</Trans>} value={model.summary.marketCap} />
           <SummaryRow label={<Trans>FDV:</Trans>} value={model.summary.fdv} />
         </div>
