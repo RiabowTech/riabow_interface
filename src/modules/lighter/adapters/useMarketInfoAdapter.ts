@@ -52,11 +52,14 @@ function normalizeApiMarketSymbol(symbol: string | null | undefined): string | n
 
 export function useMarketInfoAdapter(): LighterMarketInfo {
   const { chainId } = useChainId();
-  const { selectedSymbol } = useTradeState();
+  const { selectedSymbol, product } = useTradeState();
   const symbol = selectedSymbol?.split("-")[0] ?? "BTC";
   const { ticker } = useApiTicker(chainId, selectedSymbol ?? undefined);
   const { data: marketsData } = useZanbaraMarkets(chainId);
-  const { data: fundingRateData } = useZanbaraFundingRate(chainId, selectedSymbol ?? undefined);
+  // Funding rate is a perp-only concept. Pass undefined as symbol on spot
+  // so the SWR key is null and no /funding-rates/<symbol> request is made.
+  const fundingSymbol = product === "spot" ? undefined : selectedSymbol ?? undefined;
+  const { data: fundingRateData } = useZanbaraFundingRate(chainId, fundingSymbol);
 
   const marketLeverage = useMemo(() => {
     if (!selectedSymbol || !marketsData?.markets?.length) return null;

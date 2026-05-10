@@ -81,8 +81,10 @@ function aggregateRate(points: TimedPoint[], windowMs: number, nowMs: number): n
 
 export function useFundingAdapter(range: FundingRange): FundingViewModel {
   const { chainId } = useChainId();
-  const { selectedSymbol } = useTradeState();
-  const symbol = selectedSymbol ?? undefined;
+  const { selectedSymbol, product } = useTradeState();
+  // Funding rate is a perp-only concept. Pass undefined as symbol on spot
+  // so the SWR keys are null and no /funding-rates/* requests are made.
+  const symbol = product === "spot" ? undefined : selectedSymbol ?? undefined;
 
   const { data: currentRate } = useZanbaraFundingRate(chainId, symbol);
   const { data: history } = useZanbaraFundingHistory(chainId, symbol, {

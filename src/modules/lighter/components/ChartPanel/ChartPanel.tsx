@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { TVChart } from "components/TVChart/TVChart";
 
 import { useMarketInfoAdapter } from "../../adapters/useMarketInfoAdapter";
+import { useTradeProduct } from "../../store/TradeStateContext/TradeStateContext";
 
 import type { EntityId, IChartingLibraryWidget, SeriesType } from "../../../../charting_library";
 
@@ -259,7 +260,9 @@ export function ChartPanel() {
   const splitMenuRef = useRef<HTMLDivElement>(null);
   // 浏览器原生全屏:requestFullscreen / exitFullscreen
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const tabs: TopTab[] = ["Price", "Funding", "Details"];
+  // Funding tab is perpetual-only; spot omits it.
+  const product = useTradeProduct();
+  const tabs: TopTab[] = product === "spot" ? ["Price", "Details"] : ["Price", "Funding", "Details"];
   // "Original" 图表模式暂时下线(改动回归后再打开): 保留枚举值用于向后兼容,但从 UI 渲染列表中移除
   const modes: ChartMode[] = ["TradingView", "Depth"];
   const tfs = ["5m", "15m", "1h", "4h"];
