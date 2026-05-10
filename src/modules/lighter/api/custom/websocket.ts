@@ -166,6 +166,11 @@ export class WebSocketService {
   private static readonly SUBSCRIBE_BATCH_SIZE = 5;
   private static readonly SUBSCRIBE_BATCH_INTERVAL_MS = 250;
 
+  // Per-symbol depth state for spot. Spot pushes a snapshot once on subscribe
+  // then streams diffs (only changed levels; qty="0" means level removed).
+  // Perp pushes full snapshots every 500 ms so it doesn't need this.
+  private spotDepthState: Map<string, { bids: Map<string, string>; asks: Map<string, string>; lastUpdateId: number }> = new Map();
+
   constructor(chainId: number, product: TradeProduct = DEFAULT_TRADE_PRODUCT) {
     this.chainId = chainId;
     this.product = product;
@@ -484,19 +489,36 @@ export class WebSocketService {
     });
   }
 
+  // Channel naming differs between perp and spot on the backend:
+  //   perp:  orderbook:{sym}    trades:{sym}    ticker:{sym}    kline:{sym}:{period}
+  //   spot:  spot:depth:{sym}   spot:trade:{sym} spot:ticker:{sym} spot:kline:{sym}:{period}
+  // Note "trades" → "trade" (singular) and "orderbook" → "depth" — not just a prefix swap.
+  private orderbookChannelName(apiSymbol: string): string {
+    return this.product === "spot" ? `spot:depth:${apiSymbol}` : `orderbook:${apiSymbol}`;
+  }
+  private tradeChannelName(apiSymbol: string): string {
+    return this.product === "spot" ? `spot:trade:${apiSymbol}` : `trades:${apiSymbol}`;
+  }
+  private tickerChannelName(apiSymbol: string): string {
+    return this.product === "spot" ? `spot:ticker:${apiSymbol}` : `ticker:${apiSymbol}`;
+  }
+  private klineChannelName(apiSymbol: string, period: string): string {
+    return this.product === "spot" ? `spot:kline:${apiSymbol}:${period}` : `kline:${apiSymbol}:${period}`;
+  }
+
   subscribeOrderbook(symbol: string): void {
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.addSubscription(`orderbook:${apiSymbol}`);
+    this.addSubscription(this.orderbookChannelName(apiSymbol));
   }
 
   subscribeTrades(symbol: string): void {
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.addSubscription(`trades:${apiSymbol}`);
+    this.addSubscription(this.tradeChannelName(apiSymbol));
   }
 
   subscribeTicker(symbol: string): void {
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.addSubscription(`ticker:${apiSymbol}`);
+    this.addSubscription(this.tickerChannelName(apiSymbol));
   }
 
   subscribeAllTrades(): void {
@@ -511,29 +533,29 @@ export class WebSocketService {
 
   unsubscribeOrderbook(symbol: string): void {
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.removeSubscription(`orderbook:${apiSymbol}`);
+    this.removeSubscription(this.orderbookChannelName(apiSymbol));
   }
 
   unsubscribeTrades(symbol: string): void {
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.removeSubscription(`trades:${apiSymbol}`);
+    this.removeSubscription(this.tradeChannelName(apiSymbol));
   }
 
   unsubscribeTicker(symbol: string): void {
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.removeSubscription(`ticker:${apiSymbol}`);
+    this.removeSubscription(this.tickerChannelName(apiSymbol));
   }
 
   subscribeKline(symbol: string, period: string): void {
     // Normalize symbol to API format (ETH-USD -> ETHUSDT)
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.addSubscription(`kline:${apiSymbol}:${period}`);
+    this.addSubscription(this.klineChannelName(apiSymbol, period));
   }
 
   unsubscribeKline(symbol: string, period: string): void {
     // Normalize symbol to API format (ETH-USD -> ETHUSDT)
     const apiSymbol = normalizeMarketSymbolToApiFormat(symbol);
-    this.removeSubscription(`kline:${apiSymbol}:${period}`);
+    this.removeSubscription(this.klineChannelName(apiSymbol, period));
   }
 
   authenticate(address?: string | null): void {
@@ -604,58 +626,124 @@ export class WebSocketService {
   }
 
   onOrderbookUpdate(handler: (data: WsOrderbookUpdate) => void): () => void {
-    return this.onMessage("orderbook", (msg) => {
-      // Orderbook data can be either in msg.data or directly in msg
+    // Perp pushes full snapshots tagged "orderbook"; spot pushes "spot_depth_snapshot"
+    // (replace state) followed by "spot_depth_diff" (incremental). Subscribe to all
+    // three; for spot we maintain per-symbol price→qty maps and emit the full
+    // merged snapshot on every push so the consumer doesn't need to know the
+    // difference.
+    const perpUnsub = this.onMessage("orderbook", (msg) => {
       const orderbookData = (msg.data || msg) as WsOrderbookUpdate;
-
-      if (orderbookData && orderbookData.symbol) {
-        // Convert [string, string][] format to Array<{ price: string; size: string }> if needed
-        const normalizedData: WsOrderbookUpdate = {
-          symbol: orderbookData.symbol,
-          timestamp: orderbookData.timestamp,
-          bids: Array.isArray(orderbookData.bids) && orderbookData.bids.length > 0
-            ? Array.isArray(orderbookData.bids[0])
-              ? (orderbookData.bids as [string, string][]).map(([price, size]) => ({ price, size }))
-              : orderbookData.bids
-            : [],
-          asks: Array.isArray(orderbookData.asks) && orderbookData.asks.length > 0
-            ? Array.isArray(orderbookData.asks[0])
-              ? (orderbookData.asks as [string, string][]).map(([price, size]) => ({ price, size }))
-              : orderbookData.asks
-            : [],
-        };
-
-        handler(normalizedData);
-      }
+      if (!orderbookData?.symbol) return;
+      handler(this.normalizeOrderbookPayload(orderbookData));
     });
+    const spotSnapUnsub = this.onMessage("spot_depth_snapshot", (msg) => {
+      const data = (msg.data || msg) as { symbol?: string; last_update_id?: number; bids?: [string, string][]; asks?: [string, string][] };
+      if (!data?.symbol) return;
+      this.applySpotDepthSnapshot(data.symbol, data.bids ?? [], data.asks ?? [], data.last_update_id ?? 0);
+      handler(this.snapshotSpotDepthFor(data.symbol));
+    });
+    const spotDiffUnsub = this.onMessage("spot_depth_diff", (msg) => {
+      const data = (msg.data || msg) as { symbol?: string; update_id_last?: number; bids?: [string, string][]; asks?: [string, string][] };
+      if (!data?.symbol) return;
+      this.applySpotDepthDiff(data.symbol, data.bids ?? [], data.asks ?? [], data.update_id_last ?? 0);
+      handler(this.snapshotSpotDepthFor(data.symbol));
+    });
+    return () => { perpUnsub(); spotSnapUnsub(); spotDiffUnsub(); };
+  }
+
+  private normalizeOrderbookPayload(data: WsOrderbookUpdate): WsOrderbookUpdate {
+    return {
+      symbol: data.symbol,
+      timestamp: data.timestamp,
+      bids: Array.isArray(data.bids) && data.bids.length > 0
+        ? Array.isArray(data.bids[0])
+          ? (data.bids as unknown as [string, string][]).map(([price, size]) => ({ price, size }))
+          : data.bids
+        : [],
+      asks: Array.isArray(data.asks) && data.asks.length > 0
+        ? Array.isArray(data.asks[0])
+          ? (data.asks as unknown as [string, string][]).map(([price, size]) => ({ price, size }))
+          : data.asks
+        : [],
+    };
+  }
+
+  private applySpotDepthSnapshot(symbol: string, bids: [string, string][], asks: [string, string][], lastUpdateId: number): void {
+    const bidsMap = new Map<string, string>();
+    const asksMap = new Map<string, string>();
+    for (const [p, q] of bids) bidsMap.set(p, q);
+    for (const [p, q] of asks) asksMap.set(p, q);
+    this.spotDepthState.set(symbol, { bids: bidsMap, asks: asksMap, lastUpdateId });
+  }
+
+  private applySpotDepthDiff(symbol: string, bids: [string, string][], asks: [string, string][], updateIdLast: number): void {
+    let state = this.spotDepthState.get(symbol);
+    if (!state) {
+      // Diff before snapshot — initialize from this diff (degraded but non-fatal).
+      state = { bids: new Map(), asks: new Map(), lastUpdateId: 0 };
+      this.spotDepthState.set(symbol, state);
+    }
+    const apply = (m: Map<string, string>, levels: [string, string][]) => {
+      for (const [p, q] of levels) {
+        if (q === "0" || Number(q) === 0) m.delete(p); else m.set(p, q);
+      }
+    };
+    apply(state.bids, bids);
+    apply(state.asks, asks);
+    state.lastUpdateId = updateIdLast;
+  }
+
+  private snapshotSpotDepthFor(symbol: string): WsOrderbookUpdate {
+    const state = this.spotDepthState.get(symbol);
+    if (!state) return { symbol, timestamp: Date.now(), bids: [], asks: [] };
+    // Bids: descending by price (best bid first); asks: ascending (best ask first).
+    const bids = Array.from(state.bids.entries())
+      .sort((a, b) => Number(b[0]) - Number(a[0]))
+      .map(([price, size]) => ({ price, size }));
+    const asks = Array.from(state.asks.entries())
+      .sort((a, b) => Number(a[0]) - Number(b[0]))
+      .map(([price, size]) => ({ price, size }));
+    return { symbol, timestamp: Date.now(), bids, asks };
   }
 
   onTradeUpdate(handler: (data: WsTradeUpdate) => void): () => void {
-    return this.onMessage("trade", (msg) => {
-      // Trade data can be either in msg.data or directly in msg (some backends do not wrap payload)
+    const handlePerp = (msg: WsMessage) => {
       const tradeData = (msg.data || msg) as WsTradeUpdate;
-      if (tradeData && tradeData.symbol) {
-        // Generate id if missing
-        if (!tradeData.id) {
-          tradeData.id = `${tradeData.symbol}:${tradeData.timestamp}:${tradeData.price}:${tradeData.amount}:${tradeData.side}`;
-        }
-        // Map "amount" to "size" for backward compatibility
-        if (tradeData.amount && !tradeData.size) {
-          tradeData.size = tradeData.amount;
-        }
-        handler(tradeData);
+      if (!tradeData?.symbol) return;
+      if (!tradeData.id) {
+        tradeData.id = `${tradeData.symbol}:${tradeData.timestamp}:${tradeData.price}:${tradeData.amount}:${tradeData.side}`;
       }
-    });
+      if (tradeData.amount && !tradeData.size) tradeData.size = tradeData.amount;
+      handler(tradeData);
+    };
+    const handleSpot = (msg: WsMessage) => {
+      // Spot wire fields: trade_id (uuid), symbol, side (taker), price, quantity, ts (ms).
+      const d = (msg.data || msg) as { trade_id?: string; symbol?: string; side?: string; price?: string; quantity?: string; ts?: number };
+      if (!d?.symbol) return;
+      const trade: WsTradeUpdate = {
+        id: d.trade_id ?? `${d.symbol}:${d.ts}:${d.price}:${d.quantity}:${d.side}`,
+        symbol: d.symbol,
+        side: d.side as "buy" | "sell",
+        price: d.price ?? "0",
+        amount: d.quantity ?? "0",
+        size: d.quantity ?? "0",
+        timestamp: d.ts ?? Date.now(),
+      };
+      handler(trade);
+    };
+    const perpUnsub = this.onMessage("trade", handlePerp);
+    const spotUnsub = this.onMessage("spot_trade", handleSpot);
+    return () => { perpUnsub(); spotUnsub(); };
   }
 
   onTickerUpdate(handler: (data: WsTickerUpdate) => void): () => void {
-    return this.onMessage("ticker", (msg) => {
-      // Ticker data can be either in msg.data or directly in msg (some backends do not wrap payload)
+    const handle = (msg: WsMessage) => {
       const tickerData = (msg.data || msg) as WsTickerUpdate;
-      if (tickerData && tickerData.symbol) {
-        handler(tickerData);
-      }
-    });
+      if (tickerData && tickerData.symbol) handler(tickerData);
+    };
+    const perpUnsub = this.onMessage("ticker", handle);
+    const spotUnsub = this.onMessage("spot_ticker", handle);
+    return () => { perpUnsub(); spotUnsub(); };
   }
 
   onKlineUpdate(handler: (channel: string, data: WsKlineUpdate) => void): () => void {
@@ -678,12 +766,36 @@ export class WebSocketService {
       }
     };
 
-    const unsubscribeKline = this.onMessage("kline", klineHandler);
-    const unsubscribeSnapshot = this.onMessage("kline_snapshot", klineHandler);
+    // Spot kline payload uses `open_time` instead of `time`, and `open / high
+    // / low / close` instead of `o / h / l / c`. Normalize to the perp shape
+    // before forwarding so downstream consumers stay symmetric.
+    const spotKlineHandler = (msg: WsMessage) => {
+      if (!msg.channel || !msg.data) return;
+      const d = msg.data as Record<string, unknown>;
+      const candle: WsKlineUpdate = {
+        time: typeof d.open_time === "number" ? (d.open_time as number) : Number(d.open_time ?? 0),
+        open: String(d.open ?? "0"),
+        high: String(d.high ?? "0"),
+        low: String(d.low ?? "0"),
+        close: String(d.close ?? "0"),
+        volume: String(d.volume ?? "0"),
+        quote_volume: d.quote_volume != null ? String(d.quote_volume) : undefined,
+        trade_count: typeof d.trade_count === "number" ? (d.trade_count as number) : undefined,
+        is_final: typeof d.is_closed === "boolean" ? (d.is_closed as boolean) : undefined,
+      };
+      handler(msg.channel, candle);
+    };
+
+    const unsubKline = this.onMessage("kline", klineHandler);
+    const unsubKlineSnapshot = this.onMessage("kline_snapshot", klineHandler);
+    const unsubSpotKline = this.onMessage("spot_kline_update", spotKlineHandler);
+    const unsubSpotKlineSnapshot = this.onMessage("spot_kline_snapshot", spotKlineHandler);
 
     return () => {
-      unsubscribeKline();
-      unsubscribeSnapshot();
+      unsubKline();
+      unsubKlineSnapshot();
+      unsubSpotKline();
+      unsubSpotKlineSnapshot();
     };
   }
 
