@@ -1,4 +1,6 @@
 import cx from "classnames";
+import { t } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import React, {
   PropsWithChildren,
@@ -88,6 +90,7 @@ export default function Modal({
   zanbaraSize = "small",
   zanbaraBodyClassName = "",
 }: ModalProps) {
+  const { i18n } = useLingui();
   const modalRef = useRef<HTMLDivElement | null>(null);
   const generatedZanbaraTitleId = useId();
 
@@ -224,7 +227,7 @@ export default function Modal({
                   <button
                     type="button"
                     className="Modal-close-button"
-                    aria-label="Close"
+                    aria-label={i18n._(t`Close dialog`)}
                     onClick={() => setIsVisible(false)}
                   >
                     <CloseIcon

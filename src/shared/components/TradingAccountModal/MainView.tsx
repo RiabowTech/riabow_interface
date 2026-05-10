@@ -1,4 +1,5 @@
 import { Trans, t } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import cx from "classnames";
 import { type ChangeEvent, useCallback, useMemo, useState } from "react";
 import Skeleton from "react-loading-skeleton";
@@ -595,6 +596,7 @@ const ActionButtons = () => {
 type WalletPane = "spot" | "futures";
 
 const WalletOverview = () => {
+  const { i18n } = useLingui();
   const [, setIsVisibleOrView] = useTradingAccountModalOpen();
   const [activeWallet, setActiveWallet] = useState<WalletPane>("spot");
   const [transferAmount, setTransferAmount] = useState("");
@@ -715,28 +717,36 @@ const WalletOverview = () => {
       <section className="wallet-summary-card">
         <div className="wallet-summary-metric wallet-summary-metric--large">
           <div className="wallet-label-row">
-            <span>Total Assets (USD)</span>
+            <span>
+              <Trans>Total Assets (USD)</Trans>
+            </span>
             <span className="wallet-eye">◉</span>
           </div>
           <UsdValueWithSkeleton usd={totalUsd ?? apiTotalAccountUsd} />
           <div className="wallet-subvalue">≈ {totalText} USDT</div>
         </div>
         <div className="wallet-summary-metric">
-          <div className="wallet-label-row">Available Balance</div>
+          <div className="wallet-label-row">
+            <Trans>Available Balance</Trans>
+          </div>
           <UsdValueWithSkeleton usd={availableUsd} />
           <div className="wallet-subvalue">{availableText} USDT</div>
         </div>
         <div className="wallet-summary-metric">
           <div className="wallet-label-row">
             <TooltipWithPortal content={<FrozenBalanceTooltipContent />} variant="iconStroke">
-              <span>Frozen Balance</span>
+              <span>
+                <Trans>Frozen Balance</Trans>
+              </span>
             </TooltipWithPortal>
           </div>
           <UsdValueWithSkeleton usd={frozenUsd} />
           <div className="wallet-subvalue">{frozenText} USDT</div>
         </div>
         <div className="wallet-summary-metric">
-          <div className="wallet-label-row">Total Balance</div>
+          <div className="wallet-label-row">
+            <Trans>Total Balance</Trans>
+          </div>
           <UsdValueWithSkeleton usd={totalUsd} />
           <div className="wallet-subvalue">{totalText} USDT</div>
         </div>
@@ -749,7 +759,7 @@ const WalletOverview = () => {
           onClick={() => setActiveWallet("spot")}
         >
           <DownloadIcon className="wallet-tab-icon" />
-          Spot Wallet
+          <Trans>Spot Wallet</Trans>
         </button>
         <button
           type="button"
@@ -757,7 +767,7 @@ const WalletOverview = () => {
           onClick={() => setActiveWallet("futures")}
         >
           <PnlAnalysisIcon className="wallet-tab-icon" />
-          Futures Wallet
+          <Trans>Futures Wallet</Trans>
         </button>
       </div>
 
@@ -765,24 +775,38 @@ const WalletOverview = () => {
         <div className="wallet-assets-head">
           <div>
             <div className="wallet-label-row">
-              {activeWallet === "spot" ? "Spot Wallet Assets (USD)" : "Futures Wallet Assets (USD)"}
+              {activeWallet === "spot" ? (
+                <Trans>Spot Wallet Assets (USD)</Trans>
+              ) : (
+                <Trans>Futures Wallet Assets (USD)</Trans>
+              )}
               <span className="wallet-eye">◉</span>
             </div>
             <UsdValueWithSkeleton usd={totalUsd} />
             <div className="wallet-subvalue">≈ {totalText} USDT</div>
           </div>
           <button type="button" className="wallet-all-assets" onClick={openAssets}>
-            <span>All assets</span>
+            <span>
+              <Trans>All assets</Trans>
+            </span>
             <TokenIcons tokens={availableToTradeAssetSymbols} />
             <ChevronLeftIcon className="size-16 rotate-180 text-typography-secondary" />
           </button>
         </div>
         <div className="wallet-asset-table">
           <div className="wallet-asset-row wallet-asset-row--header">
-            <span>Asset</span>
-            <span>Available</span>
-            <span>Frozen</span>
-            <span>Total</span>
+            <span>
+              <Trans>Asset</Trans>
+            </span>
+            <span>
+              <Trans>Available</Trans>
+            </span>
+            <span>
+              <Trans>Frozen</Trans>
+            </span>
+            <span>
+              <Trans>Total</Trans>
+            </span>
           </div>
           {activeBalances.map((balance) => {
             const symbol = getBalanceSymbol(balance, balanceSymbol);
@@ -803,7 +827,9 @@ const WalletOverview = () => {
             );
           })}
           {!activeBalancesResult.isLoading && activeBalances.length === 0 && (
-            <div className="wallet-asset-empty">No assets</div>
+            <div className="wallet-asset-empty">
+              <Trans>No assets</Trans>
+            </div>
           )}
         </div>
       </section>
@@ -811,27 +837,33 @@ const WalletOverview = () => {
       <section className="wallet-transfer-card">
         <div className="wallet-section-title">
           <SwapIcon className="wallet-section-icon" />
-          Transfer {transferSymbol}
+          <Trans>Transfer</Trans> {transferSymbol}
         </div>
         <div className="wallet-transfer-grid">
           <div className="wallet-transfer-box">
-            <span>From</span>
-            <strong>{activeWallet === "spot" ? "Spot Wallet" : "Futures Wallet"}</strong>
+            <span>
+              <Trans>From</Trans>
+            </span>
+            <strong>{activeWallet === "spot" ? <Trans>Spot Wallet</Trans> : <Trans>Futures Wallet</Trans>}</strong>
             <small>{transferAvailableText} {transferSymbol}</small>
           </div>
           <button type="button" className="wallet-swap-button" onClick={() => setActiveWallet(activeWallet === "spot" ? "futures" : "spot")}>
             <SwapIcon />
           </button>
           <div className="wallet-transfer-box">
-            <span>To</span>
-            <strong>{activeWallet === "spot" ? "Futures Wallet" : "Spot Wallet"}</strong>
+            <span>
+              <Trans>To</Trans>
+            </span>
+            <strong>{activeWallet === "spot" ? <Trans>Futures Wallet</Trans> : <Trans>Spot Wallet</Trans>}</strong>
             <small>{transferDestinationAvailableText} {transferSymbol}</small>
           </div>
           <div className="wallet-transfer-amount">
-            <label>Amount</label>
+            <label>
+              <Trans>Amount</Trans>
+            </label>
             <div className="wallet-transfer-input">
               <input
-                aria-label={`Transfer ${transferSymbol} amount`}
+                aria-label={i18n._(t`Transfer ${transferSymbol} amount`)}
                 disabled={isTransferSubmitting}
                 inputMode="decimal"
                 onChange={handleTransferAmountChange}
@@ -841,7 +873,9 @@ const WalletOverview = () => {
               />
               <strong>{transferSymbol}</strong>
             </div>
-            <small>Available: {transferAvailableText} {transferSymbol}</small>
+            <small>
+              <Trans>Available:</Trans> {transferAvailableText} {transferSymbol}
+            </small>
           </div>
           <Button
             variant="primary-action"
@@ -850,7 +884,7 @@ const WalletOverview = () => {
             disabled={!canTransfer}
             onClick={handleTransfer}
           >
-            {isTransferSubmitting ? "Transferring" : "Transfer"}
+            {isTransferSubmitting ? <Trans>Transferring</Trans> : <Trans>Transfer</Trans>}
           </Button>
         </div>
       </section>
@@ -858,11 +892,11 @@ const WalletOverview = () => {
       <div className="wallet-action-grid">
         <Button variant="secondary" size="medium" className="wallet-action-button" onClick={openDeposit}>
           <DownloadIcon className="wallet-section-icon" />
-          Deposit
+          <Trans>Deposit</Trans>
         </Button>
         <Button variant="secondary" size="medium" className="wallet-action-button" onClick={openWithdraw}>
           <DownloadIcon className="wallet-section-icon wallet-section-icon--up" />
-          Withdraw
+          <Trans>Withdraw</Trans>
         </Button>
       </div>
     </div>

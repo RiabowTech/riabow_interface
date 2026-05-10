@@ -19,7 +19,7 @@ msgstr "未實現基礎盈虧"
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Wallet not connected"
-msgstr "钱包未连接"
+msgstr "錢包未連接"
 
 #: src/shared/lib/contracts/callContract.tsx
 msgid "Transaction completed."
@@ -34,6 +34,7 @@ msgid "Not likely"
 msgstr "不太可能"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Market Order"
 msgstr "市價單"
 
@@ -41,10 +42,15 @@ msgstr "市價單"
 msgid "Buy order executed."
 msgstr "買入訂單已執行。"
 
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Chart layout"
+msgstr "圖表佈局"
+
 #: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Disconnect"
-msgstr "断开连接"
+msgstr "斷開連接"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Interest Income is automatically distributed with the principal upon redemption."
@@ -64,15 +70,20 @@ msgstr "執行止損"
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "No dashboard data available"
-msgstr "暫無儀表板數據"
+msgstr "暫無儀錶板數據"
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Approval signed"
 msgstr "批准已簽名"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
 msgstr "每日損失"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Open Orders"
+msgstr "當前訂單"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Create TWAP Swap"
@@ -91,6 +102,7 @@ msgstr "止損"
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "Type"
@@ -126,11 +138,11 @@ msgstr "V2 Arbitrum"
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "CONFIRM"
-msgstr "确认"
+msgstr "確認"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Processing subscription..."
-msgstr "申购处理中..."
+msgstr "申購處理中..."
 
 #: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
 msgid "Show error"
@@ -155,6 +167,7 @@ msgstr "取消限價交換"
 msgid "Order ID not found for cancellation"
 msgstr "找不到要取消的訂單 ID"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "To"
 msgstr "至"
@@ -185,13 +198,12 @@ msgstr "缺少必要參數"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Enter partial size"
-msgstr "请选择部分仓位数量"
+msgstr "請選擇部分倉位數量"
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Connecting wallet..."
-msgstr "连接钱包中..."
+msgstr "連接錢包中..."
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "My Invite Link"
 msgstr "我的邀請連結"
@@ -199,6 +211,12 @@ msgstr "我的邀請連結"
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "The mark price has changed, consider increasing your allowed slippage by clicking on the \"...\" icon next to your address."
 msgstr "標記價格已更改，請考慮透過點選地址旁邊的“...”圖示增加允許的滑點。"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "No positions yet"
+msgstr ""
 
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "@username"
@@ -218,7 +236,7 @@ msgstr "止盈失敗"
 
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Next Funding Countdown"
-msgstr "下次结算倒计时"
+msgstr "下次結算倒計時"
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Select token"
@@ -234,7 +252,7 @@ msgstr "止損市場價格高於標記價格"
 
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Interval"
-msgstr "间隔"
+msgstr "間隔"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Could not load today’s gainers."
@@ -252,7 +270,7 @@ msgstr "歷史記錄"
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Funding"
-msgstr "资金费"
+msgstr "資金費"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Max {0} short exceeded"
@@ -265,7 +283,7 @@ msgstr "累計收益（終身）"
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Insufficient margin for this order."
-msgstr "该订单所需保证金不足。"
+msgstr "該訂單所需保證金不足。"
 
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
@@ -284,7 +302,7 @@ msgstr "倉位"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "{0} can not be sent to smart contract addresses. Select another token."
-msgstr "{0} 無法傳送到智慧合约地址。請選擇另一個代幣。"
+msgstr "{0} 無法傳送到智慧合約地址。請選擇另一個代幣。"
 
 #: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
 msgid "Season 1"
@@ -305,7 +323,7 @@ msgstr "由於 RPC 錯誤，交易失敗。<0/><1/>請在設定下啟用 <2>快�
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Position Margin"
-msgstr "仓位保证金"
+msgstr "倉位保證金"
 
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 msgid "Referral code added!"
@@ -353,7 +371,7 @@ msgstr "淺色"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Enter TP limit price"
-msgstr "请输入止盈限价"
+msgstr "請輸入止盈限價"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Your TP rate (per $1k)"
@@ -362,7 +380,7 @@ msgstr "您的 Taker 費率（每 $1,000）"
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 msgid "Maximum Order Value"
-msgstr "最大订单价值"
+msgstr "最大訂單價值"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -390,6 +408,7 @@ msgid "Market Swap"
 msgstr "市場交換"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Trade History"
 msgstr "交易歷史"
 
@@ -402,7 +421,7 @@ msgstr "更多"
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Sell / Short"
-msgstr "卖出 / 做空"
+msgstr "賣出 / 做空"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardNavigation.tsx
 msgid "Global"
@@ -416,10 +435,6 @@ msgstr "{actionsCount, plural, one {訂單} other {# 個訂單}}"
 msgid "≥ $2,000,000,000"
 msgstr "≥ $2,000,000,000"
 
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Zanbara Frozen Balance"
-msgstr ""
-
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Epoch Total Points"
 msgstr "本賽季總積分"
@@ -427,7 +442,7 @@ msgstr "本賽季總積分"
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Wallet:"
-msgstr "钱包："
+msgstr "錢包："
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Rebates on V2"
@@ -467,18 +482,19 @@ msgstr "已達成交量條件下最高 VIP 等級。"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invite friends, earn commissions, accumulate forever"
 msgstr "邀請好友、賺取返傭、長期累積"
 
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Real-Time Funding Rate"
-msgstr "实时资金费率"
+msgstr "實時資金費率"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "SL Price"
-msgstr "止损价"
+msgstr "止損價"
 
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
@@ -489,11 +505,11 @@ msgstr "限價高於標記價格"
 
 #: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
 msgid "Create or Import a Wallet"
-msgstr "创建或导入钱包"
+msgstr "創建或導入錢包"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Updated {0}h ago"
-msgstr "{0} 小时前更新"
+msgstr "{0} 小時前更新"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invitee Benefits"
@@ -505,7 +521,7 @@ msgstr "網路和設定"
 
 #: src/shared/components/SettingsModal/SettingsModal.tsx
 msgid "Max network fee buffer precision is 0.01%"
-msgstr "最大网络费用緩衝精度為 0.01%"
+msgstr "最大網絡費用緩衝精度為 0.01%"
 
 #: src/modules/lighter/features/accounts/pages/Actions/ActionsRouter.tsx
 msgid "Legacy Actions"
@@ -531,7 +547,7 @@ msgstr "已傳送推薦碼交易"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Maintenance Margin Fraction:"
-msgstr "维持保证金比例:"
+msgstr "維持保證金比例:"
 
 #: src/shared/components/TradingAccountModal/DepositStatusView.tsx
 msgid "Deposit completed"
@@ -540,6 +556,10 @@ msgstr "充值完成"
 #: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
 msgid "What did you like the most about our service?"
 msgstr "您最喜歡我們服務的哪些方面？"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Fullscreen"
+msgstr ""
 
 #: src/modules/lighter/api/custom/useReferralCode.ts
 msgid "You cannot use your own referral code."
@@ -550,8 +570,9 @@ msgid "TP - Long Dec."
 msgstr "止盈 - 多頭減少"
 
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Average"
-msgstr "均价"
+msgstr "均價"
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Claimable Rebates"
@@ -589,7 +610,7 @@ msgstr "實際年化收益率以最終結算利率為準。"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Unknown position"
-msgstr "未知仓位"
+msgstr "未知倉位"
 
 #: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
 msgid "No markets matched"
@@ -605,11 +626,12 @@ msgstr "載入每日盈虧失敗"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Smart contract address for this strategy"
-msgstr "该策略的智能合约地址"
+msgstr "該策略的智能合約地址"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Taker"
 msgstr "吃單"
 
@@ -643,7 +665,7 @@ msgstr "獎勵"
 
 #: src/shared/components/TradingAccountModal/InsufficientWntBanner.tsx
 msgid "You’ll need some {wrappedNativeTokenSymbol} in your account to withdraw funds."
-msgstr "您的賬戶需要一些 {wrappedNativeTokenSymbol} 來提取資金。"
+msgstr "您的帳戶需要一些 {wrappedNativeTokenSymbol} 來提取資金。"
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Failed to update settings."
@@ -653,9 +675,11 @@ msgstr ""
 msgid "Tier T1"
 msgstr "等級 T1"
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Current VIP Level"
-msgstr "目前 VIP 等級"
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Futures Wallet"
+msgstr "永續錢包"
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Earnings available to claim."
@@ -677,7 +701,7 @@ msgstr ""
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Contract Address:"
-msgstr "合约地址："
+msgstr "合約地址："
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "All Time"
@@ -707,13 +731,17 @@ msgstr "推薦碼已綁定"
 msgid "Deactivating..."
 msgstr "停用中..."
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Overview"
+msgstr ""
+
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Subscription Failed"
-msgstr "申购失败"
+msgstr "申購失敗"
 
 #: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
 msgid "Payment"
-msgstr "支付金额"
+msgstr "支付金額"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "Collateral"
@@ -736,6 +764,15 @@ msgstr "執行限價"
 msgid "Order cancelled successfully"
 msgstr "訂單已成功取消"
 
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds will appear in your Zanbara Account soon."
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Share your invite link with friends"
+msgstr ""
+
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Request Withdraw"
 msgstr "請求提款"
@@ -750,7 +787,7 @@ msgstr "無效 TWAP 部分數量值"
 
 #: src/shared/components/SettingsModal/SettingsModal.tsx
 msgid "Invalid network fee buffer value"
-msgstr "無效网络费用緩衝值"
+msgstr "無效網絡費用緩衝值"
 
 #: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
 #: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
@@ -759,7 +796,7 @@ msgstr "市場"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Claim Failed"
-msgstr "领取失败"
+msgstr "領取失敗"
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Retry"
@@ -767,7 +804,7 @@ msgstr ""
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Available Balance in Wallet:"
-msgstr "钱包可用余额："
+msgstr "錢包可用餘額："
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "The total realized and unrealized profit and loss for the period, considering price impact and fees but excluding swap fees."
@@ -787,15 +824,17 @@ msgstr "淨價格影響分為存儲價格影響（加倉訂單）和平倉價格
 
 #: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
 msgid "Account Balance"
-msgstr "账户余额"
+msgstr "帳戶餘額"
 
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Total"
 msgstr "總計"
 
@@ -807,7 +846,7 @@ msgstr "已實現價格影響"
 
 #: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
 msgid "Index Price"
-msgstr "指数价格"
+msgstr "指數價格"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed Limit Swap"
@@ -823,11 +862,11 @@ msgstr "市價單 - 做多增加"
 
 #: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
 msgid "Error Details"
-msgstr "错误详情"
+msgstr "錯誤詳情"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Margin Mode"
-msgstr "保证金模式"
+msgstr "保證金模式"
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Total Rebates"
@@ -844,7 +883,11 @@ msgstr "最小訂單：{0}"
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Confirm"
-msgstr "确认"
+msgstr "確認"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Approval submitted"
+msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "({0} Shares, 1 Share = {sharePrice} USDT)"
@@ -856,19 +899,15 @@ msgstr "TWAP 交換"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "CONNECT WALLET"
-msgstr "连接钱包"
+msgstr "連接錢包"
 
 #: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
 msgid "Hide error"
 msgstr "隱藏錯誤"
 
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds will appear in your Zanbara Account soon."
-msgstr ""
-
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Order amount is below the minimum size for this market."
-msgstr "下单数量低于该市场的最小下单量。"
+msgstr "下單數量低於該市場的最小下單量。"
 
 #: src/modules/lighter/domain/synthetics/userFeedback/utils.ts
 msgid "What issues did you encounter that led to your rating?"
@@ -895,6 +934,10 @@ msgstr "EIP-4844"
 msgid "Sending buy request."
 msgstr "傳送買入請求。"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Custom"
+msgstr ""
+
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "The amount you are trying to withdraw exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
 msgstr "您嘗試提取的金額超過限制。請嘗試小於 <0>{upperLimitFormatted}</0> 的金額。"
@@ -909,7 +952,7 @@ msgstr "盈利"
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Buy / Long"
-msgstr "买入 / 做多"
+msgstr "買入 / 做多"
 
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Mark Price Line"
@@ -919,6 +962,10 @@ msgstr ""
 msgid "Unknown Order"
 msgstr "未知訂單"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "No assets"
+msgstr "無資產"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Your Trading Fee"
 msgstr "您的交易手續費"
@@ -927,7 +974,7 @@ msgstr "您的交易手續費"
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 msgid "Mid"
-msgstr "中间价"
+msgstr "中間價"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Insufficient receive token liquidity"
@@ -935,7 +982,7 @@ msgstr "接收代幣流動性不足"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Open Orders ({0})"
-msgstr "当前订单 ({0})"
+msgstr "當前訂單 ({0})"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Updated {ageSec}s ago"
@@ -954,9 +1001,13 @@ msgstr "在槓桿顯示中包含盈虧"
 msgid "{positionName} Settling fees."
 msgstr "{positionName} 結算費用。"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Frozen"
+msgstr "凍結"
+
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Set the maximum leverage you are willing to use. Higher leverage increases the risk of liquidation."
-msgstr "设置愿意使用的最大杠杆。杠杆越高,强平风险越高。"
+msgstr "設置願意使用的最大槓桿。槓桿越高,強平風險越高。"
 
 #: src/modules/lighter/domain/synthetics/orders/utils.tsx
 msgid "There is currently a high swap price impact for this swap."
@@ -980,6 +1031,11 @@ msgstr "V2 Avalanche Fuji"
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order executed"
 msgstr "訂單已執行"
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Earn commissions when your friends trade"
+msgstr ""
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
@@ -1013,11 +1069,11 @@ msgstr "訂單的標記價格。"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Insufficient wallet balance on-chain"
-msgstr "链上钱包余额不足"
+msgstr "鏈上錢包餘額不足"
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Max Slippage (%)"
-msgstr "最大滑点(%)"
+msgstr "最大滑點(%)"
 
 #: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
 #: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
@@ -1026,7 +1082,7 @@ msgstr "搜尋市場"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Claim successful!"
-msgstr "领取成功！"
+msgstr "領取成功！"
 
 #: src/shared/components/SettingsModal/SettingsModal.tsx
 msgid "Number of parts must be between {MIN_TWAP_NUMBER_OF_PARTS} and {MAX_TWAP_NUMBER_OF_PARTS}"
@@ -1048,7 +1104,7 @@ msgstr "層級 {0}：{currentRebatePercentage}% 返利"
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Max Slippage override (%)"
-msgstr "自定义最大滑点(%)"
+msgstr "自定義最大滑點(%)"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
@@ -1080,23 +1136,23 @@ msgstr "{orderTypeText} {0} 為 {1}"
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Estimated PnL"
-msgstr "预估盈亏"
+msgstr "預估盈虧"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "TP limit requires TP price"
-msgstr "止盈限价需要先填写止盈价格"
+msgstr "止盈限價需要先填寫止盈價格"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Estimated Interest"
-msgstr "预估利息"
+msgstr "預估利息"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Enter a  price"
 msgstr "輸入價格"
 
-#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 msgid "Account"
 msgstr "帳戶"
 
@@ -1118,7 +1174,7 @@ msgstr "推薦碼已建立：{0}"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "FDV:"
-msgstr "完全稀释估值:"
+msgstr "完全稀釋估值:"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Min size per part: {0}"
@@ -1145,12 +1201,14 @@ msgstr "止盈/止損已成功取消"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "14D Volume"
 msgstr "14 日成交量"
 
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Total Balance"
-msgstr "总余额"
+msgstr "總餘額"
 
 #: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
 msgid "Layer 2"
@@ -1163,7 +1221,7 @@ msgstr "返利分配歷史"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Price Steps:"
-msgstr "价格步长:"
+msgstr "價格步長:"
 
 #: src/shared/components/StatusNotification/FeesSettlementStatusNotification.tsx
 msgid "Settling position fees"
@@ -1171,20 +1229,19 @@ msgstr "結算倉位費用"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Invalid product ID"
-msgstr "无效的产品 ID"
+msgstr "無效的產品 ID"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Updated {0}m ago"
-msgstr "{0} 分钟前更新"
+msgstr "{0} 分鐘前更新"
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-msgid "Referral Link"
-msgstr "邀請連結"
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "VIP"
+msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Slippage tolerance above {SLIPPAGE_WARN_THRESHOLD_PCT}% is aggressive — the executed price may deviate significantly from the estimate."
-msgstr "滑点容忍度超过 {SLIPPAGE_WARN_THRESHOLD_PCT}% 较为激进,实际成交价可能与预估明显偏离。"
+msgstr "滑點容忍度超過 {SLIPPAGE_WARN_THRESHOLD_PCT}% 較為激進,實際成交價可能與預估明顯偏離。"
 
 #: src/shared/components/SettingsModal/TradingSettings.tsx
 msgid "Settlement Chain"
@@ -1199,6 +1256,7 @@ msgstr "USD 值可能不準確，因為資料不包含 {0} 的價格"
 msgid "OPEN"
 msgstr "開放"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Cumulative PnL"
 msgstr "累積盈虧"
@@ -1227,13 +1285,12 @@ msgstr "最大"
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Slippage"
-msgstr "滑点"
+msgstr "滑點"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Subscription successful!"
-msgstr "申购成功！"
+msgstr "申購成功！"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Points"
@@ -1257,7 +1314,7 @@ msgstr "交易等級"
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Selected leverage exceeds the market cap. Lower leverage and retry."
-msgstr "所选杠杆超过该市场上限,请降低杠杆后重试。"
+msgstr "所選槓桿超過該市場上限,請降低槓桿後重試。"
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Failed to deactivate"
@@ -1269,16 +1326,16 @@ msgstr "沒有開倉，訂單無法執行，除非開倉"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "CLAIM"
-msgstr "领取"
+msgstr "領取"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Cross"
-msgstr "全仓"
+msgstr "全倉"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "USDT approved"
-msgstr "USDT 已授权"
+msgstr "USDT 已授權"
 
 #: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
@@ -1299,14 +1356,12 @@ msgid "Deposit in progress"
 msgstr "充值進行中"
 
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 msgid "Connect Wallet"
-msgstr "连接钱包"
+msgstr "連接錢包"
 
 #: src/shared/components/SettingsModal/TradingSettings.tsx
 msgid "Gas Token"
@@ -1327,12 +1382,7 @@ msgstr "累計返傭"
 
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 msgid "Close All"
-msgstr "全部平仓"
-
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Fee & VIP | Zanbara"
-msgstr "手續費與 VIP｜Zanbara"
+msgstr "全部平倉"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled."
@@ -1342,11 +1392,6 @@ msgstr "賣出訂單已取消。"
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Claim commission"
 msgstr "領取返傭"
-
-#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-msgid "Leaderboard for traders on Zanbara."
-msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Sign in to load the VIP fee schedule from the server."
@@ -1370,7 +1415,7 @@ msgstr "{0} 已批准！"
 
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 msgid "Close {0} position"
-msgstr "平仓 {0}"
+msgstr "平倉 {0}"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sending sell request."
@@ -1384,6 +1429,11 @@ msgstr "地址"
 #: src/modules/lighter/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
 msgid "Claiming successful."
 msgstr "申領成功。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Fee & VIP | Zanbara"
+msgstr "手續費與 VIP｜Zanbara"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Fulfilling sell request."
@@ -1417,7 +1467,7 @@ msgstr "交易模式"
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 msgid "TP / SL"
-msgstr "止盈 / 止损"
+msgstr "止盈 / 止損"
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "Transaction failed due to RPC error.<0/><1/>Please try changing the RPC url in your wallet settings with the help of <2>chainlist.org</2>.<3/><4/><5>Read more</5>."
@@ -1438,7 +1488,7 @@ msgstr "允許花費 {0}"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "SL Limit Price"
-msgstr "止损限价"
+msgstr "止損限價"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Tier T2"
@@ -1474,7 +1524,11 @@ msgstr "第 3 期"
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Price is outside the acceptable band for this market."
-msgstr "价格超出该市场允许的价格带。"
+msgstr "價格超出該市場允許的價格帶。"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Failed to submit spot order"
+msgstr "現貨下單失敗"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "The amount you are trying to deposit exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
@@ -1508,7 +1562,7 @@ msgstr "賽季 {selectedEpochId} 總積分"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "APPROVE USDT"
-msgstr "授权 USDT"
+msgstr "授權 USDT"
 
 #: src/modules/lighter/features/accounts/pages/Actions/ActionsRouter.tsx
 msgid "V1 is not supported on {chainName}. Please switch to Arbitrum to use V1."
@@ -1523,6 +1577,14 @@ msgstr "可用流動性不足。"
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Referred volume (USD)"
 msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Enjoy lower trading fees and exclusive benefits as your VIP level increases."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Spot Wallet Assets (USD)"
+msgstr "現貨錢包資產 (USD)"
 
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
 msgid "Trigger price above lowest limit price"
@@ -1540,7 +1602,7 @@ msgstr "最大部分數量：{MAX_TWAP_NUMBER_OF_PARTS}"
 
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
 msgid "USDC Value"
-msgstr "USDC 价值"
+msgstr "USDC 價值"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Buy order cancelled."
@@ -1563,6 +1625,7 @@ msgid "Signing transaction will also authenticate your account"
 msgstr "簽署交易將同時驗證您的帳戶"
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Role"
 msgstr "角色"
 
@@ -1570,13 +1633,9 @@ msgstr "角色"
 msgid "Relayer request failed"
 msgstr "中繼器請求失敗"
 
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
-msgstr ""
-
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Est. Price"
-msgstr "预估价格"
+msgstr "預估價格"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Execute TWAP Part"
@@ -1584,7 +1643,7 @@ msgstr "執行 TWAP 部分"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Export"
-msgstr "导出"
+msgstr "導出"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Discount applied"
@@ -1598,6 +1657,10 @@ msgstr "{fromText} 到 {toMinText}"
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "Otherwise, try changing the RPC url in your wallet settings with the help of <0>chainlist.org</0>."
 msgstr "否則，請嘗試在您的錢包設定中更改 RPC URL，可藉助 <0>chainlist.org</0>。"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Deposit sent"
+msgstr ""
 
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Testnet LayerZero Scan"
@@ -1618,9 +1681,10 @@ msgstr "觸發"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Positions ({0})"
-msgstr "仓位 ({0})"
+msgstr "倉位 ({0})"
 
 #: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order cancelled"
 msgstr "訂單已取消"
@@ -1635,7 +1699,7 @@ msgstr "摺疊"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Market Name:"
-msgstr "市场名称:"
+msgstr "市場名稱:"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "10% discount"
@@ -1657,11 +1721,11 @@ msgstr "創建中..."
 
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 msgid "Enter {triggerLabel}"
-msgstr "输入 {triggerLabel}"
+msgstr "輸入 {triggerLabel}"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "TP/SL for Position"
-msgstr "仓位止盈/止损"
+msgstr "倉位止盈/止損"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Default level for new users"
@@ -1675,6 +1739,12 @@ msgstr "和"
 msgid "Trading"
 msgstr ""
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+msgid "Zanbara Account"
+msgstr ""
+
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Pending Earnings"
 msgstr "待領取收益"
@@ -1683,9 +1753,15 @@ msgstr "待領取收益"
 msgid "Signing approval..."
 msgstr "簽署批准中..."
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Spot Wallet"
+msgstr "現貨錢包"
+
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Original"
-msgstr "原生图表"
+msgstr "原生圖表"
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Next tier referrals"
@@ -1721,7 +1797,7 @@ msgstr "僅“資本使用”超過 {0} 的倉位被排名。"
 
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 msgid "Position Value"
-msgstr "仓位价值"
+msgstr "倉位價值"
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Active Referrals"
@@ -1745,7 +1821,7 @@ msgstr "該訂單可能不會以期望的 {priceText} 執行，因為其可接�
 
 #: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
 msgid "Cross Leverage"
-msgstr "全仓杠杆"
+msgstr "全倉槓桿"
 
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Liquidation Fee"
@@ -1762,10 +1838,6 @@ msgstr "{fromText} 到"
 #: src/shared/components/SettingsModal/DisplaySettings.tsx
 msgid "Breakdown Net Price Impact"
 msgstr "分解淨價格影響"
-
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
-msgid "Cumulative PnL <0>{0}</0>"
-msgstr "累計盈虧 <0>{0}</0>"
 
 #: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 #: src/modules/lighter/api/useClosePositionHandler.ts
@@ -1790,13 +1862,13 @@ msgstr "履行買入請求。"
 msgid "days"
 msgstr "天"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Enter amount"
+msgstr "輸入數量"
+
 #: src/shared/components/SettingsModal/DebugSettings.tsx
 msgid "Show Debug Values"
 msgstr "顯示除錯值"
-
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-msgid "Zanbara information for account"
-msgstr ""
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
@@ -1804,9 +1876,6 @@ msgstr ""
 msgid "Total Referrals"
 msgstr "總推薦數"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Trade"
 msgstr "交易"
@@ -1830,6 +1899,10 @@ msgstr "更新中"
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "V1 Arbitrum"
 msgstr "V1 Arbitrum"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Enter fullscreen"
+msgstr "進入全螢幕"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
 msgid "SL"
@@ -1879,7 +1952,7 @@ msgstr "T"
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Est: {0} | Max: {1}"
-msgstr "预估: {0} | 最大: {1}"
+msgstr "預估: {0} | 最大: {1}"
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Total earnings from referrals."
@@ -1896,10 +1969,6 @@ msgstr ""
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Leave your Telegram if you’re okay with being contacted for a quick follow-up."
 msgstr "如果您同意被聯絡進行快速跟進，請留下您的 Telegram。"
-
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Zanbara Account Balance"
-msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -1928,12 +1997,12 @@ msgstr "賽季進度"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Claim Successful!"
-msgstr "领取成功！"
+msgstr "領取成功！"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Network Fee"
-msgstr "网络费用"
+msgstr "網絡費用"
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "20s"
@@ -1942,7 +2011,7 @@ msgstr "20 秒"
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Isolated"
-msgstr "逐仓"
+msgstr "逐倉"
 
 #: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
 msgid "Points Dashboard"
@@ -1951,6 +2020,10 @@ msgstr "積分總覽"
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Expires"
 msgstr "到期"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Total Assets (USD)"
+msgstr "總資產 (USD)"
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Withdrawing..."
@@ -1970,12 +2043,17 @@ msgstr "可用流動性不足。當有流動性可用時，訂單將成交。"
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/ChartTokenSelector/ChartTokenSelector.tsx
 #: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 #: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
 msgid "Market"
 msgstr "市場"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
@@ -2018,6 +2096,7 @@ msgstr "提取"
 
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Submitting..."
 msgstr "提交中..."
@@ -2090,15 +2169,15 @@ msgstr "方向"
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Slippage exceeds the allowed maximum. Raise your slippage tolerance or try a smaller size."
-msgstr "滑点超出允许上限。请调高滑点容忍度或减小下单数量。"
+msgstr "滑點超出允許上限。請調高滑點容忍度或減小下單數量。"
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 msgid "SIGN"
-msgstr ""
+msgstr "登入"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Close Out Margin Fraction:"
-msgstr "强平保证金比例:"
+msgstr "強平保證金比例:"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Today’s Top Gainers"
@@ -2136,9 +2215,8 @@ msgstr "初始抵押品"
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Taker: {0} | Maker: {1}"
-msgstr "吃单: {0} | 挂单: {1}"
+msgstr "吃單: {0} | 掛單: {1}"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Portfolio"
@@ -2158,6 +2236,10 @@ msgstr "起始未實現 PnL"
 msgid "Limit - Short Inc."
 msgstr "限價 - 做空增加"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No order history"
+msgstr "沒有訂單歷史"
+
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
 msgid "Connect Your Wallet"
 msgstr ""
@@ -2166,6 +2248,7 @@ msgstr ""
 msgid "Sending settle request"
 msgstr "傳送結算請求"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral Center"
@@ -2207,6 +2290,10 @@ msgstr "請求市場增加"
 msgid "Your current fees include rebates or staking discounts."
 msgstr "您目前的手續費已含返傭或質押折扣。"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Zanbara Frozen Balance"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Current Trading Tier"
 msgstr "目前交易等級"
@@ -2239,6 +2326,10 @@ msgstr "{positionName} 結算失敗。"
 msgid "Select a market"
 msgstr "選擇市場"
 
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Your VIP Status"
+msgstr ""
+
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "Total trade notional (maker + taker) during the selected period."
 msgstr ""
@@ -2267,21 +2358,17 @@ msgstr "已領取的總收益。"
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "This market is currently closed."
-msgstr "当前市场暂未开放。"
+msgstr "當前市場暫未開放。"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Loss"
-msgstr "亏损"
+msgstr "虧損"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "App disabled, pending {0} upgrade"
 msgstr "應用程式禁用，待 {0} 升級"
-
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds are now in your Zanbara Account."
-msgstr ""
 
 #: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "More Options"
@@ -2289,7 +2376,7 @@ msgstr "更多選項"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Processing claim..."
-msgstr "领取处理中..."
+msgstr "領取處理中..."
 
 #: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "Network"
@@ -2327,7 +2414,7 @@ msgstr "PnL"
 
 #: src/shared/components/TradingAccountModal/InsufficientWntBanner.tsx
 msgid "You’ll need <0>{formattedAmount}</0> (<1>{formattedUsd}</1>) {wrappedNativeTokenSymbol} in your account to withdraw funds."
-msgstr "您的賬戶需要 <0>{formattedAmount}</0> (<1>{formattedUsd}</1>) {wrappedNativeTokenSymbol} 來提取資金。"
+msgstr "您的帳戶需要 <0>{formattedAmount}</0> (<1>{formattedUsd}</1>) {wrappedNativeTokenSymbol} 來提取資金。"
 
 #: src/modules/lighter/domain/synthetics/orders/utils.tsx
 #: src/shared/components/TradeHistory/keys.ts
@@ -2354,6 +2441,7 @@ msgstr ""
 #: src/shared/components/TradeHistory/keys.ts
 #: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -2375,9 +2463,11 @@ msgstr "掃描後，將出現連線提示，您可以連線您的錢包。"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Claim failed. Please try again."
-msgstr "领取失败，请重试。"
+msgstr "領取失敗，請重試。"
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Fee"
 msgstr "費用"
@@ -2386,6 +2476,8 @@ msgstr "費用"
 msgid "Traders Referred on Avalanche"
 msgstr "在 Avalanche 上推薦的交易者"
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "Approval failed"
@@ -2409,7 +2501,7 @@ msgstr "您嘗試存入的金額低於限制。請嘗試大於 <0>{lowerLimitFor
 
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Funding Rate History"
-msgstr "资金费率历史"
+msgstr "資金費率歷史"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Create TWAP"
@@ -2444,7 +2536,7 @@ msgstr "每 5 分鐘更新 · 上次：{0}（UTC）"
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Loading…"
-msgstr "加载中…"
+msgstr "加載中…"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Refreshes every 5 min"
@@ -2460,7 +2552,7 @@ msgstr "已到期"
 
 #: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
 msgid "Refresh Page"
-msgstr "刷新页面"
+msgstr "刷新頁面"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed TWAP Part"
@@ -2472,11 +2564,9 @@ msgstr "TP - 做空減少"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Enter SL limit price"
-msgstr "请输入止损限价"
+msgstr "請輸入止損限價"
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
 #: src/modules/lighter/features/earn/components/EarnTitle/EarnTitle.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -2499,7 +2589,7 @@ msgstr "預計時間"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Estimated APR"
-msgstr "预估年化收益率"
+msgstr "預估年化收益率"
 
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Show last-trade price line"
@@ -2516,11 +2606,11 @@ msgstr "兩種公式取較高者"
 
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "Rebates earned by this account as a trader."
-msgstr "該賬戶作為交易者賺取的回扣。"
+msgstr "該帳戶作為交易者賺取的回扣。"
 
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Monthly Funding Rate"
-msgstr "月资金费率"
+msgstr "月資金費率"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "This Year"
@@ -2538,9 +2628,13 @@ msgstr ""
 msgid "VIP 2 Gold"
 msgstr "VIP 2 黃金"
 
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "My Wallet"
+msgstr "我的錢包"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Updated just now"
-msgstr "刚刚更新"
+msgstr "剛剛更新"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -2597,6 +2691,10 @@ msgstr "輸入價格"
 msgid "Failed Market Increase"
 msgstr "市場增加失敗"
 
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "1. Who's eligible to join Zanbara Strategy?"
+msgstr ""
+
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -2605,7 +2703,11 @@ msgstr "清算價格"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "SL limit requires SL price"
-msgstr "止损限价需要先填写止损价格"
+msgstr "止損限價需要先填寫止損價格"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trade another {0} to unlock VIP {1}"
+msgstr ""
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Please sign in first to withdraw funds"
@@ -2617,7 +2719,11 @@ msgstr "≥ $5,000,000"
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "No live price available for this market right now. Please retry in a moment."
-msgstr "该市场暂时没有可用行情,请稍后重试。"
+msgstr "該市場暫時沒有可用行情,請稍後重試。"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Cumulative PnL (USD)"
+msgstr ""
 
 #: src/shared/components/BotanixBanner/BotanixBanner.tsx
 msgid "<0>Botanix</0> currently only supports"
@@ -2629,11 +2735,11 @@ msgstr "<0>Botanix</0> 當前僅支援"
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Reduce Only"
-msgstr "只减仓"
+msgstr "只減倉"
 
 #: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
 msgid "Cross Margin Ratio"
-msgstr "全仓保证金率"
+msgstr "全倉保證金率"
 
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Fulfilling order request"
@@ -2641,7 +2747,7 @@ msgstr "履行訂單請求"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Network:"
-msgstr "网络："
+msgstr "網絡："
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -2651,6 +2757,10 @@ msgstr "{0} 餘額不足以支付 gas"
 #: src/modules/lighter/domain/synthetics/orders/prepareOrderTxn.ts
 msgid "Error preparing transaction. Provider is not defined"
 msgstr "準備交易錯誤。提供者未定義"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "the market lot size"
+msgstr "市場最小下單數量"
 
 #: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
@@ -2686,8 +2796,9 @@ msgid "Select a token"
 msgstr "選擇代幣"
 
 #: src/modules/lighter/api/useClosePositionHandler.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Please connect your wallet and sign in first"
-msgstr "請先连接钱包並登入"
+msgstr "請先連接錢包並登入"
 
 #: src/modules/lighter/domain/synthetics/orders/simulateExecuteTxn.tsx
 #: src/modules/lighter/domain/synthetics/orders/simulateExecuteTxn.tsx
@@ -2701,11 +2812,11 @@ msgstr "目前綁定推薦碼：{0}"
 
 #: src/modules/lighter/features/earn/components/ScanningEffect/ScanningEffect.tsx
 msgid "SCANNING STRATEGIES"
-msgstr "扫描策略中"
+msgstr "掃描策略中"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Initial Margin Fraction:"
-msgstr "初始保证金比例:"
+msgstr "初始保證金比例:"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
 msgid "TP"
@@ -2733,7 +2844,7 @@ msgstr "您已擁有推薦碼：{existingCode}"
 
 #: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
 msgid "Cross Margin Usage"
-msgstr "全仓保证金占用"
+msgstr "全倉保證金佔用"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed Stop Market"
@@ -2772,13 +2883,17 @@ msgstr "止盈"
 msgid "Hour(s)"
 msgstr "小時"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Frozen Balance"
+msgstr "凍結餘額"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to view your 14-day volume."
 msgstr "請連接錢包以查看您的 14 日成交量。"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Adjust Max Leverage"
-msgstr "调整最大杠杆"
+msgstr "調整最大槓桿"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Create Limit"
@@ -2809,7 +2924,7 @@ msgstr "市價單 - 做空減少"
 #: src/modules/lighter/features/points/components/PointsToolbar/PointsToolbar.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Pending"
-msgstr "待处理"
+msgstr "待處理"
 
 #: src/shared/components/TableMarketFilter/MarketFilterLongShort.tsx
 msgid "Search Trading Pair"
@@ -2819,9 +2934,18 @@ msgstr "搜索交易對"
 msgid "≥ $500,000,000"
 msgstr "≥ $500,000,000"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No open orders"
+msgstr "沒有當前訂單"
+
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Traders Referred on Avalanche Fuji"
 msgstr "在 Avalanche Fuji 上推薦的交易者"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Deposit contract not configured for this chain. Contact support."
+msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
@@ -2829,12 +2953,13 @@ msgid "Take Profit / Stop Loss"
 msgstr "止盈 / 止損"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Limit Order"
 msgstr "限價單"
 
 #: src/modules/lighter/domain/tokens/approveTokens.tsx
 msgid "There is not enough {0} in your account on {networkName} to send this transaction.<0/><1/><2>Buy or Transfer {1} to {networkName}</2>"
-msgstr "您的 {networkName} 賬戶中沒有足夠的 {0} 來傳送此交易。<0/><1/><2>購買或轉移 {1} 到 {networkName}</2>"
+msgstr "您的 {networkName} 帳戶中沒有足夠的 {0} 來傳送此交易。<0/><1/><2>購買或轉移 {1} 到 {networkName}</2>"
 
 #: src/shared/components/TVChartContainer/constants.ts
 msgid "SL - Long Dec."
@@ -2848,7 +2973,7 @@ msgstr "建立止損"
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 #: src/shared/components/AppHeader/AppHeaderUser.tsx
 msgid "Connect wallet"
-msgstr "连接钱包"
+msgstr "連接錢包"
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Failed to generate session"
@@ -2882,7 +3007,7 @@ msgstr "申購窗口已關閉，請等待下次開放。"
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Network Fee:"
-msgstr "网络费用："
+msgstr "網絡費用："
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Execute Take Profit"
@@ -2900,6 +3025,7 @@ msgstr "{orderTypeText} {visualMultiplierPrefix}{0} {longShortText}: {sign}{1}"
 msgid "Decreasing"
 msgstr "減少"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Create Referral Code"
@@ -2915,7 +3041,7 @@ msgstr "已減少"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Contract Address"
-msgstr "合约地址"
+msgstr "合約地址"
 
 #: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "Updating {orderText}."
@@ -3032,7 +3158,6 @@ msgid "Binding..."
 msgstr ""
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
@@ -3062,7 +3187,7 @@ msgstr "價差"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Current Position Leverage: {currentPositionLeverage}x"
-msgstr "当前持仓杠杆:{currentPositionLeverage} 倍"
+msgstr "當前持倉槓桿:{currentPositionLeverage} 倍"
 
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "This position was liquidated as the max. leverage of {formattedMaxLeverage} was exceeded when taking into account fees."
@@ -3079,6 +3204,8 @@ msgstr "取消 {ordersText}。"
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Loading..."
 msgstr "正在載入..."
 
@@ -3086,9 +3213,15 @@ msgstr "正在載入..."
 msgid "Trade now"
 msgstr "立即交易"
 
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Open a position to see your active trades here."
+msgstr ""
+
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Please wait for settlement to complete."
-msgstr "请等待结算完成。"
+msgstr "請等待結算完成。"
 
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Execute"
@@ -3110,11 +3243,16 @@ msgstr "已提交"
 
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 msgid "Edit take profit / stop loss for {0}"
-msgstr "编辑 {0} 的止盈 / 止损"
+msgstr "編輯 {0} 的止盈 / 止損"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Maker TP ($1k)"
 msgstr "掛單每千美元（$1k）"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trading fee tiers and VIP levels on Zanbara."
+msgstr "Zanbara 上的交易手續費階梯與 VIP 等級。"
 
 #: src/shared/components/SettingsModal/DisplaySettings.tsx
 msgid "Show Leverage Slider"
@@ -3124,7 +3262,7 @@ msgstr "顯示槓桿滑塊"
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Order Size"
-msgstr "订单规模"
+msgstr "訂單規模"
 
 #: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "Cancelling {orderText}."
@@ -3138,6 +3276,10 @@ msgstr "正在取消 {orderText}。"
 msgid "Execution price for the order."
 msgstr "訂單的執行價格。"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Failed to cancel order"
+msgstr "取消訂單失敗"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Could not load fee and VIP data."
 msgstr "無法載入手續費與 VIP 資料。"
@@ -3147,16 +3289,13 @@ msgid "Your frozen balance, locked in open orders and unavailable for trading un
 msgstr "您的凍結餘額，已鎖定在未結訂單中，在訂單關閉或取消前無法用於交易。"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Bind someone else's invitation code to obtain the benefits of the invitee"
 msgstr "綁定他人的邀請碼以取得被邀請人福利"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Partial Position"
-msgstr "部分仓位"
-
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "All Zanbara users are eligible."
-msgstr ""
+msgstr "部分倉位"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -3178,6 +3317,9 @@ msgstr "推薦程式碼更新失敗。"
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Price"
 msgstr "價格"
 
@@ -3197,7 +3339,7 @@ msgstr "訂單已成功取消"
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Subscription Amount"
-msgstr "申购金额"
+msgstr "申購金額"
 
 #: src/modules/lighter/api/custom/useReferralRebateClaim.ts
 #: src/modules/lighter/api/custom/useReferralRebateClaim.ts
@@ -3205,6 +3347,10 @@ msgstr "申购金额"
 #: src/modules/lighter/features/referrals/hooks/useReferralRebateClaim.ts
 msgid "No pending earnings to claim"
 msgstr "暫無待領取收益"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transferring"
+msgstr "劃轉中"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -3214,6 +3360,10 @@ msgstr "1 分 40 秒"
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Your deposit of from {sourceChainName} was not executed due to an error"
 msgstr "您從 {sourceChainName} 的存入由於錯誤未執行"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Your Zanbara Account balance, usable for trading from any supported chain."
+msgstr ""
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown buy order"
@@ -3255,8 +3405,6 @@ msgstr "去年"
 msgid "Rebates earned as an affiliate."
 msgstr "作為附屬機構賺取的返利。"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Fee & VIP"
 msgstr "費率與 VIP"
@@ -3267,6 +3415,10 @@ msgstr "費率與 VIP"
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Invalid liq. price"
 msgstr "無效的清算價格"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds are now in your Zanbara Account."
+msgstr ""
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "<0>Smart wallets are not supported on {0}.</0><1/><2>Please switch to a different network or use a EOA wallet.</2>"
@@ -3286,7 +3438,7 @@ msgstr "已分配總利息"
 
 #: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
 msgid "Accounts"
-msgstr "账户"
+msgstr "帳戶"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "SUBSCRIBE NOW"
@@ -3298,6 +3450,7 @@ msgstr "履行轉移請求。"
 
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Asset"
 msgstr "資產"
@@ -3318,19 +3471,20 @@ msgstr "止損減少"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "TP Limit Price"
-msgstr "止盈限价"
-
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Reliable Zanbara-powered transactions"
-msgstr ""
+msgstr "止盈限價"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to see your VIP level."
 msgstr "請連接錢包以查看 VIP 等級。"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Action"
+msgstr "操作"
+
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Available Balance"
-msgstr "可用余额"
+msgstr "可用餘額"
 
 #: src/modules/lighter/api/custom/useReferralCode.ts
 msgid "Referral code bound successfully!"
@@ -3344,13 +3498,17 @@ msgstr "推薦碼已更新。"
 msgid "30d"
 msgstr "30 天"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer failed"
+msgstr ""
+
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Select different tokens"
 msgstr "選擇不同的代幣"
 
 #: src/modules/lighter/domain/synthetics/fees/utils/index.ts
 msgid "The network fees are very high currently, which may be due to a temporary increase in transactions on the {chainName} network."
-msgstr "當前网络费用非常高，這可能是由於 {chainName} 網路上的交易暫時增加。"
+msgstr "當前網絡費用非常高，這可能是由於 {chainName} 網路上的交易暫時增加。"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
 msgid "There is no liquidation price, as the position's collateral value will increase to cover any negative PnL."
@@ -3364,6 +3522,10 @@ msgstr "編輯訂單"
 msgid "Approval was cancelled."
 msgstr "批准已取消。"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer submitted"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet and sign in to see your trading tier."
 msgstr "請連接錢包並登入以查看交易等級。"
@@ -3374,11 +3536,20 @@ msgstr "24 小時 %"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Max Leverage:"
-msgstr "最大杠杆:"
+msgstr "最大槓桿:"
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Withdrawing requires <0/> while you have <1/>. Please <2>swap</2> or <3>deposit</3> more {0} to your trading account."
 msgstr ""
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Available"
+msgstr "可用"
+
+#: src/shared/components/Modal/Modal.tsx
+msgid "Close dialog"
+msgstr "關閉彈窗"
 
 #: src/shared/components/RatingToast/RatingToast.tsx
 msgid "How likely are you to recommend our service to a friend or colleague?"
@@ -3392,6 +3563,10 @@ msgstr "流動性不足以交換抵押品"
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Market Decrease"
 msgstr "市場減少"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "All Zanbara users are eligible."
+msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -3409,10 +3584,11 @@ msgstr ""
 
 #: src/shared/components/SettingsModal/TradingSettings.tsx
 msgid "The settlement chain is the network used for your account and opening positions. Account balances and positions are specific to the selected network."
-msgstr "結算鏈是用於您的帳戶和開倉的網路。账户余额和倉位取決於所選網路。"
+msgstr "結算鏈是用於您的帳戶和開倉的網路。帳戶餘額和倉位取決於所選網路。"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Cancel"
@@ -3453,7 +3629,7 @@ msgstr "持倉時間 × 名義價值"
 
 #: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
 msgid "Loading funding history..."
-msgstr "加载资金费历史中..."
+msgstr "加載資金費歷史中..."
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Closed PnL settlement points"
@@ -3485,7 +3661,7 @@ msgstr "開啟 Binance 應用"
 
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 msgid "Trigger Conditions"
-msgstr "触发条件"
+msgstr "觸發條件"
 
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
 msgid "Limit size is required"
@@ -3497,7 +3673,7 @@ msgstr "從網路"
 
 #: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
 msgid "Next Funding"
-msgstr "下次资金费"
+msgstr "下次資金費"
 
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/position.ts
 msgid "Collateral at Liquidation"
@@ -3505,14 +3681,14 @@ msgstr "清算時的抵押品"
 
 #: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 msgid "Please connect your wallet first"
-msgstr "請先连接钱包"
+msgstr "請先連接錢包"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/shared/lib/dates.ts
 msgid "Today"
 msgstr "今天"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "From"
 msgstr "從"
@@ -3547,7 +3723,6 @@ msgstr "一旦有足夠的流動性，此訂單的部分將被執行。"
 msgid "This order using {collateralSymbol} as collateral will not be valid for the existing {longText} position using {symbol} as collateral."
 msgstr "使用 {collateralSymbol} 作為抵押品的此訂單對使用 {symbol} 作為抵押品的現有 {longText} 頭寸無效。"
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "VIP {0}"
 msgstr "VIP {0}"
@@ -3602,7 +3777,7 @@ msgstr "第三名"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Failed to update TP/SL"
-msgstr "更新止盈/止损失败"
+msgstr "更新止盈/止損失敗"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "Enter deposit amount"
@@ -3646,7 +3821,7 @@ msgstr "進行中"
 
 #: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
 msgid "Rate"
-msgstr "费率"
+msgstr "費率"
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Balance"
@@ -3699,14 +3874,26 @@ msgstr "請 <0>交換</0> 以獲取 {wrappedNativeTokenSymbol}。"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "All cross positions share the same cross margin as collateral. In the event of liquidation, your cross margin balance and any remaining open positions under assets in this mode may be forfeited."
-msgstr "所有全仓仓位共享同一笔全仓保证金作为抵押。一旦触发强平,该模式下的全仓保证金余额及剩余持仓可能被清算。"
+msgstr "所有全倉倉位共享同一筆全倉保證金作為抵押。一旦觸發強平,該模式下的全倉保證金餘額及剩餘持倉可能被清算。"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Price must be a multiple of {tickSize}"
+msgstr "價格必須是 {tickSize} 的倍數"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Interest:"
 msgstr "利息："
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "the market tick size"
+msgstr "市場最小價格單位"
+
 #: src/modules/lighter/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "You switched your settlement network to {0}, but you still have {1} remaining in your {2} Trading Account."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Reliable Zanbara-powered transactions"
 msgstr ""
 
 #: src/shared/components/Errors/errorToasts.tsx
@@ -3735,6 +3922,7 @@ msgstr "帶訂單的未平倉位"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -3744,7 +3932,7 @@ msgstr "提交"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Claimed"
-msgstr "已领取"
+msgstr "已領取"
 
 #: src/modules/lighter/domain/tokens/approveTokens.tsx
 msgid "Permit signed!"
@@ -3758,10 +3946,6 @@ msgstr "RP 積分加碼"
 msgid "less than a minute"
 msgstr "不到一分鐘"
 
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "1. Who's eligible to join Zanbara Strategy?"
-msgstr ""
-
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
@@ -3773,8 +3957,10 @@ msgstr "建立"
 msgid "Last 7d"
 msgstr "過去 7 天"
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Minimum order value is {minNotionalText} {quoteSymbol}"
+msgstr "最小訂單價值為 {minNotionalText} {quoteSymbol}"
+
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Copy"
@@ -3787,8 +3973,12 @@ msgstr "複製"
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Amount"
 msgstr "金額"
@@ -3821,6 +4011,7 @@ msgstr ""
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/keys.ts
 msgid "Deposit failed"
 msgstr "存入失敗"
@@ -3835,7 +4026,7 @@ msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 msgid "TP Trigger Price"
-msgstr "止盈触发价"
+msgstr "止盈觸發價"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Insufficient quota available"
@@ -3843,7 +4034,7 @@ msgstr "可用額度不足"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Claim submitted! Waiting for confirmation..."
-msgstr "领取已提交！等待确认..."
+msgstr "領取已提交！等待確認..."
 
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
@@ -3866,6 +4057,10 @@ msgstr "沒有資產可存入"
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "V1 Avalanche Fuji"
 msgstr "V1 Avalanche Fuji"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No trade history"
+msgstr "沒有交易歷史"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 msgid "Realized Swap Impact"
@@ -3890,7 +4085,7 @@ msgstr "簽名批准失敗"
 
 #: src/modules/lighter/domain/synthetics/fees/utils/index.ts
 msgid "The network fees are high currently, which may be due to a temporary increase in transactions on the {chainName} network."
-msgstr "當前网络费用較高，這可能是由於 {chainName} 網路上的交易暫時增加。"
+msgstr "當前網絡費用較高，這可能是由於 {chainName} 網路上的交易暫時增加。"
 
 #: src/shared/lib/wallets/connecters/binanceW3W/binanceWallet.ts
 msgid "Scan the QR code"
@@ -3910,13 +4105,13 @@ msgstr "已結束"
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Reduce-only requires an open position on this market."
-msgstr "只减仓需要该市场存在未平仓位。"
+msgstr "只減倉需要該市場存在未平倉位。"
 
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Order Value"
-msgstr "订单价值"
+msgstr "訂單價值"
 
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "{addressLabel} on {networkLabel}"
@@ -3934,6 +4129,10 @@ msgstr ""
 msgid "Update Take Profit"
 msgstr "更新止盈"
 
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Faster execution with Zanbara premium RPCs"
+msgstr ""
+
 #: src/shared/components/TwapRows/TwapRows.tsx
 msgid "Minute(s)"
 msgstr "分鐘"
@@ -3945,7 +4144,7 @@ msgstr "起始未實現費用"
 
 #: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
 msgid "1hr Funding"
-msgstr "1 小时资金费"
+msgstr "1 小時資金費"
 
 #: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "{orderText} cancel failed."
@@ -3982,7 +4181,7 @@ msgstr "執行止損市價單"
 
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "Volume traded by this account with an active referral code."
-msgstr "此賬戶使用活躍推薦程式碼的交易量。"
+msgstr "此帳戶使用活躍推薦程式碼的交易量。"
 
 #: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
 msgid "AI"
@@ -3990,7 +4189,7 @@ msgstr ""
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Subscription Successful"
-msgstr "申购成功"
+msgstr "申購成功"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Need {0} more"
@@ -4008,7 +4207,7 @@ msgstr "期限"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Min USD Amount:"
-msgstr "最小 USD 数量:"
+msgstr "最小 USD 數量:"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order executed."
@@ -4039,6 +4238,10 @@ msgstr "限價"
 msgid "You"
 msgstr "您"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Futures Wallet Assets (USD)"
+msgstr "永續錢包資產 (USD)"
+
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivate 1CT (One-Click Trading)"
 msgstr "停用 1CT (一鍵交易)"
@@ -4052,6 +4255,7 @@ msgstr "提取請求失敗"
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/keys.ts
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Deposit"
@@ -4102,7 +4306,7 @@ msgstr "最高頭寸"
 
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 msgid "Cancel All"
-msgstr "全部撤销"
+msgstr "全部撤銷"
 
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "We Value Your Feedback"
@@ -4116,6 +4320,8 @@ msgstr "止損"
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Side"
 msgstr "方向"
 
@@ -4140,12 +4346,16 @@ msgstr "超出個人限額"
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "TP Price"
-msgstr "止盈价"
+msgstr "止盈價"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "First Month Only"
 msgstr "僅首月"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer {transferSymbol} amount"
+msgstr "劃轉 {transferSymbol} 金額"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "PnL Points"
@@ -4158,7 +4368,7 @@ msgstr "搜尋地址"
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Est. Liq. Price"
-msgstr "预估强平价"
+msgstr "預估強平價"
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Session generated"
@@ -4230,6 +4440,8 @@ msgstr "模擬提取錯誤"
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
@@ -4255,6 +4467,7 @@ msgstr "將 {0} 交換為 {1}"
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Maker"
 msgstr "掛單"
 
@@ -4295,13 +4508,23 @@ msgstr "等級"
 msgid "Page outdated, please refresh"
 msgstr "頁面已過期，請重新整理"
 
+#. js-lingui-explicit-id
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "nav.futures"
+msgstr "合約"
+
+#. js-lingui-explicit-id
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "nav.spot"
+msgstr "現貨"
+
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed Withdraw"
 msgstr "提取失敗"
 
 #: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
 msgid "Perpetuals Overview"
-msgstr "永续概览"
+msgstr "永續概覽"
 
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Freeze"
@@ -4335,12 +4558,7 @@ msgstr "每小時批次結算"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Manage your risk on individual positions by restricting the amount of margin allocated to each. If the margin ratio of an isolated position reaches 100%, the position will be liquidated."
-msgstr "通过限制分配给每个仓位的保证金来管理单仓风险。当逐仓仓位的保证金率达到 100% 时,该仓位将被强平。"
-
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Trading fee tiers and VIP levels on Zanbara."
-msgstr "Zanbara 上的交易手續費階梯與 VIP 等級。"
+msgstr "通過限制分配給每個倉位的保證金來管理單倉風險。當逐倉倉位的保證金率達到 100% 時,該倉位將被強平。"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Tier T3"
@@ -4381,7 +4599,7 @@ msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Redemption Time (UTC)"
-msgstr "赎回时间 (UTC)"
+msgstr "贖回時間 (UTC)"
 
 #: src/shared/components/Referrals/ReferralCodeWarnings.tsx
 msgid "This code has been taken by someone else on {takenNetworkNames}, you will not receive rebates from traders using this code on {takenNetworkNames}."
@@ -4397,7 +4615,7 @@ msgstr "單筆成交 ≥ $1,000，雙方皆可獲得"
 
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
 msgid "Connect your wallet to view your portfolio, track your positions, and manage your trades."
-msgstr "连接钱包以查看您的投資組合、追蹤倉位並管理交易。"
+msgstr "連接錢包以查看您的投資組合、追蹤倉位並管理交易。"
 
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
@@ -4431,6 +4649,10 @@ msgstr "所有訂單已成功取消"
 msgid "$0 – $4,999,999"
 msgstr "$0 – $4,999,999"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Amount must be a multiple of {lotSize}"
+msgstr "數量必須是 {lotSize} 的倍數"
+
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Increasing"
 msgstr "增加中"
@@ -4444,11 +4666,15 @@ msgstr "推薦連結已複製到剪貼簿"
 msgid "No tier information yet."
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Zanbara Account Balance"
+msgstr ""
+
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "Total Quota"
-msgstr "总额度"
+msgstr "總額度"
 
 #: src/shared/components/TradingMarketsList/MarketTypeTabs.tsx
 msgid "DeFi"
@@ -4456,7 +4682,7 @@ msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Funding History"
-msgstr "资金费历史"
+msgstr "資金費歷史"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Cancel Take Profit"
@@ -4534,9 +4760,17 @@ msgstr "<0>您的錢包未連線到 {0}。</0><1/><2>切換到 {1}</2>"
 msgid "Transaction was cancelled."
 msgstr "交易已取消。"
 
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
+msgstr ""
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
+msgstr ""
+
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Yearly Funding Rate"
-msgstr "年资金费率"
+msgstr "年資金費率"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Shift order cancelled."
@@ -4545,6 +4779,12 @@ msgstr "轉移訂單已取消。"
 #: src/shared/lib/legacy.ts
 msgid "Order size is bigger than position, will only be executable if position increases"
 msgstr "訂單規模大於倉位，只有在倉位增加時才可執行"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Buy"
+msgstr "買入"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Transaction rejected by user"
@@ -4598,7 +4838,7 @@ msgstr ""
 #: src/shared/components/Errors/errorToasts.tsx
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "There is not enough {0} in your account on {1} to send this transaction.<0/><1/><2>Buy or Transfer {2} to {3}</2>"
-msgstr "您的 {1} 賬戶中沒有足夠的 {0} 來傳送此交易。<0/><1/><2>購買或轉移 {2} 到 {3}</2>"
+msgstr "您的 {1} 帳戶中沒有足夠的 {0} 來傳送此交易。<0/><1/><2>購買或轉移 {2} 到 {3}</2>"
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Total Volume"
@@ -4618,7 +4858,7 @@ msgstr "TWAP 交換部分失敗"
 
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 msgid "Failed to update order"
-msgstr "修改订单失败"
+msgstr "修改訂單失敗"
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "The mark price has changed, consider increasing your allowed slippage."
@@ -4631,14 +4871,10 @@ msgstr "V1 返利"
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 msgid "Modify Order"
-msgstr "修改订单"
+msgstr "修改訂單"
 
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Candles"
-msgstr ""
-
-#: src/shared/components/BotanixBanner/BotanixBanner.tsx
-msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -4651,11 +4887,16 @@ msgstr "警報"
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 msgid "Closed PnL"
-msgstr "已实现盈亏"
+msgstr "已實現盈虧"
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Min {0} Amount:"
-msgstr "最小 {0} 数量:"
+msgstr "最小 {0} 數量:"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Exit fullscreen"
+msgstr ""
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Activate 1CT (One-Click Trading)"
@@ -4665,7 +4906,7 @@ msgstr "啟用 1CT（一鍵交易）"
 #: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Wallet"
-msgstr "钱包"
+msgstr "錢包"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Enter a trigger price"
@@ -4699,16 +4940,17 @@ msgstr "限價減少"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Advanced"
-msgstr "高级"
+msgstr "高級"
 
 #: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
 msgid "24h Change"
-msgstr "24 小时涨跌"
+msgstr "24 小時漲跌"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Highest trading tier reached for volume requirement."
 msgstr "已達成交量條件下最高交易等級。"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "All assets"
 msgstr "所有資產"
@@ -4717,7 +4959,6 @@ msgstr "所有資產"
 msgid "Market - Long Dec."
 msgstr "市價單 - 做多減少"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
@@ -4733,11 +4974,20 @@ msgstr "當時間條件滿足時，可能沒有足夠的流動性來執行此訂
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "The PnL ($) compared to the capital used.<0/><1/>The capital used is calculated as the highest value of [<2>sum of collateral of open positions - realized PnL + period start pending PnL</2>]."
-msgstr "與所用資金相比的盈虧 ($)。<0/><1/>所用資金計算為 [<2>未平倉倉位抵押品總和 - 已實現盈虧 + 期初待处理盈虧</2>] 的最高值。"
+msgstr "與所用資金相比的盈虧 ($)。<0/><1/>所用資金計算為 [<2>未平倉倉位抵押品總和 - 已實現盈虧 + 期初待處理盈虧</2>] 的最高值。"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "No data available"
 msgstr "無可用資料"
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+msgid "View your trading performance and account overview"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+msgid "Spot"
+msgstr ""
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Next tier volume (USD)"
@@ -4746,10 +4996,6 @@ msgstr ""
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "VIP0: 0.040% → 0.036%"
 msgstr "VIP0：0.040% → 0.036%"
-
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Your Zanbara Account balance, usable for trading from any supported chain."
-msgstr ""
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed Stop Loss"
@@ -4764,16 +5010,17 @@ msgid "Invite friend"
 msgstr "邀請好友"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Profit"
 msgstr "每日利潤"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Subscription Amount:"
-msgstr "申购金额："
+msgstr "申購金額："
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 msgid "Trade Value"
-msgstr "成交金额"
+msgstr "成交金額"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
@@ -4782,12 +5029,13 @@ msgid "Transaction failed"
 msgstr "交易失敗"
 
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Status"
 msgstr "狀態"
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Current Maximum Leverage: {maxLeverage}x"
-msgstr "当前最大杠杆:{maxLeverage} 倍"
+msgstr "當前最大槓桿:{maxLeverage} 倍"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "30s"
@@ -4840,15 +5088,11 @@ msgstr ""
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Product has not been settled yet"
-msgstr "产品尚未结算"
+msgstr "產品尚未結算"
 
 #: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
 msgid "Oops! Something went wrong"
-msgstr "出错了"
-
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Faster execution with Zanbara premium RPCs"
-msgstr ""
+msgstr "出錯了"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -4858,11 +5102,11 @@ msgstr "已完成"
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 msgid "Order Book"
-msgstr "订单簿"
+msgstr "訂單簿"
 
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Weekly Funding Rate"
-msgstr "周资金费率"
+msgstr "周資金費率"
 
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 msgid "Generate Referral Code"
@@ -4880,18 +5124,13 @@ msgstr "多頭"
 msgid "+10 RP"
 msgstr "+10 RP"
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-msgid "My Referral Code"
-msgstr "我的推薦碼"
-
 #: src/shared/components/Referrals/ReferralCodeWarnings.tsx
 msgid "This code is not yet registered on {nonTakenNetworkNames}, you will not receive rebates there.<0/><1/>Switch your network to create this code on {nonTakenNetworkNames}."
 msgstr "此程式碼尚未在 {nonTakenNetworkNames} 上註冊，您將無法在那裡獲得返利。<0/><1/>切換您的網路以在 {nonTakenNetworkNames} 上建立此程式碼。"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Entire Position"
-msgstr "整仓"
+msgstr "整倉"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Reward"
@@ -4906,19 +5145,21 @@ msgstr "推薦碼不存在"
 msgid "Language"
 msgstr "語言"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-msgid "Zanbara Account"
-msgstr ""
-
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
 msgid "Trigger price below lowest limit price"
 msgstr "觸發價格低於最低限價"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Download as CSV"
+msgstr ""
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Order submitted: {0}"
+msgstr "訂單已提交：{0}"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+msgid "Leaderboard for traders on Zanbara."
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
@@ -4945,7 +5186,7 @@ msgstr "達到最大操作次數。<0>點選這裡</0> 更新。"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Transaction cancelled by user"
-msgstr "用户取消了交易"
+msgstr "用戶取消了交易"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Epoch {selectedEpochId} Leaderboard"
@@ -4974,7 +5215,7 @@ msgstr "需要幾分鐘才能反映。請稍後檢查。"
 
 #: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
 msgid "Perpetuals Equity"
-msgstr "永续账户权益"
+msgstr "永續帳戶權益"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
@@ -5005,6 +5246,10 @@ msgstr "7 天"
 msgid "Invitees Required"
 msgstr "所需邀請人數"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Value"
+msgstr "價值"
+
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Enter Referral Code"
 msgstr "輸入推薦碼"
@@ -5024,7 +5269,7 @@ msgstr "標記價格"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Total Claim Amount:"
-msgstr "领取总额："
+msgstr "領取總額："
 
 #: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
 msgid "24h Volume"
@@ -5048,6 +5293,7 @@ msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/HistoricalLists.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Order History"
 msgstr "訂單歷史"
 
@@ -5082,11 +5328,17 @@ msgstr "VIP {nextTier}"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Contract USDT insufficient or not approved. Please contact admin."
-msgstr "合约 USDT 不足或未授权，请联系管理员。"
+msgstr "合約 USDT 不足或未授權，請聯繫管理員。"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Sell"
+msgstr "賣出"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Your rewards have been claimed successfully."
-msgstr "您的收益已成功领取。"
+msgstr "您的收益已成功領取。"
 
 #: src/modules/lighter/domain/synthetics/orders/utils.tsx
 msgid "short"
@@ -5149,7 +5401,7 @@ msgstr "稍後提醒"
 
 #: src/modules/lighter/components/AccountsPanel/AccountsPanel.tsx
 msgid "Maintenance Margin"
-msgstr "维持保证金"
+msgstr "維持保證金"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Request Deposit"
@@ -5166,6 +5418,10 @@ msgstr ""
 #: src/shared/components/TwapRows/TwapRows.tsx
 msgid "Number of Parts"
 msgstr "部分數量"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Cancelling"
+msgstr "取消中"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "VIP 5 Legend"
@@ -5194,7 +5450,7 @@ msgstr "尚無待領返傭"
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Indicators"
-msgstr ""
+msgstr "指標"
 
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -5203,18 +5459,21 @@ msgstr "載入中"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Approving USDT..."
-msgstr "授权 USDT 中..."
+msgstr "授權 USDT 中..."
 
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Limit"
 msgstr "限價"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Available:"
 msgstr "可用："
@@ -5230,7 +5489,7 @@ msgstr "LayerZero 掃描"
 
 #: src/modules/lighter/domain/synthetics/orders/utils.tsx
 msgid "The order may not execute as the max. allowed leverage is exceeded. Consider decreasing the order's leverage by editing and decreasing its size. <0>Read more</0>."
-msgstr "訂單可能無法執行，因為超過最大允許槓桿。考慮透過編輯和減少其規模來降低訂單槓杆。<0>閱讀更多</0>。"
+msgstr "訂單可能無法執行，因為超過最大允許槓桿。考慮透過編輯和減少其規模來降低訂單槓桿。<0>閱讀更多</0>。"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Close"
@@ -5250,7 +5509,12 @@ msgstr "到期日："
 
 #: src/modules/lighter/features/earn/components/EarnErrorBoundary/EarnErrorBoundary.tsx
 msgid "We encountered an error while loading the Earn page. Please try refreshing the page or contact support if the problem persists."
-msgstr "加载理财页面时遇到错误。请尝试刷新页面，如果问题持续请联系客服。"
+msgstr "加載理財頁面時遇到錯誤。請嘗試刷新頁面，如果問題持續請聯繫客服。"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer"
+msgstr "劃轉"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Update TWAP Swap Part"
@@ -5266,7 +5530,7 @@ msgstr "請切換到 {0} 以建立您的推薦碼。它將在所有其他網路�
 
 #: src/modules/lighter/components/BottomTabs/FundingHistoryTab.tsx
 msgid "No funding history."
-msgstr "暂无资金费历史。"
+msgstr "暫無資金費歷史。"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Refreshing…"
@@ -5283,8 +5547,13 @@ msgstr "您已綁定推薦碼。"
 
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Filled"
 msgstr "已成交"
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Copy Referral Code"
+msgstr ""
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
@@ -5294,11 +5563,11 @@ msgstr "一般效能詳情"
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Chart Elements"
-msgstr ""
+msgstr "圖表元素"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Assets ({0})"
-msgstr "资产 ({0})"
+msgstr "資產 ({0})"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -5312,13 +5581,3 @@ msgstr "返傭排行榜"
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
 msgid "Total Interest Income"
 msgstr ""
-
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#. js-lingui-explicit-id
-msgid "nav.futures"
-msgstr "合約"
-
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#. js-lingui-explicit-id
-msgid "nav.spot"
-msgstr "現貨"

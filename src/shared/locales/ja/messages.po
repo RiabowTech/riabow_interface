@@ -35,12 +35,18 @@ msgid "Not likely"
 msgstr "あまりない"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Market Order"
 msgstr ""
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Buy order executed."
 msgstr "買い注文が実行されました。"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Chart layout"
+msgstr ""
 
 #: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
@@ -72,8 +78,13 @@ msgid "Approval signed"
 msgstr "承認署名完了"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
 msgstr "1日あたりの損失"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Open Orders"
+msgstr ""
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Create TWAP Swap"
@@ -92,6 +103,7 @@ msgstr "ストップロス"
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "Type"
@@ -156,6 +168,7 @@ msgstr "指値スワップのキャンセル"
 msgid "Order ID not found for cancellation"
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "To"
 msgstr "宛先"
@@ -193,13 +206,18 @@ msgid "Connecting wallet..."
 msgstr ""
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "My Invite Link"
 msgstr ""
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "The mark price has changed, consider increasing your allowed slippage by clicking on the \"...\" icon next to your address."
 msgstr "マーク価格が変わりました。アドレス横の「...」アイコンをクリックして、許容スリッページを増やしてください。"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "No positions yet"
+msgstr ""
 
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "@username"
@@ -391,6 +409,7 @@ msgid "Market Swap"
 msgstr "市場スワップ"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Trade History"
 msgstr "取引履歴"
 
@@ -415,10 +434,6 @@ msgstr "{actionsCount, plural, one {注文} other {# 注文}}"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "≥ $2,000,000,000"
-msgstr ""
-
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Zanbara Frozen Balance"
 msgstr ""
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
@@ -466,6 +481,7 @@ msgstr "ウェブ3ウォレットを使用するには[ウォレットを作成]
 msgid "Highest VIP level reached for volume requirement."
 msgstr ""
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invite friends, earn commissions, accumulate forever"
@@ -542,6 +558,10 @@ msgstr ""
 msgid "What did you like the most about our service?"
 msgstr "当サービスで最も気に入った点は何ですか？"
 
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Fullscreen"
+msgstr ""
+
 #: src/modules/lighter/api/custom/useReferralCode.ts
 msgid "You cannot use your own referral code."
 msgstr ""
@@ -551,6 +571,7 @@ msgid "TP - Long Dec."
 msgstr "TP - ロング減少"
 
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Average"
 msgstr ""
 
@@ -611,6 +632,7 @@ msgstr ""
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Taker"
 msgstr ""
 
@@ -654,8 +676,10 @@ msgstr ""
 msgid "Tier T1"
 msgstr ""
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Current VIP Level"
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Futures Wallet"
 msgstr ""
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
@@ -708,6 +732,10 @@ msgstr ""
 msgid "Deactivating..."
 msgstr "無効化中..."
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Overview"
+msgstr ""
+
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Subscription Failed"
 msgstr ""
@@ -735,6 +763,15 @@ msgstr "指値執行"
 
 #: src/modules/lighter/api/useCancelOrderHandler.ts
 msgid "Order cancelled successfully"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds will appear in your Zanbara Account soon."
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Share your invite link with friends"
 msgstr ""
 
 #: src/shared/components/TradeHistory/keys.ts
@@ -792,11 +829,13 @@ msgstr ""
 
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Total"
 msgstr "総計"
 
@@ -847,6 +886,10 @@ msgstr "最低注文: {0}"
 msgid "Confirm"
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Approval submitted"
+msgstr ""
+
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "({0} Shares, 1 Share = {sharePrice} USDT)"
 msgstr ""
@@ -862,10 +905,6 @@ msgstr ""
 #: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
 msgid "Hide error"
 msgstr "エラーを隠す"
-
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds will appear in your Zanbara Account soon."
-msgstr ""
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Order amount is below the minimum size for this market."
@@ -896,6 +935,10 @@ msgstr "EIP-4844"
 msgid "Sending buy request."
 msgstr "買いリクエストを送信中。"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Custom"
+msgstr ""
+
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "The amount you are trying to withdraw exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
 msgstr "引き出そうとしている金額が上限を超えています。<0>{upperLimitFormatted}</0>より小さい金額をお試しください。"
@@ -919,6 +962,10 @@ msgstr ""
 #: src/shared/components/TVChartContainer/DynamicLine.tsx
 msgid "Unknown Order"
 msgstr "不明な注文"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "No assets"
+msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Your Trading Fee"
@@ -955,6 +1002,10 @@ msgstr "レバレッジ表示にPnLを含める"
 msgid "{positionName} Settling fees."
 msgstr "{positionName} 決済手数料。"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Frozen"
+msgstr ""
+
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Set the maximum leverage you are willing to use. Higher leverage increases the risk of liquidation."
 msgstr ""
@@ -981,6 +1032,11 @@ msgstr "V2 Avalanche Fuji"
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order executed"
 msgstr "注文執行済"
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Earn commissions when your friends trade"
+msgstr ""
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
@@ -1097,7 +1153,7 @@ msgstr ""
 msgid "Enter a  price"
 msgstr "価格を入力"
 
-#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 msgid "Account"
 msgstr ""
 
@@ -1146,10 +1202,12 @@ msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "14D Volume"
 msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Total Balance"
 msgstr ""
 
@@ -1178,9 +1236,8 @@ msgstr ""
 msgid "Updated {0}m ago"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-msgid "Referral Link"
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "VIP"
 msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
@@ -1200,6 +1257,7 @@ msgstr "データに{0}の価格が含まれていないため、USD価値が正
 msgid "OPEN"
 msgstr ""
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Cumulative PnL"
 msgstr "累積PnL"
@@ -1234,7 +1292,6 @@ msgstr ""
 msgid "Subscription successful!"
 msgstr ""
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Points"
@@ -1300,9 +1357,7 @@ msgid "Deposit in progress"
 msgstr ""
 
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -1330,11 +1385,6 @@ msgstr ""
 msgid "Close All"
 msgstr ""
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Fee & VIP | Zanbara"
-msgstr ""
-
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled."
 msgstr "売り注文がキャンセルされました。"
@@ -1342,11 +1392,6 @@ msgstr "売り注文がキャンセルされました。"
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Claim commission"
-msgstr ""
-
-#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-msgid "Leaderboard for traders on Zanbara."
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -1385,6 +1430,11 @@ msgstr "アドレス"
 #: src/modules/lighter/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
 msgid "Claiming successful."
 msgstr "請求に成功しました。"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Fee & VIP | Zanbara"
+msgstr ""
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Fulfilling sell request."
@@ -1477,6 +1527,10 @@ msgstr ""
 msgid "Price is outside the acceptable band for this market."
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Failed to submit spot order"
+msgstr ""
+
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "The amount you are trying to deposit exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
 msgstr "入金しようとしている金額が上限を超えています。<0>{upperLimitFormatted}</0>より小さい金額をお試しください。"
@@ -1525,6 +1579,14 @@ msgstr "利用可能な流動性が不足しています。"
 msgid "Referred volume (USD)"
 msgstr ""
 
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Enjoy lower trading fees and exclusive benefits as your VIP level increases."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Spot Wallet Assets (USD)"
+msgstr ""
+
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
 msgid "Trigger price above lowest limit price"
 msgstr "トリガー価格が最低リミット価格を上回っています"
@@ -1564,16 +1626,13 @@ msgid "Signing transaction will also authenticate your account"
 msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Role"
 msgstr ""
 
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Relayer request failed"
 msgstr "リレヤーリクエストに失敗しました"
-
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
-msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Est. Price"
@@ -1600,6 +1659,10 @@ msgstr "{fromText}から{toMinText}へ"
 msgid "Otherwise, try changing the RPC url in your wallet settings with the help of <0>chainlist.org</0>."
 msgstr "それ以外の場合、<0>chainlist.org</0>の助けを借りてウォレット設定のRPC URLを変更してみてください。"
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Deposit sent"
+msgstr ""
+
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Testnet LayerZero Scan"
 msgstr "テストネット LayerZero Scan"
@@ -1622,6 +1685,7 @@ msgid "Positions ({0})"
 msgstr ""
 
 #: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order cancelled"
 msgstr "注文はキャンセルされました"
@@ -1676,6 +1740,12 @@ msgstr "と"
 msgid "Trading"
 msgstr ""
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+msgid "Zanbara Account"
+msgstr ""
+
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Pending Earnings"
 msgstr ""
@@ -1683,6 +1753,12 @@ msgstr ""
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Signing approval..."
 msgstr "承認を署名中..."
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Spot Wallet"
+msgstr ""
 
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Original"
@@ -1764,10 +1840,6 @@ msgstr "{fromText}から"
 msgid "Breakdown Net Price Impact"
 msgstr "ネット価格影響の内訳"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
-msgid "Cumulative PnL <0>{0}</0>"
-msgstr "累積PnL <0>{0}</0>"
-
 #: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 #: src/modules/lighter/api/useClosePositionHandler.ts
 msgid "Position close order submitted"
@@ -1791,13 +1863,13 @@ msgstr "買いリクエストを履行中。"
 msgid "days"
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Enter amount"
+msgstr ""
+
 #: src/shared/components/SettingsModal/DebugSettings.tsx
 msgid "Show Debug Values"
 msgstr "デバッグ値を表示"
-
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-msgid "Zanbara information for account"
-msgstr ""
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
@@ -1805,9 +1877,6 @@ msgstr ""
 msgid "Total Referrals"
 msgstr ""
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Trade"
 msgstr "トレード"
@@ -1831,6 +1900,10 @@ msgstr "更新中"
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "V1 Arbitrum"
 msgstr "V1 Arbitrum"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Enter fullscreen"
+msgstr ""
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
 msgid "SL"
@@ -1898,10 +1971,6 @@ msgstr ""
 msgid "Leave your Telegram if you’re okay with being contacted for a quick follow-up."
 msgstr "簡単なフォローアップ連絡に問題なければTelegramを残してください。"
 
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Zanbara Account Balance"
-msgstr ""
-
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "≥ $100,000,000"
@@ -1953,6 +2022,10 @@ msgstr ""
 msgid "Expires"
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Total Assets (USD)"
+msgstr ""
+
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Withdrawing..."
 msgstr "引き出し中..."
@@ -1971,12 +2044,17 @@ msgstr "利用可能な流動性が不足しています。流動性があると
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/ChartTokenSelector/ChartTokenSelector.tsx
 #: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 #: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
 msgid "Market"
 msgstr "マーケット"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
@@ -2019,6 +2097,7 @@ msgstr "引き出し"
 
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Submitting..."
 msgstr "送信中..."
@@ -2140,7 +2219,6 @@ msgid "Taker: {0} | Maker: {1}"
 msgstr ""
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Portfolio"
 msgstr ""
@@ -2159,6 +2237,10 @@ msgstr "未実現損益の開始"
 msgid "Limit - Short Inc."
 msgstr "リミット - ショート増加"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No order history"
+msgstr ""
+
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
 msgid "Connect Your Wallet"
 msgstr ""
@@ -2167,6 +2249,7 @@ msgstr ""
 msgid "Sending settle request"
 msgstr "決済リクエスト送信中"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral Center"
@@ -2208,6 +2291,10 @@ msgstr "マーケット増加リクエスト"
 msgid "Your current fees include rebates or staking discounts."
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Zanbara Frozen Balance"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Current Trading Tier"
 msgstr ""
@@ -2239,6 +2326,10 @@ msgstr "{positionName} 決済に失敗しました。"
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Select a market"
 msgstr "マーケットを選択"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Your VIP Status"
+msgstr ""
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "Total trade notional (maker + taker) during the selected period."
@@ -2279,10 +2370,6 @@ msgstr ""
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "App disabled, pending {0} upgrade"
 msgstr "{0}アップグレード待ちのためアプリ無効"
-
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds are now in your Zanbara Account."
-msgstr ""
 
 #: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "More Options"
@@ -2355,6 +2442,7 @@ msgstr ""
 #: src/shared/components/TradeHistory/keys.ts
 #: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -2379,6 +2467,8 @@ msgid "Claim failed. Please try again."
 msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Fee"
 msgstr "手数料"
@@ -2387,6 +2477,8 @@ msgstr "手数料"
 msgid "Traders Referred on Avalanche"
 msgstr "Avalancheで紹介したトレーダー"
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "Approval failed"
@@ -2476,8 +2568,6 @@ msgid "Enter SL limit price"
 msgstr ""
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
 #: src/modules/lighter/features/earn/components/EarnTitle/EarnTitle.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -2539,6 +2629,10 @@ msgstr ""
 msgid "VIP 2 Gold"
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "My Wallet"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Updated just now"
 msgstr ""
@@ -2598,6 +2692,10 @@ msgstr "価格を入力"
 msgid "Failed Market Increase"
 msgstr "マーケット増額失敗"
 
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "1. Who's eligible to join Zanbara Strategy?"
+msgstr ""
+
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -2606,6 +2704,10 @@ msgstr "清算価格"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "SL limit requires SL price"
+msgstr ""
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trade another {0} to unlock VIP {1}"
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -2618,6 +2720,10 @@ msgstr ""
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "No live price available for this market right now. Please retry in a moment."
+msgstr ""
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Cumulative PnL (USD)"
 msgstr ""
 
 #: src/shared/components/BotanixBanner/BotanixBanner.tsx
@@ -2653,6 +2759,10 @@ msgstr "ガス支払いのための{0}残高が不足しています"
 msgid "Error preparing transaction. Provider is not defined"
 msgstr "取引準備エラー。プロバイダーが定義されていません"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "the market lot size"
+msgstr ""
+
 #: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "PnL Analysis"
@@ -2687,6 +2797,7 @@ msgid "Select a token"
 msgstr "トークンを選択"
 
 #: src/modules/lighter/api/useClosePositionHandler.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Please connect your wallet and sign in first"
 msgstr ""
 
@@ -2773,6 +2884,10 @@ msgstr "テイクプロフィット"
 msgid "Hour(s)"
 msgstr "時間"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Frozen Balance"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to view your 14-day volume."
 msgstr ""
@@ -2820,9 +2935,18 @@ msgstr ""
 msgid "≥ $500,000,000"
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No open orders"
+msgstr ""
+
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Traders Referred on Avalanche Fuji"
 msgstr "Avalanche Fujiで紹介したトレーダー"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Deposit contract not configured for this chain. Contact support."
+msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
@@ -2830,6 +2954,7 @@ msgid "Take Profit / Stop Loss"
 msgstr "テイクプロフィット / ストップロス"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Limit Order"
 msgstr ""
 
@@ -2901,6 +3026,7 @@ msgstr "{orderTypeText} {visualMultiplierPrefix}{0} {longShortText}: {sign}{1}"
 msgid "Decreasing"
 msgstr "減少中"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Create Referral Code"
@@ -3033,7 +3159,6 @@ msgid "Binding..."
 msgstr ""
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
@@ -3080,11 +3205,19 @@ msgstr "{ordersText}をキャンセル中。"
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Loading..."
 msgstr "ロード中..."
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Trade now"
+msgstr ""
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Open a position to see your active trades here."
 msgstr ""
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
@@ -3117,6 +3250,11 @@ msgstr ""
 msgid "Maker TP ($1k)"
 msgstr ""
 
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trading fee tiers and VIP levels on Zanbara."
+msgstr ""
+
 #: src/shared/components/SettingsModal/DisplaySettings.tsx
 msgid "Show Leverage Slider"
 msgstr "レバレッジスライダーを表示"
@@ -3139,6 +3277,10 @@ msgstr "{orderText} をキャンセル中。"
 msgid "Execution price for the order."
 msgstr "注文の執行価格"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Failed to cancel order"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Could not load fee and VIP data."
 msgstr ""
@@ -3148,15 +3290,12 @@ msgid "Your frozen balance, locked in open orders and unavailable for trading un
 msgstr ""
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Bind someone else's invitation code to obtain the benefits of the invitee"
 msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Partial Position"
-msgstr ""
-
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "All Zanbara users are eligible."
 msgstr ""
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
@@ -3179,6 +3318,9 @@ msgstr "紹介コードが更新できませんでした。"
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Price"
 msgstr "価格"
 
@@ -3207,6 +3349,10 @@ msgstr ""
 msgid "No pending earnings to claim"
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transferring"
+msgstr ""
+
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "1m 40s"
@@ -3215,6 +3361,10 @@ msgstr "1分40秒"
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Your deposit of from {sourceChainName} was not executed due to an error"
 msgstr "{sourceChainName}からの入金がエラーにより実行されませんでした"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Your Zanbara Account balance, usable for trading from any supported chain."
+msgstr ""
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown buy order"
@@ -3256,8 +3406,6 @@ msgstr "昨年"
 msgid "Rebates earned as an affiliate."
 msgstr "アフィリエイトとして稼いだリベート。"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Fee & VIP"
 msgstr ""
@@ -3268,6 +3416,10 @@ msgstr ""
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Invalid liq. price"
 msgstr "無効な清算価格"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds are now in your Zanbara Account."
+msgstr ""
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "<0>Smart wallets are not supported on {0}.</0><1/><2>Please switch to a different network or use a EOA wallet.</2>"
@@ -3299,6 +3451,7 @@ msgstr "シフトリクエストを履行中。"
 
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Asset"
 msgstr "資産"
@@ -3321,15 +3474,16 @@ msgstr "ストップロス減少"
 msgid "TP Limit Price"
 msgstr ""
 
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Reliable Zanbara-powered transactions"
-msgstr ""
-
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to see your VIP level."
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Action"
+msgstr ""
+
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Available Balance"
 msgstr ""
 
@@ -3344,6 +3498,10 @@ msgstr "リファラルコードが更新されました。"
 #: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "30d"
 msgstr "30日"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer failed"
+msgstr ""
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Select different tokens"
@@ -3365,6 +3523,10 @@ msgstr "注文を編集"
 msgid "Approval was cancelled."
 msgstr "承認がキャンセルされました。"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer submitted"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet and sign in to see your trading tier."
 msgstr ""
@@ -3381,6 +3543,15 @@ msgstr ""
 msgid "Withdrawing requires <0/> while you have <1/>. Please <2>swap</2> or <3>deposit</3> more {0} to your trading account."
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Available"
+msgstr ""
+
+#: src/shared/components/Modal/Modal.tsx
+msgid "Close dialog"
+msgstr ""
+
 #: src/shared/components/RatingToast/RatingToast.tsx
 msgid "How likely are you to recommend our service to a friend or colleague?"
 msgstr "友人や同僚に当サービスをおすすめする可能性はどれくらいですか？"
@@ -3393,6 +3564,10 @@ msgstr "担保スワップのための流動性不足"
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Market Decrease"
 msgstr "市場減少"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "All Zanbara users are eligible."
+msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -3414,6 +3589,7 @@ msgstr ""
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Cancel"
@@ -3513,7 +3689,7 @@ msgstr ""
 msgid "Today"
 msgstr "今日"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "From"
 msgstr "から"
@@ -3548,7 +3724,6 @@ msgstr "十分な流動性がある場合にこの注文の一部が執行され
 msgid "This order using {collateralSymbol} as collateral will not be valid for the existing {longText} position using {symbol} as collateral."
 msgstr "{collateralSymbol}を担保とするこの注文は、{symbol}を担保とする既存の{longText}ポジションで有効になりません。"
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "VIP {0}"
 msgstr ""
@@ -3702,12 +3877,24 @@ msgstr "{wrappedNativeTokenSymbol} を入手するには<0>スワップ</0>し�
 msgid "All cross positions share the same cross margin as collateral. In the event of liquidation, your cross margin balance and any remaining open positions under assets in this mode may be forfeited."
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Price must be a multiple of {tickSize}"
+msgstr ""
+
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Interest:"
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "the market tick size"
+msgstr ""
+
 #: src/modules/lighter/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "You switched your settlement network to {0}, but you still have {1} remaining in your {2} Trading Account."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Reliable Zanbara-powered transactions"
 msgstr ""
 
 #: src/shared/components/Errors/errorToasts.tsx
@@ -3736,6 +3923,7 @@ msgstr "注文付きオープンポジション"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -3759,10 +3947,6 @@ msgstr ""
 msgid "less than a minute"
 msgstr "1分未満"
 
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "1. Who's eligible to join Zanbara Strategy?"
-msgstr ""
-
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
@@ -3774,8 +3958,10 @@ msgstr "作成"
 msgid "Last 7d"
 msgstr "過去7日"
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Minimum order value is {minNotionalText} {quoteSymbol}"
+msgstr ""
+
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Copy"
@@ -3788,8 +3974,12 @@ msgstr ""
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Amount"
 msgstr "額"
@@ -3819,6 +4009,7 @@ msgstr "請求"
 msgid "Shifting from <0><1>{fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>{toIndexName}</4><5>{toPoolName}</5></3>"
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
@@ -3867,6 +4058,10 @@ msgstr "入金可能な資産なし"
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "V1 Avalanche Fuji"
 msgstr "V1 Avalanche Fuji"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No trade history"
+msgstr ""
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 msgid "Realized Swap Impact"
@@ -3934,6 +4129,10 @@ msgstr ""
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Update Take Profit"
 msgstr "テイクプロフィットを更新"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Faster execution with Zanbara premium RPCs"
+msgstr ""
 
 #: src/shared/components/TwapRows/TwapRows.tsx
 msgid "Minute(s)"
@@ -4040,6 +4239,10 @@ msgstr "指値"
 msgid "You"
 msgstr "あなた"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Futures Wallet Assets (USD)"
+msgstr ""
+
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivate 1CT (One-Click Trading)"
 msgstr "1CT (ワンクリック取引) を無効化"
@@ -4053,6 +4256,7 @@ msgstr ""
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/keys.ts
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Deposit"
@@ -4117,6 +4321,8 @@ msgstr "ストップロス"
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Side"
 msgstr ""
 
@@ -4146,6 +4352,10 @@ msgstr ""
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "First Month Only"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer {transferSymbol} amount"
 msgstr ""
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
@@ -4231,6 +4441,8 @@ msgstr "引き出しシミュレーションエラー"
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
@@ -4256,6 +4468,7 @@ msgstr "{0} を {1} にスワップ"
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Maker"
 msgstr ""
 
@@ -4295,6 +4508,16 @@ msgstr ""
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Page outdated, please refresh"
 msgstr "ページが古くなっています。更新してください。"
+
+#. js-lingui-explicit-id
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "nav.futures"
+msgstr ""
+
+#. js-lingui-explicit-id
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "nav.spot"
+msgstr ""
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed Withdraw"
@@ -4336,11 +4559,6 @@ msgstr ""
 
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Manage your risk on individual positions by restricting the amount of margin allocated to each. If the margin ratio of an isolated position reaches 100%, the position will be liquidated."
-msgstr ""
-
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Trading fee tiers and VIP levels on Zanbara."
 msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
@@ -4432,6 +4650,10 @@ msgstr ""
 msgid "$0 – $4,999,999"
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Amount must be a multiple of {lotSize}"
+msgstr ""
+
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Increasing"
 msgstr "増加中"
@@ -4443,6 +4665,10 @@ msgstr ""
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "No tier information yet."
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Zanbara Account Balance"
 msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -4535,6 +4761,14 @@ msgstr "<0>ウォレットが{0}に接続されていません。</0><1/><2>{1}�
 msgid "Transaction was cancelled."
 msgstr "取引がキャンセルされました。"
 
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
+msgstr ""
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
+msgstr ""
+
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Yearly Funding Rate"
 msgstr ""
@@ -4546,6 +4780,12 @@ msgstr "シフト注文がキャンセルされました。"
 #: src/shared/lib/legacy.ts
 msgid "Order size is bigger than position, will only be executable if position increases"
 msgstr "注文サイズがポジションより大きいため、ポジションが増加した場合のみ執行可能です"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Buy"
+msgstr ""
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Transaction rejected by user"
@@ -4638,10 +4878,6 @@ msgstr ""
 msgid "Candles"
 msgstr ""
 
-#: src/shared/components/BotanixBanner/BotanixBanner.tsx
-msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
-msgstr ""
-
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Withdraw Fee"
 msgstr "引き出手数料"
@@ -4656,6 +4892,11 @@ msgstr ""
 
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Min {0} Amount:"
+msgstr ""
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Exit fullscreen"
 msgstr ""
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
@@ -4711,6 +4952,7 @@ msgid "Highest trading tier reached for volume requirement."
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "All assets"
 msgstr "すべての資産"
 
@@ -4718,7 +4960,6 @@ msgstr "すべての資産"
 msgid "Market - Long Dec."
 msgstr "市場 - ロング減少"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
@@ -4740,16 +4981,21 @@ msgstr "使用資本に対するPnL ($)。<0/><1/>使用資本は[<2>オープ�
 msgid "No data available"
 msgstr "データなし"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+msgid "View your trading performance and account overview"
+msgstr ""
+
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+msgid "Spot"
+msgstr ""
+
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Next tier volume (USD)"
 msgstr ""
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "VIP0: 0.040% → 0.036%"
-msgstr ""
-
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Your Zanbara Account balance, usable for trading from any supported chain."
 msgstr ""
 
 #: src/shared/components/TradeHistory/keys.ts
@@ -4764,6 +5010,7 @@ msgstr ""
 msgid "Invite friend"
 msgstr ""
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Profit"
 msgstr "日次利益"
@@ -4783,6 +5030,7 @@ msgid "Transaction failed"
 msgstr "取引失敗"
 
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Status"
 msgstr ""
 
@@ -4847,10 +5095,6 @@ msgstr ""
 msgid "Oops! Something went wrong"
 msgstr ""
 
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Faster execution with Zanbara premium RPCs"
-msgstr ""
-
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "COMPLETED"
@@ -4881,11 +5125,6 @@ msgstr "ロング"
 msgid "+10 RP"
 msgstr ""
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-msgid "My Referral Code"
-msgstr ""
-
 #: src/shared/components/Referrals/ReferralCodeWarnings.tsx
 msgid "This code is not yet registered on {nonTakenNetworkNames}, you will not receive rebates there.<0/><1/>Switch your network to create this code on {nonTakenNetworkNames}."
 msgstr "このコードは{nonTakenNetworkNames}にまだ登録されていません。そこでリベートを受け取れません。<0/><1/>ネットワークを切り替えて{nonTakenNetworkNames}でこのコードを作成してください。"
@@ -4907,19 +5146,21 @@ msgstr "リファラルコードが存在しません"
 msgid "Language"
 msgstr "言語"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-msgid "Zanbara Account"
-msgstr ""
-
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
 msgid "Trigger price below lowest limit price"
 msgstr "トリガー価格が最低リミット価格を下回っています"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Download as CSV"
+msgstr ""
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Order submitted: {0}"
+msgstr ""
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+msgid "Leaderboard for traders on Zanbara."
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
@@ -5006,6 +5247,10 @@ msgstr "7日"
 msgid "Invitees Required"
 msgstr ""
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Value"
+msgstr ""
+
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Enter Referral Code"
 msgstr ""
@@ -5049,6 +5294,7 @@ msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/HistoricalLists.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Order History"
 msgstr ""
 
@@ -5083,6 +5329,12 @@ msgstr ""
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Contract USDT insufficient or not approved. Please contact admin."
+msgstr ""
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Sell"
 msgstr ""
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
@@ -5168,6 +5420,10 @@ msgstr ""
 msgid "Number of Parts"
 msgstr "パート数"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Cancelling"
+msgstr ""
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "VIP 5 Legend"
 msgstr ""
@@ -5211,11 +5467,14 @@ msgstr ""
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Limit"
 msgstr "リミット"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Available:"
 msgstr "利用可能："
@@ -5253,6 +5512,11 @@ msgstr ""
 msgid "We encountered an error while loading the Earn page. Please try refreshing the page or contact support if the problem persists."
 msgstr ""
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer"
+msgstr ""
+
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Update TWAP Swap Part"
 msgstr "TWAPスワップパートを更新"
@@ -5284,7 +5548,12 @@ msgstr ""
 
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Filled"
+msgstr ""
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Copy Referral Code"
 msgstr ""
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx

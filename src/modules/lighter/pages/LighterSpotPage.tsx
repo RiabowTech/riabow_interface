@@ -1,4 +1,7 @@
+import { Trans, t } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import type { ReactNode } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { useAccount } from "wagmi";
 
@@ -162,6 +165,7 @@ function SpotOrderPanel({
   orderSide: "buy" | "sell";
   onOrderSideChange: (side: "buy" | "sell") => void;
 }) {
+  const { i18n } = useLingui();
   const { address } = useAccount();
   const { mutate } = useSWRConfig();
   const [orderType, setOrderType] = useState<"limit" | "market">("limit");
@@ -225,7 +229,7 @@ function SpotOrderPanel({
   const bestAsk = orderbook?.asks?.[0]?.[0] || "";
   const referencePrice =
     orderType === "market" ? (isBuy ? bestAsk : bestBid) || marketPrice : price || marketPrice;
-  const actionLabel = isBuy ? `Buy ${baseSymbol}` : `Sell ${baseSymbol}`;
+  const actionLabel = isBuy ? `${i18n._(t`Buy`)} ${baseSymbol}` : `${i18n._(t`Sell`)} ${baseSymbol}`;
   const feeRate = selectedMarket ? (isBuy ? selectedMarket.taker_fee_bps : selectedMarket.maker_fee_bps) / 100 : 0.1;
   const computedTotal = Number(amount) > 0 && Number(referencePrice) > 0 ? Number(amount) * Number(referencePrice) : 0;
   const canSubmit =
@@ -270,7 +274,7 @@ function SpotOrderPanel({
 
   const submit = async () => {
     if (!address) {
-      helperToast.error("Please connect your wallet and sign in first");
+      helperToast.error(i18n._(t`Please connect your wallet and sign in first`));
       return;
     }
     if (!canSubmit) return;
@@ -285,15 +289,18 @@ function SpotOrderPanel({
     const minNotional = Number(selectedMarket?.min_notional || 0);
 
     if (!normalizedAmount || Number(normalizedAmount) <= 0) {
-      helperToast.error(`Amount must be a multiple of ${selectedMarket?.lot_size || "the market lot size"}`);
+      const lotSize = selectedMarket?.lot_size || i18n._(t`the market lot size`);
+      helperToast.error(i18n._(t`Amount must be a multiple of ${lotSize}`));
       return;
     }
     if (orderType === "limit" && (!normalizedPrice || Number(normalizedPrice) <= 0)) {
-      helperToast.error(`Price must be a multiple of ${selectedMarket?.tick_size || "the market tick size"}`);
+      const tickSize = selectedMarket?.tick_size || i18n._(t`the market tick size`);
+      helperToast.error(i18n._(t`Price must be a multiple of ${tickSize}`));
       return;
     }
     if (minNotional > 0 && orderNotional < minNotional) {
-      helperToast.error(`Minimum order value is ${formatAmount(String(minNotional))} ${quoteSymbol}`);
+      const minNotionalText = formatAmount(String(minNotional));
+      helperToast.error(i18n._(t`Minimum order value is ${minNotionalText} ${quoteSymbol}`));
       return;
     }
     if (normalizedAmount !== trimDecimal(amount)) {
@@ -325,7 +332,7 @@ function SpotOrderPanel({
       if (response.status?.toLowerCase() === "rejected") {
         throw new Error(response.reject_reason || "Spot order was rejected");
       }
-      helperToast.success(`Order submitted: ${response.id}`);
+      helperToast.success(i18n._(t`Order submitted: ${response.id}`));
       setAmount("");
       setTotal("");
       setPct(0);
@@ -334,7 +341,7 @@ function SpotOrderPanel({
         revalidate: true,
       });
     } catch (error: any) {
-      helperToast.error(error?.message || "Failed to submit spot order");
+      helperToast.error(error?.message || i18n._(t`Failed to submit spot order`));
     } finally {
       setSubmitting(false);
     }
@@ -348,14 +355,14 @@ function SpotOrderPanel({
           className={`${styles.spotSideButton} ${isBuy ? styles.spotSideBuyActive : ""}`}
           onClick={() => onOrderSideChange("buy")}
         >
-          Buy
+          <Trans>Buy</Trans>
         </button>
         <button
           type="button"
           className={`${styles.spotSideButton} ${!isBuy ? styles.spotSideSellActive : ""}`}
           onClick={() => onOrderSideChange("sell")}
         >
-          Sell
+          <Trans>Sell</Trans>
         </button>
       </div>
 
@@ -366,39 +373,54 @@ function SpotOrderPanel({
             className={`${styles.spotOrderTab} ${orderType === "limit" ? styles.spotOrderTabActive : ""}`}
             onClick={() => setOrderType("limit")}
           >
-            Limit
+            <Trans>Limit</Trans>
           </button>
           <button
             type="button"
             className={`${styles.spotOrderTab} ${orderType === "market" ? styles.spotOrderTabActive : ""}`}
             onClick={() => setOrderType("market")}
           >
-            Market
+            <Trans>Market</Trans>
           </button>
           <button type="button" className={`${styles.spotOrderTab} ${styles.spotOrderType}`}>
-            {orderType === "limit" ? "Limit Order" : "Market Order"} <span className={styles.chevron}>⌄</span>
+            {orderType === "limit" ? <Trans>Limit Order</Trans> : <Trans>Market Order</Trans>}{" "}
+            <span className={styles.chevron}>⌄</span>
           </button>
         </div>
 
         <div className={styles.spotOrderBody}>
           <div className={styles.availableRow}>
-            <span>Available</span>
+            <span>
+              <Trans>Available</Trans>
+            </span>
             <span className={styles.availableValue}>
               {availableBalance ? formatAmount(availableBalance) : "--"} {availableToken} <span className={styles.addCircle}>+</span>
             </span>
           </div>
 
           {orderType === "limit" ? (
-            <SpotOrderInput label="Price" value={price} onChange={updatePrice} placeholder={marketPrice || "0.00"} suffix={quoteSymbol} />
+            <SpotOrderInput
+              label={<Trans>Price</Trans>}
+              value={price}
+              onChange={updatePrice}
+              placeholder={marketPrice || "0.00"}
+              suffix={quoteSymbol}
+            />
           ) : null}
-          <SpotOrderInput label="Amount" value={amount} onChange={updateAmount} placeholder="Enter amount" suffix={baseSymbol} />
+          <SpotOrderInput
+            label={<Trans>Amount</Trans>}
+            value={amount}
+            onChange={updateAmount}
+            placeholder={i18n._(t`Enter amount`)}
+            suffix={baseSymbol}
+          />
 
           <div className={styles.percentControl}>
             <PercentSlider value={pct} onChange={handlePercent} side={orderSide} />
           </div>
 
           <SpotOrderInput
-            label="Total"
+            label={<Trans>Total</Trans>}
             value={total || (computedTotal > 0 ? trimDecimal(String(computedTotal)) : "")}
             onChange={updateTotal}
             placeholder="0.00"
@@ -411,11 +433,13 @@ function SpotOrderPanel({
             disabled={!canSubmit}
             onClick={submit}
           >
-            {submitting ? "Submitting..." : actionLabel}
+            {submitting ? <Trans>Submitting...</Trans> : actionLabel}
           </button>
 
           <div className={styles.feeRow}>
-            <span>Fee ({feeRate}%)</span>
+            <span>
+              <Trans>Fee</Trans> ({feeRate}%)
+            </span>
             <span>{computedTotal > 0 ? formatAmount(String((computedTotal * feeRate) / 100)) : "--"} {quoteSymbol}</span>
           </div>
         </div>
@@ -431,7 +455,7 @@ function SpotOrderInput({
   placeholder,
   suffix,
 }: {
-  label: string;
+  label: ReactNode;
   value?: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -489,6 +513,7 @@ function normalizeSpotMarketKey(symbol: string): string {
 type SpotBottomTab = "Open Orders" | "Order History" | "Trade History";
 
 function SpotBottomTabs({ marketKey }: { marketKey: string }) {
+  const { i18n } = useLingui();
   const { address } = useAccount();
   const { mutate } = useSWRConfig();
   const [activeTab, setActiveTab] = useState<SpotBottomTab>("Open Orders");
@@ -528,11 +553,11 @@ function SpotBottomTabs({ marketKey }: { marketKey: string }) {
     try {
       setCancellingId(orderId);
       await cancelSpotOrder(DEFAULT_CHAIN_ID, orderId, address);
-      helperToast.success("Order cancelled");
+      helperToast.success(i18n._(t`Order cancelled`));
       mutate(openOrdersKey);
       mutate(orderHistoryKey);
     } catch (error: any) {
-      helperToast.error(error?.message || "Failed to cancel order");
+      helperToast.error(error?.message || i18n._(t`Failed to cancel order`));
     } finally {
       setCancellingId(null);
     }
@@ -548,7 +573,7 @@ function SpotBottomTabs({ marketKey }: { marketKey: string }) {
             className={`${styles.spotBottomTabButton} ${activeTab === tab ? styles.spotBottomTabButtonActive : ""}`}
             onClick={() => setActiveTab(tab)}
           >
-            {tab}
+            {getSpotBottomTabLabel(tab, i18n)}
             {tab === "Open Orders" ? ` (${openOrders.length})` : ""}
           </button>
         ))}
@@ -558,17 +583,17 @@ function SpotBottomTabs({ marketKey }: { marketKey: string }) {
         <SpotOrdersTable
           orders={openOrders}
           loading={openOrdersLoading}
-          emptyText="No open orders"
+          emptyText={i18n._(t`No open orders`)}
           showCancel
           cancellingId={cancellingId}
           onCancel={cancel}
         />
       ) : null}
       {activeTab === "Order History" ? (
-        <SpotOrdersTable orders={orderHistory} loading={orderHistoryLoading} emptyText="No order history" />
+        <SpotOrdersTable orders={orderHistory} loading={orderHistoryLoading} emptyText={i18n._(t`No order history`)} />
       ) : null}
       {activeTab === "Trade History" ? (
-        <SpotTradesTable trades={tradeHistory} loading={tradeHistoryLoading} emptyText="No trade history" />
+        <SpotTradesTable trades={tradeHistory} loading={tradeHistoryLoading} emptyText={i18n._(t`No trade history`)} />
       ) : null}
     </section>
   );
@@ -589,21 +614,22 @@ function SpotOrdersTable({
   cancellingId?: string | null;
   onCancel?: (orderId: string) => void;
 }) {
+  const { i18n } = useLingui();
   return (
     <div className={styles.spotTableWrap}>
       <table className={styles.spotTable}>
         <thead>
           <tr>
-            <th>Market</th>
-            <th>Side</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th>Amount</th>
-            <th>Filled</th>
-            <th>Average</th>
-            <th>Status</th>
-            <th>Date</th>
-            {showCancel ? <th>Action</th> : null}
+            <th><Trans>Market</Trans></th>
+            <th><Trans>Side</Trans></th>
+            <th><Trans>Type</Trans></th>
+            <th><Trans>Price</Trans></th>
+            <th><Trans>Amount</Trans></th>
+            <th><Trans>Filled</Trans></th>
+            <th><Trans>Average</Trans></th>
+            <th><Trans>Status</Trans></th>
+            <th><Trans>Date</Trans></th>
+            {showCancel ? <th><Trans>Action</Trans></th> : null}
           </tr>
         </thead>
         <tbody>
@@ -612,8 +638,10 @@ function SpotOrdersTable({
             return (
               <tr key={orderId || `${order.symbol}-${order.created_at}-${order.price}`}>
                 <td>{formatSpotSymbol(order.symbol)}</td>
-                <td className={order.side === "buy" ? styles.spotSideBuyText : styles.spotSideSellText}>{titleCase(order.side)}</td>
-                <td>{titleCase(order.type)}</td>
+                <td className={order.side === "buy" ? styles.spotSideBuyText : styles.spotSideSellText}>
+                  {formatSpotSide(order.side, i18n)}
+                </td>
+                <td>{formatSpotOrderType(order.type, i18n)}</td>
                 <td>{formatSpotCell(order.price)}</td>
                 <td>{formatSpotCell(order.quantity)}</td>
                 <td>{formatSpotCell(order.filled_qty)}</td>
@@ -628,7 +656,7 @@ function SpotOrdersTable({
                       disabled={!orderId || cancellingId === orderId}
                       onClick={() => orderId && onCancel?.(orderId)}
                     >
-                      {cancellingId === orderId ? "Cancelling" : "Cancel"}
+                    {cancellingId === orderId ? <Trans>Cancelling</Trans> : <Trans>Cancel</Trans>}
                     </button>
                   </td>
                 ) : null}
@@ -638,7 +666,7 @@ function SpotOrdersTable({
         </tbody>
       </table>
       {!orders.length ? (
-        <div className={styles.spotTableEmpty}>{loading ? "Loading..." : emptyText}</div>
+        <div className={styles.spotTableEmpty}>{loading ? <Trans>Loading...</Trans> : emptyText}</div>
       ) : null}
     </div>
   );
@@ -653,41 +681,73 @@ function SpotTradesTable({
   loading: boolean;
   emptyText: string;
 }) {
+  const { i18n } = useLingui();
   return (
     <div className={styles.spotTableWrap}>
       <table className={styles.spotTable}>
         <thead>
           <tr>
-            <th>Market</th>
-            <th>Side</th>
-            <th>Price</th>
-            <th>Amount</th>
-            <th>Value</th>
-            <th>Fee</th>
-            <th>Role</th>
-            <th>Date</th>
+            <th><Trans>Market</Trans></th>
+            <th><Trans>Side</Trans></th>
+            <th><Trans>Price</Trans></th>
+            <th><Trans>Amount</Trans></th>
+            <th><Trans>Value</Trans></th>
+            <th><Trans>Fee</Trans></th>
+            <th><Trans>Role</Trans></th>
+            <th><Trans>Date</Trans></th>
           </tr>
         </thead>
         <tbody>
           {trades.map((trade) => (
             <tr key={trade.trade_id || `${trade.order_id}-${trade.created_at}-${trade.price}`}>
               <td>{formatSpotSymbol(trade.symbol)}</td>
-              <td className={trade.side === "buy" ? styles.spotSideBuyText : styles.spotSideSellText}>{titleCase(trade.side)}</td>
+              <td className={trade.side === "buy" ? styles.spotSideBuyText : styles.spotSideSellText}>
+                {formatSpotSide(trade.side, i18n)}
+              </td>
               <td>{formatSpotCell(trade.price)}</td>
               <td>{formatSpotCell(trade.quantity)}</td>
               <td>{formatSpotValue(trade.price, trade.quantity)}</td>
               <td>{formatSpotFee(trade)}</td>
-              <td>{trade.role ? titleCase(trade.role) : "--"}</td>
+              <td>{trade.role ? formatSpotRole(trade.role, i18n) : "--"}</td>
               <td>{formatSpotTime(trade.created_at ?? trade.timestamp)}</td>
             </tr>
           ))}
         </tbody>
       </table>
       {!trades.length ? (
-        <div className={styles.spotTableEmpty}>{loading ? "Loading..." : emptyText}</div>
+        <div className={styles.spotTableEmpty}>{loading ? <Trans>Loading...</Trans> : emptyText}</div>
       ) : null}
     </div>
   );
+}
+
+type SpotI18n = ReturnType<typeof useLingui>["i18n"];
+
+function getSpotBottomTabLabel(tab: SpotBottomTab, i18n: SpotI18n): string {
+  if (tab === "Open Orders") return i18n._(t`Open Orders`);
+  if (tab === "Order History") return i18n._(t`Order History`);
+  return i18n._(t`Trade History`);
+}
+
+function formatSpotSide(side: string | undefined, i18n: SpotI18n): string {
+  const normalized = String(side || "").toLowerCase();
+  if (normalized === "buy") return i18n._(t`Buy`);
+  if (normalized === "sell") return i18n._(t`Sell`);
+  return titleCase(String(side || "--"));
+}
+
+function formatSpotOrderType(type: string | undefined, i18n: SpotI18n): string {
+  const normalized = String(type || "").toLowerCase();
+  if (normalized === "limit") return i18n._(t`Limit`);
+  if (normalized === "market") return i18n._(t`Market`);
+  return titleCase(String(type || "--"));
+}
+
+function formatSpotRole(role: string | undefined, i18n: SpotI18n): string {
+  const normalized = String(role || "").toLowerCase();
+  if (normalized === "maker") return i18n._(t`Maker`);
+  if (normalized === "taker") return i18n._(t`Taker`);
+  return titleCase(String(role || "--"));
 }
 
 function dedupeSpotOrders(orders: SpotOrderRecord[]): SpotOrderRecord[] {

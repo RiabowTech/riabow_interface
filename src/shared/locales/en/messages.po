@@ -35,12 +35,18 @@ msgid "Not likely"
 msgstr "Not likely"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Market Order"
 msgstr "Market Order"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Buy order executed."
 msgstr "Buy order executed."
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Chart layout"
+msgstr "Chart layout"
 
 #: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
@@ -72,8 +78,13 @@ msgid "Approval signed"
 msgstr "Approval signed"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Loss"
 msgstr "Daily Loss"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Open Orders"
+msgstr "Open Orders"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Create TWAP Swap"
@@ -92,6 +103,7 @@ msgstr "stop loss"
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "Type"
@@ -156,6 +168,7 @@ msgstr "Cancel Limit Swap"
 msgid "Order ID not found for cancellation"
 msgstr "Order ID not found for cancellation"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "To"
 msgstr "To"
@@ -193,13 +206,18 @@ msgid "Connecting wallet..."
 msgstr "Connecting wallet..."
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "My Invite Link"
 msgstr "My Invite Link"
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "The mark price has changed, consider increasing your allowed slippage by clicking on the \"...\" icon next to your address."
 msgstr "The mark price has changed, consider increasing your allowed slippage by clicking on the \"...\" icon next to your address."
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "No positions yet"
+msgstr "No positions yet"
 
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "@username"
@@ -391,6 +409,7 @@ msgid "Market Swap"
 msgstr "Market Swap"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Trade History"
 msgstr "Trade History"
 
@@ -416,10 +435,6 @@ msgstr "{actionsCount, plural, one {Order} other {# Orders}}"
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "≥ $2,000,000,000"
 msgstr "≥ $2,000,000,000"
-
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Zanbara Frozen Balance"
-msgstr "Zanbara Frozen Balance"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Epoch Total Points"
@@ -466,6 +481,7 @@ msgstr "Tap [Create Wallet] to start using your Web3 Wallet."
 msgid "Highest VIP level reached for volume requirement."
 msgstr "Highest VIP level reached for volume requirement."
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Invite friends, earn commissions, accumulate forever"
@@ -542,6 +558,10 @@ msgstr "Deposit completed"
 msgid "What did you like the most about our service?"
 msgstr "What did you like the most about our service?"
 
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
 #: src/modules/lighter/api/custom/useReferralCode.ts
 msgid "You cannot use your own referral code."
 msgstr "You cannot use your own referral code."
@@ -551,6 +571,7 @@ msgid "TP - Long Dec."
 msgstr "TP - Long Dec."
 
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Average"
 msgstr "Average"
 
@@ -611,6 +632,7 @@ msgstr "Smart contract address for this strategy"
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Taker"
 msgstr "Taker"
 
@@ -654,9 +676,11 @@ msgstr "Failed to update settings."
 msgid "Tier T1"
 msgstr "Tier T1"
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Current VIP Level"
-msgstr "Current VIP Level"
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Futures Wallet"
+msgstr "Futures Wallet"
 
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Earnings available to claim."
@@ -708,6 +732,10 @@ msgstr "Referral Code Bound"
 msgid "Deactivating..."
 msgstr "Deactivating..."
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Overview"
+msgstr "Overview"
+
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Subscription Failed"
 msgstr "Subscription Failed"
@@ -736,6 +764,15 @@ msgstr "Execute Limit"
 #: src/modules/lighter/api/useCancelOrderHandler.ts
 msgid "Order cancelled successfully"
 msgstr "Order cancelled successfully"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds will appear in your Zanbara Account soon."
+msgstr "Funds will appear in your Zanbara Account soon."
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Share your invite link with friends"
+msgstr "Share your invite link with friends"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Request Withdraw"
@@ -792,11 +829,13 @@ msgstr "Account Balance"
 
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardContainer.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Total"
 msgstr "Total"
 
@@ -847,6 +886,10 @@ msgstr "Min order: {0}"
 msgid "Confirm"
 msgstr "Confirm"
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Approval submitted"
+msgstr "Approval submitted"
+
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "({0} Shares, 1 Share = {sharePrice} USDT)"
 msgstr "({0} Shares, 1 Share = {sharePrice} USDT)"
@@ -862,10 +905,6 @@ msgstr "CONNECT WALLET"
 #: src/shared/components/ToastifyDebug/ToastifyDebug.tsx
 msgid "Hide error"
 msgstr "Hide error"
-
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds will appear in your Zanbara Account soon."
-msgstr "Funds will appear in your Zanbara Account soon."
 
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "Order amount is below the minimum size for this market."
@@ -896,6 +935,10 @@ msgstr "EIP-4844"
 msgid "Sending buy request."
 msgstr "Sending buy request."
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Custom"
+msgstr "Custom"
+
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "The amount you are trying to withdraw exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
 msgstr "The amount you are trying to withdraw exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
@@ -919,6 +962,10 @@ msgstr "Mark Price Line"
 #: src/shared/components/TVChartContainer/DynamicLine.tsx
 msgid "Unknown Order"
 msgstr "Unknown Order"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "No assets"
+msgstr "No assets"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Your Trading Fee"
@@ -955,6 +1002,10 @@ msgstr "Include PnL in Leverage Display"
 msgid "{positionName} Settling fees."
 msgstr "{positionName} Settling fees."
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Frozen"
+msgstr "Frozen"
+
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Set the maximum leverage you are willing to use. Higher leverage increases the risk of liquidation."
 msgstr "Set the maximum leverage you are willing to use. Higher leverage increases the risk of liquidation."
@@ -981,6 +1032,11 @@ msgstr "V2 Avalanche Fuji"
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order executed"
 msgstr "Order executed"
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Earn commissions when your friends trade"
+msgstr "Earn commissions when your friends trade"
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
@@ -1097,7 +1153,7 @@ msgstr "Estimated Interest"
 msgid "Enter a  price"
 msgstr "Enter a  price"
 
-#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 msgid "Account"
 msgstr "Account"
 
@@ -1146,10 +1202,12 @@ msgstr "TP/SL cancelled successfully"
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "14D Volume"
 msgstr "14D Volume"
 
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Total Balance"
 msgstr "Total Balance"
 
@@ -1178,10 +1236,9 @@ msgstr "Invalid product ID"
 msgid "Updated {0}m ago"
 msgstr "Updated {0}m ago"
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-msgid "Referral Link"
-msgstr "Referral Link"
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "VIP"
+msgstr "VIP"
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Slippage tolerance above {SLIPPAGE_WARN_THRESHOLD_PCT}% is aggressive — the executed price may deviate significantly from the estimate."
@@ -1200,6 +1257,7 @@ msgstr "USD Value may not be accurate since the data does not contain prices for
 msgid "OPEN"
 msgstr "OPEN"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Cumulative PnL"
 msgstr "Cumulative PnL"
@@ -1234,7 +1292,6 @@ msgstr "Slippage"
 msgid "Subscription successful!"
 msgstr "Subscription successful!"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Points"
@@ -1300,9 +1357,7 @@ msgid "Deposit in progress"
 msgstr "Deposit in progress"
 
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -1330,11 +1385,6 @@ msgstr "Total Commission"
 msgid "Close All"
 msgstr "Close All"
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Fee & VIP | Zanbara"
-msgstr "Fee & VIP | Zanbara"
-
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Sell order cancelled."
 msgstr "Sell order cancelled."
@@ -1343,11 +1393,6 @@ msgstr "Sell order cancelled."
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Claim commission"
 msgstr "Claim commission"
-
-#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
-msgid "Leaderboard for traders on Zanbara."
-msgstr "Leaderboard for traders on Zanbara."
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Sign in to load the VIP fee schedule from the server."
@@ -1385,6 +1430,11 @@ msgstr "Address"
 #: src/modules/lighter/domain/synthetics/referrals/claimAffiliateRewardsTxn.ts
 msgid "Claiming successful."
 msgstr "Claiming successful."
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Fee & VIP | Zanbara"
+msgstr "Fee & VIP | Zanbara"
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Fulfilling sell request."
@@ -1477,6 +1527,10 @@ msgstr "3rd Term"
 msgid "Price is outside the acceptable band for this market."
 msgstr "Price is outside the acceptable band for this market."
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Failed to submit spot order"
+msgstr "Failed to submit spot order"
+
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "The amount you are trying to deposit exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
 msgstr "The amount you are trying to deposit exceeds the limit. Please try an amount smaller than <0>{upperLimitFormatted}</0>."
@@ -1525,6 +1579,14 @@ msgstr "Insufficient available liquidity."
 msgid "Referred volume (USD)"
 msgstr "Referred volume (USD)"
 
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Enjoy lower trading fees and exclusive benefits as your VIP level increases."
+msgstr "Enjoy lower trading fees and exclusive benefits as your VIP level increases."
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Spot Wallet Assets (USD)"
+msgstr "Spot Wallet Assets (USD)"
+
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
 msgid "Trigger price above lowest limit price"
 msgstr "Trigger price above lowest limit price"
@@ -1564,16 +1626,13 @@ msgid "Signing transaction will also authenticate your account"
 msgstr "Signing transaction will also authenticate your account"
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Role"
 msgstr "Role"
 
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Relayer request failed"
 msgstr "Relayer request failed"
-
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
-msgstr "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
 
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
 msgid "Est. Price"
@@ -1600,6 +1659,10 @@ msgstr "{fromText} to {toMinText}"
 msgid "Otherwise, try changing the RPC url in your wallet settings with the help of <0>chainlist.org</0>."
 msgstr "Otherwise, try changing the RPC url in your wallet settings with the help of <0>chainlist.org</0>."
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Deposit sent"
+msgstr "Deposit sent"
+
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Testnet LayerZero Scan"
 msgstr "Testnet LayerZero Scan"
@@ -1622,6 +1685,7 @@ msgid "Positions ({0})"
 msgstr "Positions ({0})"
 
 #: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Order cancelled"
 msgstr "Order cancelled"
@@ -1676,6 +1740,12 @@ msgstr "and"
 msgid "Trading"
 msgstr "Trading"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+msgid "Zanbara Account"
+msgstr "Zanbara Account"
+
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Pending Earnings"
 msgstr "Pending Earnings"
@@ -1683,6 +1753,12 @@ msgstr "Pending Earnings"
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Signing approval..."
 msgstr "Signing approval..."
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Spot Wallet"
+msgstr "Spot Wallet"
 
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 msgid "Original"
@@ -1764,10 +1840,6 @@ msgstr "{fromText} to"
 msgid "Breakdown Net Price Impact"
 msgstr "Breakdown Net Price Impact"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
-msgid "Cumulative PnL <0>{0}</0>"
-msgstr "Cumulative PnL <0>{0}</0>"
-
 #: src/modules/lighter/api/custom/useZanbaraOrderSubmit.ts
 #: src/modules/lighter/api/useClosePositionHandler.ts
 msgid "Position close order submitted"
@@ -1791,13 +1863,13 @@ msgstr "Fulfilling buy request."
 msgid "days"
 msgstr "days"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Enter amount"
+msgstr "Enter amount"
+
 #: src/shared/components/SettingsModal/DebugSettings.tsx
 msgid "Show Debug Values"
 msgstr "Show Debug Values"
-
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-msgid "Zanbara information for account"
-msgstr "Zanbara information for account"
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
@@ -1805,9 +1877,6 @@ msgstr "Zanbara information for account"
 msgid "Total Referrals"
 msgstr "Total Referrals"
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Trade"
 msgstr "Trade"
@@ -1831,6 +1900,10 @@ msgstr "Updating"
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "V1 Arbitrum"
 msgstr "V1 Arbitrum"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Enter fullscreen"
+msgstr "Enter fullscreen"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
 msgid "SL"
@@ -1898,10 +1971,6 @@ msgstr "Product"
 msgid "Leave your Telegram if you’re okay with being contacted for a quick follow-up."
 msgstr "Leave your Telegram if you’re okay with being contacted for a quick follow-up."
 
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Zanbara Account Balance"
-msgstr "Zanbara Account Balance"
-
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "≥ $100,000,000"
@@ -1953,6 +2022,10 @@ msgstr "Points Dashboard"
 msgid "Expires"
 msgstr "Expires"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Total Assets (USD)"
+msgstr "Total Assets (USD)"
+
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Withdrawing..."
 msgstr "Withdrawing..."
@@ -1971,12 +2044,17 @@ msgstr "Insufficient available liquidity. The order will fill when there is liqu
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/ChartTokenSelector/ChartTokenSelector.tsx
 #: src/shared/components/Referrals/ClaimAffiliatesModal/ClaimAffiliatesModal.tsx
 #: src/shared/components/TradingMarketsList/TradingMarketsDropdown.tsx
 msgid "Market"
 msgstr "Market"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
@@ -2019,6 +2097,7 @@ msgstr "Withdrawal"
 
 #: src/modules/lighter/components/BottomTabs/ModifyOrderModal.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/UserFeedbackModal/UserFeedbackModal.tsx
 msgid "Submitting..."
 msgstr "Submitting..."
@@ -2140,7 +2219,6 @@ msgid "Taker: {0} | Maker: {1}"
 msgstr "Taker: {0} | Maker: {1}"
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/shared/components/SideNav/SideNav.tsx
 msgid "Portfolio"
 msgstr "Portfolio"
@@ -2159,6 +2237,10 @@ msgstr "Start Unrealized PnL"
 msgid "Limit - Short Inc."
 msgstr "Limit - Short Inc."
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No order history"
+msgstr "No order history"
+
 #: src/modules/lighter/features/accounts/pages/Actions/ConnectWalletPrompt.tsx
 msgid "Connect Your Wallet"
 msgstr "Connect Your Wallet"
@@ -2167,6 +2249,7 @@ msgstr "Connect Your Wallet"
 msgid "Sending settle request"
 msgstr "Sending settle request"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Referral Center"
@@ -2208,6 +2291,10 @@ msgstr "Request Market Increase"
 msgid "Your current fees include rebates or staking discounts."
 msgstr "Your current fees include rebates or staking discounts."
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Zanbara Frozen Balance"
+msgstr "Zanbara Frozen Balance"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Current Trading Tier"
 msgstr "Current Trading Tier"
@@ -2239,6 +2326,10 @@ msgstr "{positionName} Failed to settle."
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Select a market"
 msgstr "Select a market"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Your VIP Status"
+msgstr "Your VIP Status"
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 msgid "Total trade notional (maker + taker) during the selected period."
@@ -2279,10 +2370,6 @@ msgstr "Loss"
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "App disabled, pending {0} upgrade"
 msgstr "App disabled, pending {0} upgrade"
-
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Funds are now in your Zanbara Account."
-msgstr "Funds are now in your Zanbara Account."
 
 #: src/shared/components/NetworkDropdown/NetworkDropdown.tsx
 msgid "More Options"
@@ -2355,6 +2442,7 @@ msgstr "Debug"
 #: src/shared/components/TradeHistory/keys.ts
 #: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
@@ -2379,6 +2467,8 @@ msgid "Claim failed. Please try again."
 msgstr "Claim failed. Please try again."
 
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Fee"
 msgstr "Fee"
@@ -2387,6 +2477,8 @@ msgstr "Fee"
 msgid "Traders Referred on Avalanche"
 msgstr "Traders Referred on Avalanche"
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "Approval failed"
@@ -2476,8 +2568,6 @@ msgid "Enter SL limit price"
 msgstr "Enter SL limit price"
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
 #: src/modules/lighter/features/earn/components/EarnTitle/EarnTitle.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -2539,6 +2629,10 @@ msgstr "Create new code"
 msgid "VIP 2 Gold"
 msgstr "VIP 2 Gold"
 
+#: src/shared/components/TradingAccountModal/TradingAccountModal.tsx
+msgid "My Wallet"
+msgstr "My Wallet"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Updated just now"
 msgstr "Updated just now"
@@ -2598,6 +2692,10 @@ msgstr "Enter a price"
 msgid "Failed Market Increase"
 msgstr "Failed Market Increase"
 
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "1. Who's eligible to join Zanbara Strategy?"
+msgstr "1. Who's eligible to join Zanbara Strategy?"
+
 #: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -2607,6 +2705,10 @@ msgstr "Liq. Price"
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "SL limit requires SL price"
 msgstr "SL limit requires SL price"
+
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trade another {0} to unlock VIP {1}"
+msgstr "Trade another {0} to unlock VIP {1}"
 
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Please sign in first to withdraw funds"
@@ -2619,6 +2721,10 @@ msgstr "≥ $5,000,000"
 #: src/modules/lighter/adapters/useOrderPreviewAdapter.ts
 msgid "No live price available for this market right now. Please retry in a moment."
 msgstr "No live price available for this market right now. Please retry in a moment."
+
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+msgid "Cumulative PnL (USD)"
+msgstr "Cumulative PnL (USD)"
 
 #: src/shared/components/BotanixBanner/BotanixBanner.tsx
 msgid "<0>Botanix</0> currently only supports"
@@ -2652,6 +2758,10 @@ msgstr "Insufficient {0} balance to pay for gas"
 #: src/modules/lighter/domain/synthetics/orders/prepareOrderTxn.ts
 msgid "Error preparing transaction. Provider is not defined"
 msgstr "Error preparing transaction. Provider is not defined"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "the market lot size"
+msgstr "the market lot size"
 
 #: src/shared/components/AddressDropdown/AddressDropdownWithoutMultichain.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
@@ -2687,6 +2797,7 @@ msgid "Select a token"
 msgstr "Select a token"
 
 #: src/modules/lighter/api/useClosePositionHandler.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Please connect your wallet and sign in first"
 msgstr "Please connect your wallet and sign in first"
 
@@ -2773,6 +2884,10 @@ msgstr "Take Profit"
 msgid "Hour(s)"
 msgstr "Hour(s)"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Frozen Balance"
+msgstr "Frozen Balance"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to view your 14-day volume."
 msgstr "Connect wallet to view your 14-day volume."
@@ -2820,9 +2935,18 @@ msgstr "Search Trading Pair"
 msgid "≥ $500,000,000"
 msgstr "≥ $500,000,000"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No open orders"
+msgstr "No open orders"
+
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Traders Referred on Avalanche Fuji"
 msgstr "Traders Referred on Avalanche Fuji"
+
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/DepositView.tsx
+msgid "Deposit contract not configured for this chain. Contact support."
+msgstr "Deposit contract not configured for this chain. Contact support."
 
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
@@ -2830,6 +2954,7 @@ msgid "Take Profit / Stop Loss"
 msgstr "Take Profit / Stop Loss"
 
 #: src/modules/lighter/domain/synthetics/positions/utils.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Limit Order"
 msgstr "Limit Order"
 
@@ -2901,6 +3026,7 @@ msgstr "{orderTypeText} {visualMultiplierPrefix}{0} {longShortText}: {sign}{1}"
 msgid "Decreasing"
 msgstr "Decreasing"
 
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Create Referral Code"
@@ -3033,7 +3159,6 @@ msgid "Binding..."
 msgstr "Binding..."
 
 #: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
 #: src/modules/lighter/features/referrals/pages/Referrals/Referrals.tsx
@@ -3080,12 +3205,20 @@ msgstr "Cancelling {ordersText}."
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/orders/getPositionOrderError.tsx
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Loading..."
 msgstr "Loading..."
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "Trade now"
 msgstr "Trade now"
+
+#: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
+#: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/components/BottomTabs/PositionsTab.tsx
+msgid "Open a position to see your active trades here."
+msgstr "Open a position to see your active trades here."
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Please wait for settlement to complete."
@@ -3117,6 +3250,11 @@ msgstr "Edit take profit / stop loss for {0}"
 msgid "Maker TP ($1k)"
 msgstr "Maker TP ($1k)"
 
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+msgid "Trading fee tiers and VIP levels on Zanbara."
+msgstr "Trading fee tiers and VIP levels on Zanbara."
+
 #: src/shared/components/SettingsModal/DisplaySettings.tsx
 msgid "Show Leverage Slider"
 msgstr "Show Leverage Slider"
@@ -3139,6 +3277,10 @@ msgstr "Cancelling {orderText}."
 msgid "Execution price for the order."
 msgstr "Execution price for the order."
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Failed to cancel order"
+msgstr "Failed to cancel order"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Could not load fee and VIP data."
 msgstr "Could not load fee and VIP data."
@@ -3148,16 +3290,13 @@ msgid "Your frozen balance, locked in open orders and unavailable for trading un
 msgstr "Your frozen balance, locked in open orders and unavailable for trading until the orders are closed or cancelled."
 
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Bind someone else's invitation code to obtain the benefits of the invitee"
 msgstr "Bind someone else's invitation code to obtain the benefits of the invitee"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 msgid "Partial Position"
 msgstr "Partial Position"
-
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "All Zanbara users are eligible."
-msgstr "All Zanbara users are eligible."
 
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -3179,6 +3318,9 @@ msgstr "Referral code updated failed."
 #: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Price"
 msgstr "Price"
 
@@ -3207,6 +3349,10 @@ msgstr "Subscription Amount"
 msgid "No pending earnings to claim"
 msgstr "No pending earnings to claim"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transferring"
+msgstr "Transferring"
+
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "1m 40s"
@@ -3215,6 +3361,10 @@ msgstr "1m 40s"
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Your deposit of from {sourceChainName} was not executed due to an error"
 msgstr "Your deposit of from {sourceChainName} was not executed due to an error"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Your Zanbara Account balance, usable for trading from any supported chain."
+msgstr "Your Zanbara Account balance, usable for trading from any supported chain."
 
 #: src/shared/components/StatusNotification/GmStatusNotification.tsx
 msgid "Unknown buy order"
@@ -3256,8 +3406,6 @@ msgstr "Last year"
 msgid "Rebates earned as an affiliate."
 msgstr "Rebates earned as an affiliate."
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Fee & VIP"
 msgstr "Fee & VIP"
@@ -3268,6 +3416,10 @@ msgstr "Fee & VIP"
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Invalid liq. price"
 msgstr "Invalid liq. price"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Funds are now in your Zanbara Account."
+msgstr "Funds are now in your Zanbara Account."
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "<0>Smart wallets are not supported on {0}.</0><1/><2>Please switch to a different network or use a EOA wallet.</2>"
@@ -3299,6 +3451,7 @@ msgstr "Fulfilling shift request."
 
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Asset"
 msgstr "Asset"
@@ -3321,15 +3474,16 @@ msgstr "Stop Loss Decrease"
 msgid "TP Limit Price"
 msgstr "TP Limit Price"
 
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Reliable Zanbara-powered transactions"
-msgstr "Reliable Zanbara-powered transactions"
-
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to see your VIP level."
 msgstr "Connect wallet to see your VIP level."
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Action"
+msgstr "Action"
+
 #: src/modules/lighter/components/BottomTabs/AssetsTab.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Available Balance"
 msgstr "Available Balance"
 
@@ -3344,6 +3498,10 @@ msgstr "Referral code updated."
 #: src/shared/components/DateRangeSelect/DateRangeSelect.tsx
 msgid "30d"
 msgstr "30d"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer failed"
+msgstr "Transfer failed"
 
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Select different tokens"
@@ -3365,6 +3523,10 @@ msgstr "Edit Order"
 msgid "Approval was cancelled."
 msgstr "Approval was cancelled."
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer submitted"
+msgstr "Transfer submitted"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet and sign in to see your trading tier."
 msgstr "Connect wallet and sign in to see your trading tier."
@@ -3381,6 +3543,15 @@ msgstr "Max Leverage:"
 msgid "Withdrawing requires <0/> while you have <1/>. Please <2>swap</2> or <3>deposit</3> more {0} to your trading account."
 msgstr "Withdrawing requires <0/> while you have <1/>. Please <2>swap</2> or <3>deposit</3> more {0} to your trading account."
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Available"
+msgstr "Available"
+
+#: src/shared/components/Modal/Modal.tsx
+msgid "Close dialog"
+msgstr "Close dialog"
+
 #: src/shared/components/RatingToast/RatingToast.tsx
 msgid "How likely are you to recommend our service to a friend or colleague?"
 msgstr "How likely are you to recommend our service to a friend or colleague?"
@@ -3393,6 +3564,10 @@ msgstr "Insufficient liquidity to swap collateral"
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Market Decrease"
 msgstr "Market Decrease"
+
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "All Zanbara users are eligible."
+msgstr "All Zanbara users are eligible."
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -3414,6 +3589,7 @@ msgstr "The settlement chain is the network used for your account and opening po
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
 msgid "Cancel"
@@ -3513,7 +3689,7 @@ msgstr "Please connect your wallet first"
 msgid "Today"
 msgstr "Today"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "From"
 msgstr "From"
@@ -3548,7 +3724,6 @@ msgstr "Parts of this order will be executed once there is sufficient liquidity.
 msgid "This order using {collateralSymbol} as collateral will not be valid for the existing {longText} position using {symbol} as collateral."
 msgstr "This order using {collateralSymbol} as collateral will not be valid for the existing {longText} position using {symbol} as collateral."
 
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "VIP {0}"
 msgstr "VIP {0}"
@@ -3702,13 +3877,25 @@ msgstr "Please <0>swap</0> to get {wrappedNativeTokenSymbol}."
 msgid "All cross positions share the same cross margin as collateral. In the event of liquidation, your cross margin balance and any remaining open positions under assets in this mode may be forfeited."
 msgstr "All cross positions share the same cross margin as collateral. In the event of liquidation, your cross margin balance and any remaining open positions under assets in this mode may be forfeited."
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Price must be a multiple of {tickSize}"
+msgstr "Price must be a multiple of {tickSize}"
+
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Interest:"
 msgstr "Interest:"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "the market tick size"
+msgstr "the market tick size"
+
 #: src/modules/lighter/domain/multichain/SettlementChainWarningContainer.tsx
 msgid "You switched your settlement network to {0}, but you still have {1} remaining in your {2} Trading Account."
 msgstr "You switched your settlement network to {0}, but you still have {1} remaining in your {2} Trading Account."
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Reliable Zanbara-powered transactions"
+msgstr "Reliable Zanbara-powered transactions"
 
 #: src/shared/components/Errors/errorToasts.tsx
 msgid "Order error. Prices are currently volatile for this market, try again by <0>increasing the allowed slippage</0> under the execution details section."
@@ -3736,6 +3923,7 @@ msgstr "Open positions with orders"
 
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/shared/components/Referrals/BindReferralCodeForm.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
 #: src/shared/components/Referrals/JoinReferralCode.tsx
@@ -3759,10 +3947,6 @@ msgstr "RP Points Bonus"
 msgid "less than a minute"
 msgstr "less than a minute"
 
-#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
-msgid "1. Who's eligible to join Zanbara Strategy?"
-msgstr "1. Who's eligible to join Zanbara Strategy?"
-
 #: src/shared/components/Referrals/AddAffiliateCode.tsx
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 #: src/shared/components/TradeHistory/TradeHistoryRow/utils/shared.ts
@@ -3774,8 +3958,10 @@ msgstr "Create"
 msgid "Last 7d"
 msgstr "Last 7d"
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Minimum order value is {minNotionalText} {quoteSymbol}"
+msgstr "Minimum order value is {minNotionalText} {quoteSymbol}"
+
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Copy"
@@ -3788,8 +3974,12 @@ msgstr "Copy"
 #: src/modules/lighter/components/OrderFormPanel/AdvancedOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/LimitOrderForm.tsx
 #: src/modules/lighter/components/OrderFormPanel/MarketOrderForm.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
 msgid "Amount"
 msgstr "Amount"
@@ -3819,6 +4009,7 @@ msgstr "Claim"
 msgid "Shifting from <0><1>{fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>{toIndexName}</4><5>{toPoolName}</5></3>"
 msgstr "Shifting from <0><1>{fromIndexName}</1><2>{fromPoolName}</2></0> to <3><4>{toIndexName}</4><5>{toPoolName}</5></3>"
 
+#: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
@@ -3867,6 +4058,10 @@ msgstr "No assets are available for deposit"
 #: src/shared/components/Referrals/TradersStats.tsx
 msgid "V1 Avalanche Fuji"
 msgstr "V1 Avalanche Fuji"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "No trade history"
+msgstr "No trade history"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 msgid "Realized Swap Impact"
@@ -3934,6 +4129,10 @@ msgstr "Smart wallets are not supported on this network."
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Update Take Profit"
 msgstr "Update Take Profit"
+
+#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
+msgid "Faster execution with Zanbara premium RPCs"
+msgstr "Faster execution with Zanbara premium RPCs"
 
 #: src/shared/components/TwapRows/TwapRows.tsx
 msgid "Minute(s)"
@@ -4040,6 +4239,10 @@ msgstr "Limit Price"
 msgid "You"
 msgstr "You"
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Futures Wallet Assets (USD)"
+msgstr "Futures Wallet Assets (USD)"
+
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Deactivate 1CT (One-Click Trading)"
 msgstr "Deactivate 1CT (One-Click Trading)"
@@ -4053,6 +4256,7 @@ msgstr "Failed to request withdraw"
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 #: src/shared/components/TradingAccountModal/keys.ts
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Deposit"
@@ -4117,6 +4321,8 @@ msgstr "Stop Loss"
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Side"
 msgstr "Side"
 
@@ -4147,6 +4353,10 @@ msgstr "TP Price"
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "First Month Only"
 msgstr "First Month Only"
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer {transferSymbol} amount"
+msgstr "Transfer {transferSymbol} amount"
 
 #: src/modules/lighter/features/points/pages/PointsPage/PointsPage.tsx
 msgid "PnL Points"
@@ -4231,6 +4441,8 @@ msgstr "Error simulating withdrawal"
 #: src/modules/lighter/components/BottomTabs/TradeHistoryTab.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 #: src/shared/components/Referrals/TradersStats.tsx
 #: src/shared/components/TradingAccountModal/TransferDetailsView.tsx
@@ -4256,6 +4468,7 @@ msgstr "Swap {0} for {1}"
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Maker"
 msgstr "Maker"
 
@@ -4295,6 +4508,16 @@ msgstr "Tier"
 #: src/modules/lighter/domain/synthetics/trade/utils/validation.ts
 msgid "Page outdated, please refresh"
 msgstr "Page outdated, please refresh"
+
+#. js-lingui-explicit-id
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "nav.futures"
+msgstr "Futures"
+
+#. js-lingui-explicit-id
+#: src/modules/lighter/components/TopNav/TopNav.tsx
+msgid "nav.spot"
+msgstr "Spot"
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed Withdraw"
@@ -4337,11 +4560,6 @@ msgstr "Settled hourly in batches"
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
 msgid "Manage your risk on individual positions by restricting the amount of margin allocated to each. If the margin ratio of an isolated position reaches 100%, the position will be liquidated."
 msgstr "Manage your risk on individual positions by restricting the amount of margin allocated to each. If the margin ratio of an isolated position reaches 100%, the position will be liquidated."
-
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-#: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
-msgid "Trading fee tiers and VIP levels on Zanbara."
-msgstr "Trading fee tiers and VIP levels on Zanbara."
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Tier T3"
@@ -4432,6 +4650,10 @@ msgstr "All orders cancelled successfully"
 msgid "$0 – $4,999,999"
 msgstr "$0 – $4,999,999"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Amount must be a multiple of {lotSize}"
+msgstr "Amount must be a multiple of {lotSize}"
+
 #: src/shared/components/StatusNotification/OrderStatusNotification.tsx
 msgid "Increasing"
 msgstr "Increasing"
@@ -4444,6 +4666,10 @@ msgstr "Referral link copied to your clipboard"
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "No tier information yet."
 msgstr "No tier information yet."
+
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Zanbara Account Balance"
+msgstr "Zanbara Account Balance"
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -4535,6 +4761,14 @@ msgstr "<0>Your wallet is not connected to {0}.</0><1/><2>Switch to {1}</2>"
 msgid "Transaction was cancelled."
 msgstr "Transaction was cancelled."
 
+#: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
+msgid "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
+msgstr "Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at maturity."
+
+#: src/shared/components/BotanixBanner/BotanixBanner.tsx
+msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
+msgstr "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
+
 #: src/modules/lighter/components/ChartPanel/FundingPanel.tsx
 msgid "Yearly Funding Rate"
 msgstr "Yearly Funding Rate"
@@ -4546,6 +4780,12 @@ msgstr "Shift order cancelled."
 #: src/shared/lib/legacy.ts
 msgid "Order size is bigger than position, will only be executable if position increases"
 msgstr "Order size is bigger than position, will only be executable if position increases"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Buy"
+msgstr "Buy"
 
 #: src/modules/lighter/features/earn/components/SubscriptionModal/SubscriptionModal.tsx
 msgid "Transaction rejected by user"
@@ -4638,10 +4878,6 @@ msgstr "Modify Order"
 msgid "Candles"
 msgstr "Candles"
 
-#: src/shared/components/BotanixBanner/BotanixBanner.tsx
-msgid "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
-msgstr "using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time."
-
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Withdraw Fee"
 msgstr "Withdraw Fee"
@@ -4657,6 +4893,11 @@ msgstr "Closed PnL"
 #: src/modules/lighter/components/ChartPanel/DetailsPanel.tsx
 msgid "Min {0} Amount:"
 msgstr "Min {0} Amount:"
+
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+#: src/modules/lighter/components/ChartPanel/ChartPanel.tsx
+msgid "Exit fullscreen"
+msgstr "Exit fullscreen"
 
 #: src/modules/lighter/context/SubaccountContext/SubaccountContextProvider.tsx
 msgid "Activate 1CT (One-Click Trading)"
@@ -4711,6 +4952,7 @@ msgid "Highest trading tier reached for volume requirement."
 msgstr "Highest trading tier reached for volume requirement."
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "All assets"
 msgstr "All assets"
 
@@ -4718,7 +4960,6 @@ msgstr "All assets"
 msgid "Market - Long Dec."
 msgstr "Market - Long Dec."
 
-#: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/components/TopNav/TopNav.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
@@ -4740,6 +4981,15 @@ msgstr "The PnL ($) compared to the capital used.<0/><1/>The capital used is cal
 msgid "No data available"
 msgstr "No data available"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
+msgid "View your trading performance and account overview"
+msgstr "View your trading performance and account overview"
+
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
+msgid "Spot"
+msgstr "Spot"
+
 #: src/shared/components/Referrals/ReferralDashboard.tsx
 msgid "Next tier volume (USD)"
 msgstr "Next tier volume (USD)"
@@ -4747,10 +4997,6 @@ msgstr "Next tier volume (USD)"
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "VIP0: 0.040% → 0.036%"
 msgstr "VIP0: 0.040% → 0.036%"
-
-#: src/shared/components/TradingAccountModal/MainView.tsx
-msgid "Your Zanbara Account balance, usable for trading from any supported chain."
-msgstr "Your Zanbara Account balance, usable for trading from any supported chain."
 
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Failed Stop Loss"
@@ -4764,6 +5010,7 @@ msgstr "Upgrade to VIP {nextTier} to save {0}% on Taker fee"
 msgid "Invite friend"
 msgstr "Invite friend"
 
+#: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Daily Profit"
 msgstr "Daily Profit"
@@ -4783,6 +5030,7 @@ msgid "Transaction failed"
 msgstr "Transaction failed"
 
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Status"
 msgstr "Status"
 
@@ -4847,10 +5095,6 @@ msgstr "Product has not been settled yet"
 msgid "Oops! Something went wrong"
 msgstr "Oops! Something went wrong"
 
-#: src/shared/components/TradingAccountModal/DepositStatusView.tsx
-msgid "Faster execution with Zanbara premium RPCs"
-msgstr "Faster execution with Zanbara premium RPCs"
-
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "COMPLETED"
@@ -4881,11 +5125,6 @@ msgstr "long"
 msgid "+10 RP"
 msgstr "+10 RP"
 
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
-msgid "My Referral Code"
-msgstr "My Referral Code"
-
 #: src/shared/components/Referrals/ReferralCodeWarnings.tsx
 msgid "This code is not yet registered on {nonTakenNetworkNames}, you will not receive rebates there.<0/><1/>Switch your network to create this code on {nonTakenNetworkNames}."
 msgstr "This code is not yet registered on {nonTakenNetworkNames}, you will not receive rebates there.<0/><1/>Switch your network to create this code on {nonTakenNetworkNames}."
@@ -4907,13 +5146,6 @@ msgstr "Referral code does not exist"
 msgid "Language"
 msgstr "Language"
 
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-#: src/modules/lighter/features/accounts/pages/AccountDashboard/AccountDashboard.tsx
-#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-#: src/shared/components/TradingAccountModal/AvailableToTradeAssetsView.tsx
-msgid "Zanbara Account"
-msgstr "Zanbara Account"
-
 #: src/modules/lighter/domain/synthetics/sidecarOrders/utils.ts
 msgid "Trigger price below lowest limit price"
 msgstr "Trigger price below lowest limit price"
@@ -4921,6 +5153,15 @@ msgstr "Trigger price below lowest limit price"
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 msgid "Download as CSV"
 msgstr "Download as CSV"
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Order submitted: {0}"
+msgstr "Order submitted: {0}"
+
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+#: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/LeaderboardPage.tsx
+msgid "Leaderboard for traders on Zanbara."
+msgstr "Leaderboard for traders on Zanbara."
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
 msgid "Deposit Fee"
@@ -5006,6 +5247,10 @@ msgstr "7d"
 msgid "Invitees Required"
 msgstr "Invitees Required"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Value"
+msgstr "Value"
+
 #: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
 msgid "Enter Referral Code"
 msgstr "Enter Referral Code"
@@ -5049,6 +5294,7 @@ msgstr "Failed to bind referral code"
 
 #: src/modules/lighter/components/BottomTabs/BottomTabs.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/HistoricalLists.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Order History"
 msgstr "Order History"
 
@@ -5084,6 +5330,12 @@ msgstr "VIP {nextTier}"
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Contract USDT insufficient or not approved. Please contact admin."
 msgstr "Contract USDT insufficient or not approved. Please contact admin."
+
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Sell"
+msgstr "Sell"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
 msgid "Your rewards have been claimed successfully."
@@ -5168,6 +5420,10 @@ msgstr "{n}th Term"
 msgid "Number of Parts"
 msgstr "Number of Parts"
 
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+msgid "Cancelling"
+msgstr "Cancelling"
+
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "VIP 5 Legend"
 msgstr "VIP 5 Legend"
@@ -5211,11 +5467,14 @@ msgstr "Approving USDT..."
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/BottomTabs/TpSlPositionModal.tsx
 #: src/modules/lighter/components/OrderFormPanel/OrderFormPanel.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Limit"
 msgstr "Limit"
 
 #: src/shared/components/TradingAccountModal/DepositView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
 #: src/shared/components/TradingAccountModal/WithdrawalView.tsx
 msgid "Available:"
 msgstr "Available:"
@@ -5253,6 +5512,11 @@ msgstr "Maturity Date:"
 msgid "We encountered an error while loading the Earn page. Please try refreshing the page or contact support if the problem persists."
 msgstr "We encountered an error while loading the Earn page. Please try refreshing the page or contact support if the problem persists."
 
+#: src/shared/components/TradingAccountModal/MainView.tsx
+#: src/shared/components/TradingAccountModal/MainView.tsx
+msgid "Transfer"
+msgstr "Transfer"
+
 #: src/shared/components/TradeHistory/keys.ts
 msgid "Update TWAP Swap Part"
 msgstr "Update TWAP Swap Part"
@@ -5284,8 +5548,13 @@ msgstr "You have already bound a referral code."
 
 #: src/modules/lighter/components/BottomTabs/OpenOrdersTab.tsx
 #: src/modules/lighter/components/BottomTabs/OrderHistoryTab.tsx
+#: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Filled"
 msgstr "Filled"
+
+#: src/modules/lighter/features/referrals/pages/ZanbaraReferralsPage/ZanbaraReferralsPage.tsx
+msgid "Copy Referral Code"
+msgstr "Copy Referral Code"
 
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
@@ -5313,13 +5582,3 @@ msgstr "Reward Leaderboard"
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/EarnContent.tsx
 msgid "Total Interest Income"
 msgstr "Total Interest Income"
-
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#. js-lingui-explicit-id
-msgid "nav.futures"
-msgstr "Futures"
-
-#: src/modules/lighter/components/TopNav/TopNav.tsx
-#. js-lingui-explicit-id
-msgid "nav.spot"
-msgstr "Spot"
