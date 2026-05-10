@@ -31,7 +31,7 @@ import { Bar, FromOldToNewArray } from "domain/tradingview/types";
 import { formatTimeInBarToMs } from "domain/tradingview/utils";
 
 // Resolution string to backend period mapping
-// Note: Backend only supports "1m" | "5m" | "15m" | "30m" | "1h" | "4h" | "1d"
+// Note: Backend only supports "1m" | "5m" | "15m" | "1h" | "4h" | "1d"
 // For weekly and monthly, we use "1d" as fallback
 const RESOLUTION_TO_PERIOD: Record<string, KlinePeriod> = {
   "1": "1m",

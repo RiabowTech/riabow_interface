@@ -520,7 +520,8 @@ export interface LatestCandleResponse {
   is_final: boolean;
 }
 
-export type KlinePeriod = "1m" | "5m" | "15m" | "30m" | "1h" | "4h" | "1d"; // API supports these periods
+// Backend rejects "30m" on both perp and spot — supported set is exactly these six.
+export type KlinePeriod = "1m" | "5m" | "15m" | "1h" | "4h" | "1d";
 
 export interface GetCandlesParams {
   period: KlinePeriod;

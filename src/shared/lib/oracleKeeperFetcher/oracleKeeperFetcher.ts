@@ -73,21 +73,22 @@ function getPeriodSeconds(period: string): number {
 // TradingView resolution -> API period mapping
 // Note: DataFeed passes SUPPORTED_RESOLUTIONS_V2[resolution] which may be in API format (e.g., "1m", "5m", "1h", "1d")
 // or TradingView format (e.g., "1W", "1M" for weekly/monthly)
-// API only supports: "1m", "5m", "15m", "30m", "1h", "4h", "1d" (no weekly/monthly)
+// API only supports: "1m", "5m", "15m", "1h", "4h", "1d" (no 30m / weekly / monthly)
 function convertPeriodToApiFormat(period: string): KlinePeriod {
   // If period is already in API format and supported, return as is
-  const supportedPeriods: KlinePeriod[] = ["1m", "5m", "15m", "30m", "1h", "4h", "1d"];
+  const supportedPeriods: KlinePeriod[] = ["1m", "5m", "15m", "1h", "4h", "1d"];
   if (supportedPeriods.includes(period as KlinePeriod)) {
     return period as KlinePeriod;
   }
 
-  // Convert from TradingView resolution format or handle unsupported periods
-  // Note: API doesn't support weekly/monthly, so we fallback to daily
+  // Convert from TradingView resolution format or handle unsupported periods.
+  // 30m and weekly/monthly are not supported by the backend → fall back to a
+  // nearby supported interval rather than passing through and getting a 400.
   const periodMap: Record<string, KlinePeriod> = {
     "1": "1m",
     "5": "5m",
     "15": "15m",
-    "30": "30m",
+    "30": "15m", // 30m not supported → use the next finer granularity
     "60": "1h",
     "240": "4h",
     "1D": "1d",
