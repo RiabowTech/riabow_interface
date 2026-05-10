@@ -1144,6 +1144,9 @@ function normalizeBalancesResponse(raw: unknown): BalancesResponse {
         available,
         frozen,
         total,
+        available_usd: balance.available_usd !== undefined ? String(balance.available_usd) : undefined,
+        frozen_usd: balance.frozen_usd !== undefined ? String(balance.frozen_usd) : undefined,
+        total_usd: balance.total_usd !== undefined ? String(balance.total_usd) : undefined,
       };
     }),
   };

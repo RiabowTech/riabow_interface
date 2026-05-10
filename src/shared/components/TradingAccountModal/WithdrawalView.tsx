@@ -104,7 +104,7 @@ import { SyntheticsInfoRow } from "../SyntheticsInfoRow";
 import { InsufficientWntBanner } from "./InsufficientWntBanner";
 import { toastCustomOrStargateError } from "./toastCustomOrStargateError";
 import { isTradeModeActive, useTradeProduct } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
-import { useZanbaraUserBalances } from "@/modules/lighter/api";
+import { useZanbaraBalancesForProduct, useZanbaraUserBalances } from "@/modules/lighter/api";
 import { requestWithdraw, confirmWithdraw, isAuthenticated } from "@/modules/lighter/api/custom/client";
 import {
   DEFAULT_SPOT_CHAIN_ID,
@@ -196,10 +196,17 @@ export const WithdrawalView = () => {
   const isSpotProduct = product === "spot";
   const spotChainId = DEFAULT_SPOT_CHAIN_ID;
   const spotVaultAddress = getSpotVaultAddress(spotChainId);
-  const apiChainId = chainId;
-  const withdrawContractChainId = isSpotProduct ? spotChainId : chainId;
   const { data: walletTokenConfigs } = useWalletTokensConfig();
   const spotTokenConfig = findWalletTokenConfig(walletTokenConfigs, spotChainId);
+  const tradingUsdtAddress = chainId ? getTradingUsdtAddress(chainId) : undefined;
+  const selectedTokenAddressLower = selectedTokenAddress?.toLowerCase();
+  const spotTokenAddressLower = spotTokenConfig?.contract.toLowerCase();
+  const tradingUsdtAddressLower = tradingUsdtAddress?.toLowerCase();
+  const isSpotVaultWithdrawal =
+    isSpotProduct && !!selectedTokenAddressLower && selectedTokenAddressLower === spotTokenAddressLower;
+  const activeWithdrawalProduct = isSpotVaultWithdrawal ? "spot" : "futures";
+  const apiChainId = isSpotVaultWithdrawal ? spotChainId : chainId;
+  const withdrawContractChainId = isSpotVaultWithdrawal ? spotChainId : chainId;
 
   // In API trading mode, default the withdrawal token to USDT.
   useEffect(() => {
@@ -215,13 +222,18 @@ export const WithdrawalView = () => {
       return;
     }
 
-    if (withdrawalViewChain !== spotChainId) {
-      setWithdrawalViewChain(spotChainId as SourceChainId);
-    }
-    if (spotTokenConfig && selectedTokenAddress?.toLowerCase() !== spotTokenConfig.contract.toLowerCase()) {
+    if (!selectedTokenAddress && spotTokenConfig) {
       setSelectedTokenAddress(spotTokenConfig.contract);
+      return;
+    }
+
+    const nextWithdrawalChain = isSpotVaultWithdrawal ? spotChainId : chainId;
+    if (nextWithdrawalChain && withdrawalViewChain !== nextWithdrawalChain) {
+      setWithdrawalViewChain(nextWithdrawalChain as SourceChainId);
     }
   }, [
+    chainId,
+    isSpotVaultWithdrawal,
     isSpotProduct,
     isVisibleOrView,
     selectedTokenAddress,
@@ -235,6 +247,11 @@ export const WithdrawalView = () => {
   const publicClient = usePublicClient({ chainId: withdrawContractChainId });
   // Only subscribe to API balances in API trading mode to avoid unnecessary state churn.
   const balancesResult = useZanbaraUserBalances(isTradeMode ? { refreshInterval: 10000 } : undefined);
+  const futuresBalancesResult = useZanbaraBalancesForProduct(
+    "futures",
+    isTradeMode && isSpotProduct ? chainId : undefined,
+    { refreshInterval: 10000 }
+  );
   const mutateBalances = isTradeMode ? balancesResult.mutate : undefined;
 
   const { tokensData } = useTokensDataRequest(chainId, withdrawalViewChain);
@@ -268,12 +285,62 @@ export const WithdrawalView = () => {
     };
   }, [balancesResult.data?.balances, isSpotProduct, spotTokenConfig]);
 
+  const futuresUsdtToken = useMemo<TokenData | undefined>(() => {
+    if (!isSpotProduct || !tradingUsdtAddress) {
+      return undefined;
+    }
+
+    let baseToken: TokenData;
+    try {
+      baseToken = {
+        ...getToken(chainId, tradingUsdtAddress),
+        prices: { minPrice: expandDecimals(1, USD_DECIMALS), maxPrice: expandDecimals(1, USD_DECIMALS) },
+      };
+    } catch {
+      baseToken = {
+        name: "Tether",
+        symbol: "USDT",
+        decimals: 6,
+        address: tradingUsdtAddress,
+        isStable: true,
+        prices: { minPrice: expandDecimals(1, USD_DECIMALS), maxPrice: expandDecimals(1, USD_DECIMALS) },
+      };
+    }
+
+    const apiBalance = futuresBalancesResult.data?.balances?.find((balance) => balance.symbol?.toUpperCase() === "USDT");
+    const tradingAccountBalance = apiBalance ? parseUnits(apiBalance.available || "0", baseToken.decimals) : 0n;
+
+    return {
+      ...baseToken,
+      tradingAccountBalance,
+      balance: tradingAccountBalance,
+    };
+  }, [chainId, futuresBalancesResult.data?.balances, isSpotProduct, tradingUsdtAddress]);
+
   const selectedToken = useMemo(() => {
     if (isSpotProduct) {
-      return selectedTokenAddress ? spotToken : undefined;
+      if (!selectedTokenAddressLower) {
+        return undefined;
+      }
+      if (selectedTokenAddressLower === spotTokenAddressLower) {
+        return spotToken;
+      }
+      if (selectedTokenAddressLower === tradingUsdtAddressLower) {
+        return futuresUsdtToken;
+      }
+      return undefined;
     }
     return getByKey(tokensData, selectedTokenAddress);
-  }, [isSpotProduct, selectedTokenAddress, spotToken, tokensData]);
+  }, [
+    futuresUsdtToken,
+    isSpotProduct,
+    selectedTokenAddress,
+    selectedTokenAddressLower,
+    spotToken,
+    spotTokenAddressLower,
+    tokensData,
+    tradingUsdtAddressLower,
+  ]);
 
   const unwrappedSelectedTokenAddress =
     isSpotProduct
@@ -281,14 +348,16 @@ export const WithdrawalView = () => {
       : selectedTokenAddress !== undefined
         ? convertTokenAddress(chainId, selectedTokenAddress, "native")
         : undefined;
-  const unwrappedSelectedTokenSymbol = unwrappedSelectedTokenAddress
-    ? getToken(chainId, unwrappedSelectedTokenAddress).symbol
-    : undefined;
+  const unwrappedSelectedTokenSymbol = isSpotProduct
+    ? selectedToken?.symbol
+    : unwrappedSelectedTokenAddress
+      ? getToken(chainId, unwrappedSelectedTokenAddress).symbol
+      : undefined;
   const wrappedNativeTokenAddress = getWrappedToken(chainId).address;
   const wrappedNativeToken = getByKey(tokensData, wrappedNativeTokenAddress);
 
   const selectedTokenSettlementChainTokenId = unwrappedSelectedTokenAddress
-    ? isSpotProduct && spotTokenConfig
+    ? isSpotVaultWithdrawal && spotTokenConfig
       ? {
           chainId: spotTokenConfig.chainId,
           address: spotTokenConfig.contract,
@@ -308,7 +377,8 @@ export const WithdrawalView = () => {
 
   const filteredNetworks = useMemo(() => {
     if (isSpotProduct) {
-      return [{ id: spotChainId, name: getFundingChainName(spotChainId) }];
+      const activeChainId = isSpotVaultWithdrawal ? spotChainId : chainId;
+      return activeChainId ? [{ id: activeChainId, name: getFundingChainName(activeChainId) }] : EMPTY_ARRAY;
     }
 
     if (!unwrappedSelectedTokenAddress) {
@@ -323,11 +393,11 @@ export const WithdrawalView = () => {
       );
       return mappedTokenId !== undefined;
     });
-  }, [unwrappedSelectedTokenAddress, networks, chainId, isSpotProduct, spotChainId]);
+  }, [unwrappedSelectedTokenAddress, networks, chainId, isSpotProduct, isSpotVaultWithdrawal, spotChainId]);
 
   const options = useMemo((): TokenData[] => {
     if (isSpotProduct) {
-      return spotToken ? [spotToken] : EMPTY_ARRAY;
+      return [spotToken, futuresUsdtToken].filter((token): token is TokenData => Boolean(token));
     }
 
     if (!isSettlementChain(chainId) || !tokensData) {
@@ -360,7 +430,7 @@ export const WithdrawalView = () => {
           return bFloat - aFloat;
         }) ?? EMPTY_ARRAY
     );
-  }, [chainId, tokensData, isTradeMode, isSpotProduct, spotToken]);
+  }, [chainId, tokensData, isTradeMode, isSpotProduct, spotToken, futuresUsdtToken]);
 
   const { tradingAccountUsd } = useAvailableToTradeAssetMultichain();
 
@@ -621,6 +691,15 @@ export const WithdrawalView = () => {
     (tokenAddress: string) => {
       setSelectedTokenAddress(tokenAddress);
 
+      if (isSpotProduct) {
+        const isNextSpotToken = spotTokenConfig?.contract.toLowerCase() === tokenAddress.toLowerCase();
+        const nextChainId = isNextSpotToken ? spotChainId : chainId;
+        if (nextChainId) {
+          setWithdrawalViewChain(nextChainId as SourceChainId);
+        }
+        return;
+      }
+
       if (withdrawalViewChain !== undefined) {
         const unwrappedTokenAddress = convertTokenAddress(chainId, tokenAddress, "native");
         const tokenId = getMappedTokenId(chainId as SettlementChainId, unwrappedTokenAddress, withdrawalViewChain);
@@ -647,7 +726,7 @@ export const WithdrawalView = () => {
         }
       }
     },
-    [chainId, setSelectedTokenAddress, setWithdrawalViewChain, withdrawalViewChain]
+    [chainId, isSpotProduct, setSelectedTokenAddress, setWithdrawalViewChain, spotChainId, spotTokenConfig, withdrawalViewChain]
   );
 
   const handleWithdraw = async () => {
@@ -662,8 +741,8 @@ export const WithdrawalView = () => {
         !walletClient ||
         !publicClient ||
         !inputValue ||
-        inputAmountUsd === undefined ||
-        inputAmountUsd === 0n
+        inputAmount === undefined ||
+        inputAmount <= 0n
       ) {
         helperToast.error(t`Missing required parameters for withdrawal`);
         return;
@@ -680,7 +759,7 @@ export const WithdrawalView = () => {
         // Step 1: Request withdraw from backend to get signature
         // According to API documentation, token should be "USDT" (string), not contract address
         // Amount should be the raw input value without precision multiplication
-        const withdrawTokenSymbol = isSpotProduct ? spotTokenConfig?.symbol : "USDT";
+        const withdrawTokenSymbol = isSpotVaultWithdrawal ? spotTokenConfig?.symbol : "USDT";
         if (!withdrawTokenSymbol) {
           throw new Error("Withdraw token not configured");
         }
@@ -688,7 +767,7 @@ export const WithdrawalView = () => {
         const withdrawResponse = await requestWithdraw(apiChainId, {
           token: withdrawTokenSymbol,
           amount: inputValue, // Use raw input value without precision multiplication
-        }, product);
+        }, activeWithdrawalProduct);
 
         // API returns "backend_signature", fallback to "signature" for backward compatibility
         const signature = withdrawResponse.backend_signature || withdrawResponse.signature;
@@ -699,7 +778,7 @@ export const WithdrawalView = () => {
         // Use vault_address from response if available, otherwise fallback to config
         const vaultAddress =
           withdrawResponse.vault_address ||
-          (isSpotProduct ? spotVaultAddress : getTradingVaultAddress(withdrawContractChainId));
+          (isSpotVaultWithdrawal ? spotVaultAddress : getTradingVaultAddress(withdrawContractChainId));
         if (!vaultAddress) {
           throw new Error("Vault contract not found");
         }
@@ -735,7 +814,7 @@ export const WithdrawalView = () => {
 
         // Step 2: Simulate contract call before executing to check if it will succeed
         try {
-          if (isSpotProduct) {
+          if (isSpotVaultWithdrawal) {
             await publicClient.simulateContract({
               address: vaultAddress as `0x${string}`,
               abi: SpotVaultAbi,
@@ -806,7 +885,7 @@ export const WithdrawalView = () => {
         // Step 3: Call Vault contract using walletClient (only if simulation succeeds)
         // Contract signature: releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
         // Parameters from response: amount, expiry (as deadline), backend_signature
-        const txHash = isSpotProduct
+        const txHash = isSpotVaultWithdrawal
           ? await walletClient.writeContract({
               address: vaultAddress as `0x${string}`,
               abi: SpotVaultAbi,
@@ -837,7 +916,7 @@ export const WithdrawalView = () => {
           try {
             await confirmWithdraw(apiChainId, withdrawId, {
               tx_hash: receipt.transactionHash,
-            }, product);
+            }, activeWithdrawalProduct);
           } catch (confirmError) {
             // Non-critical error, just log it
             console.warn("[WithdrawalView] Failed to confirm withdraw:", confirmError);

@@ -12,8 +12,8 @@
 }
 
 .trading-account-modal-shell {
-  width: min(980px, calc(100vw - 48px)) !important;
-  height: min(92vh, 1040px) !important;
+  width: min(720px, calc(100vw - 48px)) !important;
+  height: min(82vh, 680px) !important;
   border: 1px solid rgba(212, 161, 58, 0.58) !important;
   border-radius: 10px !important;
   background:
@@ -30,29 +30,29 @@
 }
 
 .trading-account-modal-shell .Modal-header-wrapper--zanbara {
-  padding: 28px 32px 14px;
+  padding: 18px 22px 8px;
 }
 
 .trading-account-modal-shell .Modal-title-bar {
-  height: 34px;
+  height: 28px;
 }
 
 .trading-account-modal-shell .zanbara-popup__title-in-modal {
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 19px;
+  line-height: 26px;
   letter-spacing: 0;
   font-weight: 700;
   color: #f3f0e7;
 }
 
 .trading-account-modal-shell .Modal-close-icon--zanbara {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   color: #d8d2c5;
 }
 
 .trading-account-modal-main {
-  --padding-adaptive: 20px;
+  --padding-adaptive: 12px;
   min-height: 0;
   overscroll-behavior: contain;
   color: #f4f0e7;
@@ -63,31 +63,31 @@
 }
 
 .trading-account-modal-main > .px-adaptive {
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 14px;
+  padding-right: 14px;
 }
 
 .trading-wallet-layout {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
 }
 
 .wallet-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
+  gap: 12px;
 }
 
 .wallet-address-button {
-  width: min(370px, 52vw) !important;
-  min-height: 60px !important;
+  width: min(260px, 46vw) !important;
+  min-height: 42px !important;
   justify-content: flex-start !important;
-  gap: 12px !important;
+  gap: 8px !important;
   border-color: rgba(212, 161, 58, 0.42) !important;
   background: rgba(12, 13, 13, 0.58) !important;
-  padding: 0 16px !important;
+  padding: 0 12px !important;
 }
 
 .wallet-address-button .size-20 {
@@ -96,7 +96,7 @@
 
 .wallet-address-text {
   color: #f3f0e7;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.02em;
   line-height: 1;
@@ -105,12 +105,12 @@
 .wallet-toolbar-actions {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 10px;
 }
 
 .wallet-toolbar-actions .zanbara-ui-button {
-  width: 60px !important;
-  height: 60px !important;
+  width: 42px !important;
+  height: 42px !important;
   border-color: rgba(212, 161, 58, 0.42) !important;
   background: rgba(12, 13, 13, 0.58) !important;
 }
@@ -132,17 +132,17 @@
 
 .wallet-summary-card {
   display: grid;
-  grid-template-columns: 1.35fr repeat(3, 1fr);
-  min-height: 132px;
-  padding: 22px 28px;
+  grid-template-columns: 1.25fr repeat(3, 1fr);
+  min-height: 90px;
+  padding: 14px 18px;
 }
 
 .wallet-summary-metric {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 12px;
-  padding: 0 28px;
+  gap: 7px;
+  padding: 0 16px;
   border-left: 1px solid rgba(222, 208, 176, 0.13);
 }
 
@@ -152,12 +152,12 @@
 }
 
 .wallet-summary-metric--large .numbers {
-  font-size: 34px;
+  font-size: 24px;
 }
 
 .wallet-summary-metric .numbers,
 .wallet-assets-card .numbers {
-  font-size: 26px;
+  font-size: 20px;
   line-height: 1.1;
   font-weight: 700;
   color: #f3f0e7;
@@ -166,21 +166,21 @@
 .wallet-label-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   color: #a8aaa9;
-  font-size: 15px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .wallet-eye {
   color: #8e979b;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .wallet-subvalue {
   color: #a7a09b;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .wallet-tabs {
@@ -195,14 +195,14 @@
 .wallet-tab {
   position: relative;
   display: flex;
-  min-height: 58px;
+  min-height: 40px;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   border: 0;
   background: rgba(255, 255, 255, 0.02);
   color: #8e8c88;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -218,41 +218,41 @@
   position: absolute;
   bottom: -1px;
   left: 50%;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   content: "";
   transform: translate(-50%, 50%) rotate(45deg);
   background: #e4b540;
 }
 
 .wallet-tab-icon {
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
 }
 
 .wallet-assets-card {
-  padding: 22px 28px;
+  padding: 14px 18px;
 }
 
 .wallet-assets-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding-bottom: 16px;
+  gap: 12px;
+  padding-bottom: 10px;
 }
 
 .wallet-all-assets {
   display: flex;
-  min-height: 48px;
+  min-height: 34px;
   align-items: center;
   gap: 8px;
   border: 1px solid rgba(222, 208, 176, 0.12);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
   color: #f3f0e7;
-  padding: 0 18px;
-  font-size: 15px;
+  padding: 0 12px;
+  font-size: 12px;
 }
 
 .wallet-asset-table {
@@ -263,11 +263,11 @@
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
   align-items: center;
-  gap: 16px;
-  min-height: 64px;
+  gap: 10px;
+  min-height: 46px;
   border-top: 1px solid rgba(222, 208, 176, 0.09);
   color: #f3f0e7;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .wallet-asset-row:first-child {
@@ -275,56 +275,56 @@
 }
 
 .wallet-asset-row--header {
-  min-height: 40px;
+  min-height: 30px;
   color: #a8aaa9;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .wallet-asset-row span {
   display: block;
-  margin-top: 4px;
+  margin-top: 2px;
   color: #a7a09b;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .wallet-asset-empty {
   display: flex;
-  min-height: 72px;
+  min-height: 46px;
   align-items: center;
   justify-content: center;
   border-top: 1px solid rgba(222, 208, 176, 0.09);
   color: #8fa1aa;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .wallet-asset-token {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
 }
 
 .wallet-asset-symbol {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 650;
 }
 
 .wallet-transfer-card {
-  padding: 18px 28px;
+  padding: 13px 18px;
 }
 
 .wallet-section-title {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
+  gap: 8px;
+  margin-bottom: 10px;
   color: #f2c356;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
 }
 
 .wallet-section-icon {
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   color: #f2c356;
 }
 
@@ -334,18 +334,45 @@
 
 .wallet-transfer-grid {
   display: grid;
-  grid-template-columns: 1fr 52px 1fr 1.35fr 120px;
-  align-items: end;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) 38px minmax(0, 1fr);
+  grid-template-areas:
+    "from swap to"
+    "amount amount amount"
+    "submit submit submit";
+  align-items: center;
+  gap: 10px;
 }
 
 .wallet-transfer-box,
 .wallet-transfer-amount {
-  min-height: 78px;
+  min-height: 58px;
   border: 1px solid rgba(222, 208, 176, 0.16);
   border-radius: 6px;
-  padding: 12px 16px;
+  padding: 9px 12px;
   background: rgba(255, 255, 255, 0.025);
+}
+
+.wallet-transfer-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.wallet-transfer-grid > .wallet-transfer-box:first-child {
+  grid-area: from;
+}
+
+.wallet-swap-button {
+  grid-area: swap;
+  justify-self: center;
+}
+
+.wallet-transfer-grid > .wallet-transfer-box:nth-child(3) {
+  grid-area: to;
+}
+
+.wallet-transfer-amount {
+  grid-area: amount;
 }
 
 .wallet-transfer-box span,
@@ -354,20 +381,22 @@
 .wallet-transfer-box small {
   display: block;
   color: #a8aaa9;
-  font-size: 13px;
+  font-size: 11px;
+  white-space: nowrap;
 }
 
 .wallet-transfer-box strong {
   display: block;
-  margin: 8px 0;
+  margin: 5px 0;
   color: #f3f0e7;
-  font-size: 16px;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 .wallet-swap-button {
   display: flex;
-  width: 52px;
-  height: 52px;
+  width: 38px;
+  height: 38px;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(212, 161, 58, 0.48);
@@ -377,19 +406,19 @@
 }
 
 .wallet-swap-button svg {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
 }
 
 .wallet-transfer-input {
   display: flex;
-  min-height: 38px;
+  min-height: 30px;
   align-items: center;
   justify-content: space-between;
-  margin: 6px 0 10px;
+  margin: 4px 0 7px;
   border: 1px solid rgba(222, 208, 176, 0.12);
   border-radius: 4px;
-  padding: 0 12px;
+  padding: 0 9px;
   color: #f3f0e7;
 }
 
@@ -415,39 +444,43 @@
 }
 
 .wallet-transfer-submit {
-  min-height: 42px !important;
+  grid-area: submit;
+  align-self: center;
+  width: 100%;
+  min-height: 34px !important;
+  font-size: 12px !important;
 }
 
 .wallet-action-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 12px;
 }
 
 .wallet-action-button {
-  min-height: 52px !important;
-  gap: 12px !important;
-  font-size: 20px !important;
+  min-height: 38px !important;
+  gap: 8px !important;
+  font-size: 14px !important;
   color: #f2c356 !important;
 }
 
 .trading-account-modal-main > .grow:last-child {
-  padding: 0 20px 20px;
+  padding: 0 14px 14px;
 }
 
 .trading-account-modal-main > .grow:last-child > .px-adaptive {
-  padding-left: 18px;
-  padding-right: 18px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .trading-account-modal-main > .grow:last-child .text-body-large.font-medium {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
   color: #f3f0e7;
 }
 
 .trading-account-modal-main > .grow:last-child [role="button"] {
-  min-height: 62px;
+  min-height: 44px;
   border-top: 1px solid rgba(222, 208, 176, 0.08);
 }
 
@@ -463,6 +496,12 @@
   .wallet-summary-card,
   .wallet-transfer-grid {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "from"
+      "swap"
+      "to"
+      "amount"
+      "submit";
   }
 
   .wallet-summary-metric {

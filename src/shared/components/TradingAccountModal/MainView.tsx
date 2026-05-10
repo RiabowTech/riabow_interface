@@ -4,11 +4,13 @@ import { type ChangeEvent, useCallback, useMemo, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useHistory } from "react-router-dom";
 import { useCopyToClipboard } from "react-use";
-import { parseUnits, getAddress } from "viem";
+import useSWR from "swr";
+import { formatUnits, parseUnits, getAddress } from "viem";
 import { useAccount, usePublicClient } from "wagmi";
 
 import { useZanbaraBalancesForProduct, useZanbaraUserBalances } from "@/modules/lighter/api";
-import { confirmWithdraw, spotTransfer } from "@/modules/lighter/api/custom/client";
+import { confirmWithdraw, getTicker, spotTransfer } from "@/modules/lighter/api/custom/client";
+import { useTradingMarkets } from "@/modules/lighter/api/custom/useTradingMarkets";
 import { useTradingFundingHistory } from "@/modules/lighter/api/custom/useTradingFundingHistory";
 import {
   useTradingAccountModalOpen,
@@ -157,9 +159,121 @@ function findBalanceBySymbol<T extends { symbol?: string; token?: string }>(bala
   return balances?.find((balance) => getBalanceSymbol(balance).toUpperCase() === symbol.toUpperCase());
 }
 
-function toDisplayUsdAmount(value: string | undefined) {
-  return parseUsdStringToBigint(value);
+function isUsdStableSymbol(symbol: string) {
+  return ["USDT", "USDC", "USD"].includes(symbol.toUpperCase());
 }
+
+function getBalanceUsdField(
+  balance: { available_usd?: string; frozen_usd?: string; total_usd?: string } | undefined,
+  field: "available" | "frozen" | "total"
+) {
+  if (!balance) return undefined;
+
+  return field === "available" ? balance.available_usd : field === "frozen" ? balance.frozen_usd : balance.total_usd;
+}
+
+function normalizeMarketBaseSymbol(symbol: string | undefined) {
+  return (symbol ?? "").split(/[-/]/)[0]?.replace(/USDT$/i, "").toUpperCase() ?? "";
+}
+
+function buildUsdPriceMap(markets: Array<{ symbol: string; base_asset?: string; quote_asset?: string; lastPrice?: string; last_price?: string }>) {
+  const prices: Record<string, string> = {};
+
+  for (const market of markets) {
+    const quote = (market.quote_asset ?? "USDT").toUpperCase();
+    if (quote !== "USDT" && quote !== "USD") continue;
+
+    const base = (market.base_asset || normalizeMarketBaseSymbol(market.symbol)).toUpperCase();
+    const price = market.lastPrice ?? market.last_price;
+
+    if (base && price && Number(price) > 0) {
+      prices[base] = price;
+    }
+  }
+
+  return prices;
+}
+
+function getUsdPriceForBalance(balance: { symbol?: string; token?: string }, priceMap: Record<string, string>) {
+  const symbol = getBalanceSymbol(balance).toUpperCase();
+  if (isUsdStableSymbol(symbol)) return "1";
+
+  return priceMap[symbol];
+}
+
+function decimalProductToUsdBigint(amount: string | undefined, price: string | undefined) {
+  const amountNumber = Number(amount ?? "0");
+  const priceNumber = Number(price ?? "0");
+
+  if (!Number.isFinite(amountNumber) || !Number.isFinite(priceNumber)) {
+    return 0n;
+  }
+
+  return parseUsdStringToBigint((amountNumber * priceNumber).toFixed(12));
+}
+
+function balanceFieldToUsd(
+  balance:
+    | {
+        symbol?: string;
+        token?: string;
+        available: string;
+        frozen: string;
+        total: string;
+        available_usd?: string;
+        frozen_usd?: string;
+        total_usd?: string;
+      }
+    | undefined,
+  field: "available" | "frozen" | "total",
+  priceMap: Record<string, string>
+) {
+  if (!balance) return 0n;
+
+  const explicitUsd = getBalanceUsdField(balance, field);
+  if (explicitUsd !== undefined) {
+    return parseUsdStringToBigint(explicitUsd);
+  }
+
+  return decimalProductToUsdBigint(balance[field], getUsdPriceForBalance(balance, priceMap));
+}
+
+function sumBalancesUsd(
+  balances:
+    | Array<{
+        symbol?: string;
+        token?: string;
+        available: string;
+        frozen: string;
+        total: string;
+        available_usd?: string;
+        frozen_usd?: string;
+        total_usd?: string;
+      }>
+    | undefined,
+  priceMap: Record<string, string>
+) {
+  return (balances ?? []).reduce(
+    (acc, balance) => {
+      acc.availableUsd += balanceFieldToUsd(balance, "available", priceMap);
+      acc.frozenUsd += balanceFieldToUsd(balance, "frozen", priceMap);
+      acc.totalUsd += balanceFieldToUsd(balance, "total", priceMap);
+      return acc;
+    },
+    { availableUsd: 0n, frozenUsd: 0n, totalUsd: 0n }
+  );
+}
+
+function formatUsdEquivalentAmountText(usd: bigint | undefined) {
+  if (usd === undefined) return "0.00";
+
+  return Number(formatUnits(usd, 30)).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+const EMPTY_PRICE_MAP: Record<string, string> = {};
 
 function FundingHistoryItemLabel({
   step,
@@ -492,24 +606,67 @@ const WalletOverview = () => {
   const futuresBalancesResult = useZanbaraBalancesForProduct("futures", connectedChainId ?? settlementChainId, {
     refreshInterval: 10000,
   });
+  const spotMarketsResult = useTradingMarkets(DEFAULT_SPOT_CHAIN_ID, { refreshInterval: 10000 }, "spot");
+  const futuresMarketsResult = useTradingMarkets(connectedChainId ?? settlementChainId, { refreshInterval: 10000 }, "futures");
   const spotBalances = spotBalancesResult.data?.balances ?? [];
   const futuresBalances = futuresBalancesResult.data?.balances ?? [];
   const activeBalances = activeWallet === "spot" ? spotBalances : futuresBalances;
   const destinationBalances = activeWallet === "spot" ? futuresBalances : spotBalances;
   const activeBalancesResult = activeWallet === "spot" ? spotBalancesResult : futuresBalancesResult;
+  const activeMarkets = activeWallet === "spot" ? spotMarketsResult.markets : futuresMarketsResult.markets;
+  const activeNonStableSymbols = useMemo(() => {
+    return Array.from(
+      new Set(
+        activeBalances
+          .map((balance) => getBalanceSymbol(balance).toUpperCase())
+          .filter((symbol) => symbol && !isUsdStableSymbol(symbol))
+      )
+    );
+  }, [activeBalances]);
+  const activeSpotTickerSymbols = activeWallet === "spot" ? activeNonStableSymbols : [];
+  const activeSpotTickerKey =
+    activeSpotTickerSymbols.length > 0
+      ? ["wallet-spot-ticker-prices", DEFAULT_SPOT_CHAIN_ID, activeSpotTickerSymbols.join(",")]
+      : null;
+  const { data: activeSpotTickerPrices } = useSWR<Record<string, string>>(activeSpotTickerKey, async () => {
+    const entries = await Promise.all(
+      activeSpotTickerSymbols.map(async (symbol) => {
+        try {
+          const ticker = await getTicker(DEFAULT_SPOT_CHAIN_ID, `${symbol}USDT`, "spot");
+          return [symbol, ticker.last_price] as const;
+        } catch (error) {
+          console.warn("[WalletOverview] Failed to fetch spot ticker for balance valuation", { symbol, error });
+          return [symbol, undefined] as const;
+        }
+      })
+    );
+
+    return entries.reduce<Record<string, string>>((acc, [symbol, price]) => {
+      if (price && Number(price) > 0) {
+        acc[symbol] = price;
+      }
+      return acc;
+    }, {});
+  });
+  const activePriceMap = useMemo(
+    () => ({ ...buildUsdPriceMap(activeMarkets), ...(activeSpotTickerPrices ?? EMPTY_PRICE_MAP) }),
+    [activeMarkets, activeSpotTickerPrices]
+  );
+  const activeUsdTotals = useMemo(() => sumBalancesUsd(activeBalances, activePriceMap), [activeBalances, activePriceMap]);
   const primaryBalance = findPrimaryBalance(activeBalances);
   const activeUsdtBalance = findBalanceBySymbol(activeBalances, "USDT");
   const destinationUsdtBalance = findBalanceBySymbol(destinationBalances, "USDT");
   const balanceSymbol = getBalanceSymbol(primaryBalance);
-  const availableText = formatTokenAmountText(primaryBalance?.available);
-  const frozenText = formatTokenAmountText(primaryBalance?.frozen);
-  const totalText = formatTokenAmountText(primaryBalance?.total);
   const transferSymbol = "USDT";
   const transferAvailableText = formatTokenAmountText(activeUsdtBalance?.available);
   const transferDestinationAvailableText = formatTokenAmountText(destinationUsdtBalance?.available);
-  const availableUsd = primaryBalance !== undefined ? toDisplayUsdAmount(primaryBalance.available) : apiAccountUsd;
-  const frozenUsd = primaryBalance !== undefined ? toDisplayUsdAmount(primaryBalance.frozen) : apiFrozenAccountUsd;
-  const totalUsd = primaryBalance !== undefined ? toDisplayUsdAmount(primaryBalance.total) : apiTotalAccountUsd;
+  const activeBalancesLoaded = !activeBalancesResult.isLoading && activeBalancesResult.data !== undefined;
+  const availableUsd = activeBalancesLoaded ? activeUsdTotals.availableUsd : apiAccountUsd;
+  const frozenUsd = activeBalancesLoaded ? activeUsdTotals.frozenUsd : apiFrozenAccountUsd;
+  const totalUsd = activeBalancesLoaded ? activeUsdTotals.totalUsd : apiTotalAccountUsd;
+  const availableText = formatUsdEquivalentAmountText(availableUsd);
+  const frozenText = formatUsdEquivalentAmountText(frozenUsd);
+  const totalText = formatUsdEquivalentAmountText(totalUsd);
   const availableToTradeAssetSymbols =
     activeBalances.length > 0
       ? activeBalances.map((balance) => getBalanceSymbol(balance)).filter(Boolean)
@@ -562,12 +719,12 @@ const WalletOverview = () => {
             <span className="wallet-eye">◉</span>
           </div>
           <UsdValueWithSkeleton usd={totalUsd ?? apiTotalAccountUsd} />
-          <div className="wallet-subvalue">≈ {formatTokenAmountText(primaryBalance?.total)} {balanceSymbol}</div>
+          <div className="wallet-subvalue">≈ {totalText} USDT</div>
         </div>
         <div className="wallet-summary-metric">
           <div className="wallet-label-row">Available Balance</div>
           <UsdValueWithSkeleton usd={availableUsd} />
-          <div className="wallet-subvalue">{availableText} {balanceSymbol}</div>
+          <div className="wallet-subvalue">{availableText} USDT</div>
         </div>
         <div className="wallet-summary-metric">
           <div className="wallet-label-row">
@@ -576,12 +733,12 @@ const WalletOverview = () => {
             </TooltipWithPortal>
           </div>
           <UsdValueWithSkeleton usd={frozenUsd} />
-          <div className="wallet-subvalue">{frozenText} {balanceSymbol}</div>
+          <div className="wallet-subvalue">{frozenText} USDT</div>
         </div>
         <div className="wallet-summary-metric">
           <div className="wallet-label-row">Total Balance</div>
           <UsdValueWithSkeleton usd={totalUsd} />
-          <div className="wallet-subvalue">{totalText} {balanceSymbol}</div>
+          <div className="wallet-subvalue">{totalText} USDT</div>
         </div>
       </section>
 
@@ -612,7 +769,7 @@ const WalletOverview = () => {
               <span className="wallet-eye">◉</span>
             </div>
             <UsdValueWithSkeleton usd={totalUsd} />
-            <div className="wallet-subvalue">≈ {totalText} {balanceSymbol}</div>
+            <div className="wallet-subvalue">≈ {totalText} USDT</div>
           </div>
           <button type="button" className="wallet-all-assets" onClick={openAssets}>
             <span>All assets</span>
@@ -633,7 +790,7 @@ const WalletOverview = () => {
             return (
               <div className="wallet-asset-row" key={`${activeWallet}-${symbol}-${balance.token}`}>
                 <div className="wallet-asset-token">
-                  <TokenIcon symbol={symbol} displaySize={48} />
+                  <TokenIcon symbol={symbol} displaySize={34} />
                   <div>
                     <div className="wallet-asset-symbol">{symbol}</div>
                     <div className="wallet-subvalue">{symbol === "USDT" ? "Tether" : symbol}</div>

@@ -135,6 +135,9 @@ export interface AccountBalance {
   available: string;
   frozen: string; // API uses "frozen" not "locked"
   total: string; // API returns "total" not "balance"
+  available_usd?: string;
+  frozen_usd?: string;
+  total_usd?: string;
 }
 
 // ============================================
