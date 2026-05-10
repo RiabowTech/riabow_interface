@@ -81,25 +81,37 @@
 }
 
 .wallet-address-button {
-  width: min(260px, 46vw) !important;
+  width: min(300px, 46vw) !important;
   min-height: 42px !important;
   justify-content: flex-start !important;
-  gap: 8px !important;
+  gap: 10px !important;
   border-color: rgba(212, 161, 58, 0.42) !important;
   background: rgba(12, 13, 13, 0.58) !important;
-  padding: 0 12px !important;
+  padding: 0 14px !important;
+  overflow: hidden;
 }
 
 .wallet-address-button .size-20 {
-  margin-left: auto;
+  flex: 0 0 auto;
+  margin-left: 4px;
+}
+
+.wallet-address-button [class*="avatar"],
+.wallet-address-button > div:first-child {
+  flex: 0 0 auto;
 }
 
 .wallet-address-text {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
   color: #f3f0e7;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.02em;
   line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .wallet-toolbar-actions {

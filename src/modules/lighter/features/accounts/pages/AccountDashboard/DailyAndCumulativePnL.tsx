@@ -3,11 +3,12 @@ import { lightFormat, subDays } from "date-fns";
 import { toPng } from "html-to-image";
 import { useCallback, useMemo, useRef, useState } from "react";
 import {
-  Area,
   Bar,
   CartesianGrid,
   Cell,
   ComposedChart,
+  Line,
+  ReferenceLine,
   Tooltip as RechartsTooltip,
   ResponsiveContainer,
   TooltipProps,
@@ -59,8 +60,10 @@ const ACTIVE_DOT_PROPS = {
   fill: "var(--pnl-chart-active-dot-fill, var(--color-slate-900))",
 };
 
-const CHART_MARGIN = { top: 16, right: 16, bottom: 16, left: 0 };
+const CHART_MARGIN = { top: 28, right: 56, bottom: 16, left: 10 };
 const RANGE_OPTIONS = ["7D", "30D", "90D", "ALL"] as const;
+const DAILY_PNL_AXIS_ID = "dailyPnl";
+const CUMULATIVE_PNL_AXIS_ID = "cumulativePnl";
 
 type RangeOption = (typeof RANGE_OPTIONS)[number] | "CUSTOM";
 
@@ -87,28 +90,6 @@ function OverviewPnlIcon() {
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 3a9 9 0 1 0 9 9h-9V3Z" fill="none" stroke="currentColor" strokeWidth="1.8" />
       <path d="M15 3.6A9 9 0 0 1 20.4 9H15V3.6Z" fill="none" stroke="currentColor" strokeWidth="1.8" />
-    </svg>
-  );
-}
-
-function CalendarIcon() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden="true">
-      <path
-        d="M5.5 2.5v3m9-3v3M3.25 8h13.5M5 4.5h10a2 2 0 0 1 2 2V15a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="1.4"
-      />
-    </svg>
-  );
-}
-
-function ChartMenuIcon() {
-  return (
-    <svg viewBox="0 0 20 20" aria-hidden="true">
-      <path d="M4 5h12M4 10h12M4 15h12" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -193,12 +174,7 @@ export function DailyAndCumulativePnL({ chainId, account }: { chainId: Contracts
     };
   }, [cumulativeStats?.totalRealizedPnl, pnlData]);
 
-  const chartMargin = useMemo(() => {
-    if (!pnlData || pnlData.length === 0) return CHART_MARGIN;
-    const maxValue = Math.max(...pnlData.map((point) => Math.max(point.cumulativePnlFloat, point.pnlFloat)));
-    const stringValue = Math.ceil(maxValue).toString();
-    return { ...CHART_MARGIN, left: stringValue.length * 4 };
-  }, [pnlData]);
+  const chartDomains = useMemo(() => getChartDomains(pnlData), [pnlData]);
 
   return (
     <div className="account-pnl-stack" ref={cardRef}>
@@ -285,15 +261,6 @@ export function DailyAndCumulativePnL({ chainId, account }: { chainId: Contracts
               </div>
             </div>
           </div>
-          <div className="account-pnl-chart-card__tools">
-            <button type="button" className="account-pnl-chart-card__filter">
-              <CalendarIcon />
-              <Trans>All</Trans>
-            </button>
-            <button type="button" className="account-pnl-chart-card__menu" aria-label={t`Chart menu`}>
-              <ChartMenuIcon />
-            </button>
-          </div>
         </div>
 
         <div className="relative min-h-[250px] grow">
@@ -303,8 +270,8 @@ export function DailyAndCumulativePnL({ chainId, account }: { chainId: Contracts
                 width={500}
                 height={300}
                 data={pnlData}
-                barCategoryGap="25%"
-                margin={chartMargin}
+                barCategoryGap="42%"
+                margin={CHART_MARGIN}
                 // @ts-expect-error
                 overflow="visible"
               >
@@ -315,32 +282,28 @@ export function DailyAndCumulativePnL({ chainId, account }: { chainId: Contracts
                 />
                 <CartesianGrid
                   vertical={false}
-                  strokeDasharray="5 3"
+                  strokeDasharray="4 4"
                   strokeWidth={0.5}
                   stroke="var(--pnl-chart-grid, var(--color-slate-600))"
                 />
-                <Bar dataKey="pnlFloat" minPointSize={1} radius={2}>
+                <ReferenceLine
+                  yAxisId={DAILY_PNL_AXIS_ID}
+                  y={0}
+                  stroke="var(--pnl-chart-zero-line, rgba(244, 234, 212, 0.45))"
+                  strokeDasharray="5 4"
+                  strokeWidth={0.75}
+                />
+                <Bar yAxisId={DAILY_PNL_AXIS_ID} dataKey="pnlFloat" minPointSize={2} radius={[2, 2, 2, 2]}>
                   {pnlData.map(renderPnlBar)}
                 </Bar>
 
-                <defs>
-                  <linearGradient id="cumulative-pnl-gradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop
-                      offset="-45%"
-                      stopColor="var(--pnl-chart-cumulative, var(--color-blue-300))"
-                      stopOpacity={0.5}
-                    />
-                    <stop offset="100%" stopColor="var(--pnl-chart-cumulative, var(--color-blue-300))" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <Area
+                <Line
+                  yAxisId={CUMULATIVE_PNL_AXIS_ID}
                   type="monotone"
                   dataKey="cumulativePnlFloat"
                   stroke="var(--pnl-chart-cumulative, var(--color-blue-300))"
-                  fill="url(#cumulative-pnl-gradient)"
-                  strokeWidth={2}
+                  strokeWidth={1.6}
                   dot={false}
-                  baseValue="dataMin"
                   activeDot={ACTIVE_DOT_PROPS}
                 />
                 <XAxis
@@ -352,8 +315,23 @@ export function DailyAndCumulativePnL({ chainId, account }: { chainId: Contracts
                   tickMargin={10}
                 />
                 <YAxis
+                  yAxisId={DAILY_PNL_AXIS_ID}
                   type="number"
-                  allowDecimals={false}
+                  domain={chartDomains.daily}
+                  allowDecimals
+                  markerWidth={0}
+                  axisLine={false}
+                  tickLine={false}
+                  tickMargin={10}
+                  tickFormatter={yAxisTickFormatter}
+                  tick={CHART_TICK_PROPS}
+                />
+                <YAxis
+                  yAxisId={CUMULATIVE_PNL_AXIS_ID}
+                  type="number"
+                  orientation="right"
+                  domain={chartDomains.cumulative}
+                  allowDecimals
                   markerWidth={0}
                   axisLine={false}
                   tickLine={false}
@@ -404,7 +382,51 @@ function renderPnlBar(entry: AccountPnlHistoryPoint) {
 function yAxisTickFormatter(value: number) {
   if (!isFinite(value)) return "0";
 
-  return formatUsd(BigInt(value as number) * 10n ** 30n, { displayDecimals: 0 })!;
+  const absValue = Math.abs(value);
+  if (absValue > 0 && absValue < 1) {
+    return `${value < 0 ? "-" : ""}$${absValue.toFixed(2)}`;
+  }
+
+  return formatUsd(BigInt(Math.round(value)) * 10n ** 30n, { displayDecimals: 0 })!;
+}
+
+function getChartDomains(data: AccountPnlHistoryPoint[]) {
+  if (!data.length) {
+    return {
+      daily: [-1, 1] as [number, number],
+      cumulative: [-1, 1] as [number, number],
+    };
+  }
+
+  const dailyValues = data.map((point) => point.pnlFloat);
+  const cumulativeValues = data.map((point) => point.cumulativePnlFloat);
+
+  return {
+    daily: getPaddedDomain(dailyValues, { includeZero: true }),
+    cumulative: getPaddedDomain(cumulativeValues, { includeZero: true }),
+  };
+}
+
+function getPaddedDomain(values: number[], { includeZero }: { includeZero: boolean }): [number, number] {
+  const finiteValues = values.filter(Number.isFinite);
+  const baseValues = includeZero ? [...finiteValues, 0] : finiteValues;
+
+  if (!baseValues.length) {
+    return [-1, 1];
+  }
+
+  const min = Math.min(...baseValues);
+  const max = Math.max(...baseValues);
+  const span = max - min;
+  const padding = Math.max(span * 0.18, 0.25);
+  const lower = min - padding;
+  const upper = max + padding;
+
+  if (lower === upper) {
+    return [lower - 1, upper + 1];
+  }
+
+  return [lower, upper];
 }
 
 function ChartTooltip({ active, payload }: TooltipProps<number | string, "pnl" | "cumulativePnl" | "date">) {

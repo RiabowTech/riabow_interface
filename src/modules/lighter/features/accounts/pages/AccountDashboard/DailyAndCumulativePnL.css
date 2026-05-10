@@ -210,7 +210,7 @@
   overflow: hidden;
   --pnl-chart-tick: rgba(244, 234, 212, 0.72);
   --pnl-chart-axis-line: rgba(191, 148, 68, 0.22);
-  --pnl-chart-grid: rgba(191, 148, 68, 0.16);
+  --pnl-chart-grid: rgba(244, 234, 212, 0.1);
   --pnl-chart-cursor: rgba(215, 170, 67, 0.45);
   --pnl-chart-cumulative: #d7aa43;
   --pnl-chart-active-dot-stroke: #ffd16a;
@@ -255,52 +255,6 @@
   border-radius: 50%;
 }
 
-.account-pnl-chart-card__tools {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.account-pnl-chart-card__filter,
-.account-pnl-chart-card__menu {
-  height: 38px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(191, 148, 68, 0.2);
-  background: rgba(15, 15, 13, 0.68);
-  color: rgba(244, 234, 212, 0.78);
-  cursor: pointer;
-  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
-}
-
-.account-pnl-chart-card__filter {
-  gap: 8px;
-  min-width: 110px;
-  padding: 0 14px;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.account-pnl-chart-card__menu {
-  width: 38px;
-  border-radius: 5px;
-}
-
-.account-pnl-chart-card__filter:hover,
-.account-pnl-chart-card__menu:hover {
-  color: #ffd16a;
-  border-color: rgba(215, 170, 67, 0.52);
-  background: rgba(42, 32, 18, 0.76);
-}
-
-.account-pnl-chart-card__filter svg,
-.account-pnl-chart-card__menu svg {
-  width: 18px;
-  height: 18px;
-}
-
 .account-overview-mobile-range {
   display: flex;
   justify-content: center;
@@ -310,6 +264,14 @@
 
 .DailyAndCumulativePnL-hide-last-tick .recharts-cartesian-axis-tick:last-child {
   visibility: hidden;
+}
+
+.account-pnl-chart-card .recharts-bar-rectangle path {
+  opacity: 0.88;
+}
+
+.account-pnl-chart-card .recharts-line-curve {
+  filter: drop-shadow(0 0 4px rgba(215, 170, 67, 0.22));
 }
 
 @media (max-width: 1100px) {

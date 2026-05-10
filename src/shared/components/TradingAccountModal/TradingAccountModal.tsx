@@ -7,11 +7,8 @@ import {
   useTradingAccountModalOpen,
   useTradingAccountSelectedTransferGuid,
 } from "@/modules/lighter/context/TradingAccountContext";
-import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import { SyntheticsStateContextProvider } from "@/modules/lighter/store/SyntheticsStateContext/SyntheticsStateContextProvider";
 import { useTradingAccountFundingHistoryItem } from "@/modules/lighter/domain/multichain/useTradingAccountFundingHistory";
-import { CHAIN_NAMES_MAP } from "config/chains";
-import { DEFAULT_SPOT_CHAIN_ID } from "config/custom/contracts";
 import { useChainId } from "lib/chains";
 import { userAnalytics } from "lib/userAnalytics";
 import { OneClickPromotionEvent } from "lib/userAnalytics/types";
@@ -122,15 +119,7 @@ const WithdrawTitle = () => {
 };
 
 const MainTitle = () => {
-  const { chainId } = useChainId();
-  const product = useTradeProduct();
-  const isSpotProduct = product === "spot";
-  const chainName = CHAIN_NAMES_MAP[isSpotProduct ? DEFAULT_SPOT_CHAIN_ID : chainId];
-  return (
-    <>
-      <Trans>Account</Trans> / {isSpotProduct ? "Spot" : "Futures"} / {chainName} Chain
-    </>
-  );
+  return <Trans>My Wallet</Trans>;
 };
 
 const VIEW_TITLE: Record<TradingAccountModalView, React.ReactNode> = {
