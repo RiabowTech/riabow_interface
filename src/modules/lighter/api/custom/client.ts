@@ -674,6 +674,45 @@ export interface BalancesResponse {
   balances: AccountBalance[];
 }
 
+type ApiEnvelope<T> = {
+  success?: boolean;
+  data?: T;
+  error?: unknown;
+};
+
+function unwrapApiData<T>(raw: T | ApiEnvelope<T>): T {
+  if (raw && typeof raw === "object" && "data" in raw && (raw as ApiEnvelope<T>).data !== undefined) {
+    return (raw as ApiEnvelope<T>).data as T;
+  }
+
+  return raw as T;
+}
+
+function normalizeBalancesResponse(raw: unknown): BalancesResponse {
+  const data = unwrapApiData<unknown>(raw);
+  const balances = Array.isArray(data)
+    ? data
+    : Array.isArray((data as any)?.balances)
+      ? (data as any).balances
+      : [];
+
+  return {
+    balances: balances.map((balance: any) => {
+      const available = String(balance.available ?? balance.available_balance ?? "0");
+      const frozen = String(balance.frozen ?? balance.locked ?? balance.frozen_balance ?? "0");
+      const total = String(balance.total ?? balance.balance ?? Number(available) + Number(frozen));
+
+      return {
+        token: String(balance.token ?? balance.symbol ?? ""),
+        symbol: String(balance.symbol ?? balance.token ?? ""),
+        available,
+        frozen,
+        total,
+      };
+    }),
+  };
+}
+
 export interface UnifiedAccountResponse {
   margin_mode: string;
   wallet_balance: string;
@@ -737,7 +776,16 @@ export async function cancelTriggerOrder(
   });
 }
 
-export async function getBalances(chainId: number, address?: string | null, product?: TradeProduct): Promise<BalancesResponse> {
+export async function getBalances(
+  chainId: number,
+  address?: string | null,
+  product?: TradeProduct
+): Promise<BalancesResponse> {
+  if (product === "spot") {
+    const raw = await apiFetch<unknown>(chainId, "/balances", { requireAuth: true, address, product });
+    return normalizeBalancesResponse(raw);
+  }
+
   return apiFetch<BalancesResponse>(chainId, "/account/balances", { requireAuth: true, address, product });
 }
 
@@ -764,8 +812,63 @@ export interface GetFundingFeeHistoryParams {
   limit?: number;
 }
 
+function normalizeWithdrawHistoryResponse(raw: unknown): WithdrawHistoryResponse {
+  const data = unwrapApiData<unknown>(raw);
+  const withdrawals = Array.isArray(data)
+    ? data
+    : Array.isArray((data as any)?.withdrawals)
+      ? (data as any).withdrawals
+      : [];
+
+  return { withdrawals };
+}
+
 export async function getWithdrawHistory(chainId: number, product?: TradeProduct): Promise<WithdrawHistoryResponse> {
+  if (product === "spot") {
+    const raw = await apiFetch<unknown>(chainId, "/withdrawals?limit=50", { requireAuth: true, product });
+    return normalizeWithdrawHistoryResponse(raw);
+  }
+
   return apiFetch<WithdrawHistoryResponse>(chainId, "/withdraw/history", { requireAuth: true, product });
+}
+
+export async function getWithdrawById(
+  chainId: number,
+  withdrawId: string,
+  product?: TradeProduct
+): Promise<WithdrawRecord> {
+  const path = product === "spot" ? `/withdrawals/${withdrawId}` : `/withdraw/${withdrawId}`;
+  const raw = await apiFetch<WithdrawRecord | ApiEnvelope<WithdrawRecord>>(chainId, path, {
+    requireAuth: true,
+    product,
+  });
+  return unwrapApiData(raw);
+}
+
+export interface SpotTransferRequest {
+  token: string;
+  amount: string;
+  direction: "perp_to_spot" | "spot_to_perp";
+}
+
+export interface SpotTransferResponse {
+  success?: boolean;
+  transfer_id?: string;
+  id?: string;
+  token?: string;
+  amount?: string;
+  direction?: SpotTransferRequest["direction"];
+}
+
+export async function spotTransfer(chainId: number, request: SpotTransferRequest): Promise<SpotTransferResponse> {
+  const raw = await apiFetch<SpotTransferResponse | ApiEnvelope<SpotTransferResponse>>(chainId, "/transfer", {
+    method: "POST",
+    body: JSON.stringify(request),
+    requireAuth: true,
+    product: "spot",
+  });
+
+  return unwrapApiData(raw);
 }
 
 export async function getFundingFeeHistory(
@@ -819,6 +922,10 @@ export async function confirmWithdraw(
   request: ConfirmWithdrawRequest,
   product?: TradeProduct
 ): Promise<ConfirmWithdrawResponse> {
+  if (product === "spot") {
+    return { success: true };
+  }
+
   return apiFetch<ConfirmWithdrawResponse>(chainId, `/withdraw/${withdrawId}/confirm`, {
     method: "POST",
     body: JSON.stringify(request),

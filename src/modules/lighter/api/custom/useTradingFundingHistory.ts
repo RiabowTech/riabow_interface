@@ -19,6 +19,7 @@ const defaultConfig: SWRConfiguration = {
 
 export interface TradingFundingHistoryItem {
   id: string;
+  product: TradeProduct;
   type: "deposit" | "withdraw";
   token: string;
   amount: string;
@@ -153,12 +154,14 @@ export function useTradingFundingHistory(
   // Combine and sort by created_at (newest first)
   const fundingHistory = useMemo(() => {
     const items: TradingFundingHistoryItem[] = [];
+    const itemProduct = product ?? "futures";
 
     // Add deposits
     if (depositData?.deposits) {
       for (const deposit of depositData.deposits) {
         items.push({
           id: deposit.id,
+          product: itemProduct,
           type: "deposit",
           token: deposit.token,
           amount: deposit.amount,
@@ -174,6 +177,7 @@ export function useTradingFundingHistory(
       for (const withdraw of withdrawData.withdrawals) {
         items.push({
           id: withdraw.id,
+          product: itemProduct,
           type: "withdraw",
           token: withdraw.token,
           amount: withdraw.amount,
@@ -191,7 +195,7 @@ export function useTradingFundingHistory(
     items.sort((a, b) => b.created_at - a.created_at);
 
     return items;
-  }, [depositData?.deposits, withdrawData?.withdrawals]);
+  }, [depositData?.deposits, product, withdrawData?.withdrawals]);
 
   const mutate = () => {
     mutateDeposits();

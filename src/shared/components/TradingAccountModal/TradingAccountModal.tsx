@@ -7,9 +7,11 @@ import {
   useTradingAccountModalOpen,
   useTradingAccountSelectedTransferGuid,
 } from "@/modules/lighter/context/TradingAccountContext";
+import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
 import { SyntheticsStateContextProvider } from "@/modules/lighter/store/SyntheticsStateContext/SyntheticsStateContextProvider";
 import { useTradingAccountFundingHistoryItem } from "@/modules/lighter/domain/multichain/useTradingAccountFundingHistory";
 import { CHAIN_NAMES_MAP } from "config/chains";
+import { DEFAULT_SPOT_CHAIN_ID } from "config/custom/contracts";
 import { useChainId } from "lib/chains";
 import { userAnalytics } from "lib/userAnalytics";
 import { OneClickPromotionEvent } from "lib/userAnalytics/types";
@@ -121,10 +123,12 @@ const WithdrawTitle = () => {
 
 const MainTitle = () => {
   const { chainId } = useChainId();
-  const chainName = CHAIN_NAMES_MAP[chainId];
+  const product = useTradeProduct();
+  const isSpotProduct = product === "spot";
+  const chainName = CHAIN_NAMES_MAP[isSpotProduct ? DEFAULT_SPOT_CHAIN_ID : chainId];
   return (
     <>
-      <Trans>Account</Trans> / {chainName} Chain
+      <Trans>Account</Trans> / {isSpotProduct ? "Spot" : "Futures"} / {chainName} Chain
     </>
   );
 };
@@ -183,7 +187,9 @@ export const TradingAccountModal = memo(() => {
       label={VIEW_TITLE[view]}
       isVisible={isVisible}
       setIsVisible={setIsVisibleOrView}
-      desktopContentClassName="!h-[640px] !w-[461px]"
+      desktopContentClassName={
+        view === "main" ? "trading-account-modal-shell" : "!h-[640px] !w-[461px]"
+      }
       disableOverflowHandling={true}
       className="text-body-medium"
       contentPadding={false}

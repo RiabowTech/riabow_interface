@@ -2,6 +2,7 @@ import useSWR, { SWRConfiguration } from "swr";
 import { useAccount } from "wagmi";
 
 import { getServerBaseUrl } from "config/backend";
+import { useChainId } from "lib/chains";
 
 import {
   getAllFundingRates,
@@ -44,7 +45,7 @@ import type {
   OperatorStatus,
 } from "./types";
 import { useTradeProduct } from "@/modules/lighter/store/TradeStateContext";
-import { tradeProductSWRKey } from "./custom/productRouting";
+import { tradeProductSWRKey, type TradeProduct } from "./custom/productRouting";
 
 // Default SWR configuration
 const defaultConfig: SWRConfiguration = {
@@ -239,10 +240,14 @@ export function useZanbaraOrders(chainId: number | undefined, config?: SWRConfig
 export function useZanbaraBalances(chainId: number | undefined, config?: SWRConfiguration) {
   const { address } = useAccount();
   const product = useTradeProduct();
-  const authenticated = isAuthenticated(address, chainId);
+  const { chainId: settlementChainId } = useChainId();
+  const apiChainId = product === "spot" ? settlementChainId : chainId;
+  const authenticated = isAuthenticated(address, apiChainId);
   return useSWR<BalancesResponse>(
-    chainId && authenticated && address ? tradeProductSWRKey(product, [`zanbara-balances`, chainId, address]) : null,
-    () => getBalances(chainId!, address, product),
+    apiChainId && authenticated && address
+      ? tradeProductSWRKey(product, [`zanbara-balances`, apiChainId, address])
+      : null,
+    () => getBalances(apiChainId!, address, product),
     {
       ...defaultConfig,
       refreshInterval: 10000,
@@ -254,6 +259,34 @@ export function useZanbaraBalances(chainId: number | undefined, config?: SWRConf
           // Token is already cleared in apiFetch, but we can trigger re-authentication if needed
         }
         // Call custom onError if provided
+        if (config?.onError) {
+          config.onError(error, key, swrConfig);
+        }
+      },
+    }
+  );
+}
+
+export function useZanbaraBalancesForProduct(
+  product: TradeProduct,
+  chainId: number | undefined,
+  config?: SWRConfiguration
+) {
+  const { address } = useAccount();
+  const authenticated = isAuthenticated(address, chainId);
+  return useSWR<BalancesResponse>(
+    chainId && authenticated && address
+      ? tradeProductSWRKey(product, [`zanbara-balances`, chainId, address])
+      : null,
+    () => getBalances(chainId!, address, product),
+    {
+      ...defaultConfig,
+      refreshInterval: 10000,
+      ...config,
+      onError: (error: any, key: string, swrConfig: any) => {
+        if (error?.status === 401 || error?.message?.includes("401") || error?.message?.includes("Unauthorized")) {
+          console.warn(" 401 error in useZanbaraBalancesForProduct, token will be cleared by apiFetch");
+        }
         if (config?.onError) {
           config.onError(error, key, swrConfig);
         }
@@ -294,7 +327,9 @@ export function useZanbaraUserOrders(config?: SWRConfiguration) {
 
 export function useZanbaraUserBalances(config?: SWRConfiguration) {
   const { chainId } = useAccount();
-  return useZanbaraBalances(chainId, config);
+  const product = useTradeProduct();
+  const { chainId: settlementChainId } = useChainId();
+  return useZanbaraBalances(product === "spot" ? settlementChainId : chainId, config);
 }
 
 export function useZanbaraUserUnifiedAccount(config?: SWRConfiguration) {

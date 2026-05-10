@@ -31,6 +31,11 @@ function FallbackIcon({
         className
       )}
       style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
+        lineHeight: 1,
         width: displaySize,
         height: displaySize,
         fontSize: fontSize,
@@ -53,7 +58,7 @@ type Props = {
 
 function TokenIcon({ className, symbol, displaySize, badge, badgeClassName, chainIdBadge }: Props) {
   const iconPath = getIconUrlPath(symbol);
-  const classNames = cx("Token-icon inline rounded-full", className);
+  const classNames = cx("Token-icon rounded-full", className);
 
   if (!iconPath) return <></>;
 

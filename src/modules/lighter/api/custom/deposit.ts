@@ -80,6 +80,31 @@ export interface DepositHistoryResponse {
   deposits: DepositRecord[];
 }
 
+type ApiEnvelope<T> = {
+  success?: boolean;
+  data?: T;
+  error?: unknown;
+};
+
+function unwrapApiData<T>(raw: T | ApiEnvelope<T>): T {
+  if (raw && typeof raw === "object" && "data" in raw && (raw as ApiEnvelope<T>).data !== undefined) {
+    return (raw as ApiEnvelope<T>).data as T;
+  }
+
+  return raw as T;
+}
+
+function normalizeDepositHistoryResponse(raw: unknown): DepositHistoryResponse {
+  const data = unwrapApiData<unknown>(raw);
+  const deposits = Array.isArray(data)
+    ? data
+    : Array.isArray((data as any)?.deposits)
+      ? (data as any).deposits
+      : [];
+
+  return { deposits };
+}
+
 /**
  * Prepare deposit - get contract call parameters
  */
@@ -98,6 +123,16 @@ export async function prepareDeposit(
  * Get deposit history
  */
 export async function getDepositHistory(chainId: number, product?: TradeProduct): Promise<DepositHistoryResponse> {
+  if (product === "spot") {
+    const raw = await apiFetch<unknown>(chainId, "/deposits?limit=50", {
+      method: "GET",
+      requireAuth: true,
+      product,
+    });
+
+    return normalizeDepositHistoryResponse(raw);
+  }
+
   return apiFetch<DepositHistoryResponse>(chainId, "/deposit/history", {
     method: "GET",
     requireAuth: true,

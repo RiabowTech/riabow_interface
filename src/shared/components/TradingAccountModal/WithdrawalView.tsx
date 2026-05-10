@@ -196,6 +196,7 @@ export const WithdrawalView = () => {
   const isSpotProduct = product === "spot";
   const spotChainId = DEFAULT_SPOT_CHAIN_ID;
   const spotVaultAddress = getSpotVaultAddress(spotChainId);
+  const apiChainId = chainId;
   const withdrawContractChainId = isSpotProduct ? spotChainId : chainId;
   const { data: walletTokenConfigs } = useWalletTokensConfig();
   const spotTokenConfig = findWalletTokenConfig(walletTokenConfigs, spotChainId);
@@ -669,7 +670,7 @@ export const WithdrawalView = () => {
       }
 
       // Check JWT authentication before proceeding
-      if (!isAuthenticated(account, withdrawContractChainId)) {
+      if (!isAuthenticated(account, apiChainId)) {
         helperToast.error(t`Please sign in first to withdraw funds`);
         return;
       }
@@ -684,7 +685,7 @@ export const WithdrawalView = () => {
           throw new Error("Withdraw token not configured");
         }
 
-        const withdrawResponse = await requestWithdraw(withdrawContractChainId, {
+        const withdrawResponse = await requestWithdraw(apiChainId, {
           token: withdrawTokenSymbol,
           amount: inputValue, // Use raw input value without precision multiplication
         }, product);
@@ -834,7 +835,7 @@ export const WithdrawalView = () => {
         const withdrawId = withdrawResponse.withdraw_id || withdrawResponse.id;
         if (withdrawId) {
           try {
-            await confirmWithdraw(withdrawContractChainId, withdrawId, {
+            await confirmWithdraw(apiChainId, withdrawId, {
               tx_hash: receipt.transactionHash,
             }, product);
           } catch (confirmError) {

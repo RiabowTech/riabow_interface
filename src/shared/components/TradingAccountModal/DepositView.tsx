@@ -25,11 +25,9 @@ import {
   useTradingAccountDepositViewTokenAddress,
   useTradingAccountDepositViewTokenInputValue,
   useTradingAccountModalOpen,
-  useTradingAccountSelector,
   useTradingAccountSelectedTransferGuid,
   useTradingAccountSettlementChainId,
 } from "@/modules/lighter/context/TradingAccountContext";
-import { selectTradingAccountDepositViewTokenInputAmount } from "@/modules/lighter/context/TradingAccountContext";
 import { useSubaccountContext } from "@/modules/lighter/context/SubaccountContext";
 import { useMultichainApprovalsActiveListener, useSyntheticsEvents } from "@/modules/lighter/context/SyntheticsEvents";
 import { getMultichainTransferSendParams } from "@/modules/lighter/domain/multichain/getSendParams";
@@ -64,10 +62,10 @@ import { TxnCallback, TxnEventName, WalletTxnCtx } from "lib/transactions";
 import { useIsNonEoaAccountOnAnyChain } from "lib/wallets/useAccountType";
 import { useEthersSigner } from "lib/wallets/useEthersSigner";
 import { useIsGeminiWallet } from "lib/wallets/useIsGeminiWallet";
-import { switchNetwork } from "lib/wallets";
 import { convertTokenAddress, getNativeToken, getToken } from "sdk/configs/tokens";
 import { bigMath } from "sdk/utils/bigmath";
 import { convertToTokenAmount, convertToUsd, getMidPrice } from "sdk/utils/tokens";
+import { parseValue } from "sdk/utils/numbers";
 import { applySlippageToMinOut } from "sdk/utils/trade";
 import type { SendParamStruct } from "typechain-types-stargate/IStargate";
 
@@ -93,6 +91,7 @@ import { useTokenRecentPricesRequest } from "domain/synthetics/tokens";
 import { findWalletTokenConfig, useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
 import SpotVaultAbi from "sdk/abis/SpotVault";
 import useWallet from "lib/wallets/useWallet";
+import { getRainbowKitConfig } from "lib/wallets/rainbowKitConfig";
 
 const useIsFirstDeposit = () => {
   const [enabled, setEnabled] = useState(true);
@@ -122,6 +121,78 @@ function getFundingChainName(chainId: number) {
   return chainId === DEFAULT_SPOT_CHAIN_ID ? "BNB Testnet" : getChainName(chainId);
 }
 
+type RequestProvider = {
+  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
+};
+
+async function ensureConnectorChain(connector: ReturnType<typeof useWallet>["connector"], targetChainId: number) {
+  const provider = (await connector?.getProvider?.()) as Partial<RequestProvider> | undefined;
+  if (typeof provider?.request !== "function") {
+    throw new Error("No wallet provider found. Please reconnect your wallet.");
+  }
+
+  const chainIdHex = `0x${targetChainId.toString(16)}`;
+  const currentChainIdHex = (await provider.request({ method: "eth_chainId" })) as string;
+  if (parseInt(currentChainIdHex, 16) === targetChainId) {
+    return;
+  }
+
+  try {
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: chainIdHex }],
+    });
+  } catch (switchError: any) {
+    if (switchError?.code === 4001) {
+      throw new Error("User rejected the chain switch");
+    }
+
+    if (switchError?.code !== 4902 && switchError?.code !== -32603) {
+      throw switchError;
+    }
+
+    const targetChain = getRainbowKitConfig().chains.find((chain) => chain.id === targetChainId);
+    if (!targetChain) {
+      throw new Error(`Unsupported wallet network ${targetChainId}`);
+    }
+
+    await provider.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          chainId: chainIdHex,
+          chainName: targetChain.name,
+          nativeCurrency: targetChain.nativeCurrency,
+          rpcUrls: targetChain.rpcUrls.default.http,
+          blockExplorerUrls: targetChain.blockExplorers?.default?.url ? [targetChain.blockExplorers.default.url] : [],
+        },
+      ],
+    });
+
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: chainIdHex }],
+    });
+  }
+}
+
+async function requireSpotVaultTokenRegistered(params: {
+  publicClient: NonNullable<ReturnType<typeof usePublicClient>>;
+  vaultAddress: string;
+  tokenAddress: string;
+}) {
+  const isRegistered = await params.publicClient.readContract({
+    address: getAddress(params.vaultAddress),
+    abi: SpotVaultAbi,
+    functionName: "registeredTokens",
+    args: [getAddress(params.tokenAddress)],
+  });
+
+  if (!isRegistered) {
+    throw new Error("This token is not enabled for spot deposits. Contact support.");
+  }
+}
+
 export const DepositView = () => {
   const { chainId: settlementChainId, srcChainId } = useChainId();
   const { address: account, chainId: walletChainId } = useAccount();
@@ -131,7 +202,7 @@ export const DepositView = () => {
   const spotVaultAddress = getSpotVaultAddress(spotChainId);
   const { data: walletTokenConfigs } = useWalletTokensConfig();
   const spotTokenConfig = findWalletTokenConfig(walletTokenConfigs, spotChainId);
-  const { walletClient } = useWallet();
+  const { connector, walletClient } = useWallet();
   const spotPublicClient = usePublicClient({ chainId: spotChainId });
 
   const [, setSettlementChainId] = useTradingAccountSettlementChainId();
@@ -386,7 +457,13 @@ export const DepositView = () => {
 
   const nativeTokenSourceChainBalance = useNativeTokenBalance(depositViewChain, account);
 
-  const realInputAmount = useTradingAccountSelector(selectTradingAccountDepositViewTokenInputAmount);
+  const realInputAmount = useMemo(() => {
+    if (inputValue === undefined || selectedToken?.decimals === undefined) {
+      return undefined;
+    }
+
+    return parseValue(inputValue, selectedToken.decimals);
+  }, [inputValue, selectedToken?.decimals]);
 
   /**
    * Debounced
@@ -605,7 +682,12 @@ export const DepositView = () => {
 
       try {
         setIsApproving(true);
-        await switchNetwork(spotChainId, true);
+        await ensureConnectorChain(connector, spotChainId);
+        await requireSpotVaultTokenRegistered({
+          publicClient: spotPublicClient,
+          vaultAddress: spotVaultAddress,
+          tokenAddress: spotDepositTokenConfig.contract,
+        });
         const txHash = await walletClient.writeContract({
           address: getAddress(spotDepositTokenConfig.contract),
           abi: erc20Abi,
@@ -672,6 +754,7 @@ export const DepositView = () => {
     settlementChainId,
     selectedTokenSourceChainTokenId,
     setSettlementChainId,
+    connector,
     spotPublicClient,
     spotDepositTokenConfig?.contract,
     spotChainId,
@@ -849,7 +932,12 @@ export const DepositView = () => {
 
       try {
         setIsSubmitting(true);
-        await switchNetwork(spotChainId, true);
+        await ensureConnectorChain(connector, spotChainId);
+        await requireSpotVaultTokenRegistered({
+          publicClient: spotPublicClient,
+          vaultAddress: spotVaultAddress,
+          tokenAddress: spotDepositTokenConfig.contract,
+        });
         await spotPublicClient.simulateContract({
           address: getAddress(spotVaultAddress),
           abi: SpotVaultAbi,
@@ -914,6 +1002,7 @@ export const DepositView = () => {
     sameChainCallback,
     settlementChainId,
     spenderAddress,
+    connector,
     spotPublicClient,
     spotDepositTokenConfig?.contract,
     spotChainId,

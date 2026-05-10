@@ -2,9 +2,13 @@ import { MessageDescriptor } from "@lingui/core";
 import { msg, t } from "@lingui/macro";
 import cx from "classnames";
 import { useMemo, useState } from "react";
+import { parseUnits } from "viem";
 import { useAccount } from "wagmi";
 
+import { useZanbaraBalancesForProduct } from "@/modules/lighter/api";
+import { findWalletTokenConfig, useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
 import { getChainName } from "config/chains";
+import { DEFAULT_SPOT_CHAIN_ID } from "config/custom/contracts";
 import { isSettlementChain } from "config/multichain";
 import { useTokensDataRequest } from "domain/synthetics/tokens";
 import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
@@ -22,12 +26,13 @@ import TokenIcon from "components/TokenIcon/TokenIcon";
 // Virtual chain ID used to represent Zanbara Account (off-chain balances)
 const TRADING_ACCOUNT_CHAIN_ID = 0;
 
-type FilterType = "all" | "tradingAccount" | "wallet";
+type FilterType = "all" | "tradingAccount" | "spot" | "wallet";
 
-const FILTERS: FilterType[] = ["all", "wallet", "tradingAccount"];
+const FILTERS: FilterType[] = ["all", "wallet", "spot", "tradingAccount"];
 
 const FILTER_TITLE_MAP: Record<FilterType, MessageDescriptor> = {
   all: msg`All`,
+  spot: msg`Spot`,
   tradingAccount: msg`Zanbara Account`,
   wallet: msg`Wallet`,
 };
@@ -36,6 +41,7 @@ type DisplayToken = {
   chainId: number;
   symbol: string;
   isTradingAccount: boolean;
+  isSpotAccount?: boolean;
   balance: bigint | undefined;
   balanceUsd: bigint | undefined;
   decimals: number;
@@ -72,7 +78,8 @@ const AssetsList = ({ tokens, noChainFilter }: { tokens: DisplayToken[]; noChain
         noChainFilter ||
         activeFilter === "all" ||
         (activeFilter === "tradingAccount" && token.isTradingAccount) ||
-        (activeFilter === "wallet" && !token.isTradingAccount);
+        (activeFilter === "spot" && token.isSpotAccount) ||
+        (activeFilter === "wallet" && !token.isTradingAccount && !token.isSpotAccount);
 
       return matchesSearch && matchesChainFilter;
     });
@@ -111,12 +118,18 @@ const AssetsList = ({ tokens, noChainFilter }: { tokens: DisplayToken[]; noChain
             className="flex items-center justify-between px-adaptive py-8 app-hover:bg-fill-surfaceElevated50"
           >
             <div className="flex items-center gap-16">
-              <TokenIcon symbol={displayToken.symbol} displaySize={40} chainIdBadge={displayToken.chainId} />
+              <TokenIcon
+                symbol={displayToken.symbol}
+                displaySize={40}
+                chainIdBadge={displayToken.isTradingAccount ? undefined : displayToken.chainId}
+              />
               <div>
                 <div>{displayToken.symbol}</div>
                 <div className="text-body-small text-slate-100">
                   {displayToken.chainId === TRADING_ACCOUNT_CHAIN_ID
                     ? t`Zanbara Account`
+                    : displayToken.isSpotAccount
+                      ? t`Spot`
                     : getChainName(displayToken.chainId)}
                 </div>
               </div>
@@ -141,12 +154,55 @@ const AssetsList = ({ tokens, noChainFilter }: { tokens: DisplayToken[]; noChain
 // Other balances (USDC/ETH/etc.) belong to the wallet but cannot fund a trade.
 const isTradableSymbol = (symbol: string) => !isTradeModeActive() || symbol === "USDT";
 
+function parseBalanceAmount(value: string | undefined, decimals: number) {
+  try {
+    return parseUnits(value || "0", decimals);
+  } catch {
+    return 0n;
+  }
+}
+
+function useSpotDisplayTokens() {
+  const { chainId } = useChainId();
+  const { data: walletTokenConfigs } = useWalletTokensConfig();
+  const { data: spotBalances } = useZanbaraBalancesForProduct("spot", chainId, {
+    refreshInterval: 10000,
+  });
+
+  return useMemo(() => {
+    return (spotBalances?.balances ?? [])
+      .map((balance): DisplayToken | undefined => {
+        const symbol = balance.symbol || balance.token;
+        const tokenConfig = findWalletTokenConfig(walletTokenConfigs, DEFAULT_SPOT_CHAIN_ID, symbol);
+        const decimals = tokenConfig?.decimals ?? 18;
+        const total = parseBalanceAmount(balance.total, decimals);
+
+        if (total <= 0n) {
+          return undefined;
+        }
+
+        return {
+          chainId: DEFAULT_SPOT_CHAIN_ID,
+          symbol,
+          isTradingAccount: false,
+          isSpotAccount: true,
+          balance: total,
+          balanceUsd: symbol.toUpperCase() === "USDT" ? parseBalanceAmount(balance.total, 30) : undefined,
+          decimals,
+          isStable: symbol.toUpperCase() === "USDT",
+        };
+      })
+      .filter((token): token is DisplayToken => token !== undefined);
+  }, [spotBalances?.balances, walletTokenConfigs]);
+}
+
 const AssetListMultichain = () => {
   const { chainId, srcChainId } = useChainId();
   const { tokensData } = useTokensDataRequest(chainId, srcChainId);
+  const spotDisplayTokens = useSpotDisplayTokens();
 
   const displayTokens = useMemo(() => {
-    return Object.values(tokensData || {})
+    const tradingAccountTokens = Object.values(tokensData || {})
       .filter(
         (token) =>
           !token.isNative &&
@@ -166,14 +222,17 @@ const AssetListMultichain = () => {
         })
       )
       .sort(tokenSorter);
-  }, [tokensData]);
 
-  return <AssetsList noChainFilter tokens={displayTokens} />;
+    return [...spotDisplayTokens, ...tradingAccountTokens].sort(tokenSorter);
+  }, [spotDisplayTokens, tokensData]);
+
+  return <AssetsList tokens={displayTokens} />;
 };
 
 const AssetListSettlementChain = () => {
   const { chainId, srcChainId } = useChainId();
   const { tokensData } = useTokensDataRequest(chainId, srcChainId);
+  const spotDisplayTokens = useSpotDisplayTokens();
 
   const displayTokens = useMemo(() => {
     const displayTokens: DisplayToken[] = Object.values(tokensData || {})
@@ -199,8 +258,8 @@ const AssetListSettlementChain = () => {
       .filter((token) => token.balance !== undefined && token.balance > 0n)
       .sort(tokenSorter);
 
-    return displayTokens;
-  }, [chainId, tokensData]);
+    return [...spotDisplayTokens, ...displayTokens].sort(tokenSorter);
+  }, [chainId, spotDisplayTokens, tokensData]);
 
   return <AssetsList tokens={displayTokens} />;
 };

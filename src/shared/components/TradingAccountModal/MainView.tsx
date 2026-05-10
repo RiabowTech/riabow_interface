@@ -1,14 +1,14 @@
 import { Trans, t } from "@lingui/macro";
 import cx from "classnames";
-import { useCallback, useMemo, useState } from "react";
+import { type ChangeEvent, useCallback, useMemo, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useHistory } from "react-router-dom";
 import { useCopyToClipboard } from "react-use";
 import { parseUnits, getAddress } from "viem";
 import { useAccount, usePublicClient } from "wagmi";
 
-import { useZanbaraUserBalances } from "@/modules/lighter/api";
-import { confirmWithdraw } from "@/modules/lighter/api/custom/client";
+import { useZanbaraBalancesForProduct, useZanbaraUserBalances } from "@/modules/lighter/api";
+import { confirmWithdraw, spotTransfer } from "@/modules/lighter/api/custom/client";
 import { useTradingFundingHistory } from "@/modules/lighter/api/custom/useTradingFundingHistory";
 import {
   useTradingAccountModalOpen,
@@ -52,11 +52,13 @@ import TooltipWithPortal from "components/Tooltip/TooltipWithPortal";
 import BellIcon from "img/ic_bell.svg?react";
 import ChevronLeftIcon from "img/ic_chevron_left.svg?react";
 import CopyIcon from "img/ic_copy.svg?react";
+import DownloadIcon from "img/ic_download2.svg?react";
 import ExplorerIcon from "img/ic_explorer.svg?react";
 import PnlAnalysisIcon from "img/ic_pnl_analysis.svg?react";
 import SettingsIcon from "img/ic_settings.svg?react";
 import DisconnectIcon from "img/ic_sign_out_20.svg?react";
 import SpinnerIcon from "img/ic_spinner.svg?react";
+import SwapIcon from "img/swap.svg?react";
 
 import { SyntheticsInfoRow } from "../SyntheticsInfoRow";
 
@@ -105,6 +107,40 @@ const TokenIcons = ({ tokens }: { tokens: string[] }) => {
   );
 };
 
+function parseUsdStringToBigint(value: string | undefined, decimals = 30) {
+  if (!value) return 0n;
+  try {
+    return parseUnits(value, decimals);
+  } catch {
+    return 0n;
+  }
+}
+
+function formatTokenAmountText(value: string | undefined) {
+  const numeric = Number(value ?? "0");
+  if (!Number.isFinite(numeric)) return value ?? "0.00";
+  return numeric.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}
+
+function findPrimaryBalance<T extends { available: string; total: string }>(balances: T[] | undefined) {
+  return balances?.find((balance) => Number(balance.total) > 0 || Number(balance.available) > 0) ?? balances?.[0];
+}
+
+function getBalanceSymbol(balance: { symbol?: string; token?: string } | undefined, fallback = "USDT") {
+  return balance?.symbol || balance?.token || fallback;
+}
+
+function findBalanceBySymbol<T extends { symbol?: string; token?: string }>(balances: T[] | undefined, symbol: string) {
+  return balances?.find((balance) => getBalanceSymbol(balance).toUpperCase() === symbol.toUpperCase());
+}
+
+function toDisplayUsdAmount(value: string | undefined) {
+  return parseUsdStringToBigint(value);
+}
+
 function FundingHistoryItemLabel({
   step,
   operation,
@@ -134,10 +170,11 @@ function FundingHistoryItemLabel({
 const Toolbar = ({ account }: { account: string }) => {
   const [, setIsVisible] = useTradingAccountModalOpen();
   const { chainId: settlementChainId, srcChainId } = useChainId();
+  const product = useTradeProduct();
   const history = useHistory();
 
   const { isSmallMobile } = useBreakpoints();
-  const chainId = srcChainId ?? settlementChainId;
+  const chainId = product === "spot" ? DEFAULT_SPOT_CHAIN_ID : srcChainId ?? settlementChainId;
 
   const { openNotifyModal } = useNotifyModalState();
   const { setIsSettingsVisible } = useSettings();
@@ -186,17 +223,17 @@ const Toolbar = ({ account }: { account: string }) => {
   const buttonClassName = isSmallMobile ? cx("size-32 !p-0") : cx("size-40 !p-0");
 
   return (
-    <div className="flex items-stretch justify-between gap-12 max-smallMobile:flex-wrap">
-      <Button variant="secondary" size="small" className="flex flex-1 items-center gap-8" onClick={handleCopyAddress}>
+    <div className="wallet-toolbar">
+      <Button variant="secondary" size="small" className="wallet-address-button" onClick={handleCopyAddress}>
         <div className="max-[500px]:hidden">
           <Avatar size={24} ensName={ensName} address={account} />
         </div>
-        <div className="text-body-medium font-medium text-typography-primary">
+        <div className="wallet-address-text">
           {shortenAddressOrEns(ensName || account, 17)}
         </div>
         <CopyIcon className="size-20 max-[500px]:hidden" />
       </Button>
-      <div className="flex items-center gap-8">
+      <div className="wallet-toolbar-actions">
         <TooltipWithPortal content={t`PnL Analysis`} position="bottom" tooltipClassName="!min-w-max" variant="none">
           <Button variant="secondary" size="small" className={buttonClassName} onClick={handlePnlAnalysisClick}>
             <PnlAnalysisIcon width={20} height={20} />
@@ -421,12 +458,247 @@ const ActionButtons = () => {
   );
 };
 
+type WalletPane = "spot" | "futures";
+
+const WalletOverview = () => {
+  const [, setIsVisibleOrView] = useTradingAccountModalOpen();
+  const [activeWallet, setActiveWallet] = useState<WalletPane>("spot");
+  const [transferAmount, setTransferAmount] = useState("");
+  const [isTransferSubmitting, setIsTransferSubmitting] = useState(false);
+  const { chainId: connectedChainId } = useAccount();
+  const { chainId: settlementChainId } = useChainId();
+  const { apiTotalAccountUsd, apiAccountUsd, apiFrozenAccountUsd } = useAvailableToTradeAssetSettlementChain();
+  const spotBalancesResult = useZanbaraBalancesForProduct("spot", settlementChainId, { refreshInterval: 10000 });
+  const futuresBalancesResult = useZanbaraBalancesForProduct("futures", connectedChainId ?? settlementChainId, {
+    refreshInterval: 10000,
+  });
+  const spotBalances = spotBalancesResult.data?.balances ?? [];
+  const futuresBalances = futuresBalancesResult.data?.balances ?? [];
+  const activeBalances = activeWallet === "spot" ? spotBalances : futuresBalances;
+  const destinationBalances = activeWallet === "spot" ? futuresBalances : spotBalances;
+  const activeBalancesResult = activeWallet === "spot" ? spotBalancesResult : futuresBalancesResult;
+  const primaryBalance = findPrimaryBalance(activeBalances);
+  const activeUsdtBalance = findBalanceBySymbol(activeBalances, "USDT");
+  const destinationUsdtBalance = findBalanceBySymbol(destinationBalances, "USDT");
+  const balanceSymbol = getBalanceSymbol(primaryBalance);
+  const availableText = formatTokenAmountText(primaryBalance?.available);
+  const frozenText = formatTokenAmountText(primaryBalance?.frozen);
+  const totalText = formatTokenAmountText(primaryBalance?.total);
+  const transferSymbol = "USDT";
+  const transferAvailableText = formatTokenAmountText(activeUsdtBalance?.available);
+  const transferDestinationAvailableText = formatTokenAmountText(destinationUsdtBalance?.available);
+  const availableUsd = primaryBalance !== undefined ? toDisplayUsdAmount(primaryBalance.available) : apiAccountUsd;
+  const frozenUsd = primaryBalance !== undefined ? toDisplayUsdAmount(primaryBalance.frozen) : apiFrozenAccountUsd;
+  const totalUsd = primaryBalance !== undefined ? toDisplayUsdAmount(primaryBalance.total) : apiTotalAccountUsd;
+  const availableToTradeAssetSymbols =
+    activeBalances.length > 0
+      ? activeBalances.map((balance) => getBalanceSymbol(balance)).filter(Boolean)
+      : [balanceSymbol];
+  const normalizedTransferAmount = transferAmount.trim();
+  const transferAmountNumber = Number(normalizedTransferAmount);
+  const transferAvailableBalanceNumber = Number(activeUsdtBalance?.available ?? 0);
+  const canTransfer =
+    Number.isFinite(transferAmountNumber) &&
+    transferAmountNumber > 0 &&
+    transferAmountNumber <= transferAvailableBalanceNumber &&
+    !isTransferSubmitting;
+
+  const openAssets = () => setIsVisibleOrView("availableToTradeAssets");
+  const openDeposit = () => setIsVisibleOrView("deposit");
+  const openWithdraw = () => setIsVisibleOrView("withdraw");
+  const handleTransferAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const nextValue = event.target.value.replace(/,/g, ".");
+
+    if (/^\d*\.?\d*$/.test(nextValue)) {
+      setTransferAmount(nextValue);
+    }
+  };
+  const handleTransfer = async () => {
+    if (!canTransfer) return;
+
+    try {
+      setIsTransferSubmitting(true);
+      await spotTransfer(settlementChainId, {
+        token: transferSymbol,
+        amount: normalizedTransferAmount,
+        direction: activeWallet === "spot" ? "spot_to_perp" : "perp_to_spot",
+      });
+      helperToast.success(t`Transfer submitted`);
+      setTransferAmount("");
+      await Promise.all([spotBalancesResult.mutate(), futuresBalancesResult.mutate()]);
+    } catch (error) {
+      helperToast.error(error instanceof Error ? error.message : t`Transfer failed`);
+    } finally {
+      setIsTransferSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="trading-wallet-layout">
+      <section className="wallet-summary-card">
+        <div className="wallet-summary-metric wallet-summary-metric--large">
+          <div className="wallet-label-row">
+            <span>Total Assets (USD)</span>
+            <span className="wallet-eye">◉</span>
+          </div>
+          <UsdValueWithSkeleton usd={totalUsd ?? apiTotalAccountUsd} />
+          <div className="wallet-subvalue">≈ {formatTokenAmountText(primaryBalance?.total)} {balanceSymbol}</div>
+        </div>
+        <div className="wallet-summary-metric">
+          <div className="wallet-label-row">Available Balance</div>
+          <UsdValueWithSkeleton usd={availableUsd} />
+          <div className="wallet-subvalue">{availableText} {balanceSymbol}</div>
+        </div>
+        <div className="wallet-summary-metric">
+          <div className="wallet-label-row">
+            <TooltipWithPortal content={<FrozenBalanceTooltipContent />} variant="iconStroke">
+              <span>Frozen Balance</span>
+            </TooltipWithPortal>
+          </div>
+          <UsdValueWithSkeleton usd={frozenUsd} />
+          <div className="wallet-subvalue">{frozenText} {balanceSymbol}</div>
+        </div>
+        <div className="wallet-summary-metric">
+          <div className="wallet-label-row">Total Balance</div>
+          <UsdValueWithSkeleton usd={totalUsd} />
+          <div className="wallet-subvalue">{totalText} {balanceSymbol}</div>
+        </div>
+      </section>
+
+      <div className="wallet-tabs" role="tablist">
+        <button
+          type="button"
+          className={cx("wallet-tab", activeWallet === "spot" && "wallet-tab--active")}
+          onClick={() => setActiveWallet("spot")}
+        >
+          <DownloadIcon className="wallet-tab-icon" />
+          Spot Wallet
+        </button>
+        <button
+          type="button"
+          className={cx("wallet-tab", activeWallet === "futures" && "wallet-tab--active")}
+          onClick={() => setActiveWallet("futures")}
+        >
+          <PnlAnalysisIcon className="wallet-tab-icon" />
+          Futures Wallet
+        </button>
+      </div>
+
+      <section className="wallet-assets-card">
+        <div className="wallet-assets-head">
+          <div>
+            <div className="wallet-label-row">
+              {activeWallet === "spot" ? "Spot Wallet Assets (USD)" : "Futures Wallet Assets (USD)"}
+              <span className="wallet-eye">◉</span>
+            </div>
+            <UsdValueWithSkeleton usd={totalUsd} />
+            <div className="wallet-subvalue">≈ {totalText} {balanceSymbol}</div>
+          </div>
+          <button type="button" className="wallet-all-assets" onClick={openAssets}>
+            <span>All assets</span>
+            <TokenIcons tokens={availableToTradeAssetSymbols} />
+            <ChevronLeftIcon className="size-16 rotate-180 text-typography-secondary" />
+          </button>
+        </div>
+        <div className="wallet-asset-table">
+          <div className="wallet-asset-row wallet-asset-row--header">
+            <span>Asset</span>
+            <span>Available</span>
+            <span>Frozen</span>
+            <span>Total</span>
+          </div>
+          {activeBalances.map((balance) => {
+            const symbol = getBalanceSymbol(balance, balanceSymbol);
+
+            return (
+              <div className="wallet-asset-row" key={`${activeWallet}-${symbol}-${balance.token}`}>
+                <div className="wallet-asset-token">
+                  <TokenIcon symbol={symbol} displaySize={48} />
+                  <div>
+                    <div className="wallet-asset-symbol">{symbol}</div>
+                    <div className="wallet-subvalue">{symbol === "USDT" ? "Tether" : symbol}</div>
+                  </div>
+                </div>
+                <div>{formatTokenAmountText(balance.available)}<span>{symbol}</span></div>
+                <div>{formatTokenAmountText(balance.frozen)}<span>{symbol}</span></div>
+                <div>{formatTokenAmountText(balance.total)}<span>{symbol}</span></div>
+              </div>
+            );
+          })}
+          {!activeBalancesResult.isLoading && activeBalances.length === 0 && (
+            <div className="wallet-asset-empty">No assets</div>
+          )}
+        </div>
+      </section>
+
+      <section className="wallet-transfer-card">
+        <div className="wallet-section-title">
+          <SwapIcon className="wallet-section-icon" />
+          Transfer {transferSymbol}
+        </div>
+        <div className="wallet-transfer-grid">
+          <div className="wallet-transfer-box">
+            <span>From</span>
+            <strong>{activeWallet === "spot" ? "Spot Wallet" : "Futures Wallet"}</strong>
+            <small>{transferAvailableText} {transferSymbol}</small>
+          </div>
+          <button type="button" className="wallet-swap-button" onClick={() => setActiveWallet(activeWallet === "spot" ? "futures" : "spot")}>
+            <SwapIcon />
+          </button>
+          <div className="wallet-transfer-box">
+            <span>To</span>
+            <strong>{activeWallet === "spot" ? "Futures Wallet" : "Spot Wallet"}</strong>
+            <small>{transferDestinationAvailableText} {transferSymbol}</small>
+          </div>
+          <div className="wallet-transfer-amount">
+            <label>Amount</label>
+            <div className="wallet-transfer-input">
+              <input
+                aria-label={`Transfer ${transferSymbol} amount`}
+                disabled={isTransferSubmitting}
+                inputMode="decimal"
+                onChange={handleTransferAmountChange}
+                placeholder="0.00"
+                type="text"
+                value={transferAmount}
+              />
+              <strong>{transferSymbol}</strong>
+            </div>
+            <small>Available: {transferAvailableText} {transferSymbol}</small>
+          </div>
+          <Button
+            variant="primary-action"
+            size="small"
+            className="wallet-transfer-submit"
+            disabled={!canTransfer}
+            onClick={handleTransfer}
+          >
+            {isTransferSubmitting ? "Transferring" : "Transfer"}
+          </Button>
+        </div>
+      </section>
+
+      <div className="wallet-action-grid">
+        <Button variant="secondary" size="medium" className="wallet-action-button" onClick={openDeposit}>
+          <DownloadIcon className="wallet-section-icon" />
+          Deposit
+        </Button>
+        <Button variant="secondary" size="medium" className="wallet-action-button" onClick={openWithdraw}>
+          <DownloadIcon className="wallet-section-icon wallet-section-icon--up" />
+          Withdraw
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 type DisplayFundingHistoryItem = Omit<MultichainFundingHistoryItem, "token"> & {
   token: Token;
 };
 
 type TradingDisplayFundingHistoryItem = {
   id: string;
+  product: "futures" | "spot";
   type: "deposit" | "withdraw";
   token: Token;
   amount: bigint;
@@ -444,13 +716,14 @@ const FundingHistorySection = () => {
   // const [searchQuery, setSearchQuery] = useState("");
   const [, setSelectedTransferGuid] = useTradingAccountSelectedTransferGuid();
   const { address: account, chainId } = useAccount();
+  const { chainId: settlementChainId } = useChainId();
   const product = useTradeProduct();
-  const isSpotProduct = product === "spot";
-  const fundingChainId = isSpotProduct ? DEFAULT_SPOT_CHAIN_ID : chainId;
+  const apiChainId = settlementChainId;
   const spotVaultAddress = getSpotVaultAddress(DEFAULT_SPOT_CHAIN_ID);
   const { data: walletTokenConfigs } = useWalletTokensConfig();
   const { walletClient } = useWallet();
-  const publicClient = usePublicClient({ chainId: fundingChainId });
+  const futuresPublicClient = usePublicClient({ chainId });
+  const spotPublicClient = usePublicClient({ chainId: DEFAULT_SPOT_CHAIN_ID });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isTradeMode = isTradeModeActive();
   const { mutate: mutateBalances } = useZanbaraUserBalances({
@@ -458,8 +731,37 @@ const FundingHistorySection = () => {
   });
 
   // Use backend funding history in API trading mode, otherwise use regular multichain funding history.
-  const tradingFundingHistory = useTradingFundingHistory(isTradeMode ? fundingChainId : undefined, undefined, product);
+  // The wallet modal shows both Spot and Futures balances, so funding history must merge both ledgers.
+  const futuresTradingFundingHistory = useTradingFundingHistory(
+    isTradeMode ? apiChainId : undefined,
+    undefined,
+    "futures"
+  );
+  const spotTradingFundingHistory = useTradingFundingHistory(isTradeMode ? apiChainId : undefined, undefined, "spot");
   const regularFundingHistory = useTradingAccountFundingHistory({ enabled: !isTradeMode });
+  const tradingFundingHistory = useMemo(() => {
+    if (!isTradeMode) {
+      return {
+        fundingHistory: undefined,
+        isLoading: false,
+        mutate: () => undefined,
+      };
+    }
+
+    const fundingHistory = [
+      ...(futuresTradingFundingHistory.fundingHistory ?? []),
+      ...(spotTradingFundingHistory.fundingHistory ?? []),
+    ].sort((a, b) => b.created_at - a.created_at);
+
+    return {
+      fundingHistory,
+      isLoading: futuresTradingFundingHistory.isLoading || spotTradingFundingHistory.isLoading,
+      mutate: () => {
+        futuresTradingFundingHistory.mutate();
+        spotTradingFundingHistory.mutate();
+      },
+    };
+  }, [futuresTradingFundingHistory, isTradeMode, spotTradingFundingHistory]);
 
   const fundingHistory = isTradeMode ? undefined : regularFundingHistory.fundingHistory;
   const isLoading = isTradeMode ? tradingFundingHistory.isLoading : regularFundingHistory.isLoading;
@@ -474,7 +776,7 @@ const FundingHistorySection = () => {
       .map((item): TradingDisplayFundingHistoryItem | undefined => {
         // API returns token as symbol (e.g., "USDT"), not address
         // Use getTokenBySymbol to find token by symbol
-        const spotTokenConfig = isSpotProduct
+        const spotTokenConfig = item.product === "spot"
           ? findWalletTokenConfig(walletTokenConfigs, DEFAULT_SPOT_CHAIN_ID, item.token)
           : undefined;
         const token = spotTokenConfig
@@ -496,6 +798,7 @@ const FundingHistorySection = () => {
 
         return {
           id: item.id,
+          product: item.product,
           type: item.type,
           token,
           amount: amountBigInt,
@@ -509,7 +812,7 @@ const FundingHistorySection = () => {
         };
       })
       .filter((item): item is TradingDisplayFundingHistoryItem => item !== undefined);
-  }, [isTradeMode, tradingFundingHistory.fundingHistory, chainId, isSpotProduct, walletTokenConfigs]);
+  }, [isTradeMode, tradingFundingHistory.fundingHistory, chainId, walletTokenConfigs]);
 
   // Regular funding history for non-API trading mode.
   const filteredFundingHistory: DisplayFundingHistoryItem[] | undefined = useMemo(() => {
@@ -563,7 +866,11 @@ const FundingHistorySection = () => {
 
   // Handler for continuing signed withdrawal (calling contract with existing signature)
   const handleSignedWithdrawalContinue = async (item: TradingDisplayFundingHistoryItem) => {
-    if (!fundingChainId || !walletClient || !publicClient || !account) {
+    const itemIsSpotProduct = item.product === "spot";
+    const itemContractChainId = itemIsSpotProduct ? DEFAULT_SPOT_CHAIN_ID : chainId;
+    const publicClient = itemIsSpotProduct ? spotPublicClient : futuresPublicClient;
+
+    if (!itemContractChainId || !apiChainId || !walletClient || !publicClient || !account) {
       helperToast.error(t`Missing required parameters`);
       return;
     }
@@ -583,7 +890,7 @@ const FundingHistorySection = () => {
     setIsSubmitting(true);
     try {
       // Get vault address
-      const vaultAddress = isSpotProduct ? spotVaultAddress : getTradingVaultAddress(fundingChainId);
+      const vaultAddress = itemIsSpotProduct ? spotVaultAddress : getTradingVaultAddress(itemContractChainId);
       if (!vaultAddress) {
         throw new Error("Vault contract not found");
       }
@@ -602,7 +909,7 @@ const FundingHistorySection = () => {
 
       // Step 1: Simulate contract call
       try {
-        if (isSpotProduct) {
+        if (itemIsSpotProduct) {
           await publicClient.simulateContract({
             address: vaultAddress as `0x${string}`,
             abi: SpotVaultAbi,
@@ -625,7 +932,7 @@ const FundingHistorySection = () => {
       }
 
       // Step 2: Call contract
-      const txHash = isSpotProduct
+      const txHash = itemIsSpotProduct
         ? await walletClient.writeContract({
             address: vaultAddress as `0x${string}`,
             abi: SpotVaultAbi,
@@ -652,9 +959,9 @@ const FundingHistorySection = () => {
 
       // Confirm with backend
       try {
-        await confirmWithdraw(fundingChainId, item.id, {
+        await confirmWithdraw(apiChainId, item.id, {
           tx_hash: receipt.transactionHash,
-        }, product);
+        }, item.product);
       } catch (confirmError) {
         console.warn("[FundingHistory] Failed to confirm withdraw:", confirmError);
       }
@@ -709,7 +1016,7 @@ const FundingHistorySection = () => {
   };
 
   return (
-    <div className="flex grow flex-col gap-12 overflow-y-hidden">
+    <div className="flex grow flex-col gap-12 overflow-visible">
       <div className="flex items-center justify-between px-adaptive">
         <div className="text-body-large font-medium">
           <Trans>Funding Activity</Trans>
@@ -854,11 +1161,10 @@ const FundingHistorySection = () => {
 
 export const MainView = ({ account }: { account: string }) => {
   return (
-    <div className="trading-account-modal-main text-body-medium flex grow flex-col gap-[--padding-adaptive] overflow-y-hidden">
+    <div className="trading-account-modal-main text-body-medium flex grow flex-col gap-[--padding-adaptive] overflow-y-auto">
       <div className="flex flex-col gap-12 px-adaptive pb-12 pt-8">
         <Toolbar account={account} />
-        <BalanceSection />
-        <ActionButtons />
+        <WalletOverview />
       </div>
       <FundingHistorySection />
     </div>

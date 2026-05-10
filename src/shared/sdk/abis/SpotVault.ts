@@ -36,6 +36,13 @@ export default [
     stateMutability: "view",
   },
   {
+    name: "registeredTokens",
+    type: "function",
+    inputs: [{ name: "token", type: "address" }],
+    outputs: [{ type: "bool" }],
+    stateMutability: "view",
+  },
+  {
     name: "SpotDeposit",
     type: "event",
     inputs: [
