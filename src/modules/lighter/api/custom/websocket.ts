@@ -493,17 +493,23 @@ export class WebSocketService {
   //   perp:  orderbook:{sym}    trades:{sym}    ticker:{sym}    kline:{sym}:{period}
   //   spot:  spot:depth:{sym}   spot:trade:{sym} spot:ticker:{sym} spot:kline:{sym}:{period}
   // Note "trades" → "trade" (singular) and "orderbook" → "depth" — not just a prefix swap.
+  //
+  // We return the channel WITHOUT the `spot:` prefix here. addSubscription pipes
+  // the result through tradeProductChannel, which prepends `spot:` for the spot
+  // service instance (and nothing for futures). Including the prefix here too
+  // would double-prefix on the wire (`spot:spot:depth:...`) and the backend
+  // rejects it with INVALID_CHANNEL.
   private orderbookChannelName(apiSymbol: string): string {
-    return this.product === "spot" ? `spot:depth:${apiSymbol}` : `orderbook:${apiSymbol}`;
+    return this.product === "spot" ? `depth:${apiSymbol}` : `orderbook:${apiSymbol}`;
   }
   private tradeChannelName(apiSymbol: string): string {
-    return this.product === "spot" ? `spot:trade:${apiSymbol}` : `trades:${apiSymbol}`;
+    return this.product === "spot" ? `trade:${apiSymbol}` : `trades:${apiSymbol}`;
   }
   private tickerChannelName(apiSymbol: string): string {
-    return this.product === "spot" ? `spot:ticker:${apiSymbol}` : `ticker:${apiSymbol}`;
+    return `ticker:${apiSymbol}`;
   }
   private klineChannelName(apiSymbol: string, period: string): string {
-    return this.product === "spot" ? `spot:kline:${apiSymbol}:${period}` : `kline:${apiSymbol}:${period}`;
+    return `kline:${apiSymbol}:${period}`;
   }
 
   subscribeOrderbook(symbol: string): void {
