@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 
 import styles from "./AccountsPanel.module.scss";
 import { useUnifiedAccountAdapter } from "../../adapters/useUnifiedAccountAdapter";
+import { useTradeProduct } from "../../store/TradeStateContext/TradeStateContext";
 
 function Row({ label, value }: { label: ReactNode; value: string }) {
   return (
@@ -32,7 +33,16 @@ function formatLeverage(value: number | null | undefined) {
 }
 
 export function AccountsPanel() {
+  const product = useTradeProduct();
   const account = useUnifiedAccountAdapter();
+
+  // All rows below are perpetual concepts (Perpetuals Equity, Unrealized PnL,
+  // Cross Leverage, Cross/Maintenance Margin). Render nothing on spot — the
+  // spot order panel already shows per-pair available balance, and the bottom
+  // tabs cover open orders / order history / trade history.
+  if (product === "spot") {
+    return null;
+  }
 
   return (
     <div className={styles.root}>
