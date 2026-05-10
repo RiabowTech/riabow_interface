@@ -5,6 +5,7 @@ import ChartTokenSelector from "components/ChartTokenSelector/ChartTokenSelector
 
 import styles from "./SymbolBar.module.scss";
 import { useMarketInfoAdapter } from "../../adapters/useMarketInfoAdapter";
+import { useTradeProduct } from "../../store/TradeStateContext/TradeStateContext";
 import { formatFundingPct } from "../../utils/fundingFormat";
 // 以下导入是旧自建 selector 的实现痕迹。当前直接复用 shared 的 ChartTokenSelector，
 // 保留注释仅作为回退参考。
@@ -62,6 +63,8 @@ function Stat({
 
 export function SymbolBar() {
   const m = useMarketInfoAdapter();
+  const product = useTradeProduct();
+  const isSpot = product === "spot";
   const changeCls = m.change24hPct == null ? "" : m.change24hPct >= 0 ? "ltr-up" : "ltr-down";
 
   // ---- 旧 SymbolBar 自建 selector 逻辑（已弃用，改为使用 interface_copy 的 ChartTokenSelector）----
@@ -96,14 +99,17 @@ export function SymbolBar() {
           <Stat label={<Trans>24h Change</Trans>} value={fmtPct(m.change24hPct)} cls={changeCls} />
           <Stat label={<Trans>24h Volume</Trans>} value={fmtCompactUsd(m.volume24hUsd)} />
           <Stat label={<Trans>Open Interest</Trans>} value={fmtCompactUsd(m.openInterestUsd)} clickable />
-          <div className={styles.fundingGroup}>
-            <span className={`${styles.corner} ${styles.cornerTL}`} />
-            <span className={`${styles.corner} ${styles.cornerTR}`} />
-            <span className={`${styles.corner} ${styles.cornerBL}`} />
-            <span className={`${styles.corner} ${styles.cornerBR}`} />
-            <Stat label={<Trans>1hr Funding</Trans>} value={formatFundingPct(m.funding1hPct, 4)} clickable />
-            <Stat label={<Trans>Next Funding</Trans>} value={fmtCountdown(m.nextFundingTs)} />
-          </div>
+          {/* Funding rate is a perpetual concept — hidden on spot. */}
+          {!isSpot && (
+            <div className={styles.fundingGroup}>
+              <span className={`${styles.corner} ${styles.cornerTL}`} />
+              <span className={`${styles.corner} ${styles.cornerTR}`} />
+              <span className={`${styles.corner} ${styles.cornerBL}`} />
+              <span className={`${styles.corner} ${styles.cornerBR}`} />
+              <Stat label={<Trans>1hr Funding</Trans>} value={formatFundingPct(m.funding1hPct, 4)} clickable />
+              <Stat label={<Trans>Next Funding</Trans>} value={fmtCountdown(m.nextFundingTs)} />
+            </div>
+          )}
         </div>
       </div>
     </div>
