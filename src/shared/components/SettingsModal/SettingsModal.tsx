@@ -1,4 +1,4 @@
-import { msg, t } from "@lingui/macro";
+import { Trans, msg, t } from "@lingui/macro";
 import cx from "classnames";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -13,12 +13,17 @@ import { mustNeverExist } from "lib/types";
 import { MAX_TWAP_NUMBER_OF_PARTS, MIN_TWAP_NUMBER_OF_PARTS } from "sdk/configs/twap";
 
 import { SlideModal } from "components/Modal/SlideModal";
-import Tabs from "components/Tabs/Tabs";
 
 import { DebugSettings } from "./DebugSettings";
 import { DisplaySettings } from "./DisplaySettings";
 import { TradingMode } from "./shared";
 import { TradingSettings } from "./TradingSettings";
+
+import SettingsIcon from "img/ic_settings.svg?react";
+import TradingIcon from "img/ic_antenna_bars.svg?react";
+import InfoIcon from "img/ic_info_circle_stroke.svg?react";
+
+import "./SettingsModal.css";
 
 let SETTINGS_TABS: ("trading")[] = [];
 if (isDevelopment()) {
@@ -236,17 +241,63 @@ export function SettingsModal({
     [tabLabels]
   );
 
+  const modalTitle = (
+    <div className="settings-modal-header">
+      <div className="settings-modal-header__icon">
+        <SettingsIcon />
+      </div>
+      <div>
+        <div className="settings-modal-header__title">
+          <Trans>Settings</Trans>
+        </div>
+        <div className="settings-modal-header__subtitle">
+          <Trans>Manage your trading preferences</Trans>
+        </div>
+      </div>
+    </div>
+  );
+
+  const footerContent = (
+    <>
+      <div className="settings-modal-footer__hint">
+        <span className="settings-modal-footer__info">
+          <InfoIcon />
+        </span>
+        <span>
+          <Trans>You can change this setting anytime in trading settings.</Trans>
+        </span>
+      </div>
+      <button type="button" className="settings-modal-footer__button" onClick={onClose}>
+        <Trans>Close</Trans>
+      </button>
+    </>
+  );
+
   return (
     <SlideModal
       isVisible={isSettingsVisible}
       setIsVisible={setIsSettingsVisible}
-      label={t`Settings`}
+      label={modalTitle}
       qa="settings-modal"
-      className="text-body-medium text-typography-secondary"
+      className="settings-modal text-body-medium text-typography-secondary"
+      desktopContentClassName="settings-modal-panel"
+      footerContent={footerContent}
     >
-      <div className="flex flex-col gap-8">
-        <Tabs options={tabOptions} selectedValue={activeTab} onChange={setActiveTab} type="block" qa="settings-tabs" />
-        <div className="flex max-w-[380px] flex-row items-start overflow-x-hidden max-md:max-w-none">
+      <div className="settings-modal-layout">
+        <aside className="settings-modal-sidebar" aria-label={t`Settings sections`}>
+          {tabOptions.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              className={cx("settings-modal-sidebar__item", activeTab === option.value && "is-active")}
+              onClick={() => setActiveTab(option.value)}
+            >
+              <TradingIcon />
+              <span>{option.label}</span>
+            </button>
+          ))}
+        </aside>
+        <div className="settings-modal-content">
           <TabWrapper tab="trading" activeTab={activeTab}>
             <TradingSettings
               tradingMode={tradingMode}
@@ -282,7 +333,7 @@ function TabWrapper({
 }) {
   return (
     <div
-      className={cx("w-[380px] shrink-0 max-md:w-full", {
+      className={cx("w-full shrink-0", {
         "max-md:hidden md:invisible": activeTab !== tab,
         "order-first": activeTab === tab,
       })}

@@ -1,11 +1,11 @@
 import cx from "classnames";
 import { Fragment, ReactNode } from "react";
 
-import { useBreakpoints } from "lib/useBreakpoints";
-
 import PercentageInput from "components/PercentageInput/PercentageInput";
 import TooltipWithPortal from "components/Tooltip/TooltipWithPortal";
 import { ValueInput } from "components/ValueInput/ValueInput";
+
+import CheckIcon from "img/ic_check.svg?react";
 
 export enum TradingMode {
   Classic = "classic",
@@ -14,9 +14,7 @@ export enum TradingMode {
 }
 
 export function SettingsSection({ children, className }: { children?: React.ReactNode; className?: string }) {
-  return (
-    <div className={cx("flex flex-col gap-16 rounded-8 bg-fill-surfaceElevated50 p-12", className)}>{children}</div>
-  );
+  return <div className={cx("settings-section", className)}>{children}</div>;
 }
 
 export function InputSetting({
@@ -95,49 +93,44 @@ export function SettingButton({
   disabled?: boolean;
   disabledTooltip?: ReactNode;
 }) {
-  const { isMobile, isTablet } = useBreakpoints();
-
   const Wrapper = disabled && disabledTooltip ? TooltipWithPortal : Fragment;
 
   return (
     <Wrapper content={disabledTooltip} variant="none">
       <div
         className={cx(
-          `grid min-h-66 select-none grid-cols-[66px_auto] items-center rounded-8 border border-solid hover:border-slate-100`,
-          active ? "border-slate-100 text-typography-primary" : "border-slate-600",
+          "settings-mode-card",
+          active && "is-active",
           disabled ? "muted cursor-not-allowed" : "cursor-pointer"
         )}
         onClick={disabled ? undefined : onClick}
       >
-        <div
-          className={cx(
-            // 图标在网格单元中水平居中，整体略微上移
-            "flex justify-center items-center  text-typography-secondary",
-            disabled && "opacity-50",
-            active && "text-typography-primary"
-          )}
-        >
+        <div className={cx("settings-mode-card__icon", disabled && "opacity-50")}>
           {icon}
         </div>
-        <div className="flex gap-4 py-6">
-          <div className="flex flex-col border-l border-solid border-slate-600 pl-12">
-            <div className="flex items-center gap-4">
-              <div>{title}</div>
+        <div className="settings-mode-card__content">
+          <div className="settings-mode-card__title-row">
+            <div className="settings-mode-card__title">
+              {title}
               {info && (
                 <TooltipWithPortal
                   content={info}
                   handleClassName=""
                   variant="icon"
                   className="flex items-center"
-                  // prevent bubbling on desktop (handled by tooltip itself)
                   handle={<span className="inline-flex items-center" />}
                 />
               )}
             </div>
-            <div>{description}</div>
+            {chip ? <div className="settings-mode-card__chip">{chip}</div> : null}
           </div>
-          {chip ? <div className="mr-6 mt-4">{chip}</div> : null}
+          <div className="settings-mode-card__description">{description}</div>
         </div>
+        {active && (
+          <div className="settings-mode-card__check">
+            <CheckIcon />
+          </div>
+        )}
       </div>
     </Wrapper>
   );

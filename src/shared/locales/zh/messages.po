@@ -838,6 +838,10 @@ msgstr "帳戶餘額"
 msgid "Total"
 msgstr "總計"
 
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Manage your trading preferences"
+msgstr "管理你的交易偏好"
+
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -1736,6 +1740,7 @@ msgid "and"
 msgstr "和"
 
 #: src/shared/components/SettingsModal/SettingsModal.tsx
+#: src/shared/components/SettingsModal/TradingSettings.tsx
 msgid "Trading"
 msgstr ""
 
@@ -2616,6 +2621,10 @@ msgstr "月資金費率"
 msgid "This Year"
 msgstr "今年"
 
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Customize your trading experience"
+msgstr "自訂你的交易體驗"
+
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "Performance data is not available for this network"
 msgstr "此網路暫無表現數據"
@@ -3043,6 +3052,10 @@ msgstr "已減少"
 msgid "Contract Address"
 msgstr "合約地址"
 
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Recommended"
+msgstr "推薦"
+
 #: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "Updating {orderText}."
 msgstr "正在更新 {orderText}。"
@@ -3236,6 +3249,10 @@ msgstr "輸入止盈或止損價格"
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Trades"
 msgstr "交易"
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "You can change this setting anytime in trading settings."
+msgstr "你可以隨時在交易設定中更改此設定。"
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
 msgid "Submitted"
@@ -3476,6 +3493,10 @@ msgstr "止盈限價"
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to see your VIP level."
 msgstr "請連接錢包以查看 VIP 等級。"
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Choose the trading experience that works best for you."
+msgstr "選擇最適合你的交易體驗。"
 
 #: src/modules/lighter/pages/LighterSpotPage.tsx
 msgid "Action"
@@ -4198,6 +4219,10 @@ msgstr "尚需 {0}"
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Referral Codes"
 msgstr "推薦碼"
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "Last Price"
+msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -5411,6 +5436,10 @@ msgstr "請求存款"
 msgid "USDT address not configured"
 msgstr "USDT 地址未配置"
 
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Settings sections"
+msgstr "設定區段"
+
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "{n}th Term"
 msgstr ""
@@ -5492,6 +5521,7 @@ msgid "The order may not execute as the max. allowed leverage is exceeded. Con
 msgstr "訂單可能無法執行，因為超過最大允許槓桿。考慮透過編輯和減少其規模來降低訂單槓桿。<0>閱讀更多</0>。"
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/shared/components/SettingsModal/SettingsModal.tsx
 msgid "Close"
 msgstr "平倉"
 

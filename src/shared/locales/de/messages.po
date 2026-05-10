@@ -839,6 +839,10 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Manage your trading preferences"
+msgstr ""
+
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/generalPerformanceDetailsDebug.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardAccountsTable.tsx
 #: src/modules/lighter/features/leaderboard/pages/LeaderboardPage/components/LeaderboardPositionsTable.tsx
@@ -1737,6 +1741,7 @@ msgid "and"
 msgstr ""
 
 #: src/shared/components/SettingsModal/SettingsModal.tsx
+#: src/shared/components/SettingsModal/TradingSettings.tsx
 msgid "Trading"
 msgstr ""
 
@@ -2617,6 +2622,10 @@ msgstr ""
 msgid "This Year"
 msgstr ""
 
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Customize your trading experience"
+msgstr ""
+
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/GeneralPerformanceDetails.tsx
 msgid "Performance data is not available for this network"
 msgstr ""
@@ -3044,6 +3053,10 @@ msgstr ""
 msgid "Contract Address"
 msgstr ""
 
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Recommended"
+msgstr ""
+
 #: src/modules/lighter/domain/synthetics/orders/useOrderTxnCallbacks.tsx
 msgid "Updating {orderText}."
 msgstr ""
@@ -3236,6 +3249,10 @@ msgstr ""
 #: src/modules/lighter/components/OrderBookPanel/OrderBookPanel.tsx
 #: src/modules/lighter/features/accounts/pages/AccountDashboard/DailyAndCumulativePnL.tsx
 msgid "Trades"
+msgstr ""
+
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "You can change this setting anytime in trading settings."
 msgstr ""
 
 #: src/shared/components/TradingAccountModal/MainView.tsx
@@ -3476,6 +3493,10 @@ msgstr ""
 
 #: src/modules/lighter/features/feeVip/pages/FeeVipPage/FeeVipPage.tsx
 msgid "Connect wallet to see your VIP level."
+msgstr ""
+
+#: src/shared/components/SettingsModal/TradingSettings.tsx
+msgid "Choose the trading experience that works best for you."
 msgstr ""
 
 #: src/modules/lighter/pages/LighterSpotPage.tsx
@@ -4198,6 +4219,10 @@ msgstr ""
 
 #: src/shared/components/Referrals/AffiliatesStats.tsx
 msgid "Referral Codes"
+msgstr ""
+
+#: src/modules/lighter/components/SymbolBar/SymbolBar.tsx
+msgid "Last Price"
 msgstr ""
 
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
@@ -5412,6 +5437,10 @@ msgstr ""
 msgid "USDT address not configured"
 msgstr ""
 
+#: src/shared/components/SettingsModal/SettingsModal.tsx
+msgid "Settings sections"
+msgstr ""
+
 #: src/modules/lighter/features/earn/pages/Earn/Earn.tsx
 msgid "{n}th Term"
 msgstr ""
@@ -5493,6 +5522,7 @@ msgid "The order may not execute as the max. allowed leverage is exceeded. Con
 msgstr ""
 
 #: src/modules/lighter/features/earn/components/ClaimModal/ClaimModal.tsx
+#: src/shared/components/SettingsModal/SettingsModal.tsx
 msgid "Close"
 msgstr ""
 

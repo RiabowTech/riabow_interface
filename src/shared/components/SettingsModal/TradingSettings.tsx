@@ -18,6 +18,7 @@ import TokenIcon from "components/TokenIcon/TokenIcon";
 import TooltipWithPortal from "components/Tooltip/TooltipWithPortal";
 
 import HourGlassIcon from "img/ic_hourglass.svg?react";
+import TradingIcon from "img/ic_antenna_bars.svg?react";
 
 import { SettingButton, SettingsSection, TradingMode } from "./shared";
 
@@ -53,12 +54,30 @@ export function TradingSettings({
   const nativeTokenData = getByKey(tokensData, NATIVE_TOKEN_ADDRESS);
 
   return (
-    <div>
+    <div className="settings-trading">
       {getIsExpressSupported(chainId) && (
         <>
+          <div className="settings-trading__hero">
+            <div className="settings-trading__hero-icon">
+              <TradingIcon />
+            </div>
+            <div>
+              <h3>
+                <Trans>Trading</Trans>
+              </h3>
+              <p>
+                <Trans>Customize your trading experience</Trans>
+              </p>
+            </div>
+          </div>
           <SettingsSection>
-            <div className="text-14 font-medium text-typography-primary">
-              <Trans>Trading Mode</Trans>
+            <div className="settings-trading__section-heading">
+              <h4>
+                <Trans>Trading Mode</Trans>
+              </h4>
+              <p>
+                <Trans>Choose the trading experience that works best for you.</Trans>
+              </p>
             </div>
             {!srcChainId && (
               <SettingButton
@@ -72,6 +91,7 @@ export function TradingSettings({
                 }
                 icon={<HourGlassIcon className="size-28" />}
                 active={tradingMode === TradingMode.Classic}
+                chip={<Trans>Recommended</Trans>}
                 onClick={() => handleTradingModeChange(TradingMode.Classic)}
               />
             )}
@@ -100,14 +120,6 @@ export function TradingSettings({
               active={tradingMode === TradingMode.Express}
               onClick={() => handleTradingModeChange(TradingMode.Express)}
             /> */}
-            <div className="opacity-0">
-              version:
-              {(import.meta.env.VITE_GIT_COMMIT_HASH || import.meta.env.VITE_APP_VERSION || "unknown").substring(
-                0,
-                8
-              )}
-            </div>
-
             {/* <SettingButton
               title={<Trans>Express + One-Click</Trans>}
               description={<Trans>CEX-like experience with Express reliability.</Trans>}
@@ -204,85 +216,6 @@ export function TradingSettings({
         </SettingsSection>
       )}
 
-      <SettingsSection className="mt-2">
-        {/* <InputSetting
-          title={<Trans>Default Allowed Slippage</Trans>}
-          description={
-            <Trans>
-              The maximum allowed percentage difference between the mark price and the execution price for market
-              orders.
-            </Trans>
-          }
-          defaultValue={DEFAULT_SLIPPAGE_AMOUNT}
-          value={parseFloat(String(settings.savedAllowedSlippage))}
-          onChange={onChangeSlippage}
-          suggestions={EMPTY_ARRAY}
-        /> */}
-
-        {/* <InputSetting
-          title={<Trans>TWAP Number of Parts</Trans>}
-          description={
-            <div>
-              <Trans>The default number of parts for Time-Weighted Average Price (TWAP) orders.</Trans>
-            </div>
-          }
-          defaultValue={DEFAULT_TIME_WEIGHTED_NUMBER_OF_PARTS}
-          value={numberOfParts}
-          onChange={onChangeTwapNumberOfParts}
-          onBlur={onBlurTwapNumberOfParts}
-          type="number"
-        /> */}
-
-        {/* {settings.shouldUseExecutionFeeBuffer && (
-          <InputSetting
-            title={<Trans>Max Network Fee Buffer</Trans>}
-            description={
-              <Trans>
-                The max network fee is set to a higher value to handle potential increases in gas price during order
-                execution. Any excess network fee will be refunded to your account when the order is executed.
-              </Trans>
-            }
-            defaultValue={30}
-            value={parseFloat(String(settings.executionFeeBufferBps))}
-            onChange={onChangeExecutionFeeBufferBps}
-            maxValue={1000 * 100}
-            suggestions={EMPTY_ARRAY}
-          />
-        )} */}
-
-        {/* <ToggleSwitch isChecked={settings.isAutoCancelTPSL} setIsChecked={settings.setIsAutoCancelTPSL}>
-          <TooltipWithPortal
-            content={
-              <Trans>
-                TP/SL orders will be automatically cancelled when the associated position is completely closed. This
-                will only affect newly created TP/SL orders since the setting was enabled.
-              </Trans>
-            }
-            handle={<Trans>Auto-Cancel TP/SL</Trans>}
-            variant="icon"
-            className="font-medium"
-          />
-        </ToggleSwitch> */}
-
-        {/* External swaps are enabled by default on Botanix */}
-        {/* {chainId !== BOTANIX && (
-          <ToggleSwitch
-            isChecked={settings.externalSwapsEnabled}
-            setIsChecked={settings.setExternalSwapsEnabled}
-            className="font-medium"
-          >
-            <Trans>Enable External Swaps</Trans>
-          </ToggleSwitch>
-        )} */}
-
-        {/* <ToggleSwitch
-          isChecked={settings.isSetAcceptablePriceImpactEnabled}
-          setIsChecked={settings.setIsSetAcceptablePriceImpactEnabled}
-          className="font-medium"
-        >
-          <Trans>Set Acceptable Price Impact</Trans>
-        </ToggleSwitch> */}
-      </SettingsSection>
     </div>
   );
 }
