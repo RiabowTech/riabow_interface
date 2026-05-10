@@ -9,6 +9,7 @@ import { useAccount } from "wagmi";
 
 import {
   ContractsChainId,
+  DEFAULT_CHAIN_ID,
   getChainName,
   isContractsChain,
   isTestnetChain,
@@ -105,7 +106,14 @@ import { InsufficientWntBanner } from "./InsufficientWntBanner";
 import { toastCustomOrStargateError } from "./toastCustomOrStargateError";
 import { isTradeModeActive, useTradeProduct } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
 import { useZanbaraBalancesForProduct, useZanbaraUserBalances } from "@/modules/lighter/api";
-import { requestWithdraw, confirmWithdraw, isAuthenticated } from "@/modules/lighter/api/custom/client";
+import {
+  requestWithdraw,
+  confirmWithdraw,
+  isAuthenticated,
+  getWithdrawById,
+  getWithdrawHistory,
+} from "@/modules/lighter/api/custom/client";
+import type { WithdrawRecord, WithdrawResponse } from "@/modules/lighter/api/types";
 import {
   DEFAULT_SPOT_CHAIN_ID,
   getSpotVaultAddress,
@@ -127,6 +135,28 @@ const USD_GAS_TOKEN_WARNING_THRESHOLD_TESTNET = expandDecimals(9, USD_DECIMALS);
 
 function getFundingChainName(chainId: number) {
   return chainId === DEFAULT_SPOT_CHAIN_ID ? "BNB Testnet" : getChainName(chainId);
+}
+
+type SpotWithdrawAuthorization = (WithdrawRecord | WithdrawResponse) & {
+  signature?: string;
+  vault_address?: string;
+  deadline?: number;
+  withdraw_id?: string;
+};
+
+function isReusableSpotWithdrawalStatus(status?: string) {
+  return status === "signed" || status === "pending";
+}
+
+function isSameDecimalAmount(first?: string, second?: string) {
+  const firstNumber = Number(first);
+  const secondNumber = Number(second);
+
+  if (Number.isFinite(firstNumber) && Number.isFinite(secondNumber)) {
+    return Math.abs(firstNumber - secondNumber) < 1e-12;
+  }
+
+  return String(first ?? "").trim() === String(second ?? "").trim();
 }
 
 function useUsdGasTokenBuffer(): {
@@ -198,25 +228,34 @@ export const WithdrawalView = () => {
   const spotVaultAddress = getSpotVaultAddress(spotChainId);
   const { data: walletTokenConfigs } = useWalletTokensConfig();
   const spotTokenConfig = findWalletTokenConfig(walletTokenConfigs, spotChainId);
-  const tradingUsdtAddress = chainId ? getTradingUsdtAddress(chainId) : undefined;
+  const futuresWithdrawalChainId = isSpotProduct ? DEFAULT_CHAIN_ID : chainId;
+  const tradingUsdtAddress = futuresWithdrawalChainId ? getTradingUsdtAddress(futuresWithdrawalChainId) : undefined;
   const selectedTokenAddressLower = selectedTokenAddress?.toLowerCase();
   const spotTokenAddressLower = spotTokenConfig?.contract.toLowerCase();
   const tradingUsdtAddressLower = tradingUsdtAddress?.toLowerCase();
   const isSpotVaultWithdrawal =
     isSpotProduct && !!selectedTokenAddressLower && selectedTokenAddressLower === spotTokenAddressLower;
   const activeWithdrawalProduct = isSpotVaultWithdrawal ? "spot" : "futures";
-  const apiChainId = isSpotVaultWithdrawal ? spotChainId : chainId;
-  const withdrawContractChainId = isSpotVaultWithdrawal ? spotChainId : chainId;
+  const apiChainId = isSpotVaultWithdrawal ? spotChainId : futuresWithdrawalChainId;
+  const authChainId = DEFAULT_CHAIN_ID;
+  const withdrawContractChainId = isSpotVaultWithdrawal ? spotChainId : futuresWithdrawalChainId;
 
   // In API trading mode, default the withdrawal token to USDT.
   useEffect(() => {
     if (isTradeMode && !selectedTokenAddress) {
-      const defaultTokenAddress = isSpotProduct ? spotTokenConfig?.contract : chainId ? getTradingUsdtAddress(chainId) : undefined;
+      const defaultTokenAddress = isSpotProduct ? spotTokenConfig?.contract : getTradingUsdtAddress(futuresWithdrawalChainId);
       if (defaultTokenAddress) {
         setSelectedTokenAddress(defaultTokenAddress);
       }
     }
-  }, [isTradeMode, isSpotProduct, chainId, selectedTokenAddress, setSelectedTokenAddress, spotTokenConfig?.contract]);
+  }, [
+    futuresWithdrawalChainId,
+    isTradeMode,
+    isSpotProduct,
+    selectedTokenAddress,
+    setSelectedTokenAddress,
+    spotTokenConfig?.contract,
+  ]);
   useEffect(() => {
     if (!isSpotProduct || isVisibleOrView === false) {
       return;
@@ -227,12 +266,12 @@ export const WithdrawalView = () => {
       return;
     }
 
-    const nextWithdrawalChain = isSpotVaultWithdrawal ? spotChainId : chainId;
+    const nextWithdrawalChain = isSpotVaultWithdrawal ? spotChainId : futuresWithdrawalChainId;
     if (nextWithdrawalChain && withdrawalViewChain !== nextWithdrawalChain) {
       setWithdrawalViewChain(nextWithdrawalChain as SourceChainId);
     }
   }, [
-    chainId,
+    futuresWithdrawalChainId,
     isSpotVaultWithdrawal,
     isSpotProduct,
     isVisibleOrView,
@@ -247,11 +286,9 @@ export const WithdrawalView = () => {
   const publicClient = usePublicClient({ chainId: withdrawContractChainId });
   // Only subscribe to API balances in API trading mode to avoid unnecessary state churn.
   const balancesResult = useZanbaraUserBalances(isTradeMode ? { refreshInterval: 10000 } : undefined);
-  const futuresBalancesResult = useZanbaraBalancesForProduct(
-    "futures",
-    isTradeMode && isSpotProduct ? chainId : undefined,
-    { refreshInterval: 10000 }
-  );
+  const futuresBalancesResult = useZanbaraBalancesForProduct("futures", isTradeMode ? futuresWithdrawalChainId : undefined, {
+    refreshInterval: 10000,
+  });
   const mutateBalances = isTradeMode ? balancesResult.mutate : undefined;
 
   const { tokensData } = useTokensDataRequest(chainId, withdrawalViewChain);
@@ -293,7 +330,7 @@ export const WithdrawalView = () => {
     let baseToken: TokenData;
     try {
       baseToken = {
-        ...getToken(chainId, tradingUsdtAddress),
+        ...getToken(futuresWithdrawalChainId, tradingUsdtAddress),
         prices: { minPrice: expandDecimals(1, USD_DECIMALS), maxPrice: expandDecimals(1, USD_DECIMALS) },
       };
     } catch {
@@ -307,7 +344,15 @@ export const WithdrawalView = () => {
       };
     }
 
-    const apiBalance = futuresBalancesResult.data?.balances?.find((balance) => balance.symbol?.toUpperCase() === "USDT");
+    const apiBalance = futuresBalancesResult.data?.balances?.find((balance) => {
+      const symbol = balance.symbol?.toUpperCase();
+      const token = balance.token?.toUpperCase();
+      return (
+        symbol === "USDT" ||
+        token === "USDT" ||
+        balance.token?.toLowerCase() === tradingUsdtAddress.toLowerCase()
+      );
+    });
     const tradingAccountBalance = apiBalance ? parseUnits(apiBalance.available || "0", baseToken.decimals) : 0n;
 
     return {
@@ -315,7 +360,7 @@ export const WithdrawalView = () => {
       tradingAccountBalance,
       balance: tradingAccountBalance,
     };
-  }, [chainId, futuresBalancesResult.data?.balances, isSpotProduct, tradingUsdtAddress]);
+  }, [futuresBalancesResult.data?.balances, futuresWithdrawalChainId, isSpotProduct, tradingUsdtAddress]);
 
   const selectedToken = useMemo(() => {
     if (isSpotProduct) {
@@ -377,7 +422,7 @@ export const WithdrawalView = () => {
 
   const filteredNetworks = useMemo(() => {
     if (isSpotProduct) {
-      const activeChainId = isSpotVaultWithdrawal ? spotChainId : chainId;
+      const activeChainId = isSpotVaultWithdrawal ? spotChainId : futuresWithdrawalChainId;
       return activeChainId ? [{ id: activeChainId, name: getFundingChainName(activeChainId) }] : EMPTY_ARRAY;
     }
 
@@ -393,7 +438,15 @@ export const WithdrawalView = () => {
       );
       return mappedTokenId !== undefined;
     });
-  }, [unwrappedSelectedTokenAddress, networks, chainId, isSpotProduct, isSpotVaultWithdrawal, spotChainId]);
+  }, [
+    unwrappedSelectedTokenAddress,
+    networks,
+    chainId,
+    futuresWithdrawalChainId,
+    isSpotProduct,
+    isSpotVaultWithdrawal,
+    spotChainId,
+  ]);
 
   const options = useMemo((): TokenData[] => {
     if (isSpotProduct) {
@@ -445,6 +498,10 @@ export const WithdrawalView = () => {
   }, [selectedToken, inputAmount, inputAmountUsd, tradingAccountUsd]);
 
   const sendParamsWithoutSlippage: SendParamStruct | undefined = useMemo(() => {
+    if (isTradeMode) {
+      return;
+    }
+
     if (!account || inputAmount === undefined || inputAmount <= 0n || withdrawalViewChain === undefined) {
       return;
     }
@@ -455,7 +512,7 @@ export const WithdrawalView = () => {
       amountLD: inputAmount,
       isDeposit: false,
     });
-  }, [account, inputAmount, withdrawalViewChain]);
+  }, [account, inputAmount, isTradeMode, withdrawalViewChain]);
 
   const quoteOft = useQuoteOft({
     sendParams: sendParamsWithoutSlippage,
@@ -498,6 +555,10 @@ export const WithdrawalView = () => {
   });
 
   const baseSendParams = useMemo(() => {
+    if (isTradeMode) {
+      return;
+    }
+
     if (!withdrawalViewChain || !account || !unwrappedSelectedTokenSymbol) {
       return;
     }
@@ -515,7 +576,7 @@ export const WithdrawalView = () => {
       isDeposit: false,
       srcChainId: chainId,
     });
-  }, [account, chainId, unwrappedSelectedTokenSymbol, withdrawalViewChain]);
+  }, [account, chainId, isTradeMode, unwrappedSelectedTokenSymbol, withdrawalViewChain]);
   const isMaxButtonDisabled = useMemo(() => {
     if (!baseSendParams) {
       return true;
@@ -546,6 +607,10 @@ export const WithdrawalView = () => {
   });
 
   const bridgeOutParams: BridgeOutParams | undefined = useMemo(() => {
+    if (isTradeMode) {
+      return;
+    }
+
     if (
       withdrawalViewChain === undefined ||
       selectedTokenAddress === undefined ||
@@ -578,7 +643,7 @@ export const WithdrawalView = () => {
       ),
       provider: stargateAddress,
     };
-  }, [withdrawalViewChain, selectedTokenAddress, unwrappedSelectedTokenAddress, inputAmount, chainId]);
+  }, [withdrawalViewChain, selectedTokenAddress, unwrappedSelectedTokenAddress, inputAmount, chainId, isTradeMode]);
 
   const expressTransactionBuilder: ExpressTransactionBuilder | undefined = useMemo(() => {
     if (
@@ -693,7 +758,7 @@ export const WithdrawalView = () => {
 
       if (isSpotProduct) {
         const isNextSpotToken = spotTokenConfig?.contract.toLowerCase() === tokenAddress.toLowerCase();
-        const nextChainId = isNextSpotToken ? spotChainId : chainId;
+        const nextChainId = isNextSpotToken ? spotChainId : futuresWithdrawalChainId;
         if (nextChainId) {
           setWithdrawalViewChain(nextChainId as SourceChainId);
         }
@@ -726,7 +791,16 @@ export const WithdrawalView = () => {
         }
       }
     },
-    [chainId, isSpotProduct, setSelectedTokenAddress, setWithdrawalViewChain, spotChainId, spotTokenConfig, withdrawalViewChain]
+    [
+      chainId,
+      futuresWithdrawalChainId,
+      isSpotProduct,
+      setSelectedTokenAddress,
+      setWithdrawalViewChain,
+      spotChainId,
+      spotTokenConfig,
+      withdrawalViewChain,
+    ]
   );
 
   const handleWithdraw = async () => {
@@ -749,7 +823,7 @@ export const WithdrawalView = () => {
       }
 
       // Check JWT authentication before proceeding
-      if (!isAuthenticated(account, apiChainId)) {
+      if (!isAuthenticated(account, authChainId)) {
         helperToast.error(t`Please sign in first to withdraw funds`);
         return;
       }
@@ -764,10 +838,81 @@ export const WithdrawalView = () => {
           throw new Error("Withdraw token not configured");
         }
 
-        const withdrawResponse = await requestWithdraw(apiChainId, {
-          token: withdrawTokenSymbol,
-          amount: inputValue, // Use raw input value without precision multiplication
-        }, activeWithdrawalProduct);
+        const configuredVaultAddress = isSpotVaultWithdrawal
+          ? spotVaultAddress
+          : getTradingVaultAddress(withdrawContractChainId);
+
+        let expectedSpotNonce: bigint | undefined;
+        let withdrawResponse: SpotWithdrawAuthorization | undefined;
+
+        if (isSpotVaultWithdrawal) {
+          if (!configuredVaultAddress) {
+            throw new Error("Vault contract not found");
+          }
+
+          expectedSpotNonce = await publicClient.readContract({
+            address: configuredVaultAddress as `0x${string}`,
+            abi: SpotVaultAbi,
+            functionName: "releaseNonces",
+            args: [getAddress(account)],
+          });
+
+          const withdrawHistory = await getWithdrawHistory(apiChainId, activeWithdrawalProduct);
+          const signedWithdrawals = withdrawHistory.withdrawals.filter((withdrawal) => {
+            return (
+              withdrawal.nonce !== undefined &&
+              isReusableSpotWithdrawalStatus(withdrawal.status)
+            );
+          });
+
+          const currentNonceWithdrawals = signedWithdrawals.filter(
+            (withdrawal) => BigInt(withdrawal.nonce!) === expectedSpotNonce
+          );
+          const matchingWithdrawal = currentNonceWithdrawals.find(
+            (withdrawal) =>
+              withdrawal.token?.toUpperCase() === withdrawTokenSymbol.toUpperCase() &&
+              isSameDecimalAmount(withdrawal.amount, inputValue)
+          );
+
+          if (matchingWithdrawal) {
+            withdrawResponse = await getWithdrawById(apiChainId, matchingWithdrawal.id, activeWithdrawalProduct);
+          } else if (currentNonceWithdrawals.length > 0) {
+            const pendingWithdrawal = currentNonceWithdrawals[0];
+            throw new Error(
+              `Please complete the pending signed withdrawal first: ${pendingWithdrawal.amount} ${pendingWithdrawal.token}`
+            );
+          } else {
+            const laterWithdrawal = signedWithdrawals
+              .filter((withdrawal) => BigInt(withdrawal.nonce!) > expectedSpotNonce)
+              .sort((first, second) => Number(first.nonce ?? 0) - Number(second.nonce ?? 0))[0];
+
+            if (laterWithdrawal) {
+              throw new Error(
+                `Withdrawal nonce mismatch. On-chain nonce is ${expectedSpotNonce.toString()}, but the backend already has a signed withdrawal with nonce ${laterWithdrawal.nonce}. Please complete or cancel the earlier signed withdrawal first.`
+              );
+            }
+          }
+        }
+
+        if (!withdrawResponse) {
+          withdrawResponse = await requestWithdraw(
+            apiChainId,
+            {
+              token: withdrawTokenSymbol,
+              amount: inputValue, // Use raw input value without precision multiplication
+            },
+            activeWithdrawalProduct
+          );
+        }
+
+        if (
+          isSpotVaultWithdrawal &&
+          expectedSpotNonce !== undefined &&
+          withdrawResponse.nonce !== undefined &&
+          BigInt(withdrawResponse.nonce) !== expectedSpotNonce
+        ) {
+          throw new Error("Withdrawal nonce mismatch. Please complete the earlier signed withdrawal first.");
+        }
 
         // API returns "backend_signature", fallback to "signature" for backward compatibility
         const signature = withdrawResponse.backend_signature || withdrawResponse.signature;
@@ -776,16 +921,17 @@ export const WithdrawalView = () => {
         }
 
         // Use vault_address from response if available, otherwise fallback to config
-        const vaultAddress =
-          withdrawResponse.vault_address ||
-          (isSpotVaultWithdrawal ? spotVaultAddress : getTradingVaultAddress(withdrawContractChainId));
+        const vaultAddress = withdrawResponse.vault_address || configuredVaultAddress;
         if (!vaultAddress) {
           throw new Error("Vault contract not found");
         }
 
-        // Use amount directly from response (already in wei format)
-        // Response format: "amount":"10000000" (string representation of wei)
-        const amountInWei = BigInt(withdrawResponse.amount);
+        const amountInWei =
+          isSpotVaultWithdrawal && spotTokenConfig
+            ? withdrawResponse.amount_in_wei
+              ? BigInt(withdrawResponse.amount_in_wei)
+              : parseUnits(withdrawResponse.amount, spotTokenConfig.decimals)
+            : BigInt(withdrawResponse.amount);
 
         // Use expiry from response as deadline parameter
         // Response format: "expiry":1766732708 (Unix timestamp)
@@ -804,8 +950,9 @@ export const WithdrawalView = () => {
 
         // Log parameters for debugging
 
+        const spotWithdrawTokenAddress = withdrawResponse.token_address || spotTokenConfig?.contract || zeroAddress;
         const spotWithdrawArgs = [
-          getAddress(spotTokenConfig?.contract || zeroAddress),
+          getAddress(spotWithdrawTokenAddress),
           amountInWei,
           BigInt(deadline),
           signature as `0x${string}`,
@@ -1046,7 +1193,8 @@ export const WithdrawalView = () => {
       return;
     }
 
-    const canSelectedTokenBeUsedAsGasPaymentToken = getGasPaymentTokens(chainId).includes(selectedToken.address);
+    const canSelectedTokenBeUsedAsGasPaymentToken =
+      !isTradeMode && getGasPaymentTokens(chainId).includes(selectedToken.address);
 
     let amount = selectedToken.tradingAccountBalance;
 
@@ -1083,6 +1231,7 @@ export const WithdrawalView = () => {
     gasPaymentToken?.decimals,
     gasPaymentToken?.prices,
     gasTokenBuffer,
+    isTradeMode,
     selectedToken,
     setInputValue,
     unwrappedSelectedTokenAddress,
@@ -1102,7 +1251,8 @@ export const WithdrawalView = () => {
       return false;
     }
 
-    const canSelectedTokenBeUsedAsGasPaymentToken = getGasPaymentTokens(chainId).includes(selectedToken.address);
+    const canSelectedTokenBeUsedAsGasPaymentToken =
+      !isTradeMode && getGasPaymentTokens(chainId).includes(selectedToken.address);
 
     if (!canSelectedTokenBeUsedAsGasPaymentToken) {
       return false;
@@ -1129,6 +1279,7 @@ export const WithdrawalView = () => {
     gasPaymentToken?.prices,
     gasTokenBufferWarningThreshold,
     inputAmount,
+    isTradeMode,
     selectedToken,
     withdrawalViewChain,
   ]);

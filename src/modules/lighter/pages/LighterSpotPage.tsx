@@ -23,6 +23,7 @@ import {
   type SpotOrderRecord,
   type SpotTradeRecord,
 } from "@/modules/lighter/api/custom/client";
+import { useAuthToken } from "@/modules/lighter/api/custom/useAuthToken";
 import { useTradeState } from "@/modules/lighter/store/TradeStateContext";
 import { DEFAULT_CHAIN_ID } from "config/chains";
 import { helperToast } from "lib/helperToast";
@@ -167,6 +168,7 @@ function SpotOrderPanel({
 }) {
   const { i18n } = useLingui();
   const { address } = useAccount();
+  const { token: authToken } = useAuthToken(DEFAULT_CHAIN_ID);
   const { mutate } = useSWRConfig();
   const [orderType, setOrderType] = useState<"limit" | "market">("limit");
   const [price, setPrice] = useState("");
@@ -196,7 +198,7 @@ function SpotOrderPanel({
     { revalidateOnFocus: false, refreshInterval: 3_000 }
   );
 
-  const balancesKey = address ? ["spot-balances", DEFAULT_CHAIN_ID, address] : null;
+  const balancesKey = address && authToken ? ["spot-balances", DEFAULT_CHAIN_ID, address, authToken] : null;
   const { data: balancesData } = useSWR(
     balancesKey,
     () => getBalances(DEFAULT_CHAIN_ID, address, "spot"),
@@ -234,6 +236,7 @@ function SpotOrderPanel({
   const computedTotal = Number(amount) > 0 && Number(referencePrice) > 0 ? Number(amount) * Number(referencePrice) : 0;
   const canSubmit =
     !!address &&
+    !!authToken &&
     !!apiSymbol &&
     Number(amount) > 0 &&
     (orderType === "market" || Number(price) > 0) &&
@@ -273,7 +276,7 @@ function SpotOrderPanel({
   };
 
   const submit = async () => {
-    if (!address) {
+    if (!address || !authToken) {
       helperToast.error(i18n._(t`Please connect your wallet and sign in first`));
       return;
     }
@@ -515,14 +518,18 @@ type SpotBottomTab = "Open Orders" | "Order History" | "Trade History";
 function SpotBottomTabs({ marketKey }: { marketKey: string }) {
   const { i18n } = useLingui();
   const { address } = useAccount();
+  const { token: authToken } = useAuthToken(DEFAULT_CHAIN_ID);
   const { mutate } = useSWRConfig();
   const [activeTab, setActiveTab] = useState<SpotBottomTab>("Open Orders");
   const [cancellingId, setCancellingId] = useState<string | null>(null);
   const apiSymbol = normalizeSpotMarketKey(marketKey || "BTCUSDT");
 
-  const openOrdersKey = address ? ["spot-account-open-orders", DEFAULT_CHAIN_ID, address, apiSymbol] : null;
-  const orderHistoryKey = address ? ["spot-account-order-history", DEFAULT_CHAIN_ID, address, apiSymbol] : null;
-  const tradeHistoryKey = address ? ["spot-account-trade-history", DEFAULT_CHAIN_ID, address, apiSymbol] : null;
+  const openOrdersKey =
+    address && authToken ? ["spot-account-open-orders", DEFAULT_CHAIN_ID, address, apiSymbol, authToken] : null;
+  const orderHistoryKey =
+    address && authToken ? ["spot-account-order-history", DEFAULT_CHAIN_ID, address, apiSymbol, authToken] : null;
+  const tradeHistoryKey =
+    address && authToken ? ["spot-account-trade-history", DEFAULT_CHAIN_ID, address, apiSymbol, authToken] : null;
 
   const { data: openOrders = [], isLoading: openOrdersLoading } = useSWR(
     openOrdersKey,
@@ -549,7 +556,7 @@ function SpotBottomTabs({ marketKey }: { marketKey: string }) {
   );
 
   const cancel = async (orderId: string) => {
-    if (!address || !orderId || cancellingId) return;
+    if (!address || !authToken || !orderId || cancellingId) return;
     try {
       setCancellingId(orderId);
       await cancelSpotOrder(DEFAULT_CHAIN_ID, orderId, address);

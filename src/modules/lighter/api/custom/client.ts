@@ -6,6 +6,7 @@
  */
 
 import { tradeProductApiBaseUrl, tradeProductApiPath, type TradeProduct } from "./productRouting";
+import { DEFAULT_CHAIN_ID } from "config/chains";
 
 import {
   mapReferralDashboardToOnChainResponse,
@@ -394,6 +395,10 @@ interface FetchOptions extends RequestInit {
   product?: TradeProduct;
 }
 
+function getAuthChainId(chainId: number, product?: TradeProduct): number {
+  return product === "spot" ? DEFAULT_CHAIN_ID : chainId;
+}
+
 async function apiFetch<T>(chainId: number, path: string, options: FetchOptions = {}): Promise<T> {
   const baseUrl = tradeProductApiBaseUrl(chainId, options.product);
   const resolvedPath = options.product ? tradeProductApiPath(options.product, path) : path;
@@ -416,12 +421,15 @@ async function apiFetch<T>(chainId: number, path: string, options: FetchOptions 
       targetAddress = getLastAddress();
     }
 
-    const token = getStoredToken(targetAddress, chainId);
+    const authChainId = getAuthChainId(chainId, options.product);
+    const token = getStoredToken(targetAddress, authChainId);
     if (!token) {
       console.error(" Token not found for authentication", {
         providedAddress: options.address,
         lastAddress: getLastAddress(),
         chainId,
+        authChainId,
+        product: options.product,
       });
       throw new Error(" Authentication required. Please sign in again.");
     }
@@ -1134,13 +1142,24 @@ function normalizeBalancesResponse(raw: unknown): BalancesResponse {
 
   return {
     balances: balances.map((balance: any) => {
+      const symbol = String(
+        balance.symbol ??
+          balance.token ??
+          balance.asset ??
+          balance.currency ??
+          balance.coin ??
+          balance.token_symbol ??
+          balance.tokenSymbol ??
+          ""
+      );
+      const token = String(balance.token ?? balance.symbol ?? balance.asset ?? balance.currency ?? balance.coin ?? symbol);
       const available = String(balance.available ?? balance.available_balance ?? "0");
       const frozen = String(balance.frozen ?? balance.locked ?? balance.frozen_balance ?? "0");
       const total = String(balance.total ?? balance.balance ?? Number(available) + Number(frozen));
 
       return {
-        token: String(balance.token ?? balance.symbol ?? ""),
-        symbol: String(balance.symbol ?? balance.token ?? ""),
+        token,
+        symbol,
         available,
         frozen,
         total,
@@ -1225,7 +1244,8 @@ export async function getBalances(
     return normalizeBalancesResponse(raw);
   }
 
-  return apiFetch<BalancesResponse>(chainId, "/account/balances", { requireAuth: true, address, product });
+  const raw = await apiFetch<unknown>(chainId, "/account/balances", { requireAuth: true, address, product });
+  return normalizeBalancesResponse(raw);
 }
 
 export async function getUnifiedAccount(chainId: number, address?: string | null, product?: TradeProduct): Promise<UnifiedAccountResponse> {
@@ -1253,13 +1273,56 @@ export interface GetFundingFeeHistoryParams {
 
 function normalizeWithdrawHistoryResponse(raw: unknown): WithdrawHistoryResponse {
   const data = unwrapApiData<unknown>(raw);
-  const withdrawals = Array.isArray(data)
+  const rawWithdrawals = Array.isArray(data)
     ? data
     : Array.isArray((data as any)?.withdrawals)
       ? (data as any).withdrawals
       : [];
 
+  const withdrawals = rawWithdrawals.map(normalizeWithdrawRecord);
+
   return { withdrawals };
+}
+
+function normalizeApiTimestamp(value: unknown): number {
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return value > 1_000_000_000_000 ? Math.floor(value / 1000) : value;
+  }
+
+  if (typeof value === "string" && value.trim()) {
+    const numericValue = Number(value);
+    if (Number.isFinite(numericValue)) {
+      return numericValue > 1_000_000_000_000 ? Math.floor(numericValue / 1000) : numericValue;
+    }
+
+    const parsedDate = Date.parse(value);
+    if (Number.isFinite(parsedDate)) {
+      return Math.floor(parsedDate / 1000);
+    }
+  }
+
+  return 0;
+}
+
+function normalizeWithdrawRecord(record: any): WithdrawRecord {
+  return {
+    ...record,
+    id: String(record?.id ?? record?.withdraw_id ?? ""),
+    token: String(record?.token ?? ""),
+    amount: String(record?.amount ?? "0"),
+    amount_in_wei: record?.amount_in_wei !== undefined ? String(record.amount_in_wei) : undefined,
+    token_address: record?.token_address,
+    tx_hash: record?.tx_hash ?? record?.transaction_hash ?? null,
+    status: record?.status ?? "pending",
+    created_at: normalizeApiTimestamp(record?.created_at ?? record?.requested_at ?? record?.completed_at),
+    completed_at:
+      record?.completed_at !== undefined || record?.confirmed_at !== undefined
+        ? normalizeApiTimestamp(record?.completed_at ?? record?.confirmed_at)
+        : undefined,
+    expiry: record?.expiry ?? record?.deadline,
+    backend_signature: record?.backend_signature ?? record?.signature,
+    hash: record?.hash,
+  };
 }
 
 export async function getWithdrawHistory(chainId: number, product?: TradeProduct): Promise<WithdrawHistoryResponse> {
@@ -1281,7 +1344,7 @@ export async function getWithdrawById(
     requireAuth: true,
     product,
   });
-  return unwrapApiData(raw);
+  return normalizeWithdrawRecord(unwrapApiData(raw));
 }
 
 export interface SpotTransferRequest {

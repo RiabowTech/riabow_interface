@@ -795,12 +795,15 @@ export interface WithdrawResponse {
   id?: string; // Keep for backward compatibility
   token: string;
   amount: string;
+  amount_in_wei?: string; // Spot API returns raw contract amount separately
+  token_address?: string; // Spot API returns the signed token address
   backend_signature: string; // API returns "backend_signature"
   signature?: string; // Keep for backward compatibility
   nonce: number;
   expiry: number; // API returns "expiry"
   deadline?: number; // Keep for backward compatibility
   vault_address?: string; // API returns "vault_address"
+  hash?: string;
   status?: "pending" | "signed" | "completed" | "failed";
 }
 
@@ -808,6 +811,8 @@ export interface WithdrawRecord {
   id: string;
   token: string;
   amount: string;
+  amount_in_wei?: string;
+  token_address?: string;
   tx_hash?: string | null;
   status: "pending" | "signed" | "submitted" | "confirmed" | "completed" | "failed";
   created_at: number;
@@ -815,6 +820,7 @@ export interface WithdrawRecord {
   nonce?: number;
   expiry?: number;
   backend_signature?: string;
+  hash?: string;
 }
 
 // ============================================
