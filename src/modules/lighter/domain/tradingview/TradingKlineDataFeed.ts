@@ -221,11 +221,16 @@ export class TradingKlineDataFeed extends EventTarget implements IBasicDataFeed 
   }
 
   private handleKlineUpdate(channel: string, data: WsKlineUpdate): void {
-    // Channel format: kline:ETHUSDT:5m (after normalization)
+    // Channel formats:
+    //   perp: kline:ETHUSDT:5m              → 3 parts
+    //   spot: spot:kline:DFUSDT:15m         → 4 parts
+    // Period is always last, symbol second-to-last. The earlier `parts.length !== 3`
+    // guard silently dropped every spot kline message → chart appeared frozen.
     const parts = channel.split(":");
-    if (parts.length !== 3) return;
+    if (parts.length < 3) return;
 
-    const [, apiSymbol, period] = parts; // apiSymbol is in ETHUSDT format
+    const period = parts[parts.length - 1];
+    const apiSymbol = parts[parts.length - 2]; // ETHUSDT / DFUSDT format
 
     // Find matching subscription
     // Note: sub.backendSymbol is in ETH-USD format, but channel uses ETHUSDT format
