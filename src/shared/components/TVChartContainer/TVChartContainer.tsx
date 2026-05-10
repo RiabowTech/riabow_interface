@@ -1,7 +1,7 @@
 import { CSSProperties, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useLatest, useLocalStorage, useMedia } from "react-use";
 
-import { isTradeModeActive } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
+import { isTradeModeActive, useTradeProduct } from "@/modules/lighter/store/TradeStateContext/TradeStateContext";
 import { TV_SAVE_LOAD_CHARTS_KEY, WAS_TV_CHART_OVERRIDDEN_KEY } from "config/localStorage";
 import { SUPPORTED_RESOLUTIONS_V1, SUPPORTED_RESOLUTIONS_V2 } from "config/tradingview";
 import { useTheme } from "shared/context/ThemeContext/ThemeContext";
@@ -152,6 +152,13 @@ export default function TVChartContainer({
   // Check if the chart is running in API trading mode.
   const isTradeMode = isTradeModeActive();
 
+  // Read product from React context, NOT from the module-level
+  // getActiveTradeProduct() global. The provider mutates that global in a
+  // useEffect, which runs AFTER child useEffects (React fires effects
+  // bottom-up), so reading the global at construction time gives the stale
+  // "futures" default and the spot chart hits perp endpoints by mistake.
+  const tradeProduct = useTradeProduct();
+
   const [datafeed, setDatafeed] = useState<DataFeed | TradingKlineDataFeed | null>(null);
 
   useEffect(() => {
@@ -190,7 +197,9 @@ export default function TVChartContainer({
 
     if (isTradeMode) {
       // Use the API trading K-line datafeed for exchange mode.
-      newDatafeed = new TradingKlineDataFeed(chainId, brandName, visiblePlotsSet, volumeMetric);
+      // Pass tradeProduct explicitly so the spot chart routes to /spot/klines
+      // instead of falling back to the module-level "futures" default.
+      newDatafeed = new TradingKlineDataFeed(chainId, brandName, visiblePlotsSet, volumeMetric, tradeProduct);
       // For API trading mode, mark candles as loaded immediately because no prefetch is needed.
       if (setIsCandlesLoaded) {
         setIsCandlesLoaded(true);
@@ -223,6 +232,7 @@ export default function TVChartContainer({
     brandName,
     visiblePlotsSet,
     volumeMetric,
+    tradeProduct,
   ]);
 
   const isMobile = useMedia("(max-width: 550px)");
