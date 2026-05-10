@@ -1616,7 +1616,9 @@ export interface LatestCandleResponse {
   is_final: boolean;
 }
 
-export type KlinePeriod = "1m" | "5m" | "15m" | "30m" | "1h" | "4h" | "1d";
+// Backend rejects "30m" on both perp (/markets/.../candles) and spot
+// (/spot/klines) — the supported set is exactly these six values.
+export type KlinePeriod = "1m" | "5m" | "15m" | "1h" | "4h" | "1d";
 
 export interface GetCandlesParams {
   period: KlinePeriod;
@@ -1633,13 +1635,21 @@ export async function getCandles(
 ): Promise<CandlesResponse> {
   const apiSymbol = convertSymbolToApiFormat(symbol);
   const queryParams = new URLSearchParams();
-  queryParams.set(product === "spot" ? "interval" : "period", params.period);
+  // Spot and perp use different parameter names for the same fields:
+  //   spot: ?interval=…&start_time=…&end_time=…
+  //   perp: ?period=…&from=…&to=…
+  // Both expect unix seconds for time fields.
+  const isSpot = product === "spot";
+  queryParams.set(isSpot ? "interval" : "period", params.period);
   if (params.limit !== undefined) queryParams.set("limit", params.limit.toString());
-  // Convert milliseconds to seconds for backend API
-  if (params.start !== undefined) queryParams.set("from", Math.floor(params.start / 1000).toString());
-  if (params.end !== undefined) queryParams.set("to", Math.floor(params.end / 1000).toString());
+  if (params.start !== undefined) {
+    queryParams.set(isSpot ? "start_time" : "from", Math.floor(params.start / 1000).toString());
+  }
+  if (params.end !== undefined) {
+    queryParams.set(isSpot ? "end_time" : "to", Math.floor(params.end / 1000).toString());
+  }
 
-  if (product === "spot") {
+  if (isSpot) {
     queryParams.set("symbol", apiSymbol);
     const raw = await apiFetch<unknown>(chainId, `/klines?${queryParams.toString()}`, { product });
     return normalizeSpotCandles(raw, apiSymbol, params.period);
