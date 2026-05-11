@@ -2,8 +2,8 @@ import { MessageDescriptor } from "@lingui/core";
 import { msg, t } from "@lingui/macro";
 import cx from "classnames";
 import { useMemo, useState } from "react";
-import { parseUnits } from "viem";
-import { useAccount } from "wagmi";
+import { Address, erc20Abi, parseUnits } from "viem";
+import { useAccount, useReadContracts } from "wagmi";
 
 import { useZanbaraBalancesForProduct } from "@/modules/lighter/api";
 import { findWalletTokenConfig, useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
@@ -23,23 +23,25 @@ import SearchInput from "components/SearchInput/SearchInput";
 import { VerticalScrollFadeContainer } from "components/TableScrollFade/VerticalScrollFade";
 import TokenIcon from "components/TokenIcon/TokenIcon";
 
-// Virtual chain ID used to represent Zanbara Account (off-chain balances)
+// Virtual chain ID used to represent Futures account (off-chain balances)
 const TRADING_ACCOUNT_CHAIN_ID = 0;
 
-type FilterType = "all" | "tradingAccount" | "spot" | "wallet";
+type FilterType = "all" | "arb" | "bsc" | "futures" | "spot";
 
-const FILTERS: FilterType[] = ["all", "wallet", "spot", "tradingAccount"];
+const FILTERS: FilterType[] = ["all", "arb", "bsc", "futures", "spot"];
 
 const FILTER_TITLE_MAP: Record<FilterType, MessageDescriptor> = {
-  all: msg`All`,
+  all: msg`ALL`,
+  arb: msg`Arb`,
+  bsc: msg`BSC`,
+  futures: msg`Futures`,
   spot: msg`Spot`,
-  tradingAccount: msg`Zanbara Account`,
-  wallet: msg`Wallet`,
 };
 
 type DisplayToken = {
   chainId: number;
   symbol: string;
+  source: Exclude<FilterType, "all">;
   isTradingAccount: boolean;
   isSpotAccount?: boolean;
   balance: bigint | undefined;
@@ -65,21 +67,51 @@ const tokenSorter = (a: DisplayToken, b: DisplayToken): 1 | -1 | 0 => {
   return 0;
 };
 
+function getWalletSource(chainId: number): Exclude<FilterType, "all" | "futures" | "spot"> {
+  return chainId === DEFAULT_SPOT_CHAIN_ID ? "bsc" : "arb";
+}
+
+function getAssetSourceLabel(token: DisplayToken) {
+  if (token.source === "futures") {
+    return t`Futures`;
+  }
+
+  if (token.source === "spot") {
+    return t`Spot`;
+  }
+
+  if (token.source === "bsc") {
+    return "BSC";
+  }
+
+  return getChainName(token.chainId) || "Arb";
+}
+
 const AssetsList = ({ tokens, noChainFilter }: { tokens: DisplayToken[]; noChainFilter?: boolean }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const titles = useLocalizedMap(FILTER_TITLE_MAP);
 
   const sortedFilteredTokens = useMemo(() => {
-    const filteredTokens = tokens.filter((token) => {
+    const seenKeys = new Set<string>();
+    const uniqueTokens = tokens.filter((token) => {
+      const key = `${token.source}:${token.chainId}:${token.symbol.toUpperCase()}`;
+
+      if (seenKeys.has(key)) {
+        return false;
+      }
+
+      seenKeys.add(key);
+      return true;
+    });
+
+    const filteredTokens = uniqueTokens.filter((token) => {
       const matchesSearch = token.symbol.toLowerCase().includes(searchQuery.toLowerCase());
 
       const matchesChainFilter =
         noChainFilter ||
         activeFilter === "all" ||
-        (activeFilter === "tradingAccount" && token.isTradingAccount) ||
-        (activeFilter === "spot" && token.isSpotAccount) ||
-        (activeFilter === "wallet" && !token.isTradingAccount && !token.isSpotAccount);
+        activeFilter === token.source;
 
       return matchesSearch && matchesChainFilter;
     });
@@ -114,7 +146,7 @@ const AssetsList = ({ tokens, noChainFilter }: { tokens: DisplayToken[]; noChain
       <VerticalScrollFadeContainer className="flex grow flex-col overflow-y-auto">
         {sortedFilteredTokens.map((displayToken) => (
           <div
-            key={displayToken.symbol + "_" + displayToken.chainId}
+            key={`${displayToken.source}_${displayToken.symbol}_${displayToken.chainId}`}
             className="flex items-center justify-between px-adaptive py-8 app-hover:bg-fill-surfaceElevated50"
           >
             <div className="flex items-center gap-16">
@@ -126,11 +158,7 @@ const AssetsList = ({ tokens, noChainFilter }: { tokens: DisplayToken[]; noChain
               <div>
                 <div>{displayToken.symbol}</div>
                 <div className="text-body-small text-slate-100">
-                  {displayToken.chainId === TRADING_ACCOUNT_CHAIN_ID
-                    ? t`Zanbara Account`
-                    : displayToken.isSpotAccount
-                      ? t`Spot`
-                    : getChainName(displayToken.chainId)}
+                  {getAssetSourceLabel(displayToken)}
                 </div>
               </div>
             </div>
@@ -157,9 +185,71 @@ const isTradableSymbol = (symbol: string) => !isTradeModeActive() || symbol === 
 function parseBalanceAmount(value: string | undefined, decimals: number) {
   try {
     return parseUnits(value || "0", decimals);
-  } catch {
+  } catch (_error) {
     return 0n;
   }
+}
+
+function getTokenConfigKey(chainId: number, address: string) {
+  return `${chainId}:${address.toLowerCase()}`;
+}
+
+function useConfiguredWalletDisplayTokens(currentChainId: number) {
+  const { address: account } = useAccount();
+  const { data: walletTokenConfigs } = useWalletTokensConfig();
+  const configuredBalanceContracts = useMemo(
+    () =>
+      walletTokenConfigs?.map((token) => ({
+        address: token.contract as Address,
+        abi: erc20Abi,
+        functionName: "balanceOf",
+        args: [account as Address],
+        chainId: token.chainId,
+      })) ?? [],
+    [account, walletTokenConfigs]
+  );
+  const { data: configuredBalanceResults } = useReadContracts({
+    contracts: configuredBalanceContracts,
+    query: {
+      enabled: Boolean(account && configuredBalanceContracts.length > 0),
+    },
+  });
+
+  return useMemo(() => {
+    const balances = new Map<string, bigint>();
+
+    walletTokenConfigs?.forEach((token, index) => {
+      const result = configuredBalanceResults?.[index];
+      if (result?.status === "success" && typeof result.result === "bigint") {
+        balances.set(getTokenConfigKey(token.chainId, token.contract), result.result);
+      }
+    });
+
+    return (walletTokenConfigs ?? [])
+      .filter((token) => token.chainId !== currentChainId)
+      .map((token): DisplayToken | undefined => {
+        const balance = balances.get(getTokenConfigKey(token.chainId, token.contract)) ?? 0n;
+
+        if (balance <= 0n) {
+          return undefined;
+        }
+
+        const symbol = token.symbol.toUpperCase();
+        const isStable = symbol.includes("USD");
+
+        return {
+          chainId: token.chainId,
+          symbol: token.symbol,
+          source: getWalletSource(token.chainId),
+          isTradingAccount: false,
+          balance,
+          balanceUsd: isStable ? (balance * 10n ** 30n) / 10n ** BigInt(token.decimals) : undefined,
+          decimals: token.decimals,
+          isStable,
+        };
+      })
+      .filter((token): token is DisplayToken => token !== undefined);
+  }, [configuredBalanceResults, currentChainId, walletTokenConfigs]);
 }
 
 function useSpotDisplayTokens() {
@@ -184,6 +274,7 @@ function useSpotDisplayTokens() {
         return {
           chainId: DEFAULT_SPOT_CHAIN_ID,
           symbol,
+          source: "spot",
           isTradingAccount: false,
           isSpotAccount: true,
           balance: total,
@@ -196,10 +287,27 @@ function useSpotDisplayTokens() {
   }, [spotBalances?.balances, walletTokenConfigs]);
 }
 
+function useConfiguredCurrentChainSymbols(currentChainId: number) {
+  const { data: walletTokenConfigs } = useWalletTokensConfig();
+
+  return useMemo(() => {
+    if (!walletTokenConfigs) {
+      return undefined;
+    }
+
+    return new Set(
+      walletTokenConfigs
+        .filter((token) => token.chainId === currentChainId)
+        .map((token) => token.symbol.toUpperCase())
+    );
+  }, [currentChainId, walletTokenConfigs]);
+}
+
 const AssetListMultichain = () => {
   const { chainId, srcChainId } = useChainId();
   const { tokensData } = useTokensDataRequest(chainId, srcChainId);
   const spotDisplayTokens = useSpotDisplayTokens();
+  const configuredWalletDisplayTokens = useConfiguredWalletDisplayTokens(chainId);
 
   const displayTokens = useMemo(() => {
     const tradingAccountTokens = Object.values(tokensData || {})
@@ -214,6 +322,7 @@ const AssetListMultichain = () => {
         (token): DisplayToken => ({
           chainId: TRADING_ACCOUNT_CHAIN_ID,
           symbol: token.symbol,
+          source: "futures",
           isTradingAccount: true,
           balance: token.tradingAccountBalance,
           balanceUsd: convertToUsd(token.tradingAccountBalance, token.decimals, getMidPrice(token.prices)),
@@ -223,8 +332,8 @@ const AssetListMultichain = () => {
       )
       .sort(tokenSorter);
 
-    return [...spotDisplayTokens, ...tradingAccountTokens].sort(tokenSorter);
-  }, [spotDisplayTokens, tokensData]);
+    return [...configuredWalletDisplayTokens, ...spotDisplayTokens, ...tradingAccountTokens].sort(tokenSorter);
+  }, [configuredWalletDisplayTokens, spotDisplayTokens, tokensData]);
 
   return <AssetsList tokens={displayTokens} />;
 };
@@ -233,6 +342,8 @@ const AssetListSettlementChain = () => {
   const { chainId, srcChainId } = useChainId();
   const { tokensData } = useTokensDataRequest(chainId, srcChainId);
   const spotDisplayTokens = useSpotDisplayTokens();
+  const configuredWalletDisplayTokens = useConfiguredWalletDisplayTokens(chainId);
+  const configuredCurrentChainSymbols = useConfiguredCurrentChainSymbols(chainId);
 
   const displayTokens = useMemo(() => {
     const displayTokens: DisplayToken[] = Object.values(tokensData || {})
@@ -240,6 +351,7 @@ const AssetListSettlementChain = () => {
       .flatMap((tokenData): DisplayToken[] => [
         {
           ...tokenData,
+          source: "futures",
           isTradingAccount: true,
           balance: tokenData.tradingAccountBalance,
           balanceUsd: convertToUsd(tokenData.tradingAccountBalance, tokenData.decimals, getMidPrice(tokenData.prices)),
@@ -248,6 +360,7 @@ const AssetListSettlementChain = () => {
         },
         {
           ...tokenData,
+          source: getWalletSource(chainId),
           isTradingAccount: false,
           balance: tokenData.walletBalance,
           balanceUsd: convertToUsd(tokenData.walletBalance, tokenData.decimals, getMidPrice(tokenData.prices)),
@@ -256,10 +369,16 @@ const AssetListSettlementChain = () => {
         },
       ])
       .filter((token) => token.balance !== undefined && token.balance > 0n)
+      .filter(
+        (token) =>
+          token.isTradingAccount ||
+          configuredCurrentChainSymbols === undefined ||
+          configuredCurrentChainSymbols.has(token.symbol.toUpperCase())
+      )
       .sort(tokenSorter);
 
-    return [...spotDisplayTokens, ...displayTokens].sort(tokenSorter);
-  }, [chainId, spotDisplayTokens, tokensData]);
+    return [...configuredWalletDisplayTokens, ...spotDisplayTokens, ...displayTokens].sort(tokenSorter);
+  }, [chainId, configuredCurrentChainSymbols, configuredWalletDisplayTokens, spotDisplayTokens, tokensData]);
 
   return <AssetsList tokens={displayTokens} />;
 };
