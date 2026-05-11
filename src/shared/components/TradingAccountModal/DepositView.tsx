@@ -340,9 +340,7 @@ export const DepositView = () => {
   const spotDepositTokenConfig =
     selectedWalletTokenConfig?.chainId === spotChainId
       ? selectedWalletTokenConfig
-      : isSpotProduct
-        ? spotTokenConfig
-        : undefined;
+      : undefined;
   const isSpotVaultDeposit = spotDepositTokenConfig !== undefined;
 
   const spotToken = useMemo<TokenData | undefined>(() => {
@@ -1254,6 +1252,25 @@ export const DepositView = () => {
       return;
     }
 
+    if (!depositViewTokenAddress) {
+      if (depositViewChain !== spotChainId) {
+        setDepositViewChain(spotChainId as unknown as SourceChainId);
+      }
+      setDepositViewTokenAddress(spotTokenConfig.contract);
+      return;
+    }
+
+    if (selectedWalletTokenConfig) {
+      if (depositViewChain !== selectedWalletTokenConfig.chainId) {
+        setDepositViewChain(selectedWalletTokenConfig.chainId as unknown as SourceChainId);
+      }
+      return;
+    }
+
+    if (!walletTokenConfigs) {
+      return;
+    }
+
     if (depositViewChain !== spotChainId) {
       setDepositViewChain(spotChainId as unknown as SourceChainId);
     }
@@ -1265,10 +1282,12 @@ export const DepositView = () => {
     depositViewTokenAddress,
     isSpotProduct,
     isVisibleOrView,
+    selectedWalletTokenConfig,
     setDepositViewChain,
     setDepositViewTokenAddress,
     spotChainId,
     spotTokenConfig,
+    walletTokenConfigs,
   ]);
 
   useEffect(

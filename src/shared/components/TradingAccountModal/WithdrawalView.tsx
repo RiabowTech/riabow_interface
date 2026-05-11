@@ -4,8 +4,7 @@ import { type Provider } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useHistory } from "react-router-dom";
-import { Address, encodeAbiParameters, getAddress, zeroAddress } from "viem";
-import { getWalletClient } from "@wagmi/core";
+import { Address, createWalletClient, custom, encodeAbiParameters, getAddress, parseUnits, zeroAddress } from "viem";
 import { useAccount } from "wagmi";
 
 import {
@@ -79,7 +78,7 @@ import { bigintToNumber, expandDecimals, formatAmountFree, formatUsd, parseValue
 import { EMPTY_ARRAY, getByKey } from "lib/objects";
 import { useJsonRpcProvider } from "lib/rpc";
 import { ExpressTxnData, sendExpressTransaction } from "lib/transactions/sendExpressTransaction";
-import { switchNetwork, WalletSigner } from "lib/wallets";
+import { WalletSigner } from "lib/wallets";
 import { getRainbowKitConfig } from "lib/wallets/rainbowKitConfig";
 import { getGasPaymentTokens } from "sdk/configs/express";
 import { convertTokenAddress, getToken, getWrappedToken } from "sdk/configs/tokens";
@@ -126,7 +125,6 @@ import VaultAbi from "sdk/abis/Vault";
 import SpotVaultAbi from "sdk/abis/SpotVault";
 import { usePublicClient } from "wagmi";
 import useWallet from "lib/wallets/useWallet";
-import { parseUnits } from "viem";
 import { wrapChainAction } from "./wrapChainAction";
 import { findWalletTokenConfig, useWalletTokensConfig } from "@/modules/lighter/api/custom/walletTokens";
 
@@ -145,6 +143,63 @@ type SpotWithdrawAuthorization = (WithdrawRecord | WithdrawResponse) & {
   deadline?: number;
   withdraw_id?: string;
 };
+
+type RequestProvider = {
+  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
+};
+
+async function ensureConnectorChain(connector: ReturnType<typeof useWallet>["connector"], targetChainId: number) {
+  const provider = (await connector?.getProvider?.()) as Partial<RequestProvider> | undefined;
+  if (typeof provider?.request !== "function") {
+    throw new Error("No wallet provider found. Please reconnect your wallet.");
+  }
+
+  const chainIdHex = `0x${targetChainId.toString(16)}`;
+  const currentChainIdHex = (await provider.request({ method: "eth_chainId" })) as string;
+  if (parseInt(currentChainIdHex, 16) === targetChainId) {
+    return provider as RequestProvider;
+  }
+
+  try {
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: chainIdHex }],
+    });
+  } catch (switchError: any) {
+    if (switchError?.code === 4001) {
+      throw new Error("User rejected the chain switch");
+    }
+
+    if (switchError?.code !== 4902 && switchError?.code !== -32603) {
+      throw switchError;
+    }
+
+    const targetChain = getRainbowKitConfig().chains.find((chain) => chain.id === targetChainId);
+    if (!targetChain) {
+      throw new Error(`Unsupported wallet network ${targetChainId}`);
+    }
+
+    await provider.request({
+      method: "wallet_addEthereumChain",
+      params: [
+        {
+          chainId: chainIdHex,
+          chainName: targetChain.name,
+          nativeCurrency: targetChain.nativeCurrency,
+          rpcUrls: targetChain.rpcUrls.default.http,
+          blockExplorerUrls: targetChain.blockExplorers?.default?.url ? [targetChain.blockExplorers.default.url] : [],
+        },
+      ],
+    });
+
+    await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: chainIdHex }],
+    });
+  }
+
+  return provider as RequestProvider;
+}
 
 function isReusableSpotWithdrawalStatus(status?: string) {
   return status === "signed" || status === "pending";
@@ -284,7 +339,7 @@ export const WithdrawalView = () => {
     spotTokenConfig,
     withdrawalViewChain,
   ]);
-  const { chainId: walletChainId, walletClient } = useWallet();
+  const { connector } = useWallet();
   const publicClient = usePublicClient({ chainId: withdrawContractChainId });
   // Only subscribe to API balances in API trading mode to avoid unnecessary state churn.
   const balancesResult = useZanbaraUserBalances(isTradeMode ? { refreshInterval: 10000 } : undefined);
@@ -857,6 +912,7 @@ export const WithdrawalView = () => {
             functionName: "releaseNonces",
             args: [getAddress(account)],
           });
+          const spotNonce = expectedSpotNonce;
 
           const withdrawHistory = await getWithdrawHistory(apiChainId, activeWithdrawalProduct);
           const signedWithdrawals = withdrawHistory.withdrawals.filter((withdrawal) => {
@@ -867,7 +923,7 @@ export const WithdrawalView = () => {
           });
 
           const currentNonceWithdrawals = signedWithdrawals.filter(
-            (withdrawal) => BigInt(withdrawal.nonce!) === expectedSpotNonce
+            (withdrawal) => BigInt(withdrawal.nonce!) === spotNonce
           );
           const matchingWithdrawal = currentNonceWithdrawals.find(
             (withdrawal) =>
@@ -884,12 +940,12 @@ export const WithdrawalView = () => {
             );
           } else {
             const laterWithdrawal = signedWithdrawals
-              .filter((withdrawal) => BigInt(withdrawal.nonce!) > expectedSpotNonce)
+              .filter((withdrawal) => BigInt(withdrawal.nonce!) > spotNonce)
               .sort((first, second) => Number(first.nonce ?? 0) - Number(second.nonce ?? 0))[0];
 
             if (laterWithdrawal) {
               throw new Error(
-                `Withdrawal nonce mismatch. On-chain nonce is ${expectedSpotNonce.toString()}, but the backend already has a signed withdrawal with nonce ${laterWithdrawal.nonce}. Please complete or cancel the earlier signed withdrawal first.`
+                `Withdrawal nonce mismatch. On-chain nonce is ${spotNonce.toString()}, but the backend already has a signed withdrawal with nonce ${laterWithdrawal.nonce}. Please complete or cancel the earlier signed withdrawal first.`
               );
             }
           }
@@ -1030,27 +1086,15 @@ export const WithdrawalView = () => {
           throw new Error(userMessage);
         }
 
-        // Step 3: Call Vault contract using walletClient (only if simulation succeeds)
-        // Contract signature: releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
-        // Parameters from response: amount, expiry (as deadline), backend_signature
-        let activeWalletClient = walletClient;
-
-        if (walletChainId !== withdrawContractChainId) {
-          await switchNetwork(withdrawContractChainId, true);
-          activeWalletClient = await getWalletClient(getRainbowKitConfig(), {
-            chainId: withdrawContractChainId as any,
-            account: getAddress(account),
-          });
-        } else if (!activeWalletClient) {
-          activeWalletClient = await getWalletClient(getRainbowKitConfig(), {
-            chainId: withdrawContractChainId as any,
-            account: getAddress(account),
-          });
-        }
-
-        if (!activeWalletClient) {
-          throw new Error("Wallet not connected");
-        }
+        // Step 3: Call Vault contract using the currently selected connector.
+        // Wagmi's connection chain can lag behind a manual chain switch, so create
+        // a one-shot wallet client from the connector provider after switching.
+        const connectorProvider = await ensureConnectorChain(connector, withdrawContractChainId);
+        const activeWalletClient = createWalletClient({
+          account: getAddress(account),
+          chain: publicClient.chain,
+          transport: custom(connectorProvider),
+        });
 
         const txHash = isSpotVaultWithdrawal
           ? await activeWalletClient.writeContract({
