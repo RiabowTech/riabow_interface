@@ -733,13 +733,7 @@ export function ZanbaraReferralsPage({
                 <p className="ref-invite-create__hint">
                   <Trans>Earn commissions when your friends trade</Trans>
                 </p>
-                <div className="ref-invite-actions">
-                  <div className="ref-faux-input">
-                    <span className="ref-faux-input__val ref-faux-input__val--link">—</span>
-                    <button type="button" className="ref-copy-icon" disabled aria-label={t`Copy`}>
-                      <ReferralLineIcon name="copy" />
-                    </button>
-                  </div>
+                <div className="ref-invite-actions ref-invite-actions--no-link">
                   <button type="button" className="ref-create-code-btn" disabled>
                     <Trans>Create Referral Code</Trans>
                   </button>
@@ -948,25 +942,25 @@ export function ZanbaraReferralsPage({
                   <p className="ref-invite-create__hint">
                     <Trans>Earn commissions when your friends trade</Trans>
                   </p>
-                  <div className="ref-invite-actions">
-                    <div className="ref-faux-input">
-                      <span className="ref-faux-input__val ref-faux-input__val--link">
-                        {dashboard.code ? referralLink || "—" : account ? `https://www.zanbara.com/referral/${formatAddrMid(account)}` : "—"}
-                      </span>
-                      <button
-                        type="button"
-                        className="ref-copy-icon"
-                        onClick={dashboard.code ? handleCopyLink : undefined}
-                        disabled={!dashboard.code || !referralLink}
-                        aria-label={t`Copy`}
-                      >
-                        <ReferralLineIcon name="copy" />
-                      </button>
-                    </div>
+                  <div className={`ref-invite-actions${dashboard.code ? "" : " ref-invite-actions--no-link"}`}>
                     {dashboard.code ? (
+                      <>
+                        <div className="ref-faux-input">
+                          <span className="ref-faux-input__val ref-faux-input__val--link">{referralLink || "—"}</span>
+                          <button
+                            type="button"
+                            className="ref-copy-icon"
+                            onClick={handleCopyLink}
+                            disabled={!referralLink}
+                            aria-label={t`Copy`}
+                          >
+                            <ReferralLineIcon name="copy" />
+                          </button>
+                        </div>
                       <button type="button" className="ref-create-code-btn" onClick={handleCopyCodeOnly}>
                         <Trans>Copy Referral Code</Trans>
                       </button>
+                      </>
                     ) : (
                       <div className="ref-invite-create">
                   <AffiliateCodeCreateButton

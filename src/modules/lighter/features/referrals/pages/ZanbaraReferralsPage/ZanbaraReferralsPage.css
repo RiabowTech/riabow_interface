@@ -1512,11 +1512,17 @@ html[data-ui-theme="zanbara"] .ref-shell {
 
 .ref-invite-actions {
   display: grid;
-  grid-template-columns: minmax(440px, 1fr) 250px;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 250px);
   gap: 22px;
   align-items: stretch;
   margin-top: 18px;
+  width: 100%;
   max-width: 804px;
+}
+
+.ref-invite-actions--no-link {
+  grid-template-columns: minmax(220px, 250px);
+  max-width: 250px;
 }
 
 .ref-faux-input {
