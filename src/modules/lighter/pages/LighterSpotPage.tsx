@@ -251,13 +251,13 @@ function SpotOrderPanel({
   const updateAmount = (nextAmount: string) => {
     setAmount(nextAmount);
     const nextTotal = Number(nextAmount) > 0 && Number(referencePrice) > 0 ? Number(nextAmount) * Number(referencePrice) : 0;
-    setTotal(nextTotal > 0 ? trimDecimal(String(nextTotal)) : "");
+    setTotal(nextTotal > 0 ? formatTotalAmount(nextTotal) : "");
   };
 
   const updatePrice = (nextPrice: string) => {
     setPrice(nextPrice);
     const nextTotal = Number(amount) > 0 && Number(nextPrice || marketPrice) > 0 ? Number(amount) * Number(nextPrice || marketPrice) : 0;
-    setTotal(nextTotal > 0 ? trimDecimal(String(nextTotal)) : "");
+    setTotal(nextTotal > 0 ? formatTotalAmount(nextTotal) : "");
   };
 
   const updateTotal = (nextTotal: string) => {
@@ -468,7 +468,7 @@ function SpotOrderPanel({
 
           <SpotOrderInput
             label={<Trans>Total</Trans>}
-            value={total || (computedTotal > 0 ? trimDecimal(String(computedTotal)) : "")}
+            value={total || (computedTotal > 0 ? formatTotalAmount(computedTotal) : "")}
             onChange={updateTotal}
             placeholder="0.00"
             suffix={quoteSymbol}
@@ -525,6 +525,12 @@ function SpotOrderInput({
 function trimDecimal(value: string): string {
   if (!value || !Number.isFinite(Number(value))) return "";
   return value.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+}
+
+function formatTotalAmount(value: number | string): string {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return "";
+  return numeric.toFixed(2);
 }
 
 function normalizeStep(value: string, step?: string): string {
