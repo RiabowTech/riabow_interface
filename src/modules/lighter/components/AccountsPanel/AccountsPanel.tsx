@@ -1,9 +1,15 @@
 import { Trans } from "@lingui/macro";
 import type { ReactNode } from "react";
+import { useMemo } from "react";
+import useSWR from "swr";
+import { useAccount } from "wagmi";
 
 import styles from "./AccountsPanel.module.scss";
+import { getBalances } from "../../api/custom/client";
+import { useAuthToken } from "../../api/custom/useAuthToken";
 import { useUnifiedAccountAdapter } from "../../adapters/useUnifiedAccountAdapter";
 import { useTradeProduct } from "../../store/TradeStateContext/TradeStateContext";
+import { DEFAULT_CHAIN_ID } from "config/chains";
 
 function Row({ label, value }: { label: ReactNode; value: string }) {
   return (
@@ -32,16 +38,88 @@ function formatLeverage(value: number | null | undefined) {
   return `${value.toFixed(2)}x`;
 }
 
-export function AccountsPanel() {
+function formatTokenAmount(value: string | number | null | undefined) {
+  if (value === undefined || value === null || value === "") return "-";
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return String(value);
+  return numeric.toLocaleString(undefined, { maximumFractionDigits: 8 });
+}
+
+function normalizeTokenSymbol(symbol: string | null | undefined) {
+  return String(symbol || "").trim().toUpperCase();
+}
+
+export function AccountsPanel({
+  spotBaseSymbol,
+  spotQuoteSymbol = "USDT",
+}: {
+  spotBaseSymbol?: string;
+  spotQuoteSymbol?: string;
+}) {
   const product = useTradeProduct();
   const account = useUnifiedAccountAdapter();
+  const { address } = useAccount();
+  const { token: authToken } = useAuthToken(DEFAULT_CHAIN_ID);
 
-  // All rows below are perpetual concepts (Perpetuals Equity, Unrealized PnL,
-  // Cross Leverage, Cross/Maintenance Margin). Render nothing on spot — the
-  // spot order panel already shows per-pair available balance, and the bottom
-  // tabs cover open orders / order history / trade history.
+  const baseSymbol = normalizeTokenSymbol(spotBaseSymbol);
+  const quoteSymbol = normalizeTokenSymbol(spotQuoteSymbol) || "USDT";
+  const spotBalancesKey =
+    product === "spot" && address && authToken ? ["spot-account-panel-balances", DEFAULT_CHAIN_ID, address, authToken] : null;
+  const { data: spotBalancesData } = useSWR(
+    spotBalancesKey,
+    () => getBalances(DEFAULT_CHAIN_ID, address, "spot"),
+    { revalidateOnFocus: true, refreshInterval: 10_000 }
+  );
+
+  const spotBalancesBySymbol = useMemo(() => {
+    const map = new Map<string, { available: string; frozen: string }>();
+    for (const balance of spotBalancesData?.balances ?? []) {
+      const symbol = normalizeTokenSymbol(balance.symbol || balance.token);
+      if (!symbol) continue;
+      map.set(symbol, {
+        available: balance.available,
+        frozen: balance.frozen,
+      });
+    }
+    return map;
+  }, [spotBalancesData?.balances]);
+
   if (product === "spot") {
-    return null;
+    const baseBalance = baseSymbol ? spotBalancesBySymbol.get(baseSymbol) : undefined;
+    const quoteBalance = spotBalancesBySymbol.get(quoteSymbol);
+    const emptyValue = address && authToken && spotBalancesData ? "0" : "-";
+    const getAvailable = (balance?: { available: string }) => balance?.available ?? emptyValue;
+    const getFrozen = (balance?: { frozen: string }) => balance?.frozen ?? emptyValue;
+
+    return (
+      <div className={styles.root}>
+        <div className={styles.section}>
+          <div className={styles.head}>
+            <Trans>Accounts</Trans>
+          </div>
+          {baseSymbol ? (
+            <>
+              <Row
+                label={<>{baseSymbol} <Trans>Balance</Trans></>}
+                value={`${formatTokenAmount(getAvailable(baseBalance))} ${baseSymbol}`}
+              />
+              <Row
+                label={<>{baseSymbol} <Trans>Frozen</Trans></>}
+                value={`${formatTokenAmount(getFrozen(baseBalance))} ${baseSymbol}`}
+              />
+            </>
+          ) : null}
+          <Row
+            label={<>{quoteSymbol} <Trans>Balance</Trans></>}
+            value={`${formatTokenAmount(getAvailable(quoteBalance))} ${quoteSymbol}`}
+          />
+          <Row
+            label={<>{quoteSymbol} <Trans>Frozen</Trans></>}
+            value={`${formatTokenAmount(getFrozen(quoteBalance))} ${quoteSymbol}`}
+          />
+        </div>
+      </div>
+    );
   }
 
   return (

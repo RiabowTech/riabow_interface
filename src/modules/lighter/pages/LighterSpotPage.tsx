@@ -146,7 +146,7 @@ export default function LighterSpotPage() {
           <SpotBottomTabs marketKey={currentMarketKey} />
         </div>
         <div className={`${styles.accounts} ${orderBookLayout === "Large" ? styles.accountsLarge : ""}`}>
-          <AccountsPanel />
+          <AccountsPanel spotBaseSymbol={spotBaseSymbol} spotQuoteSymbol="USDT" />
         </div>
       </div>
     </div>
