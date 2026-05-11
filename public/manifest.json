@@ -1,7 +1,7 @@
 {
-  "short_name": "Zanbara",
-  "name": "Zanbara",
-  "description": "Trade spot or perpetual with up to 100x leverage directly from your wallet on Zanbara.",
+  "short_name": "ZTDX",
+  "name": "ZTDX",
+  "description": "Trade spot or perpetual BTC, ETH and other top cryptocurrencies with up to 100x leverage directly from your wallet.",
   "iconPath": "logo.png",
   "icons": [
     {
