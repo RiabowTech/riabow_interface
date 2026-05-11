@@ -2,7 +2,7 @@ import { ARBITRUM, AVALANCHE } from "config/chains";
 import { TOKENS_BY_SYMBOL_MAP } from "sdk/configs/tokens";
 
 /** 生产环境营销站根（分享链接、SEO canonical、OG 等） */
-export const PRODUCTION_HOST = "https://ztdx.io";
+export const PRODUCTION_HOST = "https://p99.world";
 
 /** 交易 SPA 生产部署源站（品牌链接 / cross-origin nav 用） */
 const rawAppOrigin = import.meta.env.VITE_ZTDX_APP_ORIGIN as string | undefined;
