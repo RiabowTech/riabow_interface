@@ -509,12 +509,26 @@
   height: 16px;
   border-radius: 999px;
   border: 1px solid rgba(215, 170, 67, 0.7);
+  background: transparent;
   color: #d7aa43;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
   font-weight: 800;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    border-color: rgba(245, 198, 90, 0.95);
+    color: #f5c65a;
+  }
+
+  &:disabled {
+    cursor: progress;
+    opacity: 0.65;
+  }
 }
 
 .spotField {

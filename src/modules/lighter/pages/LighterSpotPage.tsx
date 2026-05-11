@@ -1,10 +1,13 @@
 import { Trans, t } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { useAccount } from "wagmi";
 
+import { useZanbaraAuth } from "@/modules/lighter/api/custom/useZanbaraAuth";
+import { useTradingAccountModalOpen } from "@/modules/lighter/context/TradingAccountContext";
 import { useTokensFavorites } from "@/modules/lighter/store/TokensFavoritesContext/TokensFavoritesContextProvider";
 
 import "../styles/global.scss";
@@ -167,8 +170,11 @@ function SpotOrderPanel({
   onOrderSideChange: (side: "buy" | "sell") => void;
 }) {
   const { i18n } = useLingui();
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const { token: authToken } = useAuthToken(DEFAULT_CHAIN_ID);
+  const { openConnectModal, connectModalOpen } = useConnectModal();
+  const { isAuthenticated, isAuthenticating, authenticate, clearError } = useZanbaraAuth();
+  const [, setTradingAccountModalOpen] = useTradingAccountModalOpen();
   const { mutate } = useSWRConfig();
   const [orderType, setOrderType] = useState<"limit" | "market">("limit");
   const [price, setPrice] = useState("");
@@ -274,6 +280,35 @@ function SpotOrderPanel({
       updateAmount(normalizeStep(String((available * nextPct) / 100), selectedMarket?.lot_size));
     }
   };
+
+  const handleOpenDeposit = useCallback(async () => {
+    if (!isConnected || !address) {
+      if (!connectModalOpen) {
+        openConnectModal?.();
+      }
+      return;
+    }
+
+    if (!authToken || !isAuthenticated) {
+      if (isAuthenticating) return;
+      clearError();
+      const response = await authenticate();
+      if (!response) return;
+    }
+
+    setTradingAccountModalOpen("deposit");
+  }, [
+    address,
+    authToken,
+    authenticate,
+    clearError,
+    connectModalOpen,
+    isAuthenticated,
+    isAuthenticating,
+    isConnected,
+    openConnectModal,
+    setTradingAccountModalOpen,
+  ]);
 
   const submit = async () => {
     if (!address || !authToken) {
@@ -397,7 +432,16 @@ function SpotOrderPanel({
               <Trans>Available</Trans>
             </span>
             <span className={styles.availableValue}>
-              {availableBalance ? formatAmount(availableBalance) : "--"} {availableToken} <span className={styles.addCircle}>+</span>
+              {availableBalance ? formatAmount(availableBalance) : "--"} {availableToken}
+              <button
+                type="button"
+                className={styles.addCircle}
+                onClick={handleOpenDeposit}
+                disabled={isAuthenticating}
+                aria-label={i18n._(t`Deposit`)}
+              >
+                +
+              </button>
             </span>
           </div>
 
