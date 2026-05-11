@@ -80,9 +80,9 @@ export const DepositStatusView = () => {
   const statusVariant: "loading" | "success" = isCompleted ? "success" : "loading";
 
   const description = isCompleted ? (
-    <Trans>Funds are now in your Zanbara Account.</Trans>
+    <Trans>Funds are now in your riabow Account.</Trans>
   ) : (
-    <Trans>Funds will appear in your Zanbara Account soon.</Trans>
+    <Trans>Funds will appear in your riabow Account soon.</Trans>
   );
   const statusLabel = isCompleted ? <Trans>Deposit completed</Trans> : <Trans>Deposit in progress</Trans>;
 
@@ -127,13 +127,13 @@ export const DepositStatusView = () => {
             <div className="flex items-center gap-8">
               <div className="size-6 rotate-[45deg] transform rounded-1 bg-blue-300" />
               <span className="text-12 text-typography-secondary">
-                <Trans>Faster execution with Zanbara premium RPCs</Trans>
+                <Trans>Faster execution with riabow premium RPCs</Trans>
               </span>
             </div>
             <div className="flex items-center gap-8">
               <div className="size-6 rotate-[45deg] transform rounded-1 bg-blue-300" />
               <span className="text-12 text-typography-secondary">
-                <Trans>Reliable Zanbara-powered transactions</Trans>
+                <Trans>Reliable riabow-powered transactions</Trans>
               </span>
             </div>
           </div>

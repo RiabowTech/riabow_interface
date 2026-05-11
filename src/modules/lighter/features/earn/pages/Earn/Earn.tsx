@@ -105,10 +105,10 @@ function getStrategyEndTime(strategy: EarnProduct | null | undefined): number | 
 // 辅助函数：获取策略名称（直接使用 name 字段）
 function getStrategyBaseName(name: string | null | undefined): string {
   try {
-    return name && typeof name === "string" && name.trim() ? name.trim() : "Zanbara Strategy";
+    return name && typeof name === "string" && name.trim() ? name.trim() : "riabow Strategy";
   } catch (error) {
     console.error("[getStrategyBaseName] Error:", error);
-    return "Zanbara Strategy";
+    return "riabow Strategy";
   }
 }
 
@@ -286,10 +286,10 @@ function StrategyCard({
                       <div className="flex flex-col gap-12">
                         <div>
                           <p className="faq-question m-0 mb-4">
-                            <Trans>1. Who's eligible to join Zanbara Strategy?</Trans>
+                            <Trans>1. Who's eligible to join riabow Strategy?</Trans>
                           </p>
                           <p className="faq-answer m-0">
-                            <Trans>All Zanbara users are eligible.</Trans>
+                            <Trans>All riabow users are eligible.</Trans>
                           </p>
                         </div>
                         <div>
@@ -298,7 +298,7 @@ function StrategyCard({
                           </p>
                           <p className="faq-answer m-0">
                             <Trans>
-                              Zanbara Strategy is a fixed-term product that's automatically redeemed to your account at
+                              riabow Strategy is a fixed-term product that's automatically redeemed to your account at
                               maturity.
                             </Trans>
                           </p>

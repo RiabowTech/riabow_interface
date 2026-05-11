@@ -88,7 +88,7 @@ export function LogoSection({ isCollapsed }: { isCollapsed: boolean | undefined 
       <div className="flex h-20 items-center justify-start shrink-0">
         <img
           src={isCollapsed ? logoCompact : logoFull}
-          alt="Zanbara Logo"
+          alt="riabow Logo"
           className={cx(
             "logo-glow object-contain",
             isCollapsed ? "h-20" : "h-20"

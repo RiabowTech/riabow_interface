@@ -31,7 +31,7 @@ if (!import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID) {
   );
 }
 
-const APP_NAME = "Zanbara";
+const APP_NAME = "riabow";
 const DEFAULT_WALLET_CHAIN_ID = Number(import.meta.env.VITE_DEFAULT_CHAIN);
 const ENABLE_ARBITRUM_SEPOLIA = isDevelopment() || DEFAULT_WALLET_CHAIN_ID === arbitrumSepolia.id;
 const ENABLE_BSC_TESTNET = Number(import.meta.env.VITE_DEFAULT_SPOT_CHAIN) === bscTestnet.id;

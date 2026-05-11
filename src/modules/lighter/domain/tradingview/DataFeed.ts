@@ -65,7 +65,7 @@ export class DataFeed extends EventTarget implements IBasicDataFeed {
     private chainId: number,
     private oracleFetcher: OracleFetcher,
     private tradePageVersion = 2,
-    private brandName = "Zanbara"
+    private brandName = "riabow"
   ) {
     super();
 

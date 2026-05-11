@@ -424,7 +424,7 @@ const Toolbar = ({ account }: { account: string }) => {
 function TradingAccountBalanceTooltipContent() {
   return (
     <Trans>
-      Your Zanbara Account balance, usable for trading from any supported chain. {/* DOCS_LINK_COMMENTED: */}
+      Your riabow Account balance, usable for trading from any supported chain. {/* DOCS_LINK_COMMENTED: */}
       {/* <span className="text-blue-300">Read more</span>. */}
     </Trans>
   );
@@ -459,7 +459,7 @@ function SettlementChainBalance() {
         <SyntheticsInfoRow
           label={
             <TooltipWithPortal content={<TradingAccountBalanceTooltipContent />} variant="iconStroke">
-              <Trans>Zanbara Account Balance</Trans>
+              <Trans>riabow Account Balance</Trans>
             </TooltipWithPortal>
           }
           className="py-4"
@@ -468,7 +468,7 @@ function SettlementChainBalance() {
         <SyntheticsInfoRow
           label={
             <TooltipWithPortal content={<FrozenBalanceTooltipContent />} variant="iconStroke">
-              <Trans>Zanbara Frozen Balance</Trans>
+              <Trans>riabow Frozen Balance</Trans>
             </TooltipWithPortal>
           }
           className="py-4"

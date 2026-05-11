@@ -117,10 +117,10 @@ export function TopNav() {
         target="_blank"
         rel="noopener noreferrer"
         className={styles.logo}
-        aria-label="Zanbara home"
+        aria-label="riabow home"
       >
-        <img src={logoIcon} alt="Zanbara" className={cx(styles.logoImage, "logo-glow")} />
-        <span className="gold-gradient-text text-xl font-bold tracking-wider">Zanbara</span>
+        <img src={logoIcon} alt="riabow" className={cx(styles.logoImage, "logo-glow")} />
+        <span className="gold-gradient-text text-xl font-bold tracking-wider">riabow</span>
       </a>
       <div className={styles.nav}>
         {NAV_ITEMS.map((item) => {

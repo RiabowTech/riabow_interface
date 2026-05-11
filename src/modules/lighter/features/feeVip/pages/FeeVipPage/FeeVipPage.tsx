@@ -614,7 +614,7 @@ export function FeeVipPage() {
     return (
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">
-          <SEO title={t`Fee & VIP | Zanbara`} description={t`Trading fee tiers and VIP levels on Zanbara.`} />
+          <SEO title={t`Fee & VIP | riabow`} description={t`Trading fee tiers and VIP levels on riabow.`} />
           {body}
         </div>
       </LighterShell>
@@ -623,7 +623,7 @@ export function FeeVipPage() {
 
   return (
     <AppPageLayout>
-      <SEO title={t`Fee & VIP | Zanbara`} description={t`Trading fee tiers and VIP levels on Zanbara.`} />
+      <SEO title={t`Fee & VIP | riabow`} description={t`Trading fee tiers and VIP levels on riabow.`} />
       {body}
     </AppPageLayout>
   );

@@ -6,7 +6,7 @@ import { ARBITRUM, ARBITRUM_SEPOLIA, AVALANCHE, AVALANCHE_FUJI, BOTANIX, Contrac
 import { getTokenBySymbol, getWrappedToken } from "./tokens";
 
 export const SUBACCOUNT_MESSAGE =
-  "Generate a Zanbara 1CT (One-Click Trading) session. Only sign this message on a trusted website.";
+  "Generate a riabow 1CT (One-Click Trading) session. Only sign this message on a trusted website.";
 export const SUBACCOUNT_DOCS_URL = "https://app.primit.io/trade";
 
 export const DEFAULT_SUBACCOUNT_EXPIRY_DURATION = periodToSeconds(7, "1d"); // 1 week

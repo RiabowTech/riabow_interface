@@ -1000,7 +1000,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Zanbara Market tokens",
+      name: "riabow Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1482,7 +1482,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Zanbara Market tokens",
+      name: "riabow Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1689,7 +1689,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Zanbara Market tokens",
+      name: "riabow Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1784,7 +1784,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Zanbara Market tokens",
+      name: "riabow Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,
@@ -1864,7 +1864,7 @@ export const TOKENS: { [chainId: number]: Token[] } = {
     },
     /** Placeholder tokens */
     {
-      name: "Zanbara Market tokens",
+      name: "riabow Market tokens",
       symbol: "GM",
       address: "<market-token-address>",
       decimals: 18,

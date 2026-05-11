@@ -814,7 +814,7 @@ export function getTotalVolumeSum(volumes) {
 }
 
 export function getPageTitle(data) {
-  const title = "Zanbara | Prime Execution, Zanbaraive Design";
+  const title = "riabow | Prime Execution, Native Design";
   return `${data} | ${title}`;
 }
 

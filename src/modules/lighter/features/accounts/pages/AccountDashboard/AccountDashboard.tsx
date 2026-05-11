@@ -81,7 +81,7 @@ export function AccountDashboard() {
       <LighterShell>
         <div className="mx-auto flex w-full max-w-[1512px] grow flex-col gap-1 pb-8 pt-0 max-md:px-1">
           <div className="default-container page-layout">
-            <PageTitle title={t`Zanbara Account`} className="p-12" />
+            <PageTitle title={t`riabow Account`} className="p-12" />
             <div className="text-center text-red-500">
               <Trans>Invalid address. Please make sure you have entered a valid Ethereum address</Trans>
             </div>

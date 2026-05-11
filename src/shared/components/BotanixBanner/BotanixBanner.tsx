@@ -38,7 +38,7 @@ export function BotanixBanner() {
           <Trans>providing liquidity</Trans>
         </Link>{" "}
         <Trans>
-          using GLV and pool tokens. Buying or staking Zanbara, or using referrals, is not supported at this time.
+          using GLV and pool tokens. Buying or staking riabow, or using referrals, is not supported at this time.
         </Trans>
       </p>
       <p>

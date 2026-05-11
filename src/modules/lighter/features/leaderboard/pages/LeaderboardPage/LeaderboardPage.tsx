@@ -43,7 +43,7 @@ export function LeaderboardPage() {
   const { isZanbara } = useDesignSystem();
 
   const tooltipContent = useMemo(() => {
-    const description = leaderboardPageKey === "leaderboard" ? t`Leaderboard for traders on Zanbara.` : null;
+    const description = leaderboardPageKey === "leaderboard" ? t`Leaderboard for traders on riabow.` : null;
 
     return (
       <div>
@@ -63,7 +63,7 @@ export function LeaderboardPage() {
               </h1>
               <p className="zanbara-page-hero__subtitle">
                 {leaderboardPageKey === "leaderboard" ? (
-                  <Trans>Leaderboard for traders on Zanbara.</Trans>
+                  <Trans>Leaderboard for traders on riabow.</Trans>
                 ) : (
                   <span aria-hidden className="select-none opacity-0">
                     &nbsp;
