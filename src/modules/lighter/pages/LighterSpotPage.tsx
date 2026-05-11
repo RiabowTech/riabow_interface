@@ -238,7 +238,13 @@ function SpotOrderPanel({
   const referencePrice =
     orderType === "market" ? (isBuy ? bestAsk : bestBid) || marketPrice : price || marketPrice;
   const actionLabel = isBuy ? `${i18n._(t`Buy`)} ${baseSymbol}` : `${i18n._(t`Sell`)} ${baseSymbol}`;
-  const feeRate = selectedMarket ? (isBuy ? selectedMarket.taker_fee_bps : selectedMarket.maker_fee_bps) / 100 : 0.1;
+  // Maker vs taker is determined by order type, not buy/sell side: a resting
+  // limit order is the maker, a market order crosses the book immediately as
+  // taker. (A limit that crosses the book also pays taker on the crossed
+  // portion, but the optimistic pre-submit display uses orderType.)
+  const feeRate = selectedMarket
+    ? (orderType === "market" ? selectedMarket.taker_fee_bps : selectedMarket.maker_fee_bps) / 100
+    : 0.1;
   const computedTotal = Number(amount) > 0 && Number(referencePrice) > 0 ? Number(amount) * Number(referencePrice) : 0;
   const canSubmit =
     !!address &&
