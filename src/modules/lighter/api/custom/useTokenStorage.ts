@@ -59,6 +59,11 @@ export function useTokenStorage(
 
   // Listen for localStorage changes from other tabs
   useEffect(() => {
+    const refreshFromStorage = () => {
+      const newState = readTokenState(address, chainId);
+      setState(newState);
+    };
+
     const handleStorageChange = (e: StorageEvent) => {
       // 兼容新旧两套前缀:zanbara_* 是当前写路径,axblade_* 是历史数据(读到即迁移,见 client.ts)
       if (
@@ -67,13 +72,17 @@ export function useTokenStorage(
         e.key?.includes("axblade_jwt_token") ||
         e.key?.includes("axblade_jwt_expiry")
       ) {
-        const newState = readTokenState(address, chainId);
-        setState(newState);
+        refreshFromStorage();
       }
     };
 
     window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    window.addEventListener("auth-token-change", refreshFromStorage);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("auth-token-change", refreshFromStorage);
+    };
   }, [address, chainId]);
 
   // Save token to localStorage
