@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useHistory } from "react-router-dom";
 import { Address, encodeAbiParameters, getAddress, zeroAddress } from "viem";
+import { getWalletClient } from "@wagmi/core";
 import { useAccount } from "wagmi";
 
 import {
@@ -78,7 +79,8 @@ import { bigintToNumber, expandDecimals, formatAmountFree, formatUsd, parseValue
 import { EMPTY_ARRAY, getByKey } from "lib/objects";
 import { useJsonRpcProvider } from "lib/rpc";
 import { ExpressTxnData, sendExpressTransaction } from "lib/transactions/sendExpressTransaction";
-import { WalletSigner } from "lib/wallets";
+import { switchNetwork, WalletSigner } from "lib/wallets";
+import { getRainbowKitConfig } from "lib/wallets/rainbowKitConfig";
 import { getGasPaymentTokens } from "sdk/configs/express";
 import { convertTokenAddress, getToken, getWrappedToken } from "sdk/configs/tokens";
 import { bigMath } from "sdk/utils/bigmath";
@@ -282,7 +284,7 @@ export const WithdrawalView = () => {
     spotTokenConfig,
     withdrawalViewChain,
   ]);
-  const { walletClient } = useWallet();
+  const { chainId: walletChainId, walletClient } = useWallet();
   const publicClient = usePublicClient({ chainId: withdrawContractChainId });
   // Only subscribe to API balances in API trading mode to avoid unnecessary state churn.
   const balancesResult = useZanbaraUserBalances(isTradeMode ? { refreshInterval: 10000 } : undefined);
@@ -812,7 +814,6 @@ export const WithdrawalView = () => {
     if (isTradeMode) {
       if (
         !withdrawContractChainId ||
-        !walletClient ||
         !publicClient ||
         !inputValue ||
         inputAmount === undefined ||
@@ -1032,8 +1033,19 @@ export const WithdrawalView = () => {
         // Step 3: Call Vault contract using walletClient (only if simulation succeeds)
         // Contract signature: releaseFunds(uint256 amount, uint256 deadline, bytes calldata signature)
         // Parameters from response: amount, expiry (as deadline), backend_signature
+        let activeWalletClient = walletClient;
+
+        if (walletChainId !== withdrawContractChainId) {
+          await switchNetwork(withdrawContractChainId, true);
+          activeWalletClient = await getWalletClient(getRainbowKitConfig());
+        }
+
+        if (!activeWalletClient) {
+          throw new Error("Wallet not connected");
+        }
+
         const txHash = isSpotVaultWithdrawal
-          ? await walletClient.writeContract({
+          ? await activeWalletClient.writeContract({
               address: vaultAddress as `0x${string}`,
               abi: SpotVaultAbi,
               functionName: "withdraw",
@@ -1041,7 +1053,7 @@ export const WithdrawalView = () => {
               account: getAddress(account),
               chain: publicClient.chain,
             })
-          : await walletClient.writeContract({
+          : await activeWalletClient.writeContract({
               address: vaultAddress as `0x${string}`,
               abi: VaultAbi,
               functionName: "releaseFunds",
@@ -1327,7 +1339,7 @@ export const WithdrawalView = () => {
   } else if (isTradeMode) {
     // In API trading mode, skip express transaction validation checks.
     // Only check basic input validation
-    if (!walletClient || !publicClient) {
+    if (!publicClient) {
       buttonState = {
         text: t`Connecting wallet...`,
         disabled: true,

@@ -92,9 +92,11 @@ export function useTradingAccountFundingHistory(opts?: { enabled?: boolean }): {
   const { chainId } = useChainId();
   const { address: account } = useAccount();
   const { pendingMultichainFunding, updatePendingMultichainFunding } = useSyntheticsEvents();
+  const isEnabled = opts?.enabled !== false;
+  const safePendingMultichainFunding = Array.isArray(pendingMultichainFunding) ? pendingMultichainFunding : [];
 
   const { data, isLoading } = useSWR<MultichainFundingHistoryItem[]>(
-    account && opts?.enabled !== false ? [chainId, "trading-account-funding-history", account] : null,
+    account && isEnabled ? [chainId, "trading-account-funding-history", account] : null,
     {
       fetcher: () => fetchTradingAccountFundingHistory(chainId, { account }),
       refreshInterval: FREQUENT_UPDATE_INTERVAL,
@@ -105,6 +107,10 @@ export function useTradingAccountFundingHistory(opts?: { enabled?: boolean }): {
   );
 
   const mergedData = useMemo(() => {
+    if (!isEnabled) {
+      return data;
+    }
+
     let mergedData = data ? [...data] : [];
     const guidToIndex: Partial<Record<string, number>> = {};
 
@@ -115,7 +121,7 @@ export function useTradingAccountFundingHistory(opts?: { enabled?: boolean }): {
 
     const dataToUnshift: MultichainFundingHistoryItem[] = [];
 
-    for (const item of pendingMultichainFunding) {
+    for (const item of safePendingMultichainFunding) {
       if (item.step === "submitted") {
         continue;
       }
@@ -140,7 +146,7 @@ export function useTradingAccountFundingHistory(opts?: { enabled?: boolean }): {
 
     const alreadySentTxns = mergedData.filter((item) => item.sentTxn !== undefined).map((item) => item.sentTxn!);
 
-    const filteredSubmittedEvents = pendingMultichainFunding.filter(
+    const filteredSubmittedEvents = safePendingMultichainFunding.filter(
       (item) => item.step === "submitted" && (!item.sentTxn || !alreadySentTxns.includes(item.sentTxn))
     );
 
@@ -149,23 +155,24 @@ export function useTradingAccountFundingHistory(opts?: { enabled?: boolean }): {
     mergedData.sort((a, b) => b.sentTimestamp - a.sentTimestamp);
 
     return mergedData;
-  }, [data, pendingMultichainFunding]);
+  }, [data, isEnabled, safePendingMultichainFunding]);
 
   return { fundingHistory: mergedData, isLoading };
 }
 
 function useTradingAccountPendingFundingHistoryItem(guid: string | undefined): MultichainFundingHistoryItem | undefined {
   const { pendingMultichainFunding } = useSyntheticsEvents();
+  const safePendingMultichainFunding = Array.isArray(pendingMultichainFunding) ? pendingMultichainFunding : [];
 
   const pendingItem = useMemo((): MultichainFundingHistoryItem | undefined => {
     if (!guid) {
       return undefined;
     }
 
-    const pendingItem = pendingMultichainFunding.find((item) => item.id === guid);
+    const pendingItem = safePendingMultichainFunding.find((item) => item.id === guid);
 
     return pendingItem;
-  }, [guid, pendingMultichainFunding]);
+  }, [guid, safePendingMultichainFunding]);
 
   return pendingItem;
 }

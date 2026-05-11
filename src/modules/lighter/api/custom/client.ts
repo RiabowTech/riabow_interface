@@ -1325,6 +1325,39 @@ function normalizeWithdrawRecord(record: any): WithdrawRecord {
   };
 }
 
+function normalizeWithdrawResponse(raw: unknown): WithdrawResponse {
+  const response = unwrapApiData<any>(raw);
+  const signature =
+    response?.backend_signature ??
+    response?.signature ??
+    response?.sig ??
+    response?.withdraw_signature ??
+    response?.withdrawSignature;
+
+  return {
+    ...response,
+    withdraw_id: response?.withdraw_id ?? response?.withdrawId ?? response?.id,
+    id: response?.id ?? response?.withdraw_id ?? response?.withdrawId,
+    token: String(response?.token ?? ""),
+    amount: String(response?.amount ?? "0"),
+    amount_in_wei:
+      response?.amount_in_wei !== undefined
+        ? String(response.amount_in_wei)
+        : response?.amountInWei !== undefined
+          ? String(response.amountInWei)
+          : undefined,
+    token_address: response?.token_address ?? response?.tokenAddress,
+    backend_signature: signature,
+    signature,
+    nonce: Number(response?.nonce ?? 0),
+    expiry: Number(response?.expiry ?? response?.deadline ?? 0),
+    deadline: Number(response?.deadline ?? response?.expiry ?? 0),
+    vault_address: response?.vault_address ?? response?.vaultAddress,
+    hash: response?.hash,
+    status: response?.status,
+  };
+}
+
 export async function getWithdrawHistory(chainId: number, product?: TradeProduct): Promise<WithdrawHistoryResponse> {
   if (product === "spot") {
     const raw = await apiFetch<unknown>(chainId, "/withdrawals?limit=50", { requireAuth: true, product });
@@ -1397,12 +1430,13 @@ export async function requestWithdraw(
   request: WithdrawRequest,
   product?: TradeProduct
 ): Promise<WithdrawResponse> {
-  return apiFetch<WithdrawResponse>(chainId, "/withdraw/request", {
+  const raw = await apiFetch<unknown>(chainId, "/withdraw/request", {
     method: "POST",
     body: JSON.stringify(request),
     requireAuth: true,
     product,
   });
+  return normalizeWithdrawResponse(raw);
 }
 
 export interface ConfirmWithdrawRequest {

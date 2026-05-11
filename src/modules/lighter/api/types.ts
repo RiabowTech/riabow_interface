@@ -797,7 +797,7 @@ export interface WithdrawResponse {
   amount: string;
   amount_in_wei?: string; // Spot API returns raw contract amount separately
   token_address?: string; // Spot API returns the signed token address
-  backend_signature: string; // API returns "backend_signature"
+  backend_signature?: string; // API returns "backend_signature"
   signature?: string; // Keep for backward compatibility
   nonce: number;
   expiry: number; // API returns "expiry"
