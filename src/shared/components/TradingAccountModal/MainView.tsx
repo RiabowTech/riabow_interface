@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { useCopyToClipboard } from "react-use";
 import useSWR from "swr";
 import { formatUnits, parseUnits, getAddress } from "viem";
+import { getWalletClient } from "@wagmi/core";
 import { useAccount, usePublicClient } from "wagmi";
 
 import { useZanbaraBalancesForProduct, useZanbaraUserBalances } from "@/modules/lighter/api";
@@ -36,7 +37,8 @@ import { useENS } from "lib/legacy";
 import { formatUsd } from "lib/numbers";
 import { useBreakpoints } from "lib/useBreakpoints";
 import { useNotifyModalState } from "lib/useNotifyModalState";
-import { shortenAddressOrEns } from "lib/wallets";
+import { shortenAddressOrEns, switchNetwork } from "lib/wallets";
+import { getRainbowKitConfig } from "lib/wallets/rainbowKitConfig";
 import useWallet from "lib/wallets/useWallet";
 import { getToken, getTokenBySymbol } from "sdk/configs/tokens";
 import { Token } from "sdk/types/tokens";
@@ -932,7 +934,7 @@ const FundingHistorySection = () => {
   const apiChainId = settlementChainId;
   const spotVaultAddress = getSpotVaultAddress(DEFAULT_SPOT_CHAIN_ID);
   const { data: walletTokenConfigs } = useWalletTokensConfig();
-  const { walletClient } = useWallet();
+  const { chainId: walletChainId, walletClient } = useWallet();
   const futuresPublicClient = usePublicClient({ chainId });
   const spotPublicClient = usePublicClient({ chainId: DEFAULT_SPOT_CHAIN_ID });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -1072,7 +1074,7 @@ const FundingHistorySection = () => {
     const itemContractChainId = itemIsSpotProduct ? DEFAULT_SPOT_CHAIN_ID : chainId;
     const publicClient = itemIsSpotProduct ? spotPublicClient : futuresPublicClient;
 
-    if (!itemContractChainId || !apiChainId || !walletClient || !publicClient || !account) {
+    if (!itemContractChainId || !apiChainId || !publicClient || !account) {
       helperToast.error(t`Missing required parameters`);
       return;
     }
@@ -1134,8 +1136,26 @@ const FundingHistorySection = () => {
       }
 
       // Step 2: Call contract
+      let activeWalletClient = walletClient;
+      if (walletChainId !== itemContractChainId) {
+        await switchNetwork(itemContractChainId, true);
+        activeWalletClient = await getWalletClient(getRainbowKitConfig(), {
+          chainId: itemContractChainId as any,
+          account: getAddress(account),
+        });
+      } else if (!activeWalletClient) {
+        activeWalletClient = await getWalletClient(getRainbowKitConfig(), {
+          chainId: itemContractChainId as any,
+          account: getAddress(account),
+        });
+      }
+
+      if (!activeWalletClient) {
+        throw new Error("Wallet not connected");
+      }
+
       const txHash = itemIsSpotProduct
-        ? await walletClient.writeContract({
+        ? await activeWalletClient.writeContract({
             address: vaultAddress as `0x${string}`,
             abi: SpotVaultAbi,
             functionName: "withdraw",
@@ -1143,7 +1163,7 @@ const FundingHistorySection = () => {
             account: getAddress(account),
             chain: publicClient.chain,
           })
-        : await walletClient.writeContract({
+        : await activeWalletClient.writeContract({
             address: vaultAddress as `0x${string}`,
             abi: VaultAbi,
             functionName: "releaseFunds",

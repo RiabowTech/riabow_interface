@@ -1037,7 +1037,15 @@ export const WithdrawalView = () => {
 
         if (walletChainId !== withdrawContractChainId) {
           await switchNetwork(withdrawContractChainId, true);
-          activeWalletClient = await getWalletClient(getRainbowKitConfig());
+          activeWalletClient = await getWalletClient(getRainbowKitConfig(), {
+            chainId: withdrawContractChainId as any,
+            account: getAddress(account),
+          });
+        } else if (!activeWalletClient) {
+          activeWalletClient = await getWalletClient(getRainbowKitConfig(), {
+            chainId: withdrawContractChainId as any,
+            account: getAddress(account),
+          });
         }
 
         if (!activeWalletClient) {
