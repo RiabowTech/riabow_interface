@@ -18,7 +18,6 @@ export {
   type KlinePeriod,
 } from "./client";
 export * from "./hooks";
-export * from "./useCancelOrderHandler";
 export * from "./useClosePositionHandler";
 
 // API trading client (custom)

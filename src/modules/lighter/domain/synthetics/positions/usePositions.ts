@@ -8,7 +8,6 @@ import {
   PendingPositionUpdate,
   PositionDecreaseEvent,
   PositionIncreaseEvent,
-  useSyntheticsEvents,
 } from "@/modules/lighter/context/SyntheticsEvents";
 import type { Position } from "domain/synthetics/positions/types";
 import { metrics, MissedMarketPricesCounter } from "lib/metrics";
@@ -206,7 +205,11 @@ export function useOptimisticPositions(p: {
   isLoading: boolean;
 }): PositionsData | undefined {
   const { positionsData, allPositionsKeys, isLoading } = p;
-  const { positionDecreaseEvents, positionIncreaseEvents, pendingPositionsUpdates } = useSyntheticsEvents();
+
+  // GMX-era optimistic overlays from `positionIncreaseEvents` /
+  // `positionDecreaseEvents` / `pendingPositionsUpdates` are no longer wired
+  // (see SyntheticsEventsProvider slim-down). We just filter empty-size
+  // positions out of the multicall result.
 
   return useMemo(() => {
     if (!allPositionsKeys || isLoading) {
@@ -214,66 +217,14 @@ export function useOptimisticPositions(p: {
     }
 
     return allPositionsKeys.reduce((acc, key) => {
-      const now = Date.now();
-
-      const lastIncreaseEvent = positionIncreaseEvents
-        ? positionIncreaseEvents.filter((e) => e.positionKey === key).pop()
-        : undefined;
-      const lastDecreaseEvent = positionDecreaseEvents
-        ? positionDecreaseEvents.filter((e) => e.positionKey === key).pop()
-        : undefined;
-
-      const pendingUpdate =
-        pendingPositionsUpdates?.[key] && (pendingPositionsUpdates[key]?.updatedAt ?? 0) + MAX_PENDING_UPDATE_AGE > now
-          ? pendingPositionsUpdates[key]
-          : undefined;
-
-      let position: Position;
-
-      if (getByKey(positionsData, key)) {
-        position = { ...getByKey(positionsData, key)! };
-      } else if (pendingUpdate && pendingUpdate.isIncrease) {
-        position = getPendingMockPosition(pendingUpdate);
-      } else {
-        return acc;
+      const raw = getByKey(positionsData, key);
+      if (!raw) return acc;
+      if (raw.sizeInUsd > 0n) {
+        acc[key] = raw;
       }
-
-      if (
-        lastIncreaseEvent &&
-        lastIncreaseEvent.increasedAtTime > position.increasedAtTime &&
-        lastIncreaseEvent.increasedAtTime > (lastDecreaseEvent?.decreasedAtTime || 0)
-      ) {
-        position = applyEventChanges(position, lastIncreaseEvent);
-      } else if (
-        lastDecreaseEvent &&
-        lastDecreaseEvent.decreasedAtTime > position.decreasedAtTime &&
-        lastDecreaseEvent.decreasedAtTime > (lastIncreaseEvent?.increasedAtTime || 0)
-      ) {
-        position = applyEventChanges(position, lastDecreaseEvent);
-      }
-
-      if (
-        pendingUpdate &&
-        ((pendingUpdate.isIncrease && pendingUpdate.updatedAtBlock > position.increasedAtTime) ||
-          (!pendingUpdate.isIncrease && pendingUpdate.updatedAtBlock > position.decreasedAtTime))
-      ) {
-        position.pendingUpdate = pendingUpdate;
-      }
-
-      if (position.sizeInUsd > 0) {
-        acc[key] = position;
-      }
-
       return acc;
     }, {} as PositionsData);
-  }, [
-    allPositionsKeys,
-    isLoading,
-    pendingPositionsUpdates,
-    positionDecreaseEvents,
-    positionIncreaseEvents,
-    positionsData,
-  ]);
+  }, [allPositionsKeys, isLoading, positionsData]);
 }
 
 function applyEventChanges(position: Position, event: PositionIncreaseEvent | PositionDecreaseEvent) {
