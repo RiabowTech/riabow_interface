@@ -43,7 +43,11 @@ import useWallet from "lib/wallets/useWallet";
 import { getToken, getTokenBySymbol } from "sdk/configs/tokens";
 import { Token } from "sdk/types/tokens";
 import { buildAccountDashboardUrl } from "shared/utils/buildAccountDashboardUrl";
-import { findWalletTokenConfig, useWalletTokensConfig, type WalletTokenConfig } from "@/modules/lighter/api/custom/walletTokens";
+import {
+  findWalletTokenConfig,
+  useWalletTokensConfig,
+  type WalletTokenConfig,
+} from "@/modules/lighter/api/custom/walletTokens";
 
 import { Amount } from "components/Amount/Amount";
 import { Avatar } from "components/Avatar/Avatar";
@@ -179,7 +183,9 @@ function normalizeMarketBaseSymbol(symbol: string | undefined) {
   return (symbol ?? "").split(/[-/]/)[0]?.replace(/USDT$/i, "").toUpperCase() ?? "";
 }
 
-function buildUsdPriceMap(markets: Array<{ symbol: string; base_asset?: string; quote_asset?: string; lastPrice?: string; last_price?: string }>) {
+function buildUsdPriceMap(
+  markets: Array<{ symbol: string; base_asset?: string; quote_asset?: string; lastPrice?: string; last_price?: string }>
+) {
   const prices: Record<string, string> = {};
 
   for (const market of markets) {
@@ -365,9 +371,7 @@ const Toolbar = ({ account }: { account: string }) => {
         <div className="max-[500px]:hidden">
           <Avatar size={24} ensName={ensName} address={account} />
         </div>
-        <div className="wallet-address-text">
-          {shortenAddressOrEns(ensName || account, 17)}
-        </div>
+        <div className="wallet-address-text">{shortenAddressOrEns(ensName || account, 17)}</div>
         <CopyIcon className="size-20 max-[500px]:hidden" />
       </Button>
       <div className="wallet-toolbar-actions">
@@ -611,7 +615,11 @@ const WalletOverview = () => {
     refreshInterval: 10000,
   });
   const spotMarketsResult = useTradingMarkets(DEFAULT_SPOT_CHAIN_ID, { refreshInterval: 10000 }, "spot");
-  const futuresMarketsResult = useTradingMarkets(connectedChainId ?? settlementChainId, { refreshInterval: 10000 }, "futures");
+  const futuresMarketsResult = useTradingMarkets(
+    connectedChainId ?? settlementChainId,
+    { refreshInterval: 10000 },
+    "futures"
+  );
   const spotBalances = spotBalancesResult.data?.balances ?? [];
   const futuresBalances = futuresBalancesResult.data?.balances ?? [];
   const activeBalances = activeWallet === "spot" ? spotBalances : futuresBalances;
@@ -656,7 +664,10 @@ const WalletOverview = () => {
     () => ({ ...buildUsdPriceMap(activeMarkets), ...(activeSpotTickerPrices ?? EMPTY_PRICE_MAP) }),
     [activeMarkets, activeSpotTickerPrices]
   );
-  const activeUsdTotals = useMemo(() => sumBalancesUsd(activeBalances, activePriceMap), [activeBalances, activePriceMap]);
+  const activeUsdTotals = useMemo(
+    () => sumBalancesUsd(activeBalances, activePriceMap),
+    [activeBalances, activePriceMap]
+  );
   const primaryBalance = findPrimaryBalance(activeBalances);
   const activeUsdtBalance = findBalanceBySymbol(activeBalances, "USDT");
   const destinationUsdtBalance = findBalanceBySymbol(destinationBalances, "USDT");
@@ -822,9 +833,18 @@ const WalletOverview = () => {
                     <div className="wallet-subvalue">{symbol === "USDT" ? "Tether" : symbol}</div>
                   </div>
                 </div>
-                <div>{formatTokenAmountText(balance.available)}<span>{symbol}</span></div>
-                <div>{formatTokenAmountText(balance.frozen)}<span>{symbol}</span></div>
-                <div>{formatTokenAmountText(balance.total)}<span>{symbol}</span></div>
+                <div>
+                  {formatTokenAmountText(balance.available)}
+                  <span>{symbol}</span>
+                </div>
+                <div>
+                  {formatTokenAmountText(balance.frozen)}
+                  <span>{symbol}</span>
+                </div>
+                <div>
+                  {formatTokenAmountText(balance.total)}
+                  <span>{symbol}</span>
+                </div>
               </div>
             );
           })}
@@ -847,9 +867,15 @@ const WalletOverview = () => {
               <Trans>From</Trans>
             </span>
             <strong>{activeWallet === "spot" ? <Trans>Spot Wallet</Trans> : <Trans>Futures Wallet</Trans>}</strong>
-            <small>{transferAvailableText} {transferSymbol}</small>
+            <small>
+              {transferAvailableText} {transferSymbol}
+            </small>
           </div>
-          <button type="button" className="wallet-swap-button" onClick={() => setActiveWallet(activeWallet === "spot" ? "futures" : "spot")}>
+          <button
+            type="button"
+            className="wallet-swap-button"
+            onClick={() => setActiveWallet(activeWallet === "spot" ? "futures" : "spot")}
+          >
             <SwapIcon />
           </button>
           <div className="wallet-transfer-box">
@@ -857,7 +883,9 @@ const WalletOverview = () => {
               <Trans>To</Trans>
             </span>
             <strong>{activeWallet === "spot" ? <Trans>Futures Wallet</Trans> : <Trans>Spot Wallet</Trans>}</strong>
-            <small>{transferDestinationAvailableText} {transferSymbol}</small>
+            <small>
+              {transferDestinationAvailableText} {transferSymbol}
+            </small>
           </div>
           <div className="wallet-transfer-amount">
             <label>
@@ -999,8 +1027,12 @@ const FundingHistorySection = () => {
         // API returns token as symbol (e.g., "USDT"), not address
         // Use getTokenBySymbol to find token by symbol
         const spotTokenConfig =
-          item.product === "spot" ? findWalletTokenConfig(walletTokenConfigs, DEFAULT_SPOT_CHAIN_ID, item.token) : undefined;
-        const token = spotTokenConfig ? tokenFromWalletConfig(spotTokenConfig) : getTokenBySymbolOptional(chainId, item.token);
+          item.product === "spot"
+            ? findWalletTokenConfig(walletTokenConfigs, DEFAULT_SPOT_CHAIN_ID, item.token)
+            : undefined;
+        const token = spotTokenConfig
+          ? tokenFromWalletConfig(spotTokenConfig)
+          : getTokenBySymbolOptional(chainId, item.token);
         if (!token) {
           console.warn(`[FundingHistorySection] Token not found for symbol: ${item.token}`);
           return undefined;
@@ -1190,9 +1222,14 @@ const FundingHistorySection = () => {
 
       // Confirm with backend
       try {
-        await confirmWithdraw(apiChainId, item.id, {
-          tx_hash: receipt.transactionHash,
-        }, item.product);
+        await confirmWithdraw(
+          apiChainId,
+          item.id,
+          {
+            tx_hash: receipt.transactionHash,
+          },
+          item.product
+        );
       } catch (confirmError) {
         console.warn("[FundingHistory] Failed to confirm withdraw:", confirmError);
       }
