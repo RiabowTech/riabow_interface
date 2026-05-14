@@ -57,7 +57,7 @@ export function SyntheticsEventsProvider({ children }: { children: ReactNode }) 
   // `getProvider(...).getBalance(account, "pending")` is the cheapest way to
   // keep the cached native balance honest, and it's worth keeping the
   // wiring next to the rest of this provider.
-  void (function updateNativeTokenBalance() {
+  void function updateNativeTokenBalance() {
     if (!currentAccount) return;
     provider.getBalance(currentAccount, "pending").then((balance) => {
       setWebsocketTokenBalancesUpdates((old) =>
@@ -67,7 +67,7 @@ export function SyntheticsEventsProvider({ children }: { children: ReactNode }) 
         })
       );
     });
-  });
+  };
 
   useEffect(
     function subscribeApproval() {

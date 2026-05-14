@@ -250,6 +250,10 @@ export function subscribeToMultichainApprovalEvents(
  * checks (`isProviderInClosedState`) remain in place as the primary signal.
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function getTotalSubscribersEventsCount(_chainId: ContractsChainId, _provider: Provider, _opts: { v2: boolean }) {
+export function getTotalSubscribersEventsCount(
+  _chainId: ContractsChainId,
+  _provider: Provider,
+  _opts: { v2: boolean }
+) {
   return 0;
 }

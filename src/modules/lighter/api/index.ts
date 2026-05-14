@@ -11,12 +11,7 @@ export * from "./types";
 
 // API Client (legacy)
 // Note: Avoid exporting isAuthenticated to prevent conflicts
-export {
-  getMarkets,
-  getCandles,
-  api,
-  type KlinePeriod,
-} from "./client";
+export { getMarkets, getCandles, api, type KlinePeriod } from "./client";
 export * from "./hooks";
 export * from "./useClosePositionHandler";
 
