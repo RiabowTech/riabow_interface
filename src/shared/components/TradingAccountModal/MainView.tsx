@@ -928,8 +928,17 @@ const FundingHistorySection = () => {
   const [, setIsVisibleOrView] = useTradingAccountModalOpen();
   // const [searchQuery, setSearchQuery] = useState("");
   const [, setSelectedTransferGuid] = useTradingAccountSelectedTransferGuid();
-  const { address: account, chainId } = useAccount();
-  const { chainId: settlementChainId } = useChainId();
+  // Use the settlement (trading) chain, not the wallet's current chain.
+  // When the wallet is on a non-settlement chain (e.g. OKX on BSC),
+  // wagmi's `useAccount().chainId` returns 56. The downstream usages
+  // (`usePublicClient({ chainId })`, `getTokenBySymbol(chainId, …)`,
+  // `itemContractChainId`) all need the trading chain. The local
+  // `getTokenBySymbolOptional` try-catches the SDK throw, so this
+  // mismatch silently produced "Token not found" instead of a crash;
+  // the public-client path was still broken for futures actions.
+  const { address: account } = useAccount();
+  const { chainId } = useChainId();
+  const settlementChainId = chainId;
   const product = useTradeProduct();
   const apiChainId = settlementChainId;
   const spotVaultAddress = getSpotVaultAddress(DEFAULT_SPOT_CHAIN_ID);
