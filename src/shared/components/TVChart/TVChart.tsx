@@ -104,7 +104,6 @@ export function TVChart({
   return (
     <div className="relative grow">
       <TVChartContainer
-        chartLines={[]}
         chainId={chainId}
         period={effectivePeriod}
         setIsCandlesLoaded={undefined}
