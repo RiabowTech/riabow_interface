@@ -2,7 +2,6 @@ import { Trans, t } from "@lingui/macro";
 import { useCallback } from "react";
 import { isAddress } from "viem";
 
-import { SyntheticsStateContextProvider } from "@/modules/lighter/store/SyntheticsStateContext/SyntheticsStateContextProvider";
 import { useChainId } from "lib/chains";
 
 import { LighterShell } from "@/modules/lighter/components/LighterShell/LighterShell";
@@ -123,16 +122,14 @@ export function AccountDashboard() {
             </div>
 
             {version === 2 && (
-              <SyntheticsStateContextProvider overrideChainId={chainId} pageType="trade" skipLocalReferralCode={false}>
-                <div className="account-trade-content">
-                  <div className="flex flex-row flex-wrap">
-                    <div className="grow *:size-full">
-                      <DailyAndCumulativePnL chainId={chainId} account={account} />
-                    </div>
+              <div className="account-trade-content">
+                <div className="flex flex-row flex-wrap">
+                  <div className="grow *:size-full">
+                    <DailyAndCumulativePnL chainId={chainId} account={account} />
                   </div>
-                  <HistoricalLists chainId={chainId} account={account} />
                 </div>
-              </SyntheticsStateContextProvider>
+                <HistoricalLists chainId={chainId} account={account} />
+              </div>
             )}
           </div>
         </div>
