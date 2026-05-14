@@ -1,16 +1,42 @@
 import { ReactNode, useEffect, useMemo } from "react";
 
-import type { SyntheticsState } from "@/modules/lighter/store/SyntheticsStateContext/SyntheticsStateContextProvider";
+import type {
+  SyntheticsState,
+  SyntheticsPageType,
+} from "@/modules/lighter/store/SyntheticsStateContext/SyntheticsStateContextProvider";
 import { useLeaderboardState } from "@/modules/lighter/store/SyntheticsStateContext/useLeaderboardState";
 import { StateCtx, latestStateRef } from "@/modules/lighter/store/SyntheticsStateContext/utils";
-import { useUserReferralInfoRequest } from "domain/referrals";
-import { useMarketsInfoRequest } from "domain/synthetics/markets";
-import { usePositionsConstantsRequest } from "domain/synthetics/positions";
-import { useTokensDataRequest } from "domain/synthetics/tokens";
+import type { MarketsInfoResult } from "domain/synthetics/markets";
+import type { TokensDataResult } from "domain/synthetics/tokens";
 import { useChainId } from "lib/chains";
 import useWallet from "lib/wallets/useWallet";
 import { TradeMode, TradeType } from "sdk/types/trade";
 
+const EMPTY_MARKETS_INFO: MarketsInfoResult = {
+  marketsInfoData: undefined,
+  error: undefined,
+};
+
+const EMPTY_TOKENS_DATA: TokensDataResult = {
+  tokensData: undefined,
+  pricesUpdatedAt: undefined,
+  isAccountBalancesLoaded: false,
+  isTradingAccountBalancesLoaded: false,
+  isWalletBalancesLoaded: false,
+  isBalancesLoaded: false,
+  error: undefined,
+};
+
+const LEADERBOARD_PAGE_TYPE: SyntheticsPageType = "leaderboard";
+
+/**
+ * Leaderboard data comes from the Primit backend (`/api/v1/leaderboard/traders`)
+ * via `useLeaderboardData`. The historical GMX wiring (markets, positions,
+ * referrals, tokens) is no longer consumed — `fetchPositions` is retired and
+ * returns `[]`, so position-level selectors never render rows. Earlier this
+ * provider still issued the GMX RPC requests and dropped the result; this
+ * removes those calls and supplies empty stubs to the legacy state shape.
+ */
 export function LighterLeaderboardStateProvider({ children }: { children: ReactNode }) {
   const { chainId, srcChainId } = useChainId();
   const { account, signer } = useWallet();
@@ -18,30 +44,23 @@ export function LighterLeaderboardStateProvider({ children }: { children: ReactN
   const leaderboard = useLeaderboardState(account, true);
   const effectiveChainId = leaderboard.chainId ?? chainId;
 
-  const tokensDataResult = useTokensDataRequest(effectiveChainId, srcChainId);
-  const marketsInfo = useMarketsInfoRequest(effectiveChainId, {
-    tokensData: tokensDataResult.tokensData,
-  });
-  const { positionsConstants } = usePositionsConstantsRequest(effectiveChainId);
-  const userReferralInfo = useUserReferralInfoRequest(signer, effectiveChainId, account, true);
-
   const state = useMemo(
     () =>
       ({
-        pageType: "leaderboard",
+        pageType: LEADERBOARD_PAGE_TYPE,
         globals: {
           chainId: effectiveChainId,
           srcChainId,
           account,
           signer,
           markets: {} as SyntheticsState["globals"]["markets"],
-          marketsInfo,
+          marketsInfo: EMPTY_MARKETS_INFO,
           positionsInfo: { positionsInfoData: {}, isLoading: false } as SyntheticsState["globals"]["positionsInfo"],
-          tokensDataResult,
+          tokensDataResult: EMPTY_TOKENS_DATA,
           ordersInfo: { ordersInfoData: {}, isLoading: false } as SyntheticsState["globals"]["ordersInfo"],
-          positionsConstants,
+          positionsConstants: undefined,
           uiFeeFactor: 0n,
-          userReferralInfo,
+          userReferralInfo: undefined,
           depositMarketTokensData: undefined,
           progressiveDepositMarketTokensData: undefined,
           glvInfo: {} as SyntheticsState["globals"]["glvInfo"],
@@ -85,17 +104,7 @@ export function LighterLeaderboardStateProvider({ children }: { children: ReactN
         sponsoredCallBalanceData: undefined,
         l1ExpressOrderGasReference: undefined,
       }) satisfies SyntheticsState,
-    [
-      account,
-      effectiveChainId,
-      leaderboard,
-      marketsInfo,
-      positionsConstants,
-      signer,
-      srcChainId,
-      tokensDataResult,
-      userReferralInfo,
-    ]
+    [account, effectiveChainId, leaderboard, signer, srcChainId]
   );
 
   useEffect(() => {
