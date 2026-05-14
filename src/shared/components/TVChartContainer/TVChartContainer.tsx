@@ -16,7 +16,6 @@ import { isChartAvailableForToken } from "sdk/configs/tokens";
 import Loader from "components/Loader/Loader";
 
 import { chartOverridesDark, chartOverridesLight, defaultChartProps, disabledFeaturesOnMobile } from "./constants";
-import { DynamicLines } from "./DynamicLines";
 import { SaveLoadAdapter } from "./SaveLoadAdapter";
 import { StaticLines } from "./StaticLines";
 import type { StaticChartLine } from "./types";
@@ -737,10 +736,7 @@ export default function TVChartContainer({
       {chartDataLoading && <Loader />}
       <div style={style} ref={chartContainerRef} className="ExchangeChart-bottom-content" />
       {shouldShowPositionLines && chartReady && !isChartChangingSymbol && (
-        <>
-          <StaticLines tvWidgetRef={tvWidgetRef} chartLines={chartLines} />
-          {!isTradeMode && tradePageVersion === 2 && <DynamicLines isMobile={isMobile} tvWidgetRef={tvWidgetRef} />}
-        </>
+        <StaticLines tvWidgetRef={tvWidgetRef} chartLines={chartLines} />
       )}
     </div>
   );
