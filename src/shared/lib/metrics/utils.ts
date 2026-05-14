@@ -1,5 +1,4 @@
 import { USD_DECIMALS } from "config/factors";
-import { EventLogData } from "@/modules/lighter/context/SyntheticsEvents";
 import { ExpressTxnParams } from "domain/synthetics/express";
 import { ExecutionFee } from "domain/synthetics/fees";
 import { getMarketIndexName, getMarketPoolName, MarketInfo } from "domain/synthetics/markets";
@@ -20,8 +19,6 @@ import {
   IncreaseOrderMetricData,
   MultichainDepositMetricData,
   MultichainWithdrawalMetricData,
-  OrderCancelledEvent,
-  OrderCreatedEvent,
   OrderExecutedEvent,
   OrderMetricData,
   OrderMetricId,
@@ -920,24 +917,6 @@ export function makeTxnErrorMetricsHandler(metricId: OrderMetricId) {
   };
 }
 
-export function sendOrderCreatedMetric(metricId: OrderMetricId) {
-  const metricData = metrics.getCachedMetricData<OrderMetricData>(metricId);
-
-  if (!metricData) {
-    metrics.pushError("Order metric data not found", "sendOrderCreatedMetric");
-    return;
-  }
-
-  const timings = getOrderStepTimings(metricId, OrderStage.Created);
-
-  metrics.pushEvent<OrderCreatedEvent>({
-    event: `${metricData.metricType}.created`,
-    isError: false,
-    time: timings.timeFromSubmitted,
-    data: { ...metricData, ...timings },
-  });
-}
-
 export function sendOrderExecutedMetric(metricId: OrderMetricId) {
   const metricData = metrics.getCachedMetricData<OrderMetricData>(metricId);
 
@@ -953,27 +932,6 @@ export function sendOrderExecutedMetric(metricId: OrderMetricId) {
     isError: false,
     time: timings.timeFromSent,
     data: { ...metricData, ...timings },
-  });
-}
-
-export function sendOrderCancelledMetric(metricId: OrderMetricId, eventData: EventLogData) {
-  const metricData = metrics.getCachedMetricData<OrderMetricData>(metricId);
-
-  if (!metricData) {
-    metrics.pushError("Order metric data not found", "sendOrderCancelledMetric");
-    return;
-  }
-
-  metrics.pushEvent<OrderCancelledEvent>({
-    event: `${metricData.metricType}.failed`,
-    isError: true,
-    time: metrics.getTime(metricId, true),
-    data: {
-      ...(metricData || {}),
-      errorMessage: `${metricData.metricType} cancelled`,
-      reason: eventData.stringItems.items.reason,
-      errorContext: "execution",
-    },
   });
 }
 

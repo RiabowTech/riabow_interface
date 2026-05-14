@@ -16,10 +16,7 @@ import { isChartAvailableForToken } from "sdk/configs/tokens";
 import Loader from "components/Loader/Loader";
 
 import { chartOverridesDark, chartOverridesLight, defaultChartProps, disabledFeaturesOnMobile } from "./constants";
-import { DynamicLines } from "./DynamicLines";
 import { SaveLoadAdapter } from "./SaveLoadAdapter";
-import { StaticLines } from "./StaticLines";
-import type { StaticChartLine } from "./types";
 import type {
   ChartData,
   ChartingLibraryWidgetOptions,
@@ -48,7 +45,6 @@ const TRADE_VOLUME_SCALE_TOP_PADDING = 0.24;
 
 type Props = {
   chainId: number;
-  chartLines: StaticChartLine[];
   period: string;
   setPeriod: (period: string) => void;
   chartToken:
@@ -110,7 +106,6 @@ function resolutionToSeconds(r: string): number {
 export default function TVChartContainer({
   chartToken,
   chainId,
-  chartLines,
   period,
   setPeriod,
   supportedResolutions,
@@ -133,7 +128,6 @@ export default function TVChartContainer({
   initialBarsCount,
   onWidgetReady,
 }: Props) {
-  const shouldShowPositionLines = true;
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const tvWidgetRef = useRef<IChartingLibraryWidget | null>(null);
   const [chartReady, setChartReady] = useState(false);
@@ -736,12 +730,6 @@ export default function TVChartContainer({
     <div className="ExchangeChart-error">
       {chartDataLoading && <Loader />}
       <div style={style} ref={chartContainerRef} className="ExchangeChart-bottom-content" />
-      {shouldShowPositionLines && chartReady && !isChartChangingSymbol && (
-        <>
-          <StaticLines tvWidgetRef={tvWidgetRef} chartLines={chartLines} />
-          {!isTradeMode && tradePageVersion === 2 && <DynamicLines isMobile={isMobile} tvWidgetRef={tvWidgetRef} />}
-        </>
-      )}
     </div>
   );
 }
