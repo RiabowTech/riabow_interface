@@ -18,7 +18,6 @@ import { convertToUsd, getMidPrice } from "sdk/utils/tokens";
 
 import { Amount } from "components/Amount/Amount";
 import Button from "components/Button/Button";
-import { useMultichainTokensRequest } from "components/TradingAccountModal/hooks";
 import SearchInput from "components/SearchInput/SearchInput";
 import { ButtonRowScrollFadeContainer } from "components/TableScrollFade/TableScrollFade";
 import { VerticalScrollFadeContainer } from "components/TableScrollFade/VerticalScrollFade";
@@ -95,7 +94,6 @@ export const SelectAssetToDepositView = () => {
   const [selectedNetwork, setSelectedNetwork] = useState<number | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { tokenChainDataArray: tokenChainDataArrayRaw } = useMultichainTokensRequest();
   const { data: walletTokenConfigs } = useWalletTokensConfig();
   const configuredBalanceContracts = useMemo(
     () =>
@@ -125,28 +123,32 @@ export const SelectAssetToDepositView = () => {
     return balances;
   }, [configuredBalanceResults, walletTokenConfigs]);
 
-  // Wallet deposit assets now come from backend configuration. Keep the old
-  // multichain balance source only as a fallback while config is loading.
+  // Deposit assets MUST come from backend `walletTokenConfigs` — it encodes
+  // the only (chain, token) tuples this app can actually credit. The legacy
+  // multichain array fallback exposed unsupported chains/tokens (e.g.
+  // BSC USDT on a settlement chain that doesn't accept it) and caused a
+  // production fund-loss incident on sibling forks. While the config is
+  // loading or empty, render nothing rather than risk surfacing a bad option.
   const tokenChainDataArray = useMemo(() => {
-    if (walletTokenConfigs && walletTokenConfigs.length > 0) {
-      return walletTokenConfigs.map(
-        (token): TokenChainData => ({
-          name: token.symbol,
-          symbol: token.symbol,
-          decimals: token.decimals,
-          address: token.contract,
-          isStable: token.symbol.toUpperCase().includes("USD"),
-          imageUrl: token.image || undefined,
-          sourceChainId: token.chainId as TokenChainData["sourceChainId"],
-          sourceChainDecimals: token.decimals,
-          sourceChainPrices: undefined,
-          sourceChainBalance: configuredBalanceByToken.get(getTokenConfigKey(token.chainId, token.contract)) ?? 0n,
-        })
-      );
+    if (!walletTokenConfigs || walletTokenConfigs.length === 0) {
+      return [];
     }
 
-    return tokenChainDataArrayRaw;
-  }, [configuredBalanceByToken, tokenChainDataArrayRaw, walletTokenConfigs]);
+    return walletTokenConfigs.map(
+      (token): TokenChainData => ({
+        name: token.symbol,
+        symbol: token.symbol,
+        decimals: token.decimals,
+        address: token.contract,
+        isStable: token.symbol.toUpperCase().includes("USD"),
+        imageUrl: token.image || undefined,
+        sourceChainId: token.chainId as TokenChainData["sourceChainId"],
+        sourceChainDecimals: token.decimals,
+        sourceChainPrices: undefined,
+        sourceChainBalance: configuredBalanceByToken.get(getTokenConfigKey(token.chainId, token.contract)) ?? 0n,
+      })
+    );
+  }, [configuredBalanceByToken, walletTokenConfigs]);
 
   const NETWORKS_FILTER = useMemo(() => {
     const wildCard = { id: "all" as const, name: "All Networks" };

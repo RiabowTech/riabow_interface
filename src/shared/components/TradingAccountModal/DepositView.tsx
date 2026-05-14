@@ -1181,6 +1181,20 @@ export const DepositView = () => {
   ]);
 
   const handleDeposit = useCallback(async () => {
+    // The deposit pipeline is only wired for (chain, token) tuples the
+    // backend has whitelisted in walletTokenConfigs. Submitting any other
+    // combination produced the BSC-USDT fund-loss incident on sibling
+    // forks: tokens leave the user's wallet but never credit on the
+    // settlement chain. Refuse early, with a clear message.
+    if (!walletTokenConfigs) {
+      helperToast.error(t`Loading deposit configuration. Please try again in a moment.`);
+      return;
+    }
+    if (!selectedWalletTokenConfig) {
+      helperToast.error(t`This network and token combination is not supported for deposit.`);
+      return;
+    }
+
     if (isSpotVaultDeposit) {
       await handleSameChainDeposit();
       return;
@@ -1210,7 +1224,16 @@ export const DepositView = () => {
       setIsSubmitting(true);
       setShouldSendCrossChainDepositWhenLoaded(true);
     }
-  }, [depositViewChain, handleSameChainDeposit, isSpotVaultDeposit, settlementChainId, walletChainId]);
+  }, [
+    depositViewChain,
+    handleSameChainDeposit,
+    isSpotVaultDeposit,
+    selectedWalletTokenConfig,
+    settlementChainId,
+    spenderAddress,
+    walletChainId,
+    walletTokenConfigs,
+  ]);
 
   const isCrossChainDepositLoading = useRef(false);
   useEffect(() => {
